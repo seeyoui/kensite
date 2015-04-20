@@ -1,0 +1,196 @@
+-- Create table
+create table sys_user
+(
+  id           CHAR(32),
+  username     VARCHAR2(50),
+  password     VARCHAR2(50),
+  name         VARCHAR2(50),
+  departmentid CHAR(32),
+  state        CHAR(1)
+)
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table sys_user
+  add constraint SYS_USER_ID primary key (ID);
+-- Add comments to the table 
+comment on table SYS_USER
+  is '用户信息';
+-- Add comments to the columns 
+comment on column SYS_USER.id
+  is '主键';
+comment on column SYS_USER.username
+  is '登录账号';
+comment on column SYS_USER.password
+  is '登录密码';
+comment on column SYS_USER.name
+  is '用户名称';
+comment on column SYS_USER.departmentid
+  is '部门';
+comment on column SYS_USER.state
+  is '状态';
+-------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------
+-- Create table
+create table SYS_DEPARTMENT
+(
+  id       CHAR(32),
+  parentid CHAR(32),
+  sequence NUMBER(10),
+  name     VARCHAR2(50),
+  code     VARCHAR2(100)
+)
+;
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table SYS_DEPARTMENT
+  add constraint SYS_DEPARTMENT_ID primary key (ID);
+-- Add comments to the table 
+comment on table SYS_DEPARTMENT
+  is '部门';
+-- Add comments to the columns 
+comment on column SYS_DEPARTMENT.id
+  is '主键';
+comment on column SYS_DEPARTMENT.parentid
+  is '外键';
+comment on column SYS_DEPARTMENT.sequence
+  is '排序';
+comment on column SYS_DEPARTMENT.name
+  is '部门名称';
+comment on column SYS_DEPARTMENT.code
+  is '部门编号';
+-------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------
+-- Create table
+create table SYS_ROLE
+(
+  id    CHAR(32),
+  name  VARCHAR2(50),
+  shiro VARCHAR2(50)
+)
+;
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table SYS_ROLE
+  add constraint SYS_ROLE_ID primary key (ID);
+  
+-- Create table
+create table SYS_MENU
+(
+  id       CHAR(32),
+  parentid CHAR(32),
+  name     VARCHAR2(50),
+  url      VARCHAR2(500),
+  sequence NUMBER,
+  icon     VARCHAR2(50),
+  target   VARCHAR2(50)
+)
+;
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table SYS_MENU
+  add constraint SYS_MENU_ID primary key (ID);
+-- Add comments to the table 
+comment on table SYS_MENU
+  is '导航菜单';
+-- Add comments to the columns 
+comment on column SYS_MENU.id
+  is '主键';
+comment on column SYS_MENU.parentid
+  is '外键';
+comment on column SYS_MENU.name
+  is '名称';
+comment on column SYS_MENU.url
+  is 'URL';
+comment on column SYS_MENU.sequence
+  is '排序';
+comment on column SYS_MENU.icon
+  is '图标';
+comment on column SYS_MENU.target
+  is '打开方式';
+-------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------
+-- Create table
+create table SYS_PERMISSION
+(
+  id       VARCHAR2(50),
+  sequence NUMBER(10),
+  name     VARCHAR2(50)
+)
+;
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table SYS_PERMISSION
+  add constraint SYS_PERMISSION_ID primary key (ID);
+-- Add comments to the table 
+comment on table SYS_PERMISSION
+  is '权限信息';
+-- Add comments to the columns 
+comment on column SYS_PERMISSION.id
+  is '主键';
+comment on column SYS_PERMISSION.sequence
+  is '排序';
+comment on column SYS_PERMISSION.name
+  is '名称';
+-------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------
+-- Create table
+create table SYS_USER_ROLE
+(
+  userid char(32),
+  roleid char(32)
+)
+;
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table SYS_USER_ROLE
+  add constraint SYS_USER_ROLE_ID primary key (USERID, ROLEID);
+  
+-- Create table
+create table SYS_ROLE_MENU
+(
+  roleid char(32),
+  menuid char(32)
+)
+;
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table SYS_ROLE_MENU
+  add constraint SYS_ROLE_MENU_ID primary key (ROLEID, MENUID);
+  
+-- Create table
+create table SYS_MODULE_PERMISSION
+(
+  moduleid       char(32),
+  permissionid varchar2(50)
+)
+;
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table SYS_MENU_PERMISSION
+  add constraint SYS_MODULE_PERMISSION_ID primary key (MODULEID, PERMISSIONID);
+  
+-- Create table
+create table SYS_MODULE
+(
+  id    char(32),
+  name  varchar2(50),
+  shiro VARCHAR2(50)
+)
+;
+-- Create table
+create table SYS_ROLE_MODULE
+(
+  roleid   char(32),
+  moduleid char(32)
+)
+;
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table SYS_ROLE_MODULE
+  add constraint SYS_ROLE_MODULE_ID primary key (ROLEID, MODULEID);
+
+-- Add comments to the table 
+comment on table SYS_MODULE
+  is '系统模块';
+-- Add comments to the columns 
+comment on column SYS_MODULE.id
+  is '主键';
+comment on column SYS_MODULE.name
+  is '模块名称';
+comment on column SYS_MODULE.shiro
+  is '权限';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table SYS_MODULE
+  add constraint SYS_MODULE_ID primary key (ID);
+  

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.seeyoui.kensite.framework.system.persistence.SysUserRoleMapper" >
+	<!-- 查询单表的字段 -->
+	<sql id="tableColumns">
+	    t.userid,
+	    t.roleid
+	</sql>
+	<!-- 查询过滤条件 -->
+	<sql id="whereStr">
+		<where>
+			1=1
+			<if test="userid != null and userid != ''">
+				and t.userid LIKE '%'||#{userid}||'%'
+			</if>
+			<if test="roleid != null and roleid != ''">
+				and t.roleid LIKE '%'||#{roleid}||'%'
+			</if>
+		</where>
+	</sql>
+	<sql id="orderBy">
+		ORDER BY t.id DESC 
+	</sql>
+	
+	<!-- 根据ID查询单条数据 -->
+	<select id="findSysUserRoleById" resultType="com.seeyoui.kensite.framework.system.domain.SysUserRole">
+		SELECT
+		<include refid="tableColumns" />
+		FROM SYS_USER_ROLE t
+		WHERE id = #{id}
+	</select>
+	
+	<!-- 查询数据集合 -->
+	<select id="findSysUserRoleList" resultType="com.seeyoui.kensite.framework.system.domain.SysUserRole">
+		select * from(select t.*,rownum rn from(
+			SELECT
+			<include refid="tableColumns"/>
+			FROM SYS_USER_ROLE t
+			<include refid="whereStr"/>
+			<include refid="orderBy"/>
+		) t where rownum &lt; = #{page}*#{rows}) where rn &gt; (#{page}-1)*#{rows}
+	</select>
+	
+	<!-- 查询数据总数 -->
+	<select id="findSysUserRoleListTotal" resultType="EasyUIDataGrid">
+		SELECT
+		COUNT(id)total
+		FROM SYS_USER_ROLE t
+		<include refid="whereStr"/>
+	</select>
+	
+	<!-- 数据新增 -->
+	<insert id="saveSysUserRole" parameterType="com.seeyoui.kensite.framework.system.domain.SysUserRole">
+		INSERT INTO SYS_USER_ROLE (
+	    	userid,
+	    	roleid,
+		    id
+		)
+		VALUES (
+			#{userid},
+			#{roleid},
+		    #{id}
+		)
+	</insert>
+	
+	<!-- 数据修改 -->
+	<update id="updateSysUserRole" parameterType="com.seeyoui.kensite.framework.system.domain.SysUserRole">
+		UPDATE SYS_USER_ROLE
+		<set>
+	    	<if test="userid !=null and userid !=''">
+			userid=#{userid},
+			</if>
+	    	<if test="roleid !=null and roleid !=''">
+			roleid=#{roleid},
+			</if>
+		    id = #{id}
+		</set>
+		WHERE id = #{id}
+	</update>
+	
+	<!-- 数据删除 -->
+	<delete id="deleteSysUserRole">
+		DELETE FROM SYS_USER_ROLE WHERE id IN 
+		<foreach item="listId" collection="list"
+			open="(" separator="," close=")">
+			#{listId}
+		</foreach>
+	</delete>
+</mapper>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.seeyoui.kensite.framework.system.persistence.SysUserMapper" >
+	<!-- 查询单表的字段 -->
+	<sql id="tableColumns">
+	    t.id,
+	    t.username,
+	    t.password,
+	    t.name,
+	    t.departmentid,
+	    t.state
+	</sql>
+	<!-- 查询过滤条件 -->
+	<sql id="whereStr">
+		<where>
+			1=1
+			<if test="id != null and id != ''">
+				and t.id LIKE '%'||#{id}||'%'
+			</if>
+			<if test="username != null and username != ''">
+				and t.username LIKE '%'||#{username}||'%'
+			</if>
+			<if test="password != null and password != ''">
+				and t.password LIKE '%'||#{password}||'%'
+			</if>
+			<if test="name != null and name != ''">
+				and t.name LIKE '%'||#{name}||'%'
+			</if>
+			<if test="departmentid != null and departmentid != ''">
+				and t.departmentid LIKE '%'||#{departmentid}||'%'
+			</if>
+			<if test="state != null and state != ''">
+				and t.state LIKE '%'||#{state}||'%'
+			</if>
+		</where>
+	</sql>
+	<sql id="orderBy">
+		ORDER BY t.id DESC 
+	</sql>
+	
+	<!-- 根据ID查询单条数据 -->
+	<select id="findSysUserById" resultType="com.seeyoui.kensite.framework.system.domain.SysUser">
+		SELECT
+		<include refid="tableColumns" />
+		FROM SYS_USER t
+		WHERE id = #{id}
+	</select>
+	
+	<!-- 根据登录名查询单条数据 -->
+	<select id="findSysUserByUserName" resultType="com.seeyoui.kensite.framework.system.domain.SysUser">
+		SELECT
+		<include refid="tableColumns" />
+		FROM SYS_USER t
+		WHERE username = #{username}
+	</select>
+	
+	<!-- 查询数据集合 -->
+	<select id="findSysUserList" resultType="com.seeyoui.kensite.framework.system.domain.SysUser">
+		select * from(select t.*,rownum rn from(
+			SELECT
+			<include refid="tableColumns"/>
+			FROM SYS_USER t
+			<include refid="whereStr"/>
+			<include refid="orderBy"/>
+		) t where rownum &lt; = #{page}*#{rows}) where rn &gt; (#{page}-1)*#{rows}
+	</select>
+	
+	<!-- 查询数据总数 -->
+	<select id="findSysUserListTotal" resultType="EasyUIDataGrid">
+		SELECT
+		COUNT(id)total
+		FROM SYS_USER t
+		<include refid="whereStr"/>
+	</select>
+	
+	<!-- 数据新增 -->
+	<insert id="saveSysUser" parameterType="com.seeyoui.kensite.framework.system.domain.SysUser">
+		INSERT INTO SYS_USER (
+	    	
+	    	username,
+	    	password,
+	    	name,
+	    	departmentid,
+	    	state,
+		    id
+		)
+		VALUES (
+			
+			#{username},
+			#{password},
+			#{name},
+			#{departmentid},
+			#{state},
+		    #{id}
+		)
+	</insert>
+	
+	<!-- 数据修改 -->
+	<update id="updateSysUser" parameterType="com.seeyoui.kensite.framework.system.domain.SysUser">
+		UPDATE SYS_USER
+		<set>
+	    	
+	    	<if test="username !=null and username !=''">
+			username=#{username},
+			</if>
+	    	<if test="password !=null and password !=''">
+			password=#{password},
+			</if>
+	    	<if test="name !=null and name !=''">
+			name=#{name},
+			</if>
+	    	<if test="departmentid !=null and departmentid !=''">
+			departmentid=#{departmentid},
+			</if>
+	    	<if test="state !=null and state !=''">
+			state=#{state},
+			</if>
+		    id = #{id}
+		</set>
+		WHERE id = #{id}
+	</update>
+	
+	<!-- 数据删除 -->
+	<delete id="deleteSysUser">
+		DELETE FROM SYS_USER WHERE id IN 
+		<foreach item="listId" collection="list"
+			open="(" separator="," close=")">
+			#{listId}
+		</foreach>
+	</delete>
+</mapper>

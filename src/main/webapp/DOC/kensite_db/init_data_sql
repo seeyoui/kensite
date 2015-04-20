@@ -1,0 +1,26 @@
+insert into SYS_PERMISSION (id, sequence, name)
+values ('view', 1, '展示');
+insert into SYS_PERMISSION (id, sequence, name)
+values ('select', 2, '查询');
+insert into SYS_PERMISSION (id, sequence, name)
+values ('insert', 3, '插入');
+insert into SYS_PERMISSION (id, sequence, name)
+values ('update', 4, '修改');
+insert into SYS_PERMISSION (id, sequence, name)
+values ('delete', 5, '删除');
+insert into SYS_PERMISSION (id, sequence, name)
+values ('import', 6, '导入');
+insert into SYS_PERMISSION (id, sequence, name)
+values ('export', 7, '导出');
+insert into SYS_PERMISSION (id, sequence, name)
+values ('print', 10, '打印');
+insert into SYS_PERMISSION (id, sequence, name)
+values ('create', 11, '创建');
+insert into SYS_PERMISSION (id, sequence, name)
+values ('drop', 12, '销毁');
+insert into SYS_PERMISSION (id, sequence, name)
+values ('build', 13, '同步');
+insert into SYS_PERMISSION (id, sequence, name)
+values ('download', 9, '下载');
+insert into SYS_PERMISSION (id, sequence, name)
+values ('upload', 8, '上传');
