@@ -9,7 +9,7 @@
 	<!-- 通过ContextLoaderListener的父类ContextLoader的第120行发现CONFIG_LOCATION_PARAM固定为contextConfigLocation -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:applicationContext.xml</param-value>
+		<param-value>classpath*:/spring-*.xml</param-value>
 	</context-param>
 
 	<!-- 防止发生java.beans.Introspector内存泄露,应将它配置在ContextLoaderListener的前面 -->
@@ -68,7 +68,7 @@
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>classpath:applicationContext.xml</param-value>
+			<param-value>classpath*:/spring-mvc*.xml</param-value>
 		</init-param>
 	</servlet>
 	<servlet-mapping>

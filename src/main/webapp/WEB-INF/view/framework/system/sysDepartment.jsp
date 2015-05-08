@@ -1,14 +1,14 @@
 <%@ page import="com.seeyoui.kensite.common.constants.StringConstant"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/view/common/common.jsp" %>
+<%@ include file="/WEB-INF/view/taglib/common.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>    
     <title>部门</title>
-	<script type="text/javascript" src="${ctx_common}/js/jquery-1.7.2.min.js"></script>
-	<%@ include file="/WEB-INF/view/common/easyui.jsp" %>
-	<%@ include file="/WEB-INF/view/common/layer.jsp" %>
+	<script type="text/javascript" src="${ctx_assets}/js/jquery-1.11.1.min.js"></script>
+	<%@ include file="/WEB-INF/view/taglib/easyui.jsp" %>
+	<%@ include file="/WEB-INF/view/taglib/layer.jsp" %>
   </head>
   <body>
   
@@ -29,7 +29,7 @@
 		        </thead>
 		    </table>
 		    <div id="toolbar">
-		    	<shiro:hasPermission name="sysDepartment:abc">
+		    	<shiro:hasPermission name="sysDepartment:insert">
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newInfo()">新建</a>
 		        </shiro:hasPermission>
 		        <shiro:hasPermission name="sysDepartment:update">
@@ -39,8 +39,6 @@
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyInfo()">删除</a>
 		        </shiro:hasPermission>
 
-外键<input id="sel_parentid" name="sel_parentid" class="easyui-textbox" data-options=""/>
-排序<input id="sel_sequence" name="sel_sequence" class="easyui-numberbox" data-options="min:0,max:999999,precision:0"/>
 部门名称<input id="sel_name" name="sel_name" class="easyui-textbox" data-options=""/>
 部门编号<input id="sel_code" name="sel_code" class="easyui-textbox" data-options=""/>
 			    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="selectData()">查询</a>
@@ -93,14 +91,9 @@
 	    
 	    function selectData() {
 		    
-		    var sel_parentid = $("#sel_parentid").val();
-		    var sel_sequence = $("#sel_sequence").val();
 		    var sel_name = $("#sel_name").val();
 		    var sel_code = $("#sel_code").val();
         	$('#dataList').datagrid('load',{
-    		    
-    		    parentid:sel_parentid,
-    		    sequence:sel_sequence,
     		    name:sel_name,
     		    code:sel_code
         	});

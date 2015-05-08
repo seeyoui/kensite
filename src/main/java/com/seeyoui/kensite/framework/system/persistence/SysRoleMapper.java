@@ -4,11 +4,12 @@
  */
 package com.seeyoui.kensite.framework.system.persistence;  
 
+import java.util.List;
+
 import com.seeyoui.kensite.common.base.domain.EasyUIDataGrid;
 import com.seeyoui.kensite.common.exception.CRUDException;
-import com.seeyoui.kensite.framework.system.domain.SysMenu;
 import com.seeyoui.kensite.framework.system.domain.SysRole;
-import java.util.*;
+import com.seeyoui.kensite.framework.system.domain.SysUser;
 
 /**
  * @author cuichen
@@ -37,7 +38,7 @@ public interface SysRoleMapper {
 	 * @return
 	 * @throws CRUDException
 	 */
-	public List<SysRole> findSysUserRoleList(Map<String, String > map);
+	public List<SysRole> findSysUserRoleList(SysUser sysUser);
 	
 	/**
 	 * 查询数据总数

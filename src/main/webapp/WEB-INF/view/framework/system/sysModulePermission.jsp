@@ -1,14 +1,14 @@
 <%@ page import="com.seeyoui.kensite.common.constants.StringConstant"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/view/common/common.jsp" %>
+<%@ include file="/WEB-INF/view/taglib/common.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>    
     <title>模块权限</title>
-	<script type="text/javascript" src="${ctx_common}/js/jquery-1.7.2.min.js"></script>
-	<%@ include file="/WEB-INF/view/common/easyui.jsp" %>
-	<%@ include file="/WEB-INF/view/common/layer.jsp" %>
+	<script type="text/javascript" src="${ctx_assets}/js/jquery-1.11.1.min.js"></script>
+	<%@ include file="/WEB-INF/view/taglib/easyui.jsp" %>
+	<%@ include file="/WEB-INF/view/taglib/layer.jsp" %>
   </head>
   <body>
   
@@ -26,7 +26,7 @@
 		        </thead>
 		    </table>
 		    <div id="toolbar">
-		    	<shiro:hasPermission name="sysModulePermission:abc">
+		    	<shiro:hasPermission name="sysModulePermission:insert">
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newInfo()">新建</a>
 		        </shiro:hasPermission>
 		        <shiro:hasPermission name="sysModulePermission:update">
@@ -35,9 +35,6 @@
 		        <shiro:hasPermission name="sysModulePermission:delete">
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyInfo()">删除</a>
 		        </shiro:hasPermission>
-模块主键<input id="sel_moduleid" name="sel_moduleid" class="easyui-textbox" data-options=""/>
-权限主键<input id="sel_permissionid" name="sel_permissionid" class="easyui-textbox" data-options=""/>
-			    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="selectData()">查询</a>
 		    </div>
 		    <div id="dataWin" class="easyui-window" title="模块权限信息维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:400px;height:260px;padding:10px;">
 		        <div class="ftitle">模块权限信息维护</div>

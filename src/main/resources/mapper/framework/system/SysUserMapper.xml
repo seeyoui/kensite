@@ -8,7 +8,9 @@
 	    t.password,
 	    t.name,
 	    t.departmentid,
-	    t.state
+	    t.state,
+	    t.email,
+	    t.phone
 	</sql>
 	<!-- 查询过滤条件 -->
 	<sql id="whereStr">
@@ -31,6 +33,12 @@
 			</if>
 			<if test="state != null and state != ''">
 				and t.state LIKE '%'||#{state}||'%'
+			</if>
+			<if test="email != null and email != ''">
+				and t.email LIKE '%'||#{email}||'%'
+			</if>
+			<if test="phone != null and phone != ''">
+				and t.phone LIKE '%'||#{phone}||'%'
 			</if>
 		</where>
 	</sql>
@@ -82,6 +90,8 @@
 	    	name,
 	    	departmentid,
 	    	state,
+	    	email,
+	    	phone,
 		    id
 		)
 		VALUES (
@@ -91,6 +101,8 @@
 			#{name},
 			#{departmentid},
 			#{state},
+			#{email},
+			#{phone},
 		    #{id}
 		)
 	</insert>
@@ -115,6 +127,12 @@
 	    	<if test="state !=null and state !=''">
 			state=#{state},
 			</if>
+	    	<if test="email !=null and email !=''">
+			email=#{email},
+			</if>
+	    	<if test="phone !=null and phone !=''">
+			phone=#{phone},
+			</if>
 		    id = #{id}
 		</set>
 		WHERE id = #{id}
@@ -122,7 +140,12 @@
 	
 	<!-- 数据删除 -->
 	<delete id="deleteSysUser">
-		DELETE FROM SYS_USER WHERE id IN 
+		DELETE FROM SYS_USER WHERE ID IN 
+		<foreach item="listId" collection="list"
+			open="(" separator="," close=")">
+			#{listId}
+		</foreach>
+		OR USERNAME IN 
 		<foreach item="listId" collection="list"
 			open="(" separator="," close=")">
 			#{listId}

@@ -15,6 +15,7 @@ import com.seeyoui.kensite.common.base.service.BaseService;
 import com.seeyoui.kensite.common.exception.CRUDException;
 import com.seeyoui.kensite.common.util.*;
 import com.seeyoui.kensite.common.constants.StringConstant;
+import com.seeyoui.kensite.framework.act.idgenerator.GeneratorUUID;
 import com.seeyoui.kensite.framework.system.domain.SysUser;
 import com.seeyoui.kensite.framework.system.persistence.SysUserMapper;
 
@@ -74,7 +75,7 @@ public class SysUserService extends BaseService {
 	 * @throws CRUDException
 	 */
 	public void saveSysUser(SysUser sysUser) throws CRUDException{
-		sysUser.setId(String.valueOf(UUID.randomUUID()).replaceAll("-", ""));
+		sysUser.setId(GeneratorUUID.getId());
 		sysUserMapper.saveSysUser(sysUser);
 	}
 	

@@ -1,14 +1,14 @@
 <%@ page import="com.seeyoui.kensite.common.constants.StringConstant"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/view/common/common.jsp" %>
+<%@ include file="/WEB-INF/view/taglib/common.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>    
     <title>用户信息</title>
-	<script type="text/javascript" src="${ctx_common}/js/jquery-1.7.2.min.js"></script>
-	<%@ include file="/WEB-INF/view/common/easyui.jsp" %>
-	<%@ include file="/WEB-INF/view/common/layer.jsp" %>
+	<script type="text/javascript" src="${ctx_assets}/js/jquery-1.11.1.min.js"></script>
+	<%@ include file="/WEB-INF/view/taglib/easyui.jsp" %>
+	<%@ include file="/WEB-INF/view/taglib/layer.jsp" %>
   </head>
   <body>
   
@@ -30,7 +30,7 @@
 		        </thead>
 		    </table>
 		    <div id="toolbar">
-		    	<shiro:hasPermission name="sysUser:abc">
+		    	<shiro:hasPermission name="sysUser:insert">
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newInfo()">新建</a>
 		        </shiro:hasPermission>
 		        <shiro:hasPermission name="sysUser:update">
@@ -44,7 +44,6 @@
 密码<input id="sel_password" name="sel_password" class="easyui-textbox" data-options=""/>
 用户名<input id="sel_name" name="sel_name" class="easyui-textbox" data-options=""/>
 部门<input id="sel_departmentid" name="sel_departmentid" class="easyui-textbox" data-options=""/>
-状态<input id="sel_state" name="sel_state" class="easyui-textbox" data-options=""/>
 			    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="selectData()">查询</a>
 		    </div>
 		    <div id="dataWin" class="easyui-window" title="用户信息信息维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:400px;height:260px;padding:10px;">
@@ -103,14 +102,12 @@
 		    var sel_password = $("#sel_password").val();
 		    var sel_name = $("#sel_name").val();
 		    var sel_departmentid = $("#sel_departmentid").val();
-		    var sel_state = $("#sel_state").val();
         	$('#dataList').datagrid('load',{
     		    
     		    username:sel_username,
     		    password:sel_password,
     		    name:sel_name,
-    		    departmentid:sel_departmentid,
-    		    state:sel_state
+    		    departmentid:sel_departmentid
         	});
         }
 	    

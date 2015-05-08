@@ -91,6 +91,7 @@ public class LoginController {
             token.clear();
             modelMap.put("info", info);
         }
+        resultPageURL = "skins/top_left_main";
         return resultPageURL;
 	}
 	

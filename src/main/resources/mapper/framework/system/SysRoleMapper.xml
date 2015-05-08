@@ -46,7 +46,7 @@
 	</select>
 	
 	<!-- 查询用户权限集合 -->
-	<select id="findSysUserRoleList" resultType="com.seeyoui.kensite.framework.system.domain.SysRole" parameterType="map">
+	<select id="findSysUserRoleList" resultType="com.seeyoui.kensite.framework.system.domain.SysRole" parameterType="SysUser">
 		select 
 		<include refid="tableColumns"/>			
 		from sys_user su

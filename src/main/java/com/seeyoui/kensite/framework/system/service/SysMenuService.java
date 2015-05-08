@@ -3,19 +3,21 @@
  * Since 2014 - 2015
  */package com.seeyoui.kensite.framework.system.service;  
  
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.seeyoui.kensite.common.base.service.BaseService;
-
-import java.util.*;
-
+import com.seeyoui.kensite.common.base.domain.Attributes;
 import com.seeyoui.kensite.common.base.domain.EasyUIDataGrid;
+import com.seeyoui.kensite.common.base.domain.TreeJson;
 import com.seeyoui.kensite.common.base.service.BaseService;
 import com.seeyoui.kensite.common.exception.CRUDException;
-import com.seeyoui.kensite.common.util.*;
-import com.seeyoui.kensite.common.constants.StringConstant;
+import com.seeyoui.kensite.framework.act.idgenerator.GeneratorUUID;
 import com.seeyoui.kensite.framework.system.domain.SysMenu;
+import com.seeyoui.kensite.framework.system.domain.SysUser;
 import com.seeyoui.kensite.framework.system.persistence.SysMenuMapper;
 
 /**
@@ -55,8 +57,22 @@ public class SysMenuService extends BaseService {
 	 * @return
 	 * @throws CRUDException
 	 */
-	public List<SysMenu> findSysMenuTree(Map<String, String > map) throws CRUDException {
-		return sysMenuMapper.findSysMenuTree(map);
+	public List<TreeJson> findSysMenuTree(SysUser sysUser) throws CRUDException {
+		List<SysMenu> mList = sysMenuMapper.findSysMenuTree(sysUser);
+		List<TreeJson> tList = new ArrayList<TreeJson>();
+		for(int i=0; i<mList.size(); i++) {
+			TreeJson tj = new TreeJson();
+			tj.setId(mList.get(i).getId());
+			tj.setPid(mList.get(i).getParentid());
+			tj.setText(mList.get(i).getName());
+			Attributes attributes = new Attributes();
+			attributes.setUrl(mList.get(i).getUrl());
+			attributes.setIcon(mList.get(i).getIcon());
+			tj.setAttributes(attributes);
+			tList.add(tj);
+		}
+		List<TreeJson> jList = TreeJson.formatTree(tList);
+		return jList;
 	}
 	
 	/**
@@ -75,7 +91,7 @@ public class SysMenuService extends BaseService {
 	 * @throws CRUDException
 	 */
 	public void saveSysMenu(SysMenu sysMenu) throws CRUDException{
-		sysMenu.setId(String.valueOf(UUID.randomUUID()).replaceAll("-", ""));
+		sysMenu.setId(GeneratorUUID.getId());
 		sysMenuMapper.saveSysMenu(sysMenu);
 	}
 	

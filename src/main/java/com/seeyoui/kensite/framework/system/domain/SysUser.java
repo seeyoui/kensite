@@ -18,6 +18,8 @@ public class SysUser extends Pager {
     private String username;  
     private String password;  
     private String name;  
+    private String email;  
+    private String phone;  
     private String departmentid;  
     private String state;  
  
@@ -62,5 +64,21 @@ public class SysUser extends Pager {
       
     public String getState() {  
         return this.state;  
-    }  
+    }
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}  
 }

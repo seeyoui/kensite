@@ -4,10 +4,12 @@
  */
 package com.seeyoui.kensite.framework.system.persistence;  
 
+import java.util.List;
+
 import com.seeyoui.kensite.common.base.domain.EasyUIDataGrid;
 import com.seeyoui.kensite.common.exception.CRUDException;
 import com.seeyoui.kensite.framework.system.domain.SysMenu;
-import java.util.*;
+import com.seeyoui.kensite.framework.system.domain.SysUser;
 
 /**
  * @author cuichen
@@ -36,7 +38,7 @@ public interface SysMenuMapper {
 	 * @return
 	 * @throws CRUDException
 	 */
-	public List<SysMenu> findSysMenuTree(Map<String, String > map);
+	public List<SysMenu> findSysMenuTree(SysUser sysUser);
 	
 	/**
 	 * 查询数据总数

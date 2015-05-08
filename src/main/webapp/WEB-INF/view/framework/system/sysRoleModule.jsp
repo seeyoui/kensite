@@ -1,14 +1,14 @@
 <%@ page import="com.seeyoui.kensite.common.constants.StringConstant"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/view/common/common.jsp" %>
+<%@ include file="/WEB-INF/view/taglib/common.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>    
     <title>角色模块</title>
-	<script type="text/javascript" src="${ctx_common}/js/jquery-1.7.2.min.js"></script>
-	<%@ include file="/WEB-INF/view/common/easyui.jsp" %>
-	<%@ include file="/WEB-INF/view/common/layer.jsp" %>
+	<script type="text/javascript" src="${ctx_assets}/js/jquery-1.11.1.min.js"></script>
+	<%@ include file="/WEB-INF/view/taglib/easyui.jsp" %>
+	<%@ include file="/WEB-INF/view/taglib/layer.jsp" %>
   </head>
   <body>
   
@@ -26,7 +26,7 @@
 		        </thead>
 		    </table>
 		    <div id="toolbar">
-		    	<shiro:hasPermission name="sysRoleModule:abc">
+		    	<shiro:hasPermission name="sysRoleModule:insert">
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newInfo()">新建</a>
 		        </shiro:hasPermission>
 		        <shiro:hasPermission name="sysRoleModule:update">
@@ -35,9 +35,6 @@
 		        <shiro:hasPermission name="sysRoleModule:delete">
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyInfo()">删除</a>
 		        </shiro:hasPermission>
-角色主键<input id="sel_roleid" name="sel_roleid" class="easyui-textbox" data-options=""/>
-模块主键<input id="sel_moduleid" name="sel_moduleid" class="easyui-textbox" data-options=""/>
-			    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="selectData()">查询</a>
 		    </div>
 		    <div id="dataWin" class="easyui-window" title="角色模块信息维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:400px;height:260px;padding:10px;">
 		        <div class="ftitle">角色模块信息维护</div>

@@ -15,6 +15,7 @@ import com.seeyoui.kensite.common.base.service.BaseService;
 import com.seeyoui.kensite.common.exception.CRUDException;
 import com.seeyoui.kensite.common.util.*;
 import com.seeyoui.kensite.common.constants.StringConstant;
+import com.seeyoui.kensite.framework.act.idgenerator.GeneratorUUID;
 import com.seeyoui.kensite.framework.system.domain.SysModule;
 import com.seeyoui.kensite.framework.system.persistence.SysModuleMapper;
 
@@ -65,7 +66,7 @@ public class SysModuleService extends BaseService {
 	 * @throws CRUDException
 	 */
 	public void saveSysModule(SysModule sysModule) throws CRUDException{
-		sysModule.setId(String.valueOf(UUID.randomUUID()).replaceAll("-", ""));
+		sysModule.setId(GeneratorUUID.getId());
 		sysModuleMapper.saveSysModule(sysModule);
 	}
 	

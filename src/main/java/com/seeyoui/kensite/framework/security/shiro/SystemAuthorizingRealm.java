@@ -1,10 +1,10 @@
 package com.seeyoui.kensite.framework.security.shiro;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.LockedAccountException;
@@ -14,27 +14,30 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
-import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.seeyoui.kensite.common.base.domain.TreeJson;
+import com.seeyoui.kensite.common.util.SessionUtil;
 import com.seeyoui.kensite.common.util.SpringContextHolder;
+import com.seeyoui.kensite.framework.system.domain.SysMenu;
 import com.seeyoui.kensite.framework.system.domain.SysPermission;
 import com.seeyoui.kensite.framework.system.domain.SysRole;
 import com.seeyoui.kensite.framework.system.domain.SysUser;
+import com.seeyoui.kensite.framework.system.service.SysMenuService;
 import com.seeyoui.kensite.framework.system.service.SysPermissionService;
 import com.seeyoui.kensite.framework.system.service.SysRoleService;
 import com.seeyoui.kensite.framework.system.service.SysUserService;
+import com.seeyoui.kensite.framework.system.util.UserUtils;
 
 /**
  * 系统安全认证实现类
  * @author ken
  * @version 2015-3-27
  */
-@Service
+
 public class SystemAuthorizingRealm extends AuthorizingRealm {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
@@ -44,6 +47,8 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 	private SysRoleService sysRoleService;
 	
 	private SysPermissionService sysPermissionService;
+	
+	private SysMenuService sysMenuService;
 
 	/**
 	 * 认证回调函数, 登录时调用
@@ -65,7 +70,6 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 //				throw new AuthenticationException("msg:验证码错误, 请重试.");
 //			}
 //		}
-		
 		// 校验用户名密码
 		SysUser user = getSysUserService().findSysUserByUserName(token.getUsername());
 		if (user != null) {
@@ -74,8 +78,10 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 			} else {
 				AuthenticationInfo authcInfo = new SimpleAuthenticationInfo(
 						user.getUsername(), user.getPassword(), user.getName());
-				this.setSession("currentUser", user);
-				this.setSession("currentUsername", user.getUsername());
+				SessionUtil.setSession("currentUser", user);
+				SessionUtil.setSession("currentUsername", user.getUsername());
+				List<TreeJson> menuList = getSysMenuService().findSysMenuTree(user);
+				SessionUtil.setSession("menuList", menuList);
 				return authcInfo;
 			}
 		} else {
@@ -109,15 +115,15 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 		SysUser user = getSysUserService().findSysUserByUserName(currentUsername);
 		if (user != null) {
 			SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-			Map<String, String> map = new HashMap<String, String>();
-			map.put("username", currentUsername);
-			List<SysRole> sysRoleList = getSysRoleService().findSysUserRoleList(map);
+			SysUser sysUser = new SysUser();
+			sysUser.setUsername(currentUsername);
+			List<SysRole> sysRoleList = getSysRoleService().findSysUserRoleList(sysUser);
 			// 添加用户角色
 			for (SysRole sysRole : sysRoleList){
 				info.addRole(sysRole.getShiro());
 			}
 			// 添加用户权限
-			List<SysPermission> sysPermissionList = getSysPermissionService().findSysUserPermissionList(map);
+			List<SysPermission> sysPermissionList = getSysPermissionService().findSysUserPermissionList(sysUser);
 			for (SysPermission sysPermission : sysPermissionList){
 				info.addStringPermission(sysPermission.getId());
 			}
@@ -127,6 +133,69 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 		} else {
 			return null;
 		}
+	}
+	
+	/**
+	 * 授权用户信息
+	 */
+	public static class Principal implements Serializable {
+
+		private static final long serialVersionUID = 1L;
+		
+		private String id; // 编号
+		private String loginName; // 登录名
+		private String name; // 姓名
+		private boolean mobileLogin; // 是否手机登录
+		
+//		private Map<String, Object> cacheMap;
+
+		public Principal(SysUser sysUser, boolean mobileLogin) {
+			this.id = sysUser.getId();
+			this.loginName = sysUser.getUsername();
+			this.name = sysUser.getName();
+			this.mobileLogin = mobileLogin;
+		}
+
+		public String getId() {
+			return id;
+		}
+
+		public String getLoginName() {
+			return loginName;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public boolean isMobileLogin() {
+			return mobileLogin;
+		}
+
+//		@JsonIgnore
+//		public Map<String, Object> getCacheMap() {
+//			if (cacheMap==null){
+//				cacheMap = new HashMap<String, Object>();
+//			}
+//			return cacheMap;
+//		}
+
+		/**
+		 * 获取SESSIONID
+		 */
+		public String getSessionid() {
+			try{
+				return (String) UserUtils.getSession().getId();
+			}catch (Exception e) {
+				return "";
+			}
+		}
+		
+		@Override
+		public String toString() {
+			return id;
+		}
+
 	}
 
 	/**
@@ -150,20 +219,11 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 		}
 		return sysPermissionService;
 	}
-	
-	/**
-	 * 将一些数据放到ShiroSession中,以便于其它地方使用
-	 * @see 比如Controller,使用时直接用HttpSession.getAttribute(key)就可以取到
-	 */
-	private void setSession(Object key, Object value){
-		Subject currentUser = SecurityUtils.getSubject();
-		if(null != currentUser){
-			Session session = currentUser.getSession();
-			System.out.println("Session默认超时时间为[" + session.getTimeout() + "]毫秒");
-			if(null != session){
-				session.setAttribute(key, value);
-			}
+	public SysMenuService getSysMenuService() {
+		if (sysMenuService == null){
+			sysMenuService = SpringContextHolder.getBean(SysMenuService.class);
 		}
+		return sysMenuService;
 	}
 	
 }

@@ -1,14 +1,14 @@
 <%@ page import="com.seeyoui.kensite.common.constants.StringConstant"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/view/common/common.jsp" %>
+<%@ include file="/WEB-INF/view/taglib/common.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>    
     <title>导航菜单</title>
-	<script type="text/javascript" src="${ctx_common}/js/jquery-1.7.2.min.js"></script>
-	<%@ include file="/WEB-INF/view/common/easyui.jsp" %>
-	<%@ include file="/WEB-INF/view/common/layer.jsp" %>
+	<script type="text/javascript" src="${ctx_assets}/js/jquery-1.11.1.min.js"></script>
+	<%@ include file="/WEB-INF/view/taglib/easyui.jsp" %>
+	<%@ include file="/WEB-INF/view/taglib/layer.jsp" %>
   </head>
   <body>
   
@@ -31,7 +31,7 @@
 		        </thead>
 		    </table>
 		    <div id="toolbar">
-		    	<shiro:hasPermission name="sysMenu:abc">
+		    	<shiro:hasPermission name="sysMenu:insert">
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newInfo()">新建</a>
 		        </shiro:hasPermission>
 		        <shiro:hasPermission name="sysMenu:update">
@@ -41,12 +41,8 @@
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyInfo()">删除</a>
 		        </shiro:hasPermission>
 
-外键<input id="sel_parentid" name="sel_parentid" class="easyui-textbox" data-options=""/>
 名称<input id="sel_name" name="sel_name" class="easyui-textbox" data-options=""/>
 URL<input id="sel_url" name="sel_url" class="easyui-textbox" data-options=""/>
-排序<input id="sel_sequence" name="sel_sequence" class="easyui-numberbox" data-options="min:0,max:999999,precision:0"/>
-图标<input id="sel_icon" name="sel_icon" class="easyui-textbox" data-options=""/>
-打开方式<input id="sel_target" name="sel_target" class="easyui-textbox" data-options=""/>
 			    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="selectData()">查询</a>
 		    </div>
 		    <div id="dataWin" class="easyui-window" title="导航菜单信息维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:400px;height:260px;padding:10px;">
@@ -105,20 +101,11 @@ URL<input id="sel_url" name="sel_url" class="easyui-textbox" data-options=""/>
 	    
 	    function selectData() {
 		    
-		    var sel_parentid = $("#sel_parentid").val();
 		    var sel_name = $("#sel_name").val();
 		    var sel_url = $("#sel_url").val();
-		    var sel_sequence = $("#sel_sequence").val();
-		    var sel_icon = $("#sel_icon").val();
-		    var sel_target = $("#sel_target").val();
         	$('#dataList').datagrid('load',{
-    		    
-    		    parentid:sel_parentid,
     		    name:sel_name,
-    		    url:sel_url,
-    		    sequence:sel_sequence,
-    		    icon:sel_icon,
-    		    target:sel_target
+    		    url:sel_url
         	});
         }
 	    

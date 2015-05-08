@@ -1,0 +1,158 @@
+<%@ page import="com.seeyoui.kensite.common.constants.StringConstant"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/view/taglib/common.jsp" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>    
+    <title>流程模型</title>
+	<script type="text/javascript" src="${ctx_assets}/js/jquery-1.11.1.min.js"></script>
+	<%@ include file="/WEB-INF/view/taglib/easyui.jsp" %>
+	<%@ include file="/WEB-INF/view/taglib/layer.jsp" %>
+  </head>
+  <body>
+  
+  	<div id="divLayout" class="easyui-layout" style="width:auto;height:450px">
+        <div id="divCenter" data-options="region:'center'">
+		    <table id="dataList" title="流程模型列表" class="easyui-datagrid" style="width:auto;height:auto"
+		    		url="${ctx}/actModel/getListData.do"
+		            toolbar="#toolbar" pagination="true"
+		            rownumbers="true" fitColumns="true" singleSelect="true">
+		        <thead>
+		            <tr>
+					    <th field="id" width="100px" hidden>模型ID</th>
+					    <th field="category" width="100px">流程分类</th>
+					    <th field="key" width="100px">模型标识</th>
+					    <th field="name" width="100px">模型名称</th>
+					    <th field="version" width="50px" align="right">版本号</th>
+					    <th field="createTime" width="100px">创建时间</th>
+					    <th field="lastUpdateTime" width="100px">最后更新时间</th>
+		            </tr>
+		        </thead>
+		    </table>
+		    <div id="toolbar">
+		    	<shiro:hasPermission name="actModel:insert">
+		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newInfo()">新建</a>
+		        </shiro:hasPermission>
+		        <shiro:hasPermission name="actModel:update">
+		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editInfo()">修改</a>
+		        </shiro:hasPermission>
+		        <shiro:hasPermission name="actModel:delete">
+		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyInfo()">删除</a>
+		        </shiro:hasPermission>
+		        <shiro:hasPermission name="actModel:deploy">
+		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="deploy()">部署</a>
+		        </shiro:hasPermission>
+
+		    </div>
+		    <div id="dataWin" class="easyui-window" title="流程模型信息维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:400px;height:260px;padding:10px;">
+		        <div class="ftitle">流程模型信息维护</div>
+		        <form id="dataForm" method="post" enctype="multipart/form-data">
+							<div class="fitem">
+				                <label>流程分类</label>
+				                <input id="category" name="category" class="easyui-validatebox textbox" data-options="required:true"/>
+				            </div>
+							<div class="fitem">
+				                <label>模型标识</label>
+				                <input id="key" name="key" class="easyui-validatebox textbox" data-options="required:true"/>
+				            </div>
+							<div class="fitem">
+				                <label>模型名称</label>
+				                <input id="name" name="name" class="easyui-validatebox textbox" data-options="required:true"/>
+				            </div>
+							<div class="fitem">
+				                <label>描述</label>
+				                <input id="description" name="description" class="easyui-validatebox textbox" data-options="required:true"/>
+				            </div>
+				</form>
+				
+			    <div id="dataWin-buttons">
+			        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveInfo()" style="width:90px">保存</a>
+			        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dataWin').window('close')" style="width:90px">取消</a>
+			    </div>
+		    </div>
+	    </div>
+    </div>
+    <form id="delForm" method="post" enctype="multipart/form-data">
+    	<input type="hidden" id="delDataId" name="delDataId" value=""/>
+    </form>
+    <script type="text/javascript">
+	    $(document).ready(function(){
+	    	initSize();
+	    });
+	    
+	    function initSize() {
+	    	$("#divLayout").height($(window).height());
+	    	$("#divCenter").height($(window).height());
+	    	$("#dataList").datagrid('resize', {
+	    		height:$(window).height()-1
+	    	});
+	    }
+	    
+	    function selectData() {
+		    
+		    var sel_name = $("#sel_name").val();
+        	$('#dataList').datagrid('load',{
+    		    name:sel_name
+        	});
+        }
+	    
+        var url;
+        function newInfo(){
+            $('#dataWin').window('open');
+            $('#dataForm').form('clear');
+            url = '${ctx}/actModel/saveByAdd.do';
+        }
+        function editInfo(){
+            var row = $('#dataList').datagrid('getSelected');
+            if (row){
+                window.open('${ctx}/act/modeler.jsp?modelId='+row.id);
+            }    	
+        }
+        var loadi;
+        function saveInfo(){
+            $('#dataForm').form('submit',{
+                url: url,
+                onSubmit: function(param){
+                	if($(this).form('validate')) {
+                		loadi = layer.load('正在保存，请稍后...');
+                	}
+                    return $(this).form('validate');
+                },
+                success: function(info){
+                    if (info==TRUE){
+                        layer.msg("操作成功！", 2, -1);
+                    } else {
+	                    layer.msg("操作失败！", 2, -1);
+                    }
+                	layer.close(loadi);
+                	$('#dataWin').window('close'); 
+                	$('#dataList').datagrid('reload');
+                }
+            });
+        }
+        function destroyInfo(){
+            var row = $('#dataList').datagrid('getSelected');
+            if (row){
+                $.messager.confirm('确认','你确定删除该记录吗？',function(r){
+                    if (r){
+						$('#delDataId').val(row.id);
+						$('#delForm').form('submit',{
+							url: '${ctx}/actModel/delete.do',
+							dataType: 'text',
+							success: function(info){
+								if (info==TRUE){
+			                        layer.msg("操作成功！", 2, -1);
+			                    } else {
+				                    layer.msg("操作失败！", 2, -1);
+			                    }
+								$('#dataList').datagrid('reload');
+							}
+						});
+                    }
+                });
+            }
+        }
+    </script>
+  </body>
+</html>

@@ -70,7 +70,7 @@
 	</select>
 	
 	<!-- 查询数据TREE -->
-	<select id="findSysMenuTree" resultType="com.seeyoui.kensite.framework.system.domain.SysMenu" parameterType="map">
+	<select id="findSysMenuTree" resultType="com.seeyoui.kensite.framework.system.domain.SysMenu" parameterType="SysUser">
 		SELECT 
 		<include refid="tableColumns"/>
 		from sys_user su

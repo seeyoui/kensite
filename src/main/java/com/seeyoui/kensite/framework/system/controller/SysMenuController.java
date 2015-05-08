@@ -33,6 +33,7 @@ import com.seeyoui.kensite.common.base.domain.TreeJson;
 import com.seeyoui.kensite.common.constants.StringConstant;
 import com.seeyoui.kensite.common.util.RequestResponseUtil;
 import com.seeyoui.kensite.framework.system.domain.SysMenu;
+import com.seeyoui.kensite.framework.system.domain.SysUser;
 import com.seeyoui.kensite.framework.system.service.SysMenuService;
 /**
  * @author cuichen
@@ -94,23 +95,10 @@ public class SysMenuController extends BaseController {
 	public String findSysMenuTree(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, String username) throws Exception {
-		Map<String, String > map = new HashMap<String, String>();
-		map.put("username", username);
-		List<SysMenu> mList = sysMenuService.findSysMenuTree(map);
-		List<TreeJson> tList = new ArrayList<TreeJson>();
-		for(int i=0; i<mList.size(); i++) {
-			TreeJson tj = new TreeJson();
-			tj.setId(mList.get(i).getId());
-			tj.setPid(mList.get(i).getParentid());
-			tj.setText(mList.get(i).getName());
-			Attributes attributes = new Attributes();
-			attributes.setUrl(mList.get(i).getUrl());
-			attributes.setIcon(mList.get(i).getIcon());
-			tj.setAttributes(attributes);
-			tList.add(tj);
-		}
-		List<TreeJson> jList = TreeJson.formatTree(tList);
-		JSONObject jsonObj = JSONObject.fromObject(jList.get(0));
+		SysUser sysUser = new SysUser();
+		sysUser.setUsername(username);
+		List<TreeJson> treeList = sysMenuService.findSysMenuTree(sysUser);
+		JSONObject jsonObj = JSONObject.fromObject(treeList.get(0));
 		return "["+jsonObj.toString()+"]";
 		 
 	}

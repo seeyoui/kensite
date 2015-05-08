@@ -26,6 +26,9 @@
 	<!-- 用户缓存 -->
 	<cache name="userCache" maxEntriesLocalHeap="100" eternal="true" overflowToDisk="true"/>
 	
+	<!-- 流程缓存 -->
+	<cache name="actCache" maxEntriesLocalHeap="100" eternal="true" overflowToDisk="true"/>
+	
 	<!-- 系统活动会话缓存 -->
     <cache name="activeSessionsCache" maxEntriesLocalHeap="10000" overflowToDisk="true"
            eternal="true" timeToLiveSeconds="0" timeToIdleSeconds="0"

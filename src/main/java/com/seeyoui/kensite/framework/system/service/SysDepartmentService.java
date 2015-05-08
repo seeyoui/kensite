@@ -15,6 +15,7 @@ import com.seeyoui.kensite.common.base.service.BaseService;
 import com.seeyoui.kensite.common.exception.CRUDException;
 import com.seeyoui.kensite.common.util.*;
 import com.seeyoui.kensite.common.constants.StringConstant;
+import com.seeyoui.kensite.framework.act.idgenerator.GeneratorUUID;
 import com.seeyoui.kensite.framework.system.domain.SysDepartment;
 import com.seeyoui.kensite.framework.system.persistence.SysDepartmentMapper;
 
@@ -65,7 +66,7 @@ public class SysDepartmentService extends BaseService {
 	 * @throws CRUDException
 	 */
 	public void saveSysDepartment(SysDepartment sysDepartment) throws CRUDException{
-		sysDepartment.setId(String.valueOf(UUID.randomUUID()).replaceAll("-", ""));
+		sysDepartment.setId(GeneratorUUID.getId());
 		sysDepartmentMapper.saveSysDepartment(sysDepartment);
 	}
 	
