@@ -15,10 +15,10 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,12 +26,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.seeyoui.kensite.common.base.controller.BaseController;
-
 import com.seeyoui.kensite.common.constants.StringConstant;
 import com.seeyoui.kensite.common.base.domain.EasyUIDataGrid;
+import com.seeyoui.kensite.common.base.domain.TreeJson;
 import com.seeyoui.kensite.common.base.controller.BaseController;
 import com.seeyoui.kensite.common.util.RequestResponseUtil;
-
 import com.seeyoui.kensite.framework.system.domain.SysDepartment;
 import com.seeyoui.kensite.framework.system.service.SysDepartmentService;
 /**
@@ -80,6 +79,29 @@ public class SysDepartmentController extends BaseController {
 		JSONObject jsonObj = JSONObject.fromObject(eudg);
 		RequestResponseUtil.putResponseStr(session, response, request, jsonObj);
 		return null;
+	}
+	
+	/**
+	 * 获取模块TREE页面JSON数据
+	 * @param id
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/getTreeJson", method=RequestMethod.POST)
+	@ResponseBody
+	public String getTreeJson() throws Exception {
+		List<SysDepartment> mList = sysDepartmentService.getTreeJson();
+		List<TreeJson> tList = new ArrayList<TreeJson>();
+		for(int i=0; i<mList.size(); i++) {
+			TreeJson tj = new TreeJson();
+			tj.setId(mList.get(i).getId());
+			tj.setPid(mList.get(i).getParentid());
+			tj.setText(mList.get(i).getName());
+			tList.add(tj);
+		}
+		List<TreeJson> jList = TreeJson.formatTree(tList) ;
+		JSONArray jsonObj = JSONArray.fromObject(jList.get(0));
+		return jsonObj.toString();
 	}
 	
 	/**

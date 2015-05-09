@@ -61,6 +61,16 @@
 		<include refid="whereStr"/>
 	</select>
 	
+	<!-- 获取数据用于生成TREE -->
+	<select id="getTreeJson" resultType="com.seeyoui.kensite.framework.system.domain.SysDepartment" >  
+		SELECT 
+		<include refid="tableColumns" />
+		FROM sys_department t 
+		start with t.parentid = 'ffffffffffffffffffffffffffffffff' 
+		connect by t.parentid = prior t.id 
+		ORDER SIBLINGS BY t.sequence
+	</select>
+	
 	<!-- 数据新增 -->
 	<insert id="saveSysDepartment" parameterType="com.seeyoui.kensite.framework.system.domain.SysDepartment">
 		INSERT INTO SYS_DEPARTMENT (

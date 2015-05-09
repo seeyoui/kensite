@@ -13,6 +13,9 @@
   <body>
   
   	<div id="divLayout" class="easyui-layout" style="width:auto;height:450px">
+  		<div id="divWest" data-options="region:'west', collapsible:false,split:false" title="部门" style="width:200px;">
+        	<ul id="departmentTree" class="easyui-tree" url="${ctx}/sysDepartment/getTreeJson.do"></ul>
+        </div>
         <div id="divCenter" data-options="region:'center'">
 		    <table id="dataList" title="部门列表" class="easyui-datagrid" style="width:auto;height:auto"
 		    		url="${ctx}/sysDepartment/getListData.do"
@@ -21,10 +24,10 @@
 		        <thead>
 		            <tr>
 					    <th field="id" width="100px" hidden>主键</th>
-					    <th field="parentid" width="100px">外键</th>
-					    <th field="sequence" width="50px" align="right">排序</th>
+					    <th field="parentid" width="100px" hidden>上级部门</th>
 					    <th field="name" width="100px">部门名称</th>
 					    <th field="code" width="100px">部门编号</th>
+					    <th field="sequence" width="50px" align="right">排序</th>
 		            </tr>
 		        </thead>
 		    </table>
@@ -38,22 +41,14 @@
 		        <shiro:hasPermission name="sysDepartment:delete">
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyInfo()">删除</a>
 		        </shiro:hasPermission>
-
-部门名称<input id="sel_name" name="sel_name" class="easyui-textbox" data-options=""/>
-部门编号<input id="sel_code" name="sel_code" class="easyui-textbox" data-options=""/>
+				<input id="sel_parentid" name="sel_parentid" type="hidden" value="<%=StringConstant.ROOT_ID_32%>"/>
+				部门名称<input id="sel_name" name="sel_name" class="easyui-textbox" data-options=""/>
+				部门编号<input id="sel_code" name="sel_code" class="easyui-textbox" data-options=""/>
 			    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="selectData()">查询</a>
 		    </div>
 		    <div id="dataWin" class="easyui-window" title="部门信息维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:400px;height:260px;padding:10px;">
 		        <div class="ftitle">部门信息维护</div>
-		        <form id="dataForm" method="post" enctype="multipart/form-data">
-							<div class="fitem">
-				                <label>外键</label>
-				                <input id="parentid" name="parentid" class="easyui-validatebox textbox" data-options="required:true"/>
-				            </div>
-							<div class="fitem">
-				                <label>排序</label>
-				                <input id="sequence" name="sequence" class="easyui-numberbox textbox" data-options="min:0,max:999999,precision:0,required:true"/>
-				            </div>
+		        <form id="dataForm" method="post">
 							<div class="fitem">
 				                <label>部门名称</label>
 				                <input id="name" name="name" class="easyui-validatebox textbox" data-options="required:true"/>
@@ -62,8 +57,14 @@
 				                <label>部门编号</label>
 				                <input id="code" name="code" class="easyui-validatebox textbox" data-options="required:true"/>
 				            </div>
-	                <input id="createuser" name="createuser" type="hidden"/>
-	                <input id="updateuser" name="updateuser" type="hidden"/>
+				            <div class="fitem">
+				                <label>上级部门</label>
+				                <input id="parentid" name="parentid" class="easyui-combotree" data-options="required:true" style="width:160px;" url="${ctx}/sysDepartment/getTreeJson.do"/>
+				            </div>
+				            <div class="fitem">
+				                <label>排序</label>
+				                <input id="sequence" name="sequence" class="easyui-numberbox textbox" data-options="min:0,max:999999,precision:0,required:true"/>
+				            </div>
 				</form>
 				
 			    <div id="dataWin-buttons">
@@ -73,37 +74,48 @@
 		    </div>
 	    </div>
     </div>
-    <form id="delForm" method="post" enctype="multipart/form-data">
-    	<input type="hidden" id="delDataId" name="delDataId" value=""/>
-    </form>
     <script type="text/javascript">
 	    $(document).ready(function(){
 	    	initSize();
+	    	$("#departmentTree").tree({
+	    		onClick: function(node){
+	    			$('#sel_parentid').val(node.id);
+	    			selectData();
+	    		}
+	    	});
+	    	selectData();
 	    });
 	    
 	    function initSize() {
 	    	$("#divLayout").height($(window).height());
 	    	$("#divCenter").height($(window).height());
+	    	$("#divWest").height($(window).height()-29);
 	    	$("#dataList").datagrid('resize', {
 	    		height:$(window).height()-1
 	    	});
 	    }
 	    
 	    function selectData() {
-		    
+	    	var sel_parentid = $("#sel_parentid").val();
 		    var sel_name = $("#sel_name").val();
 		    var sel_code = $("#sel_code").val();
         	$('#dataList').datagrid('load',{
+        		parentid:sel_parentid,
     		    name:sel_name,
     		    code:sel_code
         	});
+        }
+        
+        function reloadData() {
+        	selectData();
+        	$('#departmentTree').tree('reload');
+        	$('#parentid').combotree('reload');
         }
 	    
         var url;
         function newInfo(){
             $('#dataWin').window('open');
             $('#dataForm').form('clear');
-            $("#createuser").val("${sysUserAccount}");
             url = '${ctx}/sysDepartment/saveByAdd.do';
         }
         function editInfo(){
@@ -111,7 +123,6 @@
             if (row){
                 $('#dataWin').window('open');
                 $('#dataForm').form('load',row);
-                $("#updateuser").val("${sysUserAccount}");
                 url = '${ctx}/sysDepartment/saveByUpdate.do?id='+row.id;
             }    	
         }
@@ -125,15 +136,15 @@
                 	}
                     return $(this).form('validate');
                 },
-                success: function(info){
-                    if (info==TRUE){
+                success: function(data){
+                    if (data=="<%=StringConstant.TRUE%>"){
                         layer.msg("操作成功！", 2, -1);
                     } else {
 	                    layer.msg("操作失败！", 2, -1);
                     }
                 	layer.close(loadi);
                 	$('#dataWin').window('close'); 
-                	$('#dataList').datagrid('reload');
+                	reloadData();
                 }
             });
         }
@@ -142,17 +153,20 @@
             if (row){
                 $.messager.confirm('确认','你确定删除该记录吗？',function(r){
                     if (r){
-						$('#delDataId').val(row.id);
-						$('#delForm').form('submit',{
-							url: '${ctx}/sysDepartment/delete.do',
+                    	$.ajax({
+							type: "post",
+							url: "${ctx}/sysDepartment/delete.do",
+							data: {delDataId:row.id},
 							dataType: 'text',
-							success: function(info){
-								if (info==TRUE){
+							beforeSend: function(XMLHttpRequest){
+							},
+							success: function(data, textStatus){
+								if (data=="<%=StringConstant.TRUE%>"){
 			                        layer.msg("操作成功！", 2, -1);
 			                    } else {
 				                    layer.msg("操作失败！", 2, -1);
 			                    }
-								$('#dataList').datagrid('reload');
+								reloadData();
 							}
 						});
                     }

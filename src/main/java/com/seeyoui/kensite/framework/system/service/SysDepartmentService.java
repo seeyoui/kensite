@@ -3,18 +3,14 @@
  * Since 2014 - 2015
  */package com.seeyoui.kensite.framework.system.service;  
  
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.seeyoui.kensite.common.base.service.BaseService;
-
-import java.util.*;
 
 import com.seeyoui.kensite.common.base.domain.EasyUIDataGrid;
 import com.seeyoui.kensite.common.base.service.BaseService;
 import com.seeyoui.kensite.common.exception.CRUDException;
-import com.seeyoui.kensite.common.util.*;
-import com.seeyoui.kensite.common.constants.StringConstant;
 import com.seeyoui.kensite.framework.act.idgenerator.GeneratorUUID;
 import com.seeyoui.kensite.framework.system.domain.SysDepartment;
 import com.seeyoui.kensite.framework.system.persistence.SysDepartmentMapper;
@@ -58,6 +54,15 @@ public class SysDepartmentService extends BaseService {
 	 */
 	public EasyUIDataGrid findSysDepartmentListTotal(SysDepartment sysDepartment) throws CRUDException {
 		return sysDepartmentMapper.findSysDepartmentListTotal(sysDepartment);
+	}
+	
+	/**
+	 * 获取生成TREE Json的
+	 * @return
+	 * @throws CRUDException
+	 */
+	public List<SysDepartment> getTreeJson() throws CRUDException {
+		return sysDepartmentMapper.getTreeJson();
 	}
 	
 	/**

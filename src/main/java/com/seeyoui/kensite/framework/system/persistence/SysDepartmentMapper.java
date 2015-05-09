@@ -4,9 +4,11 @@
  */
 package com.seeyoui.kensite.framework.system.persistence;  
 
+import java.util.List;
+
 import com.seeyoui.kensite.common.base.domain.EasyUIDataGrid;
+import com.seeyoui.kensite.common.exception.CRUDException;
 import com.seeyoui.kensite.framework.system.domain.SysDepartment;
-import java.util.*;
 
 /**
  * @author cuichen
@@ -35,6 +37,13 @@ public interface SysDepartmentMapper {
 	 * @return
 	 */
 	public EasyUIDataGrid findSysDepartmentListTotal(SysDepartment sysDepartment);
+	
+	/**
+	 * 获取生成TREE Json的
+	 * @return
+	 * @throws CRUDException
+	 */
+	public List<SysDepartment> getTreeJson();
 	
 	/**
 	 * 数据新增
