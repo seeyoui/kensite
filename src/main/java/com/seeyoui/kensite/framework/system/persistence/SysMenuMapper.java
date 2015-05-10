@@ -41,6 +41,14 @@ public interface SysMenuMapper {
 	public List<SysMenu> findSysMenuTree(SysUser sysUser);
 	
 	/**
+	 * 查询数据TREE
+	 * @param map
+	 * @return
+	 * @throws CRUDException
+	 */
+	public List<SysMenu> getTreeJson();
+	
+	/**
 	 * 查询数据总数
 	 * @param userinfo
 	 * @return

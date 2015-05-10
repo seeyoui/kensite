@@ -83,7 +83,6 @@
 	    			selectData();
 	    		}
 	    	});
-	    	selectData();
 	    });
 	    
 	    function initSize() {

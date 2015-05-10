@@ -32,6 +32,8 @@
 		        </shiro:hasPermission>
 		        <shiro:hasPermission name="sysRole:update">
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editInfo()">修改</a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="moduleShiro()">模块权限</a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="menuShiro()">菜单权限</a>
 		        </shiro:hasPermission>
 		        <shiro:hasPermission name="sysRole:delete">
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyInfo()">删除</a>
@@ -43,7 +45,7 @@
 		    </div>
 		    <div id="dataWin" class="easyui-window" title="角色信息维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:400px;height:260px;padding:10px;">
 		        <div class="ftitle">角色信息维护</div>
-		        <form id="dataForm" method="post" enctype="multipart/form-data">
+		        <form id="dataForm" method="post">
 							<div class="fitem">
 				                <label>角色名</label>
 				                <input id="name" name="name" class="easyui-validatebox textbox" data-options="required:true"/>
@@ -52,8 +54,20 @@
 				                <label>权限</label>
 				                <input id="shiro" name="shiro" class="easyui-validatebox textbox" data-options="required:true"/>
 				            </div>
-	                <input id="createuser" name="createuser" type="hidden"/>
-	                <input id="updateuser" name="updateuser" type="hidden"/>
+				</form>
+				
+			    <div id="dataWin-buttons">
+			        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveInfo()" style="width:90px">保存</a>
+			        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dataWin').window('close')" style="width:90px">取消</a>
+			    </div>
+		    </div>
+		    <div id="moduleWin" class="easyui-window" title="模块权限维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:400px;height:260px;padding:10px;">
+		        <div class="ftitle">模块权限维护</div>
+		        <form id="dataForm" method="post">
+					<div class="easyui-panel" title="模块权限" style="width:300px;height:300px;">
+	            		<ul id="moduleTree" class="easyui-tree" data-options="animate:true,checkbox:true,cascadeCheck:false"></ul>
+	            	</div>
+				    <input id="roleid" name="roleid" type="hidden"/>
 				</form>
 				
 			    <div id="dataWin-buttons">
@@ -63,9 +77,6 @@
 		    </div>
 	    </div>
     </div>
-    <form id="delForm" method="post" enctype="multipart/form-data">
-    	<input type="hidden" id="delDataId" name="delDataId" value=""/>
-    </form>
     <script type="text/javascript">
 	    $(document).ready(function(){
 	    	initSize();
@@ -89,12 +100,33 @@
     		    shiro:sel_shiro
         	});
         }
+        
+        function reloadData() {
+        	selectData();
+        }
+        
+        function moduleShiro() {
+        	loadModuleTreeData();
+        	$('#moduleWin').window('open');
+        }
+        
+        function loadModuleTreeData() {
+        	var roleid = $("#roleid").val();
+	    	$.ajax({
+				type: "POST",
+				url: "<%=path %>/sysModule/getModuleTreeJson.do",
+				data: "roleid="+roleid,
+				dataType: "json",
+				success: function(data){
+					$("#moduleTree").tree("loadData",data);
+				}
+			});
+	    }
 	    
         var url;
         function newInfo(){
             $('#dataWin').window('open');
             $('#dataForm').form('clear');
-            $("#createuser").val("${sysUserAccount}");
             url = '${ctx}/sysRole/saveByAdd.do';
         }
         function editInfo(){
@@ -102,7 +134,6 @@
             if (row){
                 $('#dataWin').window('open');
                 $('#dataForm').form('load',row);
-                $("#updateuser").val("${sysUserAccount}");
                 url = '${ctx}/sysRole/saveByUpdate.do?id='+row.id;
             }    	
         }
@@ -117,7 +148,7 @@
                     return $(this).form('validate');
                 },
                 success: function(info){
-                    if (info==TRUE){
+                    if (info=="<%=StringConstant.TRUE%>"){
                         layer.msg("操作成功！", 2, -1);
                     } else {
 	                    layer.msg("操作失败！", 2, -1);
@@ -133,17 +164,20 @@
             if (row){
                 $.messager.confirm('确认','你确定删除该记录吗？',function(r){
                     if (r){
-						$('#delDataId').val(row.id);
-						$('#delForm').form('submit',{
-							url: '${ctx}/sysRole/delete.do',
+                    	$.ajax({
+							type: "post",
+							url: "${ctx}/sysRole/delete.do",
+							data: {delDataId:row.id},
 							dataType: 'text',
-							success: function(info){
-								if (info==TRUE){
+							beforeSend: function(XMLHttpRequest){
+							},
+							success: function(data, textStatus){
+								if (data=="<%=StringConstant.TRUE%>"){
 			                        layer.msg("操作成功！", 2, -1);
 			                    } else {
 				                    layer.msg("操作失败！", 2, -1);
 			                    }
-								$('#dataList').datagrid('reload');
+								reloadData();
 							}
 						});
                     }

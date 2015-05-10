@@ -90,6 +90,17 @@
 		ORDER SIBLINGS BY t.sequence ASC
 	</select>
 	
+	<!-- 查询数据TREE -->
+	<select id="getTreeJson" resultType="com.seeyoui.kensite.framework.system.domain.SysMenu" parameterType="SysUser">
+		SELECT 
+		<include refid="tableColumns"/>
+		from 
+		sys_menu t
+		START WITH t.PARENTID='ffffffffffffffffffffffffffffffff'
+		CONNECT BY t.PARENTID = PRIOR t.ID 
+		ORDER SIBLINGS BY t.sequence ASC
+	</select>
+	
 	<!-- 数据新增 -->
 	<insert id="saveSysMenu" parameterType="com.seeyoui.kensite.framework.system.domain.SysMenu">
 		INSERT INTO SYS_MENU (

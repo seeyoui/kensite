@@ -54,7 +54,8 @@
 						});
 						// Set Form focus
 						$("form#login .form-group:has(.form-control):first .form-control").focus();
-						$("form").find('#password').select();
+						//$("form").find('#password').select();
+						$("form").find('#username').select();
 					
 					<c:if test="${not empty info}">
 						$(".errors-container .alert").slideUp('fast');

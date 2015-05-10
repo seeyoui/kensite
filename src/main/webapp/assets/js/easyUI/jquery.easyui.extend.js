@@ -6,6 +6,15 @@ function getTreeNodeLevel(tree, node) {
 	}
 	return level;
 }
+function getTreeChecked(tree, split) {
+	var nodes = tree.tree('getChecked');
+    var s = '';
+    for(var i=0; i<nodes.length; i++){
+        if (i != 0 && i != nodes.length-1) s += split;
+        s += nodes[i].id;
+    }
+    return s;
+}
 function pagerFilter(data){
 	if(data == null) {
 		return;

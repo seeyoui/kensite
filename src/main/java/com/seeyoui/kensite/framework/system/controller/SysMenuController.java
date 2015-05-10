@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
@@ -32,6 +33,7 @@ import com.seeyoui.kensite.common.base.domain.EasyUIDataGrid;
 import com.seeyoui.kensite.common.base.domain.TreeJson;
 import com.seeyoui.kensite.common.constants.StringConstant;
 import com.seeyoui.kensite.common.util.RequestResponseUtil;
+import com.seeyoui.kensite.framework.system.domain.SysDepartment;
 import com.seeyoui.kensite.framework.system.domain.SysMenu;
 import com.seeyoui.kensite.framework.system.domain.SysUser;
 import com.seeyoui.kensite.framework.system.service.SysMenuService;
@@ -84,23 +86,20 @@ public class SysMenuController extends BaseController {
 	}
 	
 	/**
-	 * 获取菜单TREE
-	 * @param username
+	 * 获取模块TREE页面JSON数据
 	 * @return
 	 * @throws Exception
 	 */
-	@RequiresUser
-	@RequestMapping(value = "/getTreeData", method=RequestMethod.POST)
+	@RequiresPermissions("sysMenu:select")
+	@RequestMapping(value = "/getTreeJson", method=RequestMethod.POST)
 	@ResponseBody
-	public String findSysMenuTree(HttpSession session,
+	public String getTreeJson(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, String username) throws Exception {
-		SysUser sysUser = new SysUser();
-		sysUser.setUsername(username);
-		List<TreeJson> treeList = sysMenuService.findSysMenuTree(sysUser);
-		JSONObject jsonObj = JSONObject.fromObject(treeList.get(0));
-		return "["+jsonObj.toString()+"]";
-		 
+		List<TreeJson> tList = sysMenuService.getTreeJson();
+		List<TreeJson> jList = TreeJson.formatTree(tList) ;
+		JSONArray jsonObj = JSONArray.fromObject(jList.get(0));
+		return jsonObj.toString();
 	}
 	
 	/**

@@ -83,7 +83,6 @@ public class SysDepartmentController extends BaseController {
 	
 	/**
 	 * 获取模块TREE页面JSON数据
-	 * @param id
 	 * @return
 	 * @throws Exception
 	 */

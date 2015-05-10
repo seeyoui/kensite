@@ -43,7 +43,7 @@
 		    </div>
 		    <div id="dataWin" class="easyui-window" title="系统模块信息维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:400px;height:260px;padding:10px;">
 		        <div class="ftitle">系统模块信息维护</div>
-		        <form id="dataForm" method="post" enctype="multipart/form-data">
+		        <form id="dataForm" method="post">
 							<div class="fitem">
 				                <label>模块名称</label>
 				                <input id="name" name="name" class="easyui-validatebox textbox" data-options="required:true"/>
@@ -52,8 +52,6 @@
 				                <label>权限</label>
 				                <input id="shiro" name="shiro" class="easyui-validatebox textbox" data-options="required:true"/>
 				            </div>
-	                <input id="createuser" name="createuser" type="hidden"/>
-	                <input id="updateuser" name="updateuser" type="hidden"/>
 				</form>
 				
 			    <div id="dataWin-buttons">
@@ -63,9 +61,6 @@
 		    </div>
 	    </div>
     </div>
-    <form id="delForm" method="post" enctype="multipart/form-data">
-    	<input type="hidden" id="delDataId" name="delDataId" value=""/>
-    </form>
     <script type="text/javascript">
 	    $(document).ready(function(){
 	    	initSize();
@@ -89,12 +84,15 @@
     		    shiro:sel_shiro
         	});
         }
+        
+        function reloadData() {
+        	selectData();
+        }
 	    
         var url;
         function newInfo(){
             $('#dataWin').window('open');
             $('#dataForm').form('clear');
-            $("#createuser").val("${sysUserAccount}");
             url = '${ctx}/sysModule/saveByAdd.do';
         }
         function editInfo(){
@@ -102,7 +100,6 @@
             if (row){
                 $('#dataWin').window('open');
                 $('#dataForm').form('load',row);
-                $("#updateuser").val("${sysUserAccount}");
                 url = '${ctx}/sysModule/saveByUpdate.do?id='+row.id;
             }    	
         }
@@ -117,7 +114,7 @@
                     return $(this).form('validate');
                 },
                 success: function(info){
-                    if (info==TRUE){
+                    if (info=="<%=StringConstant.TRUE%>"){
                         layer.msg("操作成功！", 2, -1);
                     } else {
 	                    layer.msg("操作失败！", 2, -1);
@@ -133,17 +130,20 @@
             if (row){
                 $.messager.confirm('确认','你确定删除该记录吗？',function(r){
                     if (r){
-						$('#delDataId').val(row.id);
-						$('#delForm').form('submit',{
-							url: '${ctx}/sysModule/delete.do',
+                    	$.ajax({
+							type: "post",
+							url: "${ctx}/sysModule/delete.do",
+							data: {delDataId:row.id},
 							dataType: 'text',
-							success: function(info){
-								if (info==TRUE){
+							beforeSend: function(XMLHttpRequest){
+							},
+							success: function(data, textStatus){
+								if (data=="<%=StringConstant.TRUE%>"){
 			                        layer.msg("操作成功！", 2, -1);
 			                    } else {
 				                    layer.msg("操作失败！", 2, -1);
 			                    }
-								$('#dataList').datagrid('reload');
+								reloadData();
 							}
 						});
                     }
