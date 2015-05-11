@@ -22,68 +22,34 @@
 		ORDER BY t.id DESC 
 	</sql>
 	
-	<!-- 根据ID查询单条数据 -->
-	<select id="findSysModulePermissionById" resultType="com.seeyoui.kensite.framework.system.domain.SysModulePermission">
-		SELECT
-		<include refid="tableColumns" />
-		FROM SYS_MODULE_PERMISSION t
-		WHERE id = #{id}
-	</select>
-	
-	<!-- 查询数据集合 -->
-	<select id="findSysModulePermissionList" resultType="com.seeyoui.kensite.framework.system.domain.SysModulePermission">
-		select * from(select t.*,rownum rn from(
-			SELECT
-			<include refid="tableColumns"/>
-			FROM SYS_MODULE_PERMISSION t
-			<include refid="whereStr"/>
-			<include refid="orderBy"/>
-		) t where rownum &lt; = #{page}*#{rows}) where rn &gt; (#{page}-1)*#{rows}
-	</select>
-	
-	<!-- 查询数据总数 -->
-	<select id="findSysModulePermissionListTotal" resultType="EasyUIDataGrid">
-		SELECT
-		COUNT(id)total
-		FROM SYS_MODULE_PERMISSION t
-		<include refid="whereStr"/>
+	<!-- 查询数据TREE -->
+	<select id="getTreeJson" resultType="com.seeyoui.kensite.framework.system.domain.SysPermission" parameterType="com.seeyoui.kensite.framework.system.domain.SysModulePermission">
+		SELECT 
+		t.id,
+		t.name,
+		case when sm.id is null then 'F' else 'T' end checked
+		from sys_permission t
+		left join sys_module_permission smp
+		on smp.permissionid = t.id and smp.moduleid=#{moduleid}
+		left join sys_module sm
+		on sm.id = smp.moduleid
+		ORDER BY t.sequence ASC
 	</select>
 	
 	<!-- 数据新增 -->
 	<insert id="saveSysModulePermission" parameterType="com.seeyoui.kensite.framework.system.domain.SysModulePermission">
 		INSERT INTO SYS_MODULE_PERMISSION (
-	    	moduleid,
 	    	permissionid,
-		    id
+	    	moduleid
 		)
 		VALUES (
-			#{moduleid},
 			#{permissionid},
-		    #{id}
+			#{moduleid}
 		)
 	</insert>
 	
-	<!-- 数据修改 -->
-	<update id="updateSysModulePermission" parameterType="com.seeyoui.kensite.framework.system.domain.SysModulePermission">
-		UPDATE SYS_MODULE_PERMISSION
-		<set>
-	    	<if test="moduleid !=null and moduleid !=''">
-			moduleid=#{moduleid},
-			</if>
-	    	<if test="permissionid !=null and permissionid !=''">
-			permissionid=#{permissionid},
-			</if>
-		    id = #{id}
-		</set>
-		WHERE id = #{id}
-	</update>
-	
 	<!-- 数据删除 -->
 	<delete id="deleteSysModulePermission">
-		DELETE FROM SYS_MODULE_PERMISSION WHERE id IN 
-		<foreach item="listId" collection="list"
-			open="(" separator="," close=")">
-			#{listId}
-		</foreach>
+		DELETE FROM SYS_MODULE_PERMISSION WHERE moduleid=#{moduleid}
 	</delete>
 </mapper>

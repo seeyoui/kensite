@@ -3,19 +3,20 @@
  * Since 2014 - 2015
  */package com.seeyoui.kensite.framework.system.service;  
  
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.seeyoui.kensite.common.base.domain.Attributes;
+import com.seeyoui.kensite.common.base.domain.TreeJson;
 import com.seeyoui.kensite.common.base.service.BaseService;
-
-import java.util.*;
-
-import com.seeyoui.kensite.common.base.domain.EasyUIDataGrid;
-import com.seeyoui.kensite.common.base.service.BaseService;
-import com.seeyoui.kensite.common.exception.CRUDException;
-import com.seeyoui.kensite.common.util.*;
 import com.seeyoui.kensite.common.constants.StringConstant;
+import com.seeyoui.kensite.common.exception.CRUDException;
 import com.seeyoui.kensite.framework.system.domain.SysModulePermission;
+import com.seeyoui.kensite.framework.system.domain.SysPermission;
 import com.seeyoui.kensite.framework.system.persistence.SysModulePermissionMapper;
 
 /**
@@ -30,33 +31,31 @@ public class SysModulePermissionService extends BaseService {
 	private SysModulePermissionMapper sysModulePermissionMapper;
 
 	/**
-	 * 根据ID查询单条数据
-	 * @param id
+	 * 查询数据TREE
+	 * @param username
 	 * @return
 	 * @throws CRUDException
 	 */
-	public SysModulePermission findSysModulePermissionById(String id) throws CRUDException{
-		return sysModulePermissionMapper.findSysModulePermissionById(id);
-	}
-	
-	/**
-	 * 查询数据集合
-	 * @param sysModulePermission
-	 * @return
-	 * @throws CRUDException
-	 */
-	public List<SysModulePermission> findSysModulePermissionList(SysModulePermission sysModulePermission) throws CRUDException {
-		return sysModulePermissionMapper.findSysModulePermissionList(sysModulePermission);
-	}
-	
-	/**
-	 * 查询数据总数
-	 * @param userinfo
-	 * @return
-	 * @throws CRUDException
-	 */
-	public EasyUIDataGrid findSysModulePermissionListTotal(SysModulePermission sysModulePermission) throws CRUDException {
-		return sysModulePermissionMapper.findSysModulePermissionListTotal(sysModulePermission);
+	public List<TreeJson> getTreeJson(SysModulePermission sysModulePermission) throws CRUDException {
+		List<SysPermission> mList = sysModulePermissionMapper.getTreeJson(sysModulePermission);
+		List<TreeJson> tList = new ArrayList<TreeJson>();
+		TreeJson root = new TreeJson();
+		root.setId(StringConstant.ROOT_ID_32);
+		root.setText("ROOT");
+		root.setPid("");
+		tList.add(root);
+		for(int i=0; i<mList.size(); i++) {
+			TreeJson tj = new TreeJson();
+			tj.setId(mList.get(i).getId());
+			tj.setText(mList.get(i).getName());
+			tj.setPid(StringConstant.ROOT_ID_32);
+			tj.setChecked(mList.get(i).getChecked());
+			Attributes attributes = new Attributes();
+			tj.setAttributes(attributes);
+			tList.add(tj);
+		}
+		List<TreeJson> jList = TreeJson.formatTree(tList);
+		return jList;
 	}
 	
 	/**
@@ -64,26 +63,13 @@ public class SysModulePermissionService extends BaseService {
 	 * @param sysModulePermission
 	 * @throws CRUDException
 	 */
-	public void saveSysModulePermission(SysModulePermission sysModulePermission) throws CRUDException{
-		sysModulePermissionMapper.saveSysModulePermission(sysModulePermission);
-	}
-	
-	/**
-	 * 数据修改
-	 * @param sysModulePermission
-	 * @throws CRUDException
-	 */
-	public void updateSysModulePermission(SysModulePermission sysModulePermission) throws CRUDException{
-		sysModulePermissionMapper.updateSysModulePermission(sysModulePermission);			
-	}
-	
-	/**
-	 * 数据删除
-	 * @param listId
-	 * @throws CRUDException
-	 */
-	public void deleteSysModulePermission(List<String> listId) throws CRUDException {
-		sysModulePermissionMapper.deleteSysModulePermission(listId);
+	public void saveSysModulePermission(SysModulePermission sysModulePermission) throws CRUDException {
+		List<String> listId = Arrays.asList(sysModulePermission.getPermissionid().split(","));
+		sysModulePermissionMapper.deleteSysModulePermission(sysModulePermission.getModuleid());
+		for(int i=0; i<listId.size(); i++) {
+			sysModulePermission.setPermissionid(listId.get(i));
+			sysModulePermissionMapper.saveSysModulePermission(sysModulePermission);
+		}
 	}
 	
 }

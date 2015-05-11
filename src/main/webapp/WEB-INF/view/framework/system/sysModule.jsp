@@ -32,6 +32,7 @@
 		        </shiro:hasPermission>
 		        <shiro:hasPermission name="sysModule:update">
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editInfo()">修改</a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="permissionInfo()">模块操作</a>
 		        </shiro:hasPermission>
 		        <shiro:hasPermission name="sysModule:delete">
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyInfo()">删除</a>
@@ -57,6 +58,20 @@
 			    <div id="dataWin-buttons">
 			        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveInfo()" style="width:90px">保存</a>
 			        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dataWin').window('close')" style="width:90px">取消</a>
+			    </div>
+		    </div>
+		    <div id="permissionWin" class="easyui-window" title="模块操作维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:335px;height:420px;padding:10px;">
+		        <div class="ftitle">模块操作维护</div>
+		        <form id="permissionDataForm" method="post">
+					<div class="easyui-panel" title="操作" style="width:300px;height:300px;">
+	            		<ul id="permissionTree" class="easyui-tree" data-options="animate:true,checkbox:true,cascadeCheck:false"></ul>
+					</div>
+				    <input id="roleid" name="roleid" type="hidden"/>
+				</form>
+				
+			    <div id="dataWin-buttons">
+			        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveModulePermissionInfo()" style="width:90px">保存</a>
+			        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#permissionWin').window('close')" style="width:90px">取消</a>
 			    </div>
 		    </div>
 	    </div>
@@ -87,6 +102,62 @@
         
         function reloadData() {
         	selectData();
+        }
+        
+        function permissionInfo() {
+        	getPermissionTreeJson();
+        	$('#permissionWin').window('open');
+        }
+        
+	    function getPermissionTreeJson() {
+        	var row = $('#dataList').datagrid('getSelected');
+            if (row){
+            	var roleid = row.id;
+	    		$.ajax({
+					type: "POST",
+					url: "<%=path %>/sysModulePermission/getTreeJson.do",
+					data: "moduleid="+roleid,
+					dataType: "json",
+					success: function(data){
+						$("#permissionTree").tree("loadData",data);
+					}
+				});
+			}
+	    }
+	    
+	    function saveModulePermissionInfo() {
+	    	var treeObj = $('#permissionTree');
+	    	var permissionid = getChecked(treeObj);
+	    	var row = $('#dataList').datagrid('getSelected');
+	    	var moduleid = row.id;
+	    	if (permissionid!=null && permissionid!=""){
+				$.ajax({
+					type: "post",
+					url: "${ctx}/sysModulePermission/saveModulePermission.do",
+					data: {moduleid:moduleid,permissionid:permissionid},
+					dataType: 'text',
+					beforeSend: function(XMLHttpRequest){
+					},
+					success: function(data, textStatus){
+						if (data=="<%=StringConstant.TRUE%>"){
+							layer.msg("操作成功！", 2, -1);
+						} else {
+							layer.msg("操作失败！", 2, -1);
+						}
+						reloadData();
+					}
+				});
+			}
+	    }
+	    
+	    function getChecked(treeObj){
+            var nodes = treeObj.tree('getChecked');
+            var s = '';
+            for(var i=0; i<nodes.length; i++){
+                if (i!=0 && i!=nodes.length) s += ',';
+                s += nodes[i].id;
+            }
+            return s;
         }
 	    
         var url;

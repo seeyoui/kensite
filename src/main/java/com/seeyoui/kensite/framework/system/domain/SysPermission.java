@@ -17,7 +17,8 @@ public class SysPermission extends Pager {
     private String id;  
     private Long sequence;  
     private String name;  
- 
+    private String checked;
+    
     public void setId(String id) {  
         this.id = id;  
     }  
@@ -38,5 +39,13 @@ public class SysPermission extends Pager {
       
     public String getName() {  
         return this.name;  
-    }  
+    }
+
+	public String getChecked() {
+		return checked;
+	}
+
+	public void setChecked(String checked) {
+		this.checked = checked;
+	}
 }

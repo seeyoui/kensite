@@ -14,7 +14,6 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -25,12 +24,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.seeyoui.kensite.common.base.controller.BaseController;
-
 import com.seeyoui.kensite.common.constants.StringConstant;
 import com.seeyoui.kensite.common.base.domain.EasyUIDataGrid;
+import com.seeyoui.kensite.common.base.domain.TreeJson;
 import com.seeyoui.kensite.common.base.controller.BaseController;
 import com.seeyoui.kensite.common.util.RequestResponseUtil;
-
+import com.seeyoui.kensite.framework.system.domain.SysModulePermission;
 import com.seeyoui.kensite.framework.system.domain.SysModulePermission;
 import com.seeyoui.kensite.framework.system.service.SysModulePermissionService;
 /**
@@ -46,21 +45,6 @@ public class SysModulePermissionController extends BaseController {
 	private SysModulePermissionService sysModulePermissionService;
 	
 	/**
-	 * 展示列表页面
-	 * @param modelMap
-	 * @param module
-	 * @return
-	 * @throws Exception
-	 */
-	@RequiresPermissions("sysModulePermission:view")
-	@RequestMapping(value = "/showPageList")
-	public ModelAndView showSysModulePermissionPageList(HttpSession session,
-			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap) throws Exception {
-		return new ModelAndView("framework/system/sysModulePermission", modelMap);
-	}
-	
-	/**
 	 * 获取列表展示数据
 	 * @param modelMap
 	 * @param sysModulePermission
@@ -68,17 +52,15 @@ public class SysModulePermissionController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequiresPermissions("sysModulePermission:select")
-	@RequestMapping(value = "/getListData", method=RequestMethod.POST)
+	@RequestMapping(value = "/getTreeJson", method=RequestMethod.POST)
 	@ResponseBody
-	public String getListData(HttpSession session,
+	public String getTreeData(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, SysModulePermission sysModulePermission) throws Exception{
-		List<SysModulePermission> sysModulePermissionList = sysModulePermissionService.findSysModulePermissionList(sysModulePermission);
-		EasyUIDataGrid eudg = sysModulePermissionService.findSysModulePermissionListTotal(sysModulePermission);
-		eudg.setRows(sysModulePermissionList);
-		JSONObject jsonObj = JSONObject.fromObject(eudg);
-		RequestResponseUtil.putResponseStr(session, response, request, jsonObj);
-		return null;
+		List<TreeJson> tList = sysModulePermissionService.getTreeJson(sysModulePermission);
+		List<TreeJson> jList = TreeJson.formatTree(tList) ;
+		JSONArray jsonObj = JSONArray.fromObject(jList.get(0).getChildren());
+		return jsonObj.toString();
 	}
 	
 	/**
@@ -89,49 +71,12 @@ public class SysModulePermissionController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequiresPermissions("sysModulePermission:insert")
-	@RequestMapping(value = "/saveByAdd", method=RequestMethod.POST)
+	@RequestMapping(value = "/saveModulePermission", method=RequestMethod.POST)
 	@ResponseBody
-	public String saveSysModulePermissionByAdd(HttpSession session,
+	public String saveModulePermission(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, SysModulePermission sysModulePermission) throws Exception{
 		sysModulePermissionService.saveSysModulePermission(sysModulePermission);
-		RequestResponseUtil.putResponseStr(session, response, request, StringConstant.TRUE);
-		return null;
-	}
-	
-	/**
-	 * 保存修改的数据
-	 * @param modelMap
-	 * @param sysModulePermission
-	 * @return
-	 * @throws Exception
-	 */
-	@RequiresPermissions("sysModulePermission:update")
-	@RequestMapping(value = "/saveByUpdate", method=RequestMethod.POST)
-	@ResponseBody
-	public String saveSysModulePermissionByUpdate(HttpSession session,
-			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap, SysModulePermission sysModulePermission) throws Exception{
-		sysModulePermissionService.updateSysModulePermission(sysModulePermission);
-		RequestResponseUtil.putResponseStr(session, response, request, StringConstant.TRUE);
-		return null;
-	}
-	
-	/**
-	 * 删除数据库
-	 * @param modelMap
-	 * @param sysModulePermissionId
-	 * @return
-	 * @throws Exception
-	 */
-	@RequiresPermissions("sysModulePermission:delete")
-	@RequestMapping(value = "/delete", method=RequestMethod.POST)
-	@ResponseBody
-	public String delete(HttpSession session,
-			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap, String delDataId) throws Exception {
-		List<String> listId = Arrays.asList(delDataId.split(","));
-		sysModulePermissionService.deleteSysModulePermission(listId);
 		RequestResponseUtil.putResponseStr(session, response, request, StringConstant.TRUE);
 		return null;
 	}
