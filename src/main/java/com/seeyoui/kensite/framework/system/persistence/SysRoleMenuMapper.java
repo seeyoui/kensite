@@ -20,27 +20,6 @@ import java.util.*;
 public interface SysRoleMenuMapper {
 
 	/**
-	 * 根据ID查询单条数据
-	 * @param id
-	 * @return
-	 */
-	public SysRoleMenu findSysRoleMenuById(String id);
-	
-	/**
-	 * 查询数据集合
-	 * @param sysRoleMenu
-	 * @return
-	 */
-	public List<SysRoleMenu> findSysRoleMenuList(SysRoleMenu sysRoleMenu);
-	
-	/**
-	 * 查询数据总数
-	 * @param userinfo
-	 * @return
-	 */
-	public EasyUIDataGrid findSysRoleMenuListTotal(SysRoleMenu sysRoleMenu);
-	
-	/**
 	 * 查询数据TREE
 	 * @param map
 	 * @return
@@ -55,14 +34,8 @@ public interface SysRoleMenuMapper {
 	public void saveSysRoleMenu(SysRoleMenu sysRoleMenu);
 	
 	/**
-	 * 数据修改
-	 * @param sysRoleMenu
-	 */
-	public void updateSysRoleMenu(SysRoleMenu sysRoleMenu);
-	
-	/**
 	 * 数据删除
 	 * @param listId
 	 */
-	public void deleteSysRoleMenu(List<String> listId);
+	public void deleteSysRoleMenu(String roleid);
 }

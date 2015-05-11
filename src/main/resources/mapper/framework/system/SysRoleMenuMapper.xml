@@ -22,33 +22,6 @@
 		ORDER BY t.id DESC 
 	</sql>
 	
-	<!-- 根据ID查询单条数据 -->
-	<select id="findSysRoleMenuById" resultType="com.seeyoui.kensite.framework.system.domain.SysRoleMenu">
-		SELECT
-		<include refid="tableColumns" />
-		FROM SYS_ROLE_MENU t
-		WHERE id = #{id}
-	</select>
-	
-	<!-- 查询数据集合 -->
-	<select id="findSysRoleMenuList" resultType="com.seeyoui.kensite.framework.system.domain.SysRoleMenu">
-		select * from(select t.*,rownum rn from(
-			SELECT
-			<include refid="tableColumns"/>
-			FROM SYS_ROLE_MENU t
-			<include refid="whereStr"/>
-			<include refid="orderBy"/>
-		) t where rownum &lt; = #{page}*#{rows}) where rn &gt; (#{page}-1)*#{rows}
-	</select>
-	
-	<!-- 查询数据总数 -->
-	<select id="findSysRoleMenuListTotal" resultType="EasyUIDataGrid">
-		SELECT
-		COUNT(id)total
-		FROM SYS_ROLE_MENU t
-		<include refid="whereStr"/>
-	</select>
-	
 	<!-- 查询数据TREE -->
 	<select id="getTreeJson" resultType="com.seeyoui.kensite.framework.system.domain.SysMenu" parameterType="com.seeyoui.kensite.framework.system.domain.SysRoleMenu">
 		SELECT 
@@ -73,37 +46,16 @@
 	<insert id="saveSysRoleMenu" parameterType="com.seeyoui.kensite.framework.system.domain.SysRoleMenu">
 		INSERT INTO SYS_ROLE_MENU (
 	    	roleid,
-	    	menuid,
-		    id
+	    	menuid
 		)
 		VALUES (
 			#{roleid},
-			#{menuid},
-		    #{id}
+			#{menuid}
 		)
 	</insert>
 	
-	<!-- 数据修改 -->
-	<update id="updateSysRoleMenu" parameterType="com.seeyoui.kensite.framework.system.domain.SysRoleMenu">
-		UPDATE SYS_ROLE_MENU
-		<set>
-	    	<if test="roleid !=null and roleid !=''">
-			roleid=#{roleid},
-			</if>
-	    	<if test="menuid !=null and menuid !=''">
-			menuid=#{menuid},
-			</if>
-		    id = #{id}
-		</set>
-		WHERE id = #{id}
-	</update>
-	
 	<!-- 数据删除 -->
 	<delete id="deleteSysRoleMenu">
-		DELETE FROM SYS_ROLE_MENU WHERE id IN 
-		<foreach item="listId" collection="list"
-			open="(" separator="," close=")">
-			#{listId}
-		</foreach>
+		DELETE FROM SYS_ROLE_MENU WHERE roleid=#{roleid}
 	</delete>
 </mapper>

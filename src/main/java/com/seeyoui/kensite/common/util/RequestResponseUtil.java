@@ -1,8 +1,10 @@
 package com.seeyoui.kensite.common.util;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.List;
@@ -82,15 +84,21 @@ public class RequestResponseUtil {
 	 * @param responseObj response写回的对象
 	 * @throws Exception
 	 */
-	public static void putResponseStr(HttpSession session, HttpServletResponse response, HttpServletRequest request, Object responseObj) throws Exception {
-		request.setCharacterEncoding("utf-8");
- 		response.setCharacterEncoding("UTF-8");
- 		response.setContentType("text/html;charset=utf-8");
-        response.setHeader("Cache-Control", "no-cache"); 
-		PrintWriter out = response.getWriter();
-		out.write(responseObj.toString());
-		out.flush();
-		out.close();
+	public static void putResponseStr(HttpSession session, HttpServletResponse response, HttpServletRequest request, Object responseObj) {
+		try {
+			request.setCharacterEncoding("utf-8");
+			response.setCharacterEncoding("UTF-8");
+			response.setContentType("text/html;charset=utf-8");
+			response.setHeader("Cache-Control", "no-cache"); 
+			PrintWriter out = response.getWriter();
+			out.write(responseObj.toString());
+			out.flush();
+			out.close();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		return;
 	}
 	/**

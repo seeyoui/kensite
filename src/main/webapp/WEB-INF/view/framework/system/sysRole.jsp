@@ -81,7 +81,7 @@
 					<div class="easyui-panel" title="菜单权限" style="width:300px;height:300px;">
 	            		<ul id="menuTree" class="easyui-tree" data-options="animate:true,checkbox:true,cascadeCheck:false"></ul>
 					</div>
-				    <input id="roleid" name="roleid" type="hidden"/>
+				    <input id="menuroleid" name="id" type="hidden"/>
 				</form>
 				
 			    <div id="dataWin-buttons">
@@ -160,6 +160,41 @@
 				});
 			}
 	    }
+	    
+	    function saveRoleMenuInfo() {
+	    	var treeObj = $('#menuTree');
+	    	var menuid = getChecked(treeObj);
+	    	var row = $('#dataList').datagrid('getSelected');
+	    	var roleid = row.id;
+	    	if (menuid!=null && menuid!=""){
+				$.ajax({
+					type: "post",
+					url: "${ctx}/sysRoleMenu/saveRoleMenu.do",
+					data: {roleid:roleid,menuid:menuid},
+					dataType: 'text',
+					beforeSend: function(XMLHttpRequest){
+					},
+					success: function(data, textStatus){
+						if (data=="<%=StringConstant.TRUE%>"){
+							layer.msg("操作成功！", 2, -1);
+						} else {
+							layer.msg("操作失败！", 2, -1);
+						}
+						reloadData();
+					}
+				});
+			}
+	    }
+	    
+	    function getChecked(treeObj){
+            var nodes = treeObj.tree('getChecked');
+            var s = '';
+            for(var i=0; i<nodes.length; i++){
+                if (i!=0 && i!=nodes.length) s += ',';
+                s += nodes[i].id;
+            }
+            return s;
+        }
 	    
         var url;
         function newInfo(){

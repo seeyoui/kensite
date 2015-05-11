@@ -42,28 +42,7 @@ public class SysRoleMenuController extends BaseController {
 	
 	@Autowired
 	private SysRoleMenuService sysRoleMenuService;
-	
-	/**
-	 * 获取列表展示数据
-	 * @param modelMap
-	 * @param sysRoleMenu
-	 * @return
-	 * @throws Exception
-	 */
-	@RequiresPermissions("sysRoleMenu:select")
-	@RequestMapping(value = "/getListData", method=RequestMethod.POST)
-	@ResponseBody
-	public String getListData(HttpSession session,
-			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap, SysRoleMenu sysRoleMenu) throws Exception{
-		List<SysRoleMenu> sysRoleMenuList = sysRoleMenuService.findSysRoleMenuList(sysRoleMenu);
-		EasyUIDataGrid eudg = sysRoleMenuService.findSysRoleMenuListTotal(sysRoleMenu);
-		eudg.setRows(sysRoleMenuList);
-		JSONObject jsonObj = JSONObject.fromObject(eudg);
-		RequestResponseUtil.putResponseStr(session, response, request, jsonObj);
-		return null;
-	}
-	
+
 	/**
 	 * 获取列表展示数据
 	 * @param modelMap
@@ -91,49 +70,12 @@ public class SysRoleMenuController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequiresPermissions("sysRoleMenu:insert")
-	@RequestMapping(value = "/saveByAdd", method=RequestMethod.POST)
+	@RequestMapping(value = "/saveRoleMenu", method=RequestMethod.POST)
 	@ResponseBody
-	public String saveSysRoleMenuByAdd(HttpSession session,
+	public String saveRoleMenu(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, SysRoleMenu sysRoleMenu) throws Exception{
 		sysRoleMenuService.saveSysRoleMenu(sysRoleMenu);
-		RequestResponseUtil.putResponseStr(session, response, request, StringConstant.TRUE);
-		return null;
-	}
-	
-	/**
-	 * 保存修改的数据
-	 * @param modelMap
-	 * @param sysRoleMenu
-	 * @return
-	 * @throws Exception
-	 */
-	@RequiresPermissions("sysRoleMenu:update")
-	@RequestMapping(value = "/saveByUpdate", method=RequestMethod.POST)
-	@ResponseBody
-	public String saveSysRoleMenuByUpdate(HttpSession session,
-			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap, SysRoleMenu sysRoleMenu) throws Exception{
-		sysRoleMenuService.updateSysRoleMenu(sysRoleMenu);
-		RequestResponseUtil.putResponseStr(session, response, request, StringConstant.TRUE);
-		return null;
-	}
-	
-	/**
-	 * 删除数据库
-	 * @param modelMap
-	 * @param sysRoleMenuId
-	 * @return
-	 * @throws Exception
-	 */
-	@RequiresPermissions("sysRoleMenu:delete")
-	@RequestMapping(value = "/delete", method=RequestMethod.POST)
-	@ResponseBody
-	public String delete(HttpSession session,
-			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap, String delDataId) throws Exception {
-		List<String> listId = Arrays.asList(delDataId.split(","));
-		sysRoleMenuService.deleteSysRoleMenu(listId);
 		RequestResponseUtil.putResponseStr(session, response, request, StringConstant.TRUE);
 		return null;
 	}
