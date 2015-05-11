@@ -22,68 +22,34 @@
 		ORDER BY t.id DESC 
 	</sql>
 	
-	<!-- 根据ID查询单条数据 -->
-	<select id="findSysRoleModuleById" resultType="com.seeyoui.kensite.framework.system.domain.SysRoleModule">
-		SELECT
-		<include refid="tableColumns" />
-		FROM SYS_ROLE_MODULE t
-		WHERE id = #{id}
-	</select>
-	
-	<!-- 查询数据集合 -->
-	<select id="findSysRoleModuleList" resultType="com.seeyoui.kensite.framework.system.domain.SysRoleModule">
-		select * from(select t.*,rownum rn from(
-			SELECT
-			<include refid="tableColumns"/>
-			FROM SYS_ROLE_MODULE t
-			<include refid="whereStr"/>
-			<include refid="orderBy"/>
-		) t where rownum &lt; = #{page}*#{rows}) where rn &gt; (#{page}-1)*#{rows}
-	</select>
-	
-	<!-- 查询数据总数 -->
-	<select id="findSysRoleModuleListTotal" resultType="EasyUIDataGrid">
-		SELECT
-		COUNT(id)total
-		FROM SYS_ROLE_MODULE t
-		<include refid="whereStr"/>
+	<!-- 查询数据TREE -->
+	<select id="getTreeJson" resultType="com.seeyoui.kensite.framework.system.domain.SysModule" parameterType="com.seeyoui.kensite.framework.system.domain.SysRoleModule">
+		SELECT 
+		t.id,
+	    t.name,
+		case when sr.id is null then 'F' else 'T' end shiro
+		from sys_module t
+	    left join sys_role_module srm
+	   	on srm.moduleid = t.id and srm.roleid=#{roleid}
+    	left join sys_role sr
+    	on sr.id = srm.roleid
+    	ORDER BY t.id ASC
 	</select>
 	
 	<!-- 数据新增 -->
 	<insert id="saveSysRoleModule" parameterType="com.seeyoui.kensite.framework.system.domain.SysRoleModule">
 		INSERT INTO SYS_ROLE_MODULE (
 	    	roleid,
-	    	moduleid,
-		    id
+	    	moduleid
 		)
 		VALUES (
 			#{roleid},
-			#{moduleid},
-		    #{id}
+			#{moduleid}
 		)
 	</insert>
 	
-	<!-- 数据修改 -->
-	<update id="updateSysRoleModule" parameterType="com.seeyoui.kensite.framework.system.domain.SysRoleModule">
-		UPDATE SYS_ROLE_MODULE
-		<set>
-	    	<if test="roleid !=null and roleid !=''">
-			roleid=#{roleid},
-			</if>
-	    	<if test="moduleid !=null and moduleid !=''">
-			moduleid=#{moduleid},
-			</if>
-		    id = #{id}
-		</set>
-		WHERE id = #{id}
-	</update>
-	
 	<!-- 数据删除 -->
 	<delete id="deleteSysRoleModule">
-		DELETE FROM SYS_ROLE_MODULE WHERE id IN 
-		<foreach item="listId" collection="list"
-			open="(" separator="," close=")">
-			#{listId}
-		</foreach>
+		DELETE FROM SYS_ROLE_MODULE WHERE roleid=#{roleid}
 	</delete>
 </mapper>

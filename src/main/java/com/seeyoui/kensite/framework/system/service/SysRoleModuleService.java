@@ -10,11 +10,15 @@ import com.seeyoui.kensite.common.base.service.BaseService;
 
 import java.util.*;
 
+import com.seeyoui.kensite.common.base.domain.Attributes;
 import com.seeyoui.kensite.common.base.domain.EasyUIDataGrid;
+import com.seeyoui.kensite.common.base.domain.TreeJson;
 import com.seeyoui.kensite.common.base.service.BaseService;
 import com.seeyoui.kensite.common.exception.CRUDException;
 import com.seeyoui.kensite.common.util.*;
 import com.seeyoui.kensite.common.constants.StringConstant;
+import com.seeyoui.kensite.framework.system.domain.SysModule;
+import com.seeyoui.kensite.framework.system.domain.SysRoleModule;
 import com.seeyoui.kensite.framework.system.domain.SysRoleModule;
 import com.seeyoui.kensite.framework.system.persistence.SysRoleModuleMapper;
 
@@ -30,33 +34,31 @@ public class SysRoleModuleService extends BaseService {
 	private SysRoleModuleMapper sysRoleModuleMapper;
 
 	/**
-	 * 根据ID查询单条数据
-	 * @param id
+	 * 查询数据TREE
+	 * @param username
 	 * @return
 	 * @throws CRUDException
 	 */
-	public SysRoleModule findSysRoleModuleById(String id) throws CRUDException{
-		return sysRoleModuleMapper.findSysRoleModuleById(id);
-	}
-	
-	/**
-	 * 查询数据集合
-	 * @param sysRoleModule
-	 * @return
-	 * @throws CRUDException
-	 */
-	public List<SysRoleModule> findSysRoleModuleList(SysRoleModule sysRoleModule) throws CRUDException {
-		return sysRoleModuleMapper.findSysRoleModuleList(sysRoleModule);
-	}
-	
-	/**
-	 * 查询数据总数
-	 * @param userinfo
-	 * @return
-	 * @throws CRUDException
-	 */
-	public EasyUIDataGrid findSysRoleModuleListTotal(SysRoleModule sysRoleModule) throws CRUDException {
-		return sysRoleModuleMapper.findSysRoleModuleListTotal(sysRoleModule);
+	public List<TreeJson> getTreeJson(SysRoleModule sysRoleModule) throws CRUDException {
+		List<SysModule> mList = sysRoleModuleMapper.getTreeJson(sysRoleModule);
+		List<TreeJson> tList = new ArrayList<TreeJson>();
+		TreeJson root = new TreeJson();
+		root.setId(StringConstant.ROOT_ID_32);
+		root.setText("ROOT");
+		root.setPid("");
+		tList.add(root);
+		for(int i=0; i<mList.size(); i++) {
+			TreeJson tj = new TreeJson();
+			tj.setId(mList.get(i).getId());
+			tj.setText(mList.get(i).getName());
+			tj.setPid(StringConstant.ROOT_ID_32);
+			tj.setChecked(mList.get(i).getShiro());
+			Attributes attributes = new Attributes();
+			tj.setAttributes(attributes);
+			tList.add(tj);
+		}
+		List<TreeJson> jList = TreeJson.formatTree(tList);
+		return jList;
 	}
 	
 	/**
@@ -64,26 +66,12 @@ public class SysRoleModuleService extends BaseService {
 	 * @param sysRoleModule
 	 * @throws CRUDException
 	 */
-	public void saveSysRoleModule(SysRoleModule sysRoleModule) throws CRUDException{
-		sysRoleModuleMapper.saveSysRoleModule(sysRoleModule);
+	public void saveSysRoleModule(SysRoleModule sysRoleModule) throws CRUDException {
+		List<String> listId = Arrays.asList(sysRoleModule.getModuleid().split(","));
+		sysRoleModuleMapper.deleteSysRoleModule(sysRoleModule.getRoleid());
+		for(int i=0; i<listId.size(); i++) {
+			sysRoleModule.setModuleid(listId.get(i));
+			sysRoleModuleMapper.saveSysRoleModule(sysRoleModule);
+		}
 	}
-	
-	/**
-	 * 数据修改
-	 * @param sysRoleModule
-	 * @throws CRUDException
-	 */
-	public void updateSysRoleModule(SysRoleModule sysRoleModule) throws CRUDException{
-		sysRoleModuleMapper.updateSysRoleModule(sysRoleModule);			
-	}
-	
-	/**
-	 * 数据删除
-	 * @param listId
-	 * @throws CRUDException
-	 */
-	public void deleteSysRoleModule(List<String> listId) throws CRUDException {
-		sysRoleModuleMapper.deleteSysRoleModule(listId);
-	}
-	
 }

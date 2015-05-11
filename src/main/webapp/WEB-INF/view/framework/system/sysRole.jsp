@@ -71,8 +71,8 @@
 				</form>
 				
 			    <div id="dataWin-buttons">
-			        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveInfo()" style="width:90px">保存</a>
-			        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dataWin').window('close')" style="width:90px">取消</a>
+			        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveRoleModuleInfo()" style="width:90px">保存</a>
+			        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#moduleDataForm').window('close')" style="width:90px">取消</a>
 			    </div>
 		    </div>
 		    <div id="menuWin" class="easyui-window" title="菜单权限维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:335px;height:420px;padding:10px;">
@@ -120,7 +120,7 @@
         }
         
         function moduleShiro() {
-        	//getModuleTreeJson();
+        	getModuleTreeJson();
         	$('#moduleWin').window('open');
         }
         
@@ -135,7 +135,7 @@
             	var roleid = row.id;
 	    		$.ajax({
 					type: "POST",
-					url: "<%=path %>/sysModule/getRoleModuleTreeJson.do",
+					url: "<%=path %>/sysRoleModule/getTreeJson.do",
 					data: "roleid="+roleid,
 					dataType: "json",
 					success: function(data){
@@ -156,6 +156,31 @@
 					dataType: "json",
 					success: function(data){
 						$("#menuTree").tree("loadData",data);
+					}
+				});
+			}
+	    }
+	    
+	    function saveRoleModuleInfo() {
+	    	var treeObj = $('#moduleTree');
+	    	var moduleid = getChecked(treeObj);
+	    	var row = $('#dataList').datagrid('getSelected');
+	    	var roleid = row.id;
+	    	if (moduleid!=null && moduleid!=""){
+				$.ajax({
+					type: "post",
+					url: "${ctx}/sysRoleModule/saveRoleModule.do",
+					data: {roleid:roleid,moduleid:moduleid},
+					dataType: 'text',
+					beforeSend: function(XMLHttpRequest){
+					},
+					success: function(data, textStatus){
+						if (data=="<%=StringConstant.TRUE%>"){
+							layer.msg("操作成功！", 2, -1);
+						} else {
+							layer.msg("操作失败！", 2, -1);
+						}
+						reloadData();
 					}
 				});
 			}
