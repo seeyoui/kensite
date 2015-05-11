@@ -18,6 +18,7 @@ import com.seeyoui.kensite.common.exception.CRUDException;
 import com.seeyoui.kensite.framework.act.idgenerator.GeneratorUUID;
 import com.seeyoui.kensite.framework.system.domain.SysDepartment;
 import com.seeyoui.kensite.framework.system.domain.SysMenu;
+import com.seeyoui.kensite.framework.system.domain.SysRole;
 import com.seeyoui.kensite.framework.system.domain.SysUser;
 import com.seeyoui.kensite.framework.system.persistence.SysMenuMapper;
 

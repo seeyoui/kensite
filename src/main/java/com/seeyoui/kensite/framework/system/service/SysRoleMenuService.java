@@ -10,11 +10,15 @@ import com.seeyoui.kensite.common.base.service.BaseService;
 
 import java.util.*;
 
+import com.seeyoui.kensite.common.base.domain.Attributes;
 import com.seeyoui.kensite.common.base.domain.EasyUIDataGrid;
+import com.seeyoui.kensite.common.base.domain.TreeJson;
 import com.seeyoui.kensite.common.base.service.BaseService;
 import com.seeyoui.kensite.common.exception.CRUDException;
 import com.seeyoui.kensite.common.util.*;
 import com.seeyoui.kensite.common.constants.StringConstant;
+import com.seeyoui.kensite.framework.system.domain.SysMenu;
+import com.seeyoui.kensite.framework.system.domain.SysRole;
 import com.seeyoui.kensite.framework.system.domain.SysRoleMenu;
 import com.seeyoui.kensite.framework.system.persistence.SysRoleMenuMapper;
 
@@ -57,6 +61,31 @@ public class SysRoleMenuService extends BaseService {
 	 */
 	public EasyUIDataGrid findSysRoleMenuListTotal(SysRoleMenu sysRoleMenu) throws CRUDException {
 		return sysRoleMenuMapper.findSysRoleMenuListTotal(sysRoleMenu);
+	}
+	
+	/**
+	 * 查询数据TREE
+	 * @param username
+	 * @return
+	 * @throws CRUDException
+	 */
+	public List<TreeJson> getTreeJson(SysRoleMenu sysRoleMenu) throws CRUDException {
+		List<SysMenu> mList = sysRoleMenuMapper.getTreeJson(sysRoleMenu);
+		List<TreeJson> tList = new ArrayList<TreeJson>();
+		for(int i=0; i<mList.size(); i++) {
+			TreeJson tj = new TreeJson();
+			tj.setId(mList.get(i).getId());
+			tj.setPid(mList.get(i).getParentid());
+			tj.setText(mList.get(i).getName());
+			tj.setChecked(mList.get(i).getTarget());
+			Attributes attributes = new Attributes();
+			attributes.setUrl(mList.get(i).getUrl());
+			attributes.setIcon(mList.get(i).getIcon());
+			tj.setAttributes(attributes);
+			tList.add(tj);
+		}
+		List<TreeJson> jList = TreeJson.formatTree(tList);
+		return jList;
 	}
 	
 	/**

@@ -49,6 +49,26 @@
 		<include refid="whereStr"/>
 	</select>
 	
+	<!-- 查询数据TREE -->
+	<select id="getTreeJson" resultType="com.seeyoui.kensite.framework.system.domain.SysMenu" parameterType="com.seeyoui.kensite.framework.system.domain.SysRoleMenu">
+		SELECT 
+		t.id,
+	    t.parentid,
+	    t.name,
+	    t.url,
+	    t.sequence,
+	    t.icon,
+		case when sr.id is null then 'F' else 'T' end target
+		from sys_menu t
+	    left join sys_role_menu srm
+	   	on srm.menuid = t.id and srm.roleid=#{roleid}
+    	left join sys_role sr
+    	on sr.id = srm.roleid
+    	START WITH t.PARENTID='ffffffffffffffffffffffffffffffff'
+    	CONNECT BY t.PARENTID = PRIOR t.ID 
+    	ORDER SIBLINGS BY t.sequence ASC
+	</select>
+	
 	<!-- 数据新增 -->
 	<insert id="saveSysRoleMenu" parameterType="com.seeyoui.kensite.framework.system.domain.SysRoleMenu">
 		INSERT INTO SYS_ROLE_MENU (

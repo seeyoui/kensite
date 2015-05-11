@@ -1,13 +1,11 @@
 /*
  * Powered By cuichen
  * Since 2014 - 2015
- */package com.seeyoui.kensite.framework.system.controller;  
+ */
+package com.seeyoui.kensite.framework.system.controller;  
  
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.sql.*;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,39 +14,37 @@ import javax.servlet.http.HttpSession;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
-import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.apache.shiro.authz.annotation.RequiresUser;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.seeyoui.kensite.common.base.controller.BaseController;
-import com.seeyoui.kensite.common.base.domain.Attributes;
-import com.seeyoui.kensite.common.base.domain.EasyUIDataGrid;
-import com.seeyoui.kensite.common.base.domain.TreeJson;
+
 import com.seeyoui.kensite.common.constants.StringConstant;
+import com.seeyoui.kensite.common.base.domain.EasyUIDataGrid;
+import com.seeyoui.kensite.common.base.controller.BaseController;
 import com.seeyoui.kensite.common.util.RequestResponseUtil;
-import com.seeyoui.kensite.framework.system.domain.SysDepartment;
-import com.seeyoui.kensite.framework.system.domain.SysMenu;
-import com.seeyoui.kensite.framework.system.domain.SysRole;
-import com.seeyoui.kensite.framework.system.domain.SysUser;
-import com.seeyoui.kensite.framework.system.service.SysMenuService;
+
+import com.seeyoui.kensite.framework.system.domain.SysModule;
+import com.seeyoui.kensite.framework.system.service.SysModuleService;
 /**
  * @author cuichen
  * @version 1.0
  * @since 1.0
  */
 @Controller
-@RequestMapping(value = "sysMenu")
-public class SysMenuController extends BaseController {
+@RequestMapping(value = "sysModule")
+public class SysModuleController extends BaseController {
 	
 	@Autowired
-	private SysMenuService sysMenuService;
+	private SysModuleService sysModuleService;
 	
 	/**
 	 * 展示列表页面
@@ -57,66 +53,49 @@ public class SysMenuController extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequiresPermissions("sysMenu:view")
+	@RequiresPermissions("sysModule:view")
 	@RequestMapping(value = "/showPageList")
-	public ModelAndView showSysMenuPageList(HttpSession session,
+	public ModelAndView showSysModulePageList(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap) throws Exception {
-		return new ModelAndView("framework/system/sysMenu", modelMap);
+		return new ModelAndView("framework/system/sysModule", modelMap);
 	}
 	
 	/**
 	 * 获取列表展示数据
 	 * @param modelMap
-	 * @param sysMenu
+	 * @param sysModule
 	 * @return
 	 * @throws Exception
 	 */
-	@RequiresPermissions("sysMenu:select")
+	@RequiresPermissions("sysModule:select")
 	@RequestMapping(value = "/getListData", method=RequestMethod.POST)
 	@ResponseBody
 	public String getListData(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap, SysMenu sysMenu) throws Exception{
-		List<SysMenu> sysMenuList = sysMenuService.findSysMenuList(sysMenu);
-		EasyUIDataGrid eudg = sysMenuService.findSysMenuListTotal(sysMenu);
-		eudg.setRows(sysMenuList);
+			ModelMap modelMap, SysModule sysModule) throws Exception{
+		List<SysModule> sysModuleList = sysModuleService.findSysModuleList(sysModule);
+		EasyUIDataGrid eudg = sysModuleService.findSysModuleListTotal(sysModule);
+		eudg.setRows(sysModuleList);
 		JSONObject jsonObj = JSONObject.fromObject(eudg);
 		RequestResponseUtil.putResponseStr(session, response, request, jsonObj);
 		return null;
 	}
 	
 	/**
-	 * 获取模块TREE页面JSON数据
-	 * @return
-	 * @throws Exception
-	 */
-	@RequiresPermissions("sysMenu:select")
-	@RequestMapping(value = "/getTreeJson", method=RequestMethod.POST)
-	@ResponseBody
-	public String getTreeJson(HttpSession session,
-			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap, String username) throws Exception {
-		List<TreeJson> tList = sysMenuService.getTreeJson();
-		List<TreeJson> jList = TreeJson.formatTree(tList) ;
-		JSONArray jsonObj = JSONArray.fromObject(jList.get(0));
-		return jsonObj.toString();
-	}
-	
-	/**
 	 * 保存新增的数据
 	 * @param modelMap
-	 * @param sysMenu
+	 * @param sysModule
 	 * @return
 	 * @throws Exception
 	 */
-	@RequiresPermissions("sysMenu:insert")
+	@RequiresPermissions("sysModule:insert")
 	@RequestMapping(value = "/saveByAdd", method=RequestMethod.POST)
 	@ResponseBody
-	public String saveSysMenuByAdd(HttpSession session,
+	public String saveSysModuleByAdd(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap, SysMenu sysMenu) throws Exception{
-		sysMenuService.saveSysMenu(sysMenu);
+			ModelMap modelMap, SysModule sysModule) throws Exception{
+		sysModuleService.saveSysModule(sysModule);
 		RequestResponseUtil.putResponseStr(session, response, request, StringConstant.TRUE);
 		return null;
 	}
@@ -124,17 +103,17 @@ public class SysMenuController extends BaseController {
 	/**
 	 * 保存修改的数据
 	 * @param modelMap
-	 * @param sysMenu
+	 * @param sysModule
 	 * @return
 	 * @throws Exception
 	 */
-	@RequiresPermissions("sysMenu:update")
+	@RequiresPermissions("sysModule:update")
 	@RequestMapping(value = "/saveByUpdate", method=RequestMethod.POST)
 	@ResponseBody
-	public String saveSysMenuByUpdate(HttpSession session,
+	public String saveSysModuleByUpdate(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap, SysMenu sysMenu) throws Exception{
-		sysMenuService.updateSysMenu(sysMenu);
+			ModelMap modelMap, SysModule sysModule) throws Exception{
+		sysModuleService.updateSysModule(sysModule);
 		RequestResponseUtil.putResponseStr(session, response, request, StringConstant.TRUE);
 		return null;
 	}
@@ -142,18 +121,18 @@ public class SysMenuController extends BaseController {
 	/**
 	 * 删除数据库
 	 * @param modelMap
-	 * @param sysMenuId
+	 * @param sysModuleId
 	 * @return
 	 * @throws Exception
 	 */
-	@RequiresPermissions("sysMenu:delete")
+	@RequiresPermissions("sysModule:delete")
 	@RequestMapping(value = "/delete", method=RequestMethod.POST)
 	@ResponseBody
 	public String delete(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, String delDataId) throws Exception {
 		List<String> listId = Arrays.asList(delDataId.split(","));
-		sysMenuService.deleteSysMenu(listId);
+		sysModuleService.deleteSysModule(listId);
 		RequestResponseUtil.putResponseStr(session, response, request, StringConstant.TRUE);
 		return null;
 	}

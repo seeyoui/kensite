@@ -5,7 +5,11 @@
 package com.seeyoui.kensite.framework.system.persistence;  
 
 import com.seeyoui.kensite.common.base.domain.EasyUIDataGrid;
+import com.seeyoui.kensite.common.exception.CRUDException;
+import com.seeyoui.kensite.framework.system.domain.SysMenu;
+import com.seeyoui.kensite.framework.system.domain.SysRole;
 import com.seeyoui.kensite.framework.system.domain.SysRoleMenu;
+
 import java.util.*;
 
 /**
@@ -35,6 +39,14 @@ public interface SysRoleMenuMapper {
 	 * @return
 	 */
 	public EasyUIDataGrid findSysRoleMenuListTotal(SysRoleMenu sysRoleMenu);
+	
+	/**
+	 * 查询数据TREE
+	 * @param map
+	 * @return
+	 * @throws CRUDException
+	 */
+	public List<SysMenu> getTreeJson(SysRoleMenu sysRoleMenu);
 	
 	/**
 	 * 数据新增

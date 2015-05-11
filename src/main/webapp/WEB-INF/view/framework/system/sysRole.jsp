@@ -61,18 +61,32 @@
 			        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dataWin').window('close')" style="width:90px">取消</a>
 			    </div>
 		    </div>
-		    <div id="moduleWin" class="easyui-window" title="模块权限维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:400px;height:260px;padding:10px;">
+		    <div id="moduleWin" class="easyui-window" title="模块权限维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:335px;height:420px;padding:10px;">
 		        <div class="ftitle">模块权限维护</div>
-		        <form id="dataForm" method="post">
+		        <form id="moduleDataForm" method="post">
 					<div class="easyui-panel" title="模块权限" style="width:300px;height:300px;">
 	            		<ul id="moduleTree" class="easyui-tree" data-options="animate:true,checkbox:true,cascadeCheck:false"></ul>
-	            	</div>
+					</div>
 				    <input id="roleid" name="roleid" type="hidden"/>
 				</form>
 				
 			    <div id="dataWin-buttons">
 			        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveInfo()" style="width:90px">保存</a>
 			        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dataWin').window('close')" style="width:90px">取消</a>
+			    </div>
+		    </div>
+		    <div id="menuWin" class="easyui-window" title="菜单权限维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:335px;height:420px;padding:10px;">
+		        <div class="ftitle">菜单权限维护</div>
+		        <form id="menuDataForm" method="post">
+					<div class="easyui-panel" title="菜单权限" style="width:300px;height:300px;">
+	            		<ul id="menuTree" class="easyui-tree" data-options="animate:true,checkbox:true,cascadeCheck:false"></ul>
+					</div>
+				    <input id="roleid" name="roleid" type="hidden"/>
+				</form>
+				
+			    <div id="dataWin-buttons">
+			        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveRoleMenuInfo()" style="width:90px">保存</a>
+			        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#menuWin').window('close')" style="width:90px">取消</a>
 			    </div>
 		    </div>
 	    </div>
@@ -106,21 +120,45 @@
         }
         
         function moduleShiro() {
-        	loadModuleTreeData();
+        	//getModuleTreeJson();
         	$('#moduleWin').window('open');
         }
         
-        function loadModuleTreeData() {
-        	var roleid = $("#roleid").val();
-	    	$.ajax({
-				type: "POST",
-				url: "<%=path %>/sysModule/getModuleTreeJson.do",
-				data: "roleid="+roleid,
-				dataType: "json",
-				success: function(data){
-					$("#moduleTree").tree("loadData",data);
-				}
-			});
+        function menuShiro() {
+        	getMenuTreeJson();
+        	$('#menuWin').window('open');
+        }
+        
+        function getModuleTreeJson() {
+        	var row = $('#dataList').datagrid('getSelected');
+            if (row){
+            	var roleid = row.id;
+	    		$.ajax({
+					type: "POST",
+					url: "<%=path %>/sysModule/getRoleModuleTreeJson.do",
+					data: "roleid="+roleid,
+					dataType: "json",
+					success: function(data){
+						$("#moduleTree").tree("loadData",data);
+					}
+				});
+			}
+	    }
+	    
+	    function getMenuTreeJson() {
+        	var row = $('#dataList').datagrid('getSelected');
+            if (row){
+            	var roleid = row.id;
+	    		$.ajax({
+					type: "POST",
+					url: "<%=path %>/sysRoleMenu/getTreeJson.do",
+					data: "roleid="+roleid,
+					dataType: "json",
+					success: function(data){
+						$("#menuTree").tree("loadData",data);
+					}
+				});
+			}
 	    }
 	    
         var url;

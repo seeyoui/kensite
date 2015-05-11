@@ -70,7 +70,7 @@
 	</select>
 	
 	<!-- 查询数据TREE -->
-	<select id="findSysMenuTree" resultType="com.seeyoui.kensite.framework.system.domain.SysMenu" parameterType="SysUser">
+	<select id="findSysMenuTree" resultType="com.seeyoui.kensite.framework.system.domain.SysMenu" parameterType="com.seeyoui.kensite.framework.system.domain.SysUser">
 		SELECT 
 		<include refid="tableColumns"/>
 		from sys_user su
@@ -91,7 +91,7 @@
 	</select>
 	
 	<!-- 查询数据TREE -->
-	<select id="getTreeJson" resultType="com.seeyoui.kensite.framework.system.domain.SysMenu" parameterType="SysUser">
+	<select id="getTreeJson" resultType="com.seeyoui.kensite.framework.system.domain.SysMenu" parameterType="com.seeyoui.kensite.framework.system.domain.SysUser">
 		SELECT 
 		<include refid="tableColumns"/>
 		from 
