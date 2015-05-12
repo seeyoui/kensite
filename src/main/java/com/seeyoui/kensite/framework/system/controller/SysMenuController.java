@@ -98,8 +98,7 @@ public class SysMenuController extends BaseController {
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, String username) throws Exception {
 		List<TreeJson> tList = sysMenuService.getTreeJson();
-		List<TreeJson> jList = TreeJson.formatTree(tList) ;
-		JSONArray jsonObj = JSONArray.fromObject(jList.get(0));
+		JSONArray jsonObj = JSONArray.fromObject(tList);
 		return jsonObj.toString();
 	}
 	

@@ -292,26 +292,36 @@
 					<!-- add class "multiple-expanded" to allow multiple submenus to open -->
 					<!-- class "auto-inherit-active-class" will automatically add "active" class for parent elements who are marked already with class "active" -->
 					<c:forEach var="tree_1" items="${menuList}" varStatus="status">
-						<c:forEach var="tree_2" items="${tree_1.children}" varStatus="status">
-							<li class="">
-								<a href="javascript:jumpTo('${ctx}${tree_2.attributes.url}', '', $(this))">
-									<i class="linecons-cog"></i>
-									<span class="title">${tree_2.text}</span>
-								</a>
-								<c:if test="${not empty tree_2.children}">
-									<ul>
-									<c:forEach var="tree_3" items="${tree_2.children}" varStatus="status">
+						<li class="">
+							<a href="javascript:jumpTo('${ctx}${tree_1.attributes.url}', '', $(this))">
+								<i class="linecons-cog"></i>
+								<span class="title">${tree_1.text}</span>
+							</a>
+							<c:if test="${not empty tree_1.children}">
+								<ul>
+									<c:forEach var="tree_2" items="${tree_1.children}" varStatus="status">
 										<li class="">
-											<a href="javascript:jumpTo('${ctx}${tree_3.attributes.url}', '', $(this))">
+											<a href="javascript:jumpTo('${ctx}${tree_2.attributes.url}', '', $(this))">
 												<i class="linecons-cog"></i>
-												<span class="title">${tree_3.text}</span>
+												<span class="title">${tree_2.text}</span>
 											</a>
+											<c:if test="${not empty tree_2.children}">
+												<ul>
+												<c:forEach var="tree_3" items="${tree_2.children}" varStatus="status">
+													<li class="">
+														<a href="javascript:jumpTo('${ctx}${tree_3.attributes.url}', '', $(this))">
+															<i class="linecons-cog"></i>
+															<span class="title">${tree_3.text}</span>
+														</a>
+													</li>
+												</c:forEach>
+												</ul>
+											</c:if>
 										</li>
 									</c:forEach>
-									</ul>
-								</c:if>
-							</li>
-						</c:forEach>
+								</ul>
+							</c:if>
+						</li>
 					</c:forEach>
 				</ul>
 			</div>

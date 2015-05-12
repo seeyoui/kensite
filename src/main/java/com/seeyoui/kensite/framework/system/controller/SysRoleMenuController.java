@@ -57,8 +57,7 @@ public class SysRoleMenuController extends BaseController {
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, SysRoleMenu sysRoleMenu) throws Exception{
 		List<TreeJson> tList = sysRoleMenuService.getTreeJson(sysRoleMenu);
-		List<TreeJson> jList = TreeJson.formatTree(tList) ;
-		JSONArray jsonObj = JSONArray.fromObject(jList.get(0));
+		JSONArray jsonObj = JSONArray.fromObject(tList);
 		return jsonObj.toString();
 	}
 	

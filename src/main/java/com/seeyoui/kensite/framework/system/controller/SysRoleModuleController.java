@@ -58,8 +58,7 @@ public class SysRoleModuleController extends BaseController {
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, SysRoleModule sysRoleModule) throws Exception{
 		List<TreeJson> tList = sysRoleModuleService.getTreeJson(sysRoleModule);
-		List<TreeJson> jList = TreeJson.formatTree(tList) ;
-		JSONArray jsonObj = JSONArray.fromObject(jList.get(0).getChildren());
+		JSONArray jsonObj = JSONArray.fromObject(tList);
 		return jsonObj.toString();
 	}
 	

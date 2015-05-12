@@ -14,6 +14,7 @@ import com.seeyoui.kensite.common.base.domain.Attributes;
 import com.seeyoui.kensite.common.base.domain.EasyUIDataGrid;
 import com.seeyoui.kensite.common.base.domain.TreeJson;
 import com.seeyoui.kensite.common.base.service.BaseService;
+import com.seeyoui.kensite.common.constants.StringConstant;
 import com.seeyoui.kensite.common.exception.CRUDException;
 import com.seeyoui.kensite.framework.act.idgenerator.GeneratorUUID;
 import com.seeyoui.kensite.framework.system.domain.SysDepartment;
@@ -73,8 +74,11 @@ public class SysMenuService extends BaseService {
 			tj.setAttributes(attributes);
 			tList.add(tj);
 		}
-		List<TreeJson> jList = TreeJson.formatTree(tList);
-		return jList;
+		
+		TreeJson root = new TreeJson();
+		root.setId(StringConstant.ROOT_ID_32);
+		TreeJson.getTree(tList, root);
+		return root.getChildren();
 	}
 	
 	/**
@@ -97,8 +101,10 @@ public class SysMenuService extends BaseService {
 			tj.setAttributes(attributes);
 			tList.add(tj);
 		}
-		List<TreeJson> jList = TreeJson.formatTree(tList);
-		return jList;
+		TreeJson root = new TreeJson();
+		root.setId(StringConstant.ROOT_ID_32);
+		TreeJson.getTree(tList, root);
+		return root.getChildren();
 	}
 	
 	/**

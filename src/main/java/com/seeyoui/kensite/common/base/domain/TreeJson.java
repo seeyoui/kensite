@@ -7,13 +7,8 @@ import java.util.List;
 import com.seeyoui.kensite.common.constants.StringConstant;
 
 /**
- * easui中的tree_data.json数据,只能有一个root节点 [{ "id":1, "text":"Folder1",
- * "iconCls":"icon-save", "children":[{ "text":"File1", "checked":true }] }]
- * 提供静态方法formatTree(List<TreeJson> list) 返回结果 TreeJson.formatTree(treeJsonlist)
- * ;
  * 
- * @author lwb
- * 
+ * @author cuichen
  */
 public class TreeJson implements Serializable {
 	/**
@@ -99,49 +94,50 @@ public class TreeJson implements Serializable {
 		this.children = children;
 	}
 
-	public static List<TreeJson> formatTree(List<TreeJson> list) {
-
-		TreeJson root = new TreeJson();
-		TreeJson node = new TreeJson();
-		List<TreeJson> treelist = new ArrayList<TreeJson>();// 拼凑好的json格式的数据
-		List<TreeJson> parentnodes = new ArrayList<TreeJson>();// parentnodes存放所有的父节点
-
-		if (list != null && list.size() > 0) {
-			root = list.get(0);
-			// 循环遍历oracle树查询的所有节点
-			for (int i = 1; i < list.size(); i++) {
-				node = list.get(i);
-				if (node.getPid().equals(root.getId())) {
-					// 为tree root 增加子节点
-					parentnodes.add(node);
-					root.getChildren().add(node);
-				} else {// 获取root子节点的孩子节点
-					getChildrenNodes(parentnodes, node);
-					parentnodes.add(node);
-				}
-			}
-		}
-		treelist.add(root);
-		return treelist;
-
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((pid == null) ? 0 : pid.hashCode());
+		return result;
 	}
 
-	private static void getChildrenNodes(List<TreeJson> parentnodes,
-			TreeJson node) {
-		// 循环遍历所有父节点和node进行匹配，确定父子关系
-		for (int i = parentnodes.size() - 1; i >= 0; i--) {
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TreeJson other = (TreeJson) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (pid == null) {
+			if (other.pid != null)
+				return false;
+		} else if (!pid.equals(other.pid))
+			return false;
+		return true;
+	}
 
-			TreeJson pnode = parentnodes.get(i);
-			// 如果是父子关系，为父节点增加子节点，退出for循环
-			if (pnode.getId().equals(node.getPid())) {
-				pnode.setState("closed");// 关闭二级树
-				pnode.getChildren().add(node);
-				return;
-			} else {
-				// 如果不是父子关系，删除父节点栈里当前的节点，
-				// 继续此次循环，直到确定父子关系或不存在退出for循环
-				parentnodes.remove(i);
+	public static void getTree(List<TreeJson> list, TreeJson root) {
+		for(int i=0; i<list.size(); i++) {
+			TreeJson tj = list.get(i);
+			if(tj.getPid().equals(root.getId())) {
+				if(root.getChildren().indexOf(tj) != 0) {
+					root.getChildren().add(tj);
+				}
+				list.remove(tj);
+				i--;
 			}
+		}
+		for(int i=0; i<root.getChildren().size(); i++) {
+			getTree(list, root.getChildren().get(i));
 		}
 	}
 }

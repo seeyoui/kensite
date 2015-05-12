@@ -98,8 +98,10 @@ public class SysDepartmentController extends BaseController {
 			tj.setText(mList.get(i).getName());
 			tList.add(tj);
 		}
-		List<TreeJson> jList = TreeJson.formatTree(tList) ;
-		JSONArray jsonObj = JSONArray.fromObject(jList.get(0));
+		TreeJson root = new TreeJson();
+		root.setId(StringConstant.ROOT_ID_32);
+		TreeJson.getTree(tList, root);
+		JSONArray jsonObj = JSONArray.fromObject(root.getChildren());
 		return jsonObj.toString();
 	}
 	

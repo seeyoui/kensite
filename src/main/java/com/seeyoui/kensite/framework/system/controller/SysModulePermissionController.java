@@ -58,8 +58,7 @@ public class SysModulePermissionController extends BaseController {
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, SysModulePermission sysModulePermission) throws Exception{
 		List<TreeJson> tList = sysModulePermissionService.getTreeJson(sysModulePermission);
-		List<TreeJson> jList = TreeJson.formatTree(tList) ;
-		JSONArray jsonObj = JSONArray.fromObject(jList.get(0).getChildren());
+		JSONArray jsonObj = JSONArray.fromObject(tList);
 		return jsonObj.toString();
 	}
 	

@@ -54,8 +54,10 @@ public class SysRoleMenuService extends BaseService {
 			tj.setAttributes(attributes);
 			tList.add(tj);
 		}
-		List<TreeJson> jList = TreeJson.formatTree(tList);
-		return jList;
+		TreeJson root = new TreeJson();
+		root.setId(StringConstant.ROOT_ID_32);
+		TreeJson.getTree(tList, root);
+		return root.getChildren();
 	}
 	
 	/**

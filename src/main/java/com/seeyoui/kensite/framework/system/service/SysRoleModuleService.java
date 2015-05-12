@@ -42,11 +42,6 @@ public class SysRoleModuleService extends BaseService {
 	public List<TreeJson> getTreeJson(SysRoleModule sysRoleModule) throws CRUDException {
 		List<SysModule> mList = sysRoleModuleMapper.getTreeJson(sysRoleModule);
 		List<TreeJson> tList = new ArrayList<TreeJson>();
-		TreeJson root = new TreeJson();
-		root.setId(StringConstant.ROOT_ID_32);
-		root.setText("ROOT");
-		root.setPid("");
-		tList.add(root);
 		for(int i=0; i<mList.size(); i++) {
 			TreeJson tj = new TreeJson();
 			tj.setId(mList.get(i).getId());
@@ -57,8 +52,10 @@ public class SysRoleModuleService extends BaseService {
 			tj.setAttributes(attributes);
 			tList.add(tj);
 		}
-		List<TreeJson> jList = TreeJson.formatTree(tList);
-		return jList;
+		TreeJson root = new TreeJson();
+		root.setId(StringConstant.ROOT_ID_32);
+		TreeJson.getTree(tList, root);
+		return root.getChildren();
 	}
 	
 	/**
