@@ -25,6 +25,7 @@
 		<shiro.version>1.2.3</shiro.version>
 		<sitemesh.version>2.4.2</sitemesh.version>
 		<activiti.version>5.17.0</activiti.version>
+		<spring-data-jpa.version>1.6.2.RELEASE</spring-data-jpa.version>
 		
 		<!-- tools version setting -->
 		<slf4j.version>1.7.7</slf4j.version>
@@ -132,6 +133,17 @@
 	<dependencies>
 	
 		<!-- SPRING begin -->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-jpa</artifactId>
+			<version>${spring-data-jpa.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>junit</groupId>
+					<artifactId>junit-dep</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>

@@ -7,29 +7,37 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.xml.stream.XMLStreamException;
 
-import org.activiti.engine.runtime.ProcessInstance;
+import net.sf.json.JSONObject;
+import net.sf.json.JsonConfig;
+import net.sf.json.util.CycleDetectionStrategy;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.seeyoui.kensite.common.base.controller.BaseController;
-import com.seeyoui.kensite.common.base.domain.Page;
+import com.seeyoui.kensite.common.base.domain.EasyUIDataGrid;
+import com.seeyoui.kensite.common.base.domain.Pager;
+import com.seeyoui.kensite.common.constants.StringConstant;
+import com.seeyoui.kensite.common.util.RequestResponseUtil;
 import com.seeyoui.kensite.common.util.StringUtils;
 import com.seeyoui.kensite.framework.act.service.ActProcessService;
 
 
 @Controller
-@RequestMapping(value = "act/process")
+@RequestMapping(value = "actProcess/")
 public class ActProcessController extends BaseController {
 
 	@Autowired
@@ -38,29 +46,47 @@ public class ActProcessController extends BaseController {
 	/**
 	 * 流程定义列表
 	 */
-	@RequiresPermissions("act:process:edit")
-	@RequestMapping(value = {"list", ""})
-	public String processList(String category, HttpServletRequest request, HttpServletResponse response, Model model) {
-		/*
-		 * 保存两个对象，一个是ProcessDefinition（流程定义），一个是Deployment（流程部署）
-		 */
-	    Page<Object[]> page = actProcessService.processList(new Page<Object[]>(request, response), category);
-		model.addAttribute("page", page);
-		model.addAttribute("category", category);
-		return "modules/act/actProcessList";
+	/**
+	 * 流程模型列表
+	 */
+	@RequiresPermissions("actProcess:view")
+	@RequestMapping(value = {"showPageList", ""})
+	public ModelAndView showactModelPageList(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap) throws Exception {
+		return new ModelAndView("framework/act/actProcessList", modelMap);
+	}
+	
+	/**
+	 * 获取列表展示数据
+	 * @param modelMap
+	 * @param actModel
+	 * @return
+	 * @throws Exception
+	 */
+	@RequiresPermissions("actProcess:select")
+	@RequestMapping(value = "getListData", method=RequestMethod.POST)
+	@ResponseBody
+	public String getListData(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap, String category, Pager pager) throws Exception{
+		EasyUIDataGrid eudg = actProcessService.processList(pager, category);
+		JsonConfig jsonConfig = new JsonConfig();
+		jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
+		JSONObject jsonObj = JSONObject.fromObject(eudg, jsonConfig);
+		RequestResponseUtil.putResponseStr(session, response, request, jsonObj);
+		return null;
 	}
 	
 	/**
 	 * 运行中的实例列表
 	 */
-	@RequiresPermissions("act:process:edit")
-	@RequestMapping(value = "running")
-	public String runningList(String procInsId, String procDefKey, HttpServletRequest request, HttpServletResponse response, Model model) {
-	    Page<ProcessInstance> page = actProcessService.runningList(new Page<ProcessInstance>(request, response), procInsId, procDefKey);
-		model.addAttribute("page", page);
-		model.addAttribute("procInsId", procInsId);
-		model.addAttribute("procDefKey", procDefKey);
-		return "modules/act/actProcessRunningList";
+	@RequiresPermissions("actProcess:view")
+	@RequestMapping(value = "showRunningPageList")
+	public ModelAndView runningList(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap) throws Exception {
+		return new ModelAndView("framework/act/actProcessRunningList", modelMap);
 	}
 
 	/**
@@ -71,23 +97,28 @@ public class ActProcessController extends BaseController {
 	 * @param response
 	 * @throws Exception
 	 */
-	@RequiresPermissions("act:process:edit")
-	@RequestMapping(value = "resource/read")
-	public void resourceRead(String procDefId, String proInsId, String resType, HttpServletResponse response) throws Exception {
+	@RequiresPermissions("actProcess:export")
+	@RequestMapping(value = "resource")
+	public void resourceRead(String procDefId, String proInsId, String resType, HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap) throws Exception {
 		InputStream resourceAsStream = actProcessService.resourceRead(procDefId, proInsId, resType);
 		byte[] b = new byte[1024];
 		int len = -1;
 		while ((len = resourceAsStream.read(b, 0, 1024)) != -1) {
 			response.getOutputStream().write(b, 0, len);
 		}
+		response.getOutputStream().flush();
 	}
 
 	/**
 	 * 部署流程
 	 */
-	@RequiresPermissions("act:process:edit")
+	@RequiresPermissions("actProcess:update")
 	@RequestMapping(value = "/deploy", method=RequestMethod.GET)
-	public String deploy(Model model) {
+	public String deploy(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap) {
 		return "modules/act/actProcessDeploy";
 	}
 	
@@ -96,7 +127,7 @@ public class ActProcessController extends BaseController {
 	 * @param file
 	 * @return
 	 */
-	@RequiresPermissions("act:process:edit")
+	@RequiresPermissions("actProcess:update")
 	@RequestMapping(value = "/deploy", method=RequestMethod.POST)
 	public String deploy(@Value("#{APP_PROP['activiti.export.diagram.path']}") String exportDir, 
 			String category, MultipartFile file, RedirectAttributes redirectAttributes) {
@@ -116,22 +147,27 @@ public class ActProcessController extends BaseController {
 	/**
 	 * 设置流程分类
 	 */
-	@RequiresPermissions("act:process:edit")
+	@RequiresPermissions("actProcess:update")
 	@RequestMapping(value = "updateCategory")
-	public String updateCategory(String procDefId, String category, RedirectAttributes redirectAttributes) {
+	public String updateCategory(String procDefId, String category, RedirectAttributes redirectAttributes,
+			HttpSession session, HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap) {
 		actProcessService.updateCategory(procDefId, category);
-		return "redirect:/act/process";
+		RequestResponseUtil.putResponseStr(session, response, request, StringConstant.TRUE);
+		return null;
 	}
 
 	/**
 	 * 挂起、激活流程实例
 	 */
-	@RequiresPermissions("act:process:edit")
+	@RequiresPermissions("actProcess:update")
 	@RequestMapping(value = "update/{state}")
-	public String updateState(@PathVariable("state") String state, String procDefId, RedirectAttributes redirectAttributes) {
+	public String updateState(@PathVariable("state") String state, String procDefId, RedirectAttributes redirectAttributes,
+			HttpSession session, HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap) {
 		String message = actProcessService.updateState(state, procDefId);
-		redirectAttributes.addFlashAttribute("message", message);
-		return "redirect:/act/process";
+		RequestResponseUtil.putResponseStr(session, response, request, message);
+		return null;
 	}
 	
 	/**
@@ -142,19 +178,22 @@ public class ActProcessController extends BaseController {
 	 * @throws UnsupportedEncodingException
 	 * @throws XMLStreamException
 	 */
-	@RequiresPermissions("act:process:edit")
-	@RequestMapping(value = "convert/toModel")
-	public String convertToModel(String procDefId, RedirectAttributes redirectAttributes) throws UnsupportedEncodingException, XMLStreamException {
+	@RequiresPermissions("actProcess:update")
+	@RequestMapping(value = "convertToModel")
+	public String convertToModel(String procDefId, RedirectAttributes redirectAttributes,
+			HttpSession session, HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap) throws UnsupportedEncodingException, XMLStreamException {
 		org.activiti.engine.repository.Model modelData = actProcessService.convertToModel(procDefId);
-		redirectAttributes.addFlashAttribute("message", "转换模型成功，模型ID="+modelData.getId());
-		return "redirect:/act/model";
+		String message = "转换模型成功，模型ID="+modelData.getId();
+		RequestResponseUtil.putResponseStr(session, response, request, message);
+		return null;
 	}
 	
 	/**
 	 * 导出图片文件到硬盘
 	 */
-	@RequiresPermissions("act:process:edit")
-	@RequestMapping(value = "export/diagrams")
+	@RequiresPermissions("actProcess:export")
+	@RequestMapping(value = "export")
 	@ResponseBody
 	public List<String> exportDiagrams(@Value("#{APP_PROP['activiti.export.diagram.path']}") String exportDir) throws IOException {
 		List<String> files = actProcessService.exportDiagrams(exportDir);;
@@ -165,9 +204,10 @@ public class ActProcessController extends BaseController {
 	 * 删除部署的流程，级联删除流程实例
 	 * @param deploymentId 流程部署ID
 	 */
-	@RequiresPermissions("act:process:edit")
-	@RequestMapping(value = "delete")
-	public String delete(String deploymentId) {
+	@RequiresPermissions("actProcess:delete")
+	@RequestMapping(value = "remove")
+	public String delete(HttpSession session, HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap, String deploymentId) {
 		actProcessService.deleteDeployment(deploymentId);
 		return "redirect:/act/process";
 	}
@@ -177,9 +217,11 @@ public class ActProcessController extends BaseController {
 	 * @param procInsId 流程实例ID
 	 * @param reason 删除原因
 	 */
-	@RequiresPermissions("act:process:edit")
+	@RequiresPermissions("actProcess:delete")
 	@RequestMapping(value = "deleteProcIns")
-	public String deleteProcIns(String procInsId, String reason, RedirectAttributes redirectAttributes) {
+	public String deleteProcIns(String procInsId, String reason, RedirectAttributes redirectAttributes,
+			HttpSession session, HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap) {
 		if (StringUtils.isBlank(reason)){
 			addMessage(redirectAttributes, "请填写删除原因");
 		}else{

@@ -76,9 +76,12 @@ public class SysMenuService extends BaseService {
 		}
 		
 		TreeJson root = new TreeJson();
+		root.setText("导航菜单");
 		root.setId(StringConstant.ROOT_ID_32);
 		TreeJson.getTree(tList, root);
-		return root.getChildren();
+		tList.clear();
+		tList.add(root);
+		return tList;
 	}
 	
 	/**
@@ -102,9 +105,12 @@ public class SysMenuService extends BaseService {
 			tList.add(tj);
 		}
 		TreeJson root = new TreeJson();
+		root.setText("导航菜单");
 		root.setId(StringConstant.ROOT_ID_32);
 		TreeJson.getTree(tList, root);
-		return root.getChildren();
+		tList.clear();
+		tList.add(root);
+		return tList;
 	}
 	
 	/**

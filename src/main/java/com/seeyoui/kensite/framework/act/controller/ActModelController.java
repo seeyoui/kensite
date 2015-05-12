@@ -28,7 +28,7 @@ import com.seeyoui.kensite.common.util.RequestResponseUtil;
 import com.seeyoui.kensite.framework.act.service.ActModelService;
 
 @Controller
-@RequestMapping(value = "actModel")
+@RequestMapping(value = "actModel/")
 public class ActModelController extends BaseController {
 
 	@Autowired
@@ -38,7 +38,7 @@ public class ActModelController extends BaseController {
 	 * 流程模型列表
 	 */
 	@RequiresPermissions("actModel:view")
-	@RequestMapping(value = "/showPageList")
+	@RequestMapping(value = {"showPageList", ""})
 	public ModelAndView showactModelPageList(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap) throws Exception {
@@ -53,7 +53,7 @@ public class ActModelController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequiresPermissions("actModel:select")
-	@RequestMapping(value = "/getListData", method=RequestMethod.POST)
+	@RequestMapping(value = "getListData", method=RequestMethod.POST)
 	@ResponseBody
 	public String getListData(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
@@ -81,7 +81,7 @@ public class ActModelController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequiresPermissions("actModel:insert")
-	@RequestMapping(value = "/saveByAdd", method=RequestMethod.POST)
+	@RequestMapping(value = "saveByAdd", method=RequestMethod.POST)
 	@ResponseBody
 	public String saveactModelByAdd(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
@@ -108,7 +108,7 @@ public class ActModelController extends BaseController {
 			ModelMap modelMap, String id) throws Exception{
 		String message = actModelService.deploy(id);
 		RequestResponseUtil.putResponseStr(session, response, request, message);
-		return "redirect:/act/process";
+		return null;
 	}
 	
 	/**
@@ -130,7 +130,7 @@ public class ActModelController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequiresPermissions("actModel:update")
-	@RequestMapping(value = "/saveByUpdate", method=RequestMethod.POST)
+	@RequestMapping(value = "saveByUpdate", method=RequestMethod.POST)
 	@ResponseBody
 	public String saveactModelByUpdate(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
@@ -148,7 +148,7 @@ public class ActModelController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequiresPermissions("actModel:delete")
-	@RequestMapping(value = "/delete", method=RequestMethod.POST)
+	@RequestMapping(value = "delete", method=RequestMethod.POST)
 	@ResponseBody
 	public String delete(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,

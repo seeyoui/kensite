@@ -85,9 +85,7 @@
 		on sr.id = srm.roleid
 		left join sys_menu t
 		on srm.menuid = t.id
-		START WITH t.PARENTID='ffffffffffffffffffffffffffffffff'
-		CONNECT BY t.PARENTID = PRIOR t.ID 
-		ORDER SIBLINGS BY t.sequence ASC
+		ORDER BY t.sequence ASC
 	</select>
 	
 	<!-- 查询数据TREE -->
@@ -96,9 +94,7 @@
 		<include refid="tableColumns"/>
 		from 
 		sys_menu t
-		START WITH t.PARENTID='ffffffffffffffffffffffffffffffff'
-		CONNECT BY t.PARENTID = PRIOR t.ID 
-		ORDER SIBLINGS BY t.sequence ASC
+		ORDER BY t.sequence ASC
 	</select>
 	
 	<!-- 数据新增 -->
