@@ -129,7 +129,7 @@ public class TreeJson implements Serializable {
 		for(int i=0; i<list.size(); i++) {
 			TreeJson tj = list.get(i);
 			if(tj.getPid().equals(root.getId())) {
-				if(root.getChildren().indexOf(tj) != 0) {
+				if(root.getChildren().indexOf(tj) == -1) {
 					root.getChildren().add(tj);
 				}
 				list.remove(tj);
