@@ -45,32 +45,6 @@
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyInfo()">删除</a>
 		        </shiro:hasPermission>
 		    </div>
-		    <div id="dataWin" class="easyui-window" title="流程模型信息维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:400px;height:260px;padding:10px;">
-		        <div class="ftitle">流程模型信息维护</div>
-		        <form id="dataForm" method="post" enctype="multipart/form-data">
-							<div class="fitem">
-				                <label>流程分类</label>
-				                <input id="category" name="category" class="easyui-validatebox textbox" data-options="required:true"/>
-				            </div>
-							<div class="fitem">
-				                <label>模型标识</label>
-				                <input id="key" name="key" class="easyui-validatebox textbox" data-options="required:true"/>
-				            </div>
-							<div class="fitem">
-				                <label>模型名称</label>
-				                <input id="name" name="name" class="easyui-validatebox textbox" data-options="required:true"/>
-				            </div>
-							<div class="fitem">
-				                <label>描述</label>
-				                <input id="description" name="description" class="easyui-validatebox textbox" data-options="required:true"/>
-				            </div>
-				</form>
-				
-			    <div id="dataWin-buttons">
-			        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveInfo()" style="width:90px">保存</a>
-			        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dataWin').window('close')" style="width:90px">取消</a>
-			    </div>
-		    </div>
 	    </div>
     </div>
     <script type="text/javascript">

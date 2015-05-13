@@ -66,8 +66,11 @@ public class SysRoleMenuService extends BaseService {
 	 * @throws CRUDException
 	 */
 	public void saveSysRoleMenu(SysRoleMenu sysRoleMenu) throws CRUDException {
-		List<String> listId = Arrays.asList(sysRoleMenu.getMenuid().split(","));
 		sysRoleMenuMapper.deleteSysRoleMenu(sysRoleMenu.getRoleid());
+		if(sysRoleMenu.getMenuid() == null || StringUtils.isBlank(sysRoleMenu.getMenuid())) {
+			return;
+		}
+		List<String> listId = Arrays.asList(sysRoleMenu.getMenuid().split(","));
 		for(int i=0; i<listId.size(); i++) {
 			sysRoleMenu.setMenuid(listId.get(i));
 			sysRoleMenuMapper.saveSysRoleMenu(sysRoleMenu);

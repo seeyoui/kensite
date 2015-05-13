@@ -88,6 +88,27 @@ public class ActProcessController extends BaseController {
 			ModelMap modelMap) throws Exception {
 		return new ModelAndView("framework/act/actProcessRunningList", modelMap);
 	}
+	
+	/**
+	 * 获取列表展示数据
+	 * @param modelMap
+	 * @param actModel
+	 * @return
+	 * @throws Exception
+	 */
+	@RequiresPermissions("actProcess:select")
+	@RequestMapping(value = "getRunningListData", method=RequestMethod.POST)
+	@ResponseBody
+	public String getRunningListData(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap, String category, String procDefKey, Pager pager) throws Exception{
+		EasyUIDataGrid eudg = actProcessService.runningList(pager, category, procDefKey);
+		JsonConfig jsonConfig = new JsonConfig();
+		jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
+		JSONObject jsonObj = JSONObject.fromObject(eudg, jsonConfig);
+		RequestResponseUtil.putResponseStr(session, response, request, jsonObj);
+		return null;
+	}
 
 	/**
 	 * 读取资源，通过部署ID
@@ -209,7 +230,8 @@ public class ActProcessController extends BaseController {
 	public String delete(HttpSession session, HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, String deploymentId) {
 		actProcessService.deleteDeployment(deploymentId);
-		return "redirect:/act/process";
+		RequestResponseUtil.putResponseStr(session, response, request, StringConstant.TRUE);
+		return null;
 	}
 	
 	/**
@@ -223,12 +245,12 @@ public class ActProcessController extends BaseController {
 			HttpSession session, HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap) {
 		if (StringUtils.isBlank(reason)){
-			addMessage(redirectAttributes, "请填写删除原因");
+			RequestResponseUtil.putResponseStr(session, response, request, "请填写删除原因");
 		}else{
 			actProcessService.deleteProcIns(procInsId, reason);
-			addMessage(redirectAttributes, "删除流程实例成功，实例ID=" + procInsId);
+			RequestResponseUtil.putResponseStr(session, response, request, "删除流程实例成功，实例ID=" + procInsId);
 		}
-		return "redirect:/act/process/running/";
+		return null;
 	}
 	
 }

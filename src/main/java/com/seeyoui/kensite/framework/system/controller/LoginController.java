@@ -68,7 +68,6 @@ public class LoginController {
         Subject currentUser = SecurityUtils.getSubject();
         try {
             currentUser.login(token);
-            resultPageURL = "skins/poor/main";
         }catch(UnknownAccountException uae){
             info = "未知账户";
         }catch(IncorrectCredentialsException ice){  
@@ -87,11 +86,12 @@ public class LoginController {
 //			String portal = sc.getUrl()+sc.getPage();
 //			modelMap.put("portalUrl", sc.getUrl());
 //        	resultPageURL = portal;
+        	resultPageURL = "skins/top_left_main";
         }else{
             token.clear();
             modelMap.put("info", info);
         }
-        resultPageURL = "skins/top_left_main";
+        
         return resultPageURL;
 	}
 	

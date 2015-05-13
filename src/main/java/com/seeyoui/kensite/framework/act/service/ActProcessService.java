@@ -35,11 +35,11 @@ import org.springframework.web.multipart.MultipartFile;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.seeyoui.kensite.common.base.domain.EasyUIDataGrid;
-import com.seeyoui.kensite.common.base.domain.Page;
 import com.seeyoui.kensite.common.base.domain.Pager;
 import com.seeyoui.kensite.common.base.service.BaseService;
 import com.seeyoui.kensite.common.util.StringUtils;
 import com.seeyoui.kensite.framework.act.domain.ActProcess;
+import com.seeyoui.kensite.framework.act.domain.ActProcessInstance;
 
 @Service
 @Transactional(readOnly = true)
@@ -93,8 +93,7 @@ public class ActProcessService extends BaseService {
 	/**
 	 * 流程定义列表
 	 */
-	public Page<ProcessInstance> runningList(Page<ProcessInstance> page,
-			String procInsId, String procDefKey) {
+	public EasyUIDataGrid runningList(Pager pager, String procInsId, String procDefKey) {
 
 		ProcessInstanceQuery processInstanceQuery = runtimeService
 				.createProcessInstanceQuery();
@@ -106,11 +105,22 @@ public class ActProcessService extends BaseService {
 		if (StringUtils.isNotBlank(procDefKey)) {
 			processInstanceQuery.processDefinitionKey(procDefKey);
 		}
-
-		page.setCount(processInstanceQuery.count());
-		page.setList(processInstanceQuery.listPage(page.getFirstResult(),
-				page.getMaxResults()));
-		return page;
+		
+		EasyUIDataGrid eudg = new EasyUIDataGrid();
+		eudg.setTotal(String.valueOf(processInstanceQuery.count()));
+		List<ProcessInstance> processInstanceList = processInstanceQuery.listPage((pager.getPage() - 1) * pager.getRows(),pager.getRows());
+		List<ActProcessInstance> procInsList = new ArrayList<ActProcessInstance>();
+		for(ProcessInstance processInstance : processInstanceList) {
+			ActProcessInstance actProcessInstance = new ActProcessInstance();
+			actProcessInstance.setId(processInstance.getId());
+			actProcessInstance.setProcessInstanceId(processInstance.getProcessInstanceId());
+			actProcessInstance.setProcessDefinitionId(processInstance.getProcessDefinitionId());
+			actProcessInstance.setActivityId(processInstance.getActivityId());
+			actProcessInstance.setSuspended(processInstance.isSuspended());
+			procInsList.add(actProcessInstance);
+		}
+		eudg.setRows(procInsList);
+		return eudg;
 	}
 
 	/**

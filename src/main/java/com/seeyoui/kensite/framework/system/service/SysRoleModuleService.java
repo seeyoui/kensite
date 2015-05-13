@@ -64,8 +64,11 @@ public class SysRoleModuleService extends BaseService {
 	 * @throws CRUDException
 	 */
 	public void saveSysRoleModule(SysRoleModule sysRoleModule) throws CRUDException {
-		List<String> listId = Arrays.asList(sysRoleModule.getModuleid().split(","));
 		sysRoleModuleMapper.deleteSysRoleModule(sysRoleModule.getRoleid());
+		if(sysRoleModule.getModuleid() == null || StringUtils.isBlank(sysRoleModule.getModuleid())) {
+			return;
+		}
+		List<String> listId = Arrays.asList(sysRoleModule.getModuleid().split(","));
 		for(int i=0; i<listId.size(); i++) {
 			sysRoleModule.setModuleid(listId.get(i));
 			sysRoleModuleMapper.saveSysRoleModule(sysRoleModule);

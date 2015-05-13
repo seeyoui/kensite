@@ -158,6 +158,7 @@
 							data: {delDataId:row.id},
 							dataType: 'text',
 							beforeSend: function(XMLHttpRequest){
+								loadi = layer.load('正在处理，请稍后...');
 							},
 							success: function(data, textStatus){
 								if (data=="<%=StringConstant.TRUE%>"){
@@ -165,6 +166,7 @@
 			                    } else {
 				                    layer.msg("操作失败！", 2, -1);
 			                    }
+			                    layer.close(loadi);
 								reloadData();
 							}
 						});

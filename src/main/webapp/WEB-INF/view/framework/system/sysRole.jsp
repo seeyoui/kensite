@@ -92,6 +92,7 @@
 	    </div>
     </div>
     <script type="text/javascript">
+    	var loadi;
 	    $(document).ready(function(){
 	    	initSize();
 	    });
@@ -166,13 +167,14 @@
 	    	var moduleid = getChecked(treeObj);
 	    	var row = $('#dataList').datagrid('getSelected');
 	    	var roleid = row.id;
-	    	if (moduleid!=null && moduleid!=""){
+	    	if (moduleid!=null){
 				$.ajax({
 					type: "post",
 					url: "${ctx}/sysRoleModule/saveRoleModule.do",
 					data: {roleid:roleid,moduleid:moduleid},
 					dataType: 'text',
 					beforeSend: function(XMLHttpRequest){
+						loadi = layer.load('正在处理，请稍后...');
 					},
 					success: function(data, textStatus){
 						if (data=="<%=StringConstant.TRUE%>"){
@@ -180,6 +182,8 @@
 						} else {
 							layer.msg("操作失败！", 2, -1);
 						}
+						layer.close(loadi);
+						$('#moduleWin').window('close');
 						reloadData();
 					}
 				});
@@ -191,13 +195,14 @@
 	    	var menuid = getChecked(treeObj);
 	    	var row = $('#dataList').datagrid('getSelected');
 	    	var roleid = row.id;
-	    	if (menuid!=null && menuid!=""){
+	    	if (menuid!=null){
 				$.ajax({
 					type: "post",
 					url: "${ctx}/sysRoleMenu/saveRoleMenu.do",
 					data: {roleid:roleid,menuid:menuid},
 					dataType: 'text',
 					beforeSend: function(XMLHttpRequest){
+						loadi = layer.load('正在处理，请稍后...');
 					},
 					success: function(data, textStatus){
 						if (data=="<%=StringConstant.TRUE%>"){
@@ -205,6 +210,8 @@
 						} else {
 							layer.msg("操作失败！", 2, -1);
 						}
+						layer.close(loadi);
+						$('#menuWin').window('close');
 						reloadData();
 					}
 				});
@@ -235,7 +242,6 @@
                 url = '${ctx}/sysRole/saveByUpdate.do?id='+row.id;
             }    	
         }
-        var loadi;
         function saveInfo(){
             $('#dataForm').form('submit',{
                 url: url,
@@ -268,6 +274,7 @@
 							data: {delDataId:row.id},
 							dataType: 'text',
 							beforeSend: function(XMLHttpRequest){
+								loadi = layer.load('正在处理，请稍后...');
 							},
 							success: function(data, textStatus){
 								if (data=="<%=StringConstant.TRUE%>"){
@@ -275,6 +282,7 @@
 			                    } else {
 				                    layer.msg("操作失败！", 2, -1);
 			                    }
+			                    layer.close(loadi);
 								reloadData();
 							}
 						});
