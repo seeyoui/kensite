@@ -327,8 +327,51 @@
 			</div>
 		</div>
 		<div class="main-content" style="padding: 85px 0px 0px;">
+			<div class="page-title" style="margin: 0px 0px 0px;height:50px;">
+				<div class="title-env">
+					<!--<h5 class="title">主标题</h5>-->
+					<p class="description">二级标题</p>
+				</div>
+				<div class="breadcrumb-env">
+					<ol class="breadcrumb bc-1" style="margin: 0px;padding: 0px;">
+						<li>
+							<a href="dashboard-1.html"><i class="fa-home"></i>Home</a>
+						</li>
+						<li>
+							<a href="ui-panels.html">UI Elements</a>
+						</li>
+						<li class="active">
+							<strong>Breadcrumbs</strong>
+						</li>
+					</ol>
+				</div>
+			</div>
+			<div class="row" style="margin: 0px;">
+				<div class="col-md-12" style="padding: 0px;">
+					<div class="panel panel-default" style="margin: 0px;padding: 0px;">
+						<!--
+						<div class="panel-body" style="height:700px;">
+							<iframe id="mainContext" src="${ctx}/login/mainContent/main.do" frameborder="0" scrolling="auto" style="width:100%;height:99%;"></iframe>
+						</div>
+						-->
+						<div class="embed-responsive embed-responsive-16by9">
+							<iframe id="mainContext" src="${ctx}/login/mainContent/main.do" class="embed-responsive-item"></iframe>
+						</div>
+					</div>
+				</div>
+			</div>
+		<!--
+		<div class="main-content" style="padding: 85px 0px 0px;">
+			<div class="embed-responsive embed-responsive-16by9">
+				<iframe id="mainContext" src="${ctx}/login/mainContent/main.do" class="embed-responsive-item"></iframe>
+			</div>
+		</div>
+		-->
+		<!--
+		<div class="main-content">
 			<iframe id="mainContext" src="${ctx}/login/mainContent/main.do" frameborder="0" scrolling="auto" style="width:100%;height:99%;"></iframe>
 		</div>
+		-->
 	</div>
 	
 	<%@ include file="/WEB-INF/view/taglib/footer.jsp" %>
