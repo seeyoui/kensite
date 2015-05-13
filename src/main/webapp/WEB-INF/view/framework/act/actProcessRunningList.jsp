@@ -30,7 +30,7 @@
 		    </table>
 		    <div id="toolbar">
 		        <shiro:hasPermission name="actProcess:delete">
-		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="openWin()">删除</a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="openWin()">删除流程实例</a>
 		        </shiro:hasPermission>
 		    </div>
 		    <div id="dataWin" class="easyui-window" title="流程实例删除" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:400px;height:260px;padding:10px;">

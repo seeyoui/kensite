@@ -81,7 +81,7 @@ public class SysMenuService extends BaseService {
 		TreeJson.getTree(tList, root);
 		tList.clear();
 		tList.add(root);
-		return tList;
+		return root.getChildren();
 	}
 	
 	/**

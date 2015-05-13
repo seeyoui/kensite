@@ -18,6 +18,7 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -107,5 +108,15 @@ public class LoginController {
 		return InternalResourceViewResolver.REDIRECT_URL_PREFIX + "/";
 	}
 	
+	/**
+	 * 登陆首页主区域页面
+	 * @param modelMap
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/mainContent/{url}")
+	public String mainContent(@PathVariable("url") String url, HttpSession session, ModelMap modelMap) {
+		return "skins/"+url;
+	}
 }
 

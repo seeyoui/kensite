@@ -327,7 +327,7 @@
 			</div>
 		</div>
 		<div class="main-content" style="padding: 85px 0px 0px;">
-			<iframe id="mainContext" src="" frameborder="0" scrolling="auto" style="width:100%;height:99%;"></iframe>
+			<iframe id="mainContext" src="${ctx}/login/mainContent/main.do" frameborder="0" scrolling="auto" style="width:100%;height:99%;"></iframe>
 		</div>
 	</div>
 	
