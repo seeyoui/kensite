@@ -91,7 +91,7 @@ public class LeaveController extends BaseController {
 	public String list(Leave leave, HttpServletRequest request, HttpServletResponse response, Model model) {
 //        Page<Leave> page = leaveService.find(new Page<Leave>(request, response), leave); 
 //        model.addAttribute("page", page);
-		return "modules/oa/leaveList";
+		return "framework/oa/leave/leaveList";
 	}
 	
 	/**

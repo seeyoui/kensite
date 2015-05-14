@@ -12,11 +12,6 @@
 	<script src="${ctx_assets}/js/toastr/toastr.min.js"></script>
 	<script src="${ctx_assets}/js/datatables/js/jquery.dataTables.min.js"></script>
 
-	<!-- Imported scripts on this page -->
-	<script src="${ctx_assets}/js/datatables/dataTables.bootstrap.js"></script>
-	<script src="${ctx_assets}/js/datatables/yadcf/jquery.dataTables.yadcf.js"></script>
-	<script src="${ctx_assets}/js/datatables/tabletools/dataTables.tableTools.min.js"></script>
-
 	<!-- JavaScripts initializations and stuff -->
 	<script src="${ctx_assets}/js/xenon-custom.js"></script>
 	<script src="${ctx_static}/cookieUtil.js"></script>

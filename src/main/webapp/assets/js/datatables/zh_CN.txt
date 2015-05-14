@@ -1,0 +1,17 @@
+{
+	"processing" : "正在加载数据...",
+	"lengthMenu" : "显示_MENU_条 ",
+	"zeroRecords" : "没有您要搜索的内容",
+	"info" : "第 _PAGE_ 页 ( 总共 _PAGES_ 页 )",
+	"infoEmpty" : "记录数为0",
+	"infoFiltered" : "(全部记录数 _MAX_  条)",
+	"infoPostFix" : "",
+	"search" : "搜索",
+	"url" : "",
+	"paginate" : {
+		"first" : "第一页",
+		"previous" : " 上一页 ",
+		"next" : " 下一页 ",
+		"last" : " 最后一页 "
+	}
+}

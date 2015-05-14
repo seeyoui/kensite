@@ -6,7 +6,7 @@
 	<%@ include file="/WEB-INF/view/taglib/header.jsp" %>
 </head>
 
-<body class="page-body">
+<body class="page-body ${theme}">
 	<div class="settings-pane">
 		<a href="#" data-toggle="settings-pane" data-animate="true">
 			&times;
@@ -26,7 +26,7 @@
 								<!-- Available statuses: is-online, is-idle, is-busy and is-offline -->
 								<span class="user-status is-online"></span>
 							</h3>
-							<p class="user-title">JAVA开发工程师</p>
+							<p class="user-title">JAVA开发工程师${theme}</p>
 							<div class="user-links">
 								<a href="javascript:void(0);" class="btn btn-success">编辑</a>
 								<a href="${ctx}/login/logout.do" class="btn btn-danger">登出</a>
@@ -42,25 +42,25 @@
 						
 						<ul class="list-unstyled">
 							<li>
-								<a href="javascript:setSkin('');">
+								<a href="javascript:setTheme('');">
 									<i class="fa-angle-right"></i>
 									默认
 								</a>
 							</li>
 							<li>
-								<a href="javascript:setSkin('aero');">
+								<a href="javascript:setTheme('aero');">
 									<i class="fa-angle-right"></i>
 									太空
 								</a>
 							</li>
 							<li>
-								<a href="javascript:setSkin('navy');">
+								<a href="javascript:setTheme('navy');">
 									<i class="fa-angle-right"></i>
 									宝石蓝
 								</a>
 							</li>
 							<li>
-								<a href="javascript:setSkin('green');">
+								<a href="javascript:setTheme('green');">
 									<i class="fa-angle-right"></i>
 									祖母绿
 								</a>
@@ -73,25 +73,25 @@
 						</h4>
 						<ul class="list-unstyled">
 							<li>
-								<a href="javascript:setSkin('turquoise');">
+								<a href="javascript:setTheme('turquoise');">
 									<i class="fa-angle-right"></i>
 									青绿色
 								</a>
 							</li>
 							<li>
-								<a href="javascript:setSkin('purple');">
+								<a href="javascript:setTheme('purple');">
 									<i class="fa-angle-right"></i>
 									幻紫
 								</a>
 							</li>
 							<li>
-								<a href="javascript:setSkin('watermelon');">
+								<a href="javascript:setTheme('watermelon');">
 									<i class="fa-angle-right"></i>
 									西瓜红
 								</a>
 							</li>
 							<li>
-								<a href="javascript:setSkin('lemonade');">
+								<a href="javascript:setTheme('lemonade');">
 									<i class="fa-angle-right"></i>
 									柠檬黄
 								</a>
@@ -301,7 +301,7 @@
 								<ul>
 									<c:forEach var="tree_2" items="${tree_1.children}" varStatus="status">
 										<li class="">
-											<a href="javascript:jumpTo('${ctx}${tree_2.attributes.url}', '', $(this))">
+											<a href="javascript:jumpTo('${ctx}${tree_2.attributes.url}', '${tree_2.text}', $(this))">
 												<i class="linecons-cog"></i>
 												<span class="title">${tree_2.text}</span>
 											</a>
@@ -309,7 +309,7 @@
 												<ul>
 												<c:forEach var="tree_3" items="${tree_2.children}" varStatus="status">
 													<li class="">
-														<a href="javascript:jumpTo('${ctx}${tree_3.attributes.url}', '', $(this))">
+														<a href="javascript:jumpTo('${ctx}${tree_3.attributes.url}', '${tree_3.text}', $(this))">
 															<i class="linecons-cog"></i>
 															<span class="title">${tree_3.text}</span>
 														</a>
@@ -330,18 +330,18 @@
 			<div class="page-title" style="margin: 0px 0px 0px;height:50px;">
 				<div class="title-env">
 					<!--<h5 class="title">主标题</h5>-->
-					<p class="description">二级标题</p>
+					<strong><p id="menuTitle" class="description">首页</p></strong>
 				</div>
 				<div class="breadcrumb-env">
 					<ol class="breadcrumb bc-1" style="margin: 0px;padding: 0px;">
 						<li>
-							<a href="dashboard-1.html"><i class="fa-home"></i>Home</a>
+							<a href="javascript:jumpTo('${ctx}/login/mainContent/main.do', '首页', $(this))"><i class="fa-home"></i>首页</a>
 						</li>
-						<li>
-							<a href="ui-panels.html">UI Elements</a>
+						<li id="parentMenu">
+							一级菜单
 						</li>
-						<li class="active">
-							<strong>Breadcrumbs</strong>
+						<li id="currentMenu" class="active">
+							<strong>二级菜单</strong>
 						</li>
 					</ol>
 				</div>
@@ -360,18 +360,6 @@
 					</div>
 				</div>
 			</div>
-		<!--
-		<div class="main-content" style="padding: 85px 0px 0px;">
-			<div class="embed-responsive embed-responsive-16by9">
-				<iframe id="mainContext" src="${ctx}/login/mainContent/main.do" class="embed-responsive-item"></iframe>
-			</div>
-		</div>
-		-->
-		<!--
-		<div class="main-content">
-			<iframe id="mainContext" src="${ctx}/login/mainContent/main.do" frameborder="0" scrolling="auto" style="width:100%;height:99%;"></iframe>
-		</div>
-		-->
 		</div>
 	</div>
 	
@@ -379,14 +367,14 @@
 	
 	<script type="text/javascript">
 		jQuery(document).ready(function($) {
-			initSkin();
+			//initTheme();
 			$("#mainConetntBody").height($(window).height()-135);
 		});
 		
-		function jumpTo(url, prama, obj) {
-			if(prama != null && prama != "") {
-				url += "?"+prama;
-			}
+		function jumpTo(url, text, obj) {
+			$("#menuTitle").html(text);
+			//设置导航条
+			//$("#currentMenu").html("<strong>"+text+"</strong>");
 			document.getElementById("mainContext").src=url;
 		}
 	</script>

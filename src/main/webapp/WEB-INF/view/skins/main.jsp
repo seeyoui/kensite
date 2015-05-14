@@ -70,6 +70,8 @@
 			</div>
 		</div>
 	</div>
+	<a href="javascript:;" onclick="jQuery('#modal-6').modal('show', {backdrop: 'static'});" class="btn btn-primary btn-single btn-sm">Show Me</a>
+	
 	<script type="text/javascript">
 		jQuery(document).ready(function($) {
 			$(function() {

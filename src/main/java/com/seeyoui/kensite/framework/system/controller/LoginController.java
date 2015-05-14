@@ -25,8 +25,10 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import com.seeyoui.kensite.common.util.CookieUtils;
 import com.seeyoui.kensite.common.util.Global;
 import com.seeyoui.kensite.common.util.MD5;
+import com.seeyoui.kensite.common.util.StringUtils;
 
 /**
  * 程序名称： LoginController.java.java
@@ -83,11 +85,9 @@ public class LoginController {
         }
         //验证是否登录成功
         if(currentUser.isAuthenticated()){
-//        	SkinsCenter sc = skinsCenterService.findCurrentSkins();
-//			String portal = sc.getUrl()+sc.getPage();
-//			modelMap.put("portalUrl", sc.getUrl());
-//        	resultPageURL = portal;
-        	resultPageURL = "skins/top_left_main";
+        	String theme = CookieUtils.getCookie(request, "current-theme");
+        	modelMap.put("theme", "skin-"+theme);
+        	resultPageURL = getSysSkins();
         }else{
             token.clear();
             modelMap.put("info", info);
@@ -106,6 +106,30 @@ public class LoginController {
 	public String loginOut(HttpSession session, ModelMap modelMap) {
 		SecurityUtils.getSubject().logout();  
 		return InternalResourceViewResolver.REDIRECT_URL_PREFIX + "/";
+	}
+	
+	/**
+	 * 获取主题方案
+	 */
+	@RequestMapping(value = "/theme/{theme}")
+	public String getThemeInCookie(@PathVariable String theme, HttpServletRequest request, HttpServletResponse response){
+		if (StringUtils.isNotBlank(theme)){
+			CookieUtils.setCookie(response, "theme", theme);
+		}else{
+			theme = CookieUtils.getCookie(request, "theme");
+		}
+		return "redirect:"+request.getParameter("url");
+	}
+	
+	/**
+	 * 获取系统皮肤方案
+	 */
+	public String getSysSkins() {
+//    	SkinsCenter sc = skinsCenterService.findCurrentSkins();
+//		String portal = sc.getUrl()+sc.getPage();
+//		modelMap.put("portalUrl", sc.getUrl());
+//    	resultPageURL = portal;
+		return "skins/top_left_main";
 	}
 	
 	/**
