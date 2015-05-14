@@ -17,7 +17,7 @@
         	<ul id="menuTree" class="easyui-tree" url="${ctx}/sysMenu/getTreeJson.do"></ul>
         </div>
         <div id="divCenter" data-options="region:'center'">
-		    <table id="dataList" title="导航菜单列表" class="easyui-datagrid" style="width:auto;height:auto"
+		    <table id="dataList" title="" class="easyui-datagrid" style="width:auto;height:auto"
 		    		url="${ctx}/sysMenu/getListData.do"
 		            toolbar="#toolbar" pagination="true"
 		            rownumbers="true" fitColumns="true" singleSelect="true">

@@ -349,14 +349,14 @@
 			<div class="row" style="margin: 0px;">
 				<div class="col-md-12" style="padding: 0px;">
 					<div class="panel panel-default" style="margin: 0px;padding: 0px;">
-						<!--
-						<div class="panel-body" style="height:700px;">
+						<div id="mainConetntBody" class="panel-body" style="margin: 0px;padding: 0px;height:700px;">
 							<iframe id="mainContext" src="${ctx}/login/mainContent/main.do" frameborder="0" scrolling="auto" style="width:100%;height:99%;"></iframe>
 						</div>
-						-->
+						<!--
 						<div class="embed-responsive embed-responsive-16by9">
 							<iframe id="mainContext" src="${ctx}/login/mainContent/main.do" class="embed-responsive-item"></iframe>
 						</div>
+						-->
 					</div>
 				</div>
 			</div>
@@ -372,6 +372,7 @@
 			<iframe id="mainContext" src="${ctx}/login/mainContent/main.do" frameborder="0" scrolling="auto" style="width:100%;height:99%;"></iframe>
 		</div>
 		-->
+		</div>
 	</div>
 	
 	<%@ include file="/WEB-INF/view/taglib/footer.jsp" %>
@@ -379,6 +380,7 @@
 	<script type="text/javascript">
 		jQuery(document).ready(function($) {
 			initSkin();
+			$("#mainConetntBody").height($(window).height()-135);
 		});
 		
 		function jumpTo(url, prama, obj) {

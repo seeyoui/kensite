@@ -14,7 +14,7 @@
   
   	<div id="divLayout" class="easyui-layout" style="width:auto;height:450px">
         <div id="divCenter" data-options="region:'center'">
-		    <table id="dataList" title="系统模块列表" class="easyui-datagrid" style="width:auto;height:auto"
+		    <table id="dataList" title="" class="easyui-datagrid" style="width:auto;height:auto"
 		    		url="${ctx}/sysModule/getListData.do"
 		            toolbar="#toolbar" pagination="true"
 		            rownumbers="true" fitColumns="true" singleSelect="true">
