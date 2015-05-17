@@ -1,6 +1,3 @@
-/**
- * Copyright &copy; 2012-2014 <a href="https://github.com/thinkgem/jeesite">JeeSite</a> All rights reserved.
- */
 package com.seeyoui.kensite.framework.act.util;
 
 import java.io.UnsupportedEncodingException;
@@ -24,21 +21,9 @@ import com.seeyoui.kensite.framework.act.domain.Act;
 import com.seeyoui.kensite.framework.system.domain.SysRole;
 import com.seeyoui.kensite.framework.system.domain.SysUser;
 
-/**
- * 流程工具
- * @author ThinkGem
- * @version 2013-11-03
- */
 public class ActUtils {
 
 //	private static Logger logger = LoggerFactory.getLogger(ActUtils.class);
-	
-	/**
-	 * 定义流程定义KEY，必须以“PD_”开头
-	 * 组成结构：string[]{"流程标识","业务主表表名"}
-	 */
-	public static final String[] PD_LEAVE = new String[]{"leave", "oa_leave"};
-	public static final String[] PD_TEST_AUDIT = new String[]{"test_audit", "oa_test_audit"};
 	
 //	/**
 //	 * 流程定义Map（自动初始化）

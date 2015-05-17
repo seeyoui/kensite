@@ -15,10 +15,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.common.collect.Maps;
@@ -46,9 +48,11 @@ public class LeaveController extends BaseController {
 
 	@RequiresPermissions("oa:leave:view")
 	@RequestMapping(value = {"form"})
-	public String form(Leave leave, Model model) {
-		model.addAttribute("leave", leave);
-		return "modules/oa/leaveForm";
+	public ModelAndView form(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap, Leave leave) {
+		modelMap.put("leave", leave);
+		return new ModelAndView("/framework/oa/leave/leaveForm");
 	}
 
 	/**
@@ -56,17 +60,16 @@ public class LeaveController extends BaseController {
 	 * @param leave	
 	 */
 	@RequiresPermissions("oa:leave:edit")
-	@RequestMapping(value = "save", method = RequestMethod.POST)
+	@RequestMapping(value = "start", method = RequestMethod.POST)
 	public String save(Leave leave, RedirectAttributes redirectAttributes) {
 		try {
 			Map<String, Object> variables = Maps.newHashMap();
-			leaveService.save(leave, variables);
-//			addMessage(redirectAttributes, "流程已启动，流程ID：" + leave.getProcessInstanceId());
+			leaveService.start(leave, variables);
+			logger.info("流程已启动，流程ID：" + leave.getBindid());
 		} catch (Exception e) {
 			logger.error("启动请假流程失败：", e);
-			addMessage(redirectAttributes, "系统内部错误！");
 		}
-		return "redirect:/oa/leave/form";
+		return "redirect:/framework/oa/leave/leaveForm";
 	}
 
 	/**
@@ -75,11 +78,13 @@ public class LeaveController extends BaseController {
 	 */
 	@RequiresPermissions("oa:leave:view")
 	@RequestMapping(value = {"list/task",""})
-	public String taskList(HttpSession session, Model model) {
+	public ModelAndView taskList(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap) {
 		String userId = UserUtils.getUser().getUsername();//ObjectUtils.toString(UserUtils.getUser().getId());
-		List<Leave> results = leaveService.findTodoTasks(userId);
-		model.addAttribute("leaves", results);
-		return "modules/oa/leaveTask";
+		List<Leave> leaveList = leaveService.findTodoTasks(userId);
+		modelMap.put("leaveList", leaveList);
+		return new ModelAndView("modules/oa/leaveTask");
 	}
 
 	/**
@@ -88,10 +93,12 @@ public class LeaveController extends BaseController {
 	 */
 	@RequiresPermissions("oa:leave:view")
 	@RequestMapping(value = {"list"})
-	public String list(Leave leave, HttpServletRequest request, HttpServletResponse response, Model model) {
-//        Page<Leave> page = leaveService.find(new Page<Leave>(request, response), leave); 
-//        model.addAttribute("page", page);
-		return "framework/oa/leave/leaveList";
+	public ModelAndView list(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap, Leave leave) {
+        List<Leave> leaveList = leaveService.find(leave); 
+        modelMap.put("leaveList", leaveList);
+		return new ModelAndView("framework/oa/leave/leaveList");
 	}
 	
 	/**
@@ -102,7 +109,7 @@ public class LeaveController extends BaseController {
 	@RequestMapping(value = "detail/{id}")
 	@ResponseBody
 	public String getLeave(@PathVariable("id") String id) {
-		Leave leave = leaveService.get(id);
+		Leave leave = leaveService.findLeaveById(id);
 		return JsonMapper.getInstance().toJson(leave);
 	}
 
@@ -114,9 +121,9 @@ public class LeaveController extends BaseController {
 	@RequestMapping(value = "detail-with-vars/{id}/{taskId}")
 	@ResponseBody
 	public String getLeaveWithVars(@PathVariable("id") String id, @PathVariable("taskId") String taskId) {
-		Leave leave = leaveService.get(id);
+		Leave leave = leaveService.findLeaveById(id);
 		Map<String, Object> variables = taskService.getVariables(taskId);
-//		leave.setVariables(variables);
+		leave.setVariables(variables);
 		return JsonMapper.getInstance().toJson(leave);
 	}
 

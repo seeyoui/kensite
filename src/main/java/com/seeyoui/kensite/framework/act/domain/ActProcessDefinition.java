@@ -2,7 +2,7 @@ package com.seeyoui.kensite.framework.act.domain;
 
 import java.util.Date;
 
-public class ActProcess {
+public class ActProcessDefinition {
 	private String id;
 	private String name;
 	private String key;

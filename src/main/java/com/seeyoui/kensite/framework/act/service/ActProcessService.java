@@ -38,7 +38,7 @@ import com.seeyoui.kensite.common.base.domain.EasyUIDataGrid;
 import com.seeyoui.kensite.common.base.domain.Pager;
 import com.seeyoui.kensite.common.base.service.BaseService;
 import com.seeyoui.kensite.common.util.StringUtils;
-import com.seeyoui.kensite.framework.act.domain.ActProcess;
+import com.seeyoui.kensite.framework.act.domain.ActProcessDefinition;
 import com.seeyoui.kensite.framework.act.domain.ActProcessInstance;
 
 @Service
@@ -68,9 +68,9 @@ public class ActProcessService extends BaseService {
 		List<ProcessDefinition> processDefinitionList = processDefinitionQuery
 				.listPage((pager.getPage() - 1) * pager.getRows(),
 						pager.getRows());
-		List<ActProcess> actProcessList = new ArrayList<ActProcess>();
+		List<ActProcessDefinition> actProcessList = new ArrayList<ActProcessDefinition>();
 		for (ProcessDefinition processDefinition : processDefinitionList) {
-			ActProcess actProcess = new ActProcess();
+			ActProcessDefinition actProcess = new ActProcessDefinition();
 			actProcess.setId(processDefinition.getId());
 			actProcess.setCategory(processDefinition.getCategory());
 			actProcess.setKey(processDefinition.getKey());
@@ -117,6 +117,11 @@ public class ActProcessService extends BaseService {
 			actProcessInstance.setProcessDefinitionId(processInstance.getProcessDefinitionId());
 			actProcessInstance.setActivityId(processInstance.getActivityId());
 			actProcessInstance.setSuspended(processInstance.isSuspended());
+			actProcessInstance.setEnded(processInstance.isEnded());
+			actProcessInstance.setDeploymentId(processInstance.getDeploymentId());
+			actProcessInstance.setName(processInstance.getName());
+			actProcessInstance.setParentId(processInstance.getParentId());
+			actProcessInstance.setProcessVariables(processInstance.getProcessVariables());
 			procInsList.add(actProcessInstance);
 		}
 		eudg.setRows(procInsList);

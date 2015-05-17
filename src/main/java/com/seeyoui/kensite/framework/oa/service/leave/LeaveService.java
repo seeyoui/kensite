@@ -15,24 +15,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.opensymphony.module.sitemesh.Page;
+import com.seeyoui.kensite.common.base.domain.Page;
 import com.seeyoui.kensite.common.base.service.BaseService;
+import com.seeyoui.kensite.common.util.Collections3;
 import com.seeyoui.kensite.common.util.StringUtils;
-import com.seeyoui.kensite.framework.act.util.ActUtils;
 import com.seeyoui.kensite.framework.oa.domain.leave.Leave;
-import com.seeyoui.kensite.framework.oa.persistence.leave.LeaveDao;
+import com.seeyoui.kensite.framework.oa.persistence.leave.LeaveMapper;
 
-/**
- * 请假Service
- * @author liuj
- * @version 2013-04-05
- */
 @Service
 @Transactional(readOnly = true)
 public class LeaveService extends BaseService {
 
 	@Autowired
-	private LeaveDao leaveDao;
+	private LeaveMapper leaveMapper;
 	@Autowired
 	private RuntimeService runtimeService;
 	@Autowired
@@ -49,18 +44,17 @@ public class LeaveService extends BaseService {
 	 * @param id
 	 */
 	@SuppressWarnings("unchecked")
-	public Leave get(String id) {
-//		Leave leave = leaveDao.get(id);
-//		Map<String,Object> variables=null;
-//		HistoricProcessInstance historicProcessInstance = historyService.createHistoricProcessInstanceQuery().processInstanceId(leave.getProcessInstanceId()).singleResult();
-//		if(historicProcessInstance!=null) {
-//			variables = Collections3.extractToMap(historyService.createHistoricVariableInstanceQuery().processInstanceId(historicProcessInstance.getId()).list(), "variableName", "value");
-//		} else {
-//			variables = runtimeService.getVariables(runtimeService.createProcessInstanceQuery().processInstanceId(leave.getProcessInstanceId()).active().singleResult().getId());
-//		}
-//		leave.setVariables(variables);
-//		return leave;
-		return null;
+	public Leave findLeaveById(String id) {
+		Leave leave = leaveMapper.findLeaveById(id);
+		Map<String,Object> variables=null;
+		HistoricProcessInstance historicProcessInstance = historyService.createHistoricProcessInstanceQuery().processInstanceId(leave.getBindid()).singleResult();
+		if(historicProcessInstance!=null) {
+			variables = Collections3.extractToMap(historyService.createHistoricVariableInstanceQuery().processInstanceId(historicProcessInstance.getId()).list(), "variableName", "value");
+		} else {
+			variables = runtimeService.getVariables(runtimeService.createProcessInstanceQuery().processInstanceId(leave.getBindid()).active().singleResult().getId());
+		}
+		leave.setVariables(variables);
+		return leave;
 	}
 	
 	/**
@@ -68,35 +62,32 @@ public class LeaveService extends BaseService {
 	 * @param entity
 	 */
 	@Transactional(readOnly = false)
-	public void save(Leave leave, Map<String, Object> variables) {
-//		
-//		// 保存业务数据
-//		if (StringUtils.isBlank(leave.getId())){
-//			leave.preInsert();
-//			leaveDao.insert(leave);
-//		}else{
-//			leave.preUpdate();
-//			leaveDao.update(leave);
-//		}
-//		logger.debug("save entity: {}", leave);
-//		
-//		// 用来设置启动流程的人员ID，引擎会自动把用户ID保存到activiti:initiator中
-//		identityService.setAuthenticatedUserId(leave.getCurrentUser().getLoginName());
-//		
-//		// 启动流程
-//		String businessKey = leave.getId().toString();
-//		variables.put("type", "leave");
-//		variables.put("busId", businessKey);
-//		ProcessInstance processInstance = runtimeService.startProcessInstanceByKey(ActUtils.PD_LEAVE[0], businessKey, variables);
-//		leave.setProcessInstance(processInstance);
-//		
-//		// 更新流程实例ID
-//		leave.setProcessInstanceId(processInstance.getId());
-//		leaveDao.updateProcessInstanceId(leave);
-//		
-//		logger.debug("start process of {key={}, bkey={}, pid={}, variables={}}", new Object[] { 
-//				ActUtils.PD_LEAVE[0], businessKey, processInstance.getId(), variables });
-//		
+	public void start(Leave leave, Map<String, Object> variables) {
+		// 保存业务数据
+		if (StringUtils.isBlank(leave.getId())){
+			leave.preInsert();
+			leaveMapper.saveLeave(leave);
+		}else{
+			leave.preUpdate();
+			leaveMapper.updateLeave(leave);
+		}
+		logger.debug("save entity: {}", leave);
+		
+		// 用来设置启动流程的人员ID，引擎会自动把用户ID保存到activiti:initiator中
+		identityService.setAuthenticatedUserId(leave.getCurrentUser().getUsername());
+		
+		// 启动流程
+		String businessKey = leave.getId().toString();
+		variables.put("type", "leave");
+		variables.put("busId", businessKey);
+		ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("leave", businessKey, variables);
+		
+		// 更新流程实例ID
+		leave.setBindid(processInstance.getId());
+		leaveMapper.updateBindid(leave);
+		
+		logger.debug("start process of {key={}, bkey={}, pid={}, variables={}}", new Object[] { 
+				"leave", businessKey, processInstance.getId(), variables });
 	}
 
 	/**
@@ -109,9 +100,9 @@ public class LeaveService extends BaseService {
 		List<Leave> results = new ArrayList<Leave>();
 		List<Task> tasks = new ArrayList<Task>();
 		// 根据当前人的ID查询
-		List<Task> todoList = taskService.createTaskQuery().processDefinitionKey(ActUtils.PD_LEAVE[0]).taskAssignee(userId).active().orderByTaskPriority().desc().orderByTaskCreateTime().desc().list();
+		List<Task> todoList = taskService.createTaskQuery().processDefinitionKey("leave").taskAssignee(userId).active().orderByTaskPriority().desc().orderByTaskCreateTime().desc().list();
 		// 根据当前人未签收的任务
-		List<Task> unsignedTasks = taskService.createTaskQuery().processDefinitionKey(ActUtils.PD_LEAVE[0]).taskCandidateUser(userId).active().orderByTaskPriority().desc().orderByTaskCreateTime().desc().list();
+		List<Task> unsignedTasks = taskService.createTaskQuery().processDefinitionKey("leave").taskCandidateUser(userId).active().orderByTaskPriority().desc().orderByTaskCreateTime().desc().list();
 		// 合并
 		tasks.addAll(todoList);
 		tasks.addAll(unsignedTasks);
@@ -120,12 +111,33 @@ public class LeaveService extends BaseService {
 			String processInstanceId = task.getProcessInstanceId();
 			ProcessInstance processInstance = runtimeService.createProcessInstanceQuery().processInstanceId(processInstanceId).active().singleResult();
 			String businessKey = processInstance.getBusinessKey();
-//			Leave leave = leaveDao.get(businessKey);
-//			leave.setTask(task);
-//			leave.setProcessInstance(processInstance);
-//			leave.setProcessDefinition(repositoryService.createProcessDefinitionQuery().processDefinitionId((processInstance.getProcessDefinitionId())).singleResult());
-//			results.add(leave);
+			Leave leave = leaveMapper.findLeaveById(businessKey);
+			leave.setTask(task);
+			leave.setProcessInstance(processInstance);
+			leave.setProcessDefinition(repositoryService.createProcessDefinitionQuery().processDefinitionId((processInstance.getProcessDefinitionId())).singleResult());
+			results.add(leave);
 		}
 		return results;
+	}
+	
+	public List<Leave> find(Leave leave) {
+		List<Leave> leaveList = leaveMapper.findLeaveList(leave);
+		for(Leave item : leaveList) {
+			String processInstanceId = item.getBindid();
+			Task task = taskService.createTaskQuery().processInstanceId(processInstanceId).active().singleResult();
+			item.setTask(task);
+			HistoricProcessInstance historicProcessInstance = historyService.createHistoricProcessInstanceQuery().processInstanceId(processInstanceId).singleResult();
+			if(historicProcessInstance!=null) {
+				item.setHistoricProcessInstance(historicProcessInstance);
+				item.setProcessDefinition(repositoryService.createProcessDefinitionQuery().processDefinitionId(historicProcessInstance.getProcessDefinitionId()).singleResult());
+			} else {
+				ProcessInstance processInstance = runtimeService.createProcessInstanceQuery().processInstanceId(processInstanceId).active().singleResult();
+				if (processInstance != null){
+					item.setProcessInstance(processInstance);
+					item.setProcessDefinition(repositoryService.createProcessDefinitionQuery().processDefinitionId(processInstance.getProcessDefinitionId()).singleResult());
+				}
+			}
+		}
+		return leaveList;
 	}
 }

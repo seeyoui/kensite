@@ -37,7 +37,7 @@ import com.seeyoui.kensite.framework.system.util.UserUtils;
  * @author ken
  * @version 2015-3-27
  */
-
+@Service
 public class SystemAuthorizingRealm extends AuthorizingRealm {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());

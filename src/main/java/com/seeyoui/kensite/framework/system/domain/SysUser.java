@@ -22,6 +22,7 @@ public class SysUser extends Pager {
     private String phone;  
     private String departmentid;  
     private String state;  
+    private SysDepartment sysDepartment;
  
     public void setId(String id) {  
         this.id = id;  
@@ -80,5 +81,13 @@ public class SysUser extends Pager {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	public SysDepartment getSysDepartment() {
+		return sysDepartment;
+	}
+
+	public void setSysDepartment(SysDepartment sysDepartment) {
+		this.sysDepartment = sysDepartment;
 	}  
 }
