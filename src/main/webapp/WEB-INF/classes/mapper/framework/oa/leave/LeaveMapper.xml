@@ -1,26 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.seeyoui.kensite.framework.oa.leave.persistence.LeaveMapper" >
+<mapper namespace="com.seeyoui.kensite.framework.oa.persistence.leave.LeaveMapper" >
 	<!-- 查询单表的字段 -->
 	<sql id="tableColumns">
 	    t.id,
 	    t.createdate,
-		t.createuser,
 		t.updatedate,
-		t.updateuser,
 		t.bindid,
 		t.reason,
 		t.starttime,
 		t.endtime,
 		t.leavetype,
-		u.username createUser.username,
-		u.name createUser.name,
-		d.id sysDepartment.id,
-		d.name sysDepartment.name
+		u.username as "createUser.username",
+		u.name as "createUser.name",
+		d.id as "sysDepartment.id",
+		d.name as "sysDepartment.name"
 	</sql>
 	
 	<sql id="leaveJoins">
-		LEFT JOIN sys_user u ON u.username = a.createuser
+		LEFT JOIN sys_user u ON u.username = t.createuser
 		LEFT JOIN sys_department d ON d.id = u.departmentid
     </sql>
 	
@@ -31,17 +29,14 @@
 			<if test="id != null and id != ''">
 				and t.id = #{id}
 			</if>
-			<if test="createuser != null and createuser != ''">
-				and t.createuser LIKE #{createuser}
-			</if>
 			<if test="bindid != null and bindid != ''">
 				and t.bindid = #{bindid}
 			</if>
 			<if test="reason != null and reason != ''">
 				and t.reason LIKE '%'||#{reason}||'%'
 			</if>
-			<if test="code != null and code != ''">
-				and t.leavetype = #{leavetype}
+			<if test="leaveType != null and leaveType != ''">
+				and t.leaveType = #{leaveType}
 			</if>
 		</where>
 	</sql>
@@ -50,7 +45,7 @@
 	</sql>
 	
 	<!-- 根据ID查询单条数据 -->
-	<select id="findLeaveById" resultType="com.seeyoui.kensite.framework.oa.domain.Leave">
+	<select id="findLeaveById" resultType="com.seeyoui.kensite.framework.oa.domain.leave.Leave">
 		SELECT
 		<include refid="tableColumns" />
 		FROM OA_LEAVE t
@@ -59,7 +54,7 @@
 	</select>
 	
 	<!-- 查询数据集合 -->
-	<select id="findLeaveList" resultType="com.seeyoui.kensite.framework.oa.domain.Leave">
+	<select id="findLeaveList" resultType="com.seeyoui.kensite.framework.oa.domain.leave.Leave">
 		select * from(select t.*,rownum rn from(
 			SELECT
 			<include refid="tableColumns"/>
@@ -79,7 +74,7 @@
 	</select>
 	
 	<!-- 数据新增 -->
-	<insert id="saveLeave" parameterType="com.seeyoui.kensite.framework.oa.domain.Leave">
+	<insert id="saveLeave" parameterType="com.seeyoui.kensite.framework.oa.domain.leave.Leave">
 		INSERT INTO OA_LEAVE (
 	    	createdate,
 	    	createuser,
@@ -91,17 +86,17 @@
 		)
 		VALUES (
 			#{createdate},
-			#{createuser},
+			#{createUser.username},
 			#{reason},
-			#{starttime},
-			#{endtime},
-			#{leavetype},
+			#{startTime},
+			#{endTime},
+			#{leaveType},
 		    #{id}
 		)
 	</insert>
 	
 	<!-- 数据修改 -->
-	<update id="updateLeave" parameterType="com.seeyoui.kensite.framework.oa.domain.Leave">
+	<update id="updateLeave" parameterType="com.seeyoui.kensite.framework.oa.domain.leave.Leave">
 		UPDATE OA_LEAVE
 		<set>
 	    	<if test="updatedate !=null and updatedate !=''">
@@ -114,13 +109,13 @@
 			reason=#{reason},
 			</if>
 	    	<if test="starttime !=null and starttime !=''">
-			starttime=#{starttime},
+			starttime=#{startTime},
 			</if>
 	    	<if test="endtime !=null and endtime !=''">
-			endtime=#{endtime},
+			endtime=#{endTime},
 			</if>
 	    	<if test="leavetype !=null and leavetype !=''">
-			leavetype=#{leavetype},
+			leavetype=#{leaveType},
 			</if>
 		    id = #{id}
 		</set>
@@ -128,7 +123,7 @@
 	</update>
 	
 	<!-- 数据修改 -->
-	<update id="updateBindid" parameterType="com.seeyoui.kensite.framework.oa.domain.Leave">
+	<update id="updateBindid" parameterType="com.seeyoui.kensite.framework.oa.domain.leave.Leave">
 		UPDATE OA_LEAVE
 		set bindid=#{bindid}
 		WHERE id = #{id}

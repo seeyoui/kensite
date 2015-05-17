@@ -14,6 +14,9 @@ import com.seeyoui.kensite.framework.act.domain.ActTask;
 public class Leave extends DataEntity<Leave> {
 	
 	private static final long serialVersionUID = 1L;
+	private int page;
+	private int rows;
+	
 	private String reason; 	// 请假原因
 	private Date startTime;	// 请假开始日期
 	private Date endTime;	// 请假结束日期
@@ -84,6 +87,24 @@ public class Leave extends DataEntity<Leave> {
 	}
 	public void setTask(Task task) {
 		this.task = task;
+	}
+	public int getPage() {
+		if(page==0) {
+			page = 1;
+		}
+		return page;
+	}
+	public void setPage(int page) {
+		this.page = page;
+	}
+	public int getRows() {
+		if(rows==0) {
+			rows = 10;
+		}
+		return rows;
+	}
+	public void setRows(int rows) {
+		this.rows = rows;
 	}
 	
 }
