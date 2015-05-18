@@ -40,10 +40,12 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
 	public void preInsert(){
 		// 不限制ID为UUID，调用setIsNewRecord()使用自定义ID
 		setId(GeneratorUUID.getId());
-		SysUser SysUser = UserUtils.getUser();
-		if (StringUtils.isNotBlank(SysUser.getId())){
-			this.updateUser = SysUser;
-			this.createUser = SysUser;
+		SysUser sysUser = UserUtils.getUser();
+//		SysUser sysUser = new SysUser();
+//		sysUser.setUsername("system");
+		if (StringUtils.isNotBlank(sysUser.getUsername())){
+			this.updateUser = sysUser;
+			this.createUser = sysUser;
 		}
 		this.updateDate = new Date();
 		this.createDate = this.updateDate;

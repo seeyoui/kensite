@@ -46,8 +46,8 @@
 		<!-- 主键生成规则 UUID -->
 		<property name="idGenerator" ref="uuidGenerator"/>
 		<!-- 生成流程图的字体 -->
-        <property name="activityFontName" value="${activiti.diagram.activityFontName}"/>
-        <property name="labelFontName" value="${activiti.diagram.labelFontName}"/>
+        <property name="activityFontName" value="宋体"/>
+        <property name="labelFontName" value="宋体"/>
         
         <!-- 自定义用户权限 -->
         <property name="customSessionFactories"> 

@@ -4,6 +4,8 @@
  */
 package com.seeyoui.kensite.framework.system.domain;  
 
+import java.io.Serializable;
+
 import com.seeyoui.kensite.common.base.domain.Pager;
 
 /**
@@ -11,7 +13,7 @@ import com.seeyoui.kensite.common.base.domain.Pager;
  * @version 1.0
  * @since 1.0
  */
-public class SysUser extends Pager {  
+public class SysUser extends Pager implements Serializable {  
     private static final long serialVersionUID = 5454155825314635342L;  
       
     private String id;  

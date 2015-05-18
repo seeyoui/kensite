@@ -41,6 +41,16 @@ public class SysUserService extends BaseService {
 	}
 	
 	/**
+	 * 根据账号查询单条数据
+	 * @param username
+	 * @return
+	 * @throws CRUDException
+	 */
+	public SysUser findSysUserByUsername(String username) throws CRUDException{
+		return sysUserMapper.findSysUserByUsername(username);
+	}
+	
+	/**
 	 * 根据登录名查询单条数据
 	 * @param username
 	 * @return

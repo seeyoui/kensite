@@ -14,23 +14,6 @@
 				<div class="col-md-12">
 					<div class="panel panel-default">
 						<div class="panel-body">
-							<script type="text/javascript">
-				jQuery(document).ready(function($) {
-					$("#jsAutoHeight").attr("data-max-height", $(window).height());
-					$("#dataList").dataTable({
-						dom: "<'toolbar'>rtip",
-						"language": {
-            				"url": "${ctx_assets}/js/datatables/zh_CN.txt"
-        				},
-        				"iDisplayLength" : 10
-					});
-					setTimeout(function(){
-						$("div.toolbar").html('<button class="btn btn-secondary btn-icon btn-xs"><i class="fa-heart"></i><span>启动流程</span></button>');
-					},500);
-				});
-				
-				</script>
-				
 				<table class="table table-bordered table-striped" id="dataList">
 					<thead>
 						<tr>
@@ -90,6 +73,37 @@
 			</div>
 		</div>
 	</div>
+	
+			<script type="text/javascript">
+				jQuery(document).ready(function($) {
+					$("#jsAutoHeight").attr("data-max-height", $(window).height());
+					$("#dataList").dataTable({
+						dom: "<'toolbar'>rtip",
+						"language": {
+            				"url": "${ctx_assets}/js/datatables/zh_CN.txt"
+        				},
+        				"iDisplayLength" : 10
+					});
+					setTimeout(function(){
+						$("div.toolbar").html('<button class="btn btn-secondary btn-icon btn-xs" onclick="start()"><i class="fa-heart"></i><span>启动流程</span></button>');
+					},500);
+				});
+				
+				function start() {
+					$.ajax({
+							type: "post",
+							url: "${ctx}/oa/leave/start.do",
+							data: {},
+							dataType: 'text',
+							beforeSend: function(XMLHttpRequest){
+							},
+							success: function(data, textStatus){
+								location.reload();
+							}
+						});
+				}
+			</script>
+	
 	<%@ include file="/WEB-INF/view/taglib/footer.jsp" %>
 	<%@ include file="/WEB-INF/view/taglib/datatables.jsp" %>
 	<script src="${ctx_assets}/js/rwd-table/js/rwd-table.min.js"></script>

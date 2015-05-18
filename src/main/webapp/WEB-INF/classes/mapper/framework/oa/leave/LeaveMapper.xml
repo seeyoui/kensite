@@ -85,7 +85,7 @@
 		    id
 		)
 		VALUES (
-			#{createdate},
+			#{createDate},
 			#{createUser.username},
 			#{reason},
 			#{startTime},
@@ -99,19 +99,19 @@
 	<update id="updateLeave" parameterType="com.seeyoui.kensite.framework.oa.domain.leave.Leave">
 		UPDATE OA_LEAVE
 		<set>
-	    	<if test="updatedate !=null and updatedate !=''">
-			updatedate=#{updatedate},
+	    	<if test="updateDate !=null and updateDate !=''">
+			updateDate=#{updateDate},
 			</if>
-	    	<if test="updateuser !=null and updateuser !=''">
-			updateuser=#{updateuser},
+	    	<if test="updateUser !=null and updateUser.username !=''">
+			updateuser=#{updateUser.username},
 			</if>
 	    	<if test="reason !=null and reason !=''">
 			reason=#{reason},
 			</if>
-	    	<if test="starttime !=null and starttime !=''">
+	    	<if test="startTime !=null and startTime !=''">
 			starttime=#{startTime},
 			</if>
-	    	<if test="endtime !=null and endtime !=''">
+	    	<if test="endTime !=null and endTime !=''">
 			endtime=#{endTime},
 			</if>
 	    	<if test="leavetype !=null and leavetype !=''">

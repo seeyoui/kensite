@@ -40,9 +40,6 @@ public class ActTaskController extends BaseController {
 	public String todoList(Act act, HttpServletResponse response, Model model) throws Exception {
 		List<Act> list = actTaskService.todoList(act);
 		model.addAttribute("list", list);
-		if (UserUtils.getPrincipal().isMobileLogin()){
-			return renderString(response, list);
-		}
 		return "modules/act/actTaskTodoList";
 	}
 	
@@ -57,9 +54,6 @@ public class ActTaskController extends BaseController {
 		Page<Act> page = new Page<Act>(request, response);
 		page = actTaskService.historicList(page, act);
 		model.addAttribute("page", page);
-		if (UserUtils.getPrincipal().isMobileLogin()){
-			return renderString(response, page);
-		}
 		return "modules/act/actTaskHistoricList";
 	}
 

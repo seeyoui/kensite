@@ -1,9 +1,7 @@
 package com.seeyoui.kensite.framework.security.shiro;
 
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -15,6 +13,7 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.util.ByteSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -22,7 +21,6 @@ import org.springframework.stereotype.Service;
 import com.seeyoui.kensite.common.base.domain.TreeJson;
 import com.seeyoui.kensite.common.util.SessionUtil;
 import com.seeyoui.kensite.common.util.SpringContextHolder;
-import com.seeyoui.kensite.framework.system.domain.SysMenu;
 import com.seeyoui.kensite.framework.system.domain.SysPermission;
 import com.seeyoui.kensite.framework.system.domain.SysRole;
 import com.seeyoui.kensite.framework.system.domain.SysUser;
@@ -78,6 +76,7 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 			} else {
 				AuthenticationInfo authcInfo = new SimpleAuthenticationInfo(
 						user.getUsername(), user.getPassword(), user.getName());
+				new Principal(user);
 				SessionUtil.setSession("currentUser", user);
 				SessionUtil.setSession("currentUsername", user.getUsername());
 				List<TreeJson> menuList = getSysMenuService().findSysMenuTree(user);
@@ -143,33 +142,27 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 		private static final long serialVersionUID = 1L;
 		
 		private String id; // 编号
-		private String loginName; // 登录名
+		private String userName; // 登录名
 		private String name; // 姓名
-		private boolean mobileLogin; // 是否手机登录
 		
 //		private Map<String, Object> cacheMap;
 
-		public Principal(SysUser sysUser, boolean mobileLogin) {
+		public Principal(SysUser sysUser) {
 			this.id = sysUser.getId();
-			this.loginName = sysUser.getUsername();
+			this.userName = sysUser.getUsername();
 			this.name = sysUser.getName();
-			this.mobileLogin = mobileLogin;
 		}
 
 		public String getId() {
 			return id;
 		}
 
-		public String getLoginName() {
-			return loginName;
+		public String getUserName() {
+			return userName;
 		}
 
 		public String getName() {
 			return name;
-		}
-
-		public boolean isMobileLogin() {
-			return mobileLogin;
 		}
 
 //		@JsonIgnore

@@ -44,14 +44,14 @@ public class UserUtils {
 	 * @param id
 	 * @return 取不到返回null
 	 */
-	public static SysUser get(String id){
-		SysUser sysUser = (SysUser)CacheUtils.get(USER_CACHE, USER_CACHE_ID_ + id);
+	public static SysUser get(String username){
+		SysUser sysUser = (SysUser)CacheUtils.get(USER_CACHE, USER_CACHE_ID_ + username);
 		if (sysUser ==  null){
-			sysUser = sysUserMapper.findSysUserById(id);
+			sysUser = sysUserMapper.findSysUserByUsername(username);
 			if (sysUser == null){
 				return null;
 			}
-//			sysUser.setRoleList(sysRoleMapper.findList(new SysRole(sysUser)));
+//			sysUser.setRoleList(sysRoleMapper.findSysUserRoleList(sysUser));
 			CacheUtils.put(USER_CACHE, USER_CACHE_ID_ + sysUser.getId(), sysUser);
 			CacheUtils.put(USER_CACHE, USER_CACHE_LOGIN_NAME_ + sysUser.getUsername(), sysUser);
 		}
@@ -108,7 +108,7 @@ public class UserUtils {
 	public static SysUser getUser(){
 		Principal principal = getPrincipal();
 		if (principal!=null){
-			SysUser sysUser = get(principal.getId());
+			SysUser sysUser = get(principal.getUserName());
 			if (sysUser != null){
 				return sysUser;
 			}
@@ -202,7 +202,9 @@ public class UserUtils {
 	public static Principal getPrincipal(){
 		try{
 			Subject subject = SecurityUtils.getSubject();
-			Principal principal = (Principal)subject.getPrincipal();
+			SysUser sysUser = new SysUser();
+			sysUser.setUsername(subject.getPrincipal().toString());
+			Principal principal = new Principal(sysUser);
 			if (principal != null){
 				return principal;
 			}

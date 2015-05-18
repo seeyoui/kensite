@@ -2,6 +2,7 @@ package com.seeyoui.kensite.framework.act.service;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.engine.FormService;
 import org.activiti.engine.HistoryService;
 import org.activiti.engine.IdentityService;
+import org.activiti.engine.ProcessEngineConfiguration;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
@@ -21,6 +23,7 @@ import org.activiti.engine.history.HistoricTaskInstance;
 import org.activiti.engine.history.HistoricTaskInstanceQuery;
 import org.activiti.engine.impl.RepositoryServiceImpl;
 import org.activiti.engine.impl.bpmn.behavior.UserTaskActivityBehavior;
+import org.activiti.engine.impl.cfg.ProcessEngineConfigurationImpl;
 import org.activiti.engine.impl.context.Context;
 import org.activiti.engine.impl.persistence.entity.ProcessDefinitionEntity;
 import org.activiti.engine.impl.pvm.delegate.ActivityBehavior;
@@ -34,6 +37,7 @@ import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Comment;
 import org.activiti.engine.task.Task;
 import org.activiti.engine.task.TaskQuery;
+import org.activiti.image.ProcessDiagramGenerator;
 import org.activiti.spring.ProcessEngineFactoryBean;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -61,6 +65,8 @@ public class ActTaskService extends BaseService {
 	
 	@Autowired
 	private ProcessEngineFactoryBean processEngine;
+	@Autowired
+    ProcessEngineConfiguration processEngineConfiguration;
 	@Autowired
 	private RuntimeService runtimeService;
 	@Autowired
@@ -529,7 +535,6 @@ public class ActTaskService extends BaseService {
 	 * @return	封装了各种节点信息
 	 */
 	public InputStream tracePhoto(String processDefinitionId, String executionId) {
-		// ProcessInstance processInstance = runtimeService.createProcessInstanceQuery().processInstanceId(executionId).singleResult();
 		BpmnModel bpmnModel = repositoryService.getBpmnModel(processDefinitionId);
 		
 		List<String> activeActivityIds = Lists.newArrayList();
@@ -542,9 +547,17 @@ public class ActTaskService extends BaseService {
 		// Context.setProcessEngineConfiguration(defaultProcessEngine.getProcessEngineConfiguration());
 
 		// 使用spring注入引擎请使用下面的这行代码
-		Context.setProcessEngineConfiguration(processEngine.getProcessEngineConfiguration());
-		return null;
-//		return ProcessDiagramGenerator.generateDiagram(bpmnModel, "png", activeActivityIds);
+		processEngineConfiguration = processEngine.getProcessEngineConfiguration();
+		Context.setProcessEngineConfiguration((ProcessEngineConfigurationImpl) processEngineConfiguration);
+//		ProcessDiagramGenerator diagramGenerator = processEngineConfiguration.getProcessDiagramGenerator();
+//        InputStream imageStream = diagramGenerator.generateDiagram(bpmnModel, "png", activeActivityIds);
+		InputStream imageStream = processEngine.getProcessEngineConfiguration().getProcessDiagramGenerator()
+	    .generateDiagram(bpmnModel, "png", activeActivityIds, activeActivityIds,
+	                     processEngine.getProcessEngineConfiguration().getActivityFontName(),
+	                     processEngine.getProcessEngineConfiguration().getLabelFontName(), 
+	                     processEngine.getProcessEngineConfiguration().getClassLoader(), 1.0);
+        return imageStream;
+//		return null;
 	}
 	
 	/**

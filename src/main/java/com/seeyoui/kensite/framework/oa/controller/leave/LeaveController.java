@@ -27,6 +27,8 @@ import com.google.common.collect.Maps;
 import com.opensymphony.module.sitemesh.Page;
 import com.seeyoui.kensite.common.base.controller.BaseController;
 import com.seeyoui.kensite.common.base.persistence.JsonMapper;
+import com.seeyoui.kensite.common.constants.StringConstant;
+import com.seeyoui.kensite.common.util.RequestResponseUtil;
 import com.seeyoui.kensite.framework.oa.domain.leave.Leave;
 import com.seeyoui.kensite.framework.oa.service.leave.LeaveService;
 import com.seeyoui.kensite.framework.system.util.UserUtils;
@@ -59,9 +61,11 @@ public class LeaveController extends BaseController {
 	 * 启动请假流程
 	 * @param leave	
 	 */
-	@RequiresPermissions("oa:leave:edit")
+	@RequiresPermissions("oa:leave:create")
 	@RequestMapping(value = "start", method = RequestMethod.POST)
-	public String save(Leave leave, RedirectAttributes redirectAttributes) {
+	public ModelAndView start(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap, Leave leave) {
 		try {
 			Map<String, Object> variables = Maps.newHashMap();
 			leaveService.start(leave, variables);
@@ -69,7 +73,8 @@ public class LeaveController extends BaseController {
 		} catch (Exception e) {
 			logger.error("启动请假流程失败：", e);
 		}
-		return "redirect:/framework/oa/leave/leaveForm";
+		RequestResponseUtil.putResponseStr(session, response, request, StringConstant.TRUE);
+		return null;
 	}
 
 	/**

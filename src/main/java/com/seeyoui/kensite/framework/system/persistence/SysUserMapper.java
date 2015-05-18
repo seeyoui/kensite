@@ -23,6 +23,13 @@ public interface SysUserMapper {
 	public SysUser findSysUserById(String id);
 	
 	/**
+	 * 根据账号查询单条数据
+	 * @param username
+	 * @return
+	 */
+	public SysUser findSysUserByUsername(String username);
+	
+	/**
 	 * 根据登录名查询单条数据
 	 * @param username
 	 * @return

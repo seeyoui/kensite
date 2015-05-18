@@ -54,6 +54,14 @@
 		WHERE id = #{id}
 	</select>
 	
+	<!-- 根据账号查询单条数据 -->
+	<select id="findSysUserByUsername" resultType="com.seeyoui.kensite.framework.system.domain.SysUser">
+		SELECT
+		<include refid="tableColumns" />
+		FROM SYS_USER t
+		WHERE username = #{username}
+	</select>
+	
 	<!-- 根据登录名查询单条数据 -->
 	<select id="findSysUserByUserName" resultType="com.seeyoui.kensite.framework.system.domain.SysUser">
 		SELECT
