@@ -1,57 +1,48 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-								<h4 class="modal-title">Modal Content is Responsive</h4>
+								<h4 class="modal-title">请假申请单</h4>
 							</div>
 							<div class="modal-body">
-								<form id="dataForm" method="post">
+								<form id="dataForm" method="post" action="">
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
-											<label for="field-1" class="control-label">Name</label>
-											<input type="text" class="form-control" id="field-1" placeholder="John">
+											<label for="field-1" class="control-label">请假者</label>
+											<input type="text" class="form-control" id="field-1" disabled="" placeholder="" value="${currentUser.name}">
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
-											<label for="field-2" class="control-label">Surname</label>
-											<input type="text" class="form-control" id="field-2" placeholder="Doe">
+											<label for="field-2" class="control-label">请假类型</label>
+											<select class="form-control" id="sboxit-1">
+												<option value="a">事假</option>
+												<option value="b">病假</option>
+												<option value="c">婚假</option>
+												<option value="d">产假</option>
+											</select>
 										</div>
 									</div>
 								</div>
 								<div class="row">
-									<div class="col-md-12">
+									<div class="col-md-6">
 										<div class="form-group">
-											<label for="field-3" class="control-label">Address</label>
-											<input type="text" class="form-control" id="field-3" placeholder="Address">
+											<label for="field-1" class="control-label">请假开始时间</label>
+											<input type="text" class="form-control" id="field-1" placeholder="" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});">
 										</div>
 									</div>
-								</div>
-								<div class="row">
-									<div class="col-md-4">
+									<div class="col-md-6">
 										<div class="form-group">
-											<label for="field-4" class="control-label">City</label>
-											<input type="text" class="form-control" id="field-4" placeholder="Boston">
-										</div>
-									</div>
-									<div class="col-md-4">
-										<div class="form-group">
-											<label for="field-5" class="control-label">Country</label>
-											<input type="text" class="form-control" id="field-5" placeholder="United States">
-										</div>
-									</div>
-									<div class="col-md-4">
-										<div class="form-group">
-											<label for="field-6" class="control-label">Zip</label>
-											<input type="text" class="form-control" id="field-6" placeholder="123456">
+											<label for="field-2" class="control-label">请假结束时间</label>
+											<input type="text" class="form-control" id="field-2" placeholder="" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});">
 										</div>
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-md-12">
 										<div class="form-group no-margin">
-											<label for="field-7" class="control-label">Personal Info</label>
-											<textarea class="form-control autogrow" id="field-7" placeholder="Write something about yourself"></textarea>
+											<label for="field-7" class="control-label">请假原因</label>
+											<textarea class="form-control autogrow" id="field-7" placeholder="请简洁明确的填写请假原因"></textarea>
 										</div>
 									</div>
 								</div>

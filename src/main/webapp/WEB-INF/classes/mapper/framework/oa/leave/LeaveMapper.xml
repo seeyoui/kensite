@@ -50,7 +50,7 @@
 		<include refid="tableColumns" />
 		FROM OA_LEAVE t
 		<include refid="leaveJoins"/>
-		WHERE id = #{id}
+		WHERE t.id = #{id}
 	</select>
 	
 	<!-- 查询数据集合 -->

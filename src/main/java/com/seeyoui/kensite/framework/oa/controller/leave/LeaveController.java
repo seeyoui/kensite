@@ -89,7 +89,7 @@ public class LeaveController extends BaseController {
 		String userId = UserUtils.getUser().getUsername();//ObjectUtils.toString(UserUtils.getUser().getId());
 		List<Leave> leaveList = leaveService.findTodoTasks(userId);
 		modelMap.put("leaveList", leaveList);
-		return new ModelAndView("modules/oa/leaveTask");
+		return new ModelAndView("framework/oa/leave/leaveTaskList");
 	}
 
 	/**
