@@ -29,8 +29,10 @@ import com.seeyoui.kensite.common.base.controller.BaseController;
 import com.seeyoui.kensite.common.base.persistence.JsonMapper;
 import com.seeyoui.kensite.common.constants.StringConstant;
 import com.seeyoui.kensite.common.util.RequestResponseUtil;
+import com.seeyoui.kensite.framework.act.service.ActTaskService;
 import com.seeyoui.kensite.framework.oa.domain.leave.Leave;
 import com.seeyoui.kensite.framework.oa.service.leave.LeaveService;
+import com.seeyoui.kensite.framework.system.domain.SysDepartment;
 import com.seeyoui.kensite.framework.system.util.UserUtils;
 
 @Controller
@@ -41,20 +43,23 @@ public class LeaveController extends BaseController {
 
 	@Autowired
 	protected LeaveService leaveService;
-
 	@Autowired
 	protected RuntimeService runtimeService;
+	@Autowired
+	protected ActTaskService actTaskService;
 
 	@Autowired
 	protected TaskService taskService;
-
+	
 	@RequiresPermissions("oa:leave:view")
 	@RequestMapping(value = {"form"})
-	public ModelAndView form(HttpSession session,
+	public ModelAndView applyForm(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap, Leave leave) {
+			ModelMap modelMap, String id, String pdid, String tdkey) {
+		Leave leave = leaveService.findLeaveById(id);
 		modelMap.put("leave", leave);
-		return new ModelAndView("/framework/oa/leave/leaveForm");
+		String formKey = actTaskService.getFormKey(pdid, tdkey);
+		return new ModelAndView(formKey);
 	}
 
 	/**
@@ -73,6 +78,24 @@ public class LeaveController extends BaseController {
 		} catch (Exception e) {
 			logger.error("启动请假流程失败：", e);
 		}
+		RequestResponseUtil.putResponseStr(session, response, request, StringConstant.TRUE);
+		return null;
+	}
+	
+	/**
+	 * 保存新增的数据
+	 * @param modelMap
+	 * @param leave
+	 * @return
+	 * @throws Exception
+	 */
+	@RequiresPermissions("oa:leave:insert")
+	@RequestMapping(value = "/save", method=RequestMethod.POST)
+	@ResponseBody
+	public String save(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap, Leave leave) throws Exception{
+		leaveService.save(leave);
 		RequestResponseUtil.putResponseStr(session, response, request, StringConstant.TRUE);
 		return null;
 	}

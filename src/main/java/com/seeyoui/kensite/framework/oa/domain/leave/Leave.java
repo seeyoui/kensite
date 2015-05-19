@@ -8,8 +8,8 @@ import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.seeyoui.kensite.common.base.domain.DataEntity;
-import com.seeyoui.kensite.framework.act.domain.ActTask;
 
 public class Leave extends DataEntity<Leave> {
 	
@@ -39,12 +39,14 @@ public class Leave extends DataEntity<Leave> {
 	public void setReason(String reason) {
 		this.reason = reason;
 	}
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	public Date getStartTime() {
 		return startTime;
 	}
 	public void setStartTime(Date startTime) {
 		this.startTime = startTime;
 	}
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	public Date getEndTime() {
 		return endTime;
 	}

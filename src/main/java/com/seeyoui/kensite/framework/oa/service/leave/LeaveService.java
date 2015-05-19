@@ -17,10 +17,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.seeyoui.kensite.common.base.domain.Page;
 import com.seeyoui.kensite.common.base.service.BaseService;
+import com.seeyoui.kensite.common.exception.CRUDException;
 import com.seeyoui.kensite.common.util.Collections3;
 import com.seeyoui.kensite.common.util.StringUtils;
+import com.seeyoui.kensite.framework.act.idgenerator.GeneratorUUID;
 import com.seeyoui.kensite.framework.oa.domain.leave.Leave;
 import com.seeyoui.kensite.framework.oa.persistence.leave.LeaveMapper;
+import com.seeyoui.kensite.framework.system.domain.SysMenu;
 
 @Service
 @Transactional(readOnly = true)
@@ -46,6 +49,10 @@ public class LeaveService extends BaseService {
 	@SuppressWarnings("unchecked")
 	public Leave findLeaveById(String id) {
 		Leave leave = leaveMapper.findLeaveById(id);
+		Task task = taskService.createTaskQuery().processInstanceId(leave.getBindid()).active().singleResult();
+		if(task!=null) {
+			leave.setTask(task);
+		}
 		Map<String,Object> variables=null;
 		HistoricProcessInstance historicProcessInstance = historyService.createHistoricProcessInstanceQuery().processInstanceId(leave.getBindid()).singleResult();
 		if(historicProcessInstance!=null) {
@@ -88,6 +95,22 @@ public class LeaveService extends BaseService {
 		
 		logger.debug("start process of {key={}, bkey={}, pid={}, variables={}}", new Object[] { 
 				"leave", businessKey, processInstance.getId(), variables });
+	}
+	
+	/**
+	 * 数据新增
+	 * @param leave
+	 * @throws CRUDException
+	 */
+	public void save(Leave leave) throws CRUDException{
+		// 保存业务数据
+		if (StringUtils.isBlank(leave.getId())){
+			leave.preInsert();
+			leaveMapper.saveLeave(leave);
+		}else{
+			leave.preUpdate();
+			leaveMapper.updateLeave(leave);
+		}
 	}
 
 	/**

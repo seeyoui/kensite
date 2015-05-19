@@ -168,7 +168,7 @@ public class ActUtils {
 			return null;
 		}
 		GroupEntity groupEntity = new GroupEntity();
-		groupEntity.setId(role.getId());
+		groupEntity.setId(role.getShiro());
 		groupEntity.setName(role.getName());
 		groupEntity.setType(role.getShiro());
 		groupEntity.setRevision(1);

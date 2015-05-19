@@ -114,7 +114,7 @@
 	    	<if test="endTime !=null and endTime !=''">
 			endtime=#{endTime},
 			</if>
-	    	<if test="leavetype !=null and leavetype !=''">
+	    	<if test="leaveType !=null and leaveType !=''">
 			leavetype=#{leaveType},
 			</if>
 		    id = #{id}

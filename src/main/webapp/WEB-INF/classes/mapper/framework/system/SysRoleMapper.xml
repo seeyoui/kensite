@@ -52,11 +52,14 @@
 		from sys_user su
 		left join sys_user_role sur
 		on su.id = sur.userid 
-		<if test="username !=null and username !=''">
-		and su.username = #{username}
-		</if>
 		left join sys_role t
 		on sur.roleid = t.id
+		<where>
+			1=1
+			<if test="username !=null and username !=''">
+			and su.username = #{username}
+			</if>
+		</where>
 	</select>
 	
 	<!-- 查询数据总数 -->

@@ -76,15 +76,18 @@
 		from sys_user su
 		left join sys_user_role sur
 		on su.id = sur.userid
-		<if test="username !=null and username !=''">
-		and su.username=#{username}
-		</if>
 		left join sys_role sr
 		on sur.roleid = sr.id
 		left join sys_role_menu srm
 		on sr.id = srm.roleid
 		left join sys_menu t
 		on srm.menuid = t.id
+		<where>
+			1=1
+			<if test="username !=null and username !=''">
+			and su.username=#{username}
+			</if>
+		</where>
 		ORDER BY t.sequence ASC
 	</select>
 	

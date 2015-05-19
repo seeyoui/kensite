@@ -37,8 +37,10 @@
 				<th>开始时间</th>
 				<th>结束时间</th>
 				<th>当前节点</th>
+				<!--
 				<th>任务创建时间</th>
 				<th>流程状态</th>
+				-->
 				<th>操作</th>
 						</tr>
 					</thead>
@@ -53,8 +55,10 @@
 					<td><fmt:formatDate value="${leave.startTime}" type="both"/></td>
 					<td><fmt:formatDate value="${leave.endTime}" type="both"/></td>
 					<td>${task.name}</td>
+					<!--
 					<td><fmt:formatDate value="${task.createTime}" type="both"/></td>
 					<td>${pi.suspended ? "已挂起" : "正常" }；<b title='流程版本号'>V: ${leave.processDefinition.version}</b></td>
+					-->
 					<td>
 						<a target="_blank" href="${ctx}/act/task/trace/photo/${task.processDefinitionId}/${task.executionId}">跟踪</a>
 						<c:if test="${empty task.assignee}">
@@ -62,7 +66,7 @@
 						</c:if>
 						<c:if test="${not empty task.assignee}">
 							<%-- 此处用tkey记录当前节点的名称 --%>
-							<a class="handle" href="#" data-tkey="${task.taskDefinitionKey}" data-tname="${task.name}"  data-id="${leave.id}"  data-tid="${task.id}">办理</a>
+							<a class="handle" href="#" data-pdid="${task.processDefinitionId}" data-tkey="${task.taskDefinitionKey}" data-tname="${task.name}"  data-id="${leave.id}"  data-tid="${task.id}">办理</a>
 						</c:if>
 					</td>
 				</tr>
@@ -79,7 +83,17 @@
 <div class="modal fade" id="createApplyWin">
 	<div class="modal-dialog">
 		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">请假申请单</h4>
+			</div>
+			<div class="modal-body">
 			<%@include file="leaveForm.jsp" %>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+				<button type="button" class="btn btn-info">保存</button>
+			</div>
 		</div>
 	</div>
 </div>
@@ -92,8 +106,10 @@
 				var obj = $(this);
 				var taskId = obj.data("tid");
 				var leaveId = obj.data("id");
+				var processDefinitionId = obj.data("pdid");
 				var tkey=obj.data("tkey");
-				jQuery("#"+tkey+"Win").modal("show", {backdrop: "static"});
+				//jQuery("#"+tkey+"Win").modal("show", {backdrop: "static"});
+				window.location.href = "${ctx}/oa/leave/form.do?id="+leaveId+"&pdid="+processDefinitionId+"&tdkey="+tkey;
 			});
 		});
 	</script>

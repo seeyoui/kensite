@@ -51,9 +51,6 @@
 		from sys_user su
 		left join sys_user_role sur
 		on su.id = sur.userid 
-		<if test="username !=null and username !=''">
-		and su.username=#{username}
-		</if>
 		left join sys_role sr
 		on sur.roleid = sr.id
 		left join sys_role_module srm
@@ -64,6 +61,12 @@
 		on sm.id = smp.moduleid
 		left join sys_permission sp
 		on smp.permissionid = sp.id
+		<where>
+			1=1
+			<if test="username !=null and username !=''">
+			and su.username=#{username}
+			</if>
+		</where>
 	</select>
 	
 	<!-- 查询数据总数 -->
