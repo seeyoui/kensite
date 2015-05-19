@@ -22,68 +22,34 @@
 		ORDER BY t.id DESC 
 	</sql>
 	
-	<!-- 根据ID查询单条数据 -->
-	<select id="findSysUserRoleById" resultType="com.seeyoui.kensite.framework.system.domain.SysUserRole">
-		SELECT
-		<include refid="tableColumns" />
-		FROM SYS_USER_ROLE t
-		WHERE id = #{id}
-	</select>
-	
-	<!-- 查询数据集合 -->
-	<select id="findSysUserRoleList" resultType="com.seeyoui.kensite.framework.system.domain.SysUserRole">
-		select * from(select t.*,rownum rn from(
-			SELECT
-			<include refid="tableColumns"/>
-			FROM SYS_USER_ROLE t
-			<include refid="whereStr"/>
-			<include refid="orderBy"/>
-		) t where rownum &lt; = #{page}*#{rows}) where rn &gt; (#{page}-1)*#{rows}
-	</select>
-	
-	<!-- 查询数据总数 -->
-	<select id="findSysUserRoleListTotal" resultType="EasyUIDataGrid">
-		SELECT
-		COUNT(id)total
-		FROM SYS_USER_ROLE t
-		<include refid="whereStr"/>
+	<!-- 查询数据TREE -->
+	<select id="getTreeJson" resultType="com.seeyoui.kensite.framework.system.domain.SysRole" parameterType="com.seeyoui.kensite.framework.system.domain.SysUserRole">
+		SELECT 
+		t.id,
+		t.name,
+		case when su.id is null then 'F' else 'T' end shiro
+		from sys_role t
+		left join sys_user_role sur
+		on sur.roleid = t.id and sur.userid=#{userid}
+		left join sys_user su
+		on su.id = sur.userid
+		ORDER BY t.id ASC
 	</select>
 	
 	<!-- 数据新增 -->
 	<insert id="saveSysUserRole" parameterType="com.seeyoui.kensite.framework.system.domain.SysUserRole">
 		INSERT INTO SYS_USER_ROLE (
-	    	userid,
-	    	roleid,
-		    id
+			userid,
+	    	roleid
 		)
 		VALUES (
 			#{userid},
-			#{roleid},
-		    #{id}
+			#{roleid}
 		)
 	</insert>
 	
-	<!-- 数据修改 -->
-	<update id="updateSysUserRole" parameterType="com.seeyoui.kensite.framework.system.domain.SysUserRole">
-		UPDATE SYS_USER_ROLE
-		<set>
-	    	<if test="userid !=null and userid !=''">
-			userid=#{userid},
-			</if>
-	    	<if test="roleid !=null and roleid !=''">
-			roleid=#{roleid},
-			</if>
-		    id = #{id}
-		</set>
-		WHERE id = #{id}
-	</update>
-	
 	<!-- 数据删除 -->
 	<delete id="deleteSysUserRole">
-		DELETE FROM SYS_USER_ROLE WHERE id IN 
-		<foreach item="listId" collection="list"
-			open="(" separator="," close=")">
-			#{listId}
-		</foreach>
+		DELETE FROM SYS_USER_ROLE WHERE userid=#{userid}
 	</delete>
 </mapper>

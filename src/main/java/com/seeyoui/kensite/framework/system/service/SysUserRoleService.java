@@ -3,18 +3,20 @@
  * Since 2014 - 2015
  */package com.seeyoui.kensite.framework.system.service;  
  
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.seeyoui.kensite.common.base.domain.Attributes;
+import com.seeyoui.kensite.common.base.domain.TreeJson;
 import com.seeyoui.kensite.common.base.service.BaseService;
-
-import java.util.*;
-
-import com.seeyoui.kensite.common.base.domain.EasyUIDataGrid;
-import com.seeyoui.kensite.common.base.service.BaseService;
-import com.seeyoui.kensite.common.exception.CRUDException;
-import com.seeyoui.kensite.common.util.*;
 import com.seeyoui.kensite.common.constants.StringConstant;
+import com.seeyoui.kensite.common.exception.CRUDException;
+import com.seeyoui.kensite.common.util.StringUtils;
+import com.seeyoui.kensite.framework.system.domain.SysRole;
 import com.seeyoui.kensite.framework.system.domain.SysUserRole;
 import com.seeyoui.kensite.framework.system.persistence.SysUserRoleMapper;
 
@@ -25,38 +27,32 @@ import com.seeyoui.kensite.framework.system.persistence.SysUserRoleMapper;
  */
 @Service
 public class SysUserRoleService extends BaseService {
-	
 	@Autowired
 	private SysUserRoleMapper sysUserRoleMapper;
 
 	/**
-	 * 根据ID查询单条数据
-	 * @param id
+	 * 查询数据TREE
+	 * @param username
 	 * @return
 	 * @throws CRUDException
 	 */
-	public SysUserRole findSysUserRoleById(String id) throws CRUDException{
-		return sysUserRoleMapper.findSysUserRoleById(id);
-	}
-	
-	/**
-	 * 查询数据集合
-	 * @param sysUserRole
-	 * @return
-	 * @throws CRUDException
-	 */
-	public List<SysUserRole> findSysUserRoleList(SysUserRole sysUserRole) throws CRUDException {
-		return sysUserRoleMapper.findSysUserRoleList(sysUserRole);
-	}
-	
-	/**
-	 * 查询数据总数
-	 * @param userinfo
-	 * @return
-	 * @throws CRUDException
-	 */
-	public EasyUIDataGrid findSysUserRoleListTotal(SysUserRole sysUserRole) throws CRUDException {
-		return sysUserRoleMapper.findSysUserRoleListTotal(sysUserRole);
+	public List<TreeJson> getTreeJson(SysUserRole sysUserRole) throws CRUDException {
+		List<SysRole> mList = sysUserRoleMapper.getTreeJson(sysUserRole);
+		List<TreeJson> tList = new ArrayList<TreeJson>();
+		for(int i=0; i<mList.size(); i++) {
+			TreeJson tj = new TreeJson();
+			tj.setId(mList.get(i).getId());
+			tj.setText(mList.get(i).getName());
+			tj.setPid(StringConstant.ROOT_ID_32);
+			tj.setChecked(mList.get(i).getShiro());
+			Attributes attributes = new Attributes();
+			tj.setAttributes(attributes);
+			tList.add(tj);
+		}
+		TreeJson root = new TreeJson();
+		root.setId(StringConstant.ROOT_ID_32);
+		TreeJson.getTree(tList, root);
+		return root.getChildren();
 	}
 	
 	/**
@@ -64,26 +60,15 @@ public class SysUserRoleService extends BaseService {
 	 * @param sysUserRole
 	 * @throws CRUDException
 	 */
-	public void saveSysUserRole(SysUserRole sysUserRole) throws CRUDException{
-		sysUserRoleMapper.saveSysUserRole(sysUserRole);
+	public void saveSysUserRole(SysUserRole sysUserRole) throws CRUDException {
+		sysUserRoleMapper.deleteSysUserRole(sysUserRole.getUserid());
+		if(sysUserRole.getRoleid() == null || StringUtils.isBlank(sysUserRole.getRoleid())) {
+			return;
+		}
+		List<String> listId = Arrays.asList(sysUserRole.getRoleid().split(","));
+		for(int i=0; i<listId.size(); i++) {
+			sysUserRole.setRoleid(listId.get(i));
+			sysUserRoleMapper.saveSysUserRole(sysUserRole);
+		}
 	}
-	
-	/**
-	 * 数据修改
-	 * @param sysUserRole
-	 * @throws CRUDException
-	 */
-	public void updateSysUserRole(SysUserRole sysUserRole) throws CRUDException{
-		sysUserRoleMapper.updateSysUserRole(sysUserRole);			
-	}
-	
-	/**
-	 * 数据删除
-	 * @param listId
-	 * @throws CRUDException
-	 */
-	public void deleteSysUserRole(List<String> listId) throws CRUDException {
-		sysUserRoleMapper.deleteSysUserRole(listId);
-	}
-	
 }

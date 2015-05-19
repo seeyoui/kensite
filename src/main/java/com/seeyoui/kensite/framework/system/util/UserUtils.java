@@ -66,7 +66,7 @@ public class UserUtils {
 	public static SysUser getByLoginName(String loginName){
 		SysUser sysUser = (SysUser)CacheUtils.get(USER_CACHE, USER_CACHE_LOGIN_NAME_ + loginName);
 		if (sysUser == null){
-			sysUser = sysUserMapper.findSysUserByUserName(loginName);
+			sysUser = sysUserMapper.findSysUserByUsername(loginName);
 			if (sysUser == null){
 				return null;
 			}

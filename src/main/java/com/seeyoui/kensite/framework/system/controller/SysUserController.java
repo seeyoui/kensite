@@ -29,6 +29,7 @@ import com.seeyoui.kensite.common.base.controller.BaseController;
 import com.seeyoui.kensite.common.base.domain.EasyUIDataGrid;
 import com.seeyoui.kensite.common.constants.StringConstant;
 import com.seeyoui.kensite.common.exception.CRUDException;
+import com.seeyoui.kensite.common.util.MD5;
 import com.seeyoui.kensite.common.util.RequestResponseUtil;
 import com.seeyoui.kensite.framework.system.domain.SysUser;
 import com.seeyoui.kensite.framework.system.service.SysUserService;
@@ -94,8 +95,8 @@ public class SysUserController extends BaseController {
 	public String saveSysUserByAdd(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, SysUser sysUser) throws Exception{
-		sysUserService.saveSysUser(sysUser);
-		RequestResponseUtil.putResponseStr(session, response, request, StringConstant.TRUE);
+		String resultInfo = sysUserService.saveSysUser(sysUser);
+		RequestResponseUtil.putResponseStr(session, response, request, resultInfo);
 		return null;
 	}
 	
@@ -113,6 +114,62 @@ public class SysUserController extends BaseController {
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, SysUser sysUser) throws Exception{
 		sysUserService.updateSysUser(sysUser);
+		RequestResponseUtil.putResponseStr(session, response, request, StringConstant.TRUE);
+		return null;
+	}
+	
+	/**
+	 * 修改用户密码
+	 * @param modelMap
+	 * @param sysUser
+	 * @return
+	 * @throws Exception
+	 */
+	@RequiresPermissions("sysUser:update")
+	@RequestMapping(value = "/updatePassword", method=RequestMethod.POST)
+	@ResponseBody
+	public String updatePassword(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap, SysUser sysUser) throws Exception{
+		sysUserService.updatePassword(sysUser);
+		RequestResponseUtil.putResponseStr(session, response, request, StringConstant.TRUE);
+		return null;
+	}
+	
+	/**
+	 * 修改账号状态
+	 * @param modelMap
+	 * @param sysUser
+	 * @return
+	 * @throws Exception
+	 */
+	@RequiresPermissions("sysUser:update")
+	@RequestMapping(value = "/updateState", method=RequestMethod.POST)
+	@ResponseBody
+	public String updateState(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap, SysUser sysUser) throws Exception{
+		sysUserService.updateState(sysUser);
+		RequestResponseUtil.putResponseStr(session, response, request, StringConstant.TRUE);
+		return null;
+	}
+	
+	/**
+	 * 初始化密码
+	 * @param modelMap
+	 * @param sysUser
+	 * @return
+	 * @throws Exception
+	 */
+	@RequiresPermissions("sysUser:update")
+	@RequestMapping(value = "/initPassword", method=RequestMethod.POST)
+	@ResponseBody
+	public String initPassword(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap, SysUser sysUser) throws Exception{
+		sysUser = sysUserService.findSysUserById(sysUser.getId());
+		sysUser.setPassword(MD5.md5(sysUser.getUsername()+StringConstant.INIT_PASSWORD));
+		sysUserService.updatePassword(sysUser);
 		RequestResponseUtil.putResponseStr(session, response, request, StringConstant.TRUE);
 		return null;
 	}

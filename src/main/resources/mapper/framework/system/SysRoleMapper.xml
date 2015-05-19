@@ -52,7 +52,7 @@
 		from sys_user su
 		left join sys_user_role sur
 		on su.id = sur.userid 
-		left join sys_role t
+		right join sys_role t
 		on sur.roleid = t.id
 		<where>
 			1=1

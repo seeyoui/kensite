@@ -80,7 +80,7 @@
 		on sur.roleid = sr.id
 		left join sys_role_menu srm
 		on sr.id = srm.roleid
-		left join sys_menu t
+		right join sys_menu t
 		on srm.menuid = t.id
 		<where>
 			1=1

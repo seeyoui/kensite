@@ -30,13 +30,6 @@ public interface SysUserMapper {
 	public SysUser findSysUserByUsername(String username);
 	
 	/**
-	 * 根据登录名查询单条数据
-	 * @param username
-	 * @return
-	 */
-	public SysUser findSysUserByUserName(String username);
-	
-	/**
 	 * 查询数据集合
 	 * @param sysUser
 	 * @return
@@ -61,6 +54,18 @@ public interface SysUserMapper {
 	 * @param sysUser
 	 */
 	public void updateSysUser(SysUser sysUser);
+	
+	/**
+	 * 修改用户密码
+	 * @param sysUser
+	 */
+	public void updatePassword(SysUser sysUser);
+	
+	/**
+	 * 修改账号状态
+	 * @param sysUser
+	 */
+	public void updateState(SysUser sysUser);
 	
 	/**
 	 * 数据删除

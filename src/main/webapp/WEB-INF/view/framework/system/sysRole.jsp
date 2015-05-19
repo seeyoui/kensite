@@ -67,12 +67,11 @@
 					<div class="easyui-panel" title="模块权限" style="width:300px;height:300px;">
 	            		<ul id="moduleTree" class="easyui-tree" data-options="animate:true,checkbox:true,cascadeCheck:false"></ul>
 					</div>
-				    <input id="roleid" name="roleid" type="hidden"/>
 				</form>
 				
 			    <div id="dataWin-buttons">
 			        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveRoleModuleInfo()" style="width:90px">保存</a>
-			        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#moduleDataForm').window('close')" style="width:90px">取消</a>
+			        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#moduleWin').window('close')" style="width:90px">取消</a>
 			    </div>
 		    </div>
 		    <div id="menuWin" class="easyui-window" title="菜单权限维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:335px;height:420px;padding:10px;">
@@ -81,7 +80,6 @@
 					<div class="easyui-panel" title="菜单权限" style="width:300px;height:300px;">
 	            		<ul id="menuTree" class="easyui-tree" data-options="animate:true,checkbox:true,cascadeCheck:false"></ul>
 					</div>
-				    <input id="menuroleid" name="id" type="hidden"/>
 				</form>
 				
 			    <div id="dataWin-buttons">

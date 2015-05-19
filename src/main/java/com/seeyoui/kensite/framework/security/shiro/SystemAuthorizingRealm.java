@@ -69,7 +69,7 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 //			}
 //		}
 		// 校验用户名密码
-		SysUser user = getSysUserService().findSysUserByUserName(token.getUsername());
+		SysUser user = getSysUserService().findSysUserByUsername(token.getUsername());
 		if (user != null) {
 			if(user.getState() == null || "".equals(user.getState()) || "0".equals(user.getState())) {
 				throw new LockedAccountException(); //帐号锁定
@@ -111,7 +111,7 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 				}
 			}
 		}*/
-		SysUser user = getSysUserService().findSysUserByUserName(currentUsername);
+		SysUser user = getSysUserService().findSysUserByUsername(currentUsername);
 		if (user != null) {
 			SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 			SysUser sysUser = new SysUser();

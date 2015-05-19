@@ -4,9 +4,11 @@
  */
 package com.seeyoui.kensite.framework.system.persistence;  
 
-import com.seeyoui.kensite.common.base.domain.EasyUIDataGrid;
+import java.util.List;
+
+import com.seeyoui.kensite.common.exception.CRUDException;
+import com.seeyoui.kensite.framework.system.domain.SysRole;
 import com.seeyoui.kensite.framework.system.domain.SysUserRole;
-import java.util.*;
 
 /**
  * @author cuichen
@@ -16,25 +18,12 @@ import java.util.*;
 public interface SysUserRoleMapper {
 
 	/**
-	 * 根据ID查询单条数据
-	 * @param id
+	 * 查询数据TREE
+	 * @param map
 	 * @return
+	 * @throws CRUDException
 	 */
-	public SysUserRole findSysUserRoleById(String id);
-	
-	/**
-	 * 查询数据集合
-	 * @param sysUserRole
-	 * @return
-	 */
-	public List<SysUserRole> findSysUserRoleList(SysUserRole sysUserRole);
-	
-	/**
-	 * 查询数据总数
-	 * @param userinfo
-	 * @return
-	 */
-	public EasyUIDataGrid findSysUserRoleListTotal(SysUserRole sysUserRole);
+	public List<SysRole> getTreeJson(SysUserRole sysUserRole);
 	
 	/**
 	 * 数据新增
@@ -43,14 +32,8 @@ public interface SysUserRoleMapper {
 	public void saveSysUserRole(SysUserRole sysUserRole);
 	
 	/**
-	 * 数据修改
-	 * @param sysUserRole
-	 */
-	public void updateSysUserRole(SysUserRole sysUserRole);
-	
-	/**
 	 * 数据删除
 	 * @param listId
 	 */
-	public void deleteSysUserRole(List<String> listId);
+	public void deleteSysUserRole(String userid);
 }
