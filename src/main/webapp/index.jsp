@@ -77,10 +77,10 @@
 				<!-- Add class "fade-in-effect" for login form effect -->
 				<form method="post" role="form" id="login" class="login-form fade-in-effect" action="${ctx}/login/login.do">
 					<div class="login-header">
-						<a href="dashboard-1.html" class="logo">
-							<img src="${ctx_assets}/img/logo-white-bg@2x.png" alt="" width="80" />
+						<div class="logo">
+							<img src="${ctx_assets}/img/kensite.png" alt="" width="80" />
 							<span>登录</span>
-						</a>
+						</div>
 						<p>欢迎使用kensite流程开发平台!</p>
 					</div>
 					<div class="form-group">

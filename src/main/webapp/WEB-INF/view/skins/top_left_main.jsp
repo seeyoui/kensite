@@ -107,7 +107,7 @@
 			<!-- Navbar Brand -->
 			<div class="navbar-brand">
 				<a href="dashboard-1.html" class="logo">
-					<img src="${ctx_assets}/img/logo-white-bg@2x.png" width="80" alt="" class="hidden-xs" />
+					<img src="${ctx_assets}/img/kensite.png" width="80" alt="" class="hidden-xs" />
 					<img src="${ctx_assets}/img/logo@2x.png" width="80" alt="" class="visible-xs" />
 				</a>
 				<a href="#" data-toggle="settings-pane" data-animate="true">
