@@ -29,6 +29,7 @@ import com.seeyoui.kensite.common.base.controller.BaseController;
 import com.seeyoui.kensite.common.base.persistence.JsonMapper;
 import com.seeyoui.kensite.common.constants.StringConstant;
 import com.seeyoui.kensite.common.util.RequestResponseUtil;
+import com.seeyoui.kensite.common.util.StringUtils;
 import com.seeyoui.kensite.framework.act.service.ActTaskService;
 import com.seeyoui.kensite.framework.oa.domain.leave.Leave;
 import com.seeyoui.kensite.framework.oa.service.leave.LeaveService;
@@ -52,12 +53,19 @@ public class LeaveController extends BaseController {
 	protected TaskService taskService;
 	
 	@RequiresPermissions("oa:leave:view")
-	@RequestMapping(value = {"form"})
-	public ModelAndView applyForm(HttpSession session,
+	@RequestMapping(value = "{state}/form")
+	public ModelAndView applyForm(@PathVariable("state") String state, HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, String id, String pdid, String tdkey) {
 		Leave leave = leaveService.findLeaveById(id);
 		modelMap.put("leave", leave);
+		if(state!=null && "read".equals(state)) {
+			state = "disabled=\"\"";
+		}
+		if(state!=null && "write".equals(state)) {
+			state = "";
+		}
+		modelMap.put("state", state);
 		String formKey = actTaskService.getFormKey(pdid, tdkey);
 		return new ModelAndView(formKey);
 	}

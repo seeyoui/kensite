@@ -91,7 +91,7 @@
 				var processDefinitionId = obj.data("pdid");
 				var tkey=obj.data("tkey");
 				//jQuery("#"+tkey+"Win").modal("show", {backdrop: "static"});
-				window.location.href = "${ctx}/oa/leave/form.do?id="+leaveId+"&pdid="+processDefinitionId+"&tdkey="+tkey;
+				window.location.href = "${ctx}/oa/leave/write/form.do?id="+leaveId+"&pdid="+processDefinitionId+"&tdkey="+tkey;
 			});
 		});
 		
