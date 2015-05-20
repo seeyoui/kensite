@@ -8,6 +8,23 @@
 <body class="page-body">
 	<div class="page-container">
 		<div class="main-content">
+				<div class="row">
+					<div class="col-sm-12">
+						<button type="button" class="btn btn-success" onclick="saveInfo()">保存</button>
+						<c:if test="${leave.task.taskDefinitionKey=='createApply'}">
+						<button type="button" class="btn btn-pink" onclick="complete('${leave.task.id}', null)">发送</button>
+						</c:if>
+						<c:if test="${leave.task.taskDefinitionKey=='deptLeaderAudit'}">
+						<button type="button" class="btn btn-pink" onclick="complete('${leave.task.id}', [{key: 'deptLeaderPass',value: true,type: 'B'}])">同意</button>
+						<button type="button" class="btn btn-pink" onclick="complete('${leave.task.id}', [{key: 'deptLeaderPass',value: false,type: 'B'}])">不同意</button>
+						</c:if>
+						<c:if test="${leave.task.taskDefinitionKey=='modifyApply'}">
+						<button type="button" class="btn btn-pink" onclick="complete('${leave.task.id}', [{key: 'reApply',value: true,type: 'B'}])">再试试</button>
+						<button type="button" class="btn btn-pink" onclick="complete('${leave.task.id}', [{key: 'reApply',value: false,type: 'B'}])">不请啦</button>
+						</c:if>
+						
+					</div>
+				</div>
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="panel panel-default">

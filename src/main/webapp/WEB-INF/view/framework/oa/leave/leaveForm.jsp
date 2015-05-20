@@ -42,11 +42,4 @@
 										</div>
 									</div>
 								</div>
-								<div class="row">
-									<div class="col-md-10"></div>
-									<div class="col-md-2">
-										<button type="button" class="btn btn-success" onclick="saveInfo()">保存</button>
-										<button type="button" class="btn btn-pink" onclick="complete('${leave.task.id}', null)">办理</button>
-									</div>
-								</div>
 								</form>

@@ -171,11 +171,8 @@ public class ActProcessService extends BaseService {
 	 */
 	@Transactional(readOnly = false)
 	public String deploy(String exportDir, String category, MultipartFile file) {
-
 		String message = "";
-
 		String fileName = file.getOriginalFilename();
-
 		try {
 			InputStream fileInputStream = file.getInputStream();
 			Deployment deployment = null;

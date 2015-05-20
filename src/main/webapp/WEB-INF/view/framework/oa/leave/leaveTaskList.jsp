@@ -30,17 +30,17 @@
 				<table class="table table-bordered table-striped" id="dataList">
 					<thead>
 						<tr>
-							<th>假种</th>
-							<th>申请人</th>
-							<th>申请时间</th>
-							<th>开始时间</th>
-							<th>结束时间</th>
-							<th>当前节点</th>
+							<th class="no-sorting">假种</th>
+							<th class="no-sorting">申请人</th>
+							<th class="no-sorting">申请时间</th>
+							<th class="no-sorting">开始时间</th>
+							<th class="no-sorting">结束时间</th>
+							<th class="no-sorting">当前节点</th>
 							<!--
-							<th>任务创建时间</th>
-							<th>流程状态</th>
+							<th class="no-sorting">任务创建时间</th>
+							<th class="no-sorting">流程状态</th>
 							-->
-							<th>操作</th>
+							<th class="no-sorting">操作</th>
 						</tr>
 					</thead>
 					<tbody class="middle-align">
@@ -91,7 +91,11 @@
 				var processDefinitionId = obj.data("pdid");
 				var tkey=obj.data("tkey");
 				//jQuery("#"+tkey+"Win").modal("show", {backdrop: "static"});
-				window.location.href = "${ctx}/oa/leave/write/form.do?id="+leaveId+"&pdid="+processDefinitionId+"&tdkey="+tkey;
+				var state = "write";
+				if(tkey=="deptLeaderAudit") {
+					state = "read";
+				}
+				window.location.href = "${ctx}/oa/leave/"+state+"/form.do?id="+leaveId+"&pdid="+processDefinitionId+"&tdkey="+tkey;
 			});
 		});
 		

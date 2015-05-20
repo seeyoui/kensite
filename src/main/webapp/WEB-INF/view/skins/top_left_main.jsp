@@ -327,7 +327,7 @@
 			</div>
 		</div>
 		<div class="main-content" style="padding: 85px 0px 0px;">
-			<div class="page-title" style="margin: 0px 0px 0px;height:50px;">
+			<div class="page-title" style="margin: 0px 0px 0px;">
 				<div class="title-env">
 					<!--<h5 class="title">主标题</h5>-->
 					<strong><p id="menuTitle" class="description">首页</p></strong>
@@ -368,7 +368,7 @@
 	<script type="text/javascript">
 		jQuery(document).ready(function($) {
 			//initTheme();
-			$("#mainConetntBody").height($(window).height()-135);
+			$("#mainConetntBody").height($(window).height()-152);
 		});
 		
 		function jumpTo(url, text, obj) {

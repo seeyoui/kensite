@@ -105,11 +105,6 @@ public class ActTaskController extends BaseController {
 		}
 		
 		return "redirect:" + ActUtils.getFormUrl(formKey, act);
-		
-//		// 传递参数到视图
-//		model.addAttribute("act", act);
-//		model.addAttribute("formUrl", formUrl);
-//		return "modules/act/actTaskForm";
 	}
 	
 	/**
