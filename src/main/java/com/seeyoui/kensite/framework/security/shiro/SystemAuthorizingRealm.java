@@ -54,12 +54,6 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken) {
 		UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
-		
-//		int activeSessionSize = getSystemService().getSessionDao().getActiveSessions(false).size();
-//		if (logger.isDebugEnabled()){
-//			logger.debug("login submit, active session size: {}, username: {}", activeSessionSize, token.getUsername());
-//		}
-		
 		// 校验登录验证码
 //		if (LoginController.isValidateCodeLogin(token.getUsername(), false, false)){
 //			Session session = UserUtils.getSession();
@@ -76,7 +70,6 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 			} else {
 				AuthenticationInfo authcInfo = new SimpleAuthenticationInfo(
 						user.getUsername(), user.getPassword(), user.getName());
-				new Principal(user);
 				SessionUtil.setSession("currentUser", user);
 				SessionUtil.setSession("currentUsername", user.getUsername());
 				List<TreeJson> menuList = getSysMenuService().findSysMenuTree(user);
@@ -94,23 +87,6 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		String currentUsername = (String) super.getAvailablePrincipal(principals);
-/*		// 获取当前已登录的用户
-		if (!Global.TRUE.equals(Global.getConfig("user.multiAccountLogin"))){
-			Collection<Session> sessions = getSystemService().getSessionDao().getActiveSessions(true, principal, UserUtils.getSession());
-			if (sessions.size() > 0){
-				// 如果是登录进来的，则踢出已在线用户
-				if (UserUtils.getSubject().isAuthenticated()){
-					for (Session session : sessions){
-						getSystemService().getSessionDao().delete(session);
-					}
-				}
-				// 记住我进来的，并且当前用户已登录，则退出当前用户提示信息。
-				else{
-					UserUtils.getSubject().logout();
-					throw new AuthenticationException("msg:账号已在其它地方登录，请重新登录。");
-				}
-			}
-		}*/
 		SysUser user = getSysUserService().findSysUserByUsername(currentUsername);
 		if (user != null) {
 			SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
@@ -132,63 +108,6 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 		} else {
 			return null;
 		}
-	}
-	
-	/**
-	 * 授权用户信息
-	 */
-	public static class Principal implements Serializable {
-
-		private static final long serialVersionUID = 1L;
-		
-		private String id; // 编号
-		private String userName; // 登录名
-		private String name; // 姓名
-		
-//		private Map<String, Object> cacheMap;
-
-		public Principal(SysUser sysUser) {
-			this.id = sysUser.getId();
-			this.userName = sysUser.getUsername();
-			this.name = sysUser.getName();
-		}
-
-		public String getId() {
-			return id;
-		}
-
-		public String getUserName() {
-			return userName;
-		}
-
-		public String getName() {
-			return name;
-		}
-
-//		@JsonIgnore
-//		public Map<String, Object> getCacheMap() {
-//			if (cacheMap==null){
-//				cacheMap = new HashMap<String, Object>();
-//			}
-//			return cacheMap;
-//		}
-
-		/**
-		 * 获取SESSIONID
-		 */
-		public String getSessionid() {
-			try{
-				return (String) UserUtils.getSession().getId();
-			}catch (Exception e) {
-				return "";
-			}
-		}
-		
-		@Override
-		public String toString() {
-			return id;
-		}
-
 	}
 
 	/**

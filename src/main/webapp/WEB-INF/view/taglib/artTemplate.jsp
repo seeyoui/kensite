@@ -1,0 +1,1 @@
+<script type="text/javascript" src="${ctx_assets}/js/artTemplate/template.js"></script>

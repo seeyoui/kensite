@@ -13,20 +13,7 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="panel panel-default">
-						<div class="panel-body">
-							<script type="text/javascript">
-							jQuery(document).ready(function($) {
-								$("#jsAutoHeight").attr("data-max-height", $(window).height());
-								$("#dataList").dataTable({
-									dom: "<'toolbar'>rtip",
-									"language": {
-     			       					"url": "${ctx_assets}/js/datatables/zh_CN.txt"
-      			  					},
-     					   			"iDisplayLength" : 10
-								});
-							});
-							</script>
-				
+						<div class="panel-body">				
 				<table class="table table-bordered table-striped" id="dataList">
 					<thead>
 						<tr>
@@ -81,8 +68,13 @@
 </div>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$("#sboxit-1").selectBoxIt().on('open', function() {
-				$(this).data('selectBoxSelectBoxIt').list.perfectScrollbar();
+			$("#jsAutoHeight").attr("data-max-height", $(window).height());
+			$("#dataList").dataTable({
+				dom: "frtip",
+				"language": {
+            		"url": "${ctx_assets}/js/datatables/zh_CN.txt"
+        		},
+        		"iDisplayLength" : 10
 			});
 			$(".handle").click(function(){
 				var obj = $(this);

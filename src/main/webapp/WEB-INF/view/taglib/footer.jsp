@@ -4,8 +4,8 @@
 	<!-- Bottom Scripts -->
 	<script src="${ctx_assets}/js/bootstrap.min.js"></script>
 	<script src="${ctx_assets}/js/TweenMax.min.js"></script>
-	<script src="${ctx_assets}/js/resizeable.js"></script>
 	<script src="${ctx_assets}/js/joinable.js"></script>
+	<script src="${ctx_assets}/js/resizeable.js"></script>
 	<script src="${ctx_assets}/js/xenon-api.js"></script>
 	<script src="${ctx_assets}/js/xenon-toggles.js"></script>
 	<script src="${ctx_assets}/js/jquery-validate/jquery.validate.min.js"></script>

@@ -22,7 +22,6 @@
 						<button type="button" class="btn btn-pink" onclick="complete('${leave.task.id}', [{key: 'reApply',value: true,type: 'B'}])">再试试</button>
 						<button type="button" class="btn btn-pink" onclick="complete('${leave.task.id}', [{key: 'reApply',value: false,type: 'B'}])">不请啦</button>
 						</c:if>
-						
 					</div>
 				</div>
 			<div class="row">
@@ -68,7 +67,7 @@
                 cache: true,
                 type: "POST",
                 url: url,
-                data: $('#dataForm').serialize(),// 你的formid
+                data: $('#dataForm').serialize(),
                 async: false,
                 error: function(request) {
                     alert("Connection error");

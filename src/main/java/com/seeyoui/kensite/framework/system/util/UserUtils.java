@@ -1,6 +1,8 @@
 package com.seeyoui.kensite.framework.system.util;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.UnavailableSecurityManagerException;
@@ -10,7 +12,6 @@ import org.apache.shiro.subject.Subject;
 
 import com.seeyoui.kensite.common.util.CacheUtils;
 import com.seeyoui.kensite.common.util.SpringContextHolder;
-import com.seeyoui.kensite.framework.security.shiro.SystemAuthorizingRealm.Principal;
 import com.seeyoui.kensite.framework.system.domain.SysDepartment;
 import com.seeyoui.kensite.framework.system.domain.SysMenu;
 import com.seeyoui.kensite.framework.system.domain.SysRole;
@@ -25,29 +26,26 @@ public class UserUtils {
 	private static SysUserMapper sysUserMapper = SpringContextHolder.getBean(SysUserMapper.class);
 	private static SysRoleMapper sysRoleMapper = SpringContextHolder.getBean(SysRoleMapper.class);
 	private static SysMenuMapper sysMenuMapper = SpringContextHolder.getBean(SysMenuMapper.class);
-//	private static AreaDao areaDao = SpringContextHolder.getBean(AreaDao.class);
 	private static SysDepartmentMapper sysDepartmentMapper = SpringContextHolder.getBean(SysDepartmentMapper.class);
 
 	public static final String USER_CACHE = "userCache";
 	public static final String USER_CACHE_ID_ = "id_";
 	public static final String USER_CACHE_LOGIN_NAME_ = "ln";
-	public static final String USER_CACHE_LIST_BY_OFFICE_ID_ = "oid_";
+	public static final String USER_CACHE_LIST_BY_DEPARTMENT_ID_ = "deptid_";
 
 	public static final String CACHE_ROLE_LIST = "roleList";
 	public static final String CACHE_MENU_LIST = "menuList";
-	public static final String CACHE_AREA_LIST = "areaList";
-	public static final String CACHE_OFFICE_LIST = "officeList";
-	public static final String CACHE_OFFICE_ALL_LIST = "officeAllList";
+	public static final String CACHE_DEPARTMENT_LIST = "deptList";
 	
 	/**
 	 * 根据ID获取用户
 	 * @param id
 	 * @return 取不到返回null
 	 */
-	public static SysUser get(String username){
-		SysUser sysUser = (SysUser)CacheUtils.get(USER_CACHE, USER_CACHE_ID_ + username);
+	public static SysUser getById(String id){
+		SysUser sysUser = (SysUser)CacheUtils.get(USER_CACHE, USER_CACHE_ID_ + id);
 		if (sysUser ==  null){
-			sysUser = sysUserMapper.findSysUserByUsername(username);
+			sysUser = sysUserMapper.findSysUserById(id);
 			if (sysUser == null){
 				return null;
 			}
@@ -83,9 +81,7 @@ public class UserUtils {
 	public static void clearCache(){
 		removeCache(CACHE_ROLE_LIST);
 		removeCache(CACHE_MENU_LIST);
-		removeCache(CACHE_AREA_LIST);
-		removeCache(CACHE_OFFICE_LIST);
-		removeCache(CACHE_OFFICE_ALL_LIST);
+		removeCache(CACHE_DEPARTMENT_LIST);
 		UserUtils.clearCache(getUser());
 	}
 	
@@ -97,7 +93,7 @@ public class UserUtils {
 		CacheUtils.remove(USER_CACHE, USER_CACHE_ID_ + sysUser.getId());
 		CacheUtils.remove(USER_CACHE, USER_CACHE_LOGIN_NAME_ + sysUser.getUsername());
 		if (sysUser.getDepartmentid() != null){
-			CacheUtils.remove(USER_CACHE, USER_CACHE_LIST_BY_OFFICE_ID_ + sysUser.getDepartmentid());
+			CacheUtils.remove(USER_CACHE, USER_CACHE_LIST_BY_DEPARTMENT_ID_ + sysUser.getDepartmentid());
 		}
 	}
 	
@@ -106,13 +102,16 @@ public class UserUtils {
 	 * @return 取不到返回 new SysUser()
 	 */
 	public static SysUser getUser(){
-		Principal principal = getPrincipal();
-		if (principal!=null){
-			SysUser sysUser = get(principal.getUserName());
+		SysUser sysUser = (SysUser)getSession().getAttribute("currentUser");
+		if (sysUser != null){
+			String currentUsername = (String)getSession().getAttribute("currentUsername");
+			if(currentUsername == null) {
+				return new SysUser();
+			}
+			sysUser = getByLoginName(currentUsername);
 			if (sysUser != null){
 				return sysUser;
 			}
-			return new SysUser();
 		}
 		// 如果没有登录，则返回实例化空的User对象。
 		return new SysUser();
@@ -161,9 +160,9 @@ public class UserUtils {
 	 * 获取当前用户有权限访问的部门
 	 * @return
 	 */
-	public static List<SysDepartment> getOfficeList(){
+	public static List<SysDepartment> getDepartmentList(){
 		@SuppressWarnings("unchecked")
-		List<SysDepartment> officeList = (List<SysDepartment>)getCache(CACHE_OFFICE_LIST);
+		List<SysDepartment> officeList = (List<SysDepartment>)getCache(CACHE_DEPARTMENT_LIST);
 		if (officeList == null){
 			SysUser sysUser = getUser();
 //			if (sysUser.isAdmin()){
@@ -171,20 +170,7 @@ public class UserUtils {
 //			}else{
 //				officeList = sysDepartmentMapper.findList(office);
 //			}
-			putCache(CACHE_OFFICE_LIST, officeList);
-		}
-		return officeList;
-	}
-
-	/**
-	 * 获取当前用户有权限访问的部门
-	 * @return
-	 */
-	public static List<SysDepartment> getOfficeAllList(){
-		@SuppressWarnings("unchecked")
-		List<SysDepartment> officeList = (List<SysDepartment>)getCache(CACHE_OFFICE_ALL_LIST);
-		if (officeList == null){
-//			officeList = sysDepartmentMapper.findAllList(new SysDepartment());
+			putCache(CACHE_DEPARTMENT_LIST, officeList);
 		}
 		return officeList;
 	}
@@ -194,27 +180,6 @@ public class UserUtils {
 	 */
 	public static Subject getSubject(){
 		return SecurityUtils.getSubject();
-	}
-	
-	/**
-	 * 获取当前登录者对象
-	 */
-	public static Principal getPrincipal(){
-		try{
-			Subject subject = SecurityUtils.getSubject();
-			SysUser sysUser = new SysUser();
-			sysUser.setUsername(subject.getPrincipal().toString());
-			Principal principal = new Principal(sysUser);
-			if (principal != null){
-				return principal;
-			}
-//			subject.logout();
-		}catch (UnavailableSecurityManagerException e) {
-			
-		}catch (InvalidSessionException e){
-			
-		}
-		return null;
 	}
 	
 	public static Session getSession(){
@@ -227,7 +192,6 @@ public class UserUtils {
 			if (session != null){
 				return session;
 			}
-//			subject.logout();
 		}catch (InvalidSessionException e){
 			
 		}
@@ -254,14 +218,5 @@ public class UserUtils {
 	public static void removeCache(String key) {
 //		getCacheMap().remove(key);
 		getSession().removeAttribute(key);
-	}
-	
-//	public static Map<String, Object> getCacheMap(){
-//		Principal principal = getPrincipal();
-//		if(principal!=null){
-//			return principal.getCacheMap();
-//		}
-//		return new HashMap<String, Object>();
-//	}
-	
+	}	
 }

@@ -108,7 +108,7 @@
 			<div class="navbar-brand">
 				<a href="dashboard-1.html" class="logo">
 					<img src="${ctx_assets}/img/kensite.png" width="80" alt="" class="hidden-xs" />
-					<img src="${ctx_assets}/img/logo@2x.png" width="80" alt="" class="visible-xs" />
+					<img src="${ctx_assets}/img/kensite.png" width="80" alt="" class="visible-xs" />
 				</a>
 				<a href="#" data-toggle="settings-pane" data-animate="true">
 					<i class="linecons-cog"></i>
@@ -136,37 +136,45 @@
 			</div>
 			<div class="navbar-mobile-clear"></div>
 			<!-- main menu -->
-			<!-- 
-			<ul class="navbar-nav">
-				<c:forEach var="tree_1" items="${menuList}" varStatus="status">
-					<c:forEach var="tree_2" items="${tree_1.children}" varStatus="status">
-						<li class="">
-							<a href="javascript:jumpTo('${ctx}${tree_2.attributes.url}', '', $(this))">
+				<ul class="navbar-nav">
+					<!-- add class "multiple-expanded" to allow multiple submenus to open -->
+					<!-- class "auto-inherit-active-class" will automatically add "active" class for parent elements who are marked already with class "active" -->
+					<c:forEach var="tree_1" items="${menuList}" varStatus="status">
+						<li class="has-sub">
+							<a href="javascript:jumpTo('${ctx}${tree_1.attributes.url}', '', $(this))">
 								<i class="linecons-cog"></i>
-								<span class="title">${tree_2.text}</span>
+								<span class="title">${tree_1.text}</span>
 							</a>
-							<c:if test="${not empty tree_2.children}">
+							<c:if test="${not empty tree_1.children}">
 								<ul>
-								<c:forEach var="tree_3" items="${tree_2.children}" varStatus="status">
-									<li class="">
-										<a href="javascript:jumpTo('${ctx}${tree_3.attributes.url}', '', $(this))">
-											<i class="linecons-cog"></i>
-											<span class="title">${tree_3.text}</span>
-										</a>
-									</li>
-								</c:forEach>
+									<c:forEach var="tree_2" items="${tree_1.children}" varStatus="status">
+										<li>
+											<a href="javascript:jumpTo('${ctx}${tree_2.attributes.url}', '${tree_2.text}', $(this))">
+												<span class="title">${tree_2.text}</span>
+											</a>
+											<c:if test="${not empty tree_2.children}">
+												<ul>
+												<c:forEach var="tree_3" items="${tree_2.children}" varStatus="status">
+													<li>
+														<a href="javascript:jumpTo('${ctx}${tree_3.attributes.url}', '${tree_3.text}', $(this))">
+															<span class="title">${tree_3.text}</span>
+														</a>
+													</li>
+												</c:forEach>
+												</ul>
+											</c:if>
+										</li>
+									</c:forEach>
 								</ul>
 							</c:if>
 						</li>
 					</c:forEach>
-				</c:forEach>
-			</ul>
-			-->
+				</ul>
 			<!-- notifications and other links -->
 			<ul class="nav nav-userinfo navbar-right">
 				<li class="search-form"><!-- You can add "always-visible" to show make the search input visible -->
 					<form method="get" action="extra-search.html">
-						<input type="text" name="s" class="form-control search-field" placeholder="Type to search..." />
+						<input type="text" name="s" class="form-control search-field" placeholder="搜索内容" />
 						<button type="submit" class="btn btn-link">
 							<i class="linecons-search"></i>
 						</button>
@@ -286,13 +294,13 @@
 		<!-- Add "fixed" class to make the sidebar fixed always to the browser viewport. -->
 		<!-- Adding class "toggle-others" will keep only one menu item open at a time. -->
 		<!-- Adding class "collapsed" collapse sidebar root elements and show only icons. -->
-		<div class="sidebar-menu toggle-others fixed" style="width: 300px;">
-			<div class="sidebar-menu-inner">	
+		<div class="sidebar-menu toggle-others fixed">
+			<div class="sidebar-menu-inner ps-container ps-active-y">	
 				<ul id="main-menu" class="main-menu">
 					<!-- add class "multiple-expanded" to allow multiple submenus to open -->
 					<!-- class "auto-inherit-active-class" will automatically add "active" class for parent elements who are marked already with class "active" -->
 					<c:forEach var="tree_1" items="${menuList}" varStatus="status">
-						<li class="">
+						<li class="has-sub">
 							<a href="javascript:jumpTo('${ctx}${tree_1.attributes.url}', '', $(this))">
 								<i class="linecons-cog"></i>
 								<span class="title">${tree_1.text}</span>
@@ -326,39 +334,9 @@
 				</ul>
 			</div>
 		</div>
-		<div class="main-content" style="padding: 85px 0px 0px;">
-			<div class="page-title" style="margin: 0px 0px 0px;">
-				<div class="title-env">
-					<!--<h5 class="title">主标题</h5>-->
-					<strong><p id="menuTitle" class="description">首页</p></strong>
-				</div>
-				<div class="breadcrumb-env">
-					<ol class="breadcrumb bc-1" style="margin: 0px;padding: 0px;">
-						<li>
-							<a href="javascript:jumpTo('${ctx}/login/mainContent/main.do', '首页', $(this))"><i class="fa-home"></i>首页</a>
-						</li>
-						<li id="parentMenu">
-							一级菜单
-						</li>
-						<li id="currentMenu" class="active">
-							<strong>二级菜单</strong>
-						</li>
-					</ol>
-				</div>
-			</div>
-			<div class="row" style="margin: 0px;">
-				<div class="col-md-12" style="padding: 0px;">
-					<div class="panel panel-default" style="margin: 0px;padding: 0px;">
-						<div id="mainConetntBody" class="panel-body" style="margin: 0px;padding: 0px;height:700px;">
-							<iframe id="mainContext" src="${ctx}/login/mainContent/main.do" frameborder="0" scrolling="auto" style="width:100%;height:99%;"></iframe>
-						</div>
-						<!--
-						<div class="embed-responsive embed-responsive-16by9">
-							<iframe id="mainContext" src="${ctx}/login/mainContent/main.do" class="embed-responsive-item"></iframe>
-						</div>
-						-->
-					</div>
-				</div>
+		<div class="main-content">
+			<div style="top:85px;left:0px;right:0px;bottom:4px;position:absolute;">
+				<iframe  id="mainContext" src="${ctx}/login/mainContent/main.do" style="width:100%;height:100%;border:0px;"></iframe>
 			</div>
 		</div>
 	</div>
