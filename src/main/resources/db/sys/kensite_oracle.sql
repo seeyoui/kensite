@@ -1,3 +1,14 @@
+drop table OA_LEAVE cascade constraints;
+drop table SYS_DEPARTMENT cascade constraints;
+drop table SYS_MENU cascade constraints;
+drop table SYS_MODULE cascade constraints;
+drop table SYS_MODULE_PERMISSION cascade constraints;
+drop table SYS_PERMISSION cascade constraints;
+drop table SYS_ROLE cascade constraints;
+drop table SYS_ROLE_MENU cascade constraints;
+drop table SYS_ROLE_MODULE cascade constraints;
+drop table SYS_USER cascade constraints;
+drop table SYS_USER_ROLE cascade constraints;
 create table OA_LEAVE
 (
   id         CHAR(32) not null,
