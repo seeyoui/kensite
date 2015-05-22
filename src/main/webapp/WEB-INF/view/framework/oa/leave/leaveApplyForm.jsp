@@ -10,6 +10,7 @@
 		<div class="main-content">
 				<div class="row">
 					<div class="col-sm-12">
+						<button type="button" class="btn btn-success" onclick="test()">TEST</button>
 						<button type="button" class="btn btn-success" onclick="saveInfo()">保存</button>
 						<c:if test="${leave.task.taskDefinitionKey=='createApply'}">
 						<button type="button" class="btn btn-pink" onclick="complete('${leave.task.id}', null)">发送</button>
@@ -112,6 +113,14 @@
 		
 		function goBackToList() {
 			window.location.href = "${ctx}/oa/leave/list/task.do";
+		}
+		
+		function test() {
+			var id = $("#id_id").val();
+			$.post('${ctx}/oa/leave/detail/'+id+'.do', {
+		    }, function(data) {
+		        alert(data);
+		    });
 		}
 	</script>
 </body>

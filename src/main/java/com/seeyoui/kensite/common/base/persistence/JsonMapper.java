@@ -29,8 +29,6 @@ import com.google.common.collect.Maps;
 /**
  * 简单封装Jackson，实现JSON String<->Java Object的Mapper.
  * 封装不同的输出风格, 使用不同的builder函数创建实例.
- * @author ken
- * @version 2015-03-25
  */
 public class JsonMapper extends ObjectMapper {
 

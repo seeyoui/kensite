@@ -110,41 +110,38 @@
 				<ul class="navbar-nav">
 					<!-- add class "multiple-expanded" to allow multiple submenus to open -->
 					<!-- class "auto-inherit-active-class" will automatically add "active" class for parent elements who are marked already with class "active" -->
-					<li>
-						<a href="javascript:jumpTo('${ctx}/login/mainContent/main.do', '', $(this))">
+					<li onclick="jumpTo('/login/mainContent/main.do', '', $(this))">
+						<a href="javascript:void(0);">
 							<i class="linecons-heart"></i>
 							<span class="title">首页</span>
 						</a>
 					</li>
 					<c:forEach var="tree_1" items="${menuList}" varStatus="status">
-						<li class="has-sub">
-							<a href="javascript:jumpTo('${ctx}${tree_1.attributes.url}', '', $(this))">
-								<i class="${tree_1.attributes.icon}"></i>
-								<span class="title">${tree_1.text}</span>
-							</a>
-							<c:if test="${not empty tree_1.children}">
+						<c:if test="${not empty tree_1.children}">
+							<li class="has-sub">
+								<a href="javascript:void(0);">
+									<i class="${tree_1.attributes.icon}"></i>
+									<span class="title">${tree_1.text}</span>
+								</a>
 								<ul>
 									<c:forEach var="tree_2" items="${tree_1.children}" varStatus="status">
-										<li>
-											<a href="javascript:jumpTo('${ctx}${tree_2.attributes.url}', '${tree_2.text}', $(this))">
+										<li onclick="jumpTo('${tree_2.attributes.url}', '', $(this))">
+											<a href="javascript:void(0);">
 												<span class="title">${tree_2.text}</span>
 											</a>
-											<c:if test="${not empty tree_2.children}">
-												<ul>
-												<c:forEach var="tree_3" items="${tree_2.children}" varStatus="status">
-													<li>
-														<a href="javascript:jumpTo('${ctx}${tree_3.attributes.url}', '${tree_3.text}', $(this))">
-															<span class="title">${tree_3.text}</span>
-														</a>
-													</li>
-												</c:forEach>
-												</ul>
-											</c:if>
 										</li>
 									</c:forEach>
 								</ul>
+								</li>
 							</c:if>
-						</li>
+							<c:if test="${empty tree_1.children}">
+							<li class="" onclick="jumpTo('${tree_1.attributes.url}', '', $(this))">
+								<a href="javascript:void(0);">
+									<i class="${tree_1.attributes.icon}"></i>
+									<span class="title">${tree_1.text}</span>
+								</a>
+							</li>
+							</c:if>
 					</c:forEach>
 				</ul>
 			<!-- notifications and other links -->
@@ -277,36 +274,32 @@
 					<!-- add class "multiple-expanded" to allow multiple submenus to open -->
 					<!-- class "auto-inherit-active-class" will automatically add "active" class for parent elements who are marked already with class "active" -->
 					<c:forEach var="tree_1" items="${menuList}" varStatus="status">
-						<li class="has-sub">
-							<a href="javascript:jumpTo('${ctx}${tree_1.attributes.url}', '', $(this))">
+						<c:if test="${not empty tree_1.children}">
+							<li class="has-sub" onclick="jumpTo('${tree_1.attributes.url}', '', $(this))">
+							<a href="javascript:void(0);">
 								<i class="${tree_1.attributes.icon}"></i>
 								<span class="title">${tree_1.text}</span>
 							</a>
-							<c:if test="${not empty tree_1.children}">
 								<ul>
 									<c:forEach var="tree_2" items="${tree_1.children}" varStatus="status">
-										<li class="">
-											<a href="javascript:jumpTo('${ctx}${tree_2.attributes.url}', '${tree_2.text}', $(this))">
+										<li class="" onclick="jumpTo('${tree_2.attributes.url}', '', $(this))">
+											<a href="javascript:void(0);">
 												<i class="${tree_2.attributes.icon}"></i>
 												<span class="title">${tree_2.text}</span>
 											</a>
-											<c:if test="${not empty tree_2.children}">
-												<ul>
-												<c:forEach var="tree_3" items="${tree_2.children}" varStatus="status">
-													<li class="">
-														<a href="javascript:jumpTo('${ctx}${tree_3.attributes.url}', '${tree_3.text}', $(this))">
-															<i class="${tree_3.attributes.icon}"></i>
-															<span class="title">${tree_3.text}</span>
-														</a>
-													</li>
-												</c:forEach>
-												</ul>
-											</c:if>
 										</li>
 									</c:forEach>
 								</ul>
-							</c:if>
-						</li>
+							</li>
+						</c:if>
+						<c:if test="${empty tree_1.children}">
+							<li class="">
+							<a href="javascript:void(0);">
+								<i class="${tree_1.attributes.icon}"></i>
+								<span class="title">${tree_1.text}</span>
+							</a>
+							</li>
+						</c:if>
 					</c:forEach>
 				</ul>
 			</div>
@@ -327,10 +320,16 @@
 		});
 		
 		function jumpTo(url, text, obj) {
-			$("#menuTitle").html(text);
+			if(url==null || url=="" || url=="/") {
+				return;
+			}
+			$("li").removeClass("active");
+			obj.addClass("active");
+			obj.parents("li").addClass("active");
+			//$("#menuTitle").html(text);
 			//设置导航条
 			//$("#currentMenu").html("<strong>"+text+"</strong>");
-			document.getElementById("mainContext").src=url;
+			document.getElementById("mainContext").src = "${ctx}"+url;
 		}
 	</script>
 	

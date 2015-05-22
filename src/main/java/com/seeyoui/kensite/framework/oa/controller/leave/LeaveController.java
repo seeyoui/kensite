@@ -7,8 +7,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import net.sf.json.JSONObject;
+
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
+import org.activiti.engine.task.Task;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -58,6 +61,10 @@ public class LeaveController extends BaseController {
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, String id, String pdid, String tdkey) {
 		Leave leave = leaveService.findLeaveById(id);
+		Task task = taskService.createTaskQuery().processInstanceId(leave.getBindid()).active().singleResult();
+		if(task!=null) {
+			leave.setTask(task);
+		}
 		modelMap.put("leave", leave);
 		if(state!=null && "read".equals(state)) {
 			state = "disabled=\"\"";
@@ -144,9 +151,14 @@ public class LeaveController extends BaseController {
 	 */
 	@RequestMapping(value = "detail/{id}")
 	@ResponseBody
-	public String getLeave(@PathVariable("id") String id) {
+	public String getLeave(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap, @PathVariable("id") String id) {
 		Leave leave = leaveService.findLeaveById(id);
-		return JsonMapper.getInstance().toJson(leave);
+		JSONObject jsonObject = JSONObject.fromObject(leave);
+		
+		RequestResponseUtil.putResponseStr(session, response, request, JsonMapper.getInstance().toJson(leave));
+		return null;
 	}
 
 	/**
@@ -156,7 +168,9 @@ public class LeaveController extends BaseController {
 	 */
 	@RequestMapping(value = "detail-with-vars/{id}/{taskId}")
 	@ResponseBody
-	public String getLeaveWithVars(@PathVariable("id") String id, @PathVariable("taskId") String taskId) {
+	public String getLeaveWithVars(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap, @PathVariable("id") String id, @PathVariable("taskId") String taskId) {
 		Leave leave = leaveService.findLeaveById(id);
 		Map<String, Object> variables = taskService.getVariables(taskId);
 		leave.setVariables(variables);
