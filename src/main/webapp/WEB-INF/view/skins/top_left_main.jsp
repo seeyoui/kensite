@@ -36,65 +36,36 @@
 				</div>
 				<div class="col-md-8 link-blocks-env">
 					<div class="links-block left-sep">
-						<h4>
-							<span>皮肤</span>
-						</h4>
-						
+						<h4><span>皮肤</span></h4>
 						<ul class="list-unstyled">
 							<li>
-								<a href="javascript:setTheme('');">
-									<i class="fa-angle-right"></i>
-									默认
-								</a>
+								<a href="javascript:setTheme('');"><i class="fa-angle-right"></i>默认</a>
 							</li>
 							<li>
-								<a href="javascript:setTheme('aero');">
-									<i class="fa-angle-right"></i>
-									太空
-								</a>
+								<a href="javascript:setTheme('aero');"><i class="fa-angle-right"></i>太空</a>
 							</li>
 							<li>
-								<a href="javascript:setTheme('navy');">
-									<i class="fa-angle-right"></i>
-									宝石蓝
-								</a>
+								<a href="javascript:setTheme('navy');"><i class="fa-angle-right"></i>宝石蓝</a>
 							</li>
 							<li>
-								<a href="javascript:setTheme('green');">
-									<i class="fa-angle-right"></i>
-									祖母绿
-								</a>
+								<a href="javascript:setTheme('green');"><i class="fa-angle-right"></i>祖母绿</a>
 							</li>
 						</ul>
 					</div>
 					<div class="links-block left-sep">
-						<h4>
-							<span>皮肤</span>
-						</h4>
+						<h4><span>皮肤</span></h4>
 						<ul class="list-unstyled">
 							<li>
-								<a href="javascript:setTheme('turquoise');">
-									<i class="fa-angle-right"></i>
-									青绿色
-								</a>
+								<a href="javascript:setTheme('turquoise');"><i class="fa-angle-right"></i>青绿色</a>
 							</li>
 							<li>
-								<a href="javascript:setTheme('purple');">
-									<i class="fa-angle-right"></i>
-									幻紫
-								</a>
+								<a href="javascript:setTheme('purple');"><i class="fa-angle-right"></i>幻紫</a>
 							</li>
 							<li>
-								<a href="javascript:setTheme('watermelon');">
-									<i class="fa-angle-right"></i>
-									西瓜红
-								</a>
+								<a href="javascript:setTheme('watermelon');"><i class="fa-angle-right"></i>西瓜红</a>
 							</li>
 							<li>
-								<a href="javascript:setTheme('lemonade');">
-									<i class="fa-angle-right"></i>
-									柠檬黄
-								</a>
+								<a href="javascript:setTheme('lemonade');"><i class="fa-angle-right"></i>柠檬黄</a>
 							</li>
 						</ul>
 					</div>
@@ -141,14 +112,14 @@
 					<!-- class "auto-inherit-active-class" will automatically add "active" class for parent elements who are marked already with class "active" -->
 					<li>
 						<a href="javascript:jumpTo('${ctx}/login/mainContent/main.do', '', $(this))">
-							<i class="linecons-cog"></i>
+							<i class="linecons-heart"></i>
 							<span class="title">首页</span>
 						</a>
 					</li>
 					<c:forEach var="tree_1" items="${menuList}" varStatus="status">
 						<li class="has-sub">
 							<a href="javascript:jumpTo('${ctx}${tree_1.attributes.url}', '', $(this))">
-								<i class="linecons-cog"></i>
+								<i class="${tree_1.attributes.icon}"></i>
 								<span class="title">${tree_1.text}</span>
 							</a>
 							<c:if test="${not empty tree_1.children}">
@@ -308,7 +279,7 @@
 					<c:forEach var="tree_1" items="${menuList}" varStatus="status">
 						<li class="has-sub">
 							<a href="javascript:jumpTo('${ctx}${tree_1.attributes.url}', '', $(this))">
-								<i class="linecons-cog"></i>
+								<i class="${tree_1.attributes.icon}"></i>
 								<span class="title">${tree_1.text}</span>
 							</a>
 							<c:if test="${not empty tree_1.children}">
@@ -316,7 +287,7 @@
 									<c:forEach var="tree_2" items="${tree_1.children}" varStatus="status">
 										<li class="">
 											<a href="javascript:jumpTo('${ctx}${tree_2.attributes.url}', '${tree_2.text}', $(this))">
-												<i class="linecons-cog"></i>
+												<i class="${tree_2.attributes.icon}"></i>
 												<span class="title">${tree_2.text}</span>
 											</a>
 											<c:if test="${not empty tree_2.children}">
@@ -324,7 +295,7 @@
 												<c:forEach var="tree_3" items="${tree_2.children}" varStatus="status">
 													<li class="">
 														<a href="javascript:jumpTo('${ctx}${tree_3.attributes.url}', '${tree_3.text}', $(this))">
-															<i class="linecons-cog"></i>
+															<i class="${tree_3.attributes.icon}"></i>
 															<span class="title">${tree_3.text}</span>
 														</a>
 													</li>

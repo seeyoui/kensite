@@ -6,6 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>    
     <title>导航菜单</title>
+    <link rel="stylesheet" href="${ctx_assets}/css/fonts/linecons/css/linecons.css"/>
 	<script type="text/javascript" src="${ctx_assets}/js/jquery-1.11.1.min.js"></script>
 	<%@ include file="/WEB-INF/view/taglib/easyui.jsp" %>
 	<%@ include file="/WEB-INF/view/taglib/layer.jsp" %>
@@ -48,7 +49,7 @@
 				URL<input id="sel_url" name="sel_url" class="easyui-textbox" data-options=""/>
 			    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="selectData()">查询</a>
 		    </div>
-		    <div id="dataWin" class="easyui-window" title="导航菜单信息维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:400px;height:260px;padding:10px;">
+		    <div id="dataWin" class="easyui-window" title="导航菜单信息维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:400px;height:320px;padding:10px;">
 		        <div class="ftitle">导航菜单信息维护</div>
 		        <form id="dataForm" method="post">
 							<div class="fitem">
@@ -68,12 +69,62 @@
 				                <input id="sequence" name="sequence" class="easyui-numberbox" data-options="min:0,max:999999,precision:0,required:true"/>
 				            </div>
 							<div class="fitem">
+				                <label>打开方式</label>
+				                <input id="target" name="target" class="easyui-validatebox textbox" data-options="required:true" value="_blank"/>
+				            </div>
+							<div class="fitem">
 				                <label>图标</label>
 				                <input id="icon" name="icon" class="easyui-validatebox textbox" data-options="required:true"/>
 				            </div>
-							<div class="fitem">
-				                <label>打开方式</label>
-				                <input id="target" name="target" class="easyui-validatebox textbox" data-options="required:true"/>
+				            <div id="icon_li" class="fitem">
+				            	<i class="linecons-music"></i>
+	<i class="linecons-search"></i>
+	<i class="linecons-mail"></i>
+	<i class="linecons-heart"></i>
+	<i class="linecons-star"></i>
+	<i class="linecons-user"></i>
+	<i class="linecons-videocam"></i>
+	<i class="linecons-camera"></i>
+	<i class="linecons-photo"></i>
+	<i class="linecons-attach"></i>
+	<i class="linecons-lock"></i>
+	<i class="linecons-eye"></i>
+	<i class="linecons-tag"></i>
+	<i class="linecons-thumbs-up"></i>
+	<i class="linecons-pencil"></i>
+	<i class="linecons-comment"></i>
+	<i class="linecons-location"></i>
+	<i class="linecons-cup"></i>
+	<i class="linecons-trash"></i>
+	<i class="linecons-doc"></i>
+	<i class="linecons-note"></i>
+	<i class="linecons-cog"></i>
+	<i class="linecons-params"></i>
+	<i class="linecons-calendar"></i>
+	<i class="linecons-sound"></i>
+	<i class="linecons-clock"></i>
+	<i class="linecons-lightbulb"></i>
+	<i class="linecons-tv"></i>
+	<i class="linecons-desktop"></i>
+	<i class="linecons-mobile"></i>
+	<i class="linecons-cd"></i>
+	<i class="linecons-inbox"></i>
+	<i class="linecons-globe"></i>
+	<i class="linecons-cloud"></i>
+	<i class="linecons-paper-plane"></i>
+	<i class="linecons-fire"></i>
+	<i class="linecons-graduation-cap"></i>
+	<i class="linecons-megaphone"></i>
+	<i class="linecons-database"></i>
+	<i class="linecons-key"></i>
+	<i class="linecons-beaker"></i>
+	<i class="linecons-truck"></i>
+	<i class="linecons-money"></i>
+	<i class="linecons-food"></i>
+	<i class="linecons-shop"></i>
+	<i class="linecons-diamond"></i>
+	<i class="linecons-t-shirt"></i>
+	<i class="linecons-wallet"></i>
 				            </div>
 				</form>
 				
@@ -92,6 +143,10 @@
 	    			$('#sel_parentid').val(node.id);
 	    			selectData();
 	    		}
+	    	});
+	    	$("#icon_li i").click(function(){
+	    		var obj = $(this);
+	    		$("#icon").val(obj.attr("class"));
 	    	});
 	    });
 	    
