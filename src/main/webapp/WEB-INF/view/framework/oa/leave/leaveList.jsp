@@ -91,16 +91,16 @@
 				
 				function start() {
 					$.ajax({
-							type: "post",
-							url: "${ctx}/oa/leave/start.do",
-							data: {},
-							dataType: 'text',
-							beforeSend: function(XMLHttpRequest){
-							},
-							success: function(data, textStatus){
-								location.reload();
-							}
-						});
+						type: "post",
+						url: "${ctx}/oa/leave/start.do",
+						data: {},
+						dataType: 'text',
+						beforeSend: function(XMLHttpRequest){
+						},
+						success: function(data, textStatus){
+							location.reload();
+						}
+					});
 				}
 			</script>
 	

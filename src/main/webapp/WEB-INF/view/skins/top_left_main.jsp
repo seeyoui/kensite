@@ -139,6 +139,12 @@
 				<ul class="navbar-nav">
 					<!-- add class "multiple-expanded" to allow multiple submenus to open -->
 					<!-- class "auto-inherit-active-class" will automatically add "active" class for parent elements who are marked already with class "active" -->
+					<li>
+						<a href="javascript:jumpTo('${ctx}/login/mainContent/main.do', '', $(this))">
+							<i class="linecons-cog"></i>
+							<span class="title">首页</span>
+						</a>
+					</li>
 					<c:forEach var="tree_1" items="${menuList}" varStatus="status">
 						<li class="has-sub">
 							<a href="javascript:jumpTo('${ctx}${tree_1.attributes.url}', '', $(this))">

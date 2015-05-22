@@ -70,12 +70,15 @@
 		$(document).ready(function() {
 			$("#jsAutoHeight").attr("data-max-height", $(window).height());
 			$("#dataList").dataTable({
-				dom: "frtip",
+				dom: "<'toolbar'>frtip",
 				"language": {
             		"url": "${ctx_assets}/js/datatables/zh_CN.txt"
         		},
         		"iDisplayLength" : 10
 			});
+			setTimeout(function(){
+				$("div.toolbar").html('<button class="btn btn-secondary btn-icon btn-xs" onclick="start()"><i class="fa-heart"></i><span>启动流程</span></button>');
+			},500);
 			$(".handle").click(function(){
 				var obj = $(this);
 				var taskId = obj.data("tid");
@@ -90,6 +93,20 @@
 				window.location.href = "${ctx}/oa/leave/"+state+"/form.do?id="+leaveId+"&pdid="+processDefinitionId+"&tdkey="+tkey;
 			});
 		});
+		
+		function start() {
+			$.ajax({
+				type: "post",
+				url: "${ctx}/oa/leave/start.do",
+				data: {},
+				dataType: 'text',
+				beforeSend: function(XMLHttpRequest){
+				},
+				success: function(data, textStatus){
+					location.reload();
+				}
+			});
+		}
 		
 		/**
 		 * 签收任务
