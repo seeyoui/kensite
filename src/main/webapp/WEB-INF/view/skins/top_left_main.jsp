@@ -6,7 +6,7 @@
 	<%@ include file="/WEB-INF/view/taglib/header.jsp" %>
 </head>
 
-<body class="page-body ${theme}">
+<body class="page-body ${theme}" style="overflow:hidden;">
 	<div class="settings-pane">
 		<a href="#" data-toggle="settings-pane" data-animate="true">
 			&times;
@@ -264,7 +264,7 @@
 			</ul>
 		</div>
 	</nav>
-	<div class="page-container" style="margin-top: 0px;"><!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->
+	<div class="page-container"><!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->
 		<!-- Add "fixed" class to make the sidebar fixed always to the browser viewport. -->
 		<!-- Adding class "toggle-others" will keep only one menu item open at a time. -->
 		<!-- Adding class "collapsed" collapse sidebar root elements and show only icons. -->
@@ -305,7 +305,7 @@
 			</div>
 		</div>
 		<div class="main-content">
-			<div style="top:85px;left:0px;right:0px;bottom:4px;position:absolute;">
+			<div style="top:0px;left:0px;right:0px;bottom:85px;position:absolute;">
 				<iframe  id="mainContext" src="${ctx}/login/mainContent/main.do" style="width:100%;height:100%;border:0px;"></iframe>
 			</div>
 		</div>
@@ -316,7 +316,7 @@
 	<script type="text/javascript">
 		jQuery(document).ready(function($) {
 			//initTheme();
-			$("#mainConetntBody").height($(window).height()-152);
+			//$("#mainConetntBody").height($(window).height()-242);
 		});
 		
 		function jumpTo(url, text, obj) {
