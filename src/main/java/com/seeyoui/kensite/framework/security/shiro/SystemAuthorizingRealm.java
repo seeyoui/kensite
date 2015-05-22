@@ -40,14 +40,6 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	
-	private SysUserService sysUserService;
-	
-	private SysRoleService sysRoleService;
-	
-	private SysPermissionService sysPermissionService;
-	
-	private SysMenuService sysMenuService;
-
 	/**
 	 * 认证回调函数, 登录时调用
 	 */
@@ -63,7 +55,7 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 //			}
 //		}
 		// 校验用户名密码
-		SysUser user = getSysUserService().findSysUserByUsername(token.getUsername());
+		SysUser user = UserUtils.getByLoginName(token.getUsername());
 		if (user != null) {
 			if(user.getState() == null || "".equals(user.getState()) || "0".equals(user.getState())) {
 				throw new LockedAccountException(); //帐号锁定
@@ -72,8 +64,11 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 						user.getUsername(), user.getPassword(), user.getName());
 				SessionUtil.setSession("currentUser", user);
 				SessionUtil.setSession("currentUsername", user.getUsername());
-				List<TreeJson> menuList = getSysMenuService().findSysMenuTree(user);
-				SessionUtil.setSession("menuList", menuList);
+				TreeJson root = UserUtils.getMenuTree();
+				if(root != null) {
+					List<TreeJson> menuList = root.getChildren();
+					SessionUtil.setSession("menuList", menuList);
+				}
 				return authcInfo;
 			}
 		} else {
@@ -87,18 +82,16 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		String currentUsername = (String) super.getAvailablePrincipal(principals);
-		SysUser user = getSysUserService().findSysUserByUsername(currentUsername);
+		SysUser user = UserUtils.getByLoginName(currentUsername);
 		if (user != null) {
 			SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-			SysUser sysUser = new SysUser();
-			sysUser.setUsername(currentUsername);
-			List<SysRole> sysRoleList = getSysRoleService().findSysUserRoleList(sysUser);
+			List<SysRole> sysRoleList = UserUtils.getRoleList();
 			// 添加用户角色
 			for (SysRole sysRole : sysRoleList){
 				info.addRole(sysRole.getShiro());
 			}
 			// 添加用户权限
-			List<SysPermission> sysPermissionList = getSysPermissionService().findSysUserPermissionList(sysUser);
+			List<SysPermission> sysPermissionList = UserUtils.getPermissionList();
 			for (SysPermission sysPermission : sysPermissionList){
 				info.addStringPermission(sysPermission.getId());
 			}
@@ -113,29 +106,10 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 	/**
 	 * 获取系统业务对象
 	 */
-	public SysUserService getSysUserService() {
-		if (sysUserService == null){
-			sysUserService = SpringContextHolder.getBean(SysUserService.class);
-		}
-		return sysUserService;
-	}
-	public SysRoleService getSysRoleService() {
-		if (sysRoleService == null){
-			sysRoleService = SpringContextHolder.getBean(SysRoleService.class);
-		}
-		return sysRoleService;
-	}
-	public SysPermissionService getSysPermissionService() {
-		if (sysPermissionService == null){
-			sysPermissionService = SpringContextHolder.getBean(SysPermissionService.class);
-		}
-		return sysPermissionService;
-	}
-	public SysMenuService getSysMenuService() {
-		if (sysMenuService == null){
-			sysMenuService = SpringContextHolder.getBean(SysMenuService.class);
-		}
-		return sysMenuService;
-	}
-	
+//	public SysUserService getSysUserService() {
+//		if (sysUserService == null){
+//			sysUserService = SpringContextHolder.getBean(SysUserService.class);
+//		}
+//		return sysUserService;
+//	}
 }

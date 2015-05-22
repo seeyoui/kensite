@@ -1,23 +1,26 @@
 package com.seeyoui.kensite.framework.system.util;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.UnavailableSecurityManagerException;
 import org.apache.shiro.session.InvalidSessionException;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 
+import com.seeyoui.kensite.common.base.domain.Attributes;
+import com.seeyoui.kensite.common.base.domain.TreeJson;
+import com.seeyoui.kensite.common.constants.StringConstant;
 import com.seeyoui.kensite.common.util.CacheUtils;
 import com.seeyoui.kensite.common.util.SpringContextHolder;
 import com.seeyoui.kensite.framework.system.domain.SysDepartment;
 import com.seeyoui.kensite.framework.system.domain.SysMenu;
+import com.seeyoui.kensite.framework.system.domain.SysPermission;
 import com.seeyoui.kensite.framework.system.domain.SysRole;
 import com.seeyoui.kensite.framework.system.domain.SysUser;
 import com.seeyoui.kensite.framework.system.persistence.SysDepartmentMapper;
 import com.seeyoui.kensite.framework.system.persistence.SysMenuMapper;
+import com.seeyoui.kensite.framework.system.persistence.SysPermissionMapper;
 import com.seeyoui.kensite.framework.system.persistence.SysRoleMapper;
 import com.seeyoui.kensite.framework.system.persistence.SysUserMapper;
 
@@ -26,6 +29,7 @@ public class UserUtils {
 	private static SysUserMapper sysUserMapper = SpringContextHolder.getBean(SysUserMapper.class);
 	private static SysRoleMapper sysRoleMapper = SpringContextHolder.getBean(SysRoleMapper.class);
 	private static SysMenuMapper sysMenuMapper = SpringContextHolder.getBean(SysMenuMapper.class);
+	private static SysPermissionMapper sysPermissionMapper = SpringContextHolder.getBean(SysPermissionMapper.class);
 	private static SysDepartmentMapper sysDepartmentMapper = SpringContextHolder.getBean(SysDepartmentMapper.class);
 
 	public static final String USER_CACHE = "userCache";
@@ -34,7 +38,9 @@ public class UserUtils {
 	public static final String USER_CACHE_LIST_BY_DEPARTMENT_ID_ = "deptid_";
 
 	public static final String CACHE_ROLE_LIST = "roleList";
+	public static final String CACHE_PERMISSION_LIST = "permissionList";
 	public static final String CACHE_MENU_LIST = "menuList";
+	public static final String CACHE_MENU_TREE = "menuTree";
 	public static final String CACHE_DEPARTMENT_LIST = "deptList";
 	
 	/**
@@ -126,15 +132,21 @@ public class UserUtils {
 		List<SysRole> roleList = (List<SysRole>)getCache(CACHE_ROLE_LIST);
 		if (roleList == null){
 			SysUser sysUser = getUser();
-//			if (sysUser.isAdmin()){
-//				roleList = sysRoleMapper.findAllList(new SysRole());
-//			}else{
-//				SysRole sysRole = new SysRole();
-//				roleList = sysRoleMapper.findList(sysRole);
-//			}
+			roleList = sysRoleMapper.findSysUserRoleList(sysUser);
 			putCache(CACHE_ROLE_LIST, roleList);
 		}
 		return roleList;
+	}
+	
+	public static List<SysPermission> getPermissionList(){
+		@SuppressWarnings("unchecked")
+		List<SysPermission> permissionList = (List<SysPermission>)getCache(CACHE_PERMISSION_LIST);
+		if (permissionList == null){
+			SysUser sysUser = getUser();
+			permissionList = sysPermissionMapper.findSysUserPermissionList(sysUser);
+			putCache(CACHE_PERMISSION_LIST, permissionList);
+		}
+		return permissionList;
 	}
 	
 	/**
@@ -146,14 +158,39 @@ public class UserUtils {
 		List<SysMenu> menuList = (List<SysMenu>)getCache(CACHE_MENU_LIST);
 		if (menuList == null){
 			SysUser sysUser = getUser();
-//			if (sysUser.isAdmin()){
-//				menuList = sysMenuMapper.findAllList(new SysMenu());
-//			}else{
-//				menuList = sysMenuMapper.findSysMenuTree(sysUser);
-//			}
+			menuList = sysMenuMapper.findSysMenuTree(sysUser);
 			putCache(CACHE_MENU_LIST, menuList);
 		}
 		return menuList;
+	}
+	
+	public static TreeJson getMenuTree(){
+		@SuppressWarnings("unchecked")
+		List<TreeJson> tList = (List<TreeJson>)getCache(CACHE_MENU_TREE);
+		if (tList == null){
+			SysUser sysUser = getUser();
+			List<SysMenu> mList = sysMenuMapper.findSysMenuTree(sysUser);
+			tList = new ArrayList<TreeJson>();
+			for(int i=0; i<mList.size(); i++) {
+				TreeJson tj = new TreeJson();
+				tj.setId(mList.get(i).getId());
+				tj.setPid(mList.get(i).getParentid());
+				tj.setText(mList.get(i).getName());
+				Attributes attributes = new Attributes();
+				attributes.setUrl(mList.get(i).getUrl());
+				attributes.setIcon(mList.get(i).getIcon());
+				tj.setAttributes(attributes);
+				tList.add(tj);
+			}
+		}
+		TreeJson root = new TreeJson();
+		root.setText("导航菜单");
+		root.setId(StringConstant.ROOT_ID_32);
+		TreeJson.getTree(tList, root);
+		tList.clear();
+		tList.add(root);
+		putCache(CACHE_MENU_TREE, root);
+		return root;
 	}
 	
 	/**

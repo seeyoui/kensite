@@ -22,6 +22,7 @@ import com.seeyoui.kensite.framework.system.domain.SysMenu;
 import com.seeyoui.kensite.framework.system.domain.SysRole;
 import com.seeyoui.kensite.framework.system.domain.SysUser;
 import com.seeyoui.kensite.framework.system.persistence.SysMenuMapper;
+import com.seeyoui.kensite.framework.system.util.UserUtils;
 
 /**
  * @author cuichen
@@ -61,26 +62,7 @@ public class SysMenuService extends BaseService {
 	 * @throws CRUDException
 	 */
 	public List<TreeJson> findSysMenuTree(SysUser sysUser) throws CRUDException {
-		List<SysMenu> mList = sysMenuMapper.findSysMenuTree(sysUser);
-		List<TreeJson> tList = new ArrayList<TreeJson>();
-		for(int i=0; i<mList.size(); i++) {
-			TreeJson tj = new TreeJson();
-			tj.setId(mList.get(i).getId());
-			tj.setPid(mList.get(i).getParentid());
-			tj.setText(mList.get(i).getName());
-			Attributes attributes = new Attributes();
-			attributes.setUrl(mList.get(i).getUrl());
-			attributes.setIcon(mList.get(i).getIcon());
-			tj.setAttributes(attributes);
-			tList.add(tj);
-		}
-		
-		TreeJson root = new TreeJson();
-		root.setText("导航菜单");
-		root.setId(StringConstant.ROOT_ID_32);
-		TreeJson.getTree(tList, root);
-		tList.clear();
-		tList.add(root);
+		TreeJson root = UserUtils.getMenuTree();
 		return root.getChildren();
 	}
 	
