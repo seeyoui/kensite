@@ -764,20 +764,7 @@
 						WEB-INF/classes/org/mybatis/spring/**
 					</packagingExcludes>
 					<warSourceExcludes>
-						static/bootstrap/2.3.1/docs/**,
-						static/ckeditor/_samples/**,
-						static/ckeditor/_source/**,
-						static/ckfinder/_samples/**,
-						static/ckfinder/help/**,
-						static/compressor*/**,
-						static/jquery-jbox/2.3/docs/**,
-						static/jquery-jbox/2.3/Skins2/**,
-						static/jquery-validation/1.11.0/demo/**,
-						static/jquery-ztree/3.5.12/demo/**,
-						static/My97DatePicker/docs/**,
-						static/supcan/doc/**,
-						static/SuperSlide/demo/**,
-						static/treeTable/demo/**<!-- , -->
+						static/bootstrap/2.3.1/docs/**,<!-- , -->
 						<!-- userfiles/** --><!-- ,/**/*.jsp -->,
 						test/**
 					</warSourceExcludes>
@@ -895,68 +882,6 @@
 			</plugin>
 		</plugins>
 	</build>
-	
-	<profiles>
-		<!-- 初始化数据库 -->			
-		<profile>
-			<id>init-db</id>
-			<dependencies>
-				<dependency>
-					<groupId>org.dbunit</groupId>
-					<artifactId>dbunit</artifactId>
-					<version>2.4.8</version>
-				</dependency>
-			  	<dependency>
-				    <groupId>org.apache.poi</groupId>
-				    <artifactId>poi</artifactId>
-				    <version>3.2-FINAL</version>
-				</dependency>
-			</dependencies>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-antrun-plugin</artifactId>
-						<version>1.7</version>
-						<configuration>
-							<target>
-								<!-- mysql
-								<property name="dbunit.datatype" value="org.dbunit.ext.mysql.MySqlDataTypeFactory" /> -->
-								<!-- mssql
-								<property name="dbunit.datatype" value="org.dbunit.ext.mssql.MsSqlDataTypeFactory" /> -->
-								<!-- oracle -->
-								<property name="dbunit.datatype" value="org.dbunit.ext.oracle.Oracle10DataTypeFactory" />
-								<property file="src/main/resources/kensite.properties" />
-								<sql driver="${jdbc.driver}" url="${jdbc.url}" userid="${jdbc.username}" password="${jdbc.password}" 
-									onerror="continue" encoding="${project.build.sourceEncoding}">
-									<classpath refid="maven.test.classpath" />
-									<transaction src="src/main/resources/db/sys/kensite_${jdbc.type}.sql"/>
-									<transaction src="src/main/resources/db/act/drop/activiti.${jdbc.type}.drop.engine.sql"/>
-									<transaction src="src/main/resources/db/act/drop/activiti.${jdbc.type}.drop.history.sql"/>
-									<transaction src="src/main/resources/db/act/drop/activiti.${jdbc.type}.drop.identity.sql"/>
-									<transaction src="src/main/resources/db/act/create/activiti.${jdbc.type}.create.engine.sql"/>
-									<transaction src="src/main/resources/db/act/create/activiti.${jdbc.type}.create.history.sql"/>
-									<transaction src="src/main/resources/db/act/create/activiti.${jdbc.type}.create.identity.sql"/>
-								</sql>
-								<taskdef name="dbunit" classname="org.dbunit.ant.DbUnitTask" classpathref="maven.test.classpath" />
-								<!-- mysql、mssql
-								<dbunit driver="${jdbc.driver}" url="${jdbc.url}" userid="${jdbc.username}" password="${jdbc.password}"> -->
-								<!-- oracle -->
-								<dbunit driver="${jdbc.driver}" url="${jdbc.url}" userid="${jdbc.username}" password="${jdbc.password}"
-									schema="${jdbc.username}" >
-									<dbconfig>
-										<property name="datatypeFactory" value="${dbunit.datatype}" />
-									</dbconfig>
-									<classpath refid="maven.test.classpath" />
-									<!-- <operation type="INSERT" src="src/main/resources/db/sys/kensite_data.xls" format="xls" transaction="true"/> -->
-								</dbunit>
-							</target>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
 	
 	<!-- 开发者信息 -->
 	<developers>  

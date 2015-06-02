@@ -155,8 +155,8 @@ public class LeaveController extends BaseController {
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, @PathVariable("id") String id) {
 		Leave leave = leaveService.findLeaveById(id);
-		JSONObject jsonObject = JSONObject.fromObject(leave);
-		
+//		JSONObject jsonObject = JSONObject.fromObject(leave);
+//		System.out.println(jsonObject.toString());
 		RequestResponseUtil.putResponseStr(session, response, request, JsonMapper.getInstance().toJson(leave));
 		return null;
 	}

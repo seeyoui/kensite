@@ -110,7 +110,7 @@
 				<ul class="navbar-nav">
 					<!-- add class "multiple-expanded" to allow multiple submenus to open -->
 					<!-- class "auto-inherit-active-class" will automatically add "active" class for parent elements who are marked already with class "active" -->
-					<li onclick="jumpTo('/login/mainContent/main.do', '', $(this))">
+					<li onclick="jumpTo('/login/mainContent/welcome.do', '', $(this))">
 						<a href="javascript:void(0);">
 							<i class="linecons-heart"></i>
 							<span class="title">首页</span>
@@ -306,7 +306,7 @@
 		</div>
 		<div class="main-content">
 			<div style="top:0px;left:0px;right:0px;bottom:85px;position:absolute;">
-				<iframe  id="mainContext" src="${ctx}/login/mainContent/main.do" style="width:100%;height:100%;border:0px;"></iframe>
+				<iframe  id="mainContext" src="${ctx}/login/mainContent/welcome.do" style="width:100%;height:100%;border:0px;"></iframe>
 			</div>
 		</div>
 	</div>
