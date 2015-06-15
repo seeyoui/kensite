@@ -5,8 +5,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
@@ -15,20 +13,17 @@ import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import com.seeyoui.kensite.common.util.CookieUtils;
-import com.seeyoui.kensite.common.util.Global;
 import com.seeyoui.kensite.common.util.MD5;
 import com.seeyoui.kensite.common.util.StringUtils;
+import com.seeyoui.kensite.framework.system.util.UserUtils;
 
 /**
  * 程序名称： LoginController.java.java
@@ -104,6 +99,7 @@ public class LoginController {
 	 */
 	@RequestMapping(value = "/logout")
 	public String loginOut(HttpSession session, ModelMap modelMap) {
+		UserUtils.clearCache();
 		SecurityUtils.getSubject().logout();  
 		return InternalResourceViewResolver.REDIRECT_URL_PREFIX + "/";
 	}

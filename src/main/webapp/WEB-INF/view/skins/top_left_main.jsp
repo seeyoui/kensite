@@ -4,6 +4,7 @@
 <html lang="en">
 <head>
 	<%@ include file="/WEB-INF/view/taglib/header.jsp" %>
+	<%@ include file="/WEB-INF/view/taglib/layer.jsp" %>
 </head>
 
 <body class="page-body ${theme}" style="overflow:hidden;">
@@ -26,9 +27,13 @@
 								<!-- Available statuses: is-online, is-idle, is-busy and is-offline -->
 								<span class="user-status is-online"></span>
 							</h3>
-							<p class="user-title">JAVA开发工程师${theme}</p>
+							<p class="user-title">
+							<c:forEach var="role" items="${currentUser.roleList}" varStatus="status">
+							${role.name}|
+							</c:forEach>
+							</p>
 							<div class="user-links">
-								<a href="javascript:void(0);" class="btn btn-success">编辑</a>
+								<a href="javascript:void(0);" onclick="jQuery('#userInfoModal').modal('show', {backdrop: 'static'});" class="btn btn-success">编辑</a>
 								<a href="${ctx}/login/logout.do" class="btn btn-danger">登出</a>
 							</div>
 						</div>
@@ -311,14 +316,50 @@
 		</div>
 	</div>
 	
+	<div class="modal fade" id="userInfoModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">用户信息</h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="field-1" class="control-label">姓名</label>
+								<input type="text" class="form-control" id="form-name" name="name" placeholder="请输入姓名" value="${currentUser.name}">
+							</div>	
+						</div>
+						<div class="col-md-6">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="field-1" class="control-label">邮箱</label>
+								<input type="text" class="form-control" id="form-email" name="email" placeholder="行输入有效邮箱" value="${currentUser.email}">
+							</div>	
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="field-2" class="control-label">手机</label>
+								<input type="text" class="form-control" id="form-phone" name="phone" placeholder="请输入常用手机号" value="${currentUser.phone}">
+							</div>	
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-info" onclick="updateUserInfo()">保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
 	<%@ include file="/WEB-INF/view/taglib/footer.jsp" %>
 	
 	<script type="text/javascript">
-		jQuery(document).ready(function($) {
-			//initTheme();
-			//$("#mainConetntBody").height($(window).height()-242);
-		});
-		
 		function jumpTo(url, text, obj) {
 			if(url==null || url=="" || url=="/") {
 				return;
@@ -331,6 +372,37 @@
 			//$("#currentMenu").html("<strong>"+text+"</strong>");
 			document.getElementById("mainContext").src = "${ctx}"+url;
 		}
+		
+		function updateUserInfo() {
+			//${ctx}/sysUser/saveByUpdate.do
+			var id = "${currentUser.id}";
+			var name = $("#form-name").val();
+			var email = $("#form-email").val();
+			var phone = $("#form-phone").val();
+			
+			$.ajax({
+				type: "post",
+				url: "${ctx}/sysUser/saveByUpdate.do",
+				data: {id:id,name:name,email:email,phone:phone},
+				dataType: 'text',
+				beforeSend: function(XMLHttpRequest){
+					loadi = layer.load('正在处理，请稍后...');
+				},
+				success: function(data, textStatus){
+					if (data=="<%=StringConstant.TRUE%>"){
+			        	layer.msg("操作成功！", 2, -1);
+			        } else {
+				    	layer.msg("操作失败！", 2, -1);
+			        }
+			        layer.close(loadi);
+				}
+			});
+		}
+		
+		jQuery(document).ready(function($) {
+			//initTheme();
+			
+		});
 	</script>
 	
 </body>

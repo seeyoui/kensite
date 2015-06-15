@@ -5,6 +5,7 @@
 package com.seeyoui.kensite.framework.system.domain;  
 
 import java.io.Serializable;
+import java.util.List;
 
 import com.seeyoui.kensite.common.base.domain.Pager;
 
@@ -25,6 +26,7 @@ public class SysUser extends Pager implements Serializable {
     private String departmentid;  
     private String state;  
     private SysDepartment sysDepartment;
+    private List<SysRole> roleList;
  
     public void setId(String id) {  
         this.id = id;  
@@ -91,5 +93,13 @@ public class SysUser extends Pager implements Serializable {
 
 	public void setSysDepartment(SysDepartment sysDepartment) {
 		this.sysDepartment = sysDepartment;
+	}
+
+	public List<SysRole> getRoleList() {
+		return roleList;
+	}
+
+	public void setRoleList(List<SysRole> roleList) {
+		this.roleList = roleList;
 	}  
 }
