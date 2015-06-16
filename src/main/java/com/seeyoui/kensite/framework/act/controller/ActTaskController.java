@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.seeyoui.kensite.common.base.controller.BaseController;
 import com.seeyoui.kensite.common.base.domain.Page;
+import com.seeyoui.kensite.common.constants.StringConstant;
 import com.seeyoui.kensite.framework.act.domain.Act;
 import com.seeyoui.kensite.framework.act.service.ActTaskService;
 import com.seeyoui.kensite.framework.act.util.ActUtils;
@@ -117,7 +118,7 @@ public class ActTaskController extends BaseController {
 	@ResponseBody
 	public String start(Act act, String table, String id, Model model) throws Exception {
 		actTaskService.startProcess(act.getProcDefKey(), act.getBusinessId(), act.getBusinessTable(), act.getTitle());
-		return "true";//adminPath + "/act/task";
+		return StringConstant.TRUE;
 	}
 
 	/**
@@ -129,7 +130,7 @@ public class ActTaskController extends BaseController {
 	public String claim(Act act) {
 		String userId = UserUtils.getUser().getUsername();//ObjectUtils.toString(UserUtils.getUser().getId());
 		actTaskService.claim(act.getTaskId(), userId);
-		return "true";//adminPath + "/act/task";
+		return StringConstant.TRUE;
 	}
 	
 	/**
@@ -146,7 +147,7 @@ public class ActTaskController extends BaseController {
 	@ResponseBody
 	public String complete(Act act) {
 		actTaskService.complete(act.getTaskId(), act.getProcInsId(), act.getComment(), act.getVars().getVariableMap());
-		return "true";//adminPath + "/act/task";
+		return StringConstant.TRUE;
 	}
 	
 	/**
