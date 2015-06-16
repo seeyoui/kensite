@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.seeyoui.kensite.framework.system.persistence.SysModulePermissionMapper" >
+	<!-- 查询单表的字段 -->
+	<sql id="tableColumns">
+	    t.moduleid,
+	    t.permissionid
+	</sql>
+	<!-- 查询过滤条件 -->
+	<sql id="whereStr">
+		<where>
+			1=1
+			<if test="moduleid != null and moduleid != ''">
+				and t.moduleid LIKE '%${moduleid}%'
+			</if>
+			<if test="permissionid != null and permissionid != ''">
+				and t.permissionid LIKE '%${permissionid}%'
+			</if>
+		</where>
+	</sql>
+	<sql id="orderBy">
+		ORDER BY t.id DESC 
+	</sql>
+	
+	<!-- 查询数据TREE -->
+	<select id="getTreeJson" resultType="com.seeyoui.kensite.framework.system.domain.SysPermission" parameterType="com.seeyoui.kensite.framework.system.domain.SysModulePermission">
+		SELECT 
+		t.id,
+		t.name,
+		case when sm.id is null then 'F' else 'T' end checked
+		from sys_permission t
+		left join sys_module_permission smp
+		on smp.permissionid = t.id and smp.moduleid=#{moduleid}
+		left join sys_module sm
+		on sm.id = smp.moduleid
+		ORDER BY t.sequence ASC
+	</select>
+	
+	<!-- 数据新增 -->
+	<insert id="saveSysModulePermission" parameterType="com.seeyoui.kensite.framework.system.domain.SysModulePermission">
+		INSERT INTO SYS_MODULE_PERMISSION (
+	    	permissionid,
+	    	moduleid
+		)
+		VALUES (
+			#{permissionid},
+			#{moduleid}
+		)
+	</insert>
+	
+	<!-- 数据删除 -->
+	<delete id="deleteSysModulePermission">
+		DELETE FROM SYS_MODULE_PERMISSION WHERE moduleid=#{moduleid}
+	</delete>
+</mapper>

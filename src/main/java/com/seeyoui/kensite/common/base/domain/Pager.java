@@ -3,6 +3,7 @@ package com.seeyoui.kensite.common.base.domain;
 public class Pager {
 	private int page;
 	private int rows;
+	private int row;
 	public int getPage() {
 		return page;
 	}
@@ -15,4 +16,8 @@ public class Pager {
 	public void setRows(int rows) {
 		this.rows = rows;
 	}
+	public int getRow() {
+		return (this.page-1)*this.rows;
+	}
+	
 }

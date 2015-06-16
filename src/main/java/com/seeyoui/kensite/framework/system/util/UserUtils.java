@@ -55,7 +55,7 @@ public class UserUtils {
 			if (sysUser == null){
 				return null;
 			}
-//			sysUser.setRoleList(sysRoleMapper.findSysUserRoleList(sysUser));
+			sysUser.setRoleList(sysRoleMapper.findSysUserRoleList(sysUser));
 			CacheUtils.put(USER_CACHE, USER_CACHE_ID_ + sysUser.getId(), sysUser);
 			CacheUtils.put(USER_CACHE, USER_CACHE_LOGIN_NAME_ + sysUser.getUsername(), sysUser);
 		}
@@ -74,7 +74,7 @@ public class UserUtils {
 			if (sysUser == null){
 				return null;
 			}
-//			sysUser.setRoleList(sysRoleMapper.findList(new SysRole(sysUser)));
+			sysUser.setRoleList(sysRoleMapper.findSysUserRoleList(sysUser));
 			CacheUtils.put(USER_CACHE, USER_CACHE_ID_ + sysUser.getId(), sysUser);
 			CacheUtils.put(USER_CACHE, USER_CACHE_LOGIN_NAME_ + sysUser.getUsername(), sysUser);
 		}
