@@ -1,4 +1,4 @@
-package com.seeyoui.kensite.framework.oa.controller.leave;
+package com.seeyoui.kensite.framework.oa.leave.controller;
 
 import java.util.List;
 import java.util.Map;
@@ -34,8 +34,8 @@ import com.seeyoui.kensite.common.constants.StringConstant;
 import com.seeyoui.kensite.common.util.RequestResponseUtil;
 import com.seeyoui.kensite.common.util.StringUtils;
 import com.seeyoui.kensite.framework.act.service.ActTaskService;
-import com.seeyoui.kensite.framework.oa.domain.leave.Leave;
-import com.seeyoui.kensite.framework.oa.service.leave.LeaveService;
+import com.seeyoui.kensite.framework.oa.leave.domain.Leave;
+import com.seeyoui.kensite.framework.oa.leave.service.LeaveService;
 import com.seeyoui.kensite.framework.system.domain.SysDepartment;
 import com.seeyoui.kensite.framework.system.util.UserUtils;
 

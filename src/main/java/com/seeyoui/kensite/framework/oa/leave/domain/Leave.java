@@ -1,4 +1,4 @@
-package com.seeyoui.kensite.framework.oa.domain.leave;
+package com.seeyoui.kensite.framework.oa.leave.domain;
 
 import java.util.Date;
 import java.util.Map;

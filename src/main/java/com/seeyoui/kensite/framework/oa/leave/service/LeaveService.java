@@ -1,4 +1,4 @@
-package com.seeyoui.kensite.framework.oa.service.leave;
+package com.seeyoui.kensite.framework.oa.leave.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -21,8 +21,8 @@ import com.seeyoui.kensite.common.exception.CRUDException;
 import com.seeyoui.kensite.common.util.Collections3;
 import com.seeyoui.kensite.common.util.StringUtils;
 import com.seeyoui.kensite.framework.act.idgenerator.GeneratorUUID;
-import com.seeyoui.kensite.framework.oa.domain.leave.Leave;
-import com.seeyoui.kensite.framework.oa.persistence.leave.LeaveMapper;
+import com.seeyoui.kensite.framework.oa.leave.domain.Leave;
+import com.seeyoui.kensite.framework.oa.leave.persistence.LeaveMapper;
 import com.seeyoui.kensite.framework.system.domain.SysMenu;
 
 @Service

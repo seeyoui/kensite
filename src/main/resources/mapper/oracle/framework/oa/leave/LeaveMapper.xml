@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.seeyoui.kensite.framework.oa.persistence.leave.LeaveMapper" >
+<mapper namespace="com.seeyoui.kensite.framework.oa.leave.persistence.LeaveMapper" >
 	<!-- 查询单表的字段 -->
 	<sql id="tableColumns">
 	    t.id,
@@ -45,7 +45,7 @@
 	</sql>
 	
 	<!-- 根据ID查询单条数据 -->
-	<select id="findLeaveById" resultType="com.seeyoui.kensite.framework.oa.domain.leave.Leave">
+	<select id="findLeaveById" resultType="com.seeyoui.kensite.framework.oa.leave.domain.Leave">
 		SELECT
 		<include refid="tableColumns" />
 		FROM OA_LEAVE t
@@ -54,7 +54,7 @@
 	</select>
 	
 	<!-- 查询数据集合 -->
-	<select id="findLeaveList" resultType="com.seeyoui.kensite.framework.oa.domain.leave.Leave">
+	<select id="findLeaveList" resultType="com.seeyoui.kensite.framework.oa.leave.domain.Leave">
 		select * from(select t.*,rownum rn from(
 			SELECT
 			<include refid="tableColumns"/>
@@ -74,7 +74,7 @@
 	</select>
 	
 	<!-- 数据新增 -->
-	<insert id="saveLeave" parameterType="com.seeyoui.kensite.framework.oa.domain.leave.Leave">
+	<insert id="saveLeave" parameterType="com.seeyoui.kensite.framework.oa.leave.domain.Leave">
 		INSERT INTO OA_LEAVE (
 	    	createdate,
 	    	createuser,
@@ -96,7 +96,7 @@
 	</insert>
 	
 	<!-- 数据修改 -->
-	<update id="updateLeave" parameterType="com.seeyoui.kensite.framework.oa.domain.leave.Leave">
+	<update id="updateLeave" parameterType="com.seeyoui.kensite.framework.oa.leave.domain.Leave">
 		UPDATE OA_LEAVE
 		<set>
 	    	<if test="updateDate !=null and updateDate !=''">
@@ -123,7 +123,7 @@
 	</update>
 	
 	<!-- 数据修改 -->
-	<update id="updateBindid" parameterType="com.seeyoui.kensite.framework.oa.domain.leave.Leave">
+	<update id="updateBindid" parameterType="com.seeyoui.kensite.framework.oa.leave.domain.Leave">
 		UPDATE OA_LEAVE
 		set bindid=#{bindid}
 		WHERE id = #{id}

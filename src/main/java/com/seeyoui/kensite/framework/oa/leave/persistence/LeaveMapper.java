@@ -1,10 +1,10 @@
-package com.seeyoui.kensite.framework.oa.persistence.leave;
+package com.seeyoui.kensite.framework.oa.leave.persistence;
 
 import java.util.List;
 
 import com.seeyoui.kensite.common.base.domain.EasyUIDataGrid;
 import com.seeyoui.kensite.common.exception.CRUDException;
-import com.seeyoui.kensite.framework.oa.domain.leave.Leave;
+import com.seeyoui.kensite.framework.oa.leave.domain.Leave;
 
 public interface LeaveMapper {
 	
