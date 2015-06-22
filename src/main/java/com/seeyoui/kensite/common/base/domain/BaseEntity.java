@@ -24,11 +24,6 @@ public abstract class BaseEntity<T> implements Serializable {
 	 */
 	protected SysUser currentUser;
 	
-	/**
-	 * 自定义SQL（SQL标识，SQL内容）
-	 */
-	protected Map<String, String> sqlMap;
-
 	public String getId() {
 		return id;
 	}
@@ -47,18 +42,6 @@ public abstract class BaseEntity<T> implements Serializable {
 	
 	public void setCurrentUser(SysUser currentUser) {
 		this.currentUser = currentUser;
-	}
-
-	@JsonIgnore
-	public Map<String, String> getSqlMap() {
-		if (sqlMap == null){
-			sqlMap = Maps.newHashMap();
-		}
-		return sqlMap;
-	}
-
-	public void setSqlMap(Map<String, String> sqlMap) {
-		this.sqlMap = sqlMap;
 	}
 	
 	/**

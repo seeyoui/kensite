@@ -41,8 +41,6 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
 		// 不限制ID为UUID，调用setIsNewRecord()使用自定义ID
 		setId(GeneratorUUID.getId());
 		SysUser sysUser = UserUtils.getUser();
-//		SysUser sysUser = new SysUser();
-//		sysUser.setUsername("system");
 		if (StringUtils.isNotBlank(sysUser.getUsername())){
 			this.updateUser = sysUser;
 			this.createUser = sysUser;
