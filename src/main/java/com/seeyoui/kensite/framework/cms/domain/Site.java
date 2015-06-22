@@ -4,6 +4,7 @@
  */
 package com.seeyoui.kensite.framework.cms.domain;  
 
+import com.seeyoui.kensite.common.base.domain.DataEntity;
 import com.seeyoui.kensite.common.base.domain.Pager;
 
 /**
@@ -11,7 +12,7 @@ import com.seeyoui.kensite.common.base.domain.Pager;
  * @version 1.0
  * @since 1.0
  */
-public class Site extends Pager {
+public class Site extends DataEntity<Link> {
     private static final long serialVersionUID = 5454155825314635342L;
       
     //编号

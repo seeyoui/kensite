@@ -66,7 +66,7 @@ public class SiteService extends BaseService {
 	 * @throws CRUDException
 	 */
 	public void saveSite(Site site) throws CRUDException{
-		site.setId(GeneratorUUID.getId());
+		site.preInsert();
 		siteMapper.saveSite(site);
 	}
 	
@@ -76,6 +76,7 @@ public class SiteService extends BaseService {
 	 * @throws CRUDException
 	 */
 	public void updateSite(Site site) throws CRUDException{
+		site.preUpdate();
 		siteMapper.updateSite(site);			
 	}
 	

@@ -10,7 +10,7 @@ import com.google.common.collect.Maps;
 import com.seeyoui.kensite.framework.system.domain.SysUser;
 import com.seeyoui.kensite.framework.system.util.UserUtils;
 
-public abstract class BaseEntity<T> implements Serializable {
+public abstract class BaseEntity<T> extends Pager implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 

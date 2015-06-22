@@ -54,7 +54,7 @@
 		    </div>
 		    <div id="dataWin" class="easyui-window" title="站点表信息维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:400px;height:260px;padding:10px;">
 		        <div class="ftitle">站点表信息维护</div>
-		        <form id="dataForm" method="post" enctype="multipart/form-data">
+		        <form id="dataForm" method="post">
 							<div class="fitem">
 				                <label>站点名称</label>
 				                <input id="name" name="name" class="easyui-validatebox textbox" data-options="required:true"/>
@@ -85,7 +85,7 @@
 				            </div>
 							<div class="fitem">
 				                <label>版权信息</label>
-				                <input id="copyright" name="copyright" class="easyui-validatebox textbox" data-options="required:true,multiline:true" style="height:100px"/>
+				                <input id="copyright" name="copyright" class="easyui-validatebox textbox" data-options="required:true"/>
 				            </div>
 							<div class="fitem">
 				                <label>自定义站点首页视图</label>
@@ -95,12 +95,6 @@
 				                <label>备注信息</label>
 				                <input id="remarks" name="remarks" class="easyui-validatebox textbox" data-options="required:true"/>
 				            </div>
-							<div class="fitem">
-				                <label>删除标记</label>
-				                <input id="delflag" name="delflag" class="easyui-validatebox textbox" data-options="required:true"/>
-				            </div>
-	                <input id="createuser" name="createuser" type="hidden"/>
-	                <input id="updateuser" name="updateuser" type="hidden"/>
 				</form>
 				
 			    <div id="dataWin-buttons">
@@ -110,9 +104,6 @@
 		    </div>
 	    </div>
     </div>
-    <form id="delForm" method="post" enctype="multipart/form-data">
-    	<input type="hidden" id="delDataId" name="delDataId" value=""/>
-    </form>
     <script type="text/javascript">
 	    $(document).ready(function(){
 	    	initSize();
@@ -138,12 +129,13 @@
     		    keywords:sel_keywords
         	});
         }
-	    
+	    function reloadData() {
+        	selectData();
+        }
         var url;
         function newInfo(){
             $('#dataWin').window('open');
             $('#dataForm').form('clear');
-            $("#createuser").val("${currentUsername}");
             url = '${ctx}/cms/site/saveByAdd.do';
         }
         function editInfo(){
@@ -151,7 +143,6 @@
             if (row){
                 $('#dataWin').window('open');
                 $('#dataForm').form('load',row);
-                $("#updateuser").val("${currentUsername}");
                 url = '${ctx}/cms/site/saveByUpdate.do?id='+row.id;
             }    	
         }
@@ -166,7 +157,7 @@
                     return $(this).form('validate');
                 },
                 success: function(info){
-                    if (info==TRUE){
+                    if (info=="<%=StringConstant.TRUE%>"){
                         layer.msg("操作成功！", 2, -1);
                     } else {
 	                    layer.msg("操作失败！", 2, -1);
@@ -182,17 +173,20 @@
             if (row){
                 $.messager.confirm('确认','你确定删除该记录吗？',function(r){
                     if (r){
-						$('#delDataId').val(row.id);
-						$('#delForm').form('submit',{
-							url: '${ctx}/cms/site/delete.do',
+                    	$.ajax({
+							type: "post",
+							url: "${ctx}/cms/site/delete.do",
+							data: {delDataId:row.id},
 							dataType: 'text',
-							success: function(info){
-								if (info==TRUE){
+							beforeSend: function(XMLHttpRequest){
+							},
+							success: function(data, textStatus){
+								if (data=="<%=StringConstant.TRUE%>"){
 			                        layer.msg("操作成功！", 2, -1);
 			                    } else {
 				                    layer.msg("操作失败！", 2, -1);
 			                    }
-								$('#dataList').datagrid('reload');
+								reloadData();
 							}
 						});
                     }

@@ -119,7 +119,6 @@
 	    	customview,
 	    	createuser,
 	    	remarks,
-	    	delflag,
 		    id
 		)
 		VALUES (
@@ -134,7 +133,6 @@
 			#{customview},
 			#{createuser},
 			#{remarks},
-			#{delflag},
 		    #{id}
 		)
 	</insert>
