@@ -13,7 +13,7 @@ import com.seeyoui.kensite.framework.system.util.UserUtils;
 
 /**
  * 数据Entity类
- * @author ThinkGem
+ * @author SeeYoui
  * @version 2014-05-16
  */
 public abstract class DataEntity<T> extends BaseEntity<T> {
@@ -28,18 +28,14 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
 	protected String delFlag; 	// 删除标记（0：正常；1：删除；2：审核）
 	protected String bindid;	// 流程相关绑定id
 	
-	public DataEntity() {
-		super();
-		this.delFlag = DEL_FLAG_NORMAL;
-	}
-	
 	/**
 	 * 插入之前执行方法，需要手动调用
 	 */
 	@Override
 	public void preInsert(){
-		// 不限制ID为UUID，调用setIsNewRecord()使用自定义ID
-		setId(GeneratorUUID.getId());
+		if(StringUtils.isBlank(this.id)) {
+			this.id = GeneratorUUID.getId();
+		}
 		SysUser sysUser = UserUtils.getUser();
 		if (StringUtils.isNotBlank(sysUser.getUsername())){
 			this.updateUser = sysUser;
@@ -55,7 +51,7 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
 	@Override
 	public void preUpdate(){
 		SysUser SysUser = UserUtils.getUser();
-		if (StringUtils.isNotBlank(SysUser.getId())){
+		if (StringUtils.isNotBlank(SysUser.getUsername())){
 			this.updateUser = SysUser;
 		}
 		this.updateDate = new Date();

@@ -3,14 +3,16 @@ package com.seeyoui.kensite.common.base.domain;
 import java.io.Serializable;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.collect.Maps;
+import com.seeyoui.kensite.framework.act.idgenerator.GeneratorUUID;
 import com.seeyoui.kensite.framework.system.domain.SysUser;
 import com.seeyoui.kensite.framework.system.util.UserUtils;
 
-public abstract class BaseEntity<T> extends Pager implements Serializable {
+public abstract class BaseEntity<T> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -24,6 +26,19 @@ public abstract class BaseEntity<T> extends Pager implements Serializable {
 	 */
 	protected SysUser currentUser;
 	
+	/**
+	 * 当前页号
+	 */
+	protected int page;
+	/**
+	 * 每页行数
+	 */
+	protected int rows;
+	/**
+	 * 当前行号
+	 */
+	protected int row;
+	
 	public String getId() {
 		return id;
 	}
@@ -32,6 +47,30 @@ public abstract class BaseEntity<T> extends Pager implements Serializable {
 		this.id = id;
 	}
 	
+	public int getPage() {
+		return page;
+	}
+
+	public void setPage(int page) {
+		this.page = page;
+	}
+
+	public int getRows() {
+		return rows;
+	}
+
+	public void setRows(int rows) {
+		this.rows = rows;
+	}
+
+	public int getRow() {
+		return row;
+	}
+
+	public void setRow(int row) {
+		this.row = row;
+	}
+
 	@JsonIgnore
 	public SysUser getCurrentUser() {
 		if(currentUser == null){
