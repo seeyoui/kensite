@@ -1,0 +1,28 @@
+-- 日志表
+CREATE TABLE sys_log
+(
+	id char(32) NOT NULL,
+	type char(1) DEFAULT '1',
+	title varchar2(500),
+	createuser varchar2(64),
+	createdate date,
+	remote_addr varchar2(255),
+	user_agent varchar2(255),
+	request_uri varchar2(255),
+	method varchar2(5),
+	params varchar2(4000),
+	exception varchar2(4000),
+	PRIMARY KEY (id)
+);
+COMMENT ON TABLE sys_log IS '日志表';
+COMMENT ON COLUMN sys_log.id IS '主键';
+COMMENT ON COLUMN sys_log.type IS '日志类型';
+COMMENT ON COLUMN sys_log.title IS '日志标题';
+COMMENT ON COLUMN sys_log.createuser IS '创建者';
+COMMENT ON COLUMN sys_log.createdate IS '创建时间';
+COMMENT ON COLUMN sys_log.remote_addr IS '操作用户的IP地址';
+COMMENT ON COLUMN sys_log.user_agent IS '操作用户代理信息';
+COMMENT ON COLUMN sys_log.request_uri IS '操作的URI';
+COMMENT ON COLUMN sys_log.method IS '操作的方式';
+COMMENT ON COLUMN sys_log.params IS '操作提交的数据';
+COMMENT ON COLUMN sys_log.exception IS '异常信息';
