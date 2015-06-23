@@ -5,18 +5,15 @@
 package com.seeyoui.kensite.framework.cms.domain;  
 
 import com.seeyoui.kensite.common.base.domain.DataEntity;
-import com.seeyoui.kensite.common.base.domain.Pager;
 
 /**
  * @author cuichen
  * @version 1.0
  * @since 1.0
  */
-public class Site extends DataEntity<Link> {
+public class Site extends DataEntity<Site> {
     private static final long serialVersionUID = 5454155825314635342L;
       
-    //编号
-    private String id;
     //站点名称
     private String name;
     //站点标题
@@ -35,26 +32,7 @@ public class Site extends DataEntity<Link> {
     private String copyright;
     //自定义站点首页视图
     private String customview;
-    //创建者
-    private String createuser;
-    //创建时间
-    private java.util.Date createdate;
-    //更新者
-    private String updateuser;
-    //更新时间
-    private java.util.Date updatedate;
-    //备注信息
-    private String remarks;
-    //删除标记
-    private String delflag;
  
-    public void setId(String id) {
-        this.id = id;
-    }
-    
-    public String getId() {
-        return this.id;
-    }
     public void setName(String name) {
         this.name = name;
     }
@@ -117,47 +95,5 @@ public class Site extends DataEntity<Link> {
     
     public String getCustomview() {
         return this.customview;
-    }
-    public void setCreateuser(String createuser) {
-        this.createuser = createuser;
-    }
-    
-    public String getCreateuser() {
-        return this.createuser;
-    }
-    public void setCreatedate(java.util.Date createdate) {
-        this.createdate = createdate;
-    }
-    
-    public java.util.Date getCreatedate() {
-        return this.createdate;
-    }
-    public void setUpdateuser(String updateuser) {
-        this.updateuser = updateuser;
-    }
-    
-    public String getUpdateuser() {
-        return this.updateuser;
-    }
-    public void setUpdatedate(java.util.Date updatedate) {
-        this.updatedate = updatedate;
-    }
-    
-    public java.util.Date getUpdatedate() {
-        return this.updatedate;
-    }
-    public void setRemarks(String remarks) {
-        this.remarks = remarks;
-    }
-    
-    public String getRemarks() {
-        return this.remarks;
-    }
-    public void setDelflag(String delflag) {
-        this.delflag = delflag;
-    }
-    
-    public String getDelflag() {
-        return this.delflag;
     }
 }

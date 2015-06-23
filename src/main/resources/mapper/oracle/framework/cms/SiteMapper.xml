@@ -13,12 +13,12 @@
 	    t.theme,
 	    t.copyright,
 	    t.customview,
-	    t.createuser,
-	    t.createdate,
-	    t.updateuser,
-	    t.updatedate,
+	    t.createuser as "createUser.username",
+	    t.createDate,
+	    t.updateuser as "updateUser.username",
+	    t.updateDate,
 	    t.remarks,
-	    t.delflag
+	    t.delFlag
 	</sql>
 	<!-- 查询过滤条件 -->
 	<sql id="whereStr">
@@ -54,23 +54,23 @@
 			<if test="customview != null and customview != ''">
 				and t.customview LIKE '%'||#{customview}||'%'
 			</if>
-			<if test="createuser != null and createuser != ''">
-				and t.createuser LIKE '%'||#{createuser}||'%'
+			<if test="createUser != null and createUser.username!= null and createUser.username != ''">
+				and t.createuser LIKE '%'||#{createUser.username}||'%'
 			</if>
-			<if test="createdate != null and createdate != ''">
-				and t.createdate = #{createdate}
+			<if test="createDate != null and createDate != ''">
+				and t.createdate = #{createDate}
 			</if>
-			<if test="updateuser != null and updateuser != ''">
-				and t.updateuser LIKE '%'||#{updateuser}||'%'
+			<if test="updateUser != null and updateUser.username != null and updateUser.username != ''">
+				and t.updateuser LIKE '%'||#{updateUser.username}||'%'
 			</if>
-			<if test="updatedate != null and updatedate != ''">
-				and t.updatedate = #{updatedate}
+			<if test="updateDate != null and updateDate != ''">
+				and t.updateDate = #{updateDate}
 			</if>
 			<if test="remarks != null and remarks != ''">
 				and t.remarks LIKE '%'||#{remarks}||'%'
 			</if>
-			<if test="delflag != null and delflag != ''">
-				and t.delflag LIKE '%'||#{delflag}||'%'
+			<if test="delFlag != null and delFlag != ''">
+				and t.delFlag LIKE '%'||#{delFlag}||'%'
 			</if>
 		</where>
 	</sql>
@@ -118,6 +118,7 @@
 	    	copyright,
 	    	customview,
 	    	createuser,
+	    	createdate,
 	    	remarks,
 		    id
 		)
@@ -131,7 +132,8 @@
 			#{theme},
 			#{copyright},
 			#{customview},
-			#{createuser},
+			#{createUser.username},
+			#{createDate},
 			#{remarks},
 		    #{id}
 		)
@@ -168,14 +170,17 @@
 	    	<if test="customview !=null and customview !=''">
 			customview=#{customview},
 			</if>
-	    	<if test="updateuser !=null and updateuser !=''">
-			updateuser=#{updateuser},
+	    	<if test="updateUser !=null and updateUser.username !=null and updateUser.username !=''">
+			updateuser=#{updateUser.username},
+			</if>
+	    	<if test="updateDate !=null and updateDate !=''">
+			updateDate=#{updateDate},
 			</if>
 	    	<if test="remarks !=null and remarks !=''">
 			remarks=#{remarks},
 			</if>
-	    	<if test="delflag !=null and delflag !=''">
-			delflag=#{delflag},
+	    	<if test="delFlag !=null and delFlag !=''">
+			delFlag=#{delFlag},
 			</if>
 		    id = #{id}
 		</set>
