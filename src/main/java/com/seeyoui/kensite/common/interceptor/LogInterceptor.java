@@ -1,6 +1,3 @@
-/**
- * Copyright &copy; 2014-2015 <a href="https://seeyoui.com">kensite</a> All rights reserved.
- */
 package com.seeyoui.kensite.common.interceptor;
 
 import java.text.SimpleDateFormat;
@@ -14,10 +11,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.seeyoui.kensite.common.base.service.BaseService;
 import com.seeyoui.kensite.common.util.DateUtils;
+import com.seeyoui.kensite.framework.plugin.log.util.LogUtils;
 
 /**
  * 日志拦截器
- * @author ken
+ * @author SeeYoui
  * @version 2015-03-25
  */
 public class LogInterceptor extends BaseService implements HandlerInterceptor {
@@ -45,12 +43,12 @@ public class LogInterceptor extends BaseService implements HandlerInterceptor {
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, 
 			Object handler, Exception ex) throws Exception {
-		// 保存日志
-		//LogUtils.saveLog(request, handler, ex, null);
+		//保存日志
+		LogUtils.saveLog(request, handler, ex, null);
 		// 打印JVM信息。
 		if (logger.isDebugEnabled()){
 			long beginTime = startTimeThreadLocal.get();//得到线程绑定的局部变量（开始时间）  
-			long endTime = System.currentTimeMillis(); 	//2、结束时间  
+			long endTime = System.currentTimeMillis(); 	//2、结束时间
 	        logger.debug("计时结束：{}  耗时：{}  URI: {}  最大内存: {}m  已分配内存: {}m  已分配内存中的剩余空间: {}m  最大可用内存: {}m",
 	        		new SimpleDateFormat("hh:mm:ss.SSS").format(endTime), DateUtils.formatDateTime(endTime - beginTime),
 					request.getRequestURI(), Runtime.getRuntime().maxMemory()/1024/1024, Runtime.getRuntime().totalMemory()/1024/1024, Runtime.getRuntime().freeMemory()/1024/1024, 

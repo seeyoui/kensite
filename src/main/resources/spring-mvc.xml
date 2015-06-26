@@ -104,7 +104,13 @@
 	<mvc:resources mapping="/assets/**" location="/assets/"/>
 	<mvc:resources mapping="/static/**" location="/static/"/>
 	<mvc:resources mapping="/WEB-INF/**" location="/WEB-INF/"/>
-	
+	<!-- 拦截器配置 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean class="com.seeyoui.kensite.common.interceptor.LogInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
 
 	<!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
 	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>

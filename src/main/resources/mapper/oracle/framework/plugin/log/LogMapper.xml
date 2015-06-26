@@ -6,11 +6,11 @@
 	    t.id,
 	    t.type,
 	    t.title,
-	    t.createuser,
-	    t.createdate,
-	    t.remoteAddr,
-	    t.userAgent,
-	    t.requestUri,
+	    t.createuser as "createUser.username",
+	    t.createdate as "createDate",
+	    t.remote_addr,
+	    t.user_agent,
+	    t.request_uri,
 	    t.method,
 	    t.params,
 	    t.exception
@@ -25,20 +25,20 @@
 			<if test="title != null and title != ''">
 				and t.title LIKE '%'||#{title}||'%'
 			</if>
-			<if test="createuser != null and createuser != ''">
-				and t.createuser LIKE '%'||#{createuser}||'%'
+			<if test="createUser != null and createUser.username != null and createUser.username != ''">
+				and t.createuser LIKE '%'||#{createUser.username}||'%'
 			</if>
-			<if test="createdate != null and createdate != ''">
-				and t.createdate = #{createdate}
+			<if test="createDate != null and createDate != ''">
+				and t.createdate = #{createDate}
 			</if>
 			<if test="remoteAddr != null and remoteAddr != ''">
-				and t.remoteAddr LIKE '%'||#{remoteAddr}||'%'
+				and t.remote_addr LIKE '%'||#{remoteAddr}||'%'
 			</if>
 			<if test="userAgent != null and userAgent != ''">
-				and t.userAgent LIKE '%'||#{userAgent}||'%'
+				and t.user_agent LIKE '%'||#{userAgent}||'%'
 			</if>
 			<if test="requestUri != null and requestUri != ''">
-				and t.requestUri LIKE '%'||#{requestUri}||'%'
+				and t.request_uri LIKE '%'||#{requestUri}||'%'
 			</if>
 			<if test="method != null and method != ''">
 				and t.method LIKE '%'||#{method}||'%'
@@ -88,9 +88,10 @@
 	    	type,
 	    	title,
 	    	createuser,
-	    	remoteAddr,
-	    	userAgent,
-	    	requestUri,
+	    	createdate,
+	    	remote_addr,
+	    	user_agent,
+	    	request_uri,
 	    	method,
 	    	params,
 	    	exception,
@@ -99,7 +100,8 @@
 		VALUES (
 			#{type},
 			#{title},
-			#{createuser},
+			#{createUser.username},
+			#{createDate},
 			#{remoteAddr},
 			#{userAgent},
 			#{requestUri},

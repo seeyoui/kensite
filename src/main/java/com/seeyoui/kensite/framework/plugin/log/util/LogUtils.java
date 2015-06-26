@@ -50,11 +50,12 @@ public class LogUtils {
 		if (user != null && user.getId() != null){
 			Log log = new Log();
 			log.setTitle(title);
+			log.setCreateUser(user);
 			log.setType(ex == null ? "s" : "e");
 			log.setRemoteAddr(StringUtils.getRemoteAddr(request));
 			log.setUserAgent(request.getHeader("user-agent"));
 			log.setRequestUri(request.getRequestURI());
-			log.setParams(request.getParameterMap().toString());
+			log.setParams(request.getParameterMap());
 			log.setMethod(request.getMethod());
 			// 异步保存日志
 			new SaveLogThread(log, handler, ex).start();
@@ -87,7 +88,7 @@ public class LogUtils {
 					RequiresPermissions rp = m.getAnnotation(RequiresPermissions.class);
 					permission = (rp != null ? StringUtils.join(rp.value(), ",") : "");
 				}
-				log.setTitle("");
+				log.setTitle("["+log.getCreateUser().getUsername()+"]"+log.getCreateUser().getName());
 			}
 			// 如果有异常，设置异常信息
 			log.setException(Exceptions.getStackTraceAsString(ex));
