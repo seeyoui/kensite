@@ -2,7 +2,7 @@
  * Powered By cuichen
  * Since 2014 - 2015
  */
-package com.seeyoui.kensite.framework.log.controller;  
+package com.seeyoui.kensite.framework.plugin.log.controller;  
  
 import java.util.List;
 
@@ -24,8 +24,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.seeyoui.kensite.common.base.controller.BaseController;
 import com.seeyoui.kensite.common.base.domain.EasyUIDataGrid;
 import com.seeyoui.kensite.common.util.RequestResponseUtil;
-import com.seeyoui.kensite.framework.log.domain.Log;
-import com.seeyoui.kensite.framework.log.service.LogService;
+import com.seeyoui.kensite.framework.plugin.log.domain.Log;
+import com.seeyoui.kensite.framework.plugin.log.service.LogService;
 /**
  * @author cuichen
  * @version 1.0

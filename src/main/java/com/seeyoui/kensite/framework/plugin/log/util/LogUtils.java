@@ -1,4 +1,4 @@
-package com.seeyoui.kensite.framework.log.util;
+package com.seeyoui.kensite.framework.plugin.log.util;
 
 import java.lang.reflect.Method;
 import java.util.List;
@@ -16,8 +16,8 @@ import com.seeyoui.kensite.common.util.CacheUtils;
 import com.seeyoui.kensite.common.util.Global;
 import com.seeyoui.kensite.common.util.SpringContextHolder;
 import com.seeyoui.kensite.common.util.StringUtils;
-import com.seeyoui.kensite.framework.log.domain.Log;
-import com.seeyoui.kensite.framework.log.persistence.LogMapper;
+import com.seeyoui.kensite.framework.plugin.log.domain.Log;
+import com.seeyoui.kensite.framework.plugin.log.persistence.LogMapper;
 import com.seeyoui.kensite.framework.system.domain.SysMenu;
 import com.seeyoui.kensite.framework.system.domain.SysUser;
 import com.seeyoui.kensite.framework.system.persistence.SysMenuMapper;
@@ -54,7 +54,7 @@ public class LogUtils {
 			log.setRemoteAddr(StringUtils.getRemoteAddr(request));
 			log.setUserAgent(request.getHeader("user-agent"));
 			log.setRequestUri(request.getRequestURI());
-			log.setParams(request.getParameterMap());
+			log.setParams(request.getParameterMap().toString());
 			log.setMethod(request.getMethod());
 			// 异步保存日志
 			new SaveLogThread(log, handler, ex).start();

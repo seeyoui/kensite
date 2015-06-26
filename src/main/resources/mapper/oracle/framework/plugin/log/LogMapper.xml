@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.seeyoui.kensite.framework.plugin.log.persistence.LogMapper" >
+	<!-- 查询单表的字段 -->
+	<sql id="tableColumns">
+	    t.id,
+	    t.type,
+	    t.title,
+	    t.createuser,
+	    t.createdate,
+	    t.remoteAddr,
+	    t.userAgent,
+	    t.requestUri,
+	    t.method,
+	    t.params,
+	    t.exception
+	</sql>
+	<!-- 查询过滤条件 -->
+	<sql id="whereStr">
+		<where>
+			1=1
+			<if test="type != null and type != ''">
+				and t.type LIKE '%'||#{type}||'%'
+			</if>
+			<if test="title != null and title != ''">
+				and t.title LIKE '%'||#{title}||'%'
+			</if>
+			<if test="createuser != null and createuser != ''">
+				and t.createuser LIKE '%'||#{createuser}||'%'
+			</if>
+			<if test="createdate != null and createdate != ''">
+				and t.createdate = #{createdate}
+			</if>
+			<if test="remoteAddr != null and remoteAddr != ''">
+				and t.remoteAddr LIKE '%'||#{remoteAddr}||'%'
+			</if>
+			<if test="userAgent != null and userAgent != ''">
+				and t.userAgent LIKE '%'||#{userAgent}||'%'
+			</if>
+			<if test="requestUri != null and requestUri != ''">
+				and t.requestUri LIKE '%'||#{requestUri}||'%'
+			</if>
+			<if test="method != null and method != ''">
+				and t.method LIKE '%'||#{method}||'%'
+			</if>
+			<if test="params != null and params != ''">
+				and t.params LIKE '%'||#{params}||'%'
+			</if>
+			<if test="exception != null and exception != ''">
+				and t.exception LIKE '%'||#{exception}||'%'
+			</if>
+		</where>
+	</sql>
+	<sql id="orderBy">
+		ORDER BY t.id DESC 
+	</sql>
+	
+	<!-- 根据ID查询单条数据 -->
+	<select id="findLogById" resultType="com.seeyoui.kensite.framework.plugin.log.domain.Log">
+		SELECT
+		<include refid="tableColumns" />
+		FROM SYS_LOG t
+		WHERE id = #{id}
+	</select>
+	
+	<!-- 查询数据集合 -->
+	<select id="findLogList" resultType="com.seeyoui.kensite.framework.plugin.log.domain.Log">
+		select * from(select t.*,rownum rn from(
+			SELECT
+			<include refid="tableColumns"/>
+			FROM SYS_LOG t
+			<include refid="whereStr"/>
+			<include refid="orderBy"/>
+		) t where rownum &lt; = #{page}*#{rows}) where rn &gt; (#{page}-1)*#{rows}
+	</select>
+	
+	<!-- 查询数据总数 -->
+	<select id="findLogListTotal" resultType="EasyUIDataGrid">
+		SELECT
+		COUNT(id)total
+		FROM SYS_LOG t
+		<include refid="whereStr"/>
+	</select>
+	
+	<!-- 数据新增 -->
+	<insert id="saveLog" parameterType="com.seeyoui.kensite.framework.plugin.log.domain.Log">
+		INSERT INTO SYS_LOG (
+	    	type,
+	    	title,
+	    	createuser,
+	    	remoteAddr,
+	    	userAgent,
+	    	requestUri,
+	    	method,
+	    	params,
+	    	exception,
+		    id
+		)
+		VALUES (
+			#{type},
+			#{title},
+			#{createuser},
+			#{remoteAddr},
+			#{userAgent},
+			#{requestUri},
+			#{method},
+			#{params},
+			#{exception},
+		    #{id}
+		)
+	</insert>
+</mapper>

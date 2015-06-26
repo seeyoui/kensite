@@ -2,10 +2,10 @@
  * Powered By cuichen
  * Since 2014 - 2015
  */
-package com.seeyoui.kensite.framework.log.persistence;  
+package com.seeyoui.kensite.framework.plugin.log.persistence;  
 
 import com.seeyoui.kensite.common.base.domain.EasyUIDataGrid;
-import com.seeyoui.kensite.framework.log.domain.Log;
+import com.seeyoui.kensite.framework.plugin.log.domain.Log;
 import java.util.*;
 
 /**

@@ -1,7 +1,7 @@
 /*
  * Powered By cuichen
  * Since 2014 - 2015
- */package com.seeyoui.kensite.framework.log.service;  
+ */package com.seeyoui.kensite.framework.plugin.log.service;  
  
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,8 +15,8 @@ import com.seeyoui.kensite.common.base.service.BaseService;
 import com.seeyoui.kensite.common.exception.CRUDException;
 import com.seeyoui.kensite.common.util.*;
 import com.seeyoui.kensite.common.constants.StringConstant;
-import com.seeyoui.kensite.framework.log.domain.Log;
-import com.seeyoui.kensite.framework.log.persistence.LogMapper;
+import com.seeyoui.kensite.framework.plugin.log.domain.Log;
+import com.seeyoui.kensite.framework.plugin.log.persistence.LogMapper;
 import com.seeyoui.kensite.framework.act.idgenerator.GeneratorUUID;
 
 /**
