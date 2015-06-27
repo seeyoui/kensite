@@ -18,12 +18,11 @@ public final class StringConstant {
 	//树形结构的根节点编号
 	public static final String ROOT_ID_32 = "00000000000000000000000000000000";
 	
-	//报表查询SQL的预设前后SQL片段
-	public static final String FONT_SQL = "SELECT FUSIONCHART.CHARTID,FUSIONCHART.CATEGORIESID,FUSIONCHART.CATEGORYID,FUSIONCHART.CATEGORYLABEL,FUSIONCHART.DATASETID,FUSIONCHART.SERIESNAME,FUSIONCHART.DATAID,FUSIONCHART.DATAVALUE FROM (";
-	public static final String BEHIND_SQL = ") FUSIONCHART ORDER BY FUSIONCHART.CATEGORYID,FUSIONCHART.DATAID";
-	
 	//数据库建模创建表名的前缀
 	public static final String TABLE_PREFIX = "BO_";
+	
+	//附件存放路径
+	public static final String UPLOAD_FILE_URL = "upload\\";
 	
 	//初始化密码
 	public static final String INIT_PASSWORD = "123456";
@@ -31,9 +30,6 @@ public final class StringConstant {
 	//字符串表示布尔值
 	public static final String TRUE = "T";
 	public static final String FALSE = "F";
-	
-	//操作完成后（保存或者修改），统一跳转的页面
-	public static final String ACTION_DONE = "share/done";
 	
 	//jsp表单模板存放路径
 	public static final String TEMPLAT_JSP_URL = "/WebContent/WEB-INF/view/templat/jsp/";
@@ -61,17 +57,6 @@ public final class StringConstant {
 	public static final String STATE_CASH="M";//现金付款
 	public static final String STATE_CARD="C";//刷卡付款
 	public static final String STATE_NET="N";//网上在线付款
-	
-	//客户端类型
-	public static final String APP = "app";//app
-	public static final String WSC = "wsc";//微商城
-	
-	//年龄分组
-	public static final String AGE_GROUP_CHILD="C";//幼年
-	public static final String AGE_GROUP_JUVENILE="J";//少年
-	public static final String AGE_GROUP_YOUTH="L";//青年 为了排序方便,选择L
-	public static final String AGE_GROUP_MIDDLE="M";//中年
-	public static final String AGE_GROUP_OLD="O";//老年
 	
 	//消息阅读状态
 	public static final String READ_SATUS_READ="READ";//已读
@@ -110,10 +95,4 @@ public final class StringConstant {
 		ACCOUNT_ROLE_STATE.put(STATE_UNRELATED, "未关联");
 		
 	}
-	public static final String LOCATION_URL = "http://ip.taobao.com/service/getIpInfo.php";
-	public static final String LOCATION_PARAM = "ip=";
-	
-	public static final String WEB_URL = "http://61.177.151.154/milk";
-	// 与开发模式接口配置信息中的Token保持一致
-	public static final String TOKEN = "weixinCourse";
 }
