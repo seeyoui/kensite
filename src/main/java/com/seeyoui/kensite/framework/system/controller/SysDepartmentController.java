@@ -118,6 +118,10 @@ public class SysDepartmentController extends BaseController {
 	public String saveSysDepartmentByAdd(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, SysDepartment sysDepartment) throws Exception{
+		if (!beanValidator(modelMap, sysDepartment)){
+			RequestResponseUtil.putResponseStr(session, response, request, StringConstant.FALSE);
+			return null;
+		}
 		sysDepartmentService.saveSysDepartment(sysDepartment);
 		RequestResponseUtil.putResponseStr(session, response, request, StringConstant.TRUE);
 		return null;

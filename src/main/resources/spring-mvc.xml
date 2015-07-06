@@ -78,6 +78,9 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	
+	<!-- 配置 JSR303 Bean Validator 定义 -->
+	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
+	
 	<!-- scan mappers and let them be autowired -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.seeyoui.kensite" />

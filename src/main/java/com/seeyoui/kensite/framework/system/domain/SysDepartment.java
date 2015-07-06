@@ -4,6 +4,8 @@
  */
 package com.seeyoui.kensite.framework.system.domain;  
 
+import org.hibernate.validator.constraints.Range;
+
 import com.seeyoui.kensite.common.base.domain.Pager;
 
 /**
@@ -16,6 +18,8 @@ public class SysDepartment extends Pager {
       
     private String id;  
     private String parentid;  
+//    @Range(min = 1, max = 100, message="长度不对")
+    @Range(min = 1, max = 100)
     private Long sequence;  
     private String name;  
     private String code;  

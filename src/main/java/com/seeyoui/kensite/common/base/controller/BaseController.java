@@ -15,8 +15,8 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindException;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -51,12 +51,11 @@ public abstract class BaseController {
 	 * @param groups 验证组
 	 * @return 验证成功：返回true；严重失败：将错误信息添加到 message 中
 	 */
-	protected boolean beanValidator(Model model, Object object, Class<?>... groups) {
+	protected boolean beanValidator(ModelMap model, Object object, Class<?>... groups) {
 		try{
 			BeanValidators.validateWithException(validator, object, groups);
 		}catch(ConstraintViolationException ex){
 			List<String> list = BeanValidators.extractPropertyAndMessageAsList(ex, ": ");
-			list.add(0, "数据验证失败：");
 			addMessage(model, list.toArray(new String[]{}));
 			return false;
 		}
@@ -74,7 +73,6 @@ public abstract class BaseController {
 			BeanValidators.validateWithException(validator, object, groups);
 		}catch(ConstraintViolationException ex){
 			List<String> list = BeanValidators.extractPropertyAndMessageAsList(ex, ": ");
-			list.add(0, "数据验证失败：");
 			addMessage(redirectAttributes, list.toArray(new String[]{}));
 			return false;
 		}
@@ -95,7 +93,7 @@ public abstract class BaseController {
 	 * 添加Model消息
 	 * @param message
 	 */
-	protected void addMessage(Model model, String... messages) {
+	protected void addMessage(ModelMap model, String... messages) {
 		StringBuilder sb = new StringBuilder();
 		for (String message : messages){
 			sb.append(message).append(messages.length>1?"<br/>":"");
