@@ -120,8 +120,8 @@ public class UploadfileService extends BaseService {
             		UUID = "";
             	}
                 FileCopyUtils.copy(mf.getBytes(), realFile);
-                return UUID;
-//                JSONObject jsonObject = JSONObject.fromObject(uploadFile);
+                JSONObject jsonObject = JSONObject.fromObject(uploadFile);
+                return jsonObject.toString();
 	        } catch (IOException e) {  
 	            e.printStackTrace();  
 	        }

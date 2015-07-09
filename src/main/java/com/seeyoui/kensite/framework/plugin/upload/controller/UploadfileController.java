@@ -93,8 +93,8 @@ public class UploadfileController extends BaseController {
 	public String uploadfile(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, String abc, String cba, Uploadfile uploadfile) throws Exception{
-		String uuid = uploadfileService.uploadfile(uploadfile, request);
-		RequestResponseUtil.putResponseStr(session, response, request, uuid);
+		String uf = uploadfileService.uploadfile(uploadfile, request);
+		RequestResponseUtil.putResponseStr(session, response, request, uf);
 		return null;
 	}
 	

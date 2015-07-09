@@ -12,7 +12,7 @@
 	<%@ include file="/WEB-INF/view/taglib/uploadify.jsp" %>
 	<script type="text/javascript">
 		//回调函数(文件对象,提示信息)
-		function afterMineUpload(file, uuid, message) {
+		function afterMineUpload(file, uf, message) {
 			//文件对象为空上传失败，不为空上传成功
 			if(file!=null) {
 				alert(file.id);
@@ -21,8 +21,8 @@
 	    		alert(file.name);//文件名称
 			}
 			//上传成功且保存数据库则返回主键UUID
-			if(uuid!=null && uuid!="") {
-				alert(uuid);
+			if(uf!=null && uf.id!="") {
+				alert(uf.id);
 			}
 			alert(message);
 		}
