@@ -60,3 +60,38 @@ comment on column SYS_UPLOADFILE.filesize
   is '文件大小';
 comment on column SYS_UPLOADFILE.createdate
   is '上传时间';
+
+  
+  -- Create table
+create table sys_information
+(
+  id       char(32) not null,
+  content  varchar2(100),
+  type     char(1),
+  sender   varchar2(100),
+  receiver varchar2(100),
+  timeout  number default -1,
+  status   number default 0
+)
+;
+-- Add comments to the table 
+comment on table sys_information
+  is '系统消息';
+-- Add comments to the columns 
+comment on column sys_information.id
+  is '主键';
+comment on column sys_information.content
+  is '消息内容';
+comment on column sys_information.type
+  is '消息类型';
+comment on column sys_information.sender
+  is '发送者';
+comment on column sys_information.receiver
+  is '接收者';
+comment on column sys_information.timeout
+  is '时效';
+comment on column sys_information.status
+  is '状态';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table sys_information
+  add primary key (ID);

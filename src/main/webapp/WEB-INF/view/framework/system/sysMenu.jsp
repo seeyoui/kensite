@@ -13,12 +13,12 @@
   </head>
   <body>
   
-  	<div id="divLayout" class="easyui-layout" style="width:auto;height:450px">
-  		<div id="divWest" data-options="region:'west', collapsible:false,split:false" title="模块" style="width:200px;">
+  	<div style="position:absolute;top:0px;left:0px;right:0px;bottom:0px;">
+  		<div style="position:absolute;top:0px;bottom:0px;width:200px;">
         	<ul id="menuTree" class="easyui-tree" url="${ctx}/sysMenu/getTreeJson.do"></ul>
         </div>
-        <div id="divCenter" data-options="region:'center'">
-		    <table id="dataList" title="" class="easyui-datagrid" style="width:auto;height:auto"
+        <div style="position:absolute;top:0px;left:200px;right:0px;bottom:0px;">
+		    <table id="dataList" title="" class="easyui-datagrid" style="width:100%;height:100%"
 		    		url="${ctx}/sysMenu/getListData.do"
 		            toolbar="#toolbar" pagination="true"
 		            rownumbers="true" fitColumns="true" singleSelect="true">
@@ -78,53 +78,53 @@
 				            </div>
 				            <div id="icon_li" class="fitem">
 				            	<i class="linecons-music"></i>
-	<i class="linecons-search"></i>
-	<i class="linecons-mail"></i>
-	<i class="linecons-heart"></i>
-	<i class="linecons-star"></i>
-	<i class="linecons-user"></i>
-	<i class="linecons-videocam"></i>
-	<i class="linecons-camera"></i>
-	<i class="linecons-photo"></i>
-	<i class="linecons-attach"></i>
-	<i class="linecons-lock"></i>
-	<i class="linecons-eye"></i>
-	<i class="linecons-tag"></i>
-	<i class="linecons-thumbs-up"></i>
-	<i class="linecons-pencil"></i>
-	<i class="linecons-comment"></i>
-	<i class="linecons-location"></i>
-	<i class="linecons-cup"></i>
-	<i class="linecons-trash"></i>
-	<i class="linecons-doc"></i>
-	<i class="linecons-note"></i>
-	<i class="linecons-cog"></i>
-	<i class="linecons-params"></i>
-	<i class="linecons-calendar"></i>
-	<i class="linecons-sound"></i>
-	<i class="linecons-clock"></i>
-	<i class="linecons-lightbulb"></i>
-	<i class="linecons-tv"></i>
-	<i class="linecons-desktop"></i>
-	<i class="linecons-mobile"></i>
-	<i class="linecons-cd"></i>
-	<i class="linecons-inbox"></i>
-	<i class="linecons-globe"></i>
-	<i class="linecons-cloud"></i>
-	<i class="linecons-paper-plane"></i>
-	<i class="linecons-fire"></i>
-	<i class="linecons-graduation-cap"></i>
-	<i class="linecons-megaphone"></i>
-	<i class="linecons-database"></i>
-	<i class="linecons-key"></i>
-	<i class="linecons-beaker"></i>
-	<i class="linecons-truck"></i>
-	<i class="linecons-money"></i>
-	<i class="linecons-food"></i>
-	<i class="linecons-shop"></i>
-	<i class="linecons-diamond"></i>
-	<i class="linecons-t-shirt"></i>
-	<i class="linecons-wallet"></i>
+								<i class="linecons-search"></i>
+								<i class="linecons-mail"></i>
+								<i class="linecons-heart"></i>
+								<i class="linecons-star"></i>
+								<i class="linecons-user"></i>
+								<i class="linecons-videocam"></i>
+								<i class="linecons-camera"></i>
+								<i class="linecons-photo"></i>
+								<i class="linecons-attach"></i>
+								<i class="linecons-lock"></i>
+								<i class="linecons-eye"></i>
+								<i class="linecons-tag"></i>
+								<i class="linecons-thumbs-up"></i>
+								<i class="linecons-pencil"></i>
+								<i class="linecons-comment"></i>
+								<i class="linecons-location"></i>
+								<i class="linecons-cup"></i>
+								<i class="linecons-trash"></i>
+								<i class="linecons-doc"></i>
+								<i class="linecons-note"></i>
+								<i class="linecons-cog"></i>
+								<i class="linecons-params"></i>
+								<i class="linecons-calendar"></i>
+								<i class="linecons-sound"></i>
+								<i class="linecons-clock"></i>
+								<i class="linecons-lightbulb"></i>
+								<i class="linecons-tv"></i>
+								<i class="linecons-desktop"></i>
+								<i class="linecons-mobile"></i>
+								<i class="linecons-cd"></i>
+								<i class="linecons-inbox"></i>
+								<i class="linecons-globe"></i>
+								<i class="linecons-cloud"></i>
+								<i class="linecons-paper-plane"></i>
+								<i class="linecons-fire"></i>
+								<i class="linecons-graduation-cap"></i>
+								<i class="linecons-megaphone"></i>
+								<i class="linecons-database"></i>
+								<i class="linecons-key"></i>
+								<i class="linecons-beaker"></i>
+								<i class="linecons-truck"></i>
+								<i class="linecons-money"></i>
+								<i class="linecons-food"></i>
+								<i class="linecons-shop"></i>
+								<i class="linecons-diamond"></i>
+								<i class="linecons-t-shirt"></i>
+								<i class="linecons-wallet"></i>
 				            </div>
 				</form>
 				
@@ -137,7 +137,6 @@
     </div>
     <script type="text/javascript">
 	    $(document).ready(function(){
-	    	initSize();
 	    	$("#menuTree").tree({
 	    		onClick: function(node){
 	    			$('#sel_parentid').val(node.id);
@@ -149,15 +148,6 @@
 	    		$("#icon").val(obj.attr("class"));
 	    	});
 	    });
-	    
-	    function initSize() {
-	    	$("#divLayout").height($(window).height());
-	    	$("#divCenter").height($(window).height());
-	    	$("#divWest").height($(window).height()-29);
-	    	$("#dataList").datagrid('resize', {
-	    		height:$(window).height()-1
-	    	});
-	    }
 	    
 	    function selectData() {
 		    var sel_parentid = $("#sel_parentid").val();

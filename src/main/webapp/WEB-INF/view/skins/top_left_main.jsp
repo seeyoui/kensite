@@ -274,6 +274,11 @@
 		<!-- Adding class "toggle-others" will keep only one menu item open at a time. -->
 		<!-- Adding class "collapsed" collapse sidebar root elements and show only icons. -->
 		<div class="sidebar-menu toggle-others fixed">
+			<!--<div style="position:relative;top:10px;left:30px;">
+				<a data-toggle="sidebar" href="#">
+					<i class="fa-bars"></i>
+				</a>
+			</div>-->
 			<div class="sidebar-menu-inner ps-container ps-active-y">	
 				<ul id="main-menu" class="main-menu">
 					<!-- add class "multiple-expanded" to allow multiple submenus to open -->

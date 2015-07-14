@@ -12,9 +12,9 @@
   </head>
   <body>
   
-  	<div id="divLayout" class="easyui-layout" style="width:auto;height:450px">
-        <div id="divCenter" data-options="region:'center'">
-		    <table id="dataList" title="" class="easyui-datagrid" style="width:auto;height:auto"
+  	<div style="position:absolute;top:0px;left:0px;right:0px;bottom:0px;">
+		<div style="position:absolute;top:0px;left:0px;right:0px;bottom:0px;">
+		    <table id="dataList" title="" class="easyui-datagrid" style="width:100%;height:100%"
 		    		url="${ctx}/actProcess/getRunningListData.do"
 		            toolbar="#toolbar" pagination="true"
 		            rownumbers="true" fitColumns="true" singleSelect="true">
@@ -59,16 +59,7 @@
         }
     	
 	    $(document).ready(function(){
-	    	initSize();
 	    });
-	    
-	    function initSize() {
-	    	$("#divLayout").height($(window).height());
-	    	$("#divCenter").height($(window).height());
-	    	$("#dataList").datagrid('resize', {
-	    		height:$(window).height()-1
-	    	});
-	    }
 	    
 	    function selectData() {
 		    var sel_name = $("#sel_name").val();

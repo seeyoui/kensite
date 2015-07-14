@@ -166,11 +166,11 @@ public class UserUtils {
 	
 	public static TreeJson getMenuTree(){
 		@SuppressWarnings("unchecked")
-		List<TreeJson> tList = (List<TreeJson>)getCache(CACHE_MENU_TREE);
-		if (tList == null){
+		TreeJson menuTree = (TreeJson)getCache(CACHE_MENU_TREE);
+		if (menuTree == null){
 			SysUser sysUser = getUser();
 			List<SysMenu> mList = sysMenuMapper.findSysMenuTree(sysUser);
-			tList = new ArrayList<TreeJson>();
+			ArrayList<TreeJson> tList = new ArrayList<TreeJson>();
 			for(int i=0; i<mList.size(); i++) {
 				TreeJson tj = new TreeJson();
 				tj.setId(mList.get(i).getId());
@@ -182,15 +182,15 @@ public class UserUtils {
 				tj.setAttributes(attributes);
 				tList.add(tj);
 			}
+			menuTree = new TreeJson();
+			menuTree.setText("导航菜单");
+			menuTree.setId(StringConstant.ROOT_ID_32);
+			TreeJson.getTree(tList, menuTree);
+			tList.clear();
+			tList.add(menuTree);
+			putCache(CACHE_MENU_TREE, menuTree);
 		}
-		TreeJson root = new TreeJson();
-		root.setText("导航菜单");
-		root.setId(StringConstant.ROOT_ID_32);
-		TreeJson.getTree(tList, root);
-		tList.clear();
-		tList.add(root);
-		putCache(CACHE_MENU_TREE, root);
-		return root;
+		return menuTree;
 	}
 	
 	/**

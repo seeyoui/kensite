@@ -5,95 +5,72 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>    
-    <title>站点表</title>
+    <title>系统消息</title>
 	<script type="text/javascript" src="${ctx_assets}/js/jquery-1.11.1.min.js"></script>
 	<%@ include file="/WEB-INF/view/taglib/easyui.jsp" %>
 	<%@ include file="/WEB-INF/view/taglib/layer.jsp" %>
   </head>
   <body>
-  
   	<div style="position:absolute;top:0px;left:0px;right:0px;bottom:0px;">
 		<div style="position:absolute;top:0px;left:0px;right:0px;bottom:0px;">
-		    <table id="dataList" title="站点表列表" class="easyui-datagrid" style="width:100%;height:100%"
-		    		url="${ctx}/cms/site/getListData.do"
+		    <table id="dataList" title="系统消息列表" class="easyui-datagrid" style="width:100%;height:100%"
+		    		url="${ctx}/information/getListData.do"
 		            toolbar="#toolbar" pagination="true"
 		            rownumbers="true" fitColumns="true" singleSelect="true">
 		        <thead>
 		            <tr>
-					    <th field="id" width="100px" hidden>编号</th>
-					    <th field="name" width="100px">站点名称</th>
-					    <th field="title" width="100px">站点标题</th>
-					    <th field="logo" width="100px">站点Logo</th>
-					    <th field="domain" width="100px">站点域名</th>
-					    <th field="description" width="100px">描述</th>
-					    <th field="keywords" width="100px">关键字</th>
-					    <th field="theme" width="100px">主题</th>
-					    <th field="copyright" width="100px">版权信息</th>
-					    <th field="customview" width="100px">自定义站点首页视图</th>
-					    <th field="remarks" width="100px">备注信息</th>
-					    <th field="delflag" width="100px">删除标记</th>
+					    <th field="id" width="100px" hidden>主键</th>
+					    <th field="content" width="100px">消息内容</th>
+					    <th field="type" width="100px">消息类型</th>
+					    <th field="sender" width="100px">发送者</th>
+					    <th field="receiver" width="100px">接收者</th>
+					    <th field="timeout" width="50px" align="right">时效</th>
+					    <th field="status" width="50px" align="right">状态</th>
 		            </tr>
 		        </thead>
 		    </table>
 		    <div id="toolbar">
-		    	<shiro:hasPermission name="cms:site:insert">
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newInfo()">新建</a>
-		        </shiro:hasPermission>
-		        <shiro:hasPermission name="cms:site:update">
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editInfo()">修改</a>
-		        </shiro:hasPermission>
-		        <shiro:hasPermission name="cms:site:delete">
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyInfo()">删除</a>
+		    	<shiro:hasPermission name="information:insert">
 		        </shiro:hasPermission>
-
-站点名称<input id="sel_name" name="sel_name" class="easyui-textbox" data-options=""/>
-站点标题<input id="sel_title" name="sel_title" class="easyui-textbox" data-options=""/>
-站点域名<input id="sel_domain" name="sel_domain" class="easyui-textbox" data-options=""/>
-关键字<input id="sel_keywords" name="sel_keywords" class="easyui-textbox" data-options=""/>
+		        <shiro:hasPermission name="information:update">
+		        </shiro:hasPermission>
+		        <shiro:hasPermission name="information:delete">
+		        </shiro:hasPermission>
+消息内容<input id="sel_content" name="sel_content" class="easyui-textbox" data-options=""/>
+消息类型<input id="sel_type" name="sel_type" class="easyui-textbox" data-options=""/>
+发送者<input id="sel_sender" name="sel_sender" class="easyui-textbox" data-options=""/>
+接收者<input id="sel_receiver" name="sel_receiver" class="easyui-textbox" data-options=""/>
 			    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="selectData()">查询</a>
 		    </div>
-		    <div id="dataWin" class="easyui-window" title="站点表信息维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:400px;height:260px;padding:10px;">
-		        <div class="ftitle">站点表信息维护</div>
+		    <div id="dataWin" class="easyui-window" title="系统消息信息维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:400px;height:260px;padding:10px;">
+		        <div class="ftitle">系统消息信息维护</div>
 		        <form id="dataForm" method="post">
 							<div class="fitem">
-				                <label>站点名称</label>
-				                <input id="name" name="name" class="easyui-validatebox textbox" data-options="required:true"/>
+				                <label>消息内容</label>
+				                <input id="content" name="content" class="easyui-validatebox textbox" data-options="required:true"/>
 				            </div>
 							<div class="fitem">
-				                <label>站点标题</label>
-				                <input id="title" name="title" class="easyui-validatebox textbox" data-options="required:true"/>
+				                <label>消息类型</label>
+				                <input id="type" name="type" class="easyui-validatebox textbox" data-options="required:true"/>
 				            </div>
 							<div class="fitem">
-				                <label>站点Logo</label>
-				                <input id="logo" name="logo" class="easyui-validatebox textbox" data-options="required:true"/>
+				                <label>发送者</label>
+				                <input id="sender" name="sender" class="easyui-validatebox textbox" data-options="required:true"/>
 				            </div>
 							<div class="fitem">
-				                <label>站点域名</label>
-				                <input id="domain" name="domain" class="easyui-validatebox textbox" data-options="required:true"/>
+				                <label>接收者</label>
+				                <input id="receiver" name="receiver" class="easyui-validatebox textbox" data-options="required:true"/>
 				            </div>
 							<div class="fitem">
-				                <label>描述</label>
-				                <input id="description" name="description" class="easyui-validatebox textbox" data-options="required:true"/>
+				                <label>时效</label>
+				                <input id="timeout" name="timeout" class="easyui-numberbox textbox" data-options="min:0,max:999999,precision:0,required:true"/>
 				            </div>
 							<div class="fitem">
-				                <label>关键字</label>
-				                <input id="keywords" name="keywords" class="easyui-validatebox textbox" data-options="required:true"/>
-				            </div>
-							<div class="fitem">
-				                <label>主题</label>
-				                <input id="theme" name="theme" class="easyui-validatebox textbox" data-options="required:true"/>
-				            </div>
-							<div class="fitem">
-				                <label>版权信息</label>
-				                <input id="copyright" name="copyright" class="easyui-validatebox textbox" data-options="required:true"/>
-				            </div>
-							<div class="fitem">
-				                <label>自定义站点首页视图</label>
-				                <input id="customview" name="customview" class="easyui-validatebox textbox" data-options="required:true"/>
-				            </div>
-							<div class="fitem">
-				                <label>备注信息</label>
-				                <input id="remarks" name="remarks" class="easyui-validatebox textbox" data-options="required:true"/>
+				                <label>状态</label>
+				                <input id="status" name="status" class="easyui-numberbox textbox" data-options="min:0,max:999999,precision:0,required:true"/>
 				            </div>
 				</form>
 				
@@ -106,35 +83,37 @@
     </div>
     <script type="text/javascript">
 	    $(document).ready(function(){
+	    	
 	    });
 	    
 	    function selectData() {
-		    var sel_name = $("#sel_name").val();
-		    var sel_title = $("#sel_title").val();
-		    var sel_domain = $("#sel_domain").val();
-		    var sel_keywords = $("#sel_keywords").val();
+		    var sel_content = $("#sel_content").val();
+		    var sel_type = $("#sel_type").val();
+		    var sel_sender = $("#sel_sender").val();
+		    var sel_receiver = $("#sel_receiver").val();
         	$('#dataList').datagrid('load',{
-    		    name:sel_name,
-    		    title:sel_title,
-    		    domain:sel_domain,
-    		    keywords:sel_keywords
+    		    content:sel_content,
+    		    type:sel_type,
+    		    sender:sel_sender,
+    		    receiver:sel_receiver
         	});
         }
 	    function reloadData() {
         	selectData();
         }
+	    
         var url;
         function newInfo(){
             $('#dataWin').window('open');
             $('#dataForm').form('clear');
-            url = '${ctx}/cms/site/saveByAdd.do';
+            url = '${ctx}/information/saveByAdd.do';
         }
         function editInfo(){
             var row = $('#dataList').datagrid('getSelected');
             if (row){
                 $('#dataWin').window('open');
                 $('#dataForm').form('load',row);
-                url = '${ctx}/cms/site/saveByUpdate.do?id='+row.id;
+                url = '${ctx}/information/saveByUpdate.do?id='+row.id;
             }    	
         }
         var loadi;
@@ -155,7 +134,7 @@
                     }
                 	layer.close(loadi);
                 	$('#dataWin').window('close'); 
-                	$('#dataList').datagrid('reload');
+                	reloadData();
                 }
             });
         }
@@ -166,7 +145,7 @@
                     if (r){
                     	$.ajax({
 							type: "post",
-							url: "${ctx}/cms/site/delete.do",
+							url: '${ctx}/information/delete.do',
 							data: {delDataId:row.id},
 							dataType: 'text',
 							beforeSend: function(XMLHttpRequest){

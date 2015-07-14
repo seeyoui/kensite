@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.seeyoui.kensite.framework.plugin.info.persistence.InformationMapper" >
+	<!-- 查询单表的字段 -->
+	<sql id="tableColumns">
+	    t.id,
+	    t.content,
+	    t.type,
+	    t.sender,
+	    t.receiver,
+	    t.timeout,
+	    t.status
+	</sql>
+	<!-- 查询过滤条件 -->
+	<sql id="whereStr">
+		<where>
+			1=1
+			<if test="id != null and id != ''">
+				and t.id LIKE '%'||#{id}||'%'
+			</if>
+			<if test="content != null and content != ''">
+				and t.content LIKE '%'||#{content}||'%'
+			</if>
+			<if test="type != null and type != ''">
+				and t.type LIKE '%'||#{type}||'%'
+			</if>
+			<if test="sender != null and sender != ''">
+				and t.sender LIKE '%'||#{sender}||'%'
+			</if>
+			<if test="receiver != null and receiver != ''">
+				and t.receiver LIKE '%'||#{receiver}||'%'
+			</if>
+			<if test="timeout != null and timeout != ''">
+				and t.timeout = #{timeout}
+			</if>
+			<if test="status != null and status != ''">
+				and t.status = #{status}
+			</if>
+		</where>
+	</sql>
+	<sql id="orderBy">
+		ORDER BY t.id DESC 
+	</sql>
+	
+	<!-- 根据ID查询单条数据 -->
+	<select id="findInformationById" resultType="com.seeyoui.kensite.framework.plugin.info.domain.Information">
+		SELECT
+		<include refid="tableColumns" />
+		FROM SYS_INFORMATION t
+		WHERE id = #{id}
+	</select>
+	
+	<!-- 查询数据集合 -->
+	<select id="findInformationList" resultType="com.seeyoui.kensite.framework.plugin.info.domain.Information">
+		select * from(select t.*,rownum rn from(
+			SELECT
+			<include refid="tableColumns"/>
+			FROM SYS_INFORMATION t
+			<include refid="whereStr"/>
+			<include refid="orderBy"/>
+		) t where rownum &lt; = #{page}*#{rows}) where rn &gt; (#{page}-1)*#{rows}
+	</select>
+	
+	<!-- 查询数据总数 -->
+	<select id="findInformationListTotal" resultType="EasyUIDataGrid">
+		SELECT
+		COUNT(id)total
+		FROM SYS_INFORMATION t
+		<include refid="whereStr"/>
+	</select>
+	
+	<!-- 数据新增 -->
+	<insert id="saveInformation" parameterType="com.seeyoui.kensite.framework.plugin.info.domain.Information">
+		INSERT INTO SYS_INFORMATION (
+	    	
+	    	content,
+	    	type,
+	    	sender,
+	    	receiver,
+	    	timeout,
+	    	status,
+		    id
+		)
+		VALUES (
+			
+			#{content},
+			#{type},
+			#{sender},
+			#{receiver},
+			#{timeout},
+			#{status},
+		    #{id}
+		)
+	</insert>
+	
+	<!-- 数据修改 -->
+	<update id="updateInformation" parameterType="com.seeyoui.kensite.framework.plugin.info.domain.Information">
+		UPDATE SYS_INFORMATION
+		<set>
+	    	
+	    	<if test="content !=null and content !=''">
+			content=#{content},
+			</if>
+	    	<if test="type !=null and type !=''">
+			type=#{type},
+			</if>
+	    	<if test="sender !=null and sender !=''">
+			sender=#{sender},
+			</if>
+	    	<if test="receiver !=null and receiver !=''">
+			receiver=#{receiver},
+			</if>
+	    	<if test="timeout !=null and timeout !=''">
+			timeout=#{timeout},
+			</if>
+	    	<if test="status !=null and status !=''">
+			status=#{status},
+			</if>
+		    id = #{id}
+		</set>
+		WHERE id = #{id}
+	</update>
+	
+	<!-- 数据删除 -->
+	<delete id="deleteInformation">
+		DELETE FROM SYS_INFORMATION WHERE id IN 
+		<foreach item="listId" collection="list"
+			open="(" separator="," close=")">
+			#{listId}
+		</foreach>
+	</delete>
+</mapper>
