@@ -50,6 +50,16 @@ public class SysUserService extends BaseService {
 	}
 	
 	/**
+	 * 查询某个角色的所有用户
+	 * @param roleid
+	 * @return
+	 * @throws CRUDException
+	 */
+	public List<SysUser> findSysUserByRole(String roleid) throws CRUDException{
+		return sysUserMapper.findSysUserByRole(roleid);
+	}
+	
+	/**
 	 * 查询数据集合
 	 * @param sysUser
 	 * @return
@@ -57,6 +67,16 @@ public class SysUserService extends BaseService {
 	 */
 	public List<SysUser> findSysUserList(SysUser sysUser) throws CRUDException {
 		return sysUserMapper.findSysUserList(sysUser);
+	}
+	
+	/**
+	 * 查询所有数据集合
+	 * @param sysUser
+	 * @return
+	 * @throws CRUDException
+	 */
+	public List<SysUser> findAllSysUserList(SysUser sysUser) throws CRUDException {
+		return sysUserMapper.findAllSysUserList(sysUser);
 	}
 	
 	/**

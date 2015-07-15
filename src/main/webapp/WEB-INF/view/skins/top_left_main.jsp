@@ -191,35 +191,18 @@
 				<li class="dropdown xs-left">
 					<a href="#" data-toggle="dropdown" class="notification-icon notification-icon-messages">
 						<i class="fa-bell-o"></i>
-						<span class="badge badge-purple">7</span>
+						<span id="infoNumOuter" class="badge badge-purple">0</span>
 					</a>
 					<ul class="dropdown-menu notifications">
 					<li class="top">
 						<p class="small">
-							<a href="#" class="pull-right">Mark all Read</a>
-							You have <strong>3</strong> new notifications.
+							<!--<a href="#" class="pull-right">read all</a>-->
+							你有<strong id="infoNumInner">0</strong>条最新消息。
 						</p>
 					</li>
 					<li>
-						<ul class="dropdown-menu-list list-unstyled ps-scrollbar">
-							<li class="active notification-success">
-								<a href="#">
-									<i class="fa-user"></i>
-									<span class="line">
-										<strong>New user registered</strong>
-									</span>
-									<span class="line small time">
-										30 seconds ago
-									</span>
-								</a>
-							</li>
+						<ul id="infoList" class="dropdown-menu-list list-unstyled ps-scrollbar">
 						</ul>
-					</li>
-					<li class="external">
-						<a href="#">
-							<span>View all notifications</span>
-							<i class="fa-link-ext"></i>
-						</a>
 					</li>
 					</ul>
 				</li>
@@ -404,9 +387,59 @@
 			});
 		}
 		
+		function sysInformation() {
+			$.ajax({
+				type: "post",
+				url: "${ctx}/information/getUserInformation.do",
+				data: {page:1,rows:10,status:0},
+				dataType: 'json',
+				beforeSend: function(XMLHttpRequest){
+				},
+				success: function(data, textStatus){
+					$("#infoList").empty();
+					$("#infoNumOuter").html(data.length);
+					$("#infoNumInner").html(data.length);
+					for(var i=0; i<data.length; i++) {
+						var infoType = data[i].type;
+						var infoTypeStr = "success";
+						if(infoType == null) {
+						//白色：secondary黑色：primary蓝色：info
+						} else if(infoType == "1") {//通知-绿色
+							infoTypeStr = "success";
+						} else if(infoType == "2") {//提醒-黄色
+							infoTypeStr = "warning";
+						} else if(infoType == "3") {//警告-红色
+							infoTypeStr = "danger";
+						}
+						var infoListStr = "";
+						infoListStr += "<li id=\""+data[i].id+"\" class=\"active notification-"+infoTypeStr+"\" onclick=\"readInformation(this.id);\">";
+						infoListStr += "<a href=\"javascript:void(0);\">";
+						infoListStr += "<i class=\"fa-envelope-o\"></i>";
+						infoListStr += "<span class=\"line\"><strong>"+data[i].content+"</strong></span>";
+						infoListStr += "<span class=\"line small time\">"+formatDateTimeCol(data[i].sendtime)+"</span>";
+						infoListStr += "</a></li>";
+						$("#infoList").append(infoListStr);
+					}
+				}
+			});
+		}
+		
+		function readInformation(infoId) {
+			$.ajax({
+				type: "post",
+				url: "${ctx}/information/readInfo.do",
+				data: {readIds : infoId},
+				dataType: 'text',
+				beforeSend: function(XMLHttpRequest){
+				},
+				success: function(data, textStatus){
+					sysInformation();
+				}
+			});
+		}
 		jQuery(document).ready(function($) {
 			//initTheme();
-			
+			sysInformation();
 		});
 	</script>
 	

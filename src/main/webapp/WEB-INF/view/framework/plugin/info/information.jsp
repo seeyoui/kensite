@@ -20,6 +20,7 @@
 		        <thead>
 		            <tr>
 					    <th field="id" width="100px" hidden>主键</th>
+					    <th field="sendtime" width="100px" formatter="formatDateTimeCol">发送时间</th>
 					    <th field="content" width="100px">消息内容</th>
 					    <th field="type" width="100px">消息类型</th>
 					    <th field="sender" width="100px">发送者</th>

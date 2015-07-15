@@ -53,4 +53,10 @@ public interface InformationMapper {
 	 * @param listId
 	 */
 	public void deleteInformation(List<String> listId);
+	
+	/**
+	 * 将消息标记为已读
+	 * @param listId
+	 */
+	public void readInfo(List<String> listId);
 }

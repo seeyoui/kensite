@@ -88,4 +88,26 @@ public class InformationService extends BaseService {
 		informationMapper.deleteInformation(listId);
 	}
 	
+	/**
+	 * 将消息标记为已读
+	 * @param listId
+	 * @throws CRUDException
+	 */
+	public void readInfo(List<String> listId) throws CRUDException {
+		informationMapper.readInfo(listId);
+	}
+	
+	/**
+	 * 消息发送
+	 * @param information
+	 * @throws CRUDException
+	 */
+	public void sendInformation(Information information) throws CRUDException{
+		List<String> listUserName = Arrays.asList(information.getReceiver().split(","));
+		for(int i=0; i<listUserName.size(); i++) {
+			information.setId(GeneratorUUID.getId());
+			information.setReceiver(listUserName.get(i));
+			informationMapper.saveInformation(information);
+		}
+	}
 }

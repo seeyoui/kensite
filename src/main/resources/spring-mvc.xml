@@ -115,6 +115,7 @@
 			<mvc:exclude-mapping path="/static/**"/>
 			<mvc:exclude-mapping path="/act/**"/>
 			<mvc:exclude-mapping path="/sys/**"/>
+			<mvc:exclude-mapping path="/information/**"/>
 			<bean class="com.seeyoui.kensite.common.interceptor.LogInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>

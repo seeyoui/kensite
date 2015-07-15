@@ -4,6 +4,7 @@
 	<!-- 查询单表的字段 -->
 	<sql id="tableColumns">
 	    t.id,
+	    t.sendtime,
 	    t.content,
 	    t.type,
 	    t.sender,
@@ -21,7 +22,7 @@
 			<if test="content != null and content != ''">
 				and t.content LIKE '%'||#{content}||'%'
 			</if>
-			<if test="type != null and type != ''">
+			<if test="type != null">
 				and t.type LIKE '%'||#{type}||'%'
 			</if>
 			<if test="sender != null and sender != ''">
@@ -33,13 +34,13 @@
 			<if test="timeout != null and timeout != ''">
 				and t.timeout = #{timeout}
 			</if>
-			<if test="status != null and status != ''">
+			<if test="status != null">
 				and t.status = #{status}
 			</if>
 		</where>
 	</sql>
 	<sql id="orderBy">
-		ORDER BY t.id DESC 
+		ORDER BY t.sendtime DESC 
 	</sql>
 	
 	<!-- 根据ID查询单条数据 -->
@@ -72,7 +73,7 @@
 	<!-- 数据新增 -->
 	<insert id="saveInformation" parameterType="com.seeyoui.kensite.framework.plugin.info.domain.Information">
 		INSERT INTO SYS_INFORMATION (
-	    	
+	    	sendtime,
 	    	content,
 	    	type,
 	    	sender,
@@ -82,7 +83,7 @@
 		    id
 		)
 		VALUES (
-			
+			#{sendtime},
 			#{content},
 			#{type},
 			#{sender},
@@ -129,4 +130,13 @@
 			#{listId}
 		</foreach>
 	</delete>
+	
+	<!-- 将消息标记为已读 -->
+	<update id="readInfo">
+		UPDATE SYS_INFORMATION set status=1 WHERE id IN 
+		<foreach item="listId" collection="list"
+			open="(" separator="," close=")">
+			#{listId}
+		</foreach>
+	</update>
 </mapper>

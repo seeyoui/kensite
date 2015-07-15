@@ -62,6 +62,18 @@
 		WHERE username = #{username}
 	</select>
 	
+	<!-- 查询某个角色的所有用户 -->
+	<select id="findSysUserByRole" resultType="com.seeyoui.kensite.framework.system.domain.SysUser">
+		SELECT
+		<include refid="tableColumns" />
+		from sys_role r
+	    left join sys_user_role sur
+	    on sur.roleid = r.id
+	    left join sys_user t
+	    on r.id = sur.userid
+		WHERE r.id = #{roleid}
+	</select>
+	
 	<!-- 查询数据集合 -->
 	<select id="findSysUserList" resultType="com.seeyoui.kensite.framework.system.domain.SysUser">
 		select * from(select t.*,rownum rn from(
@@ -71,6 +83,15 @@
 			<include refid="whereStr"/>
 			<include refid="orderBy"/>
 		) t where rownum &lt; = #{page}*#{rows}) where rn &gt; (#{page}-1)*#{rows}
+	</select>
+	
+	<!-- 查询所有数据集合 -->
+	<select id="findAllSysUserList" resultType="com.seeyoui.kensite.framework.system.domain.SysUser">
+		SELECT
+		<include refid="tableColumns"/>
+		FROM SYS_USER t
+		<include refid="whereStr"/>
+		<include refid="orderBy"/>
 	</select>
 	
 	<!-- 查询数据总数 -->

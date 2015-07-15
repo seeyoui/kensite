@@ -4,6 +4,9 @@
  */
 package com.seeyoui.kensite.framework.plugin.info.domain;  
 
+import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.seeyoui.kensite.common.base.domain.Pager;
 
 /**
@@ -15,12 +18,13 @@ public class Information extends Pager {
     private static final long serialVersionUID = 5454155825314635342L;
       
     private String id;
+    private Date sendtime;
     private String content;
     private String type;
     private String sender;
     private String receiver;
-    private Long timeout;
-    private Long status;
+    private long timeout;
+    private long status;
  
     public void setId(String id) {
         this.id = id;
@@ -29,7 +33,16 @@ public class Information extends Pager {
     public String getId() {
         return this.id;
     }
-    public void setContent(String content) {
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    public Date getSendtime() {
+		return sendtime;
+	}
+
+	public void setSendtime(Date sendtime) {
+		this.sendtime = sendtime;
+	}
+
+	public void setContent(String content) {
         this.content = content;
     }
     
@@ -57,18 +70,18 @@ public class Information extends Pager {
     public String getReceiver() {
         return this.receiver;
     }
-    public void setTimeout(Long timeout) {
+    public void setTimeout(long timeout) {
         this.timeout = timeout;
     }
     
-    public Long getTimeout() {
+    public long getTimeout() {
         return this.timeout;
     }
-    public void setStatus(Long status) {
+    public void setStatus(long status) {
         this.status = status;
     }
     
-    public Long getStatus() {
+    public long getStatus() {
         return this.status;
     }
 }

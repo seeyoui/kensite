@@ -30,11 +30,25 @@ public interface SysUserMapper {
 	public SysUser findSysUserByUsername(String username);
 	
 	/**
+	 * 查询某个角色的所有用户
+	 * @param username
+	 * @return
+	 */
+	public List<SysUser> findSysUserByRole(String roleid);
+	
+	/**
 	 * 查询数据集合
 	 * @param sysUser
 	 * @return
 	 */
 	public List<SysUser> findSysUserList(SysUser sysUser);
+	
+	/**
+	 * 查询所有数据集合
+	 * @param sysUser
+	 * @return
+	 */
+	public List<SysUser> findAllSysUserList(SysUser sysUser);
 	
 	/**
 	 * 查询数据总数

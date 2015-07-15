@@ -66,6 +66,7 @@ comment on column SYS_UPLOADFILE.createdate
 create table sys_information
 (
   id       char(32) not null,
+  sendtime	date,
   content  varchar2(100),
   type     char(1),
   sender   varchar2(100),
@@ -80,6 +81,8 @@ comment on table sys_information
 -- Add comments to the columns 
 comment on column sys_information.id
   is '主键';
+comment on column sys_information.content
+  is '发送时间';
 comment on column sys_information.content
   is '消息内容';
 comment on column sys_information.type

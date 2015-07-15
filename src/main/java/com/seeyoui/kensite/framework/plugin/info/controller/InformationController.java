@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import org.apache.shiro.authz.annotation.RequiresUser;
@@ -28,6 +29,8 @@ import com.seeyoui.kensite.common.constants.StringConstant;
 import com.seeyoui.kensite.common.util.RequestResponseUtil;
 import com.seeyoui.kensite.framework.plugin.info.domain.Information;
 import com.seeyoui.kensite.framework.plugin.info.service.InformationService;
+import com.seeyoui.kensite.framework.system.service.SysUserService;
+import com.seeyoui.kensite.framework.system.util.UserUtils;
 /**
  * @author cuichen
  * @version 1.0
@@ -39,6 +42,8 @@ public class InformationController extends BaseController {
 	
 	@Autowired
 	private InformationService informationService;
+	@Autowired
+	private SysUserService sysUserService;
 	
 	/**
 	 * 展示列表页面
@@ -127,6 +132,69 @@ public class InformationController extends BaseController {
 			ModelMap modelMap, String delDataId) throws Exception {
 		List<String> listId = Arrays.asList(delDataId.split(","));
 		informationService.deleteInformation(listId);
+		RequestResponseUtil.putResponseStr(session, response, request, StringConstant.TRUE);
+		return null;
+	}
+	
+	/**
+	 * 获取当前用户系统消息
+	 * @param session
+	 * @param response
+	 * @param request
+	 * @param modelMap
+	 * @param information
+	 * @return
+	 * @throws Exception
+	 */
+	@RequiresUser
+	@RequestMapping(value = "/getUserInformation", method=RequestMethod.POST)
+	@ResponseBody
+	public String getUserInformation(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap, Information information) throws Exception {
+		String userName = UserUtils.getUser().getUsername();
+		information.setReceiver(userName);
+		List<Information> informationList = informationService.findInformationList(information);
+		JSONArray jsonArr = JSONArray.fromObject(informationList);
+		RequestResponseUtil.putResponseStr(session, response, request, jsonArr);
+		return null;
+	}
+	
+	/**
+	 * 将消息标记为已读
+	 * @param modelMap
+	 * @param readIds
+	 * @return
+	 * @throws Exception
+	 */
+	@RequiresUser
+	@RequestMapping(value = "/readInfo", method=RequestMethod.POST)
+	@ResponseBody
+	public String readInfo(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap, String readIds) throws Exception {
+		List<String> listId = Arrays.asList(readIds.split(","));
+		informationService.readInfo(listId);
+		RequestResponseUtil.putResponseStr(session, response, request, StringConstant.TRUE);
+		return null;
+	}
+	
+	@RequiresUser
+	@RequestMapping(value = "/sendInfo", method=RequestMethod.POST)
+	@ResponseBody
+	public String sendInfo(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap, Information information, String receiverUser, String receiverRole, String receiverDept) throws Exception {
+		if(receiverUser!=null) {
+			information.setReceiver(receiverUser);
+			informationService.sendInformation(information);
+		}
+		if(receiverRole!=null) {
+			
+		}
+		if(receiverDept!=null) {
+			
+		}
 		RequestResponseUtil.putResponseStr(session, response, request, StringConstant.TRUE);
 		return null;
 	}
