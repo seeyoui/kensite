@@ -79,17 +79,15 @@
 	    	sender,
 	    	receiver,
 	    	timeout,
-	    	status,
 		    id
 		)
 		VALUES (
-			#{sendtime},
+			sysdate,
 			#{content},
 			#{type},
 			#{sender},
 			#{receiver},
 			#{timeout},
-			#{status},
 		    #{id}
 		)
 	</insert>
@@ -98,7 +96,6 @@
 	<update id="updateInformation" parameterType="com.seeyoui.kensite.framework.plugin.info.domain.Information">
 		UPDATE SYS_INFORMATION
 		<set>
-	    	
 	    	<if test="content !=null and content !=''">
 			content=#{content},
 			</if>

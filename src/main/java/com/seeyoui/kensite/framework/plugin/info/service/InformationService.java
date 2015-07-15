@@ -17,6 +17,7 @@ import com.seeyoui.kensite.common.util.*;
 import com.seeyoui.kensite.common.constants.StringConstant;
 import com.seeyoui.kensite.framework.plugin.info.domain.Information;
 import com.seeyoui.kensite.framework.plugin.info.persistence.InformationMapper;
+import com.seeyoui.kensite.framework.system.util.UserUtils;
 import com.seeyoui.kensite.framework.act.idgenerator.GeneratorUUID;
 
 /**
@@ -95,19 +96,5 @@ public class InformationService extends BaseService {
 	 */
 	public void readInfo(List<String> listId) throws CRUDException {
 		informationMapper.readInfo(listId);
-	}
-	
-	/**
-	 * 消息发送
-	 * @param information
-	 * @throws CRUDException
-	 */
-	public void sendInformation(Information information) throws CRUDException{
-		List<String> listUserName = Arrays.asList(information.getReceiver().split(","));
-		for(int i=0; i<listUserName.size(); i++) {
-			information.setId(GeneratorUUID.getId());
-			information.setReceiver(listUserName.get(i));
-			informationMapper.saveInformation(information);
-		}
 	}
 }

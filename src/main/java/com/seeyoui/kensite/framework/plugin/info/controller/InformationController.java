@@ -27,8 +27,11 @@ import com.seeyoui.kensite.common.base.controller.BaseController;
 import com.seeyoui.kensite.common.base.domain.EasyUIDataGrid;
 import com.seeyoui.kensite.common.constants.StringConstant;
 import com.seeyoui.kensite.common.util.RequestResponseUtil;
+import com.seeyoui.kensite.common.util.StringUtils;
+import com.seeyoui.kensite.framework.act.idgenerator.GeneratorUUID;
 import com.seeyoui.kensite.framework.plugin.info.domain.Information;
 import com.seeyoui.kensite.framework.plugin.info.service.InformationService;
+import com.seeyoui.kensite.framework.system.domain.SysUser;
 import com.seeyoui.kensite.framework.system.service.SysUserService;
 import com.seeyoui.kensite.framework.system.util.UserUtils;
 /**
@@ -184,18 +187,50 @@ public class InformationController extends BaseController {
 	@ResponseBody
 	public String sendInfo(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap, Information information, String receiverUser, String receiverRole, String receiverDept) throws Exception {
-		if(receiverUser!=null) {
-			information.setReceiver(receiverUser);
-			informationService.sendInformation(information);
+			ModelMap modelMap, String content, String type, String receivers, String sendType) throws Exception {
+		Information information = new Information();
+		String userName = UserUtils.getUser().getUsername();
+		information.setSender(userName);
+		information.setContent(content);
+		information.setType(type);
+		if(StringUtils.isNoneBlank(sendType) && "U".equals(sendType)) {
+			List<String> listUserName = Arrays.asList(receivers.split(","));
+			for(int i=0; i<listUserName.size(); i++) {
+				information.setId(GeneratorUUID.getId());
+				information.setReceiver(listUserName.get(i));
+				informationService.saveInformation(information);
+			}
+			RequestResponseUtil.putResponseStr(session, response, request, StringConstant.TRUE);
+			return null;
 		}
-		if(receiverRole!=null) {
-			
+		if(StringUtils.isNoneBlank(sendType) && "R".equals(sendType)) {
+			List<String> listRoleid = Arrays.asList(receivers.split(","));
+			for(int i=0; i<listRoleid.size(); i++) {
+				List<SysUser> userList = sysUserService.findSysUserByRole(listRoleid.get(i));
+				for(int j=0; j<userList.size(); j++) {
+					information.setId(GeneratorUUID.getId());
+					information.setReceiver(userList.get(j).getUsername());
+					informationService.saveInformation(information);
+				}
+			}
+			RequestResponseUtil.putResponseStr(session, response, request, StringConstant.TRUE);
+			return null;
 		}
-		if(receiverDept!=null) {
-			
+		if(StringUtils.isNoneBlank(sendType) && "D".equals(sendType)) {
+			List<String> listDeptid = Arrays.asList(receivers.split(","));
+			for(int i=0; i<listDeptid.size(); i++) {
+				SysUser sysUser = new SysUser();
+				sysUser.setDepartmentid(listDeptid.get(i));
+				List<SysUser> userList = sysUserService.findAllSysUserList(sysUser);
+				for(int j=0; j<userList.size(); j++) {
+					information.setId(GeneratorUUID.getId());
+					information.setReceiver(userList.get(j).getUsername());
+					informationService.saveInformation(information);
+				}
+			}
+			RequestResponseUtil.putResponseStr(session, response, request, StringConstant.TRUE);
+			return null;
 		}
-		RequestResponseUtil.putResponseStr(session, response, request, StringConstant.TRUE);
 		return null;
 	}
 }

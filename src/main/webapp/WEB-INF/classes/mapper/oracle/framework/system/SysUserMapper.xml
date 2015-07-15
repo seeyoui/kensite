@@ -66,11 +66,9 @@
 	<select id="findSysUserByRole" resultType="com.seeyoui.kensite.framework.system.domain.SysUser">
 		SELECT
 		<include refid="tableColumns" />
-		from sys_role r
-	    left join sys_user_role sur
-	    on sur.roleid = r.id
-	    left join sys_user t
-	    on r.id = sur.userid
+		from sys_user t
+		left join sys_user_role sur on t.id=sur.userid
+		left join sys_role r on sur.roleid=r.id
 		WHERE r.id = #{roleid}
 	</select>
 	
