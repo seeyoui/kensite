@@ -104,5 +104,9 @@
 	</script>
 	<%@ include file="/WEB-INF/view/taglib/footer.jsp" %>
 	<script src="${ctx_assets}/js/jquery-ui/jquery-ui.min.js"></script>
+	<br/><br/><br/><br/><br/>
+	<%@ taglib uri="/WEB-INF/taglib/componentTag.tld" prefix="ks"%>
+    <!-- 给标签设置user属性绑定要展现的UserInfo对象  -->
+    <ks:formTag tagname="text" />
 </body>
 </html>
