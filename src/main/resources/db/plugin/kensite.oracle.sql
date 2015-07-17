@@ -11,7 +11,7 @@ CREATE TABLE sys_log
 	request_uri varchar2(255),
 	method varchar2(5),
 	params varchar2(4000),
-	exception varchar2(4000),
+	exception clob,
 	PRIMARY KEY (id)
 );
 COMMENT ON TABLE sys_log IS '日志表';
