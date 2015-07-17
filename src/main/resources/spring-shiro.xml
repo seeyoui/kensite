@@ -69,7 +69,7 @@
 				/act/** = anon
 				/assets/** = anon
 				/static/** = anon
-				/uploadFile/** = anon
+				/upload/** = anon
 				/login/login = authc
 				/login/logout = logout
 			</value>

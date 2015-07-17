@@ -4,7 +4,7 @@ function mineUpload(uploadObj, ctx , funcName) {
 	}
 	var url = $(uploadObj).data("url");
 	if(url==null || url=="") {
-		url = "";
+		url = "temp\";
 	}
 	var buttonText = $(uploadObj).data("buttontext");
 	if(buttonText==null || buttonText=="") {
@@ -17,14 +17,10 @@ function mineUpload(uploadObj, ctx , funcName) {
 	var multi = $(uploadObj).data("multi");
 	if(multi==null || multi=="") {
 		multi = true;
-	} else {
-		multi = (multi=='true'?true:false);
 	}
 	var auto = $(uploadObj).data("auto");
 	if(auto==null || auto=="") {
 		auto = false;
-	} else {
-		auto = (auto=='true'?true:false);
 	}
 	var queueID = $(uploadObj).data("queueid");
 	if(queueID==null || queueID=="") {
@@ -87,7 +83,7 @@ function mineUpload(uploadObj, ctx , funcName) {
             alert("您未安装FLASH控件，无法上传！请安装FLASH控件后再试。");
         },
         //上传到服务器，服务器返回相应信息到data里
-	    'onUploadSuccess' : function(file, uuid, response) {
+	    'onUploadSuccess' : function(file, uf, response) {
 	    	//for(var item in file){
 	    	//	alert(item+"的值="+file[item]);
 	    	//}
@@ -98,8 +94,9 @@ function mineUpload(uploadObj, ctx , funcName) {
 	    	//uuid后台返回的字符串
             //alert('The file ' + file.name + ' was successfully uploaded with a response of ' + response + ':' + uuid);
 	    	//alert(uuid);
+	    	uf = eval("("+uf+")");
 	    	var res = "上传成功";
-	    	eval( funcName + "(file, uuid, res)" );
+	    	eval( funcName + "(file, uf, res)" );
         }
     });
 }

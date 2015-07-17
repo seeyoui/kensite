@@ -113,7 +113,7 @@ public class UploadfileService extends BaseService {
                 uploadFile.setRealurl(ctxPath.replaceAll("\\\\", "/"));
                 uploadFile.setSuffix(suffix);
                 uploadFile.setFilesize(mf.getSize()+"");
-            	if(!(uploadfile.getUrl()==null?"":uploadfile.getUrl()).startsWith("temp")) {
+            	if(!(uploadfile.getUrl()==null?"temp":uploadfile.getUrl()).startsWith("temp")) {
             		uploadfile.preInsert();
             		uploadfileMapper.saveUploadfile(uploadFile);
             	} else {
