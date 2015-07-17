@@ -145,12 +145,12 @@
 					type: "post",
 					url: "${ctx}/sysUserRole/saveUserRole.do",
 					data: {userid:userid,roleid:roleid},
-					dataType: 'text',
+					dataType: 'json',
 					beforeSend: function(XMLHttpRequest){
 						loadi = layer.load('正在处理，请稍后...');
 					},
 					success: function(data, textStatus){
-						if (data=="<%=StringConstant.TRUE%>"){
+						if (data.success=="<%=StringConstant.TRUE%>"){
 							layer.msg("操作成功！", 2, -1);
 						} else {
 							layer.msg("操作失败！", 2, -1);
@@ -198,11 +198,7 @@
                     return $(this).form('validate');
                 },
                 success: function(info){
-                    if (info=="<%=StringConstant.TRUE%>"){
-                        layer.msg("操作成功！", 2, -1);
-                    } else {
-	                    layer.msg("操作失败！", 2, -1);
-                    }
+					layer.msg(info, 2, -1);
                 	layer.close(loadi);
                 	$('#dataWin').window('close'); 
                 	$('#dataList').datagrid('reload');
@@ -218,12 +214,12 @@
 							type: "post",
 							url: "${ctx}/sysUser/delete.do",
 							data: {delDataId:row.id},
-							dataType: 'text',
+							dataType: 'json',
 							beforeSend: function(XMLHttpRequest){
 								loadi = layer.load('正在处理，请稍后...');
 							},
 							success: function(data, textStatus){
-								if (data=="<%=StringConstant.TRUE%>"){
+								if (data.success=="<%=StringConstant.TRUE%>"){
 			                        layer.msg("操作成功！", 2, -1);
 			                    } else {
 				                    layer.msg("操作失败！", 2, -1);
@@ -246,12 +242,12 @@
 							type: "post",
 							url: "${ctx}/sysUser/initPassword.do",
 							data: {id : row.id},
-							dataType: 'text',
+							dataType: 'json',
 							beforeSend: function(XMLHttpRequest){
 								loadi = layer.load('正在处理，请稍后...');
 							},
 							success: function(data, textStatus){
-								if (data=="<%=StringConstant.TRUE%>"){
+								if (data.success=="<%=StringConstant.TRUE%>"){
 			                        layer.msg("操作成功！", 2, -1);
 			                    } else {
 				                    layer.msg("操作失败！", 2, -1);
@@ -274,12 +270,12 @@
 							type: "post",
 							url: "${ctx}/sysUser/updateState.do",
 							data: {id : row.id, state : state},
-							dataType: 'text',
+							dataType: 'json',
 							beforeSend: function(XMLHttpRequest){
 								loadi = layer.load('正在处理，请稍后...');
 							},
 							success: function(data, textStatus){
-								if (data=="<%=StringConstant.TRUE%>"){
+								if (data.success=="<%=StringConstant.TRUE%>"){
 			                        layer.msg("操作成功！", 2, -1);
 			                    } else {
 				                    layer.msg("操作失败！", 2, -1);

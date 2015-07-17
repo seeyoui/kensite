@@ -94,8 +94,12 @@ public class SysPermissionController extends BaseController {
 	public String saveSysPermissionByAdd(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, SysPermission sysPermission) throws Exception{
+		if (!beanValidator(modelMap, sysPermission)){
+			RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
+			return null;
+		}
 		sysPermissionService.saveSysPermission(sysPermission);
-		RequestResponseUtil.putResponseStr(session, response, request, StringConstant.TRUE);
+		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}
 	
@@ -112,8 +116,12 @@ public class SysPermissionController extends BaseController {
 	public String saveSysPermissionByUpdate(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, SysPermission sysPermission) throws Exception{
+		if (!beanValidator(modelMap, sysPermission)){
+			RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
+			return null;
+		}
 		sysPermissionService.updateSysPermission(sysPermission);
-		RequestResponseUtil.putResponseStr(session, response, request, StringConstant.TRUE);
+		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}
 	
@@ -132,7 +140,7 @@ public class SysPermissionController extends BaseController {
 			ModelMap modelMap, String delDataId) throws Exception {
 		List<String> listId = Arrays.asList(delDataId.split(","));
 		sysPermissionService.deleteSysPermission(listId);
-		RequestResponseUtil.putResponseStr(session, response, request, StringConstant.TRUE);
+		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}
 }

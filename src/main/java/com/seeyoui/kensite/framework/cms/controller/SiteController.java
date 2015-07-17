@@ -95,8 +95,12 @@ public class SiteController extends BaseController {
 	public String saveSiteByAdd(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, Site site) throws Exception{
+		if (!beanValidator(modelMap, site)){
+			RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
+			return null;
+		}
 		siteService.saveSite(site);
-		RequestResponseUtil.putResponseStr(session, response, request, StringConstant.TRUE);
+		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}
 	
@@ -113,8 +117,12 @@ public class SiteController extends BaseController {
 	public String saveSiteByUpdate(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, Site site) throws Exception{
+		if (!beanValidator(modelMap, site)){
+			RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
+			return null;
+		}
 		siteService.updateSite(site);
-		RequestResponseUtil.putResponseStr(session, response, request, StringConstant.TRUE);
+		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}
 	
@@ -133,7 +141,7 @@ public class SiteController extends BaseController {
 			ModelMap modelMap, String delDataId) throws Exception {
 		List<String> listId = Arrays.asList(delDataId.split(","));
 		siteService.deleteSite(listId);
-		RequestResponseUtil.putResponseStr(session, response, request, StringConstant.TRUE);
+		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}
 }

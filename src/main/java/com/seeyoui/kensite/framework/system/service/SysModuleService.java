@@ -3,21 +3,18 @@
  * Since 2014 - 2015
  */package com.seeyoui.kensite.framework.system.service;  
  
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.seeyoui.kensite.common.base.service.BaseService;
-
-import java.util.*;
 
 import com.seeyoui.kensite.common.base.domain.EasyUIDataGrid;
 import com.seeyoui.kensite.common.base.service.BaseService;
 import com.seeyoui.kensite.common.exception.CRUDException;
-import com.seeyoui.kensite.common.util.*;
-import com.seeyoui.kensite.common.constants.StringConstant;
 import com.seeyoui.kensite.framework.act.idgenerator.GeneratorUUID;
 import com.seeyoui.kensite.framework.system.domain.SysModule;
 import com.seeyoui.kensite.framework.system.persistence.SysModuleMapper;
+import com.seeyoui.kensite.framework.system.persistence.SysModulePermissionMapper;
 
 /**
  * @author cuichen
@@ -29,6 +26,8 @@ public class SysModuleService extends BaseService {
 	
 	@Autowired
 	private SysModuleMapper sysModuleMapper;
+	@Autowired
+	private SysModulePermissionMapper sysModulePermissionMapper;
 
 	/**
 	 * 根据ID查询单条数据
@@ -85,6 +84,9 @@ public class SysModuleService extends BaseService {
 	 * @throws CRUDException
 	 */
 	public void deleteSysModule(List<String> listId) throws CRUDException {
+		for(int i=0; i<listId.size(); i++) {
+			sysModulePermissionMapper.deleteSysModulePermission(listId.get(i));
+		}
 		sysModuleMapper.deleteSysModule(listId);
 	}
 	

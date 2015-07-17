@@ -74,8 +74,12 @@ public class SysRoleMenuController extends BaseController {
 	public String saveRoleMenu(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, SysRoleMenu sysRoleMenu) throws Exception{
+		if (!beanValidator(modelMap, sysRoleMenu)){
+			RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
+			return null;
+		}
 		sysRoleMenuService.saveSysRoleMenu(sysRoleMenu);
-		RequestResponseUtil.putResponseStr(session, response, request, StringConstant.TRUE);
+		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}
 }

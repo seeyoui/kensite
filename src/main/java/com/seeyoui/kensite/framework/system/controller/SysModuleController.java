@@ -95,8 +95,12 @@ public class SysModuleController extends BaseController {
 	public String saveSysModuleByAdd(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, SysModule sysModule) throws Exception{
+		if (!beanValidator(modelMap, sysModule)){
+			RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
+			return null;
+		}
 		sysModuleService.saveSysModule(sysModule);
-		RequestResponseUtil.putResponseStr(session, response, request, StringConstant.TRUE);
+		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}
 	
@@ -113,8 +117,12 @@ public class SysModuleController extends BaseController {
 	public String saveSysModuleByUpdate(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, SysModule sysModule) throws Exception{
+		if (!beanValidator(modelMap, sysModule)){
+			RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
+			return null;
+		}
 		sysModuleService.updateSysModule(sysModule);
-		RequestResponseUtil.putResponseStr(session, response, request, StringConstant.TRUE);
+		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}
 	
@@ -133,7 +141,7 @@ public class SysModuleController extends BaseController {
 			ModelMap modelMap, String delDataId) throws Exception {
 		List<String> listId = Arrays.asList(delDataId.split(","));
 		sysModuleService.deleteSysModule(listId);
-		RequestResponseUtil.putResponseStr(session, response, request, StringConstant.TRUE);
+		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}
 }

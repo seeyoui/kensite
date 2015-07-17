@@ -4,6 +4,9 @@
  */
 package com.seeyoui.kensite.framework.system.domain;  
 
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
 
 import com.seeyoui.kensite.common.base.domain.Pager;
@@ -22,6 +25,7 @@ public class SysDepartment extends Pager {
     @Range(min = 1, max = 100)
     private Long sequence;  
     private String name;  
+    @Length(min = 6, max = 8)
     private String code;  
  
     public void setId(String id) {  

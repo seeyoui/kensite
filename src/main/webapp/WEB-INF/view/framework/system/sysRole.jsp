@@ -161,12 +161,12 @@
 					type: "post",
 					url: "${ctx}/sysRoleModule/saveRoleModule.do",
 					data: {roleid:roleid,moduleid:moduleid},
-					dataType: 'text',
+					dataType: 'json',
 					beforeSend: function(XMLHttpRequest){
 						loadi = layer.load('正在处理，请稍后...');
 					},
 					success: function(data, textStatus){
-						if (data=="<%=StringConstant.TRUE%>"){
+						if (data.success=="<%=StringConstant.TRUE%>"){
 							layer.msg("操作成功！", 2, -1);
 						} else {
 							layer.msg("操作失败！", 2, -1);
@@ -189,12 +189,12 @@
 					type: "post",
 					url: "${ctx}/sysRoleMenu/saveRoleMenu.do",
 					data: {roleid:roleid,menuid:menuid},
-					dataType: 'text',
+					dataType: 'json',
 					beforeSend: function(XMLHttpRequest){
 						loadi = layer.load('正在处理，请稍后...');
 					},
 					success: function(data, textStatus){
-						if (data=="<%=StringConstant.TRUE%>"){
+						if (data.success=="<%=StringConstant.TRUE%>"){
 							layer.msg("操作成功！", 2, -1);
 						} else {
 							layer.msg("操作失败！", 2, -1);
@@ -241,7 +241,8 @@
                     return $(this).form('validate');
                 },
                 success: function(info){
-                    if (info=="<%=StringConstant.TRUE%>"){
+                	data = eval('(' + info + ')');
+                    if (data.success=="<%=StringConstant.TRUE%>"){
                         layer.msg("操作成功！", 2, -1);
                     } else {
 	                    layer.msg("操作失败！", 2, -1);
@@ -261,12 +262,12 @@
 							type: "post",
 							url: "${ctx}/sysRole/delete.do",
 							data: {delDataId:row.id},
-							dataType: 'text',
+							dataType: 'json',
 							beforeSend: function(XMLHttpRequest){
 								loadi = layer.load('正在处理，请稍后...');
 							},
 							success: function(data, textStatus){
-								if (data=="<%=StringConstant.TRUE%>"){
+								if (data.success=="<%=StringConstant.TRUE%>"){
 			                        layer.msg("操作成功！", 2, -1);
 			                    } else {
 				                    layer.msg("操作失败！", 2, -1);

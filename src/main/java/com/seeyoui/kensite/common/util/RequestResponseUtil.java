@@ -8,6 +8,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +16,8 @@ import javax.servlet.http.HttpSession;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+
+import org.springframework.ui.ModelMap;
 
 public class RequestResponseUtil {
 	
@@ -101,6 +104,35 @@ public class RequestResponseUtil {
 		}
 		return;
 	}
+	
+	/**
+	 * 通用返回字符串
+	 * @param session
+	 * @param response
+	 * @param request
+	 * @param responseObj response写回的对象
+	 * @throws Exception
+	 */
+	public static void putResponseStr(HttpSession session, HttpServletResponse response, HttpServletRequest request, ModelMap model, String success) {
+		try {
+			request.setCharacterEncoding("utf-8");
+			response.setCharacterEncoding("UTF-8");
+			response.setContentType("text/html;charset=utf-8");
+			response.setHeader("Cache-Control", "no-cache"); 
+			PrintWriter out = response.getWriter();
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("message", model.get("message")==null?"":model.get("message"));
+			map.put("success", success);
+			out.write(JSONObject.fromObject(map).toString());
+			out.flush();
+			out.close();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return;
+	}
 	/**
 	 * 返回Map集合
 	 * @param session
@@ -109,7 +141,7 @@ public class RequestResponseUtil {
 	 * @param map
 	 * @throws Exception
 	 */
-	public static void putResponseMap(HttpSession session, HttpServletResponse response, HttpServletRequest request,HashMap map)throws Exception{
+	public static void putResponseMap(HttpSession session, HttpServletResponse response, HttpServletRequest request, HashMap map)throws Exception{
 		JSONObject result=JSONObject.fromObject(map);
 		putResponseStr(session, response, request, result);
 	}

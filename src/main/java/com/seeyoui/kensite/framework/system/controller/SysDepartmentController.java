@@ -119,11 +119,11 @@ public class SysDepartmentController extends BaseController {
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, SysDepartment sysDepartment) throws Exception{
 		if (!beanValidator(modelMap, sysDepartment)){
-			RequestResponseUtil.putResponseStr(session, response, request, StringConstant.FALSE);
+			RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
 			return null;
 		}
 		sysDepartmentService.saveSysDepartment(sysDepartment);
-		RequestResponseUtil.putResponseStr(session, response, request, StringConstant.TRUE);
+		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}
 	
@@ -140,8 +140,12 @@ public class SysDepartmentController extends BaseController {
 	public String saveSysDepartmentByUpdate(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, SysDepartment sysDepartment) throws Exception{
+		if (!beanValidator(modelMap, sysDepartment)){
+			RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
+			return null;
+		}
 		sysDepartmentService.updateSysDepartment(sysDepartment);
-		RequestResponseUtil.putResponseStr(session, response, request, StringConstant.TRUE);
+		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}
 	
@@ -160,7 +164,7 @@ public class SysDepartmentController extends BaseController {
 			ModelMap modelMap, String delDataId) throws Exception {
 		List<String> listId = Arrays.asList(delDataId.split(","));
 		sysDepartmentService.deleteSysDepartment(listId);
-		RequestResponseUtil.putResponseStr(session, response, request, StringConstant.TRUE);
+		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}
 }

@@ -51,7 +51,6 @@
 		</script>
   </head>
   <body>
-  	<div id="uploadfileQueue"></div>
   	<!--
   	filetypeexts：默认所有文件类型
   	buttontext：默认选择附件
@@ -62,13 +61,13 @@
   	method：默认POST
   	url：temp(服务器保存文件但不存数据库)
   	-->
+  	<div id="uploadfileQueue"></div>
 	<input type="file" id="uploadify" name="uploadify" data-queueid="uploadfileQueue" 
 	data-filetypeexts="*.jpg;*.jpge;*.gif;*.png" 
 	data-buttontext="选择附件" data-auto="false" 
 	data-multi="false" data-queuesizelimit="5" 
 	data-filesizelimit="5000KB" data-method="POST"
 	data-url="image\" />
-	
 	<a href="javascript:$('#uploadify').uploadify('upload','*')">上传</a>|
 	<a href="javascript:$('#uploadify').uploadify('cancel','*')">取消上传</a>
 	<br/><br/><br/><br/><br/>

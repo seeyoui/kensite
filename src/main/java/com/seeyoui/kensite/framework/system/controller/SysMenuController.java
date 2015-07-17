@@ -115,8 +115,12 @@ public class SysMenuController extends BaseController {
 	public String saveSysMenuByAdd(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, SysMenu sysMenu) throws Exception{
+		if (!beanValidator(modelMap, sysMenu)){
+			RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
+			return null;
+		}
 		sysMenuService.saveSysMenu(sysMenu);
-		RequestResponseUtil.putResponseStr(session, response, request, StringConstant.TRUE);
+		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}
 	
@@ -133,8 +137,12 @@ public class SysMenuController extends BaseController {
 	public String saveSysMenuByUpdate(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, SysMenu sysMenu) throws Exception{
+		if (!beanValidator(modelMap, sysMenu)){
+			RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
+			return null;
+		}
 		sysMenuService.updateSysMenu(sysMenu);
-		RequestResponseUtil.putResponseStr(session, response, request, StringConstant.TRUE);
+		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}
 	
@@ -153,7 +161,7 @@ public class SysMenuController extends BaseController {
 			ModelMap modelMap, String delDataId) throws Exception {
 		List<String> listId = Arrays.asList(delDataId.split(","));
 		sysMenuService.deleteSysMenu(listId);
-		RequestResponseUtil.putResponseStr(session, response, request, StringConstant.TRUE);
+		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}
 }

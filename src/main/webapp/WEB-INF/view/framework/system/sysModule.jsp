@@ -120,21 +120,26 @@
 	    	var treeObj = $('#permissionTree');
 	    	var permissionid = getChecked(treeObj);
 	    	var row = $('#dataList').datagrid('getSelected');
-	    	var moduleid = row.id;
-	    	if (permissionid!=null && permissionid!=""){
+	    	var moduleid = "";
+	    	if(!row) {
+	    		return;
+	    	}
+	    	moduleid = row.id;
+	    	if (permissionid!=null){
 				$.ajax({
 					type: "post",
 					url: "${ctx}/sysModulePermission/saveModulePermission.do",
 					data: {moduleid:moduleid,permissionid:permissionid},
-					dataType: 'text',
+					dataType: 'json',
 					beforeSend: function(XMLHttpRequest){
 					},
 					success: function(data, textStatus){
-						if (data=="<%=StringConstant.TRUE%>"){
+						if (data.success=="<%=StringConstant.TRUE%>"){
 							layer.msg("操作成功！", 2, -1);
 						} else {
 							layer.msg("操作失败！", 2, -1);
 						}
+						$('#permissionWin').window('close');
 						reloadData();
 					}
 				});
@@ -176,7 +181,8 @@
                     return $(this).form('validate');
                 },
                 success: function(info){
-                    if (info=="<%=StringConstant.TRUE%>"){
+                	data = eval('(' + info + ')');
+                    if (data.success=="<%=StringConstant.TRUE%>"){
                         layer.msg("操作成功！", 2, -1);
                     } else {
 	                    layer.msg("操作失败！", 2, -1);
@@ -196,12 +202,12 @@
 							type: "post",
 							url: "${ctx}/sysModule/delete.do",
 							data: {delDataId:row.id},
-							dataType: 'text',
+							dataType: 'json',
 							beforeSend: function(XMLHttpRequest){
 								loadi = layer.load('正在处理，请稍后...');
 							},
 							success: function(data, textStatus){
-								if (data=="<%=StringConstant.TRUE%>"){
+								if (data.success=="<%=StringConstant.TRUE%>"){
 			                        layer.msg("操作成功！", 2, -1);
 			                    } else {
 				                    layer.msg("操作失败！", 2, -1);

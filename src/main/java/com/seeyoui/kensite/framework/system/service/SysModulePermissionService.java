@@ -15,6 +15,7 @@ import com.seeyoui.kensite.common.base.domain.TreeJson;
 import com.seeyoui.kensite.common.base.service.BaseService;
 import com.seeyoui.kensite.common.constants.StringConstant;
 import com.seeyoui.kensite.common.exception.CRUDException;
+import com.seeyoui.kensite.common.util.StringUtils;
 import com.seeyoui.kensite.framework.system.domain.SysModulePermission;
 import com.seeyoui.kensite.framework.system.domain.SysPermission;
 import com.seeyoui.kensite.framework.system.persistence.SysModulePermissionMapper;
@@ -61,11 +62,14 @@ public class SysModulePermissionService extends BaseService {
 	 * @throws CRUDException
 	 */
 	public void saveSysModulePermission(SysModulePermission sysModulePermission) throws CRUDException {
-		List<String> listId = Arrays.asList(sysModulePermission.getPermissionid().split(","));
 		sysModulePermissionMapper.deleteSysModulePermission(sysModulePermission.getModuleid());
-		for(int i=0; i<listId.size(); i++) {
-			sysModulePermission.setPermissionid(listId.get(i));
-			sysModulePermissionMapper.saveSysModulePermission(sysModulePermission);
+		String mpid = sysModulePermission.getPermissionid();
+		if(StringUtils.isNotBlank(mpid)) {
+			List<String> listId = Arrays.asList(mpid.split(","));
+			for(int i=0; i<listId.size(); i++) {
+				sysModulePermission.setPermissionid(listId.get(i));
+				sysModulePermissionMapper.saveSysModulePermission(sysModulePermission);
+			}
 		}
 	}
 	

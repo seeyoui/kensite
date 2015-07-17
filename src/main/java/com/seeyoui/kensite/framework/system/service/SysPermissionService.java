@@ -73,7 +73,6 @@ public class SysPermissionService extends BaseService {
 	 * @throws CRUDException
 	 */
 	public void saveSysPermission(SysPermission sysPermission) throws CRUDException{
-		sysPermission.setId(GeneratorUUID.getId());
 		sysPermissionMapper.saveSysPermission(sysPermission);
 	}
 	

@@ -75,8 +75,12 @@ public class SysModulePermissionController extends BaseController {
 	public String saveModulePermission(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, SysModulePermission sysModulePermission) throws Exception{
+		if (!beanValidator(modelMap, sysModulePermission)){
+			RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
+			return null;
+		}
 		sysModulePermissionService.saveSysModulePermission(sysModulePermission);
-		RequestResponseUtil.putResponseStr(session, response, request, StringConstant.TRUE);
+		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}
 }

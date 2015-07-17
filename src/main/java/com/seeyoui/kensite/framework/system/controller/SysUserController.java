@@ -113,8 +113,12 @@ public class SysUserController extends BaseController {
 	public String saveSysUserByUpdate(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, SysUser sysUser) throws Exception{
+		if (!beanValidator(modelMap, sysUser)){
+			RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
+			return null;
+		}
 		sysUserService.updateSysUser(sysUser);
-		RequestResponseUtil.putResponseStr(session, response, request, StringConstant.TRUE);
+		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}
 	
@@ -131,8 +135,12 @@ public class SysUserController extends BaseController {
 	public String updatePassword(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, SysUser sysUser) throws Exception{
+		if (!beanValidator(modelMap, sysUser)){
+			RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
+			return null;
+		}
 		sysUserService.updatePassword(sysUser);
-		RequestResponseUtil.putResponseStr(session, response, request, StringConstant.TRUE);
+		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}
 	
@@ -150,7 +158,7 @@ public class SysUserController extends BaseController {
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, SysUser sysUser) throws Exception{
 		sysUserService.updateState(sysUser);
-		RequestResponseUtil.putResponseStr(session, response, request, StringConstant.TRUE);
+		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}
 	
@@ -170,7 +178,7 @@ public class SysUserController extends BaseController {
 		sysUser = sysUserService.findSysUserById(sysUser.getId());
 		sysUser.setPassword(MD5.md5(sysUser.getUsername()+StringConstant.INIT_PASSWORD));
 		sysUserService.updatePassword(sysUser);
-		RequestResponseUtil.putResponseStr(session, response, request, StringConstant.TRUE);
+		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}
 	
@@ -189,7 +197,7 @@ public class SysUserController extends BaseController {
 			ModelMap modelMap, String delDataId) throws Exception {
 		List<String> listId = Arrays.asList(delDataId.split(","));
 		sysUserService.deleteSysUser(listId);
-		RequestResponseUtil.putResponseStr(session, response, request, StringConstant.TRUE);
+		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}
 }

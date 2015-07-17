@@ -4,6 +4,7 @@ import java.beans.PropertyEditorSupport;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolationException;
@@ -15,7 +16,6 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindException;
 import org.springframework.web.bind.WebDataBinder;
@@ -55,8 +55,9 @@ public abstract class BaseController {
 		try{
 			BeanValidators.validateWithException(validator, object, groups);
 		}catch(ConstraintViolationException ex){
-			List<String> list = BeanValidators.extractPropertyAndMessageAsList(ex, ": ");
-			addMessage(model, list.toArray(new String[]{}));
+			Map<String, String> map = BeanValidators.extractPropertyAndMessage(ex);
+			//addMessage(model, list.toArray(new String[]{}));
+			model.addAttribute("message", map);
 			return false;
 		}
 		return true;
@@ -72,8 +73,9 @@ public abstract class BaseController {
 		try{
 			BeanValidators.validateWithException(validator, object, groups);
 		}catch(ConstraintViolationException ex){
-			List<String> list = BeanValidators.extractPropertyAndMessageAsList(ex, ": ");
-			addMessage(redirectAttributes, list.toArray(new String[]{}));
+			List<String> list = BeanValidators.extractPropertyAndMessageAsList(ex, ":");
+			redirectAttributes.addFlashAttribute("message", list);
+			//addMessage(redirectAttributes, list.toArray(new String[]{}));
 			return false;
 		}
 		return true;
@@ -96,7 +98,7 @@ public abstract class BaseController {
 	protected void addMessage(ModelMap model, String... messages) {
 		StringBuilder sb = new StringBuilder();
 		for (String message : messages){
-			sb.append(message).append(messages.length>1?"<br/>":"");
+			sb.append(message).append(messages.length>1?";":"");
 		}
 		model.addAttribute("message", sb.toString());
 	}
@@ -108,7 +110,7 @@ public abstract class BaseController {
 	protected void addMessage(RedirectAttributes redirectAttributes, String... messages) {
 		StringBuilder sb = new StringBuilder();
 		for (String message : messages){
-			sb.append(message).append(messages.length>1?"<br/>":"");
+			sb.append(message).append(messages.length>1?";":"");
 		}
 		redirectAttributes.addFlashAttribute("message", sb.toString());
 	}

@@ -75,8 +75,12 @@ public class SysRoleModuleController extends BaseController {
 	public String saveRoleModule(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, SysRoleModule sysRoleModule) throws Exception{
+		if (!beanValidator(modelMap, sysRoleModule)){
+			RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
+			return null;
+		}
 		sysRoleModuleService.saveSysRoleModule(sysRoleModule);
-		RequestResponseUtil.putResponseStr(session, response, request, StringConstant.TRUE);
+		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}
 }

@@ -1,3 +1,13 @@
+function renderErrMsg(errMsg) {
+   	for(var item in errMsg){
+   		if($("#msg-"+item) != null) {
+			$("#msg-"+item).html(errMsg[item]);
+		}
+	}
+}
+function cleanErrMsg() {
+	$(".err-msg").html("");        	
+}
 function getTreeNodeLevel(tree, node) {
 	var level = 0;
 	while(node != null) {

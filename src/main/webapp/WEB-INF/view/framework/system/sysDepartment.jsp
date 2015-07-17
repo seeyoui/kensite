@@ -56,6 +56,7 @@
 							<div class="fitem">
 				                <label>部门编号</label>
 				                <input id="code" name="code" class="easyui-validatebox textbox" data-options="required:true"/>
+				                <span id="msg-code" class="err-msg"></span>
 				            </div>
 				            <div class="fitem">
 				                <label>上级部门</label>
@@ -64,6 +65,7 @@
 				            <div class="fitem">
 				                <label>排序</label>
 				                <input id="sequence" name="sequence" class="easyui-numberbox textbox" data-options="min:0,max:999999,precision:0,required:true"/>
+				                <span id="msg-sequence" class="err-msg"></span>
 				            </div>
 				</form>
 				
@@ -105,6 +107,7 @@
         function newInfo(){
             $('#dataWin').window('open');
             $('#dataForm').form('clear');
+            cleanErrMsg();
             url = '${ctx}/sysDepartment/saveByAdd.do';
         }
         function editInfo(){
@@ -112,6 +115,7 @@
             if (row){
                 $('#dataWin').window('open');
                 $('#dataForm').form('load',row);
+                cleanErrMsg();
                 url = '${ctx}/sysDepartment/saveByUpdate.do?id='+row.id;
             }    	
         }
@@ -126,14 +130,17 @@
                     return $(this).form('validate');
                 },
                 success: function(data){
-                    if (data=="<%=StringConstant.TRUE%>"){
+                	cleanErrMsg();
+                	data = eval('(' + data + ')');
+                    if (data.success=="<%=StringConstant.TRUE%>"){
                         layer.msg("操作成功！", 2, -1);
+                		$('#dataWin').window('close'); 
+                		reloadData();
                     } else {
 	                    layer.msg("操作失败！", 2, -1);
+	                    renderErrMsg(data.message);
                     }
                 	layer.close(loadi);
-                	$('#dataWin').window('close'); 
-                	reloadData();
                 }
             });
         }
@@ -146,24 +153,25 @@
 							type: "post",
 							url: "${ctx}/sysDepartment/delete.do",
 							data: {delDataId:row.id},
-							dataType: 'text',
+							dataType: 'json',
 							beforeSend: function(XMLHttpRequest){
 								loadi = layer.load('正在处理，请稍后...');
 							},
 							success: function(data, textStatus){
-								if (data=="<%=StringConstant.TRUE%>"){
+								if (data.success=="<%=StringConstant.TRUE%>"){
 			                        layer.msg("操作成功！", 2, -1);
+									reloadData();
 			                    } else {
 				                    layer.msg("操作失败！", 2, -1);
 			                    }
 			                    layer.close(loadi);
-								reloadData();
 							}
 						});
                     }
                 });
             }
         }
+        
     </script>
   </body>
 </html>
