@@ -125,7 +125,8 @@ public class LoginController {
 //		String portal = sc.getUrl()+sc.getPage();
 //		modelMap.put("portalUrl", sc.getUrl());
 //    	resultPageURL = portal;
-		return "skins/top_left_main";
+		return "skins/xenon/top_left_main";
+//		return "skins/poor/main";
 	}
 	
 	/**

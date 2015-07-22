@@ -3,6 +3,8 @@ package com.seeyoui.kensite.framework.security.shiro;
 import java.io.Serializable;
 import java.util.List;
 
+import net.sf.json.JSONArray;
+
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.LockedAccountException;
@@ -68,6 +70,7 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 				if(root != null) {
 					List<TreeJson> menuList = root.getChildren();
 					SessionUtil.setSession("menuList", menuList);
+					SessionUtil.setSession("menuTree", JSONArray.fromObject(menuList));
 				}
 				return authcInfo;
 			}

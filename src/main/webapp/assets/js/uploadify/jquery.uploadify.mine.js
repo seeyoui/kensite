@@ -4,7 +4,7 @@ function mineUpload(uploadObj, ctx , funcName) {
 	}
 	var url = $(uploadObj).data("url");
 	if(url==null || url=="") {
-		url = "temp\";
+		url = "temp\\";
 	}
 	var buttonText = $(uploadObj).data("buttontext");
 	if(buttonText==null || buttonText=="") {

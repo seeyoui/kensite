@@ -75,7 +75,7 @@ public class UploadfileService extends BaseService {
 	 * @param uploadfile
 	 * @throws CRUDException
 	 */
-	public String uploadfile(Uploadfile uploadfile, HttpServletRequest request) throws CRUDException{
+	public Uploadfile uploadfile(Uploadfile uploadfile, HttpServletRequest request) throws CRUDException{
 		String ctxPath = request.getSession().getServletContext().getRealPath("/"); 
 		MultipartResolver resolver = new CommonsMultipartResolver(request.getSession().getServletContext());
 		MultipartHttpServletRequest multipartRequest = resolver.resolveMultipart(request);
@@ -108,25 +108,24 @@ public class UploadfileService extends BaseService {
             	uploadFile.setId(UUID);
                 uploadFile.setViewname(fileName);
                 uploadFile.setRealname(newFileName);
-                String fileUrl = StringConstant.UPLOAD_FILE_URL + (uploadfile.getUrl()==null?"":uploadfile.getUrl());
+                String fileUrl = StringConstant.UPLOAD_FILE_URL + (url==null?"":url);
                 uploadFile.setUrl(fileUrl.replaceAll("\\\\", "/"));
                 uploadFile.setRealurl(ctxPath.replaceAll("\\\\", "/"));
                 uploadFile.setSuffix(suffix);
                 uploadFile.setFilesize(mf.getSize()+"");
-            	if(!(uploadfile.getUrl()==null?"temp":uploadfile.getUrl()).startsWith("temp")) {
+            	if(!(url==null?"temp":url).startsWith("temp")) {
             		uploadfile.preInsert();
             		uploadfileMapper.saveUploadfile(uploadFile);
             	} else {
             		UUID = "";
             	}
                 FileCopyUtils.copy(mf.getBytes(), realFile);
-                JSONObject jsonObject = JSONObject.fromObject(uploadFile);
-                return jsonObject.toString();
+                return uploadFile;
 	        } catch (IOException e) {  
 	            e.printStackTrace();  
 	        }
 		}
-        return "";
+        return null;
 		
 	}
 	

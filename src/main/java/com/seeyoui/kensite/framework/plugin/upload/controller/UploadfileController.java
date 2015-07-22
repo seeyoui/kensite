@@ -54,20 +54,6 @@ public class UploadfileController extends BaseController {
 		return new ModelAndView("framework/plugin/upload/uploadfile", modelMap);
 	}
 	
-	/**
-	 * 展示图片crop页面
-	 * @param modelMap
-	 * @param module
-	 * @return
-	 * @throws Exception
-	 */
-	@RequestMapping(value = "/showImageCrop")
-	public ModelAndView showImageCrop(HttpSession session,
-			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap) throws Exception {
-		return new ModelAndView("framework/plugin/upload/imageCrop", modelMap);
-	}
-	
 	@RequestMapping(value = "/testUpload")
 	public ModelAndView testUpload(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
@@ -107,8 +93,9 @@ public class UploadfileController extends BaseController {
 	public String uploadfile(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, Uploadfile uploadfile) throws Exception{
-		String uf = uploadfileService.uploadfile(uploadfile, request);
-		RequestResponseUtil.putResponseStr(session, response, request, uf);
+		Uploadfile uf = uploadfileService.uploadfile(uploadfile, request);
+		JSONObject jsonObject = JSONObject.fromObject(uf);
+		RequestResponseUtil.putResponseStr(session, response, request, jsonObject.toString());
 		return null;
 	}
 	
