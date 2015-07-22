@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.seeyoui.kensite.framework.plugin.skins.persistence.SkinsMapper" >
+	<!-- 查询单表的字段 -->
+	<sql id="tableColumns">
+	    t.id,
+	    t.name,
+	    t.url,
+	    t.state
+	</sql>
+	<!-- 查询过滤条件 -->
+	<sql id="whereStr">
+		<where>
+			1=1
+			<if test="id != null and id != ''">
+				and t.id LIKE '%'||#{id}||'%'
+			</if>
+			<if test="name != null and name != ''">
+				and t.name LIKE '%'||#{name}||'%'
+			</if>
+			<if test="url != null and url != ''">
+				and t.url LIKE '%'||#{url}||'%'
+			</if>
+			<if test="state != null and state != ''">
+				and t.state LIKE '%'||#{state}||'%'
+			</if>
+		</where>
+	</sql>
+	<sql id="orderBy">
+		ORDER BY t.id DESC 
+	</sql>
+	
+	<!-- 根据ID查询单条数据 -->
+	<select id="findSkinsById" resultType="com.seeyoui.kensite.framework.plugin.skins.domain.Skins">
+		SELECT
+		<include refid="tableColumns" />
+		FROM SYS_SKINS t
+		WHERE id = #{id}
+	</select>
+	
+	<!-- 查询数据集合 -->
+	<select id="findSkinsList" resultType="com.seeyoui.kensite.framework.plugin.skins.domain.Skins">
+		select * from(select t.*,rownum rn from(
+			SELECT
+			<include refid="tableColumns"/>
+			FROM SYS_SKINS t
+			<include refid="whereStr"/>
+			<include refid="orderBy"/>
+		) t where rownum &lt; = #{page}*#{rows}) where rn &gt; (#{page}-1)*#{rows}
+	</select>
+	
+	<!-- 查询所有数据集合 -->
+	<select id="findAllSkinsList" resultType="com.seeyoui.kensite.framework.plugin.skins.domain.Skins">
+		SELECT
+		<include refid="tableColumns"/>
+		FROM SYS_SKINS t
+		<include refid="whereStr"/>
+		<include refid="orderBy"/>
+	</select>
+	
+	<!-- 查询数据总数 -->
+	<select id="findSkinsListTotal" resultType="EasyUIDataGrid">
+		SELECT
+		COUNT(1) total
+		FROM SYS_SKINS t
+		<include refid="whereStr"/>
+	</select>
+	
+	<!-- 查询数据总数 -->
+	<select id="findSkinsTotal">
+		SELECT
+		COUNT(1) total
+		FROM SYS_SKINS t
+		<include refid="whereStr"/>
+	</select>
+	
+	<!-- 数据新增 -->
+	<insert id="saveSkins" parameterType="com.seeyoui.kensite.framework.plugin.skins.domain.Skins">
+		INSERT INTO SYS_SKINS (
+	    	
+	    	name,
+	    	url,
+	    	state,
+		    id
+		)
+		VALUES (
+			
+			#{name},
+			#{url},
+			#{state},
+		    #{id}
+		)
+	</insert>
+	
+	<!-- 数据修改 -->
+	<update id="updateSkins" parameterType="com.seeyoui.kensite.framework.plugin.skins.domain.Skins">
+		UPDATE SYS_SKINS
+		<set>
+	    	
+	    	<if test="name !=null and name !=''">
+			name=#{name},
+			</if>
+	    	<if test="url !=null and url !=''">
+			url=#{url},
+			</if>
+	    	<if test="state !=null and state !=''">
+			state=#{state},
+			</if>
+		    id = #{id}
+		</set>
+		WHERE id = #{id}
+	</update>
+	
+	<!-- 数据删除 -->
+	<delete id="deleteSkins">
+		DELETE FROM SYS_SKINS WHERE id IN 
+		<foreach item="listId" collection="list"
+			open="(" separator="," close=")">
+			#{listId}
+		</foreach>
+	</delete>
+	
+	<!-- 查询当前系统皮肤 -->
+	<select id="findCurrentSkins" resultType="com.seeyoui.kensite.framework.plugin.skins.domain.Skins">
+		SELECT
+		<include refid="tableColumns" />
+		FROM 
+		SYS_SKINS t
+		WHERE 
+		t.state='1' 
+	</select>
+	
+	<!-- 选中 -->
+	<update id="choseSkins" parameterType="com.seeyoui.kensite.framework.plugin.skins.domain.Skins">
+		UPDATE SYS_SKINS
+		set state = '1'
+		WHERE id = #{id}
+	</update>
+	
+	<!-- 清空 -->
+	<update id="unchoseSkins" parameterType="com.seeyoui.kensite.framework.plugin.skins.domain.Skins">
+		UPDATE SYS_SKINS
+		set state = '0'
+		WHERE state = '1'
+	</update>
+</mapper>

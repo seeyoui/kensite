@@ -98,3 +98,33 @@ comment on column sys_information.status
 -- Create/Recreate primary, unique and foreign key constraints 
 alter table sys_information
   add primary key (ID);
+
+-- Create table
+create table SYS_SKINS
+(
+  id    CHAR(32) not null,
+  name  VARCHAR2(50),
+  url   VARCHAR2(100),
+  state VARCHAR2(1) default 0
+)
+;
+-- Add comments to the table 
+comment on table SYS_SKINS
+  is '系统皮肤';
+-- Add comments to the columns 
+comment on column SYS_SKINS.id
+  is '主键';
+comment on column SYS_SKINS.name
+  is '说明';
+comment on column SYS_SKINS.url
+  is '页面路径';
+comment on column SYS_SKINS.state
+  is '状态';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table SYS_SKINS
+  add constraint SYS_SKINS_ID primary key (ID);
+  
+insert into SYS_SKINS (id, name, url, state)
+values ('87871541b05e411ca5e8da15015c821f', 'XENON皮肤', 'skins/xenon/top_left_main', '0');
+insert into SYS_SKINS (id, name, url, state)
+values ('3df2a557ac47442889212395848b9213', 'EASYUI皮肤', 'skins/poor/main', '1');

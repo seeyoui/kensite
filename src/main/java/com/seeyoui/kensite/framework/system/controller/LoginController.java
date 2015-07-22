@@ -13,6 +13,7 @@ import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +24,8 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import com.seeyoui.kensite.common.util.CookieUtils;
 import com.seeyoui.kensite.common.util.MD5;
 import com.seeyoui.kensite.common.util.StringUtils;
+import com.seeyoui.kensite.framework.plugin.skins.domain.Skins;
+import com.seeyoui.kensite.framework.plugin.skins.service.SkinsService;
 import com.seeyoui.kensite.framework.system.util.UserUtils;
 
 /**
@@ -35,8 +38,8 @@ import com.seeyoui.kensite.framework.system.util.UserUtils;
 @RequestMapping(value = "login")
 public class LoginController {
 	
-//	@Autowired
-//	private LoginService loginService;
+	@Autowired
+	private SkinsService skinsService;
 	
 	/**
 	 * 账号登录
@@ -121,11 +124,13 @@ public class LoginController {
 	 * 获取系统皮肤方案
 	 */
 	public String getSysSkins() {
-//    	SkinsCenter sc = skinsCenterService.findCurrentSkins();
-//		String portal = sc.getUrl()+sc.getPage();
-//		modelMap.put("portalUrl", sc.getUrl());
-//    	resultPageURL = portal;
-		return "skins/xenon/top_left_main";
+    	Skins skin = skinsService.findCurrentSkins();
+    	if(skin==null || skin.getUrl()==null || "".equals(skin.getUrl())) {
+    		return "skins/xenon/top_left_main";
+    	} else {
+    		return skin.getUrl();
+    	}
+//		return "skins/xenon/top_left_main";
 //		return "skins/poor/main";
 	}
 	
