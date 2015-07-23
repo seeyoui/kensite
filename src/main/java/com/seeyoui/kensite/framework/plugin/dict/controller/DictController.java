@@ -2,7 +2,7 @@
  * Powered By cuichen
  * Since 2014 - 2015
  */
-package com.seeyoui.kensite.framework.system.controller;  
+package com.seeyoui.kensite.framework.plugin.dict.controller;  
  
 import java.sql.*;
 import java.util.*;
@@ -19,7 +19,6 @@ import org.apache.shiro.authz.annotation.RequiresUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,23 +27,26 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.seeyoui.kensite.common.base.controller.BaseController;
 import com.seeyoui.kensite.common.constants.StringConstant;
+import com.seeyoui.kensite.common.util.RequestResponseUtil;
+import com.seeyoui.kensite.common.constants.StringConstant;
 import com.seeyoui.kensite.common.base.domain.EasyUIDataGrid;
 import com.seeyoui.kensite.common.base.domain.TreeJson;
 import com.seeyoui.kensite.common.base.controller.BaseController;
 import com.seeyoui.kensite.common.util.RequestResponseUtil;
+import com.seeyoui.kensite.framework.plugin.dict.domain.Dict;
+import com.seeyoui.kensite.framework.plugin.dict.service.DictService;
 import com.seeyoui.kensite.framework.system.domain.SysDepartment;
-import com.seeyoui.kensite.framework.system.service.SysDepartmentService;
 /**
  * @author cuichen
  * @version 1.0
  * @since 1.0
  */
 @Controller
-@RequestMapping(value = "sysDepartment")
-public class SysDepartmentController extends BaseController {
+@RequestMapping(value = "sys/dict")
+public class DictController extends BaseController {
 	
 	@Autowired
-	private SysDepartmentService sysDepartmentService;
+	private DictService dictService;
 	
 	/**
 	 * 展示列表页面
@@ -53,31 +55,50 @@ public class SysDepartmentController extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequiresPermissions("sysDepartment:view")
+	@RequiresPermissions("dict:view")
 	@RequestMapping(value = "/showPageList")
-	public ModelAndView showSysDepartmentPageList(HttpSession session,
+	public ModelAndView showDictPageList(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap) throws Exception {
-		return new ModelAndView("framework/system/sysDepartment", modelMap);
+		return new ModelAndView("framework/plugin/dict/dict", modelMap);
 	}
 	
 	/**
 	 * 获取列表展示数据
 	 * @param modelMap
-	 * @param sysDepartment
+	 * @param dict
 	 * @return
 	 * @throws Exception
 	 */
-	@RequiresPermissions("sysDepartment:select")
+	@RequiresPermissions("dict:select")
 	@RequestMapping(value = "/getListData", method=RequestMethod.POST)
 	@ResponseBody
 	public String getListData(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap, SysDepartment sysDepartment) throws Exception{
-		List<SysDepartment> sysDepartmentList = sysDepartmentService.findSysDepartmentList(sysDepartment);
-		EasyUIDataGrid eudg = sysDepartmentService.findSysDepartmentListTotal(sysDepartment);
-		eudg.setRows(sysDepartmentList);
+			ModelMap modelMap, Dict dict) throws Exception{
+		List<Dict> dictList = dictService.findDictList(dict);
+		EasyUIDataGrid eudg = dictService.findDictListTotal(dict);
+		eudg.setRows(dictList);
 		JSONObject jsonObj = JSONObject.fromObject(eudg);
+		RequestResponseUtil.putResponseStr(session, response, request, jsonObj);
+		return null;
+	}
+	
+	/**
+	 * 获取所有数据
+	 * @param modelMap
+	 * @param dict
+	 * @return
+	 * @throws Exception
+	 */
+	@RequiresPermissions("dict:select")
+	@RequestMapping(value = "/getAllListData", method=RequestMethod.POST)
+	@ResponseBody
+	public String getAllListData(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap, Dict dict) throws Exception{
+		List<Dict> dictList = dictService.findDictList(dict);
+		JSONArray jsonObj = JSONArray.fromObject(dictList);
 		RequestResponseUtil.putResponseStr(session, response, request, jsonObj);
 		return null;
 	}
@@ -90,41 +111,42 @@ public class SysDepartmentController extends BaseController {
 	@RequiresUser
 	@RequestMapping(value = "/getTreeJson", method=RequestMethod.POST)
 	@ResponseBody
-	public String getTreeJson() throws Exception {
-		List<SysDepartment> mList = sysDepartmentService.getTreeJson();
+	public String getTreeJson(Dict dict) throws Exception {
+		List<Dict> mList = dictService.getTreeJson(dict);
 		List<TreeJson> tList = new ArrayList<TreeJson>();
 		for(int i=0; i<mList.size(); i++) {
 			TreeJson tj = new TreeJson();
 			tj.setId(mList.get(i).getId());
 			tj.setPid(mList.get(i).getParentid());
-			tj.setText(mList.get(i).getName());
+			tj.setText(mList.get(i).getLabel()+"["+mList.get(i).getCategory()+"]");
 			tList.add(tj);
 		}
 		TreeJson root = new TreeJson();
 		root.setId(StringConstant.ROOT_ID_32);
+		root.setText("系统字典");
 		TreeJson.getTree(tList, root);
-		JSONArray jsonObj = JSONArray.fromObject(root.getChildren());
+		JSONArray jsonObj = JSONArray.fromObject(root);
 		return jsonObj.toString();
 	}
 	
 	/**
 	 * 保存新增的数据
 	 * @param modelMap
-	 * @param sysDepartment
+	 * @param dict
 	 * @return
 	 * @throws Exception
 	 */
-	@RequiresPermissions("sysDepartment:insert")
+	@RequiresPermissions("dict:insert")
 	@RequestMapping(value = "/saveByAdd", method=RequestMethod.POST)
 	@ResponseBody
-	public String saveSysDepartmentByAdd(HttpSession session,
+	public String saveDictByAdd(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap, SysDepartment sysDepartment) throws Exception{
-		if (!beanValidator(modelMap, sysDepartment)){
+			ModelMap modelMap, Dict dict) throws Exception{
+		if (!beanValidator(modelMap, dict)){
 			RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
 			return null;
 		}
-		sysDepartmentService.saveSysDepartment(sysDepartment);
+		dictService.saveDict(dict);
 		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}
@@ -132,21 +154,21 @@ public class SysDepartmentController extends BaseController {
 	/**
 	 * 保存修改的数据
 	 * @param modelMap
-	 * @param sysDepartment
+	 * @param dict
 	 * @return
 	 * @throws Exception
 	 */
-	@RequiresPermissions("sysDepartment:update")
+	@RequiresPermissions("dict:update")
 	@RequestMapping(value = "/saveByUpdate", method=RequestMethod.POST)
 	@ResponseBody
-	public String saveSysDepartmentByUpdate(HttpSession session,
+	public String saveDictByUpdate(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap, SysDepartment sysDepartment) throws Exception{
-		if (!beanValidator(modelMap, sysDepartment)){
+			ModelMap modelMap, Dict dict) throws Exception{
+		if (!beanValidator(modelMap, dict)){
 			RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
 			return null;
 		}
-		sysDepartmentService.updateSysDepartment(sysDepartment);
+		dictService.updateDict(dict);
 		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}
@@ -154,18 +176,18 @@ public class SysDepartmentController extends BaseController {
 	/**
 	 * 删除数据库
 	 * @param modelMap
-	 * @param sysDepartmentId
+	 * @param dictId
 	 * @return
 	 * @throws Exception
 	 */
-	@RequiresPermissions("sysDepartment:delete")
+	@RequiresPermissions("dict:delete")
 	@RequestMapping(value = "/delete", method=RequestMethod.POST)
 	@ResponseBody
 	public String delete(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, String delDataId) throws Exception {
 		List<String> listId = Arrays.asList(delDataId.split(","));
-		sysDepartmentService.deleteSysDepartment(listId);
+		dictService.deleteDict(listId);
 		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}

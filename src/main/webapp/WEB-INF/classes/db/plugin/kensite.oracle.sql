@@ -128,3 +128,37 @@ insert into SYS_SKINS (id, name, url, state)
 values ('87871541b05e411ca5e8da15015c821f', 'XENON皮肤', 'skins/xenon/top_left_main', '0');
 insert into SYS_SKINS (id, name, url, state)
 values ('3df2a557ac47442889212395848b9213', 'EASYUI皮肤', 'skins/poor/main', '1');
+
+-- Create table
+create table SYS_DICT
+(
+  id          char(32) not null,
+  value       varchar2(50),
+  label       varchar2(50),
+  category    varchar2(50),
+  description varchar2(50),
+  sequence    number(10) default 0,
+  parentid    char(32)
+)
+;
+-- Add comments to the table 
+comment on table SYS_DICT
+  is '系统字典';
+-- Add comments to the columns 
+comment on column SYS_DICT.id
+  is '主键';
+comment on column SYS_DICT.value
+  is '数据值';
+comment on column SYS_DICT.label
+  is '标签名';
+comment on column SYS_DICT.category
+  is '分类';
+comment on column SYS_DICT.description
+  is '描述';
+comment on column SYS_DICT.sequence
+  is '排序';
+comment on column SYS_DICT.parentid
+  is '父主键';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table SYS_DICT
+  add constraint SYS_DICT_ID primary key (ID);
