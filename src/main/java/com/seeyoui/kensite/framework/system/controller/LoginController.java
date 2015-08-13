@@ -88,6 +88,8 @@ public class LoginController {
         	resultPageURL = getSysSkins();
         }else{
             token.clear();
+    		UserUtils.clearCache();
+    		SecurityUtils.getSubject().logout();  
             modelMap.put("info", info);
         }
         
