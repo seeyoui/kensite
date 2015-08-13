@@ -25,6 +25,7 @@ import com.seeyoui.kensite.common.constants.StringConstant;
 import com.seeyoui.kensite.common.util.RequestResponseUtil;
 import com.seeyoui.kensite.framework.system.domain.SysUserRole;
 import com.seeyoui.kensite.framework.system.service.SysUserRoleService;
+
 /**
  * @author cuichen
  * @version 1.0

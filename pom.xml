@@ -593,6 +593,13 @@
 			<version>2.2</version>
 		</dependency>
 		
+		<!-- 汉字转拼音 -->
+		<dependency>
+			<groupId>com.belerweb</groupId>
+			<artifactId>pinyin4j</artifactId>
+			<version>2.5.0</version>
+		</dependency>
+		
 		<!-- TEST begin -->
 		<dependency>
 			<groupId>junit</groupId>

@@ -12,11 +12,8 @@ import javax.servlet.http.HttpSession;
 
 import net.sf.json.JSONObject;
 
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authz.UnauthorizedException;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.apache.shiro.authz.annotation.RequiresRoles;
-import org.apache.shiro.subject.Subject;
+import org.apache.shiro.authz.annotation.RequiresUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -28,11 +25,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.seeyoui.kensite.common.base.controller.BaseController;
 import com.seeyoui.kensite.common.base.domain.EasyUIDataGrid;
 import com.seeyoui.kensite.common.constants.StringConstant;
-import com.seeyoui.kensite.common.exception.CRUDException;
 import com.seeyoui.kensite.common.util.MD5;
 import com.seeyoui.kensite.common.util.RequestResponseUtil;
 import com.seeyoui.kensite.framework.system.domain.SysUser;
 import com.seeyoui.kensite.framework.system.service.SysUserService;
+
 /**
  * @author cuichen
  * @version 1.0
@@ -96,7 +93,9 @@ public class SysUserController extends BaseController {
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, SysUser sysUser) throws Exception{
 		String resultInfo = sysUserService.saveSysUser(sysUser);
-		RequestResponseUtil.putResponseStr(session, response, request, resultInfo);
+//		RequestResponseUtil.putResponseStr(session, response, request, resultInfo);
+		modelMap.put("message", resultInfo);
+		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}
 	
@@ -129,7 +128,7 @@ public class SysUserController extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequiresPermissions("sysUser:update")
+	@RequiresUser
 	@RequestMapping(value = "/updatePassword", method=RequestMethod.POST)
 	@ResponseBody
 	public String updatePassword(HttpSession session,
@@ -176,7 +175,6 @@ public class SysUserController extends BaseController {
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, SysUser sysUser) throws Exception{
 		sysUser = sysUserService.findSysUserById(sysUser.getId());
-		sysUser.setPassword(MD5.md5(sysUser.getUsername()+StringConstant.INIT_PASSWORD));
 		sysUserService.updatePassword(sysUser);
 		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
@@ -198,6 +196,51 @@ public class SysUserController extends BaseController {
 		List<String> listId = Arrays.asList(delDataId.split(","));
 		sysUserService.deleteSysUser(listId);
 		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
+		return null;
+	}
+	
+	/**
+	 * 验证用户名是否已被占用
+	 * @param modelMap
+	 * @param sysUserId
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/validateUsername")
+	@ResponseBody
+	public String validateUsername(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap, String username) throws Exception {
+		SysUser sysUserResult = sysUserService.findSysUserByUsername(username);
+		if(sysUserResult != null 
+			&& (sysUserResult.getId() != null && !sysUserResult.getId().equals(""))){
+			RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
+		}
+		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
+		return null;
+	}
+	
+	/**
+	 * 验证用户名是否已被占用
+	 * @param modelMap
+	 * @param sysUserId
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/validatePassWord")
+	@ResponseBody
+	public String validatePassWord(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap, String userName, String passWord) throws Exception {
+		SysUser sysUserResult = sysUserService.findSysUserByUsername(userName);
+		if(sysUserResult != null 
+			&& (sysUserResult.getId() != null && !sysUserResult.getId().equals(""))){
+			String newPassWord = MD5.md5(userName+passWord);
+			if(newPassWord.equals(sysUserResult.getPassword())) {
+				RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
+			}
+		}
+		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
 		return null;
 	}
 }

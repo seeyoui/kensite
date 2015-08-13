@@ -17,6 +17,7 @@ import com.seeyoui.kensite.framework.act.idgenerator.GeneratorUUID;
 import com.seeyoui.kensite.framework.system.constants.SysUserConstants;
 import com.seeyoui.kensite.framework.system.domain.SysUser;
 import com.seeyoui.kensite.framework.system.persistence.SysUserMapper;
+import com.seeyoui.kensite.framework.system.util.UserUtils;
 
 /**
  * @author cuichen
@@ -146,6 +147,7 @@ public class SysUserService extends BaseService {
 	 * @throws CRUDException
 	 */
 	public void updateState(SysUser sysUser) throws CRUDException{
+		UserUtils.clearCache(sysUser);
 		sysUserMapper.updateState(sysUser);			
 	}
 	

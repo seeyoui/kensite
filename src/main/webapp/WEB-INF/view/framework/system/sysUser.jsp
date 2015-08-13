@@ -269,7 +269,7 @@
                     	$.ajax({
 							type: "post",
 							url: "${ctx}/sysUser/updateState.do",
-							data: {id : row.id, state : state},
+							data: {id : row.id, username : row.username, state : state},
 							dataType: 'json',
 							beforeSend: function(XMLHttpRequest){
 								loadi = layer.load('正在处理，请稍后...');

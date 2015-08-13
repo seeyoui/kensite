@@ -1,6 +1,9 @@
 package com.seeyoui.kensite.common.base.domain;
 
-public class Pager {
+import java.io.Serializable;
+
+public class Pager implements Serializable {
+	private static final long serialVersionUID = 2906682093124263902L;
 	private int page;
 	private int rows;
 	private int row;
