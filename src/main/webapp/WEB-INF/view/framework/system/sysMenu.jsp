@@ -77,18 +77,9 @@
 				                <input id="icon" name="icon" class="easyui-validatebox textbox" data-options="required:true"/>
 				            </div>
 				            <div id="icon_li" class="fitem" style="background:#D2E9FF">
-				            	<img id="/portal/img/menu/icon_00.png" src="${ctx_skins}/portal/img/menu/icon_00.png" style="width:25px;height:25px;"/>
-				            	<img id="/portal/img/menu/icon_01.png" src="${ctx_skins}/portal/img/menu/icon_01.png" style="width:25px;height:25px;"/>
-				            	<img id="/portal/img/menu/icon_02.png" src="${ctx_skins}/portal/img/menu/icon_02.png" style="width:25px;height:25px;"/>
-				            	<img id="/portal/img/menu/icon_03.png" src="${ctx_skins}/portal/img/menu/icon_03.png" style="width:25px;height:25px;"/>
-				            	<img id="/portal/img/menu/icon_04.png" src="${ctx_skins}/portal/img/menu/icon_04.png" style="width:25px;height:25px;"/>
-				            	<img id="/portal/img/menu/icon_05.png" src="${ctx_skins}/portal/img/menu/icon_05.png" style="width:25px;height:25px;"/>
-				            	<img id="/portal/img/menu/icon_06.png" src="${ctx_skins}/portal/img/menu/icon_06.png" style="width:25px;height:25px;"/>
-				            	<img id="/portal/img/menu/icon_07.png" src="${ctx_skins}/portal/img/menu/icon_07.png" style="width:25px;height:25px;"/>
-				            	<img id="/portal/img/menu/icon_08.png" src="${ctx_skins}/portal/img/menu/icon_08.png" style="width:25px;height:25px;"/>
-				            	<img id="/portal/img/menu/icon_09.png" src="${ctx_skins}/portal/img/menu/icon_09.png" style="width:25px;height:25px;"/>
-				            	<img id="/portal/img/menu/icon_10.png" src="${ctx_skins}/portal/img/menu/icon_10.png" style="width:25px;height:25px;"/>
-				            	<img id="/portal/img/menu/icon_11.png" src="${ctx_skins}/portal/img/menu/icon_11.png" style="width:25px;height:25px;"/>
+				            	<c:forEach var="menuIcon" items="${menuIconList}" varStatus="status">
+				            		<img id="${menuIcon}" src="${ctx_skins}${menuIcon}" style="width:25px;height:25px;"/>
+								</c:forEach>
 				            </div>
 				</form>
 				

@@ -6,7 +6,8 @@
 	    t.id,
 	    t.name,
 	    t.url,
-	    t.state
+	    t.state,
+	    t.main
 	</sql>
 	<!-- 查询过滤条件 -->
 	<sql id="whereStr">
@@ -23,6 +24,9 @@
 			</if>
 			<if test="state != null and state != ''">
 				and t.state LIKE '%'||#{state}||'%'
+			</if>
+			<if test="main != null and main != ''">
+				and t.main LIKE '%'||#{main}||'%'
 			</if>
 		</where>
 	</sql>
@@ -77,14 +81,14 @@
 	<!-- 数据新增 -->
 	<insert id="saveSkins" parameterType="com.seeyoui.kensite.framework.plugin.skins.domain.Skins">
 		INSERT INTO SYS_SKINS (
-	    	
+	    	main,
 	    	name,
 	    	url,
 	    	state,
 		    id
 		)
 		VALUES (
-			
+			#{main},
 			#{name},
 			#{url},
 			#{state},
@@ -96,7 +100,9 @@
 	<update id="updateSkins" parameterType="com.seeyoui.kensite.framework.plugin.skins.domain.Skins">
 		UPDATE SYS_SKINS
 		<set>
-	    	
+	    	<if test="main !=null and main !=''">
+			main=#{main},
+			</if>
 	    	<if test="name !=null and name !=''">
 			name=#{name},
 			</if>

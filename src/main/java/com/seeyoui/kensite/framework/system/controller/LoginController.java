@@ -1,6 +1,8 @@
 package com.seeyoui.kensite.framework.system.controller;
 
 
+import java.io.File;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -128,12 +130,10 @@ public class LoginController {
 	public String getSysSkins() {
     	Skins skin = skinsService.findCurrentSkins();
     	if(skin==null || skin.getUrl()==null || "".equals(skin.getUrl())) {
-    		return "skins/xenon/top_left_main";
+    		return "skins/poor/main";
     	} else {
-    		return skin.getUrl();
+    		return "skins"+skin.getUrl()+"/"+skin.getMain();
     	}
-//		return "skins/xenon/top_left_main";
-//		return "skins/poor/main";
 	}
 	
 	/**

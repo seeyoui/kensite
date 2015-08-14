@@ -3,11 +3,10 @@
  * Since 2014 - 2015
  */package com.seeyoui.kensite.framework.system.controller;  
  
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,9 +15,7 @@ import javax.servlet.http.HttpSession;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
-import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.apache.shiro.authz.annotation.RequiresUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -28,15 +25,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.seeyoui.kensite.common.base.controller.BaseController;
-import com.seeyoui.kensite.common.base.domain.Attributes;
 import com.seeyoui.kensite.common.base.domain.EasyUIDataGrid;
 import com.seeyoui.kensite.common.base.domain.TreeJson;
 import com.seeyoui.kensite.common.constants.StringConstant;
+import com.seeyoui.kensite.common.util.FileUtils;
 import com.seeyoui.kensite.common.util.RequestResponseUtil;
-import com.seeyoui.kensite.framework.system.domain.SysDepartment;
+import com.seeyoui.kensite.framework.plugin.skins.domain.Skins;
+import com.seeyoui.kensite.framework.plugin.skins.service.SkinsService;
 import com.seeyoui.kensite.framework.system.domain.SysMenu;
-import com.seeyoui.kensite.framework.system.domain.SysRole;
-import com.seeyoui.kensite.framework.system.domain.SysUser;
 import com.seeyoui.kensite.framework.system.service.SysMenuService;
 /**
  * @author cuichen
@@ -49,6 +45,8 @@ public class SysMenuController extends BaseController {
 	
 	@Autowired
 	private SysMenuService sysMenuService;
+	@Autowired
+	private SkinsService skinsService;
 	
 	/**
 	 * 展示列表页面
@@ -62,6 +60,25 @@ public class SysMenuController extends BaseController {
 	public ModelAndView showSysMenuPageList(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap) throws Exception {
+		String ctxPath = request.getSession().getServletContext().getRealPath("/"); 
+		List<String> menuIconList = new ArrayList<String>();
+		Skins skin = skinsService.findCurrentSkins();
+		String skinsUrl = "";
+    	if(skin!=null && !"".equals(skin.getUrl())) {
+    		skinsUrl = skin.getUrl();
+    	}
+		String url = ctxPath + "/static/skins/"+skinsUrl+"/img/menu/";
+		url = FileUtils.path(url);
+		File file = new File(url);
+		if(file.exists() && file.isDirectory()) {
+			File[] fs = file.listFiles();
+			for(int i=0; i<fs.length; i++){
+				if(fs[i].isFile()) {
+					menuIconList.add(skinsUrl+"/img/menu/"+fs[i].getName());
+				}
+			}
+		}
+		modelMap.put("menuIconList", menuIconList);
 		return new ModelAndView("framework/system/sysMenu", modelMap);
 	}
 	

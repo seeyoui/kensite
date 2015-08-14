@@ -20,8 +20,10 @@ public class Skins extends DataEntity<Article> {
 	private static final long serialVersionUID = 5454155825314635342L;
     
 	private String name;
-	@Length(min = 6, max = 100)
+	@Length(min = 1, max = 100)
 	private String url;
+	@Length(min = 1, max = 100)
+	private String main;
 	private String state;
 
 	public void setName(String name) {
@@ -44,5 +46,13 @@ public class Skins extends DataEntity<Article> {
     
 	public String getState() {
 		return this.state;
+	}
+
+	public String getMain() {
+		return main;
+	}
+
+	public void setMain(String main) {
+		this.main = main;
 	}
 }

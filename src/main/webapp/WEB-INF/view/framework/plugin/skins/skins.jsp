@@ -22,6 +22,7 @@
 					    <th field="id" width="100px" hidden>主键</th>
 					    <th field="name" width="100px">说明</th>
 					    <th field="url" width="100px">页面路径</th>
+					    <th field="main" width="100px">页面名</th>
 					    <th field="state" width="100px" formatter="formatStateCol">状态</th>
 		            </tr>
 		        </thead>
@@ -53,6 +54,11 @@
 				                <label>页面路径</label>
 				                <input id="url" name="url" class="easyui-validatebox textbox" data-options="required:true"/>
 				                <span id="msg-url" class="err-msg"></span>
+				            </div>
+							<div class="fitem">
+				                <label>页面名</label>
+				                <input id="main" name="main" class="easyui-validatebox textbox" data-options="required:true"/>
+				                <span id="msg-main" class="err-msg"></span>
 				            </div>
 				</form>
 				
