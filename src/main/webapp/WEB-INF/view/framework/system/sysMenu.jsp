@@ -7,7 +7,7 @@
   <head>    
     <title>导航菜单</title>
     <link rel="stylesheet" href="${ctx_script}css/fonts/linecons/css/linecons.css"/>
-	<script type="text/javascript" src="${ctx_script}/jquery-1.11.1.min.js"></script>
+	<%@ include file="/WEB-INF/view/taglib/header.jsp" %>
 	<%@ include file="/WEB-INF/view/taglib/easyui.jsp" %>
 	<%@ include file="/WEB-INF/view/taglib/layer.jsp" %>
   </head>
@@ -76,55 +76,19 @@
 				                <label>图标</label>
 				                <input id="icon" name="icon" class="easyui-validatebox textbox" data-options="required:true"/>
 				            </div>
-				            <div id="icon_li" class="fitem">
-				            	<i class="linecons-music"></i>
-								<i class="linecons-search"></i>
-								<i class="linecons-mail"></i>
-								<i class="linecons-heart"></i>
-								<i class="linecons-star"></i>
-								<i class="linecons-user"></i>
-								<i class="linecons-videocam"></i>
-								<i class="linecons-camera"></i>
-								<i class="linecons-photo"></i>
-								<i class="linecons-attach"></i>
-								<i class="linecons-lock"></i>
-								<i class="linecons-eye"></i>
-								<i class="linecons-tag"></i>
-								<i class="linecons-thumbs-up"></i>
-								<i class="linecons-pencil"></i>
-								<i class="linecons-comment"></i>
-								<i class="linecons-location"></i>
-								<i class="linecons-cup"></i>
-								<i class="linecons-trash"></i>
-								<i class="linecons-doc"></i>
-								<i class="linecons-note"></i>
-								<i class="linecons-cog"></i>
-								<i class="linecons-params"></i>
-								<i class="linecons-calendar"></i>
-								<i class="linecons-sound"></i>
-								<i class="linecons-clock"></i>
-								<i class="linecons-lightbulb"></i>
-								<i class="linecons-tv"></i>
-								<i class="linecons-desktop"></i>
-								<i class="linecons-mobile"></i>
-								<i class="linecons-cd"></i>
-								<i class="linecons-inbox"></i>
-								<i class="linecons-globe"></i>
-								<i class="linecons-cloud"></i>
-								<i class="linecons-paper-plane"></i>
-								<i class="linecons-fire"></i>
-								<i class="linecons-graduation-cap"></i>
-								<i class="linecons-megaphone"></i>
-								<i class="linecons-database"></i>
-								<i class="linecons-key"></i>
-								<i class="linecons-beaker"></i>
-								<i class="linecons-truck"></i>
-								<i class="linecons-money"></i>
-								<i class="linecons-food"></i>
-								<i class="linecons-shop"></i>
-								<i class="linecons-diamond"></i>
-								<i class="linecons-t-shirt"></i>
-								<i class="linecons-wallet"></i>
+				            <div id="icon_li" class="fitem" style="background:#D2E9FF">
+				            	<img id="/portal/img/menu/icon_00.png" src="${ctx_skins}/portal/img/menu/icon_00.png" style="width:25px;height:25px;"/>
+				            	<img id="/portal/img/menu/icon_01.png" src="${ctx_skins}/portal/img/menu/icon_01.png" style="width:25px;height:25px;"/>
+				            	<img id="/portal/img/menu/icon_02.png" src="${ctx_skins}/portal/img/menu/icon_02.png" style="width:25px;height:25px;"/>
+				            	<img id="/portal/img/menu/icon_03.png" src="${ctx_skins}/portal/img/menu/icon_03.png" style="width:25px;height:25px;"/>
+				            	<img id="/portal/img/menu/icon_04.png" src="${ctx_skins}/portal/img/menu/icon_04.png" style="width:25px;height:25px;"/>
+				            	<img id="/portal/img/menu/icon_05.png" src="${ctx_skins}/portal/img/menu/icon_05.png" style="width:25px;height:25px;"/>
+				            	<img id="/portal/img/menu/icon_06.png" src="${ctx_skins}/portal/img/menu/icon_06.png" style="width:25px;height:25px;"/>
+				            	<img id="/portal/img/menu/icon_07.png" src="${ctx_skins}/portal/img/menu/icon_07.png" style="width:25px;height:25px;"/>
+				            	<img id="/portal/img/menu/icon_08.png" src="${ctx_skins}/portal/img/menu/icon_08.png" style="width:25px;height:25px;"/>
+				            	<img id="/portal/img/menu/icon_09.png" src="${ctx_skins}/portal/img/menu/icon_09.png" style="width:25px;height:25px;"/>
+				            	<img id="/portal/img/menu/icon_10.png" src="${ctx_skins}/portal/img/menu/icon_10.png" style="width:25px;height:25px;"/>
+				            	<img id="/portal/img/menu/icon_11.png" src="${ctx_skins}/portal/img/menu/icon_11.png" style="width:25px;height:25px;"/>
 				            </div>
 				</form>
 				
@@ -143,9 +107,9 @@
 	    			selectData();
 	    		}
 	    	});
-	    	$("#icon_li i").click(function(){
+	    	$("#icon_li img").click(function(){
 	    		var obj = $(this);
-	    		$("#icon").val(obj.attr("class"));
+	    		$("#icon").val(obj.attr("id"));
 	    	});
 	    });
 	    

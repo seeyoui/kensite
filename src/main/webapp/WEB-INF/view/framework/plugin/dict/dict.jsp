@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>    
     <title>系统字典</title>
-	<script type="text/javascript" src="${ctx_script}/jquery-1.11.1.min.js"></script>
+	<%@ include file="/WEB-INF/view/taglib/header.jsp" %>
 	<%@ include file="/WEB-INF/view/taglib/easyui.jsp" %>
 	<%@ include file="/WEB-INF/view/taglib/layer.jsp" %>
   </head>
