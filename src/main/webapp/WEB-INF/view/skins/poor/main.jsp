@@ -7,7 +7,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=GBK">
 	<title>平台</title>
-	<script type="text/javascript" src="${ctx_assets}/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="${ctx_script}/jquery-1.11.1.min.js"></script>
 	<%@ include file="/WEB-INF/view/taglib/easyui.jsp" %>
 
 	<style type="text/css">

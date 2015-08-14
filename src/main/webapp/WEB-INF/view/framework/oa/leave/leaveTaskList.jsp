@@ -72,7 +72,7 @@
 			$("#dataList").dataTable({
 				dom: "<'toolbar'>frtip",
 				"language": {
-            		"url": "${ctx_assets}/js/datatables/zh_CN.txt"
+            		"url": "${ctx_script}/datatables/zh_CN.txt"
         		},
         		"iDisplayLength" : 10
 			});
@@ -121,7 +121,7 @@
 	</script>
 	<%@ include file="/WEB-INF/view/taglib/footer.jsp" %>
 	<%@ include file="/WEB-INF/view/taglib/datatables.jsp" %>
-	<script src="${ctx_assets}/js/rwd-table/js/rwd-table.min.js"></script>
+	<script src="${ctx_script}/rwd-table/js/rwd-table.min.js"></script>
 	<%@ include file="/WEB-INF/view/taglib/dataform.jsp" %>
 </body>
 </html>

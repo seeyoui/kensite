@@ -6,8 +6,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>    
     <title>导航菜单</title>
-    <link rel="stylesheet" href="${ctx_assets}/css/fonts/linecons/css/linecons.css"/>
-	<script type="text/javascript" src="${ctx_assets}/js/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" href="${ctx_script}css/fonts/linecons/css/linecons.css"/>
+	<script type="text/javascript" src="${ctx_script}/jquery-1.11.1.min.js"></script>
 	<%@ include file="/WEB-INF/view/taglib/easyui.jsp" %>
 	<%@ include file="/WEB-INF/view/taglib/layer.jsp" %>
   </head>

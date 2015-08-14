@@ -47,7 +47,7 @@
 		//附件上传模块渲染
 		mineUpload($("#uploadify"), "${ctx}", "afterMineUpload");
 		renderImgCrop();
-		//renderImgCrop("${ctx_assets}/img/vw1.jpg");
+		//renderImgCrop("${ctx_script}img/vw1.jpg");
 		//renderImgCrop("/kensite/upload/image/eede13185d0641af8ad8fb50762050d3.jpg");
 	});
 	
@@ -95,10 +95,10 @@
 	}
 	</script>
 	<!-- Imported styles on this page -->
-	<link rel="stylesheet" href="${ctx_assets}/js/cropper/cropper.min.css"/>
+	<link rel="stylesheet" href="${ctx_script}/cropper/cropper.min.css"/>
 	<%@ include file="/WEB-INF/view/taglib/uploadify.jsp" %>
 	<%@ include file="/WEB-INF/view/taglib/footer.jsp" %>
 	<!-- Imported scripts on this page -->
-	<script src="${ctx_assets}/js/cropper/cropper.min.js"></script>
+	<script src="${ctx_script}/cropper/cropper.min.js"></script>
 </body>
 </html>

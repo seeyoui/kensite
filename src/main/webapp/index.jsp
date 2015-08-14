@@ -1,115 +1,147 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/view/taglib/common.jsp" %>
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title>KenSite - 系统登录</title>
-	<%@ include file="/WEB-INF/view/taglib/header.jsp" %>
-</head>
-<body class="page-body login-page login-light">
-	<div class="login-container">
-		<div class="row">
-			<div class="col-sm-6">
-				<script type="text/javascript">
-					jQuery(document).ready(function($) {
-						// Reveal Login form
-						setTimeout(function(){ $(".fade-in-effect").addClass('in'); }, 1);
-						// Validation and Ajax action
-						$("form#login").validate({
-							rules: {
-								username: {
-									required: true
-								},
-								password: {
-									required: true
-								}
-							},
-							messages: {
-								username: {
-									required: '请输入账号'
-								},
-								password: {
-									required: '请输入密码'
-								}
-							},
-							// Form Processing via AJAX
-							submitHandler: function(form) {
-								show_loading_bar(70); // Fill progress bar to 70% (just a given value)
-								var opts = {
-									"closeButton": true,
-									"debug": false,
-									"positionClass": "toast-top-full-width",
-									"onclick": null,
-									"showDuration": "300",
-									"hideDuration": "1000",
-									"timeOut": "5000",
-									"extendedTimeOut": "1000",
-									"showEasing": "swing",
-									"hideEasing": "linear",
-									"showMethod": "fadeIn",
-									"hideMethod": "fadeOut"
-								};
-								$("form#login").submit();
-							}
-						});
-						// Set Form focus
-						$("form#login .form-group:has(.form-control):first .form-control").focus();
-						//$("form").find('#password').select();
-						$("form").find('#username').select();
-					
-					<c:if test="${not empty info}">
-						$(".errors-container .alert").slideUp('fast');
-						$(".errors-container").html('<div class="alert alert-danger">\
-							<button type="button" class="close" data-dismiss="alert">\
-								<span aria-hidden="true">&times;</span>\
-								<span class="sr-only">Close</span>\
-							</button>\<c:out value="${info}"/>\
-						</div>');
-						$(".errors-container .alert").hide().slideDown();
-					</c:if>
-					});
-				</script>
-				
-				<!-- Errors container -->
-				<div class="errors-container">
-				</div>
-				
-				<!-- Add class "fade-in-effect" for login form effect -->
-				<form method="post" role="form" id="login" class="login-form fade-in-effect" action="${ctx}/login/login.do">
-					<div class="login-header">
-						<div class="logo">
-							<img src="${ctx_assets}/img/kensite.png" alt="" width="80" />
-							<span>登录</span>
-						</div>
-						<p>欢迎使用kensite流程开发平台!</p>
-					</div>
-					<div class="form-group">
-						<label class="control-label" for="username">账号</label>
-						<input type="text" class="form-control" name="username" id="username" autocomplete="off" />
-					</div>
-					<div class="form-group">
-						<label class="control-label" for="password">密码</label>
-						<input type="password" class="form-control" name="password" id="password" autocomplete="off" />
-					</div>
-					<div class="form-group">
-						<button type="submit" class="btn btn-primary  btn-block text-left">
-							<i class="fa-lock"></i>
-							登录
-						</button>
-					</div>
-					<div class="login-footer">
-						<a href="#">忘记密码?</a>
-						<div class="info-links">
-							<a href="#">To</a> -
-							<a href="#">ken</a>
-						</div>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-	
-	<%@ include file="/WEB-INF/view/taglib/footer.jsp" %>
+	<script type="text/javascript" src="${ctx_script}/jquery-1.11.1.min.js"></script>
+	<%@ include file="/WEB-INF/view/taglib/easyui.jsp" %>
+<style type="text/css">
+body {
+	background: url('${ctx_login}/login_index/img/login_bg.png');
+}
 
+form {
+	position: absolute;
+	background: url('${ctx_login}/login_index/img/login.png') no-repeat;
+	height: 350px;
+	width: 380px;
+}
+
+.nameDiv {
+	position: absolute;
+	padding: 0px;
+	top: 149px;
+	left: 150px;
+}
+
+.pwdDiv {
+	position: absolute;
+	padding: 0px;
+	top: 210px;
+	left: 150px;
+}
+
+input {
+	color: #4E4E4E;
+	font-size: 22px;
+	font-family: verdana, simsun, sans-serif;
+	font-weight: 700;
+	width: 150px;
+	height: 30px;
+	line-height: 30px;
+	background: transparent;
+	border: none;
+}
+
+.no_rememberDiv {
+	position: absolute;
+	display: block;
+	padding: 0px;
+	top: 261px;
+	left: 76px;
+	width: 140px;
+	height: 40px;
+	background: transparent url('${ctx_login}/login_index/img/no_remember.gif')
+		no-repeat;
+	cursor: pointer;
+}
+
+.rememberDiv {
+	background: transparent url('${ctx_login}/login_index/img/remember.gif')
+		no-repeat;
+}
+
+.submitDiv {
+	position: absolute;
+	padding: 0px;
+	top: 262px;
+	left: 228px;
+	width: 78px;
+	height: 38px;
+	cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+	<form method="post" id="loginForm" name="loginForm"
+		action="${ctx}/login/login.do">
+		<input id="rememberMe" name="rememberMe" type="hidden"
+			value="" />
+		<div class="nameDiv">
+			<input type="text" id="accountName" name="username"
+				value="" />
+		</div>
+		<div class="pwdDiv">
+			<input type="password" id="accountPwd" name="password"
+				value="" />
+		</div>
+		<a id="autoLogin" class="no_rememberDiv"></a>
+		<div class="submitDiv"></div>
+	</form>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#accountName').focus();
+			/*
+			alert($(window).height()); //浏览器当前窗口可视区域高度 
+			alert($(document).height()); //浏览器当前窗口文档的高度 
+			alert($(document.body).height());//浏览器当前窗口文档body的高度 
+			alert($(document.body).outerHeight(true));//浏览器当前窗口文档body的总高度 包括border padding margin 
+			alert($(window).width()); //浏览器当前窗口可视区域宽度
+			alert($(document).width());//浏览器当前窗口文档对象宽度 
+			alert($(document.body).width());//浏览器当前窗口文档body的高度 
+			alert($(document.body).outerWidth(true));//浏览器当前窗口文档body的总宽度 包括border padding margin 
+			*/
+			var $remember = $('#remember'), $body = $(document.body), $loginForm = $('#loginForm'), top = ($(window)
+					.height() - $("#loginForm").height()) * 0.5, left = ($(window)
+					.width() - $("#loginForm").width()) * 0.5;
+
+			if ($remember.val() === 'T') {
+				$('#autoLogin').addClass('rememberDiv');
+				$('#loginForm').submit();
+			}
+			$loginForm.css({
+				'top' : top,
+				'left' : left
+			});
+			$('.submitDiv').click(function() {
+				$('#loginForm').submit();
+			});
+			//添加“回车”事件
+			$(document).keydown(function(e) {
+				if (e.keyCode === 13) {
+					$('.submitDiv').click();
+				}
+			});
+			$("#autoLogin").bind('click', function() {
+				if ($remember.val() === 'T') {
+					$remember.val('F');
+					$(this).removeClass('rememberDiv');
+				} else {
+					$remember.val('T');
+					$(this).addClass('rememberDiv');
+				}
+			});
+			<c:if test="${not empty info}">
+				$.messager.show({
+					title:'错误提示',
+					msg:'<c:out value="${info}"/>',
+					showType:'fade'
+				});
+			</c:if>
+
+		});
+	</script>
 </body>
 </html>

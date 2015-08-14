@@ -89,6 +89,6 @@
 	
 	<%@ include file="/WEB-INF/view/taglib/footer.jsp" %>
 	<%@ include file="/WEB-INF/view/taglib/datatables.jsp" %>
-	<script src="${ctx_assets}/js/rwd-table/js/rwd-table.min.js"></script>
+	<script src="${ctx_script}/rwd-table/js/rwd-table.min.js"></script>
 </body>
 </html>
