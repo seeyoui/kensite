@@ -1,5 +1,5 @@
 <link rel="stylesheet" type="text/css" href="${ctx_assets}/js/easyUI/themes/metro/easyui.css"/>
-<link rel="stylesheet" type="text/css" href="${ctx_assets}/js/easyUI/themes/icon.css"/>
+<!--<link rel="stylesheet" type="text/css" href="${ctx_assets}/js/easyUI/themes/icon.css"/>-->
 <link rel="stylesheet" type="text/css" href="${ctx_assets}/js/easyUI/themes/icon-extends.css"/>
 <link rel="stylesheet" type="text/css" href="${ctx_assets}/js/easyUI/themes/form.css"/>
 <link rel="stylesheet" type="text/css" href="${ctx_assets}/js/easyUI/themes/page.css"/>

@@ -12,8 +12,12 @@ import javax.servlet.http.HttpSession;
 
 import net.sf.json.JSONObject;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.UnauthorizedException;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.authz.annotation.RequiresUser;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -25,11 +29,12 @@ import org.springframework.web.servlet.ModelAndView;
 import com.seeyoui.kensite.common.base.controller.BaseController;
 import com.seeyoui.kensite.common.base.domain.EasyUIDataGrid;
 import com.seeyoui.kensite.common.constants.StringConstant;
+import com.seeyoui.kensite.common.exception.CRUDException;
 import com.seeyoui.kensite.common.util.MD5;
 import com.seeyoui.kensite.common.util.RequestResponseUtil;
+import com.seeyoui.kensite.framework.system.constants.SysUserConstants;
 import com.seeyoui.kensite.framework.system.domain.SysUser;
 import com.seeyoui.kensite.framework.system.service.SysUserService;
-
 /**
  * @author cuichen
  * @version 1.0
@@ -138,6 +143,7 @@ public class SysUserController extends BaseController {
 			RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
 			return null;
 		}
+		sysUser.setPassword(MD5.md5(sysUser.getUsername()+sysUser.getPassword()));
 		sysUserService.updatePassword(sysUser);
 		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
@@ -175,6 +181,7 @@ public class SysUserController extends BaseController {
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, SysUser sysUser) throws Exception{
 		sysUser = sysUserService.findSysUserById(sysUser.getId());
+		sysUser.setPassword(MD5.md5(sysUser.getUsername()+StringConstant.INIT_PASSWORD));
 		sysUserService.updatePassword(sysUser);
 		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;

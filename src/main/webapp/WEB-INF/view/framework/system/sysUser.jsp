@@ -33,10 +33,10 @@
 		        </shiro:hasPermission>
 		        <shiro:hasPermission name="sysUser:update">
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editInfo()">修改</a>
-		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="userRole()">用户角色</a>
-		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="initPassword()">初始化密码</a>
-		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="updateState(0)">冻结账号</a>
-		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="updateState(1)">激活账号</a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-people" plain="true" onclick="userRole()">用户角色</a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-arrow_refresh" plain="true" onclick="initPassword()">初始化密码</a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-lock" plain="true" onclick="updateState(0)">冻结账号</a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-key" plain="true" onclick="updateState(1)">激活账号</a>
 		        </shiro:hasPermission>
 		        <shiro:hasPermission name="sysUser:delete">
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyInfo()">删除</a>
