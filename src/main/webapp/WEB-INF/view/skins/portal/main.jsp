@@ -261,10 +261,10 @@ a:hover {text-decoration:one;}
 		</div>
 		<div id="head">
 			<div id="logo">
-				<img id="logo_img" src="${ctx_skins}/portal/img/logo.png"/>
+				<img id="logo_img" src="${ctx_common}/img/logo.png" style="width:220px;height:47px;"/>
 			</div>
 			<div id="top_menu_button_div">
-				<img id="left_button" onclick="menu_left()"  src="${ctx_skins}/portal/img/menu_left.png"/>
+				<img id="left_button" onclick="menu_left()" src="${ctx_skins}/portal/img/menu_left.png"/>
 				<div id="top_menu_button">
 					<ul>
 						<!-- 生成菜单导航 -->
@@ -308,7 +308,7 @@ a:hover {text-decoration:one;}
 			</div>
 		</div>
 		<div id="bottom">
-			Copyright &copy; 2015 淄博万洲软件科技发展有限公司
+			Copyright &copy; 2015 kensite快速开发平台
 		</div>
 	</div>
 </body>
@@ -334,7 +334,8 @@ a:hover {text-decoration:one;}
 		left_button_init();//按钮初始化效果
 		right_button_init();//按钮初始化效果
 		//user_menu_a_init();//用户菜单初始化效果
-		//initTab('房态图', '/RoomStateFigure/showPageList.do');//初始化主页
+		
+		initTab('首页', '/login/mainContent/welcome.do');//初始化主页
 		//初始化左侧菜单
 		$("#top_menu_button ul li:first").attr("class","top_menu_button_click_bg");
 		$("#top_menu_button ul li:first").click();
@@ -359,20 +360,19 @@ a:hover {text-decoration:one;}
 			}
 		} else {
 			var content = createFrame(url);
-			//if(title != "房态图") {
+			if(title != "首页") {
 				$('#tabs').tabs('add',{
 					title:title,
 					content:content,
 					closable:true
 				});
-			/* 	
 			} else {
 				$('#tabs').tabs('add',{
 					title:title,
 					content:content,
 					closable:false
 				});
-			} */
+			}
 		}
 		tabClose();
 	}
@@ -461,9 +461,6 @@ a:hover {text-decoration:one;}
 	}
 	//选择顶部菜单时获取子菜单
 	function getChildrenMenu(id,text){
-		if(text == "房态图"){
-			initTab('房态图', '/RoomStateFigure/showPageList.do');
-		}
 		$("#menu_des").html(text);
 		//清空div下所有内容
 		$(".user_menu").empty();
