@@ -25,70 +25,6 @@
 			</list>
 		</property>
 	</bean>
-	
-	<!-- 启用SpringMVC的注解功能,它会自动注册HandlerMapping、HandlerAdapter、ExceptionResolver的相关实例 -->
-	<mvc:annotation-driven/>
-	<!-- activiti modeler rest服务，位于activiti-modeler.jar下 -->
-	<context:component-scan base-package="org.activiti.rest.editor"></context:component-scan>
-	<!-- json处理 -->
-	<bean id="objectMapper" class="com.fasterxml.jackson.databind.ObjectMapper"></bean>
-    <!-- 启用缓存注解功能(请将其配置在Spring主配置文件中)
-    <cache:annotation-driven cache-manager="shiroCacheManager"/> -->
-	
-	<!-- 数据源配置, 使用 BoneCP 数据库连接池 -->
-	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
-		init-method="init" destroy-method="close">
-		<!-- 数据源驱动类可不写，Druid默认会自动根据URL识别DriverClass -->
-		<property name="driverClassName" value="${jdbc.driver}" />
-		<!-- 基本属性 url、user、password -->
-		<property name="url" value="${jdbc.url}" />
-		<property name="username" value="${jdbc.username}" />
-		<property name="password" value="${jdbc.password}" />
-		<!-- 配置初始化大小、最小、最大 -->
-		<property name="initialSize" value="${jdbc.pool.init}" />
-		<property name="minIdle" value="${jdbc.pool.minIdle}" />
-		<property name="maxActive" value="${jdbc.pool.maxActive}" />
-		<!-- 配置获取连接等待超时的时间 -->
-		<property name="maxWait" value="60000" />
-		<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
-		<property name="timeBetweenEvictionRunsMillis" value="60000" />
-		<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
-		<property name="minEvictableIdleTimeMillis" value="300000" />
-		<property name="validationQuery" value="${jdbc.testSql}" />
-		<property name="testWhileIdle" value="true" />
-		<property name="testOnBorrow" value="false" />
-		<property name="testOnReturn" value="false" />
-		<!-- 打开PSCache，并且指定每个连接上PSCache的大小（Oracle使用） <property name="poolPreparedStatements" 
-			value="true" /> <property name="maxPoolPreparedStatementPerConnectionSize" 
-			value="20" /> -->
-		<!-- 配置监控统计拦截的filters -->
-		<property name="filters" value="stat" />
-	</bean>
-	
-	<!-- 创建SqlSessionFactory，同时指定数据源 -->
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="dataSource" />
-		<property name="typeAliasesPackage" value="com.seeyoui.kensite" />
-		<property name="mapperLocations" value="classpath:mapper/${jdbc.type}/**/*.xml" />
-		<property name="configLocation" value="classpath:mybatis-config.xml" />
-	</bean>
-	
-	<!-- 配置事务 -->
-	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-	
-	<!-- 配置 JSR303 Bean Validator 定义 -->
-	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
-	
-	<!-- scan mappers and let them be autowired -->
-	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.seeyoui.kensite" />
-	</bean>
-						
-	<!-- 它背后注册了很多用于解析注解的处理器,其中就包括<context:annotation-config/>配置的注解所使用的处理器 -->
-	<!-- 所以配置了<context:component-scan base-package="">之后,便无需再配置<context:annotation-config> -->
-	<context:component-scan base-package="com.seeyoui.kensite"/>
 
 	<!-- 配置SpringMVC的视图解析器 -->
 	<!-- 其viewClass属性的默认值就是org.springframework.web.servlet.view.JstlView -->
@@ -104,7 +40,7 @@
 	<!-- 经过下面的配置，该标签的作用就是：所有页面中引用"/js/**"的资源，都会从"/resources/js/"里面进行查找 -->
 	<!-- 我们可以访问http://IP:8080/xxx/js/my.css和http://IP:8080/xxx/resources/js/my.css对比出来 -->
 	<mvc:resources mapping="/act/**" location="/act/"/>
-	<mvc:resources mapping="/script/**" location="/script/"/>
+	<mvc:resources mapping="/assets/**" location="/assets/"/>
 	<mvc:resources mapping="/static/**" location="/static/"/>
 	<mvc:resources mapping="/upload/**" location="/upload/"/>
 	<mvc:resources mapping="/WEB-INF/**" location="/WEB-INF/"/>
@@ -112,7 +48,7 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
-			<mvc:exclude-mapping path="/script/**"/>
+			<mvc:exclude-mapping path="/assets/**"/>
 			<mvc:exclude-mapping path="/static/**"/>
 			<mvc:exclude-mapping path="/upload/**"/>
 			<mvc:exclude-mapping path="/act/**"/>
@@ -121,16 +57,4 @@
 			<bean class="com.seeyoui.kensite.common.interceptor.LogInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
-
-	<!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
-	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
-
-	<!-- 开启Shiro的注解(如@RequiresRoles,@RequiresPermissions),需借助SpringAOP扫描使用Shiro注解的类,并在必要时进行安全逻辑验证 -->
-	<!-- 配置以下两个bean即可实现此功能 -->
-	<!-- Enable Shiro Annotations for Spring-configured beans. Only run after the lifecycleBeanProcessor has run -->
-	<!-- 由于本例中并未使用Shiro注解,故注释掉这两个bean(个人觉得将权限通过注解的方式硬编码在程序中,查看起来不是很方便,没必要使用) -->
-	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor"/>
-	<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
-		<property name="securityManager" ref="securityManager"/>
-	</bean>
 </beans>
