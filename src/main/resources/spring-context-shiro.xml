@@ -67,7 +67,7 @@
 		<property name="filterChainDefinitions">
 			<value>
 				/act/** = anon
-				/assets/** = anon
+				/script/** = anon
 				/static/** = anon
 				/upload/** = anon
 				/login/login = authc
