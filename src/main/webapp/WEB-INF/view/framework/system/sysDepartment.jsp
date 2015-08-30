@@ -18,7 +18,6 @@
         </div>
 		<div style="position:absolute;top:0px;left:200px;right:0px;bottom:0px;">
 		    <table id="dataList" title="" class="easyui-datagrid" style="width:100%;height:100%"
-		    		url="${ctx}/sysDepartment/getListData.do"
 		            toolbar="#toolbar" pagination="true"
 		            rownumbers="true" fitColumns="true" singleSelect="true">
 		        <thead>
@@ -41,7 +40,7 @@
 		        <shiro:hasPermission name="sysDepartment:delete">
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyInfo()">删除</a>
 		        </shiro:hasPermission>
-				<input id="sel_parentid" name="sel_parentid" type="hidden" value="<%=StringConstant.ROOT_ID_32%>"/>
+				<input id="sel_parentid" name="sel_parentid" type="hidden" value=""/>
 				部门名称<input id="sel_name" name="sel_name" class="easyui-textbox" data-options=""/>
 				部门编号<input id="sel_code" name="sel_code" class="easyui-textbox" data-options=""/>
 			    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="selectData()">查询</a>
@@ -84,6 +83,12 @@
 	    			selectData();
 	    		}
 	    	});
+	    	$('#dataList').datagrid({
+	    		url:'${ctx}/sysDepartment/getListData.do',
+	    		queryParams: {
+	    			parentid:"<%=StringConstant.ROOT_ID_32%>"
+	    		}
+	    	});
 	    });
 	    
 	    function selectData() {
@@ -105,9 +110,14 @@
 	    
         var url;
         function newInfo(){
-            $('#dataWin').window('open');
-            $('#dataForm').form('clear');
             cleanErrMsg();
+            $('#dataForm').form('clear');
+            var node = $('#departmentTree').tree('getSelected');
+            if(node == null) {
+            	node = $('#departmentTree').tree('getRoot');
+            }
+            $('#parentid').combotree('setValue', node.id);
+            $('#dataWin').window('open');
             url = '${ctx}/sysDepartment/saveByAdd.do';
         }
         function editInfo(){

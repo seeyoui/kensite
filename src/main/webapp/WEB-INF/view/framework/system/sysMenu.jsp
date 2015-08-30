@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>    
     <title>导航菜单</title>
-    <link rel="stylesheet" href="${ctx_script}css/fonts/linecons/css/linecons.css"/>
+    <link rel="stylesheet" href="${ctx_script}/css/fonts/linecons/css/linecons.css"/>
 	<%@ include file="/WEB-INF/view/taglib/header.jsp" %>
 	<%@ include file="/WEB-INF/view/taglib/easyui.jsp" %>
 	<%@ include file="/WEB-INF/view/taglib/layer.jsp" %>
@@ -19,7 +19,6 @@
         </div>
         <div style="position:absolute;top:0px;left:200px;right:0px;bottom:0px;">
 		    <table id="dataList" title="" class="easyui-datagrid" style="width:100%;height:100%"
-		    		url="${ctx}/sysMenu/getListData.do"
 		            toolbar="#toolbar" pagination="true"
 		            rownumbers="true" fitColumns="true" singleSelect="true">
 		        <thead>
@@ -44,7 +43,7 @@
 		        <shiro:hasPermission name="sysMenu:delete">
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyInfo()">删除</a>
 		        </shiro:hasPermission>
-				<input id="sel_parentid" name="sel_parentid" type="hidden" value="<%=StringConstant.ROOT_ID_32%>"/>
+				<input id="sel_parentid" name="sel_parentid" type="hidden" value=""/>
 				名称<input id="sel_name" name="sel_name" class="easyui-textbox" data-options=""/>
 				URL<input id="sel_url" name="sel_url" class="easyui-textbox" data-options=""/>
 			    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="selectData()">查询</a>
@@ -74,7 +73,7 @@
 				            </div>
 							<div class="fitem">
 				                <label>图标</label>
-				                <input id="icon" name="icon" class="easyui-validatebox textbox" data-options="required:true"/>
+				                <input id="icon" name="icon" class="easyui-validatebox textbox" data-options=""/>
 				            </div>
 				            <div id="icon_li" class="fitem" style="background:#D2E9FF">
 				            	<c:forEach var="menuIcon" items="${menuIconList}" varStatus="status">
@@ -102,6 +101,12 @@
 	    		var obj = $(this);
 	    		$("#icon").val(obj.attr("id"));
 	    	});
+	    	$('#dataList').datagrid({
+	    		url:'${ctx}/sysMenu/getListData.do',
+	    		queryParams: {
+	    			parentid:"<%=StringConstant.ROOT_ID_32%>"
+	    		}
+	    	});
 	    });
 	    
 	    function selectData() {
@@ -123,8 +128,15 @@
 	    
         var url;
         function newInfo(){
-            $('#dataWin').window('open');
             $('#dataForm').form('clear');
+            var node = $('#menuTree').tree('getSelected');
+            if(node == null) {
+            	node = $('#menuTree').tree('getRoot');
+            }
+            $('#parentid').combotree('setValue', node.id);
+            $('#target').val('_blank');
+            $('#url').val('/');
+            $('#dataWin').window('open');
             url = '${ctx}/sysMenu/saveByAdd.do';
         }
         function editInfo(){

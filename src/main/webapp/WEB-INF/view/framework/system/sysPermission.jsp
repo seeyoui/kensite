@@ -20,7 +20,7 @@
 		            rownumbers="true" fitColumns="true" singleSelect="true">
 		        <thead>
 		            <tr>
-					    <th field="id" width="100px">主键</th>
+					    <th field="id" width="100px">权限</th>
 					    <th field="name" width="100px">权限名</th>
 					    <th field="sequence" width="50px" align="right">排序</th>
 		            </tr>
@@ -40,7 +40,7 @@
 权限名<input id="sel_name" name="sel_name" class="easyui-textbox" data-options=""/>
 			    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="selectData()">查询</a>
 		    </div>
-		    <div id="dataWin" class="easyui-window" title="权限信息维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:400px;height:260px;padding:10px;">
+		    <div id="dataWin" class="easyui-window" title="权限信息维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:400px;height:200px;padding:10px;">
 		        <div class="ftitle">权限信息维护</div>
 		        <form id="dataForm" method="post">
 							<div class="fitem">

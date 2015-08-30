@@ -12,9 +12,11 @@
   </head>
   <body>
  	<div style="position:absolute;top:0px;left:0px;right:0px;bottom:0px;">
-		<div style="position:absolute;top:0px;left:0px;right:0px;bottom:0px;">
+ 		<div style="position:absolute;top:0px;bottom:0px;width:200px; overflow:scroll;">
+        	<ul id="dictTree" class="easyui-tree" url="${ctx}/sys/dict/getTreeJson.do"></ul>
+        </div>
+		<div style="position:absolute;top:0px;left:200px;right:0px;bottom:0px;">
 		    <table id="dataList" title="系统字典列表" class="easyui-datagrid" style="width:100%;height:100%"
-		    		url="${ctx}/sys/dict/getListData.do"
 		            toolbar="#toolbar" pagination="true"
 		            rownumbers="true" fitColumns="true" singleSelect="true">
 		        <thead>
@@ -44,6 +46,7 @@
 				标签名<input id="sel_label" name="sel_label" class="easyui-textbox" data-options=""/>
 				分类<input id="sel_category" name="sel_category" class="easyui-textbox" data-options=""/>
 				描述<input id="sel_description" name="sel_description" class="easyui-textbox" data-options=""/>
+				<input id="sel_parentid" name="sel_parentid" type="hidden" value=""/>
 			    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="selectData()">查询</a>
 		    </div>
 		    <div id="dataWin" class="easyui-window" title="系统字典信息维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:400px;height:260px;padding:10px;">
@@ -90,29 +93,50 @@
     </div>
     <script type="text/javascript">
 	    $(document).ready(function(){
+	    	$("#dictTree").tree({
+	    		onClick: function(node){
+	    			$('#sel_parentid').val(node.id);
+	    			selectData();
+	    		}
+	    	});
+	    	$('#dataList').datagrid({
+	    		url:'${ctx}/sys/dict/getListData.do',
+	    		queryParams: {
+	    			parentid:"<%=StringConstant.ROOT_ID_32%>"
+	    		}
+	    	});
 	    });
 	    
 	    function selectData() {
-		    
+		    var sel_parentid = $("#sel_parentid").val();
 		    var sel_value = $("#sel_value").val();
 		    var sel_label = $("#sel_label").val();
 		    var sel_category = $("#sel_category").val();
 		    var sel_description = $("#sel_description").val();
         	$('#dataList').datagrid('load',{
+        		parentid:sel_parentid,
     		    value:sel_value,
     		    label:sel_label,
     		    category:sel_category,
     		    description:sel_description
         	});
+        	$('#sel_parentid').val("");
         }
 	    function reloadData() {
         	selectData();
+        	$('#dictTree').tree('reload');
+        	$('#parentid').combotree('reload');
         }
 	    
         var url;
         function newInfo(){
             cleanErrMsg();
             $('#dataForm').form('clear');
+            var node = $('#dictTree').tree('getSelected');
+            if(node == null) {
+            	node = $('#dictTree').tree('getRoot');
+            }
+            $('#parentid').combotree('setValue', node.id);
             $('#dataWin').window('open');
             url = '${ctx}/sys/dict/saveByAdd.do';
         }

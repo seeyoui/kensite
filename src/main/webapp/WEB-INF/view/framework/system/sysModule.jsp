@@ -32,7 +32,7 @@
 		        </shiro:hasPermission>
 		        <shiro:hasPermission name="sysModule:update">
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editInfo()">修改</a>
-		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="permissionInfo()">模块操作</a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-chart_organisation" plain="true" onclick="permissionInfo()">模块操作</a>
 		        </shiro:hasPermission>
 		        <shiro:hasPermission name="sysModule:delete">
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyInfo()">删除</a>
@@ -42,7 +42,7 @@
 权限<input id="sel_shiro" name="sel_shiro" class="easyui-textbox" data-options=""/>
 			    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="selectData()">查询</a>
 		    </div>
-		    <div id="dataWin" class="easyui-window" title="系统模块信息维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:400px;height:260px;padding:10px;">
+		    <div id="dataWin" class="easyui-window" title="系统模块信息维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:400px;height:170px;padding:10px;">
 		        <div class="ftitle">系统模块信息维护</div>
 		        <form id="dataForm" method="post">
 							<div class="fitem">
