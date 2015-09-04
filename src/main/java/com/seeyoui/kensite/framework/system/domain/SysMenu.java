@@ -15,7 +15,7 @@ public class SysMenu extends Pager {
     private static final long serialVersionUID = 5454155825314635342L;  
       
     private String id;  
-    private String parentid;  
+    private String parentId;  
     private String name;  
     private String url;  
     private Long sequence;  
@@ -29,12 +29,12 @@ public class SysMenu extends Pager {
     public String getId() {  
         return this.id;  
     }  
-    public void setParentid(String parentid) {  
-        this.parentid = parentid;  
+    public void setParentId(String parentId) {  
+        this.parentId = parentId;  
     }  
       
-    public String getParentid() {  
-        return this.parentid;  
+    public String getParentId() {  
+        return this.parentId;  
     }  
     public void setName(String name) {  
         this.name = name;  

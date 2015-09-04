@@ -37,22 +37,21 @@
 		        <shiro:hasPermission name="sysModule:delete">
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyInfo()">删除</a>
 		        </shiro:hasPermission>
-
-模块名称<input id="sel_name" name="sel_name" class="easyui-textbox" data-options=""/>
-权限<input id="sel_shiro" name="sel_shiro" class="easyui-textbox" data-options=""/>
+				模块名称<input id="sel_name" name="sel_name" class="easyui-textbox" data-options=""/>
+				权限<input id="sel_shiro" name="sel_shiro" class="easyui-textbox" data-options=""/>
 			    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="selectData()">查询</a>
 		    </div>
 		    <div id="dataWin" class="easyui-window" title="系统模块信息维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:400px;height:170px;padding:10px;">
 		        <div class="ftitle">系统模块信息维护</div>
 		        <form id="dataForm" method="post">
-							<div class="fitem">
-				                <label>模块名称</label>
-				                <input id="name" name="name" class="easyui-validatebox textbox" data-options="required:true"/>
-				            </div>
-							<div class="fitem">
-				                <label>权限</label>
-				                <input id="shiro" name="shiro" class="easyui-validatebox textbox" data-options="required:true"/>
-				            </div>
+					<div class="fitem">
+		                <label>模块名称</label>
+		                <input id="name" name="name" class="easyui-validatebox textbox" data-options="required:true"/>
+		            </div>
+					<div class="fitem">
+		                <label>权限</label>
+		                <input id="shiro" name="shiro" class="easyui-validatebox textbox" data-options="required:true"/>
+		            </div>
 				</form>
 				
 			    <div id="dataWin-buttons">
@@ -107,7 +106,7 @@
 	    		$.ajax({
 					type: "POST",
 					url: "<%=path %>/sysModulePermission/getTreeJson.do",
-					data: "moduleid="+roleid,
+					data: "moduleId="+roleid,
 					dataType: "json",
 					success: function(data){
 						$("#permissionTree").tree("loadData",data);
@@ -118,18 +117,18 @@
 	    
 	    function saveModulePermissionInfo() {
 	    	var treeObj = $('#permissionTree');
-	    	var permissionid = getChecked(treeObj);
+	    	var permissionId = getChecked(treeObj);
 	    	var row = $('#dataList').datagrid('getSelected');
-	    	var moduleid = "";
+	    	var moduleId = "";
 	    	if(!row) {
 	    		return;
 	    	}
-	    	moduleid = row.id;
-	    	if (permissionid!=null){
+	    	moduleId = row.id;
+	    	if (permissionId!=null){
 				$.ajax({
 					type: "post",
 					url: "${ctx}/sysModulePermission/saveModulePermission.do",
-					data: {moduleid:moduleid,permissionid:permissionid},
+					data: {moduleId:moduleId,permissionId:permissionId},
 					dataType: 'json',
 					beforeSend: function(XMLHttpRequest){
 					},

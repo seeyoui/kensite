@@ -38,22 +38,21 @@
 		        <shiro:hasPermission name="sysRole:delete">
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyInfo()">删除</a>
 		        </shiro:hasPermission>
-
-角色名<input id="sel_name" name="sel_name" class="easyui-textbox" data-options=""/>
-权限<input id="sel_shiro" name="sel_shiro" class="easyui-textbox" data-options=""/>
+				角色名<input id="sel_name" name="sel_name" class="easyui-textbox" data-options=""/>
+				权限<input id="sel_shiro" name="sel_shiro" class="easyui-textbox" data-options=""/>
 			    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="selectData()">查询</a>
 		    </div>
 		    <div id="dataWin" class="easyui-window" title="角色信息维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:400px;height:170px;padding:10px;">
 		        <div class="ftitle">角色信息维护</div>
 		        <form id="dataForm" method="post">
-							<div class="fitem">
-				                <label>角色名</label>
-				                <input id="name" name="name" class="easyui-validatebox textbox" data-options="required:true"/>
-				            </div>
-							<div class="fitem">
-				                <label>权限</label>
-				                <input id="shiro" name="shiro" class="easyui-validatebox textbox" data-options="required:true"/>
-				            </div>
+					<div class="fitem">
+		                <label>角色名</label>
+		                <input id="name" name="name" class="easyui-validatebox textbox" data-options="required:true"/>
+		            </div>
+					<div class="fitem">
+		                <label>权限</label>
+		                <input id="shiro" name="shiro" class="easyui-validatebox textbox" data-options="required:true"/>
+		            </div>
 				</form>
 				
 			    <div id="dataWin-buttons">
@@ -122,11 +121,11 @@
         function getModuleTreeJson() {
         	var row = $('#dataList').datagrid('getSelected');
             if (row){
-            	var roleid = row.id;
+            	var roleId = row.id;
 	    		$.ajax({
 					type: "POST",
 					url: "<%=path %>/sysRoleModule/getTreeJson.do",
-					data: "roleid="+roleid,
+					data: "roleId="+roleId,
 					dataType: "json",
 					success: function(data){
 						$("#moduleTree").tree("loadData",data);
@@ -138,11 +137,11 @@
 	    function getMenuTreeJson() {
         	var row = $('#dataList').datagrid('getSelected');
             if (row){
-            	var roleid = row.id;
+            	var roleId = row.id;
 	    		$.ajax({
 					type: "POST",
 					url: "<%=path %>/sysRoleMenu/getTreeJson.do",
-					data: "roleid="+roleid,
+					data: "roleId="+roleId,
 					dataType: "json",
 					success: function(data){
 						$("#menuTree").tree("loadData",data);
@@ -153,14 +152,14 @@
 	    
 	    function saveRoleModuleInfo() {
 	    	var treeObj = $('#moduleTree');
-	    	var moduleid = getChecked(treeObj);
+	    	var moduleId = getChecked(treeObj);
 	    	var row = $('#dataList').datagrid('getSelected');
-	    	var roleid = row.id;
-	    	if (moduleid!=null){
+	    	var roleId = row.id;
+	    	if (moduleId!=null){
 				$.ajax({
 					type: "post",
 					url: "${ctx}/sysRoleModule/saveRoleModule.do",
-					data: {roleid:roleid,moduleid:moduleid},
+					data: {roleId:roleId,moduleId:moduleId},
 					dataType: 'json',
 					beforeSend: function(XMLHttpRequest){
 						loadi = layer.load('正在处理，请稍后...');
@@ -181,14 +180,14 @@
 	    
 	    function saveRoleMenuInfo() {
 	    	var treeObj = $('#menuTree');
-	    	var menuid = getChecked(treeObj);
+	    	var menuId = getChecked(treeObj);
 	    	var row = $('#dataList').datagrid('getSelected');
-	    	var roleid = row.id;
-	    	if (menuid!=null){
+	    	var roleId = row.id;
+	    	if (menuId!=null){
 				$.ajax({
 					type: "post",
 					url: "${ctx}/sysRoleMenu/saveRoleMenu.do",
-					data: {roleid:roleid,menuid:menuid},
+					data: {roleId:roleId,menuId:menuId},
 					dataType: 'json',
 					beforeSend: function(XMLHttpRequest){
 						loadi = layer.load('正在处理，请稍后...');

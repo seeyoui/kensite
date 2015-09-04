@@ -3,22 +3,20 @@
  * Since 2014 - 2015
  */package com.seeyoui.kensite.framework.system.service;  
  
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.seeyoui.kensite.common.base.service.BaseService;
-
-import java.util.*;
-
 import com.seeyoui.kensite.common.base.domain.Attributes;
-import com.seeyoui.kensite.common.base.domain.EasyUIDataGrid;
 import com.seeyoui.kensite.common.base.domain.TreeJson;
 import com.seeyoui.kensite.common.base.service.BaseService;
-import com.seeyoui.kensite.common.exception.CRUDException;
-import com.seeyoui.kensite.common.util.*;
 import com.seeyoui.kensite.common.constants.StringConstant;
+import com.seeyoui.kensite.common.exception.CRUDException;
+import com.seeyoui.kensite.common.util.StringUtils;
 import com.seeyoui.kensite.framework.system.domain.SysMenu;
-import com.seeyoui.kensite.framework.system.domain.SysRole;
 import com.seeyoui.kensite.framework.system.domain.SysRoleMenu;
 import com.seeyoui.kensite.framework.system.persistence.SysRoleMenuMapper;
 
@@ -45,7 +43,7 @@ public class SysRoleMenuService extends BaseService {
 		for(int i=0; i<mList.size(); i++) {
 			TreeJson tj = new TreeJson();
 			tj.setId(mList.get(i).getId());
-			tj.setPid(mList.get(i).getParentid());
+			tj.setPid(mList.get(i).getParentId());
 			tj.setText(mList.get(i).getName());
 			tj.setChecked(mList.get(i).getTarget());
 			Attributes attributes = new Attributes();
@@ -66,13 +64,13 @@ public class SysRoleMenuService extends BaseService {
 	 * @throws CRUDException
 	 */
 	public void saveSysRoleMenu(SysRoleMenu sysRoleMenu) throws CRUDException {
-		sysRoleMenuMapper.deleteSysRoleMenu(sysRoleMenu.getRoleid());
-		if(sysRoleMenu.getMenuid() == null || StringUtils.isBlank(sysRoleMenu.getMenuid())) {
+		sysRoleMenuMapper.deleteSysRoleMenu(sysRoleMenu.getRoleId());
+		if(sysRoleMenu.getMenuId() == null || StringUtils.isBlank(sysRoleMenu.getMenuId())) {
 			return;
 		}
-		List<String> listId = Arrays.asList(sysRoleMenu.getMenuid().split(","));
+		List<String> listId = Arrays.asList(sysRoleMenu.getMenuId().split(","));
 		for(int i=0; i<listId.size(); i++) {
-			sysRoleMenu.setMenuid(listId.get(i));
+			sysRoleMenu.setMenuId(listId.get(i));
 			sysRoleMenuMapper.saveSysRoleMenu(sysRoleMenu);
 		}
 	}

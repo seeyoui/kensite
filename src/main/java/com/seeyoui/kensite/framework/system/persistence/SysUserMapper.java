@@ -24,17 +24,17 @@ public interface SysUserMapper {
 	
 	/**
 	 * 根据账号查询单条数据
-	 * @param username
+	 * @param userName
 	 * @return
 	 */
-	public SysUser findSysUserByUsername(String username);
+	public SysUser findSysUserByUserName(String userName);
 	
 	/**
 	 * 查询某个角色的所有用户
-	 * @param username
+	 * @param roleId
 	 * @return
 	 */
-	public List<SysUser> findSysUserByRole(String roleid);
+	public List<SysUser> findSysUserByRole(String roleId);
 	
 	/**
 	 * 查询数据集合

@@ -18,12 +18,12 @@ public class SysUser extends Pager implements Serializable {
     private static final long serialVersionUID = 5454155825314635342L;  
       
     private String id;  
-    private String username;  
+    private String userName;  
     private String password;  
     private String name;  
     private String email;  
     private String phone;  
-    private String departmentid;  
+    private String departmentId;  
     private String state;  
     private SysDepartment sysDepartment;
     private List<SysRole> roleList;
@@ -35,12 +35,12 @@ public class SysUser extends Pager implements Serializable {
     public String getId() {  
         return this.id;  
     }  
-    public void setUsername(String username) {  
-        this.username = username;  
+    public void setUserName(String userName) {  
+        this.userName = userName;  
     }  
       
-    public String getUsername() {  
-        return this.username;  
+    public String getUserName() {  
+        return this.userName;  
     }  
     public void setPassword(String password) {  
         this.password = password;  
@@ -56,12 +56,12 @@ public class SysUser extends Pager implements Serializable {
     public String getName() {  
         return this.name;  
     }  
-    public void setDepartmentid(String departmentid) {  
-        this.departmentid = departmentid;  
+    public void setDepartmentId(String departmentId) {  
+        this.departmentId = departmentId;  
     }  
       
-    public String getDepartmentid() {  
-        return this.departmentid;  
+    public String getDepartmentId() {  
+        return this.departmentId;  
     }  
     public void setState(String state) {  
         this.state = state;  

@@ -3,14 +3,14 @@
 <mapper namespace="com.seeyoui.kensite.framework.system.persistence.SysUserMapper" >
 	<!-- 查询单表的字段 -->
 	<sql id="tableColumns">
-	    t.id,
-	    t.username,
-	    t.password,
-	    t.name,
-	    t.departmentid,
-	    t.state,
-	    t.email,
-	    t.phone
+	    t.id as "id",
+	    t.user_name as "userName",
+	    t.password as "password",
+	    t.name as "name",
+	    t.department_id as "departmentId",
+	    t.state as "state",
+	    t.email as "email",
+	    t.phone as "phone"
 	</sql>
 	<!-- 查询过滤条件 -->
 	<sql id="whereStr">
@@ -19,8 +19,8 @@
 			<if test="id != null and id != ''">
 				and t.id LIKE '%'||#{id}||'%'
 			</if>
-			<if test="username != null and username != ''">
-				and t.username LIKE '%'||#{username}||'%'
+			<if test="userName != null and userName != ''">
+				and t.user_name LIKE '%'||#{userName}||'%'
 			</if>
 			<if test="password != null and password != ''">
 				and t.password LIKE '%'||#{password}||'%'
@@ -28,8 +28,8 @@
 			<if test="name != null and name != ''">
 				and t.name LIKE '%'||#{name}||'%'
 			</if>
-			<if test="departmentid != null and departmentid != ''">
-				and t.departmentid LIKE '%'||#{departmentid}||'%'
+			<if test="departmentId != null and departmentId != ''">
+				and t.department_id LIKE '%'||#{departmentId}||'%'
 			</if>
 			<if test="state != null and state != ''">
 				and t.state LIKE '%'||#{state}||'%'
@@ -55,11 +55,11 @@
 	</select>
 	
 	<!-- 根据账号查询单条数据 -->
-	<select id="findSysUserByUsername" resultType="com.seeyoui.kensite.framework.system.domain.SysUser">
+	<select id="findSysUserByUserName" resultType="com.seeyoui.kensite.framework.system.domain.SysUser">
 		SELECT
 		<include refid="tableColumns" />
 		FROM SYS_USER t
-		WHERE username = #{username}
+		WHERE user_name = #{userName}
 	</select>
 	
 	<!-- 查询某个角色的所有用户 -->
@@ -67,9 +67,9 @@
 		SELECT
 		<include refid="tableColumns" />
 		from sys_user t
-		left join sys_user_role sur on t.id=sur.userid
-		left join sys_role r on sur.roleid=r.id
-		WHERE r.id = #{roleid}
+		left join sys_user_role sur on t.id=sur.user_id
+		left join sys_role r on sur.role_id=r.id
+		WHERE r.id = #{roleId}
 	</select>
 	
 	<!-- 查询数据集合 -->
@@ -104,10 +104,10 @@
 	<insert id="saveSysUser" parameterType="com.seeyoui.kensite.framework.system.domain.SysUser">
 		INSERT INTO SYS_USER (
 	    	
-	    	username,
+	    	user_name,
 	    	password,
 	    	name,
-	    	departmentid,
+	    	department_id,
 	    	state,
 	    	email,
 	    	phone,
@@ -115,10 +115,10 @@
 		)
 		VALUES (
 			
-			#{username},
+			#{userName},
 			#{password},
 			#{name},
-			#{departmentid},
+			#{departmentId},
 			#{state},
 			#{email},
 			#{phone},
@@ -133,8 +133,8 @@
 	    	<if test="name !=null and name !=''">
 			name=#{name},
 			</if>
-	    	<if test="departmentid !=null and departmentid !=''">
-			departmentid=#{departmentid},
+	    	<if test="departmentId !=null and departmentId !=''">
+			department_id=#{departmentId},
 			</if>
 	    	<if test="email !=null and email !=''">
 			email=#{email},
@@ -168,7 +168,7 @@
 			open="(" separator="," close=")">
 			#{listId}
 		</foreach>
-		OR USERNAME IN 
+		OR USER_NAME IN 
 		<foreach item="listId" collection="list"
 			open="(" separator="," close=")">
 			#{listId}

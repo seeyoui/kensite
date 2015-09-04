@@ -21,7 +21,7 @@
 		        <thead>
 		            <tr>
 					    <th field="id" width="100px" hidden>主键</th>
-					    <th field="username" width="100px">账号</th>
+					    <th field="userName" width="100px">账号</th>
 					    <th field="name" width="100px">用户名</th>
 					    <th field="state" width="100px" formatter="formatState">状态</th>
 		            </tr>
@@ -41,30 +41,29 @@
 		        <shiro:hasPermission name="sysUser:delete">
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyInfo()">删除</a>
 		        </shiro:hasPermission>
-
-账号<input id="sel_username" name="sel_username" class="easyui-textbox" data-options=""/>
-用户名<input id="sel_name" name="sel_name" class="easyui-textbox" data-options=""/>
+				账号<input id="sel_userName" name="sel_userName" class="easyui-textbox" data-options=""/>
+				用户名<input id="sel_name" name="sel_name" class="easyui-textbox" data-options=""/>
 			    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="selectData()">查询</a>
 		    </div>
 		    <div id="dataWin" class="easyui-window" title="用户信息信息维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:400px;height:230px;padding:10px;">
 		        <div class="ftitle">用户信息信息维护</div>
 		        <form id="dataForm" method="post">
-							<div class="fitem">
-				                <label>账号</label>
-				                <input id="username" name="username" class="easyui-validatebox textbox" data-options="required:true"/>
-				            </div>
-		            		<div class="fitem">
-								<label>用户密码:</label>
-				               	 初始化密码123456
-				            </div>
-							<div class="fitem">
-				                <label>用户名</label>
-				                <input id="name" name="name" class="easyui-validatebox textbox" data-options="required:true"/>
-				            </div>
-							<div class="fitem">
-				                <label>部门</label>
-				                <input id="deptTree" name="departmentid" class="easyui-combotree" data-options="required:true" url="${ctx}/sysDepartment/getTreeJson.do"/>
-				            </div>
+					<div class="fitem">
+		                <label>账号</label>
+		                <input id="userName" name="userName" class="easyui-validatebox textbox" data-options="required:true"/>
+		            </div>
+            		<div class="fitem">
+						<label>用户密码:</label>
+		               	 初始化密码123456
+		            </div>
+					<div class="fitem">
+		                <label>用户名</label>
+		                <input id="name" name="name" class="easyui-validatebox textbox" data-options="required:true"/>
+		            </div>
+					<div class="fitem">
+		                <label>部门</label>
+		                <input id="deptTree" name="departmentId" class="easyui-combotree" data-options="required:true" url="${ctx}/sysDepartment/getTreeJson.do"/>
+		            </div>
 				</form>
 				
 			    <div id="dataWin-buttons">
@@ -92,10 +91,10 @@
 	    });
 	    
 	    function selectData() {
-		    var sel_username = $("#sel_username").val();
+		    var sel_userName = $("#sel_userName").val();
 		    var sel_name = $("#sel_name").val();
         	$('#dataList').datagrid('load',{
-    		    username:sel_username,
+    		    userName:sel_userName,
     		    name:sel_name
         	});
         }
@@ -122,11 +121,11 @@
         function getRoleTreeJson() {
         	var row = $('#dataList').datagrid('getSelected');
             if (row){
-            	var userid = row.id;
+            	var userId = row.id;
 	    		$.ajax({
 					type: "POST",
 					url: "<%=path %>/sysUserRole/getTreeJson.do",
-					data: "userid="+userid,
+					data: "userId="+userId,
 					dataType: "json",
 					success: function(data){
 						$("#roleTree").tree("loadData",data);
@@ -137,14 +136,14 @@
         
         function saveUserRoleInfo() {
 	    	var treeObj = $('#roleTree');
-	    	var roleid = getChecked(treeObj);
+	    	var roleId = getChecked(treeObj);
 	    	var row = $('#dataList').datagrid('getSelected');
-	    	var userid = row.id;
-	    	if (roleid!=null){
+	    	var userId = row.id;
+	    	if (roleId!=null){
 				$.ajax({
 					type: "post",
 					url: "${ctx}/sysUserRole/saveUserRole.do",
-					data: {userid:userid,roleid:roleid},
+					data: {userId:userId,roleId:roleId},
 					dataType: 'json',
 					beforeSend: function(XMLHttpRequest){
 						loadi = layer.load('正在处理，请稍后...');
@@ -198,10 +197,16 @@
                     return $(this).form('validate');
                 },
                 success: function(info){
-					layer.msg(info, 2, -1);
+                	data = eval('(' + info + ')');
+                	if (data.success=="<%=StringConstant.TRUE%>"){
+                        layer.msg("操作成功！", 2, -1);
+                		$('#dataWin').window('close'); 
+                		reloadData();
+                    } else {
+	                    layer.msg("操作失败！", 2, -1);
+	                    renderErrMsg(data.message);
+                    }
                 	layer.close(loadi);
-                	$('#dataWin').window('close'); 
-                	$('#dataList').datagrid('reload');
                 }
             });
         }
@@ -269,7 +274,7 @@
                     	$.ajax({
 							type: "post",
 							url: "${ctx}/sysUser/updateState.do",
-							data: {id : row.id, username : row.username, state : state},
+							data: {id : row.id, userName : row.userName, state : state},
 							dataType: 'json',
 							beforeSend: function(XMLHttpRequest){
 								loadi = layer.load('正在处理，请稍后...');

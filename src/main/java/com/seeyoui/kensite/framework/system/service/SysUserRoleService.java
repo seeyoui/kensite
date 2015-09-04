@@ -61,13 +61,13 @@ public class SysUserRoleService extends BaseService {
 	 * @throws CRUDException
 	 */
 	public void saveSysUserRole(SysUserRole sysUserRole) throws CRUDException {
-		sysUserRoleMapper.deleteSysUserRole(sysUserRole.getUserid());
-		if(sysUserRole.getRoleid() == null || StringUtils.isBlank(sysUserRole.getRoleid())) {
+		sysUserRoleMapper.deleteSysUserRole(sysUserRole.getUserId());
+		if(sysUserRole.getRoleId() == null || StringUtils.isBlank(sysUserRole.getRoleId())) {
 			return;
 		}
-		List<String> listId = Arrays.asList(sysUserRole.getRoleid().split(","));
+		List<String> listId = Arrays.asList(sysUserRole.getRoleId().split(","));
 		for(int i=0; i<listId.size(); i++) {
-			sysUserRole.setRoleid(listId.get(i));
+			sysUserRole.setRoleId(listId.get(i));
 			sysUserRoleMapper.saveSysUserRole(sysUserRole);
 		}
 	}

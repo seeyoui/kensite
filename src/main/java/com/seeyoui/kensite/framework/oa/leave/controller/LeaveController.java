@@ -61,7 +61,7 @@ public class LeaveController extends BaseController {
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, String id, String pdid, String tdkey) {
 		Leave leave = leaveService.findLeaveById(id);
-		Task task = taskService.createTaskQuery().processInstanceId(leave.getBindid()).active().singleResult();
+		Task task = taskService.createTaskQuery().processInstanceId(leave.getBindId()).active().singleResult();
 		if(task!=null) {
 			leave.setTask(task);
 		}
@@ -89,7 +89,7 @@ public class LeaveController extends BaseController {
 		try {
 			Map<String, Object> variables = Maps.newHashMap();
 			leaveService.start(leave, variables);
-			logger.info("流程已启动，流程ID：" + leave.getBindid());
+			logger.info("流程已启动，流程ID：" + leave.getBindId());
 		} catch (Exception e) {
 			logger.error("启动请假流程失败：", e);
 		}
@@ -124,7 +124,7 @@ public class LeaveController extends BaseController {
 	public ModelAndView taskList(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap) {
-		String userId = UserUtils.getUser().getUsername();//ObjectUtils.toString(UserUtils.getUser().getId());
+		String userId = UserUtils.getUser().getUserName();//ObjectUtils.toString(UserUtils.getUser().getId());
 		List<Leave> leaveList = leaveService.findTodoTasks(userId);
 		modelMap.put("leaveList", leaveList);
 		return new ModelAndView("framework/oa/leave/leaveTaskList");

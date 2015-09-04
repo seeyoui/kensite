@@ -51,13 +51,13 @@
 		<include refid="tableColumns"/>			
 		from sys_user su
 		left join sys_user_role sur
-		on su.id = sur.userid 
+		on su.id = sur.user_id 
 		right join sys_role t
-		on sur.roleid = t.id
+		on sur.role_id = t.id
 		<where>
 			1=1
-			<if test="username !=null and username !=''">
-			and su.username = #{username}
+			<if test="userName !=null and userName !=''">
+			and su.user_name = #{userName}
 			</if>
 		</where>
 	</select>

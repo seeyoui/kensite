@@ -143,7 +143,7 @@ public class SysUserController extends BaseController {
 			RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
 			return null;
 		}
-		sysUser.setPassword(MD5.md5(sysUser.getUsername()+sysUser.getPassword()));
+		sysUser.setPassword(MD5.md5(sysUser.getUserName()+sysUser.getPassword()));
 		sysUserService.updatePassword(sysUser);
 		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
@@ -181,7 +181,7 @@ public class SysUserController extends BaseController {
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, SysUser sysUser) throws Exception{
 		sysUser = sysUserService.findSysUserById(sysUser.getId());
-		sysUser.setPassword(MD5.md5(sysUser.getUsername()+StringConstant.INIT_PASSWORD));
+		sysUser.setPassword(MD5.md5(sysUser.getUserName()+StringConstant.INIT_PASSWORD));
 		sysUserService.updatePassword(sysUser);
 		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
@@ -213,12 +213,12 @@ public class SysUserController extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/validateUsername")
+	@RequestMapping(value = "/validateUserName")
 	@ResponseBody
-	public String validateUsername(HttpSession session,
+	public String validateUserName(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap, String username) throws Exception {
-		SysUser sysUserResult = sysUserService.findSysUserByUsername(username);
+			ModelMap modelMap, String userName) throws Exception {
+		SysUser sysUserResult = sysUserService.findSysUserByUserName(userName);
 		if(sysUserResult != null 
 			&& (sysUserResult.getId() != null && !sysUserResult.getId().equals(""))){
 			RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
@@ -239,7 +239,7 @@ public class SysUserController extends BaseController {
 	public String validatePassWord(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, String userName, String passWord) throws Exception {
-		SysUser sysUserResult = sysUserService.findSysUserByUsername(userName);
+		SysUser sysUserResult = sysUserService.findSysUserByUserName(userName);
 		if(sysUserResult != null 
 			&& (sysUserResult.getId() != null && !sysUserResult.getId().equals(""))){
 			String newPassWord = MD5.md5(userName+passWord);

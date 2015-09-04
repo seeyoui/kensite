@@ -3,13 +3,13 @@
 <mapper namespace="com.seeyoui.kensite.framework.plugin.dict.persistence.DictMapper" >
 	<!-- 查询单表的字段 -->
 	<sql id="tableColumns">
-	    t.id,
-	    t.value,
-	    t.label,
-	    t.category,
-	    t.description,
-	    t.sequence,
-	    t.parentid
+	    t.id as "id",
+	    t.value as "value",
+	    t.label as "label",
+	    t.category as "category",
+	    t.description as "description",
+	    t.sequence as "sequence",
+	    t.parent_id as "parentId"
 	</sql>
 	<!-- 查询过滤条件 -->
 	<sql id="whereStr">
@@ -33,8 +33,8 @@
 			<if test="sequence != null and sequence != ''">
 				and t.sequence = #{sequence}
 			</if>
-			<if test="parentid != null and parentid != ''">
-				and t.parentid LIKE '%'||#{parentid}||'%'
+			<if test="parentId != null and parentId != ''">
+				and t.parent_id LIKE '%'||#{parentId}||'%'
 			</if>
 		</where>
 	</sql>
@@ -104,7 +104,7 @@
 	    	category,
 	    	description,
 	    	sequence,
-	    	parentid,
+	    	parent_id,
 		    id
 		)
 		VALUES (
@@ -114,7 +114,7 @@
 			#{category},
 			#{description},
 			#{sequence},
-			#{parentid},
+			#{parentId},
 		    #{id}
 		)
 	</insert>
@@ -139,8 +139,8 @@
 	    	<if test="sequence !=null and sequence !=''">
 			sequence=#{sequence},
 			</if>
-	    	<if test="parentid !=null and parentid !=''">
-			parentid=#{parentid},
+	    	<if test="parentId !=null and parentId !=''">
+			parent_id=#{parentId},
 			</if>
 		    id = #{id}
 		</set>

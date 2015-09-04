@@ -50,11 +50,11 @@ public class LeaveService extends BaseService {
 	public Leave findLeaveById(String id) {
 		Leave leave = leaveMapper.findLeaveById(id);
 		Map<String,Object> variables=null;
-		HistoricProcessInstance historicProcessInstance = historyService.createHistoricProcessInstanceQuery().processInstanceId(leave.getBindid()).singleResult();
+		HistoricProcessInstance historicProcessInstance = historyService.createHistoricProcessInstanceQuery().processInstanceId(leave.getBindId()).singleResult();
 		if(historicProcessInstance!=null) {
 			variables = Collections3.extractToMap(historyService.createHistoricVariableInstanceQuery().processInstanceId(historicProcessInstance.getId()).list(), "variableName", "value");
 		} else {
-			variables = runtimeService.getVariables(runtimeService.createProcessInstanceQuery().processInstanceId(leave.getBindid()).active().singleResult().getId());
+			variables = runtimeService.getVariables(runtimeService.createProcessInstanceQuery().processInstanceId(leave.getBindId()).active().singleResult().getId());
 		}
 		leave.setVariables(variables);
 		return leave;
@@ -77,7 +77,7 @@ public class LeaveService extends BaseService {
 		logger.debug("save entity: {}", leave);
 		
 		// 用来设置启动流程的人员ID，引擎会自动把用户ID保存到activiti:initiator中
-		identityService.setAuthenticatedUserId(leave.getCurrentUser().getUsername());
+		identityService.setAuthenticatedUserId(leave.getCurrentUser().getUserName());
 		
 		// 启动流程
 		String businessKey = leave.getId().toString();
@@ -86,7 +86,7 @@ public class LeaveService extends BaseService {
 		ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("leave", businessKey, variables);
 		
 		// 更新流程实例ID
-		leave.setBindid(processInstance.getId());
+		leave.setBindId(processInstance.getId());
 		leaveMapper.updateBindid(leave);
 		
 		logger.debug("start process of {key={}, bkey={}, pid={}, variables={}}", new Object[] { 
@@ -143,7 +143,7 @@ public class LeaveService extends BaseService {
 	public List<Leave> find(Leave leave) {
 		List<Leave> leaveList = leaveMapper.findLeaveList(leave);
 		for(Leave item : leaveList) {
-			String processInstanceId = item.getBindid();
+			String processInstanceId = item.getBindId();
 			Task task = taskService.createTaskQuery().processInstanceId(processInstanceId).active().singleResult();
 			item.setTask(task);
 			HistoricProcessInstance historicProcessInstance = historyService.createHistoricProcessInstanceQuery().processInstanceId(processInstanceId).singleResult();

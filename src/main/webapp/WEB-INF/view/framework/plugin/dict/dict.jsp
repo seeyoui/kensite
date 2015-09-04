@@ -27,7 +27,7 @@
 					    <th field="category" width="100px">分类</th>
 					    <th field="description" width="100px">描述</th>
 					    <th field="sequence" width="50px" align="right">排序</th>
-					    <th field="parentid" width="100px" hidden>父主键</th>
+					    <th field="parentId" width="100px" hidden>父主键</th>
 		            </tr>
 		        </thead>
 		    </table>
@@ -46,7 +46,7 @@
 				标签名<input id="sel_label" name="sel_label" class="easyui-textbox" data-options=""/>
 				分类<input id="sel_category" name="sel_category" class="easyui-textbox" data-options=""/>
 				描述<input id="sel_description" name="sel_description" class="easyui-textbox" data-options=""/>
-				<input id="sel_parentid" name="sel_parentid" type="hidden" value=""/>
+				<input id="sel_parentId" name="sel_parentId" type="hidden" value=""/>
 			    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="selectData()">查询</a>
 		    </div>
 		    <div id="dataWin" class="easyui-window" title="系统字典信息维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:400px;height:260px;padding:10px;">
@@ -79,8 +79,8 @@
 				            </div>
 							<div class="fitem">
 				                <label>父级字典</label>
-				                <input id="parentid" name="parentid" class="easyui-combotree" data-options="required:true" style="width:160px;" url="${ctx}/sys/dict/getTreeJson.do"/>
-				                <span id="msg-parentid" class="err-msg"></span>
+				                <input id="parentId" name="parentId" class="easyui-combotree" data-options="required:true" style="width:160px;" url="${ctx}/sys/dict/getTreeJson.do"/>
+				                <span id="msg-parentId" class="err-msg"></span>
 				            </div>
 				</form>
 				
@@ -95,37 +95,36 @@
 	    $(document).ready(function(){
 	    	$("#dictTree").tree({
 	    		onClick: function(node){
-	    			$('#sel_parentid').val(node.id);
+	    			$('#sel_parentId').val(node.id);
 	    			selectData();
 	    		}
 	    	});
 	    	$('#dataList').datagrid({
 	    		url:'${ctx}/sys/dict/getListData.do',
 	    		queryParams: {
-	    			parentid:"<%=StringConstant.ROOT_ID_32%>"
+	    			parentId:"<%=StringConstant.ROOT_ID_32%>"
 	    		}
 	    	});
 	    });
 	    
 	    function selectData() {
-		    var sel_parentid = $("#sel_parentid").val();
+		    var sel_parentId = $("#sel_parentId").val();
 		    var sel_value = $("#sel_value").val();
 		    var sel_label = $("#sel_label").val();
 		    var sel_category = $("#sel_category").val();
 		    var sel_description = $("#sel_description").val();
         	$('#dataList').datagrid('load',{
-        		parentid:sel_parentid,
+        		parentId:sel_parentId,
     		    value:sel_value,
     		    label:sel_label,
     		    category:sel_category,
     		    description:sel_description
         	});
-        	$('#sel_parentid').val("");
         }
 	    function reloadData() {
         	selectData();
         	$('#dictTree').tree('reload');
-        	$('#parentid').combotree('reload');
+        	$('#parentId').combotree('reload');
         }
 	    
         var url;
@@ -136,7 +135,7 @@
             if(node == null) {
             	node = $('#dictTree').tree('getRoot');
             }
-            $('#parentid').combotree('setValue', node.id);
+            $('#parentId').combotree('setValue', node.id);
             $('#dataWin').window('open');
             url = '${ctx}/sys/dict/saveByAdd.do';
         }

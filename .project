@@ -11,7 +11,6 @@
 			<arguments>
 				<dictionary>
 					<key>LaunchConfigHandle</key>
-					<value>&lt;project&gt;/.externalToolBuilders/org.eclipse.wst.jsdt.core.javascriptValidator.launch</value>
 				</dictionary>
 			</arguments>
 		</buildCommand>
@@ -31,7 +30,6 @@
 			<arguments>
 				<dictionary>
 					<key>LaunchConfigHandle</key>
-					<value>&lt;project&gt;/.externalToolBuilders/com.genuitec.eclipse.j2eedt.core.J2EEProjectValidator.launch</value>
 				</dictionary>
 			</arguments>
 		</buildCommand>
@@ -41,7 +39,6 @@
 			<arguments>
 				<dictionary>
 					<key>LaunchConfigHandle</key>
-					<value>&lt;project&gt;/.externalToolBuilders/com.genuitec.eclipse.j2eedt.core.DeploymentDescriptorValidator.launch</value>
 				</dictionary>
 			</arguments>
 		</buildCommand>
@@ -74,6 +71,5 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.eclipse.m2e.core.maven2Nature</nature>
 		<nature>org.eclipse.wst.common.project.facet.core.nature</nature>
-		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
 	</natures>
 </projectDescription>

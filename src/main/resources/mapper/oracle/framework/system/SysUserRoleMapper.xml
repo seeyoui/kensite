@@ -3,18 +3,18 @@
 <mapper namespace="com.seeyoui.kensite.framework.system.persistence.SysUserRoleMapper" >
 	<!-- 查询单表的字段 -->
 	<sql id="tableColumns">
-	    t.userid,
-	    t.roleid
+	    t.user_id as "userId",
+	    t.role_id as "roleId"
 	</sql>
 	<!-- 查询过滤条件 -->
 	<sql id="whereStr">
 		<where>
 			1=1
-			<if test="userid != null and userid != ''">
-				and t.userid LIKE '%'||#{userid}||'%'
+			<if test="userId != null and userId != ''">
+				and t.user_id LIKE '%'||#{userId}||'%'
 			</if>
-			<if test="roleid != null and roleid != ''">
-				and t.roleid LIKE '%'||#{roleid}||'%'
+			<if test="roleId != null and roleId != ''">
+				and t.role_id LIKE '%'||#{roleId}||'%'
 			</if>
 		</where>
 	</sql>
@@ -30,26 +30,26 @@
 		case when su.id is null then 'F' else 'T' end shiro
 		from sys_role t
 		left join sys_user_role sur
-		on sur.roleid = t.id and sur.userid=#{userid}
+		on sur.role_id = t.id and sur.user_id=#{userId}
 		left join sys_user su
-		on su.id = sur.userid
+		on su.id = sur.user_id
 		ORDER BY t.id ASC
 	</select>
 	
 	<!-- 数据新增 -->
 	<insert id="saveSysUserRole" parameterType="com.seeyoui.kensite.framework.system.domain.SysUserRole">
 		INSERT INTO SYS_USER_ROLE (
-			userid,
-	    	roleid
+			user_id,
+	    	role_id
 		)
 		VALUES (
-			#{userid},
-			#{roleid}
+			#{userId},
+			#{roleId}
 		)
 	</insert>
 	
 	<!-- 数据删除 -->
 	<delete id="deleteSysUserRole">
-		DELETE FROM SYS_USER_ROLE WHERE userid=#{userid}
+		DELETE FROM SYS_USER_ROLE WHERE user_id=#{userId}
 	</delete>
 </mapper>

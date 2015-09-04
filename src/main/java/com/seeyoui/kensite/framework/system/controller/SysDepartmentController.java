@@ -96,7 +96,7 @@ public class SysDepartmentController extends BaseController {
 		for(int i=0; i<mList.size(); i++) {
 			TreeJson tj = new TreeJson();
 			tj.setId(mList.get(i).getId());
-			tj.setPid(mList.get(i).getParentid());
+			tj.setPid(mList.get(i).getParentId());
 			tj.setText(mList.get(i).getName());
 			tList.add(tj);
 		}

@@ -57,7 +57,7 @@ public class UserUtils {
 			}
 			sysUser.setRoleList(sysRoleMapper.findSysUserRoleList(sysUser));
 			CacheUtils.put(USER_CACHE, USER_CACHE_ID_ + sysUser.getId(), sysUser);
-			CacheUtils.put(USER_CACHE, USER_CACHE_LOGIN_NAME_ + sysUser.getUsername(), sysUser);
+			CacheUtils.put(USER_CACHE, USER_CACHE_LOGIN_NAME_ + sysUser.getUserName(), sysUser);
 		}
 		return sysUser;
 	}
@@ -70,13 +70,13 @@ public class UserUtils {
 	public static SysUser getByLoginName(String loginName){
 		SysUser sysUser = (SysUser)CacheUtils.get(USER_CACHE, USER_CACHE_LOGIN_NAME_ + loginName);
 		if (sysUser == null){
-			sysUser = sysUserMapper.findSysUserByUsername(loginName);
+			sysUser = sysUserMapper.findSysUserByUserName(loginName);
 			if (sysUser == null){
 				return null;
 			}
 			sysUser.setRoleList(sysRoleMapper.findSysUserRoleList(sysUser));
 			CacheUtils.put(USER_CACHE, USER_CACHE_ID_ + sysUser.getId(), sysUser);
-			CacheUtils.put(USER_CACHE, USER_CACHE_LOGIN_NAME_ + sysUser.getUsername(), sysUser);
+			CacheUtils.put(USER_CACHE, USER_CACHE_LOGIN_NAME_ + sysUser.getUserName(), sysUser);
 		}
 		return sysUser;
 	}
@@ -97,9 +97,9 @@ public class UserUtils {
 	 */
 	public static void clearCache(SysUser sysUser){
 		CacheUtils.remove(USER_CACHE, USER_CACHE_ID_ + sysUser.getId());
-		CacheUtils.remove(USER_CACHE, USER_CACHE_LOGIN_NAME_ + sysUser.getUsername());
-		if (sysUser.getDepartmentid() != null){
-			CacheUtils.remove(USER_CACHE, USER_CACHE_LIST_BY_DEPARTMENT_ID_ + sysUser.getDepartmentid());
+		CacheUtils.remove(USER_CACHE, USER_CACHE_LOGIN_NAME_ + sysUser.getUserName());
+		if (sysUser.getDepartmentId() != null){
+			CacheUtils.remove(USER_CACHE, USER_CACHE_LIST_BY_DEPARTMENT_ID_ + sysUser.getDepartmentId());
 		}
 	}
 	
@@ -110,11 +110,11 @@ public class UserUtils {
 	public static SysUser getUser(){
 		SysUser sysUser = (SysUser)getSession().getAttribute("currentUser");
 		if (sysUser != null){
-			String currentUsername = (String)getSession().getAttribute("currentUsername");
-			if(currentUsername == null) {
+			String currentUserName = (String)getSession().getAttribute("currentUserName");
+			if(currentUserName == null) {
 				return new SysUser();
 			}
-			sysUser = getByLoginName(currentUsername);
+			sysUser = getByLoginName(currentUserName);
 			if (sysUser != null){
 				return sysUser;
 			}
@@ -174,7 +174,7 @@ public class UserUtils {
 			for(int i=0; i<mList.size(); i++) {
 				TreeJson tj = new TreeJson();
 				tj.setId(mList.get(i).getId());
-				tj.setPid(mList.get(i).getParentid());
+				tj.setPid(mList.get(i).getParentId());
 				tj.setText(mList.get(i).getName());
 				Attributes attributes = new Attributes();
 				attributes.setUrl(mList.get(i).getUrl());

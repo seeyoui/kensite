@@ -538,7 +538,7 @@ a:hover {text-decoration:one;}
 		//2判断旧密码是否正确
 		$.ajax({
    			type:'POST',
-   			url :'${ctx}/sysUser/validatePassWord.do?userName=${currentUser.username}'+"&passWord="+lPass,
+   			url :'${ctx}/sysUser/validatePassWord.do?userName=${currentUser.userName}'+"&passWord="+lPass,
    			dataType : "json",
    			success : function(result) {
    				if(result.success == "<%=StringConstant.TRUE%>"){
@@ -554,7 +554,7 @@ a:hover {text-decoration:one;}
    					}
    					$.ajax({
    			   			type:'POST',
-   			   			url :'${ctx}/sysUser/updatePassword.do?id=${currentUser.id}'+"&password="+newPass+"&username=${currentUser.username}",
+   			   			url :'${ctx}/sysUser/updatePassword.do?id=${currentUser.id}'+"&password="+newPass+"&userName=${currentUser.userName}",
    			   			dataType : "json",
    			   			success : function(result) {
    			   				layer.close(loadi);

@@ -6,7 +6,7 @@
 	    t.id,
 	    t.type,
 	    t.title,
-	    t.createuser as "createUser.username",
+	    t.createuser as "createUser.userName",
 	    t.createdate as "createDate",
 	    t.remote_addr,
 	    t.user_agent,
@@ -25,8 +25,8 @@
 			<if test="title != null and title != ''">
 				and t.title LIKE '%'||#{title}||'%'
 			</if>
-			<if test="createUser != null and createUser.username != null and createUser.username != ''">
-				and t.createuser LIKE '%'||#{createUser.username}||'%'
+			<if test="createUser != null and createUser.userName != null and createUser.userName != ''">
+				and t.createuser LIKE '%'||#{createUser.userName}||'%'
 			</if>
 			<if test="createDate != null and createDate != ''">
 				and t.createdate = #{createDate}
@@ -100,7 +100,7 @@
 		VALUES (
 			#{type},
 			#{title},
-			#{createUser.username},
+			#{createUser.userName},
 			#{createDate},
 			#{remoteAddr},
 			#{userAgent},

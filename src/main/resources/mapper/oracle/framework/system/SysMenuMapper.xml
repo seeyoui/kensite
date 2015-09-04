@@ -3,13 +3,13 @@
 <mapper namespace="com.seeyoui.kensite.framework.system.persistence.SysMenuMapper" >
 	<!-- 查询单表的字段 -->
 	<sql id="tableColumns">
-	    t.id,
-	    t.parentid,
-	    t.name,
-	    t.url,
-	    t.sequence,
-	    t.icon,
-	    t.target
+	    t.id as "id",
+	    t.parent_id as "parentId",
+	    t.name as "name",
+	    t.url as "url",
+	    t.sequence as "sequence",
+	    t.icon as "icon",
+	    t.target as "target"
 	</sql>
 	<!-- 查询过滤条件 -->
 	<sql id="whereStr">
@@ -18,8 +18,8 @@
 			<if test="id != null and id != ''">
 				and t.id LIKE '%'||#{id}||'%'
 			</if>
-			<if test="parentid != null and parentid != ''">
-				and t.parentid LIKE '%'||#{parentid}||'%'
+			<if test="parentId != null and parentId != ''">
+				and t.parent_id LIKE '%'||#{parentId}||'%'
 			</if>
 			<if test="name != null and name != ''">
 				and t.name LIKE '%'||#{name}||'%'
@@ -75,17 +75,17 @@
 		<include refid="tableColumns"/>
 		from sys_user su
 		left join sys_user_role sur
-		on su.id = sur.userid
+		on su.id = sur.user_id
 		left join sys_role sr
-		on sur.roleid = sr.id
+		on sur.role_id = sr.id
 		left join sys_role_menu srm
-		on sr.id = srm.roleid
+		on sr.id = srm.role_id
 		right join sys_menu t
-		on srm.menuid = t.id
+		on srm.menu_id = t.id
 		<where>
 			1=1
-			<if test="username !=null and username !=''">
-			and su.username=#{username}
+			<if test="userName !=null and userName !=''">
+			and su.user_name=#{userName}
 			</if>
 		</where>
 		ORDER BY t.sequence ASC
@@ -104,7 +104,7 @@
 	<insert id="saveSysMenu" parameterType="com.seeyoui.kensite.framework.system.domain.SysMenu">
 		INSERT INTO SYS_MENU (
 	    	
-	    	parentid,
+	    	parent_id,
 	    	name,
 	    	url,
 	    	sequence,
@@ -114,7 +114,7 @@
 		)
 		VALUES (
 			
-			#{parentid},
+			#{parentId},
 			#{name},
 			#{url},
 			#{sequence},
@@ -129,8 +129,8 @@
 		UPDATE SYS_MENU
 		<set>
 	    	
-	    	<if test="parentid !=null and parentid !=''">
-			parentid=#{parentid},
+	    	<if test="parentId !=null and parentId !=''">
+			parent_id=#{parentId},
 			</if>
 	    	<if test="name !=null and name !=''">
 			name=#{name},
