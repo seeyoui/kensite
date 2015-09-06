@@ -63,9 +63,9 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 				throw new LockedAccountException(); //帐号锁定
 			} else {
 				AuthenticationInfo authcInfo = new SimpleAuthenticationInfo(
-						user.getUsername(), user.getPassword(), user.getName());
+						user.getUserName(), user.getPassword(), user.getName());
 				SessionUtil.setSession("currentUser", user);
-				SessionUtil.setSession("currentUsername", user.getUsername());
+				SessionUtil.setSession("currentUserName", user.getUserName());
 				TreeJson root = UserUtils.getMenuTree();
 				if(root != null) {
 					List<TreeJson> menuList = root.getChildren();

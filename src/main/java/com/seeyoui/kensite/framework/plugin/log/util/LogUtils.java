@@ -88,7 +88,7 @@ public class LogUtils {
 					RequiresPermissions rp = m.getAnnotation(RequiresPermissions.class);
 					permission = (rp != null ? StringUtils.join(rp.value(), ",") : "");
 				}
-				log.setTitle("["+log.getCreateUser().getUsername()+"]"+log.getCreateUser().getName());
+				log.setTitle("["+log.getCreateUser().getUserName()+"]"+log.getCreateUser().getName());
 			}
 			// 如果有异常，设置异常信息
 			log.setException(Exceptions.getStackTraceAsString(ex));

@@ -24,7 +24,7 @@
 		        <thead>
 		            <tr>
 					    <th field="id" width="100px" hidden>主键</th>
-					    <th field="parentid" width="100px" hidden>外键</th>
+					    <th field="parentId" width="100px" hidden>外键</th>
 					    <th field="name" width="100px">名称</th>
 					    <th field="url" width="100px">URL</th>
 					    <th field="sequence" width="50px" align="right">排序</th>
@@ -43,7 +43,7 @@
 		        <shiro:hasPermission name="sysMenu:delete">
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyInfo()">删除</a>
 		        </shiro:hasPermission>
-				<input id="sel_parentid" name="sel_parentid" type="hidden" value=""/>
+				<input id="sel_parentId" name="sel_parentId" type="hidden" value=""/>
 				名称<input id="sel_name" name="sel_name" class="easyui-textbox" data-options=""/>
 				URL<input id="sel_url" name="sel_url" class="easyui-textbox" data-options=""/>
 			    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="selectData()">查询</a>
@@ -51,35 +51,35 @@
 		    <div id="dataWin" class="easyui-window" title="导航菜单信息维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:400px;height:320px;padding:10px;">
 		        <div class="ftitle">导航菜单信息维护</div>
 		        <form id="dataForm" method="post">
-							<div class="fitem">
-				                <label>名称</label>
-				                <input id="name" name="name" class="easyui-validatebox textbox" data-options="required:true"/>
-				            </div>
-				            <div class="fitem">
-				                <label>上级菜单</label>
-				                <input id="parentid" name="parentid" class="easyui-combotree" data-options="required:true" url="${ctx}/sysMenu/getTreeJson.do"/>
-				            </div>
-							<div class="fitem">
-				                <label>URL</label>
-				                <input id="url" name="url" class="easyui-validatebox textbox" data-options="required:true"/>
-				            </div>
-							<div class="fitem">
-				                <label>排序</label>
-				                <input id="sequence" name="sequence" class="easyui-numberbox" data-options="min:0,max:999999,precision:0,required:true"/>
-				            </div>
-							<div class="fitem">
-				                <label>打开方式</label>
-				                <input id="target" name="target" class="easyui-validatebox textbox" data-options="required:true" value="_blank"/>
-				            </div>
-							<div class="fitem">
-				                <label>图标</label>
-				                <input id="icon" name="icon" class="easyui-validatebox textbox" data-options=""/>
-				            </div>
-				            <div id="icon_li" class="fitem" style="background:#D2E9FF">
-				            	<c:forEach var="menuIcon" items="${menuIconList}" varStatus="status">
-				            		<img id="${menuIcon}" src="${ctx_skins}${menuIcon}" style="width:25px;height:25px;"/>
-								</c:forEach>
-				            </div>
+					<div class="fitem">
+		                <label>名称</label>
+		                <input id="name" name="name" class="easyui-validatebox textbox" data-options="required:true"/>
+		            </div>
+		            <div class="fitem">
+		                <label>上级菜单</label>
+		                <input id="parentId" name="parentId" class="easyui-combotree" data-options="required:true" url="${ctx}/sysMenu/getTreeJson.do"/>
+		            </div>
+					<div class="fitem">
+		                <label>URL</label>
+		                <input id="url" name="url" class="easyui-validatebox textbox" data-options="required:true"/>
+		            </div>
+					<div class="fitem">
+		                <label>排序</label>
+		                <input id="sequence" name="sequence" class="easyui-numberbox" data-options="min:0,max:999999,precision:0,required:true"/>
+		            </div>
+					<div class="fitem">
+		                <label>打开方式</label>
+		                <input id="target" name="target" class="easyui-validatebox textbox" data-options="required:true" value="_blank"/>
+		            </div>
+					<div class="fitem">
+		                <label>图标</label>
+		                <input id="icon" name="icon" class="easyui-validatebox textbox" data-options=""/>
+		            </div>
+		            <div id="icon_li" class="fitem" style="background:#D2E9FF">
+		            	<c:forEach var="menuIcon" items="${menuIconList}" varStatus="status">
+		            		<img id="${menuIcon}" src="${ctx_skins}${menuIcon}" style="width:25px;height:25px;"/>
+						</c:forEach>
+		            </div>
 				</form>
 				
 			    <div id="dataWin-buttons">
@@ -93,7 +93,7 @@
 	    $(document).ready(function(){
 	    	$("#menuTree").tree({
 	    		onClick: function(node){
-	    			$('#sel_parentid').val(node.id);
+	    			$('#sel_parentId').val(node.id);
 	    			selectData();
 	    		}
 	    	});
@@ -104,17 +104,17 @@
 	    	$('#dataList').datagrid({
 	    		url:'${ctx}/sysMenu/getListData.do',
 	    		queryParams: {
-	    			parentid:"<%=StringConstant.ROOT_ID_32%>"
+	    			parentId:"<%=StringConstant.ROOT_ID_32%>"
 	    		}
 	    	});
 	    });
 	    
 	    function selectData() {
-		    var sel_parentid = $("#sel_parentid").val();
+		    var sel_parentId = $("#sel_parentId").val();
 		    var sel_name = $("#sel_name").val();
 		    var sel_url = $("#sel_url").val();
         	$('#dataList').datagrid('load',{
-        		parentid:sel_parentid,
+        		parentId:sel_parentId,
     		    name:sel_name,
     		    url:sel_url
         	});
@@ -123,7 +123,7 @@
         function reloadData() {
         	selectData();
         	$('#menuTree').tree('reload');
-        	$('#parentid').combotree('reload');
+        	$('#parentId').combotree('reload');
         }
 	    
         var url;
@@ -133,7 +133,7 @@
             if(node == null) {
             	node = $('#menuTree').tree('getRoot');
             }
-            $('#parentid').combotree('setValue', node.id);
+            $('#parentId').combotree('setValue', node.id);
             $('#target').val('_blank');
             $('#url').val('/');
             $('#dataWin').window('open');

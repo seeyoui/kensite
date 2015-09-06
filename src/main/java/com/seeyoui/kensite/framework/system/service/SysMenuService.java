@@ -5,7 +5,6 @@
  
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,9 +16,7 @@ import com.seeyoui.kensite.common.base.service.BaseService;
 import com.seeyoui.kensite.common.constants.StringConstant;
 import com.seeyoui.kensite.common.exception.CRUDException;
 import com.seeyoui.kensite.framework.act.idgenerator.GeneratorUUID;
-import com.seeyoui.kensite.framework.system.domain.SysDepartment;
 import com.seeyoui.kensite.framework.system.domain.SysMenu;
-import com.seeyoui.kensite.framework.system.domain.SysRole;
 import com.seeyoui.kensite.framework.system.domain.SysUser;
 import com.seeyoui.kensite.framework.system.persistence.SysMenuMapper;
 import com.seeyoui.kensite.framework.system.util.UserUtils;
@@ -78,7 +75,7 @@ public class SysMenuService extends BaseService {
 		for(int i=0; i<mList.size(); i++) {
 			TreeJson tj = new TreeJson();
 			tj.setId(mList.get(i).getId());
-			tj.setPid(mList.get(i).getParentid());
+			tj.setPid(mList.get(i).getParentId());
 			tj.setText(mList.get(i).getName());
 			Attributes attributes = new Attributes();
 			attributes.setUrl(mList.get(i).getUrl());

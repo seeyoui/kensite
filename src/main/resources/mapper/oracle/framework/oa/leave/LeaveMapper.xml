@@ -11,15 +11,15 @@
 		t.starttime,
 		t.endtime,
 		t.leavetype,
-		u.username as "createUser.username",
+		u.user_name as "createUser.userName",
 		u.name as "createUser.name",
 		d.id as "sysDepartment.id",
 		d.name as "sysDepartment.name"
 	</sql>
 	
 	<sql id="leaveJoins">
-		LEFT JOIN sys_user u ON u.username = t.createuser
-		LEFT JOIN sys_department d ON d.id = u.departmentid
+		LEFT JOIN sys_user u ON u.user_name = t.createuser
+		LEFT JOIN sys_department d ON d.id = u.department_id
     </sql>
 	
 	<!-- 查询过滤条件 -->
@@ -86,7 +86,7 @@
 		)
 		VALUES (
 			#{createDate},
-			#{createUser.username},
+			#{createUser.userName},
 			#{reason},
 			#{startTime},
 			#{endTime},
@@ -102,8 +102,8 @@
 	    	<if test="updateDate !=null and updateDate !=''">
 			updateDate=#{updateDate},
 			</if>
-	    	<if test="updateUser !=null and updateUser.username !=''">
-			updateuser=#{updateUser.username},
+	    	<if test="updateUser !=null and updateUser.userName !=''">
+			updateuser=#{updateUser.userName},
 			</if>
 	    	<if test="reason !=null and reason !=''">
 			reason=#{reason},

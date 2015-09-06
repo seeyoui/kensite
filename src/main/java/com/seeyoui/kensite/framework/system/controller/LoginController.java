@@ -53,19 +53,19 @@ public class LoginController {
 	public String loginIn(HttpSession session, HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) {
 		String info = "";
 		String resultPageURL = InternalResourceViewResolver.FORWARD_URL_PREFIX + "/";  
-		String username = request.getParameter("username");
+		String userName = request.getParameter("userName");
 		String password = request.getParameter("password");
-        password = MD5.md5(username+password);
+        password = MD5.md5(userName+password);
         //获取HttpSession中的验证码
 //        String verifyCode = (String)request.getSession().getAttribute("verifyCode");
         //获取用户请求表单中输入的验证码
 //        String submitCode = WebUtils.getCleanParam(request, "verifyCode");
-//        System.out.println("用户[" + username + "]登录时输入的验证码为[" + submitCode + "],HttpSession中的验证码为[" + verifyCode + "]");
+//        System.out.println("用户[" + userName + "]登录时输入的验证码为[" + submitCode + "],HttpSession中的验证码为[" + verifyCode + "]");
 //        if (StringUtils.isEmpty(submitCode) || !StringUtils.equals(verifyCode, submitCode.toLowerCase())){
 //            request.setAttribute("message_login", "验证码不正确");
 //            return resultPageURL;
 //        }
-        UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+        UsernamePasswordToken token = new UsernamePasswordToken(userName, password);
         token.setRememberMe(true);
         //获取当前的Subject
         Subject currentUser = SecurityUtils.getSubject();

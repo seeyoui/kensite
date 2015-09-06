@@ -3,18 +3,18 @@
 <mapper namespace="com.seeyoui.kensite.framework.system.persistence.SysRoleMenuMapper" >
 	<!-- 查询单表的字段 -->
 	<sql id="tableColumns">
-	    t.roleid,
-	    t.menuid
+	    t.role_id as "roleId",
+	    t.menu_id
 	</sql>
 	<!-- 查询过滤条件 -->
 	<sql id="whereStr">
 		<where>
 			1=1
-			<if test="roleid != null and roleid != ''">
-				and t.roleid LIKE '%'||#{roleid}||'%'
+			<if test="roleId != null and roleId != ''">
+				and t.role_id LIKE '%'||#{roleId}||'%'
 			</if>
-			<if test="menuid != null and menuid != ''">
-				and t.menuid LIKE '%'||#{menuid}||'%'
+			<if test="menuId != null and menuId != ''">
+				and t.menu_id LIKE '%'||#{menuId}||'%'
 			</if>
 		</where>
 	</sql>
@@ -34,26 +34,26 @@
 		case when sr.id is null then 'F' else 'T' end target
 		from sys_menu t
 	    left join sys_role_menu srm
-	   	on srm.menuid = t.id and srm.roleid=#{roleid}
+	   	on srm.menu_id = t.id and srm.role_id=#{roleId}
     	left join sys_role sr
-    	on sr.id = srm.roleid
+    	on sr.id = srm.role_id
     	ORDER BY t.sequence ASC
 	</select>
 	
 	<!-- 数据新增 -->
 	<insert id="saveSysRoleMenu" parameterType="com.seeyoui.kensite.framework.system.domain.SysRoleMenu">
 		INSERT INTO SYS_ROLE_MENU (
-	    	roleid,
-	    	menuid
+	    	role_id,
+	    	menu_id
 		)
 		VALUES (
-			#{roleid},
-			#{menuid}
+			#{roleId},
+			#{menuId}
 		)
 	</insert>
 	
 	<!-- 数据删除 -->
 	<delete id="deleteSysRoleMenu">
-		DELETE FROM SYS_ROLE_MENU WHERE roleid=#{roleid}
+		DELETE FROM SYS_ROLE_MENU WHERE role_id=#{roleId}
 	</delete>
 </mapper>

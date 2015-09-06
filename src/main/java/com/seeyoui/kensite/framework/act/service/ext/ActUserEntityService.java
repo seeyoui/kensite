@@ -99,7 +99,7 @@ public class ActUserEntityService extends UserEntityManager {
 //		return getDbSqlSession().selectList("selectGroupsByUserId", userId);
 		List<Group> list = Lists.newArrayList();
 		SysUser sysUser = new SysUser();
-		sysUser.setUsername(userId);
+		sysUser.setUserName(userId);
 		List<SysRole> sysRoleList = getSysRoleService().findSysUserRoleList(sysUser);
 		for (SysRole role : sysRoleList){
 			list.add(ActUtils.toActivitiGroup(role));

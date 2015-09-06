@@ -14,21 +14,21 @@ import com.seeyoui.kensite.common.base.domain.Pager;
 public class SysUserRole extends Pager {  
     private static final long serialVersionUID = 5454155825314635342L;  
       
-    private String userid;  
-    private String roleid;  
+    private String userId;  
+    private String roleId;  
  
-    public void setUserid(String userid) {  
-        this.userid = userid;  
+    public void setUserId(String userId) {  
+        this.userId = userId;  
     }  
       
-    public String getUserid() {  
-        return this.userid;  
+    public String getUserId() {  
+        return this.userId;  
     }  
-    public void setRoleid(String roleid) {  
-        this.roleid = roleid;  
+    public void setRoleId(String roleId) {  
+        this.roleId = roleId;  
     }  
       
-    public String getRoleid() {  
-        return this.roleid;  
+    public String getRoleId() {  
+        return this.roleId;  
     }  
 }

@@ -23,7 +23,7 @@
 		        <thead>
 		            <tr>
 					    <th field="id" width="100px" hidden>主键</th>
-					    <th field="parentid" width="100px" hidden>上级部门</th>
+					    <th field="parentId" width="100px" hidden>上级部门</th>
 					    <th field="name" width="100px">部门名称</th>
 					    <th field="code" width="100px">部门编号</th>
 					    <th field="sequence" width="50px" align="right">排序</th>
@@ -40,7 +40,7 @@
 		        <shiro:hasPermission name="sysDepartment:delete">
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyInfo()">删除</a>
 		        </shiro:hasPermission>
-				<input id="sel_parentid" name="sel_parentid" type="hidden" value=""/>
+				<input id="sel_parentId" name="sel_parentId" type="hidden" value=""/>
 				部门名称<input id="sel_name" name="sel_name" class="easyui-textbox" data-options=""/>
 				部门编号<input id="sel_code" name="sel_code" class="easyui-textbox" data-options=""/>
 			    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="selectData()">查询</a>
@@ -48,24 +48,24 @@
 		    <div id="dataWin" class="easyui-window" title="部门信息维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:400px;height:260px;padding:10px;">
 		        <div class="ftitle">部门信息维护</div>
 		        <form id="dataForm" method="post">
-							<div class="fitem">
-				                <label>部门名称</label>
-				                <input id="name" name="name" class="easyui-validatebox textbox" data-options="required:true"/>
-				            </div>
-							<div class="fitem">
-				                <label>部门编号</label>
-				                <input id="code" name="code" class="easyui-validatebox textbox" data-options="required:true"/>
-				                <span id="msg-code" class="err-msg"></span>
-				            </div>
-				            <div class="fitem">
-				                <label>上级部门</label>
-				                <input id="parentid" name="parentid" class="easyui-combotree" data-options="required:true" style="width:160px;" url="${ctx}/sysDepartment/getTreeJson.do"/>
-				            </div>
-				            <div class="fitem">
-				                <label>排序</label>
-				                <input id="sequence" name="sequence" class="easyui-numberbox textbox" data-options="min:0,max:999999,precision:0,required:true"/>
-				                <span id="msg-sequence" class="err-msg"></span>
-				            </div>
+					<div class="fitem">
+		                <label>部门名称</label>
+		                <input id="name" name="name" class="easyui-validatebox textbox" data-options="required:true"/>
+		            </div>
+					<div class="fitem">
+		                <label>部门编号</label>
+		                <input id="code" name="code" class="easyui-validatebox textbox" data-options="required:true"/>
+		                <span id="msg-code" class="err-msg"></span>
+		            </div>
+		            <div class="fitem">
+		                <label>上级部门</label>
+		                <input id="parentId" name="parentId" class="easyui-combotree" data-options="required:true" style="width:160px;" url="${ctx}/sysDepartment/getTreeJson.do"/>
+		            </div>
+		            <div class="fitem">
+		                <label>排序</label>
+		                <input id="sequence" name="sequence" class="easyui-numberbox textbox" data-options="min:0,max:999999,precision:0,required:true"/>
+		                <span id="msg-sequence" class="err-msg"></span>
+		            </div>
 				</form>
 				
 			    <div id="dataWin-buttons">
@@ -79,24 +79,24 @@
 	    $(document).ready(function(){
 	    	$("#departmentTree").tree({
 	    		onClick: function(node){
-	    			$('#sel_parentid').val(node.id);
+	    			$('#sel_parentId').val(node.id);
 	    			selectData();
 	    		}
 	    	});
 	    	$('#dataList').datagrid({
 	    		url:'${ctx}/sysDepartment/getListData.do',
 	    		queryParams: {
-	    			parentid:"<%=StringConstant.ROOT_ID_32%>"
+	    			parentId:"<%=StringConstant.ROOT_ID_32%>"
 	    		}
 	    	});
 	    });
 	    
 	    function selectData() {
-	    	var sel_parentid = $("#sel_parentid").val();
+	    	var sel_parentId = $("#sel_parentId").val();
 		    var sel_name = $("#sel_name").val();
 		    var sel_code = $("#sel_code").val();
         	$('#dataList').datagrid('load',{
-        		parentid:sel_parentid,
+        		parentId:sel_parentId,
     		    name:sel_name,
     		    code:sel_code
         	});
@@ -105,7 +105,7 @@
         function reloadData() {
         	selectData();
         	$('#departmentTree').tree('reload');
-        	$('#parentid').combotree('reload');
+        	$('#parentId').combotree('reload');
         }
 	    
         var url;
@@ -116,7 +116,7 @@
             if(node == null) {
             	node = $('#departmentTree').tree('getRoot');
             }
-            $('#parentid').combotree('setValue', node.id);
+            $('#parentId').combotree('setValue', node.id);
             $('#dataWin').window('open');
             url = '${ctx}/sysDepartment/saveByAdd.do';
         }

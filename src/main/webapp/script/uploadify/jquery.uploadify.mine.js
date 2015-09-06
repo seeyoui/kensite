@@ -42,14 +42,14 @@ function mineUpload(uploadObj, ctx , funcName) {
 		fileSizeLimit = "5M";
 	}
 	$(uploadObj).uploadify({
-	    'swf' : ctx+'/assets/js/uploadify/uploadify.swf',
+	    'swf' : ctx+'/script/uploadify/uploadify.swf',
 	    'uploader' : ctx+'/sys/uploadfile/upload.do?url='+url,
         'debug' : false,//开启调试
 	    'buttonText' : buttonText,//按钮显示文本
 	    'method' : method,
 	    //'scriptData': {'url':'123'},
 	    //'formData' : {'abc' : '123'},
-	    'cancelImg' : ctx+'/assets/js/uploadify/uploadify-cancel.png',
+	    'cancelImg' : ctx+'/script/uploadify/uploadify-cancel.png',
 	    'auto' : auto,//是否自动上传
         'successTimeout' : 99999,//超时时间
 	    'queueID' : queueID,//文件选择后的容器ID

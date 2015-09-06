@@ -14,21 +14,21 @@ import com.seeyoui.kensite.common.base.domain.Pager;
 public class SysModulePermission extends Pager {  
     private static final long serialVersionUID = 5454155825314635342L;  
       
-    private String moduleid;  
-    private String permissionid;  
+    private String moduleId;  
+    private String permissionId;  
  
-    public void setModuleid(String moduleid) {  
-        this.moduleid = moduleid;  
+    public void setModuleId(String moduleId) {  
+        this.moduleId = moduleId;  
     }  
       
-    public String getModuleid() {  
-        return this.moduleid;  
+    public String getModuleId() {  
+        return this.moduleId;  
     }  
-    public void setPermissionid(String permissionid) {  
-        this.permissionid = permissionid;  
+    public void setPermissionId(String permissionId) {  
+        this.permissionId = permissionId;  
     }  
       
-    public String getPermissionid() {  
-        return this.permissionid;  
+    public String getPermissionId() {  
+        return this.permissionId;  
     }  
 }

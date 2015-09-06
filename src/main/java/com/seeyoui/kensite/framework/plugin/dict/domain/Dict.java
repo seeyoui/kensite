@@ -22,7 +22,7 @@ public class Dict extends DataEntity<Article> {
 	private String category;
 	private String description;
 	private Long sequence;
-	private String parentid;
+	private String parentId;
 
 	public void setValue(String value) {
 		this.value = value;
@@ -59,11 +59,11 @@ public class Dict extends DataEntity<Article> {
 	public Long getSequence() {
 		return this.sequence;
 	}
-	public void setParentid(String parentid) {
-		this.parentid = parentid;
+	public void setParentId(String parentId) {
+		this.parentId = parentId;
 	}
     
-	public String getParentid() {
-		return this.parentid;
+	public String getParentId() {
+		return this.parentId;
 	}
 }

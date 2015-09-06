@@ -79,7 +79,7 @@ input {
 		<input id="rememberMe" name="rememberMe" type="hidden"
 			value="" />
 		<div class="nameDiv">
-			<input type="text" id="accountName" name="username"
+			<input type="text" id="accountName" name="userName"
 				value="" />
 		</div>
 		<div class="pwdDiv">

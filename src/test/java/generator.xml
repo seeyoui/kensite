@@ -8,23 +8,23 @@
 	</comment>
 	<entry key="basepackage">com.seeyoui.kensite</entry>
 	<!-- 当前模块所属包路径 -->
-	<entry key="innerpackage">business</entry>
+	<entry key="innerpackage">framework.cms</entry>
 	<!-- 当前功能名，对应工作空间的文件夹名，注意大小写 -->
-	<entry key="projectName">Camp</entry>
+	<entry key="projectName">kensite</entry>
 	
 	<!-- jsp namespace: web/${namespace}/${className}/list.jsp -->
 	<entry key="namespace">WEB-INF/view</entry>
 	
-	<entry key="outRoot">F:\workspace</entry>
+	<entry key="outRoot">C:\Users\Administrator\git</entry>
 
 	<!-- 需要移除的表名前缀,使用逗号进行分隔多个前缀,示例值: t_,v_ -->
-	<entry key="tableRemovePrefixes">t_,t_yetai_</entry>
+	<entry key="tableRemovePrefixes">cms_,t_,sys_</entry>
 	
-	<entry key="jdbc.username">wisdomcamp</entry>
-	<entry key="jdbc.password">123456</entry>
+	<entry key="jdbc.username">kensite</entry>
+	<entry key="jdbc.password">kensite</entry>
 		
 	<!-- oracle需要指定jdbc.schema,其它数据库忽略此项配置  -->
-	<entry key="jdbc.schema">WISDOMCAMP</entry>
+	<entry key="jdbc.schema">KENSITE</entry>
 	<entry key="jdbc.catalog"></entry>
 	
 	<!-- 数据库类型映射  -->
@@ -46,7 +46,7 @@
 
 	<!-- Oracle 	jdbc:oracle:oci:@tnsname_devdb
 	-->
-	<entry key="jdbc.url">jdbc:oracle:thin:@192.168.31.251:1521:orcl</entry>
+	<entry key="jdbc.url">jdbc:oracle:thin:@127.0.0.1:1521:orcl</entry>
 	<entry key="jdbc.driver">oracle.jdbc.driver.OracleDriver</entry>
 	
 	<!-- SQLServer2000 

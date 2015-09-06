@@ -3,22 +3,20 @@
  * Since 2014 - 2015
  */package com.seeyoui.kensite.framework.system.service;  
  
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.seeyoui.kensite.common.base.service.BaseService;
-
-import java.util.*;
-
 import com.seeyoui.kensite.common.base.domain.Attributes;
-import com.seeyoui.kensite.common.base.domain.EasyUIDataGrid;
 import com.seeyoui.kensite.common.base.domain.TreeJson;
 import com.seeyoui.kensite.common.base.service.BaseService;
-import com.seeyoui.kensite.common.exception.CRUDException;
-import com.seeyoui.kensite.common.util.*;
 import com.seeyoui.kensite.common.constants.StringConstant;
+import com.seeyoui.kensite.common.exception.CRUDException;
+import com.seeyoui.kensite.common.util.StringUtils;
 import com.seeyoui.kensite.framework.system.domain.SysModule;
-import com.seeyoui.kensite.framework.system.domain.SysRoleModule;
 import com.seeyoui.kensite.framework.system.domain.SysRoleModule;
 import com.seeyoui.kensite.framework.system.persistence.SysRoleModuleMapper;
 
@@ -64,13 +62,13 @@ public class SysRoleModuleService extends BaseService {
 	 * @throws CRUDException
 	 */
 	public void saveSysRoleModule(SysRoleModule sysRoleModule) throws CRUDException {
-		sysRoleModuleMapper.deleteSysRoleModule(sysRoleModule.getRoleid());
-		if(sysRoleModule.getModuleid() == null || StringUtils.isBlank(sysRoleModule.getModuleid())) {
+		sysRoleModuleMapper.deleteSysRoleModule(sysRoleModule.getRoleId());
+		if(sysRoleModule.getModuleId() == null || StringUtils.isBlank(sysRoleModule.getModuleId())) {
 			return;
 		}
-		List<String> listId = Arrays.asList(sysRoleModule.getModuleid().split(","));
+		List<String> listId = Arrays.asList(sysRoleModule.getModuleId().split(","));
 		for(int i=0; i<listId.size(); i++) {
-			sysRoleModule.setModuleid(listId.get(i));
+			sysRoleModule.setModuleId(listId.get(i));
 			sysRoleModuleMapper.saveSysRoleModule(sysRoleModule);
 		}
 	}

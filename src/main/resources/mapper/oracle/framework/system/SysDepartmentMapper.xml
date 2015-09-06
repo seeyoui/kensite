@@ -3,11 +3,11 @@
 <mapper namespace="com.seeyoui.kensite.framework.system.persistence.SysDepartmentMapper" >
 	<!-- 查询单表的字段 -->
 	<sql id="tableColumns">
-	    t.id,
-	    t.parentid,
-	    t.sequence,
-	    t.name,
-	    t.code
+	    t.id as "id",
+	    t.parent_id as "parentId",
+	    t.sequence as "sequence",
+	    t.name as "name",
+	    t.code as code
 	</sql>
 	<!-- 查询过滤条件 -->
 	<sql id="whereStr">
@@ -16,8 +16,8 @@
 			<if test="id != null and id != ''">
 				and t.id LIKE '%'||#{id}||'%'
 			</if>
-			<if test="parentid != null and parentid != ''">
-				and t.parentid LIKE '%'||#{parentid}||'%'
+			<if test="parentId != null and parentId != ''">
+				and t.parent_id LIKE '%'||#{parentId}||'%'
 			</if>
 			<if test="sequence != null and sequence != ''">
 				and t.sequence = #{sequence}
@@ -31,7 +31,7 @@
 		</where>
 	</sql>
 	<sql id="orderBy">
-		ORDER BY t.id DESC 
+		ORDER BY t.sequence DESC 
 	</sql>
 	
 	<!-- 根据ID查询单条数据 -->
@@ -72,16 +72,14 @@
 	<!-- 数据新增 -->
 	<insert id="saveSysDepartment" parameterType="com.seeyoui.kensite.framework.system.domain.SysDepartment">
 		INSERT INTO SYS_DEPARTMENT (
-	    	
-	    	parentid,
+	    	parent_id,
 	    	sequence,
 	    	name,
 	    	code,
 		    id
 		)
 		VALUES (
-			
-			#{parentid},
+			#{parentId},
 			#{sequence},
 			#{name},
 			#{code},
@@ -93,9 +91,8 @@
 	<update id="updateSysDepartment" parameterType="com.seeyoui.kensite.framework.system.domain.SysDepartment">
 		UPDATE SYS_DEPARTMENT
 		<set>
-	    	
-	    	<if test="parentid !=null and parentid !=''">
-			parentid=#{parentid},
+	    	<if test="parentId !=null and parentId !=''">
+			parent_id=#{parentId},
 			</if>
 	    	<if test="sequence !=null and sequence !=''">
 			sequence=#{sequence},

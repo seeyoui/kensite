@@ -20,7 +20,7 @@ public class SysDepartment extends Pager {
     private static final long serialVersionUID = 5454155825314635342L;  
       
     private String id;  
-    private String parentid;  
+    private String parentId;  
 //    @Range(min = 1, max = 100, message="长度不对")
     @Range(min = 1, max = 100)
     private Long sequence;  
@@ -35,12 +35,12 @@ public class SysDepartment extends Pager {
     public String getId() {  
         return this.id;  
     }  
-    public void setParentid(String parentid) {  
-        this.parentid = parentid;  
+    public void setParentId(String parentId) {  
+        this.parentId = parentId;  
     }  
       
-    public String getParentid() {  
-        return this.parentid;  
+    public String getParentId() {  
+        return this.parentId;  
     }  
     public void setSequence(Long sequence) {  
         this.sequence = sequence;  

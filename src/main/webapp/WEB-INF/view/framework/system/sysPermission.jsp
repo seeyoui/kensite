@@ -36,25 +36,24 @@
 		        <shiro:hasPermission name="sysPermission:delete">
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyInfo()">删除</a>
 		        </shiro:hasPermission>
-
-权限名<input id="sel_name" name="sel_name" class="easyui-textbox" data-options=""/>
+				权限名<input id="sel_name" name="sel_name" class="easyui-textbox" data-options=""/>
 			    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="selectData()">查询</a>
 		    </div>
 		    <div id="dataWin" class="easyui-window" title="权限信息维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:400px;height:200px;padding:10px;">
 		        <div class="ftitle">权限信息维护</div>
 		        <form id="dataForm" method="post">
-							<div class="fitem">
-				                <label>权限</label>
-				                <input id="id" name="id" class="easyui-validatebox textbox" data-options="required:true"/>
-				            </div>
-							<div class="fitem">
-				                <label>权限名</label>
-				                <input id="name" name="name" class="easyui-validatebox textbox" data-options="required:true"/>
-				            </div>
-							<div class="fitem">
-				                <label>排序</label>
-				                <input id="sequence" name="sequence" class="easyui-numberbox textbox" data-options="min:0,max:999999,precision:0,required:true"/>
-				            </div>
+					<div class="fitem">
+		                <label>权限</label>
+		                <input id="id" name="id" class="easyui-validatebox textbox" data-options="required:true"/>
+		            </div>
+					<div class="fitem">
+		                <label>权限名</label>
+		                <input id="name" name="name" class="easyui-validatebox textbox" data-options="required:true"/>
+		            </div>
+					<div class="fitem">
+		                <label>排序</label>
+		                <input id="sequence" name="sequence" class="easyui-numberbox textbox" data-options="min:0,max:999999,precision:0,required:true"/>
+		            </div>
 				</form>
 				
 			    <div id="dataWin-buttons">

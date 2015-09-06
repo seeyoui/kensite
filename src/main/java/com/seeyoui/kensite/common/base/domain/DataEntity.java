@@ -26,7 +26,7 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
 	protected SysUser updateUser;	// 更新者
 	protected Date updateDate;	// 更新日期
 	protected String delFlag; 	// 删除标记（0：正常；1：删除；2：审核）
-	protected String bindid;	// 流程相关绑定id
+	protected String bindId;	// 流程相关绑定id
 	
 	/**
 	 * 插入之前执行方法，需要手动调用
@@ -37,7 +37,7 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
 			this.id = GeneratorUUID.getId();
 		}
 		SysUser sysUser = UserUtils.getUser();
-		if (StringUtils.isNotBlank(sysUser.getUsername())){
+		if (StringUtils.isNotBlank(sysUser.getUserName())){
 			this.updateUser = sysUser;
 			this.createUser = sysUser;
 		}
@@ -51,7 +51,7 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
 	@Override
 	public void preUpdate(){
 		SysUser SysUser = UserUtils.getUser();
-		if (StringUtils.isNotBlank(SysUser.getUsername())){
+		if (StringUtils.isNotBlank(SysUser.getUserName())){
 			this.updateUser = SysUser;
 		}
 		this.updateDate = new Date();
@@ -112,12 +112,12 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
 		this.delFlag = delFlag;
 	}
 
-	public String getBindid() {
-		return bindid;
+	public String getBindId() {
+		return bindId;
 	}
 
-	public void setBindid(String bindid) {
-		this.bindid = bindid;
+	public void setBindId(String bindId) {
+		this.bindId = bindId;
 	}
 
 }

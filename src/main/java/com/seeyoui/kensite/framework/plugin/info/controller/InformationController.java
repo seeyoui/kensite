@@ -155,7 +155,7 @@ public class InformationController extends BaseController {
 	public String getUserInformation(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, Information information) throws Exception {
-		String userName = UserUtils.getUser().getUsername();
+		String userName = UserUtils.getUser().getUserName();
 		information.setReceiver(userName);
 		List<Information> informationList = informationService.findInformationList(information);
 		JSONArray jsonArr = JSONArray.fromObject(informationList);
@@ -189,7 +189,7 @@ public class InformationController extends BaseController {
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, String content, String type, String receivers, String sendType) throws Exception {
 		Information information = new Information();
-		String userName = UserUtils.getUser().getUsername();
+		String userName = UserUtils.getUser().getUserName();
 		information.setSender(userName);
 		information.setContent(content);
 		information.setType(type);
@@ -209,7 +209,7 @@ public class InformationController extends BaseController {
 				List<SysUser> userList = sysUserService.findSysUserByRole(listRoleid.get(i));
 				for(int j=0; j<userList.size(); j++) {
 					information.setId(GeneratorUUID.getId());
-					information.setReceiver(userList.get(j).getUsername());
+					information.setReceiver(userList.get(j).getUserName());
 					informationService.saveInformation(information);
 				}
 			}
@@ -220,11 +220,11 @@ public class InformationController extends BaseController {
 			List<String> listDeptid = Arrays.asList(receivers.split(","));
 			for(int i=0; i<listDeptid.size(); i++) {
 				SysUser sysUser = new SysUser();
-				sysUser.setDepartmentid(listDeptid.get(i));
+				sysUser.setDepartmentId(listDeptid.get(i));
 				List<SysUser> userList = sysUserService.findAllSysUserList(sysUser);
 				for(int j=0; j<userList.size(); j++) {
 					information.setId(GeneratorUUID.getId());
-					information.setReceiver(userList.get(j).getUsername());
+					information.setReceiver(userList.get(j).getUserName());
 					informationService.saveInformation(information);
 				}
 			}

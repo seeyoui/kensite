@@ -14,21 +14,21 @@ import com.seeyoui.kensite.common.base.domain.Pager;
 public class SysRoleMenu extends Pager {  
     private static final long serialVersionUID = 5454155825314635342L;  
       
-    private String roleid;  
-    private String menuid;  
+    private String roleId;  
+    private String menuId;  
  
-    public void setRoleid(String roleid) {  
-        this.roleid = roleid;  
+    public void setRoleId(String roleId) {  
+        this.roleId = roleId;  
     }  
       
-    public String getRoleid() {  
-        return this.roleid;  
+    public String getRoleId() {  
+        return this.roleId;  
     }  
-    public void setMenuid(String menuid) {  
-        this.menuid = menuid;  
+    public void setMenuId(String menuId) {  
+        this.menuId = menuId;  
     }  
       
-    public String getMenuid() {  
-        return this.menuid;  
+    public String getMenuId() {  
+        return this.menuId;  
     }  
 }

@@ -46,8 +46,8 @@ public class SysUserService extends BaseService {
 	 * @return
 	 * @throws CRUDException
 	 */
-	public SysUser findSysUserByUsername(String username) throws CRUDException{
-		return sysUserMapper.findSysUserByUsername(username);
+	public SysUser findSysUserByUserName(String username) throws CRUDException{
+		return sysUserMapper.findSysUserByUserName(username);
 	}
 	
 	/**
@@ -103,8 +103,8 @@ public class SysUserService extends BaseService {
 		 *		直接返回提示信息，需要用户重新输入用户名称
 		 * 
 		 */
-		if(sysUser.getUsername() != null && !sysUser.getUsername().equals("")){
-			SysUser sysUserResult = sysUserMapper.findSysUserByUsername(sysUser.getUsername());
+		if(sysUser.getUserName() != null && !sysUser.getUserName().equals("")){
+			SysUser sysUserResult = sysUserMapper.findSysUserByUserName(sysUser.getUserName());
 			if(sysUserResult != null 
 				&& (sysUserResult.getId() != null && !sysUserResult.getId().equals(""))){
 				return SysUserConstants.MESSAGE_ACCOUNT_EXIST;
@@ -115,9 +115,9 @@ public class SysUserService extends BaseService {
 		sysUser.setId(GeneratorUUID.getId());
 		sysUser.setState(StringConstant.STATE_ENABLE);
 		if(sysUser.getPassword() != null && !"".equals(sysUser.getPassword()) && !"null".equals(sysUser.getPassword())) {
-			sysUser.setPassword(MD5.md5(sysUser.getUsername()+sysUser.getPassword()));
+			sysUser.setPassword(MD5.md5(sysUser.getUserName()+sysUser.getPassword()));
 		} else {
-			sysUser.setPassword(MD5.md5(sysUser.getUsername()+StringConstant.INIT_PASSWORD));
+			sysUser.setPassword(MD5.md5(sysUser.getUserName()+StringConstant.INIT_PASSWORD));
 		}
 		sysUserMapper.saveSysUser(sysUser);
 		return SysUserConstants.MESSAGE_SUCCESS;

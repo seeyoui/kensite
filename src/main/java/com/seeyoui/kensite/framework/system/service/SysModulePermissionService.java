@@ -62,12 +62,12 @@ public class SysModulePermissionService extends BaseService {
 	 * @throws CRUDException
 	 */
 	public void saveSysModulePermission(SysModulePermission sysModulePermission) throws CRUDException {
-		sysModulePermissionMapper.deleteSysModulePermission(sysModulePermission.getModuleid());
-		String mpid = sysModulePermission.getPermissionid();
+		sysModulePermissionMapper.deleteSysModulePermission(sysModulePermission.getModuleId());
+		String mpid = sysModulePermission.getPermissionId();
 		if(StringUtils.isNotBlank(mpid)) {
 			List<String> listId = Arrays.asList(mpid.split(","));
 			for(int i=0; i<listId.size(); i++) {
-				sysModulePermission.setPermissionid(listId.get(i));
+				sysModulePermission.setPermissionId(listId.get(i));
 				sysModulePermissionMapper.saveSysModulePermission(sysModulePermission);
 			}
 		}

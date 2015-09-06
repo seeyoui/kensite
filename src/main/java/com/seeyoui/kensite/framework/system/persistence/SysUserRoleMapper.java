@@ -35,5 +35,5 @@ public interface SysUserRoleMapper {
 	 * 数据删除
 	 * @param listId
 	 */
-	public void deleteSysUserRole(String userid);
+	public void deleteSysUserRole(String userId);
 }
