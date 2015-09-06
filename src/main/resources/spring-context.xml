@@ -5,6 +5,7 @@
 	xmlns:context="http://www.springframework.org/schema/context"
     xmlns:aop="http://www.springframework.org/schema/aop"
     xmlns:cache="http://www.springframework.org/schema/cache" 
+    xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 						http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
 						http://www.springframework.org/schema/aop
@@ -14,7 +15,9 @@
 						http://www.springframework.org/schema/mvc
 						http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
 						http://www.springframework.org/schema/context
-						http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+						http://www.springframework.org/schema/context/spring-context-3.2.xsd
+						http://www.springframework.org/schema/tx
+						http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
 						
 	<!-- 属性文件读入 -->
 	<bean id="propertyConfigurer"
@@ -28,7 +31,10 @@
 						
 	<!-- 它背后注册了很多用于解析注解的处理器,其中就包括<context:annotation-config/>配置的注解所使用的处理器 -->
 	<!-- 所以配置了<context:component-scan base-package="">之后,便无需再配置<context:annotation-config> -->
-	<context:component-scan base-package="com.seeyoui.kensite,org.activiti.rest.editor"/>
+	<context:component-scan base-package="com.seeyoui.kensite,org.activiti.rest.editor">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+		<!-- <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service" /> -->
+	</context:component-scan>
 	
 	<!-- 启用SpringMVC的注解功能,它会自动注册HandlerMapping、HandlerAdapter、ExceptionResolver的相关实例 -->
 	<mvc:annotation-driven/>
@@ -81,6 +87,11 @@
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
+	
+	<!-- 基于注释的事务，当注释中发现@Transactional时，使用id为“transactionManager”的事务管理器  -->
+    <!-- 如果没有设置transaction-manager的值，则spring以缺省默认的事务管理器来处理事务，默认事务管理器为第一个加载的事务管理器 -->
+    <!-- <tx:annotation-driven transaction-manager="transactionManager"/>
+	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/> -->
 	
 	<!-- 配置 JSR303 Bean Validator 定义 -->
 	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
