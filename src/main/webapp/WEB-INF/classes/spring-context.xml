@@ -5,6 +5,7 @@
 	xmlns:context="http://www.springframework.org/schema/context"
     xmlns:aop="http://www.springframework.org/schema/aop"
     xmlns:cache="http://www.springframework.org/schema/cache" 
+    xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 						http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
 						http://www.springframework.org/schema/aop
@@ -14,7 +15,9 @@
 						http://www.springframework.org/schema/mvc
 						http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
 						http://www.springframework.org/schema/context
-						http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+						http://www.springframework.org/schema/context/spring-context-3.2.xsd
+						http://www.springframework.org/schema/tx
+						http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 						
 	<!-- 属性文件读入 -->
 	<bean id="propertyConfigurer"
@@ -32,12 +35,9 @@
 	
 	<!-- 启用SpringMVC的注解功能,它会自动注册HandlerMapping、HandlerAdapter、ExceptionResolver的相关实例 -->
 	<mvc:annotation-driven/>
-	<!-- activiti modeler rest服务，位于activiti-modeler.jar下
-	<context:component-scan base-package="org.activiti.rest.editor"></context:component-scan> -->
+
 	<!-- json处理 -->
 	<bean id="objectMapper" class="com.fasterxml.jackson.databind.ObjectMapper"></bean>
-    <!-- 启用缓存注解功能(请将其配置在Spring主配置文件中)
-    <cache:annotation-driven cache-manager="shiroCacheManager"/> -->
 	
 	<!-- 数据源配置, 使用 BoneCP 数据库连接池 -->
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
@@ -82,23 +82,15 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	
+	<!-- 配置 Annotation 驱动，扫描@Transactional注解的类定义事务
+	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>-->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	
 	<!-- 配置 JSR303 Bean Validator 定义 -->
 	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
 	
 	<!-- scan mappers and let them be autowired -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.seeyoui.kensite" />
-	</bean>
-
-	<!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
-	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
-
-	<!-- 开启Shiro的注解(如@RequiresRoles,@RequiresPermissions),需借助SpringAOP扫描使用Shiro注解的类,并在必要时进行安全逻辑验证 -->
-	<!-- 配置以下两个bean即可实现此功能 -->
-	<!-- Enable Shiro Annotations for Spring-configured beans. Only run after the lifecycleBeanProcessor has run -->
-	<!-- 由于本例中并未使用Shiro注解,故注释掉这两个bean(个人觉得将权限通过注解的方式硬编码在程序中,查看起来不是很方便,没必要使用) -->
-	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor"/>
-	<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
-		<property name="securityManager" ref="securityManager"/>
 	</bean>
 </beans>
