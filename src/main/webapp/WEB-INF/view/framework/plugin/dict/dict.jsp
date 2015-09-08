@@ -49,7 +49,7 @@
 				<input id="sel_parentId" name="sel_parentId" type="hidden" value=""/>
 			    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="selectData()">查询</a>
 		    </div>
-		    <div id="dataWin" class="easyui-window" title="系统字典信息维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:400px;height:260px;padding:10px;">
+		    <div id="dataWin" class="easyui-window" title="系统字典信息维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:400px;height:280px;padding:10px;">
 		        <div class="ftitle">系统字典信息维护</div>
 		        <form id="dataForm" method="post">
 							<div class="fitem">
