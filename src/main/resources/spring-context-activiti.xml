@@ -26,6 +26,7 @@
 		</property>
 	</bean>
 	
+	<!-- activiti主键生成规则 -->
 	<bean id="uuidGenerator" class="com.seeyoui.kensite.framework.act.idgenerator.GeneratorUUID"/>
 	
 	<bean id="processEngineConfiguration" class="org.activiti.spring.SpringProcessEngineConfiguration">
@@ -43,8 +44,8 @@
                 <value>classpath*:/act/diagrams/*</value>
             </list>
         </property>
-		<!-- 主键生成规则 UUID -->
-		<property name="idGenerator" ref="uuidGenerator"/>
+		<!-- 主键生成规则 UUID
+		<property name="idGenerator" ref="uuidGenerator"/> -->
 		<!-- 生成流程图的字体 -->
         <property name="activityFontName" value="宋体"/>
         <property name="labelFontName" value="宋体"/>

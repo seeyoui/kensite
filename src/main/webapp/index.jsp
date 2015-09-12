@@ -6,15 +6,20 @@
 	<%@ include file="/WEB-INF/view/taglib/header.jsp" %>
 	<%@ include file="/WEB-INF/view/taglib/easyui.jsp" %>
 <style type="text/css">
-body {
-	background: url('${ctx_login}/login_index/img/login_bg.png');
-}
-
 form {
 	position: absolute;
 	background: url('${ctx_login}/login_index/img/login.png') no-repeat;
 	height: 350px;
-	width: 380px;
+	width: 360px;
+}
+
+#logindiv {
+	width:400px;
+	height:350px;
+	position:absolute;
+	top:50%;
+	left:50%;
+	margin:-175px 0 0 -255px;
 }
 
 .nameDiv {
@@ -70,21 +75,40 @@ input {
 	height: 38px;
 	cursor: pointer;
 }
+
+#loginForm {
+	position:absolute;
+	top:50%;
+	left:50%;
+	margin:-170px 0 0 -190px;
+}
+
+#bg_div{ 
+	position:fixed; 
+	top:0; 
+	left:0; 
+	bottom:0; 
+	right:0; 
+	z-index:-1; 
+} 
+
+#bg_div img { 
+	height:100%; 
+	width:100%; 
+	border:0; 
+} 
 </style>
 </head>
 
 <body>
-	<form method="post" id="loginForm" name="loginForm"
-		action="${ctx}/login/login.do">
-		<input id="rememberMe" name="rememberMe" type="hidden"
-			value="" />
+	<div id="bg_div"><img src="${ctx_login}/login_index/img/login_bg.png" /></div>
+	<form method="post" id="loginForm" name="loginForm" action="${ctx}/login/login.do">
+		<input id="rememberMe" name="rememberMe" type="hidden" value="" />
 		<div class="nameDiv">
-			<input type="text" id="accountName" name="userName"
-				value="" />
+			<input type="text" id="accountName" name="userName" value="" />
 		</div>
 		<div class="pwdDiv">
-			<input type="password" id="accountPwd" name="password"
-				value="" />
+			<input type="password" id="accountPwd" name="password" value="" />
 		</div>
 		<a id="autoLogin" class="no_rememberDiv"></a>
 		<div class="submitDiv"></div>
@@ -103,9 +127,9 @@ input {
 			alert($(document.body).width());//浏览器当前窗口文档body的高度 
 			alert($(document.body).outerWidth(true));//浏览器当前窗口文档body的总宽度 包括border padding margin 
 			*/
-			var $remember = $('#remember'), $body = $(document.body), $loginForm = $('#loginForm'), top = ($(window)
+			/* var $remember = $('#remember'), $body = $(document.body), $loginForm = $('#loginForm'), top = ($(window)
 					.height() - $("#loginForm").height()) * 0.5, left = ($(window)
-					.width() - $("#loginForm").width()) * 0.5;
+					.width() - $("#loginForm").width()) * 0.5; */
 
 			if ($remember.val() === 'T') {
 				$('#autoLogin').addClass('rememberDiv');

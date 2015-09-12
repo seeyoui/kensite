@@ -1,7 +1,8 @@
 /*
  * Powered By cuichen
  * Since 2014 - 2015
- */package com.seeyoui.kensite.framework.system.controller;  
+ */
+package com.seeyoui.kensite.framework.system.controller;  
  
 import java.sql.*;
 import java.util.*;
