@@ -6,7 +6,7 @@
 	    t.id,
 	    t.createdate,
 		t.updatedate,
-		t.bindid,
+		t.bindId,
 		t.reason,
 		t.starttime,
 		t.endtime,
@@ -29,8 +29,11 @@
 			<if test="id != null and id != ''">
 				and t.id = #{id}
 			</if>
-			<if test="bindid != null and bindid != ''">
-				and t.bindid = #{bindid}
+			<if test="createUser.userName != null and createUser.userName != ''">
+				and t.createuser = #{createUser.userName}
+			</if>
+			<if test="bindId != null and bindId != ''">
+				and t.bindId = #{bindId}
 			</if>
 			<if test="reason != null and reason != ''">
 				and t.reason LIKE '%'||#{reason}||'%'
@@ -125,7 +128,7 @@
 	<!-- 数据修改 -->
 	<update id="updateBindid" parameterType="com.seeyoui.kensite.framework.oa.leave.domain.Leave">
 		UPDATE OA_LEAVE
-		set bindid=#{bindid}
+		set bindId=#{bindId}
 		WHERE id = #{id}
 	</update>
 	

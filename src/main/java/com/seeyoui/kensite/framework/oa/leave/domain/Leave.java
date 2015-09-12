@@ -14,9 +14,6 @@ import com.seeyoui.kensite.common.base.domain.DataEntity;
 public class Leave extends DataEntity<Leave> {
 	
 	private static final long serialVersionUID = 1L;
-	private int page;
-	private int rows;
-	private int row;
 	
 	private String reason; 	// 请假原因
 	private Date startTime;	// 请假开始日期
@@ -26,6 +23,7 @@ public class Leave extends DataEntity<Leave> {
 	//-- 临时属性 --//
 	// 流程任务
 	private Task task;
+	//流程参数
 	private Map<String, Object> variables;
 	// 运行中的流程实例
 	private ProcessInstance processInstance;
@@ -90,27 +88,6 @@ public class Leave extends DataEntity<Leave> {
 	}
 	public void setTask(Task task) {
 		this.task = task;
-	}
-	public int getPage() {
-		if(page==0) {
-			page = 1;
-		}
-		return page;
-	}
-	public void setPage(int page) {
-		this.page = page;
-	}
-	public int getRows() {
-		if(rows==0) {
-			rows = 10;
-		}
-		return rows;
-	}
-	public void setRows(int rows) {
-		this.rows = rows;
-	}
-	public int getRow() {
-		return (getPage()-1)*getRows();
 	}
 	
 }

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.seeyoui.kensite.common.constants.StringConstant;
+import com.seeyoui.kensite.common.util.StringUtils;
 
 /**
  * 
@@ -128,7 +129,7 @@ public class TreeJson implements Serializable {
 	public static void getTree(List<TreeJson> list, TreeJson root) {
 		for(int i=0; i<list.size(); i++) {
 			TreeJson tj = list.get(i);
-			if(tj.getPid().equals(root.getId())) {
+			if(StringUtils.isNotBlank(tj.getPid()) && tj.getPid().equals(root.getId())) {
 				if(root.getChildren().indexOf(tj) == -1) {
 					root.getChildren().add(tj);
 				}

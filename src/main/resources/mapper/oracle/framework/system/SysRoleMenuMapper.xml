@@ -26,7 +26,7 @@
 	<select id="getTreeJson" resultType="com.seeyoui.kensite.framework.system.domain.SysMenu" parameterType="com.seeyoui.kensite.framework.system.domain.SysRoleMenu">
 		SELECT 
 		t.id,
-	    t.parentid,
+	    t.parent_id as "parentId",
 	    t.name,
 	    t.url,
 	    t.sequence,

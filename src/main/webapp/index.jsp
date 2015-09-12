@@ -130,15 +130,11 @@ input {
 			/* var $remember = $('#remember'), $body = $(document.body), $loginForm = $('#loginForm'), top = ($(window)
 					.height() - $("#loginForm").height()) * 0.5, left = ($(window)
 					.width() - $("#loginForm").width()) * 0.5; */
-
+			var $remember = $('#remember');
 			if ($remember.val() === 'T') {
 				$('#autoLogin').addClass('rememberDiv');
 				$('#loginForm').submit();
 			}
-			$loginForm.css({
-				'top' : top,
-				'left' : left
-			});
 			$('.submitDiv').click(function() {
 				$('#loginForm').submit();
 			});

@@ -48,6 +48,9 @@ public abstract class BaseEntity<T> implements Serializable {
 	}
 	
 	public int getPage() {
+		if(this.page == 0) {
+			return 1;
+		}
 		return page;
 	}
 
@@ -56,6 +59,9 @@ public abstract class BaseEntity<T> implements Serializable {
 	}
 
 	public int getRows() {
+		if(this.rows == 0) {
+			return 20;
+		}
 		return rows;
 	}
 
@@ -64,6 +70,9 @@ public abstract class BaseEntity<T> implements Serializable {
 	}
 
 	public int getRow() {
+		if(this.row == 0) {
+			return (this.page-1)*this.rows;
+		}
 		return row;
 	}
 

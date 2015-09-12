@@ -119,7 +119,7 @@ public class LeaveController extends BaseController {
 	 * 任务列表
 	 * @param leave	
 	 */
-	@RequiresPermissions("oa:leave:view")
+//	@RequiresPermissions("oa:leave:view")
 	@RequestMapping(value = {"list/task",""})
 	public ModelAndView taskList(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
@@ -139,6 +139,7 @@ public class LeaveController extends BaseController {
 	public ModelAndView list(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, Leave leave) {
+		leave.setCreateUser(UserUtils.getUser());
         List<Leave> leaveList = leaveService.find(leave); 
         modelMap.put("leaveList", leaveList);
 		return new ModelAndView("framework/oa/leave/leaveList");

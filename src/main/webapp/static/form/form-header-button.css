@@ -1,0 +1,11 @@
+/*for buttons*/
+*{ padding:0px; margin:0px;}
+body{ padding-top:60px;}
+#buttons_box{ position:fixed; left:0px; top:0px; height:51px; overflow:hidden; background-image:url(images/buttons_box_bg.png); background-repeat:repeat-x; width:100%; padding-top:8px;text-align:right;}
+*html #buttons_box /* IE6 Í·²¿¹Ì¶¨ */{position:absolute;bottom:auto;top:expression(eval(document.documentElement.scrollTop)); }
+#buttons_box ul{ padding:0 10px; float:right;}
+*html,*html body{background-image:url(about:blank);background-attachment:fixed;}
+#buttons_box li{ float:left; list-style:none; background-image:url(images/buttons_left_bg.png); background-repeat:no-repeat; background-position:left; padding-left:13px;padding-right:5px;}
+#buttons_box li a,#buttons_box li a:link,#buttons_box li a:visited{ display:inline-block; height:33px; line-height:32px; vertical-align:middle; font-size:12px; color:#333333; text-decoration:none; background-image:url(images/buttons_right.png); background-position:right; padding-right:20px; padding-left:5px; }
+#buttons_box li a:hover{ color:#FF0000;}
+/*end buttons*/
