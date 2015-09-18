@@ -3,7 +3,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/view/taglib/common.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" style="overflow: hidden;">
   <head>    
     <title>角色</title>
 	<%@ include file="/WEB-INF/view/taglib/header.jsp" %>
@@ -60,19 +60,6 @@
 			        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dataWin').window('close')" style="width:90px">取消</a>
 			    </div>
 		    </div>
-		    <div id="moduleWin" class="easyui-window" title="模块权限维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:335px;height:420px;padding:10px;">
-		        <div class="ftitle">模块权限维护</div>
-		        <form id="moduleDataForm" method="post">
-					<div class="easyui-panel" title="模块权限" style="width:300px;height:300px;">
-	            		<ul id="moduleTree" class="easyui-tree" data-options="animate:true,checkbox:true,cascadeCheck:false"></ul>
-					</div>
-				</form>
-				
-			    <div id="dataWin-buttons">
-			        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveRoleModuleInfo()" style="width:90px">保存</a>
-			        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#moduleWin').window('close')" style="width:90px">取消</a>
-			    </div>
-		    </div>
 		    <div id="menuWin" class="easyui-window" title="菜单权限维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:335px;height:420px;padding:10px;">
 		        <div class="ftitle">菜单权限维护</div>
 		        <form id="menuDataForm" method="post">
@@ -84,6 +71,19 @@
 			    <div id="dataWin-buttons">
 			        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveRoleMenuInfo()" style="width:90px">保存</a>
 			        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#menuWin').window('close')" style="width:90px">取消</a>
+			    </div>
+		    </div>
+		    <div id="moduleWin" class="easyui-window" title="模块权限维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:335px;height:420px;padding:10px;">
+		        <div class="ftitle">模块权限维护</div>
+		        <form id="moduleDataForm" method="post">
+					<div class="easyui-panel" title="模块权限" style="width:300px;height:300px;">
+	            		<ul id="moduleTree" class="easyui-tree" data-options="animate:true,checkbox:true,cascadeCheck:false"></ul>
+					</div>
+				</form>
+				
+			    <div id="dataWin-buttons">
+			        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveRoleModuleInfo()" style="width:90px">保存</a>
+			        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#moduleWin').window('close')" style="width:90px">取消</a>
 			    </div>
 		    </div>
 	    </div>

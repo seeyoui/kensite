@@ -97,11 +97,6 @@ public class ActUserEntityService extends UserEntityManager {
 
 	public List<Group> findGroupsByUser(String userId) {
 //		return getDbSqlSession().selectList("selectGroupsByUserId", userId);
-		System.out.println("----------------");
-		System.out.println("----------------");
-		System.out.println(userId);
-		System.out.println("----------------");
-		System.out.println("----------------");
 		List<Group> list = Lists.newArrayList();
 		SysUser sysUser = new SysUser();
 		sysUser.setUserName(userId);

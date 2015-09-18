@@ -117,15 +117,17 @@ public class LeaveService extends BaseService {
 	public List<Leave> findTodoTasks(String userId) {
 		
 		List<Leave> results = new ArrayList<Leave>();
-//		List<Task> tasks = new ArrayList<Task>();
+		List<Task> tasks = new ArrayList<Task>();
 		// 根据当前人的ID查询
-//		List<Task> todoList = taskService.createTaskQuery().processDefinitionKey("leave").taskAssignee(userId).active().orderByTaskPriority().desc().orderByTaskCreateTime().desc().list();
+		List<Task> todoList = taskService.createTaskQuery().processDefinitionKey("leave").taskAssignee(userId).active().orderByTaskPriority().desc().orderByTaskCreateTime().desc().list();
 		// 根据当前人未签收的任务
-//		List<Task> unsignedTasks = taskService.createTaskQuery().processDefinitionKey("leave").taskCandidateUser(userId).active().orderByTaskPriority().desc().orderByTaskCreateTime().desc().list();
+		List<Task> unsignedTasks = taskService.createTaskQuery().processDefinitionKey("leave").taskCandidateUser(userId).active().orderByTaskPriority().desc().orderByTaskCreateTime().desc().list();
 		// 合并
-//		tasks.addAll(todoList);
-//		tasks.addAll(unsignedTasks);
-		List<Task> tasks = taskService.createTaskQuery().processDefinitionKey("leave").taskCandidateOrAssigned(userId).active().orderByTaskPriority().desc().orderByTaskCreateTime().desc().list();
+		tasks.addAll(todoList);
+		tasks.addAll(unsignedTasks);
+		
+		//下面的方法不能使用自定义的用户和用户组
+//		List<Task> tasks = taskService.createTaskQuery().processDefinitionKey("leave").taskCandidateOrAssigned(userId).active().orderByTaskPriority().desc().orderByTaskCreateTime().desc().list();
 		// 根据流程的业务ID查询实体并关联
 		for (Task task : tasks) {
 			String processInstanceId = task.getProcessInstanceId();
