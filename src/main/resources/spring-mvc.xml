@@ -47,6 +47,7 @@
 	<!-- 经过下面的配置，该标签的作用就是：所有页面中引用"/js/**"的资源，都会从"/resources/js/"里面进行查找 -->
 	<!-- 我们可以访问http://IP:8080/xxx/js/my.css和http://IP:8080/xxx/resources/js/my.css对比出来 -->
 	<mvc:resources mapping="/act/**" location="/act/"/>
+	<mvc:resources mapping="/assets/**" location="/assets/"/>
 	<mvc:resources mapping="/script/**" location="/script/"/>
 	<mvc:resources mapping="/static/**" location="/static/"/>
 	<mvc:resources mapping="/upload/**" location="/upload/"/>
@@ -55,6 +56,7 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
+			<mvc:exclude-mapping path="/assets/**"/>
 			<mvc:exclude-mapping path="/script/**"/>
 			<mvc:exclude-mapping path="/static/**"/>
 			<mvc:exclude-mapping path="/upload/**"/>
