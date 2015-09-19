@@ -146,7 +146,7 @@ ${"<if test=\""+column.columnNameLower+" !=null and "+column.columnNameLower+" !
 			<#list table.columns as column>
 			${getInsertDataStr(column)}
 			</#list>
-			${"#{"}createUser.username${"}"},
+			${"#{"}createUser.userName${"}"},
 			sysdate,
 		    ${"#{"}id${"}"}
 		)
@@ -159,7 +159,7 @@ ${"<if test=\""+column.columnNameLower+" !=null and "+column.columnNameLower+" !
 		    <#list table.columns as column>
 	    	${getUpdateStr(column)}
 		    </#list>
-		    UPDATE_USER = ${"#{"}updateUser.username${"}"},
+		    UPDATE_USER = ${"#{"}updateUser.userName${"}"},
 		    UPDATE_DATE = sysdate,
 		    ID = ${"#{"}id${"}"}
 		</set>

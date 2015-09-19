@@ -8,9 +8,9 @@
 <#assign rtn>
 <#if dbtype=="number" >
 	<#if column.decimalDigits==0>
-	long
+	String
 	<#else>
-	double
+	String
 	</#if>
 <#elseif (dbtype=="varchar2"||dbtype=="char")  >
 String
