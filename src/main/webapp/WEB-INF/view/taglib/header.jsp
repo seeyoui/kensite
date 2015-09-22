@@ -4,8 +4,9 @@
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="author" content="seeyoui" />
+	<meta name="keywords" content="seeyoui,kensite,ken,site">
 	<meta name="description" content="kensite" />
-	<meta name="author" content="" />
 	<link rel="shortcut icon" type="image/x-icon" href="${ctx_common}/img/favicon.ico" />
 	<script type="text/javascript" src="${ctx_static}/jquery-1.11.1.min.js"></script>
 	<script src="${ctx_static}/cookieUtil.js"></script>
