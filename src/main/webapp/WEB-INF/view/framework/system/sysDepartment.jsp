@@ -83,6 +83,17 @@
 	    			selectData();
 	    		}
 	    	});
+	    	$('#departmentTree').tree({
+	    		onLoadSuccess: function(node, data){
+	    			$('#departmentTree').tree('collapseAll');
+	    			var nodeId = $('#sel_parentId').val();
+	    			if(nodeId == "") {
+	    				return;
+	    			}
+	    			var node = $('#departmentTree').tree('find', nodeId);
+	    			$('#departmentTree').tree('expandTo', node.target);
+	    		}
+	    	});
 	    	$('#dataList').datagrid({
 	    		url:'${ctx}/sysDepartment/getListData.do',
 	    		queryParams: {

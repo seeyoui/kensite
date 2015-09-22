@@ -97,6 +97,17 @@
 	    			selectData();
 	    		}
 	    	});
+	    	$('#menuTree').tree({
+	    		onLoadSuccess: function(node, data){
+	    			$('#menuTree').tree('collapseAll');
+	    			var nodeId = $('#sel_parentId').val();
+	    			if(nodeId == "") {
+	    				return;
+	    			}
+	    			var node = $('#menuTree').tree('find', nodeId);
+	    			$('#menuTree').tree('expandTo', node.target);
+	    		}
+	    	});
 	    	$("#icon_li img").click(function(){
 	    		var obj = $(this);
 	    		$("#icon").val(obj.attr("id"));
