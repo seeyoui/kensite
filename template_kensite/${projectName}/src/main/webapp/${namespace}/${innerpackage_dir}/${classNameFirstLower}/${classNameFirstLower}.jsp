@@ -1,12 +1,11 @@
 <#include "/custom.include">
-<#assign className = table.className>   
+<#assign className = table.className>
 <#assign classNameLower = className?uncap_first>
 <#function getFormInputHtml column>
 <#assign dbtype=column.sqlTypeName?lower_case>
 <#assign colname=column.columnName?lower_case>
 <#assign rtn>
-<#if (colname=="id"||colname=="createuser"||colname=="createdate"||colname=="updateuser"||colname=="updatedate") >
-<#else>
+<#if (colname=="id"||colname=="createuser"||colname=="createdate"||colname=="updateuser"||colname=="updatedate"||colname=="remarks"||colname=="delflag") ><#else>
 	<#if dbtype=="number" >
 	<input id="${column.columnNameLower}" name="${column.columnNameLower}" class="easyui-numberbox textbox" data-options="min:0,max:999999,precision:${column.decimalDigits},required:true"/>
 	<#elseif (dbtype=="varchar2"||dbtype=="char")  >
@@ -25,8 +24,7 @@
 <#assign colname=column.columnName?lower_case>
 <#assign colcnname=column.columnAlias>
 <#assign rtn>
-<#if (colname=="createuser"||colname=="createdate"||colname=="updateuser"||colname=="updatedate") >
-<#elseif (colname=="id")>
+<#if (colname=="createuser"||colname=="createdate"||colname=="updateuser"||colname=="updatedate"||colname=="remarks"||colname=="delflag") ><#elseif (colname=="id")>
 <th field="${column.columnNameLower}" width="100px" hidden>${colcnname}</th>
 <#else>
 	<#if dbtype=="date">
@@ -44,8 +42,7 @@
 <#assign dbtype=column.sqlTypeName?lower_case>
 <#assign colname=column.columnName?lower_case>
 <#assign rtn>
-<#if (colname=="id"||colname=="createuser"||colname=="createdate"||colname=="updateuser"||colname=="updatedate") >
-<#else>
+<#if (colname=="id"||colname=="createuser"||colname=="createdate"||colname=="updateuser"||colname=="updatedate"||colname=="remarks"||colname=="delflag") ><#else>
 	<#if dbtype=="number" >
 	<input id="sel_${column.columnNameLower}" name="sel_${column.columnNameLower}" class="easyui-numberbox" data-options="min:0,max:999999,precision:${column.decimalDigits}"/>
 	<#elseif (dbtype=="varchar2"||dbtype=="char"||dbtype=="clob")  >
@@ -61,8 +58,7 @@
 <#assign dbtype=column.sqlTypeName?lower_case>
 <#assign colname=column.columnName?lower_case>
 <#assign rtn>
-<#if (colname=="id"||colname=="createuser"||colname=="createdate"||colname=="updateuser"||colname=="updatedate") >
-<#else>
+<#if (colname=="id"||colname=="createuser"||colname=="createdate"||colname=="updateuser"||colname=="updatedate"||colname=="remarks"||colname=="delflag") ><#else>
 var sel_${column.columnNameLower} = $("#sel_${column.columnNameLower}").val();
 </#if>
 </#assign>
@@ -72,8 +68,7 @@ var sel_${column.columnNameLower} = $("#sel_${column.columnNameLower}").val();
 <#assign dbtype=column.sqlTypeName?lower_case>
 <#assign colname=column.columnName?lower_case>
 <#assign rtn>
-<#if (colname=="id"||colname=="createuser"||colname=="createdate"||colname=="updateuser"||colname=="updatedate") >
-<#else>
+<#if (colname=="id"||colname=="createuser"||colname=="createdate"||colname=="updateuser"||colname=="updatedate"||colname=="remarks"||colname=="delflag") ><#else>
 ${column.columnNameLower}:sel_${column.columnNameLower}
 </#if>
 </#assign>
@@ -85,9 +80,9 @@ ${column.columnNameLower}:sel_${column.columnNameLower}
 <%@ include file="/WEB-INF/view/taglib/common.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>    
+  <head>
     <title>${table.remarks}</title>
-	<script type="text/javascript" src="${"${"}ctx_static${"}"}/jquery-1.11.1.min.js"></script>
+	<%@ include file="/WEB-INF/view/taglib/header.jsp" %>
 	<%@ include file="/WEB-INF/view/taglib/easyui.jsp" %>
 	<%@ include file="/WEB-INF/view/taglib/layer.jsp" %>
   </head>
@@ -100,7 +95,7 @@ ${column.columnNameLower}:sel_${column.columnNameLower}
 		            rownumbers="true" fitColumns="true" singleSelect="true">
 		        <thead>
 		            <tr>
-		            	<#list table.columns as column>  
+		            	<#list table.columns as column>
 					    ${getTableHeaderHtml(column)}
 					    </#list>
 		            </tr>
@@ -116,8 +111,8 @@ ${column.columnNameLower}:sel_${column.columnNameLower}
 		        <shiro:hasPermission name="${table.classNameFirstLower}:delete">
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyInfo()">删除</a>
 		        </shiro:hasPermission>
-		        <#list table.columns as column>  
-			    <#if (column.columnName?lower_case=="id"||column.columnName?lower_case=="createuser"||column.columnName?lower_case=="createdate"||column.columnName?lower_case=="updateuser"||column.columnName?lower_case=="updatedate") ><#else>				${column.columnAlias}</#if>${getSelectPanelHtml(column)}
+		        <#list table.columns as column>
+			    <#if (column.columnName?lower_case=="id"||column.columnName?lower_case=="createuser"||column.columnName?lower_case=="createdate"||column.columnName?lower_case=="updateuser"||column.columnName?lower_case=="updatedate"||colname=="remarks"||colname=="delflag") ><#else>				${column.columnAlias}</#if>${getSelectPanelHtml(column)}
 			    </#list>
 			    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="selectData()">查询</a>
 		    </div>
@@ -125,8 +120,7 @@ ${column.columnNameLower}:sel_${column.columnNameLower}
 		        <div class="ftitle">${table.remarks}信息维护</div>
 		        <form id="dataForm" method="post">
 					<#list table.columns as column>
-		            	<#if (column.columnName?lower_case=="id"||column.columnName?lower_case=="createuser"||column.columnName?lower_case=="createdate"||column.columnName?lower_case=="updateuser"||column.columnName?lower_case=="updatedate") >
-						<#else>
+		            	<#if (column.columnName?lower_case=="id"||column.columnName?lower_case=="createuser"||column.columnName?lower_case=="createdate"||column.columnName?lower_case=="updateuser"||column.columnName?lower_case=="updatedate"||colname=="remarks"||colname=="delflag") ><#else>
 							<div class="fitem">
 				                <label>${column.columnAlias}</label>
 				                ${getFormInputHtml(column)}
@@ -148,12 +142,12 @@ ${column.columnNameLower}:sel_${column.columnNameLower}
 	    });
 	    
 	    function selectData() {
-        	<#list table.columns as column>  
+        	<#list table.columns as column>
 		    ${getSelectJsVarHtml(column)}
 		    </#list>
         	$('#dataList').datagrid('load',{
-        		<#list table.columns as column>  
-    		    ${getSelectJsParamHtml(column)}<#if (column.columnName?lower_case=="id"||column.columnName?lower_case=="createuser"||column.columnName?lower_case=="createdate"||column.columnName?lower_case=="updateuser"||column.columnName?lower_case=="updatedate") ><#else><#if column_has_next>,</#if></#if>
+        		<#list table.columns as column>
+    		    ${getSelectJsParamHtml(column)}<#if (column.columnName?lower_case=="id"||column.columnName?lower_case=="createuser"||column.columnName?lower_case=="createdate"||column.columnName?lower_case=="updateuser"||column.columnName?lower_case=="updatedate"||colname=="remarks"||colname=="delflag") ><#else><#if column_has_next>,</#if></#if>
     		    </#list>
         	});
         }

@@ -21,8 +21,7 @@ AND T.${column.sqlName} = ${"#{"+column.columnNameLower+"}"}
 <#assign dbtype=column.sqlTypeName?lower_case>
 <#assign colname=column.columnName?lower_case>
 <#assign rtn>
-<#if (colname=="id"||colname=="createdate"||colname=="updatedate"||colname=="updateuser"||colname=="createuser") >
-<#else>
+<#if (colname=="id"||colname=="createdate"||colname=="updatedate"||colname=="updateuser"||colname=="createuser") ><#else>
 ${column.sqlName},
 </#if>
 </#assign>
@@ -33,8 +32,7 @@ ${column.sqlName},
 <#assign dbtype=column.sqlTypeName?lower_case>
 <#assign colname=column.columnName?lower_case>
 <#assign rtn>
-<#if (colname=="id"||colname=="createdate"||colname=="updatedate"||colname=="updateuser"||colname=="createuser") >
-<#else>
+<#if (colname=="id"||colname=="createdate"||colname=="updatedate"||colname=="updateuser"||colname=="createuser") ><#else>
 <#if (dbtype=="number"&&column.decimalDigits==0) >
 ${"#{"+column.columnNameLower+",jdbcType=NUMERIC}"},
 <#elseif (dbtype=="number"&&column.decimalDigits!=0)  >
@@ -55,8 +53,7 @@ ${"#{"+column.columnNameLower+",jdbcType=TIMESTAMP}"},
 <#assign dbtype=column.sqlTypeName?lower_case>
 <#assign colname=column.columnName?lower_case>
 <#assign rtn>
-<#if (colname=="id"||colname=="createdate"||colname=="updatedate"||colname=="createuser"||colname=="updateuser") >
-<#else>
+<#if (colname=="id"||colname=="createdate"||colname=="updatedate"||colname=="createuser"||colname=="updateuser") ><#else>
 ${"<if test=\""+column.columnNameLower+" !=null and "+column.columnNameLower+" !=''\">"}
 			${column.sqlName}=${"#{"+column.columnNameLower+"}"},
 			${"</if>"}
