@@ -112,7 +112,7 @@ ${column.columnNameLower}:sel_${column.columnNameLower}
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyInfo()">删除</a>
 		        </shiro:hasPermission>
 		        <#list table.columns as column>
-			    <#if (column.columnName?lower_case=="id"||column.columnName?lower_case=="createuser"||column.columnName?lower_case=="createdate"||column.columnName?lower_case=="updateuser"||column.columnName?lower_case=="updatedate"||colname=="remarks"||colname=="delflag") ><#else>				${column.columnAlias}</#if>${getSelectPanelHtml(column)}
+			    <#if (column.columnName?lower_case=="id"||column.columnName?lower_case=="createuser"||column.columnName?lower_case=="createdate"||column.columnName?lower_case=="updateuser"||column.columnName?lower_case=="updatedate"||column.columnName?lower_case=="remarks"||column.columnName?lower_case=="delflag") ><#else>				${column.columnAlias}</#if>${getSelectPanelHtml(column)}
 			    </#list>
 			    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="selectData()">查询</a>
 		    </div>
@@ -120,7 +120,8 @@ ${column.columnNameLower}:sel_${column.columnNameLower}
 		        <div class="ftitle">${table.remarks}信息维护</div>
 		        <form id="dataForm" method="post">
 					<#list table.columns as column>
-		            	<#if (column.columnName?lower_case=="id"||column.columnName?lower_case=="createuser"||column.columnName?lower_case=="createdate"||column.columnName?lower_case=="updateuser"||column.columnName?lower_case=="updatedate"||colname=="remarks"||colname=="delflag") ><#else>
+		            	<#if (column.columnName?lower_case=="id"||column.columnName?lower_case=="createuser"||column.columnName?lower_case=="createdate"||column.columnName?lower_case=="updateuser"||column.columnName?lower_case=="updatedate"||column.columnName?lower_case=="remarks"||column.columnName?lower_case=="delflag") >
+		            	<#else>
 							<div class="fitem">
 				                <label>${column.columnAlias}</label>
 				                ${getFormInputHtml(column)}
