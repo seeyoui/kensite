@@ -14,7 +14,7 @@
  	<div style="position:absolute;top:0px;left:0px;right:0px;bottom:0px;">
 		<div style="position:absolute;top:0px;left:0px;right:0px;bottom:0px;">
 		    <table id="dataList" title="业务表列表" class="easyui-datagrid" style="width:100%;height:100%"
-		    		url="${ctx}/table/getListData.do"
+		    		url="${ctx}/sys/table/getListData.do"
 		            toolbar="#toolbar" pagination="true"
 		            rownumbers="true" fitColumns="true" singleSelect="true">
 		        <thead>
@@ -52,13 +52,33 @@
 				描述<input id="sel_comments" name="sel_comments" class="easyui-textbox" data-options=""/>
 				关联父表<input id="sel_parentTable" name="sel_parentTable" class="easyui-textbox" data-options=""/>
 				关联父表外键<input id="sel_parentTableFk" name="sel_parentTableFk" class="easyui-textbox" data-options=""/>
-				备注信息
+
 
 			    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="selectData()">查询</a>
 		    </div>
 		    <div id="dataWin" class="easyui-window" title="业务表信息维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:400px;height:260px;padding:10px;">
 		        <div class="ftitle">业务表信息维护</div>
 		        <form id="dataForm" method="post">
+							<div class="fitem">
+				                <label>名称</label>
+				                <input id="name" name="name" class="easyui-validatebox textbox" data-options="required:true"/>
+				                <span id="msg-name" class="err-msg"></span>
+				            </div>
+							<div class="fitem">
+				                <label>描述</label>
+				                <input id="comments" name="comments" class="easyui-validatebox textbox" data-options="required:true"/>
+				                <span id="msg-comments" class="err-msg"></span>
+				            </div>
+							<div class="fitem">
+				                <label>关联父表</label>
+				                <input id="parentTable" name="parentTable" class="easyui-validatebox textbox" data-options="required:true"/>
+				                <span id="msg-parenttable" class="err-msg"></span>
+				            </div>
+							<div class="fitem">
+				                <label>关联父表外键</label>
+				                <input id="parentTableFk" name="parentTableFk" class="easyui-validatebox textbox" data-options="required:true"/>
+				                <span id="msg-parenttablefk" class="err-msg"></span>
+				            </div>
 				</form>
 				
 			    <div id="dataWin-buttons">
@@ -93,7 +113,7 @@
     		    name:sel_name,
     		    comments:sel_comments,
     		    parentTable:sel_parentTable,
-    		    parentTableFk:sel_parentTableFk
+    		    parentTableFk:sel_parentTableFk,
     		    
     		    
         	});
@@ -107,7 +127,7 @@
             cleanErrMsg();
             $('#dataForm').form('clear');
             $('#dataWin').window('open');
-            url = '${ctx}/table/saveByAdd.do';
+            url = '${ctx}/sys/table/saveByAdd.do';
         }
         function editInfo(){
             var row = $('#dataList').datagrid('getSelected');
@@ -115,7 +135,7 @@
             	cleanErrMsg();
                 $('#dataForm').form('load',row);
                 $('#dataWin').window('open');
-                url = '${ctx}/table/saveByUpdate.do?id='+row.id;
+                url = '${ctx}/sys/table/saveByUpdate.do?id='+row.id;
             }    	
         }
         var loadi;
@@ -150,7 +170,7 @@
                     if (r){
                     	$.ajax({
 							type: "post",
-							url: '${ctx}/table/delete.do',
+							url: '${ctx}/sys/table/delete.do',
 							data: {delDataId:row.id},
 							dataType: 'json',
 							beforeSend: function(XMLHttpRequest){

@@ -41,7 +41,7 @@ import com.seeyoui.kensite.framework.mod.table.service.TableService;
  * @date 2015-09-22
  */
 @Controller
-@RequestMapping(value = "table")
+@RequestMapping(value = "sys/table")
 public class TableController extends BaseController {
 	
 	@Autowired
