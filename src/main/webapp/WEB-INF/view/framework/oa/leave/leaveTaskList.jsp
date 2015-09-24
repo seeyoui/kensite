@@ -100,7 +100,7 @@
 		 */
 		function claim(taskId) {
 			$.get('${ctx}/act/task/claim' ,{taskId: taskId}, function(data) {
-	        	layer.msg("签收成功！", 2, -1);
+	        	layer.msg("签收成功！", {time: layerMsgTime});
 	        	location.reload();
 		    });
 		}

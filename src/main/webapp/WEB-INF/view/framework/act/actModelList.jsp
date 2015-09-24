@@ -109,15 +109,15 @@
                 url: url,
                 onSubmit: function(param){
                 	if($(this).form('validate')) {
-                		loadi = layer.load('正在保存，请稍后...');
+                		loadi = layer.load(2, {time: layerLoadMaxTime});
                 	}
                     return $(this).form('validate');
                 },
                 success: function(info){
                     if (info==TRUE){
-                        layer.msg("操作成功！", 2, -1);
+                        layer.msg("操作成功！", {time: layerMsgTime});
                     } else {
-	                    layer.msg("操作失败！", 2, -1);
+	                    layer.msg("操作失败！", {time: layerMsgTime});
                     }
                 	layer.close(loadi);
                 	$('#dataWin').window('close'); 
@@ -138,7 +138,7 @@
 							beforeSend: function(XMLHttpRequest){
 							},
 							success: function(data, textStatus){
-			                    layer.msg(data, 2, -1);
+			                    layer.msg(data, {time: layerMsgTime});
 								reloadData();
 							}
 						});
@@ -160,9 +160,9 @@
 							},
 							success: function(data, textStatus){
 								if (data=="<%=StringConstant.TRUE%>"){
-			                        layer.msg("操作成功！", 2, -1);
+			                        layer.msg("操作成功！", {time: layerMsgTime});
 			                    } else {
-				                    layer.msg("操作失败！", 2, -1);
+				                    layer.msg("操作失败！", {time: layerMsgTime});
 			                    }
 								reloadData();
 							}

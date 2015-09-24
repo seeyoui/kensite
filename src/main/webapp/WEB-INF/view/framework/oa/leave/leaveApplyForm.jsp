@@ -125,7 +125,7 @@
 	                }
 	            }
 	        	return; */
-        		loadi = layer.load('正在处理，请稍后...');
+        		loadi = layer.load(2, {time: layerLoadMaxTime});
 	        	var url = "${ctx}/oa/leave/save.do";
 	        	$.ajax({
 	                cache: true,
@@ -138,7 +138,7 @@
 	                },
 	                success: function(data) {
 	                	layer.close(loadi);
-	                	layer.msg("操作成功！", 2, -1);
+	                	layer.msg("操作成功！", {time: layerMsgTime});
 	                	//goBackToList();
 	                }
 	            });
@@ -164,7 +164,7 @@
 					});
 				}
 				// 发送任务完成请求
-        		loadi = layer.load('正在处理，请稍后...');
+        		loadi = layer.load(2, {time: layerLoadMaxTime});
 			    $.post('${ctx}/act/task/complete/', {
 			    	taskId: taskId,
 			        "vars.keys": keys,
@@ -172,7 +172,7 @@
 			        "vars.types": types
 			    }, function(data) {
                 	layer.close(loadi);
-			        layer.msg("发送成功！", 2, -1);
+			        layer.msg("发送成功！", {time: layerMsgTime});
 			        goBackToList();
 			    });
 			}

@@ -147,15 +147,15 @@ WEB访问路径<input id="sel_url" name="sel_url" class="easyui-textbox" data-op
                 url: url,
                 onSubmit: function(param){
                 	if($(this).form('validate')) {
-                		loadi = layer.load('正在保存，请稍后...');
+                		loadi = layer.load(2, {time: layerLoadMaxTime});
                 	}
                     return $(this).form('validate');
                 },
                 success: function(info){
                     if (info==TRUE){
-                        layer.msg("操作成功！", 2, -1);
+                        layer.msg("操作成功！", {time: layerMsgTime});
                     } else {
-	                    layer.msg("操作失败！", 2, -1);
+	                    layer.msg("操作失败！", {time: layerMsgTime});
                     }
                 	layer.close(loadi);
                 	$('#dataWin').window('close'); 
@@ -177,9 +177,9 @@ WEB访问路径<input id="sel_url" name="sel_url" class="easyui-textbox" data-op
 							},
 							success: function(data, textStatus){
 								if (data=="<%=StringConstant.TRUE%>"){
-			                        layer.msg("操作成功！", 2, -1);
+			                        layer.msg("操作成功！", {time: layerMsgTime});
 			                    } else {
-				                    layer.msg("操作失败！", 2, -1);
+				                    layer.msg("操作失败！", {time: layerMsgTime});
 			                    }
 								reloadData();
 							}

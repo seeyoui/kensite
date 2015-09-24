@@ -116,7 +116,7 @@
                 url: url,
                 onSubmit: function(param){
                 	if($(this).form('validate')) {
-                		loadi = layer.load('正在保存，请稍后...');
+                		loadi = layer.load(2, {time: layerLoadMaxTime});
                 	}
                     return $(this).form('validate');
                 },
@@ -124,11 +124,11 @@
                     cleanErrMsg();
                 	data = eval('(' + info + ')');
                     if (data.success=="<%=StringConstant.TRUE%>"){
-                        layer.msg("操作成功！", 2, -1);
+                        layer.msg("操作成功！", {time: layerMsgTime});
                 		$('#dataWin').window('close'); 
                 		reloadData();
                     } else {
-	                    layer.msg("操作失败！", 2, -1);
+	                    layer.msg("操作失败！", {time: layerMsgTime});
 	                    renderErrMsg(data.message);
                     }
                 	layer.close(loadi);
@@ -149,10 +149,10 @@
 							},
 							success: function(data, textStatus){
 								if (data.success=="<%=StringConstant.TRUE%>"){
-			                        layer.msg("操作成功！", 2, -1);
+			                        layer.msg("操作成功！", {time: layerMsgTime});
 									reloadData();
 			                    } else {
-				                    layer.msg("操作失败！", 2, -1);
+				                    layer.msg("操作失败！", {time: layerMsgTime});
 			                    }
 							}
 						});
@@ -175,10 +175,10 @@
 							},
 							success: function(data, textStatus){
 								if (data.success=="<%=StringConstant.TRUE%>"){
-			                        layer.msg("设置成功！", 2, -1);
+			                        layer.msg("设置成功！", {time: layerMsgTime});
 									reloadData();
 			                    } else {
-				                    layer.msg("设置失败！", 2, -1);
+				                    layer.msg("设置失败！", {time: layerMsgTime});
 			                    }
 							}
 						});

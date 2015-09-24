@@ -95,7 +95,7 @@
 							},
 							success: function(data, textStatus){
 								$('#dataWin').window('close'); 
-			                    layer.msg(data, 2, -1);
+			                    layer.msg(data, {time: layerMsgTime});
 								reloadData();
 							}
 						});

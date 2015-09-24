@@ -36,9 +36,9 @@
 				},
 				success: function(data, textStatus){
 					if (data=="<%=StringConstant.TRUE%>"){
-				    	layer.msg("操作成功！", 2, -1);
+				    	layer.msg("操作成功！", {time: layerMsgTime});
 					} else {
-						layer.msg("操作失败！", 2, -1);
+						layer.msg("操作失败！", {time: layerMsgTime});
 					}
 					reloadData();
 				}

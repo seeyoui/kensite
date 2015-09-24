@@ -134,9 +134,9 @@
 					},
 					success: function(data, textStatus){
 						if (data.success=="<%=StringConstant.TRUE%>"){
-							layer.msg("操作成功！", 2, -1);
+							layer.msg("操作成功！", {time: layerMsgTime});
 						} else {
-							layer.msg("操作失败！", 2, -1);
+							layer.msg("操作失败！", {time: layerMsgTime});
 						}
 						$('#permissionWin').window('close');
 						reloadData();
@@ -175,16 +175,16 @@
                 url: url,
                 onSubmit: function(param){
                 	if($(this).form('validate')) {
-                		loadi = layer.load('正在保存，请稍后...');
+                		loadi = layer.load(2, {time: layerLoadMaxTime});
                 	}
                     return $(this).form('validate');
                 },
                 success: function(info){
                 	data = eval('(' + info + ')');
                     if (data.success=="<%=StringConstant.TRUE%>"){
-                        layer.msg("操作成功！", 2, -1);
+                        layer.msg("操作成功！", {time: layerMsgTime});
                     } else {
-	                    layer.msg("操作失败！", 2, -1);
+	                    layer.msg("操作失败！", {time: layerMsgTime});
                     }
                 	layer.close(loadi);
                 	$('#dataWin').window('close'); 
@@ -203,13 +203,13 @@
 							data: {delDataId:row.id},
 							dataType: 'json',
 							beforeSend: function(XMLHttpRequest){
-								loadi = layer.load('正在处理，请稍后...');
+								loadi = layer.load(2, {time: layerLoadMaxTime});
 							},
 							success: function(data, textStatus){
 								if (data.success=="<%=StringConstant.TRUE%>"){
-			                        layer.msg("操作成功！", 2, -1);
+			                        layer.msg("操作成功！", {time: layerMsgTime});
 			                    } else {
-				                    layer.msg("操作失败！", 2, -1);
+				                    layer.msg("操作失败！", {time: layerMsgTime});
 			                    }
 			                    layer.close(loadi);
 								reloadData();
