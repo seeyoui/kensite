@@ -13,7 +13,7 @@ public class Global {
 	static {
 		ClassLoader loader = Global.class.getClassLoader();
 		InputStream ips = loader
-				.getResourceAsStream("param.properties");
+				.getResourceAsStream("kensite.properties");
 		try {
 			prop.load(ips);
 		} catch (Exception e) {
