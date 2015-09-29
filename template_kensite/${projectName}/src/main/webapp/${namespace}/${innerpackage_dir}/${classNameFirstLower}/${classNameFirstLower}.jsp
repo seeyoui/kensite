@@ -178,22 +178,22 @@ ${column.columnNameLower}:sel_${column.columnNameLower}
                 url: url,
                 onSubmit: function(param){
                 	if($(this).form('validate')) {
-                		loadi = layer.load('正在保存，请稍后...');
+                		loadi = layer.load(2, {time: layerLoadMaxTime});
                 	}
                     return $(this).form('validate');
                 },
                 success: function(info){
+                	layer.close(loadi);
                     cleanErrMsg();
                 	data = eval('(' + info + ')');
                     if (data.success=="<%=StringConstant.TRUE%>"){
-                        layer.msg("操作成功！", 2, -1);
+                        layer.msg("操作成功！", {time: layerMsgTime});
                 		$('#dataWin').window('close'); 
                 		reloadData();
                     } else {
-	                    layer.msg("操作失败！", 2, -1);
+	                    layer.msg("操作失败！", {time: layerMsgTime});
 	                    renderErrMsg(data.message);
                     }
-                	layer.close(loadi);
                 }
             });
         }
@@ -208,13 +208,15 @@ ${column.columnNameLower}:sel_${column.columnNameLower}
 							data: {delDataId:row.id},
 							dataType: 'json',
 							beforeSend: function(XMLHttpRequest){
+								loadi = layer.load(2, {time: layerLoadMaxTime});
 							},
 							success: function(data, textStatus){
+								layer.close(loadi);
 								if (data.success=="<%=StringConstant.TRUE%>"){
-			                        layer.msg("操作成功！", 2, -1);
+			                        layer.msg("操作成功！", {time: layerMsgTime});
 									reloadData();
 			                    } else {
-				                    layer.msg("操作失败！", 2, -1);
+				                    layer.msg("操作失败！", {time: layerMsgTime});
 			                    }
 							}
 						});
