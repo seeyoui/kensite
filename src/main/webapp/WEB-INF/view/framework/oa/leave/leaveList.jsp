@@ -55,7 +55,16 @@
 		 
 		 function trace(processDefinitionId, executionId) {
 			 var url = "${ctx}/act/task/trace/photo/"+processDefinitionId+"/"+executionId;
-			 $.layer({
+			 layer.open({
+			    type: 2,
+			    title: false,
+			    closeBtn: false,
+			    shadeClose: true,
+			    shade: 0.8,
+			    area: ['80%', '90%'],
+			    content: url //iframe的url
+			}); 
+			 /* $.layer({
 				    type: 2,
 				    shadeClose: true,
 				    title: false,
@@ -65,7 +74,7 @@
 				    offset: ['20px',''],
 				    area: ['1000px', ($(window).height() - 50) +'px'],
 				    iframe: {src: url}
-				}); 
+				});  */
 		 }
 	</script>
 </body>

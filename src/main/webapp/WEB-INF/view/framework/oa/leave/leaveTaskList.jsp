@@ -107,17 +107,26 @@
 		 
 		 function trace(processDefinitionId, executionId) {
 			 var url = "${ctx}/act/task/trace/photo/"+processDefinitionId+"/"+executionId;
-			 $.layer({
+			 layer.open({
 				    type: 2,
-				    shadeClose: true,
 				    title: false,
-				    closeBtn: [0, false],
-				    shade: [0.8, '#000'],
-				    border: [0],
-				    offset: ['20px',''],
-				    area: ['1000px', ($(window).height() - 50) +'px'],
-				    iframe: {src: url}
+				    closeBtn: false,
+				    shadeClose: true,
+				    shade: 0.8,
+				    area: ['80%', '90%'],
+				    content: url //iframe的url
 				}); 
+				 /* $.layer({
+					    type: 2,
+					    shadeClose: true,
+					    title: false,
+					    closeBtn: [0, false],
+					    shade: [0.8, '#000'],
+					    border: [0],
+					    offset: ['20px',''],
+					    area: ['1000px', ($(window).height() - 50) +'px'],
+					    iframe: {src: url}
+					});  */
 		 }
 	</script>
 </body>
