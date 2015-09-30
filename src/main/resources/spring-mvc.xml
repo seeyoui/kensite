@@ -60,6 +60,15 @@
 			<mvc:exclude-mapping path="/script/**"/>
 			<mvc:exclude-mapping path="/static/**"/>
 			<mvc:exclude-mapping path="/upload/**"/>
+			<mvc:exclude-mapping path="/sys/**"/>
+			<bean class="com.seeyoui.kensite.common.interceptor.AuthorityInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<mvc:exclude-mapping path="/assets/**"/>
+			<mvc:exclude-mapping path="/script/**"/>
+			<mvc:exclude-mapping path="/static/**"/>
+			<mvc:exclude-mapping path="/upload/**"/>
 			<mvc:exclude-mapping path="/act/**"/>
 			<mvc:exclude-mapping path="/sys/**"/>
 			<mvc:exclude-mapping path="/information/**"/>
