@@ -11,6 +11,7 @@
 	<script type="text/javascript" src="${ctx_static}/jquery-1.11.1.min.js"></script>
 	<script src="${ctx_static}/cookieUtil.js"></script>
 	<script src="${ctx_static}/json2.js"></script>
+	<script type="text/javascript" src="${ctx_static}/kensite.sys.js"></script>
 	<script type="text/javascript" src="${ctx_static}/kensite.info.js"></script>
 
 	<script type="text/javascript" >

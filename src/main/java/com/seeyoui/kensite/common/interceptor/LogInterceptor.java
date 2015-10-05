@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.seeyoui.kensite.common.base.service.BaseService;
 import com.seeyoui.kensite.common.util.DateUtils;
 import com.seeyoui.kensite.framework.plugin.log.util.LogUtils;
+import com.seeyoui.kensite.framework.system.util.UserUtils;
 
 /**
  * 日志拦截器

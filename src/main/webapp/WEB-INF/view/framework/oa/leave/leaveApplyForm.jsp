@@ -88,6 +88,7 @@
 													</div>
 												</div>
 												<div class="rowSubmit">
+												<a href="javascript:void(0)" class="btn btn-alt" onclick="test()"><span>test</span></a>
 													<c:if test="${leave.task.taskDefinitionKey=='createApply'}">
 													<a href="javascript:void(0)" class="btn btn-alt" onclick="saveInfo()"><span>保存</span></a>
 													<a href="javascript:void(0)" onclick="complete('${leave.task.id}', null)" class="btn btn-alt btn-blue"><span>发送</span></a>
@@ -179,6 +180,25 @@
 			
 			function goBackToList() {
 				window.location.href = "${ctx}/oa/leave/list/task.do";
+			}
+			
+			function test() {
+				var id = $("#id").val();
+				$.ajax({
+					type: 'post',
+					url: '${ctx}/oa/leave/detail/'+id+'.do',
+					data: {},
+					dataType: 'json',
+					beforeSend: function(XMLHttpRequest){
+						alert("before");
+					},
+					success: function(data, textStatus){
+						alert("success");
+					},
+					error: function(XMLHttpRequest, textStatus, errorThrown){
+						alert("error");
+					}
+				});
 			}
 		</script>
 	</body>
