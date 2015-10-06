@@ -96,4 +96,30 @@
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.seeyoui.kensite" />
 	</bean>
+	
+	<!-- 拦截器配置 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<mvc:exclude-mapping path="/assets/**"/>
+			<mvc:exclude-mapping path="/script/**"/>
+			<mvc:exclude-mapping path="/static/**"/>
+			<mvc:exclude-mapping path="/upload/**"/>
+			<mvc:exclude-mapping path="/login/**"/>
+			<mvc:exclude-mapping path="/"/>
+			<bean class="com.seeyoui.kensite.common.interceptor.AuthorityInterceptor" />
+		</mvc:interceptor>
+		<!-- <mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<mvc:exclude-mapping path="/assets/**"/>
+			<mvc:exclude-mapping path="/script/**"/>
+			<mvc:exclude-mapping path="/static/**"/>
+			<mvc:exclude-mapping path="/upload/**"/>
+			<mvc:exclude-mapping path="/act/**"/>
+			<mvc:exclude-mapping path="/sys/**"/>
+			<mvc:exclude-mapping path="/information/**"/>
+			<mvc:exclude-mapping path="/"/>
+			<bean class="com.seeyoui.kensite.common.interceptor.LogInterceptor" />
+		</mvc:interceptor> -->
+	</mvc:interceptors>
 </beans>

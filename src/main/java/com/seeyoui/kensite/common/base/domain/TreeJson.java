@@ -12,9 +12,6 @@ import com.seeyoui.kensite.common.util.StringUtils;
  * @author cuichen
  */
 public class TreeJson implements Serializable {
-	/**
-     * 
-     */
 	private static final long serialVersionUID = 1L;
 
 	private String id;

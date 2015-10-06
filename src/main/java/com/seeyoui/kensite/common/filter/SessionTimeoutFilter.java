@@ -15,6 +15,11 @@ import javax.servlet.http.HttpSession;
 
 import com.seeyoui.kensite.common.util.SessionUtil;
  
+/**
+ * 暂时由拦截器实现，该方法可以用但是未使用
+ * @author cuichen
+ *
+ */
 public class SessionTimeoutFilter implements Filter {
  
     public void destroy() {

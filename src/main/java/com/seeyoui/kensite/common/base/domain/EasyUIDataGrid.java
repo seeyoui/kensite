@@ -1,6 +1,9 @@
 package com.seeyoui.kensite.common.base.domain;
 
-public class EasyUIDataGrid {
+import java.io.Serializable;
+
+public class EasyUIDataGrid implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private String total;
 	Object rows;
 	public String getTotal() {
