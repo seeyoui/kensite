@@ -47,7 +47,8 @@
 	
 	<!-- 查询用户权限集合 -->
 	<select id="findSysUserPermissionList" resultType="com.seeyoui.kensite.framework.system.domain.SysPermission" parameterType="SysUser">
-		select sm.shiro || ':' || sp.id id
+		select sm.shiro || ':' || sp.id id,
+		su.name || '[' || su.user_name || ']' || '-' || sm.name || '-' || sp.name name
 		from sys_user su
 		left join sys_user_role sur
 		on su.id = sur.user_id 
