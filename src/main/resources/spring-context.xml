@@ -109,7 +109,7 @@
 			<mvc:exclude-mapping path="/"/>
 			<bean class="com.seeyoui.kensite.common.interceptor.AuthorityInterceptor" />
 		</mvc:interceptor>
-		<!-- <mvc:interceptor>
+		<mvc:interceptor>
 			<mvc:mapping path="/**" />
 			<mvc:exclude-mapping path="/assets/**"/>
 			<mvc:exclude-mapping path="/script/**"/>
@@ -120,6 +120,6 @@
 			<mvc:exclude-mapping path="/information/**"/>
 			<mvc:exclude-mapping path="/"/>
 			<bean class="com.seeyoui.kensite.common.interceptor.LogInterceptor" />
-		</mvc:interceptor> -->
+		</mvc:interceptor>
 	</mvc:interceptors>
 </beans>
