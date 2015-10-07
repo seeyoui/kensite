@@ -35,6 +35,8 @@ public class Log extends DataEntity<Log> {
     private String params;
     //异常信息
     private String exception;
+    //耗费时间
+    private String spendTime;
  
     public void setType(String type) {
         this.type = type;
@@ -93,7 +95,15 @@ public class Log extends DataEntity<Log> {
         return this.exception;
     }
     
-    /**
+    public String getSpendTime() {
+		return spendTime;
+	}
+
+	public void setSpendTime(String spendTime) {
+		this.spendTime = spendTime;
+	}
+
+	/**
 	 * 设置请求参数
 	 * @param paramMap
 	 */

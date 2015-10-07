@@ -39,14 +39,14 @@ public class LogUtils {
 	/**
 	 * 保存日志
 	 */
-	public static void saveLog(HttpServletRequest request, String title){
-		saveLog(request, null, null, title);
+	public static void saveLog(HttpServletRequest request, String title, long spendTime){
+		saveLog(request, null, null, title, spendTime);
 	}
 	
 	/**
 	 * 保存日志
 	 */
-	public static void saveLog(HttpServletRequest request, Object handler, Exception ex, String title){
+	public static void saveLog(HttpServletRequest request, Object handler, Exception ex, String title, long spendTime){
 		SysUser user = UserUtils.getUser();
 		if (user != null && user.getId() != null){
 			Log log = new Log();
@@ -58,6 +58,7 @@ public class LogUtils {
 			log.setRequestUri(request.getRequestURI());
 			log.setParams(request.getParameterMap());
 			log.setMethod(request.getMethod());
+			log.setSpendTime(String.valueOf(spendTime));
 			// 异步保存日志
 			new SaveLogThread(log, handler, ex).start();
 		}

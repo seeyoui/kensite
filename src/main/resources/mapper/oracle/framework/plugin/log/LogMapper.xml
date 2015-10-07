@@ -6,14 +6,15 @@
 	    t.id,
 	    t.type,
 	    t.title,
-	    t.createuser as "createUser.userName",
-	    t.createdate as "createDate",
-	    t.remote_addr,
-	    t.user_agent,
-	    t.request_uri,
+	    t.create_user as "createUser.userName",
+	    t.create_date as "createDate",
+	    t.remote_addr as "remoteAddr",
+	    t.user_agent as "userAgent",
+	    t.request_uri as "requestUri",
 	    t.method,
 	    t.params,
-	    t.exception
+	    t.exception,
+	    t.spend_time as "spendTime"
 	</sql>
 	<!-- 查询过滤条件 -->
 	<sql id="whereStr">
@@ -26,10 +27,10 @@
 				and t.title LIKE '%'||#{title}||'%'
 			</if>
 			<if test="createUser != null and createUser.userName != null and createUser.userName != ''">
-				and t.createuser LIKE '%'||#{createUser.userName}||'%'
+				and t.create_user LIKE '%'||#{createUser.userName}||'%'
 			</if>
 			<if test="createDate != null and createDate != ''">
-				and t.createdate = #{createDate}
+				and t.create_date = #{createDate}
 			</if>
 			<if test="remoteAddr != null and remoteAddr != ''">
 				and t.remote_addr LIKE '%'||#{remoteAddr}||'%'
@@ -48,6 +49,9 @@
 			</if>
 			<if test="exception != null and exception != ''">
 				and t.exception LIKE '%'||#{exception}||'%'
+			</if>
+			<if test="spendTime != null and spendTime != ''">
+				and t.spend_time LIKE '%'||#{spendTime}||'%'
 			</if>
 		</where>
 	</sql>
@@ -87,14 +91,15 @@
 		INSERT INTO SYS_LOG (
 	    	type,
 	    	title,
-	    	createuser,
-	    	createdate,
+	    	create_user,
+	    	create_date,
 	    	remote_addr,
 	    	user_agent,
 	    	request_uri,
 	    	method,
 	    	params,
 	    	exception,
+	    	spend_time,
 		    id
 		)
 		VALUES (
@@ -108,6 +113,7 @@
 			#{method},
 			#{params},
 			#{exception},
+			#{spendTime},
 		    #{id}
 		)
 	</insert>
