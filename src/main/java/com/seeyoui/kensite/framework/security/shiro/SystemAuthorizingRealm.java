@@ -23,6 +23,7 @@ import org.springframework.stereotype.Service;
 import com.seeyoui.kensite.common.base.domain.TreeJson;
 import com.seeyoui.kensite.common.util.SessionUtil;
 import com.seeyoui.kensite.common.util.SpringContextHolder;
+import com.seeyoui.kensite.common.util.StringUtils;
 import com.seeyoui.kensite.framework.system.domain.SysPermission;
 import com.seeyoui.kensite.framework.system.domain.SysRole;
 import com.seeyoui.kensite.framework.system.domain.SysUser;
@@ -58,7 +59,7 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 //		}
 		// 校验用户名密码
 		SysUser user = UserUtils.getByLoginName(token.getUsername());
-		if (user != null) {
+		if (user != null && StringUtils.isNoneBlank(user.getId())) {
 			if(user.getState() == null || "".equals(user.getState()) || "0".equals(user.getState())) {
 				throw new LockedAccountException(); //帐号锁定
 			} else {

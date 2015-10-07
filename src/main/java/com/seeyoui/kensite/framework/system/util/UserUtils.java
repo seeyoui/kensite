@@ -85,9 +85,6 @@ public class UserUtils {
 	 * 清除当前用户缓存
 	 */
 	public static void clearCache(){
-		removeCache(CACHE_ROLE_LIST);
-		removeCache(CACHE_MENU_LIST);
-		removeCache(CACHE_DEPARTMENT_LIST);
 		UserUtils.clearCache(getUser());
 	}
 	
@@ -98,6 +95,12 @@ public class UserUtils {
 	public static void clearCache(SysUser sysUser){
 		CacheUtils.remove(USER_CACHE, USER_CACHE_ID_ + sysUser.getId());
 		CacheUtils.remove(USER_CACHE, USER_CACHE_LOGIN_NAME_ + sysUser.getUserName());
+		removeCache(CACHE_ROLE_LIST + sysUser.getId());
+		removeCache(CACHE_MENU_LIST + sysUser.getId());
+		removeCache(CACHE_DEPARTMENT_LIST + sysUser.getId());
+		removeCache(CACHE_ROLE_LIST + sysUser.getUserName());
+		removeCache(CACHE_MENU_LIST + sysUser.getUserName());
+		removeCache(CACHE_DEPARTMENT_LIST + sysUser.getUserName());
 		if (sysUser.getDepartmentId() != null){
 			CacheUtils.remove(USER_CACHE, USER_CACHE_LIST_BY_DEPARTMENT_ID_ + sysUser.getDepartmentId());
 		}
@@ -128,23 +131,25 @@ public class UserUtils {
 	 * @return
 	 */
 	public static List<SysRole> getRoleList(){
+		SysUser sysUser = getUser();
 		@SuppressWarnings("unchecked")
-		List<SysRole> roleList = (List<SysRole>)getCache(CACHE_ROLE_LIST);
+		List<SysRole> roleList = (List<SysRole>)getCache(CACHE_ROLE_LIST + sysUser.getId());
 		if (roleList == null){
-			SysUser sysUser = getUser();
 			roleList = sysRoleMapper.findSysUserRoleList(sysUser);
-			putCache(CACHE_ROLE_LIST, roleList);
+			putCache(CACHE_ROLE_LIST + sysUser.getId(), roleList);
+			putCache(CACHE_ROLE_LIST + sysUser.getUserName(), roleList);
 		}
 		return roleList;
 	}
 	
 	public static List<SysPermission> getPermissionList(){
+		SysUser sysUser = getUser();
 		@SuppressWarnings("unchecked")
-		List<SysPermission> permissionList = (List<SysPermission>)getCache(CACHE_PERMISSION_LIST);
+		List<SysPermission> permissionList = (List<SysPermission>)getCache(CACHE_PERMISSION_LIST + sysUser.getId());
 		if (permissionList == null){
-			SysUser sysUser = getUser();
 			permissionList = sysPermissionMapper.findSysUserPermissionList(sysUser);
-			putCache(CACHE_PERMISSION_LIST, permissionList);
+			putCache(CACHE_PERMISSION_LIST + sysUser.getId(), permissionList);
+			putCache(CACHE_PERMISSION_LIST + sysUser.getUserName(), permissionList);
 		}
 		return permissionList;
 	}
@@ -154,21 +159,22 @@ public class UserUtils {
 	 * @return
 	 */
 	public static List<SysMenu> getMenuList(){
+		SysUser sysUser = getUser();
 		@SuppressWarnings("unchecked")
-		List<SysMenu> menuList = (List<SysMenu>)getCache(CACHE_MENU_LIST);
+		List<SysMenu> menuList = (List<SysMenu>)getCache(CACHE_MENU_LIST + sysUser.getId());
 		if (menuList == null){
-			SysUser sysUser = getUser();
 			menuList = sysMenuMapper.findSysMenuTree(sysUser);
-			putCache(CACHE_MENU_LIST, menuList);
+			putCache(CACHE_MENU_LIST + sysUser.getId(), menuList);
+			putCache(CACHE_MENU_LIST + sysUser.getUserName(), menuList);
 		}
 		return menuList;
 	}
 	
 	public static TreeJson getMenuTree(){
+		SysUser sysUser = getUser();
 		@SuppressWarnings("unchecked")
-		TreeJson menuTree = (TreeJson)getCache(CACHE_MENU_TREE);
+		TreeJson menuTree = (TreeJson)getCache(CACHE_MENU_TREE + sysUser.getId());
 		if (menuTree == null){
-			SysUser sysUser = getUser();
 			List<SysMenu> mList = sysMenuMapper.findSysMenuTree(sysUser);
 			ArrayList<TreeJson> tList = new ArrayList<TreeJson>();
 			for(int i=0; i<mList.size(); i++) {
@@ -188,7 +194,8 @@ public class UserUtils {
 			TreeJson.getTree(tList, menuTree);
 			tList.clear();
 			tList.add(menuTree);
-			putCache(CACHE_MENU_TREE, menuTree);
+			putCache(CACHE_MENU_TREE + sysUser.getId(), menuTree);
+			putCache(CACHE_MENU_TREE + sysUser.getName(), menuTree);
 		}
 		return menuTree;
 	}
@@ -242,18 +249,18 @@ public class UserUtils {
 	}
 	
 	public static Object getCache(String key, Object defaultValue) {
-//		Object obj = getCacheMap().get(key);
+//		Object obj = CacheUtils.get(USER_CACHE, key);
 		Object obj = getSession().getAttribute(key);
 		return obj==null?defaultValue:obj;
 	}
 
 	public static void putCache(String key, Object value) {
-//		getCacheMap().put(key, value);
+//		CacheUtils.put(USER_CACHE, key, value);
 		getSession().setAttribute(key, value);
 	}
 
 	public static void removeCache(String key) {
-//		getCacheMap().remove(key);
+//		CacheUtils.remove(USER_CACHE, key);
 		getSession().removeAttribute(key);
 	}	
 }

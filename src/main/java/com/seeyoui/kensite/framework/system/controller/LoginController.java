@@ -52,6 +52,7 @@ public class LoginController {
 	@RequestMapping(value = "/login", method=RequestMethod.POST)
 	public String loginIn(HttpSession session, HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) {
 		String info = "";
+		Boolean status = true;
 		String resultPageURL = InternalResourceViewResolver.FORWARD_URL_PREFIX + "/";  
 		String userName = request.getParameter("userName");
 		String password = request.getParameter("password");
@@ -73,18 +74,23 @@ public class LoginController {
             currentUser.login(token);
         }catch(UnknownAccountException uae){
             info = "未知账户";
+            status = false;
         }catch(IncorrectCredentialsException ice){  
-            info = "密码不正确";  
+            info = "密码不正确";
+            status = false;
         }catch(LockedAccountException lae){
             info = "账户已锁定";
+            status = false;
         }catch(ExcessiveAttemptsException eae){
             info = "用户名或密码错误次数过多";
+            status = false;
         }catch(AuthenticationException ae){
             ae.printStackTrace();
             info = "账户状态异常";
+            status = false;
         }
         //验证是否登录成功
-        if(currentUser.isAuthenticated()){
+        if(currentUser.isAuthenticated() && status){
         	String theme = CookieUtils.getCookie(request, "current-theme");
         	modelMap.put("theme", "skin-"+theme);
         	resultPageURL = getSysSkins();
