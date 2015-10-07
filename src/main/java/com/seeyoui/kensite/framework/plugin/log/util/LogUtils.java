@@ -19,6 +19,7 @@ import com.seeyoui.kensite.common.util.StringUtils;
 import com.seeyoui.kensite.framework.plugin.log.domain.Log;
 import com.seeyoui.kensite.framework.plugin.log.persistence.LogMapper;
 import com.seeyoui.kensite.framework.system.domain.SysMenu;
+import com.seeyoui.kensite.framework.system.domain.SysPermission;
 import com.seeyoui.kensite.framework.system.domain.SysUser;
 import com.seeyoui.kensite.framework.system.persistence.SysMenuMapper;
 import com.seeyoui.kensite.framework.system.util.UserUtils;
@@ -88,7 +89,7 @@ public class LogUtils {
 					RequiresPermissions rp = m.getAnnotation(RequiresPermissions.class);
 					permission = (rp != null ? StringUtils.join(rp.value(), ",") : "");
 				}
-				log.setTitle("["+log.getCreateUser().getUserName()+"]"+log.getCreateUser().getName());
+				log.setTitle(getNameByPermission(permission));
 			}
 			// 如果有异常，设置异常信息
 			log.setException(Exceptions.getStackTraceAsString(ex));
@@ -102,4 +103,16 @@ public class LogUtils {
 		}
 	}
 
+	public static String getNameByPermission(String permission) {
+		List<SysPermission> sysPermissionList = UserUtils.getPermissionList();
+		StringBuffer sb = new StringBuffer();
+		for (String p : StringUtils.split(permission)){
+			for(SysPermission sp : sysPermissionList) {
+				if(p.equals(sp.getId())) {
+					sb.append(sp.getName());
+				}
+			}
+		}
+		return sb.toString();
+	}
 }
