@@ -41,7 +41,7 @@
 	</bean>
 
 	<!-- 默认访问跳转到登录页面(即定义无需Controller的url<->view直接映射) -->
-	<mvc:view-controller path="/" view-name="forward:/login.jsp"/>
+	<mvc:view-controller path="/" view-name="forward:/index.jsp"/>
 
 	<!-- 由于web.xml中设置是：由SpringMVC拦截所有请求,于是在读取静态资源文件的时候就会受到影响(说白了就是读不到) -->
 	<!-- 经过下面的配置，该标签的作用就是：所有页面中引用"/js/**"的资源，都会从"/resources/js/"里面进行查找 -->

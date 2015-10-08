@@ -154,11 +154,11 @@ input {
 				}
 			});
 			<c:if test="${not empty info}">
-				$.messager.show({
-					title:'错误提示',
-					msg:'<c:out value="${info}"/>',
-					showType:'fade'
-				});
+			$.messager.show({
+				title:'错误提示',
+				msg:'<c:out value="${info}"/>',
+				showType:'fade'
+			});
 			</c:if>
 
 		});
