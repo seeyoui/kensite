@@ -5,10 +5,7 @@
 package com.seeyoui.kensite.framework.plugin.skins.domain;  
 
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.Range;
 
-import com.seeyoui.kensite.common.base.domain.DataEntity;
-import com.seeyoui.kensite.framework.cms.domain.Article;
 import com.seeyoui.kensite.common.base.domain.DataEntity;
 
 /**
@@ -16,7 +13,7 @@ import com.seeyoui.kensite.common.base.domain.DataEntity;
  * @version 1.0
  * @since 1.0
  */
-public class Skins extends DataEntity<Article> {
+public class Skins extends DataEntity<Skins> {
 	private static final long serialVersionUID = 5454155825314635342L;
     
 	private String name;

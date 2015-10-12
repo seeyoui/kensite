@@ -90,7 +90,7 @@ ${column.columnNameLower}:sel_${column.columnNameLower}
  	<div style="position:absolute;top:0px;left:0px;right:0px;bottom:0px;">
 		<div style="position:absolute;top:0px;left:0px;right:0px;bottom:0px;">
 		    <table id="dataList" title="${table.remarks}列表" class="easyui-datagrid" style="width:100%;height:100%"
-		    		url="${"${"}ctx${"}"}/${table.classNameFirstLower}/getListData.do"
+		    		url="${"${"}ctx${"}"}/${moduleC}${table.classNameFirstLower}/getListData.do"
 		            toolbar="#toolbar" pagination="true"
 		            rownumbers="true" fitColumns="true" singleSelect="true">
 		        <thead>
@@ -102,13 +102,13 @@ ${column.columnNameLower}:sel_${column.columnNameLower}
 		        </thead>
 		    </table>
 		    <div id="toolbar">
-		    	<shiro:hasPermission name="${table.classNameFirstLower}:insert">
+		    	<shiro:hasPermission name="${moduleP}${table.classNameFirstLower}:insert">
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newInfo()">新建</a>
 		        </shiro:hasPermission>
-		        <shiro:hasPermission name="${table.classNameFirstLower}:update">
+		        <shiro:hasPermission name="${moduleP}${table.classNameFirstLower}:update">
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editInfo()">修改</a>
 		        </shiro:hasPermission>
-		        <shiro:hasPermission name="${table.classNameFirstLower}:delete">
+		        <shiro:hasPermission name="${moduleP}${table.classNameFirstLower}:delete">
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyInfo()">删除</a>
 		        </shiro:hasPermission>
 		        <#list table.columns as column>
@@ -161,7 +161,7 @@ ${column.columnNameLower}:sel_${column.columnNameLower}
             cleanErrMsg();
             $('#dataForm').form('clear');
             $('#dataWin').window('open');
-            url = '${"${"}ctx${"}"}/${table.classNameFirstLower}/saveByAdd.do';
+            url = '${"${"}ctx${"}"}/${moduleC}${table.classNameFirstLower}/saveByAdd.do';
         }
         function editInfo(){
             var row = $('#dataList').datagrid('getSelected');
@@ -169,7 +169,7 @@ ${column.columnNameLower}:sel_${column.columnNameLower}
             	cleanErrMsg();
                 $('#dataForm').form('load',row);
                 $('#dataWin').window('open');
-                url = '${"${"}ctx${"}"}/${table.classNameFirstLower}/saveByUpdate.do?id='+row.id;
+                url = '${"${"}ctx${"}"}/${moduleC}${table.classNameFirstLower}/saveByUpdate.do?id='+row.id;
             }    	
         }
         var loadi;
@@ -187,11 +187,11 @@ ${column.columnNameLower}:sel_${column.columnNameLower}
                     cleanErrMsg();
                 	data = eval('(' + info + ')');
                     if (data.success=="<%=StringConstant.TRUE%>"){
-                        layer.msg("操作成功！", {time: layerMsgTime});
+                        layer.msg("操作成功！", {offset: 'rb',icon: 6,shift: 8,time: layerMsgTime});
                 		$('#dataWin').window('close'); 
                 		reloadData();
                     } else {
-	                    layer.msg("操作失败！", {time: layerMsgTime});
+	                    layer.msg("操作失败！", {offset: 'rb',icon: 5,shift: 8,time: layerMsgTime});
 	                    renderErrMsg(data.message);
                     }
                 }
@@ -204,7 +204,7 @@ ${column.columnNameLower}:sel_${column.columnNameLower}
                     if (r){
                     	$.ajax({
 							type: "post",
-							url: '${"${"}ctx${"}"}/${table.classNameFirstLower}/delete.do',
+							url: '${"${"}ctx${"}"}/${moduleC}${table.classNameFirstLower}/delete.do',
 							data: {delDataId:row.id},
 							dataType: 'json',
 							beforeSend: function(XMLHttpRequest){
@@ -213,10 +213,10 @@ ${column.columnNameLower}:sel_${column.columnNameLower}
 							success: function(data, textStatus){
 								layer.close(loadi);
 								if (data.success=="<%=StringConstant.TRUE%>"){
-			                        layer.msg("操作成功！", {time: layerMsgTime});
+			                        layer.msg("操作成功！", {offset: 'rb',icon: 6,shift: 8,time: layerMsgTime});
 									reloadData();
 			                    } else {
-				                    layer.msg("操作失败！", {time: layerMsgTime});
+				                    layer.msg("操作失败！", {offset: 'rb',icon: 5,shift: 8,time: layerMsgTime});
 			                    }
 							}
 						});

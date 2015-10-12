@@ -11,20 +11,24 @@
 	<entry key="innerpackage">framework.cms</entry>
 	<!-- 当前功能名，对应工作空间的文件夹名，注意大小写 -->
 	<entry key="projectName">kensite</entry>
+	<!-- 当前模块名，@RequestMapping(value = "guestbook")==@RequestMapping(value = "cms/guestbook") -->
+	<entry key="moduleC">cms/</entry>
+	<!-- 当前模块名，@RequiresPermissions("guestbook:view")==@RequiresPermissions("cms:guestbook:view") -->
+	<entry key="moduleP">cms:</entry>
 	
 	<!-- jsp namespace: web/${namespace}/${className}/list.jsp -->
 	<entry key="namespace">WEB-INF/view</entry>
 	
-	<entry key="outRoot">C:\Users\Administrator\git</entry>
+	<entry key="outRoot">C:\Users\cuichen\git\</entry>
 
 	<!-- 需要移除的表名前缀,使用逗号进行分隔多个前缀,示例值: t_,v_ -->
-	<entry key="tableRemovePrefixes">cms_,t_,sys_</entry>
+	<entry key="tableRemovePrefixes">cms_,t_,sys_,mod_</entry>
 	
-	<entry key="jdbc.username">kensite</entry>
+	<entry key="jdbc.username">ks</entry>
 	<entry key="jdbc.password">kensite</entry>
 		
 	<!-- oracle需要指定jdbc.schema,其它数据库忽略此项配置  -->
-	<entry key="jdbc.schema">KENSITE</entry>
+	<entry key="jdbc.schema">KS</entry>
 	<entry key="jdbc.catalog"></entry>
 	
 	<!-- 数据库类型映射  -->
@@ -46,7 +50,7 @@
 
 	<!-- Oracle 	jdbc:oracle:oci:@tnsname_devdb
 	-->
-	<entry key="jdbc.url">jdbc:oracle:thin:@127.0.0.1:1521:orcl</entry>
+	<entry key="jdbc.url">jdbc:oracle:thin:@123.56.224.66:1521:orcl</entry>
 	<entry key="jdbc.driver">oracle.jdbc.driver.OracleDriver</entry>
 	
 	<!-- SQLServer2000 

@@ -39,7 +39,7 @@ import ${basepackage}.${innerpackage}.${table.classNameFirstLower}.service.${cla
 <#include "/java_imports.include">
 
 @Controller
-@RequestMapping(value = "${table.classNameFirstLower}")
+@RequestMapping(value = "${moduleC}${table.classNameFirstLower}")
 public class ${className}Controller extends BaseController {
 	
 	@Autowired
@@ -52,7 +52,7 @@ public class ${className}Controller extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequiresPermissions("${table.classNameFirstLower}:view")
+	@RequiresPermissions("${moduleP}${table.classNameFirstLower}:view")
 	@RequestMapping(value = "/showPageList")
 	public ModelAndView show${className}PageList(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
@@ -67,7 +67,7 @@ public class ${className}Controller extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequiresPermissions("${table.classNameFirstLower}:select")
+	@RequiresPermissions("${moduleP}${table.classNameFirstLower}:select")
 	@RequestMapping(value = "/getListData", method=RequestMethod.POST)
 	@ResponseBody
 	public String getListData(HttpSession session,
@@ -88,7 +88,7 @@ public class ${className}Controller extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequiresPermissions("${table.classNameFirstLower}:select")
+	@RequiresPermissions("${moduleP}${table.classNameFirstLower}:select")
 	@RequestMapping(value = "/getAllListData", method=RequestMethod.POST)
 	@ResponseBody
 	public String getAllListData(HttpSession session,
@@ -107,7 +107,7 @@ public class ${className}Controller extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequiresPermissions("${table.classNameFirstLower}:insert")
+	@RequiresPermissions("${moduleP}${table.classNameFirstLower}:insert")
 	@RequestMapping(value = "/saveByAdd", method=RequestMethod.POST)
 	@ResponseBody
 	public String save${className}ByAdd(HttpSession session,
@@ -129,7 +129,7 @@ public class ${className}Controller extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequiresPermissions("${table.classNameFirstLower}:update")
+	@RequiresPermissions("${moduleP}${table.classNameFirstLower}:update")
 	@RequestMapping(value = "/saveByUpdate", method=RequestMethod.POST)
 	@ResponseBody
 	public String save${className}ByUpdate(HttpSession session,
@@ -151,7 +151,7 @@ public class ${className}Controller extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequiresPermissions("${table.classNameFirstLower}:delete")
+	@RequiresPermissions("${moduleP}${table.classNameFirstLower}:delete")
 	@RequestMapping(value = "/delete", method=RequestMethod.POST)
 	@ResponseBody
 	public String delete(HttpSession session,

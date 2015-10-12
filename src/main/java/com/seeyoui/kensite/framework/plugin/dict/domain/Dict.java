@@ -5,16 +5,13 @@
 package com.seeyoui.kensite.framework.plugin.dict.domain;  
 
 import com.seeyoui.kensite.common.base.domain.DataEntity;
-import com.seeyoui.kensite.framework.cms.domain.Article;
-
-import com.seeyoui.kensite.common.base.domain.DataEntity;
 
 /**
  * @author cuichen
  * @version 1.0
  * @since 1.0
  */
-public class Dict extends DataEntity<Article> {
+public class Dict extends DataEntity<Dict> {
 	private static final long serialVersionUID = 5454155825314635342L;
     
 	private String value;
