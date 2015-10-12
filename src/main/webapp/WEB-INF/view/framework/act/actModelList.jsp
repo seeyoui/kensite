@@ -115,9 +115,9 @@
                 },
                 success: function(info){
                     if (info==TRUE){
-                        layer.msg("操作成功！", {time: layerMsgTime});
+                        layer.msg("操作成功！", {offset: 'rb',icon: 6,shift: 8,time: layerMsgTime});
                     } else {
-	                    layer.msg("操作失败！", {time: layerMsgTime});
+	                    layer.msg("操作失败！", {offset: 'rb',icon: 5,shift: 8,time: layerMsgTime});
                     }
                 	layer.close(loadi);
                 	$('#dataWin').window('close'); 
@@ -160,9 +160,9 @@
 							},
 							success: function(data, textStatus){
 								if (data=="<%=StringConstant.TRUE%>"){
-			                        layer.msg("操作成功！", {time: layerMsgTime});
+			                        layer.msg("操作成功！", {offset: 'rb',icon: 6,shift: 8,time: layerMsgTime});
 			                    } else {
-				                    layer.msg("操作失败！", {time: layerMsgTime});
+				                    layer.msg("操作失败！", {offset: 'rb',icon: 5,shift: 8,time: layerMsgTime});
 			                    }
 								reloadData();
 							}

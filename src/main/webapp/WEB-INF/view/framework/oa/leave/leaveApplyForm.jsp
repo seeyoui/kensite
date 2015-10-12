@@ -139,7 +139,7 @@
 	                },
 	                success: function(data) {
 	                	layer.close(loadi);
-	                	layer.msg("操作成功！", {time: layerMsgTime});
+	                	layer.msg("操作成功！", {offset: 'rb',icon: 6,shift: 8,time: layerMsgTime});
 	                	//goBackToList();
 	                }
 	            });

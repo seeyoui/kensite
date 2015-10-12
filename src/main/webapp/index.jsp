@@ -68,7 +68,7 @@
 			});
 			<c:if test="${not empty info}">
 				layer.msg('${info}', {
-				    offset: 0,
+				    offset: 'rb',
 					icon: 5,
 				    shift: 8
 				});
