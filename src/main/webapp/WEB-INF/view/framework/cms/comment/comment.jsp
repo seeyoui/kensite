@@ -22,7 +22,7 @@
 					    <th field="id" width="100px" hidden>编号</th>
 					    <th field="categoryId" width="100px">栏目编号</th>
 					    <th field="contentId" width="100px">内容编号</th>
-					    <th field="title" width="100px">内容标题</th>
+					    <th field="score" width="50px" align="right">评论等级</th>
 					    <th field="content" width="100px">评论内容</th>
 					    <th field="name" width="100px">评论姓名</th>
 					    <th field="ip" width="100px">评论IP</th>
@@ -50,7 +50,7 @@
 
 				栏目编号<input id="sel_categoryId" name="sel_categoryId" class="easyui-textbox" data-options=""/>
 				内容编号<input id="sel_contentId" name="sel_contentId" class="easyui-textbox" data-options=""/>
-				内容标题<input id="sel_title" name="sel_title" class="easyui-textbox" data-options=""/>
+				评论等级<input id="sel_score" name="sel_score" class="easyui-numberbox" data-options="min:0,max:999999,precision:0"/>
 				评论内容<input id="sel_content" name="sel_content" class="easyui-textbox" data-options=""/>
 				评论姓名<input id="sel_name" name="sel_name" class="easyui-textbox" data-options=""/>
 				评论IP<input id="sel_ip" name="sel_ip" class="easyui-textbox" data-options=""/>
@@ -78,9 +78,9 @@
 				                <span id="msg-contentid" class="err-msg"></span>
 				            </div>
 							<div class="fitem">
-				                <label>内容标题</label>
-				                <input id="title" name="title" class="easyui-validatebox textbox" data-options="required:true"/>
-				                <span id="msg-title" class="err-msg"></span>
+				                <label>评论等级</label>
+				                <input id="score" name="score" class="easyui-numberbox textbox" data-options="min:0,max:999999,precision:0,required:true"/>
+				                <span id="msg-score" class="err-msg"></span>
 				            </div>
 							<div class="fitem">
 				                <label>评论内容</label>
@@ -124,7 +124,7 @@
 		    
 		    var sel_categoryId = $("#sel_categoryId").val();
 		    var sel_contentId = $("#sel_contentId").val();
-		    var sel_title = $("#sel_title").val();
+		    var sel_score = $("#sel_score").val();
 		    var sel_content = $("#sel_content").val();
 		    var sel_name = $("#sel_name").val();
 		    var sel_ip = $("#sel_ip").val();
@@ -140,7 +140,7 @@
     		    
     		    categoryId:sel_categoryId,
     		    contentId:sel_contentId,
-    		    title:sel_title,
+    		    score:sel_score,
     		    content:sel_content,
     		    name:sel_name,
     		    ip:sel_ip,

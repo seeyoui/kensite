@@ -14,18 +14,18 @@ import com.seeyoui.kensite.common.base.domain.DataEntity;
  * @date 2015-10-12
  */
 public class Guestbook extends DataEntity<Guestbook> {
-	private static final long serialVersionUID = 5454155825314635342L;
+	private static final long serialVersionUID = 1L;
     
-	private String type;//留言分类type
-	private String content;//留言内容content
-	private String name;//姓名name
-	private String email;//邮箱email
-	private String phone;//电话phone
-	private String workunit;//单位workunit
-	private String ip;//IPip
-	private String reUserId;//回复人reUserId
-	private java.util.Date reDate;//回复时间reDate
-	private String reContent;//回复内容reContent
+	private String type;//留言分类
+	private String content;//留言内容
+	private String name;//姓名
+	private String email;//邮箱
+	private String phone;//电话
+	private String workunit;//单位
+	private String ip;//IP
+	private String reUserId;//回复人
+	private java.util.Date reDate;//回复时间
+	private String reContent;//回复内容
 
 	public void setType(String type) {
 		this.type = type;

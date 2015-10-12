@@ -14,16 +14,16 @@ import com.seeyoui.kensite.common.base.domain.DataEntity;
  * @date 2015-10-12
  */
 public class Comment extends DataEntity<Comment> {
-	private static final long serialVersionUID = 5454155825314635342L;
+	private static final long serialVersionUID = 1L;
     
-	private String categoryId;//栏目编号categoryId
-	private String contentId;//内容编号contentId
-	private String title;//内容标题title
-	private String content;//评论内容content
-	private String name;//评论姓名name
-	private String ip;//评论IPip
-	private String auditUserId;//审核人auditUserId
-	private java.util.Date auditDate;//审核时间auditDate
+	private String categoryId;//栏目编号
+	private String contentId;//内容编号
+	private String score;//评论等级
+	private String content;//评论内容
+	private String name;//评论姓名
+	private String ip;//评论IP
+	private String auditUserId;//审核人
+	private java.util.Date auditDate;//审核时间
 
 	public void setCategoryId(String categoryId) {
 		this.categoryId = categoryId;
@@ -39,12 +39,12 @@ public class Comment extends DataEntity<Comment> {
 	public String getContentId() {
 		return this.contentId;
 	}
-	public void setTitle(String title) {
-		this.title = title;
+	public void setScore(String score) {
+		this.score = score;
 	}
     
-	public String getTitle() {
-		return this.title;
+	public String getScore() {
+		return this.score;
 	}
 	public void setContent(String content) {
 		this.content = content;

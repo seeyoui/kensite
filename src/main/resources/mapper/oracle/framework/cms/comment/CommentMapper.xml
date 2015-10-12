@@ -6,7 +6,7 @@
 	    T.ID AS "id",
 	    T.CATEGORY_ID AS "categoryId",
 	    T.CONTENT_ID AS "contentId",
-	    T.TITLE AS "title",
+	    T.SCORE AS "score",
 	    T.CONTENT AS "content",
 	    T.NAME AS "name",
 	    T.IP AS "ip",
@@ -32,8 +32,8 @@
 			<if test="contentId != null and contentId != ''">
 				AND T.CONTENT_ID LIKE '%'||#{contentId}||'%'
 			</if>
-			<if test="title != null and title != ''">
-				AND T.TITLE LIKE '%'||#{title}||'%'
+			<if test="score != null and score != ''">
+				AND T.SCORE = #{score}
 			</if>
 			<if test="content != null and content != ''">
 				AND T.CONTENT LIKE '%'||#{content}||'%'
@@ -124,7 +124,7 @@
 	    	
 	    	CATEGORY_ID,
 	    	CONTENT_ID,
-	    	TITLE,
+	    	SCORE,
 	    	CONTENT,
 	    	NAME,
 	    	IP,
@@ -144,7 +144,7 @@
 			
 			#{categoryId,jdbcType=VARCHAR},
 			#{contentId,jdbcType=VARCHAR},
-			#{title,jdbcType=VARCHAR},
+			#{score,jdbcType=NUMERIC},
 			#{content,jdbcType=VARCHAR},
 			#{name,jdbcType=VARCHAR},
 			#{ip,jdbcType=VARCHAR},
@@ -173,8 +173,8 @@
 	    	<if test="contentId !=null and contentId !=''">
 			CONTENT_ID=#{contentId},
 			</if>
-	    	<if test="title !=null and title !=''">
-			TITLE=#{title},
+	    	<if test="score !=null and score !=''">
+			SCORE=#{score},
 			</if>
 	    	<if test="content !=null and content !=''">
 			CONTENT=#{content},
