@@ -27,7 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.seeyoui.kensite.common.base.controller.BaseController;
 import com.seeyoui.kensite.common.constants.StringConstant;
 import com.seeyoui.kensite.common.util.RequestResponseUtil;
-
+import com.seeyoui.kensite.common.util.StringUtils;
 import com.seeyoui.kensite.common.constants.StringConstant;
 import com.seeyoui.kensite.common.base.domain.EasyUIDataGrid;
 import com.seeyoui.kensite.common.base.controller.BaseController;
@@ -55,7 +55,7 @@ public class CommentController extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequiresPermissions("cms:comment:view")
+	//@RequiresPermissions("cms:comment:view")
 	@RequestMapping(value = "/showPageList")
 	public ModelAndView showCommentPageList(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
@@ -70,7 +70,7 @@ public class CommentController extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequiresPermissions("cms:comment:select")
+	//@RequiresPermissions("cms:comment:select")
 	@RequestMapping(value = "/getListData", method=RequestMethod.POST)
 	@ResponseBody
 	public String getListData(HttpSession session,
@@ -91,7 +91,7 @@ public class CommentController extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequiresPermissions("cms:comment:select")
+	//@RequiresPermissions("cms:comment:select")
 	@RequestMapping(value = "/getAllListData", method=RequestMethod.POST)
 	@ResponseBody
 	public String getAllListData(HttpSession session,
@@ -110,7 +110,7 @@ public class CommentController extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequiresPermissions("cms:comment:insert")
+	//@RequiresPermissions("cms:comment:insert")
 	@RequestMapping(value = "/saveByAdd", method=RequestMethod.POST)
 	@ResponseBody
 	public String saveCommentByAdd(HttpSession session,
@@ -120,6 +120,7 @@ public class CommentController extends BaseController {
 			RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
 			return null;
 		}
+		comment.setIp(StringUtils.getRemoteAddr(request));
 		commentService.saveComment(comment);
 		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
@@ -132,7 +133,7 @@ public class CommentController extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequiresPermissions("cms:comment:update")
+	//@RequiresPermissions("cms:comment:update")
 	@RequestMapping(value = "/saveByUpdate", method=RequestMethod.POST)
 	@ResponseBody
 	public String saveCommentByUpdate(HttpSession session,
@@ -154,7 +155,7 @@ public class CommentController extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequiresPermissions("cms:comment:delete")
+	//@RequiresPermissions("cms:comment:delete")
 	@RequestMapping(value = "/delete", method=RequestMethod.POST)
 	@ResponseBody
 	public String delete(HttpSession session,

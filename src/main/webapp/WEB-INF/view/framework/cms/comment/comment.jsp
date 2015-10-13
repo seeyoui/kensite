@@ -20,185 +20,113 @@
 		        <thead>
 		            <tr>
 					    <th field="id" width="100px" hidden>编号</th>
-					    <th field="categoryId" width="100px">栏目编号</th>
-					    <th field="contentId" width="100px">内容编号</th>
-					    <th field="score" width="50px" align="right">评论等级</th>
+					    <th field="categoryId" width="100px" hidden>栏目编号</th>
+					    <th field="contentId" width="100px" hidden>内容编号</th>
+					    <th field="score" width="50px" align="right" formatter="formatRank">评论等级</th>
 					    <th field="content" width="100px">评论内容</th>
 					    <th field="name" width="100px">评论姓名</th>
 					    <th field="ip" width="100px">评论IP</th>
-					    <th field="auditUserId" width="100px">审核人</th>
+					    <th field="auditUserId" width="100px" hidden>审核人</th>
 					    <th field="auditDate" width="100px" formatter="formatDateTimeCol">审核时间</th>
-					    
-					    
-					    
-					    
-					    
-					    
+					    <th field="delFlag" width="100px" formatter="formatStatus">审核状态</th>
 		            </tr>
 		        </thead>
 		    </table>
 		    <div id="toolbar">
-		    	<shiro:hasPermission name="cms:comment:insert">
+		    	<%-- <shiro:hasPermission name="cms:comment:insert">
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newInfo()">新建</a>
-		        </shiro:hasPermission>
+		        </shiro:hasPermission> --%>
 		        <shiro:hasPermission name="cms:comment:update">
-		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editInfo()">修改</a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-comment_play" plain="true" onclick="passInfo(1)">审核通过</a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-comment_delete" plain="true" onclick="passInfo(0)">屏蔽</a>
 		        </shiro:hasPermission>
 		        <shiro:hasPermission name="cms:comment:delete">
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyInfo()">删除</a>
 		        </shiro:hasPermission>
 
 				栏目编号<input id="sel_categoryId" name="sel_categoryId" class="easyui-textbox" data-options=""/>
-				内容编号<input id="sel_contentId" name="sel_contentId" class="easyui-textbox" data-options=""/>
-				评论等级<input id="sel_score" name="sel_score" class="easyui-numberbox" data-options="min:0,max:999999,precision:0"/>
-				评论内容<input id="sel_content" name="sel_content" class="easyui-textbox" data-options=""/>
-				评论姓名<input id="sel_name" name="sel_name" class="easyui-textbox" data-options=""/>
-				评论IP<input id="sel_ip" name="sel_ip" class="easyui-textbox" data-options=""/>
-				审核人<input id="sel_auditUserId" name="sel_auditUserId" class="easyui-textbox" data-options=""/>
-				审核时间<input id="sel_auditDate" name="sel_auditDate" class="easyui-textbox" data-options="" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
-
-
-
-
-
-
+				评论等级<input id="sel_score" name="sel_score" class="easyui-combobox" data-options="panelHeight:'auto',valueField: 'value',textField: 'label',data: [{label: '一星',value: '1'},{label: '二星',value: '2'},{label: '三星',value: '3'},{label: '四星',value: '4'},{label: '五星',value: '5'}]" />
 			    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="selectData()">查询</a>
-		    </div>
-		    <div id="dataWin" class="easyui-window" title="评论信息维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:400px;height:260px;padding:10px;">
-		        <div class="ftitle">评论信息维护</div>
-		        <form id="dataForm" method="post">
-							<div class="fitem">
-				                <label>栏目编号</label>
-				                <input id="categoryId" name="categoryId" class="easyui-validatebox textbox" data-options="required:true"/>
-				                <span id="msg-categoryid" class="err-msg"></span>
-				            </div>
-							<div class="fitem">
-				                <label>内容编号</label>
-				                <input id="contentId" name="contentId" class="easyui-validatebox textbox" data-options="required:true"/>
-				                <span id="msg-contentid" class="err-msg"></span>
-				            </div>
-							<div class="fitem">
-				                <label>评论等级</label>
-				                <input id="score" name="score" class="easyui-numberbox textbox" data-options="min:0,max:999999,precision:0,required:true"/>
-				                <span id="msg-score" class="err-msg"></span>
-				            </div>
-							<div class="fitem">
-				                <label>评论内容</label>
-				                <input id="content" name="content" class="easyui-validatebox textbox" data-options="required:true"/>
-				                <span id="msg-content" class="err-msg"></span>
-				            </div>
-							<div class="fitem">
-				                <label>评论姓名</label>
-				                <input id="name" name="name" class="easyui-validatebox textbox" data-options="required:true"/>
-				                <span id="msg-name" class="err-msg"></span>
-				            </div>
-							<div class="fitem">
-				                <label>评论IP</label>
-				                <input id="ip" name="ip" class="easyui-validatebox textbox" data-options="required:true"/>
-				                <span id="msg-ip" class="err-msg"></span>
-				            </div>
-							<div class="fitem">
-				                <label>审核人</label>
-				                <input id="auditUserId" name="auditUserId" class="easyui-validatebox textbox" data-options="required:true"/>
-				                <span id="msg-audituserid" class="err-msg"></span>
-				            </div>
-							<div class="fitem">
-				                <label>审核时间</label>
-				                <input id="auditDate" name="auditDate" class="easyui-validatebox textbox" data-options="required:true" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
-				                <span id="msg-auditdate" class="err-msg"></span>
-				            </div>
-				</form>
-				
-			    <div id="dataWin-buttons">
-			        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveInfo()" style="width:90px">保存</a>
-			        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dataWin').window('close')" style="width:90px">取消</a>
-			    </div>
 		    </div>
 	    </div>
     </div>
     <script type="text/javascript">
 	    $(document).ready(function(){
 	    });
+
+	    function formatStatus(value, row, index){
+			if (value == "1"){
+				return "审核通过";
+			} else {
+				return "已屏蔽";
+			}
+		}
+        
+        function formatRank(val,row){
+        	if(val==null) {
+        		return "";
+        	}
+        	var res = "";
+        	for(var i=1; i<=val; i++) {
+        		res += "<img src='${ctx_common}/img/icon/colorful/1/12628.png' style='width: 20px;height: 20px;'/>";
+        	}
+        	return res;
+	    }
 	    
 	    function selectData() {
-		    
 		    var sel_categoryId = $("#sel_categoryId").val();
-		    var sel_contentId = $("#sel_contentId").val();
-		    var sel_score = $("#sel_score").val();
-		    var sel_content = $("#sel_content").val();
-		    var sel_name = $("#sel_name").val();
-		    var sel_ip = $("#sel_ip").val();
-		    var sel_auditUserId = $("#sel_auditUserId").val();
-		    var sel_auditDate = $("#sel_auditDate").val();
-		    
-		    
-		    
-		    
-		    
-		    
+		    var sel_score = $("#sel_score").combobox('getValue');
         	$('#dataList').datagrid('load',{
-    		    
     		    categoryId:sel_categoryId,
-    		    contentId:sel_contentId,
-    		    score:sel_score,
-    		    content:sel_content,
-    		    name:sel_name,
-    		    ip:sel_ip,
-    		    auditUserId:sel_auditUserId,
-    		    auditDate:sel_auditDate,
-    		    
-    		    
-    		    
-    		    
-    		    
-    		    
+    		    score:sel_score
         	});
         }
 	    function reloadData() {
         	selectData();
         }
 	    
-        var url;
-        function newInfo(){
-            cleanErrMsg();
-            $('#dataForm').form('clear');
-            $('#dataWin').window('open');
-            url = '${ctx}/cms/comment/saveByAdd.do';
-        }
-        function editInfo(){
+	    function getCurrentDate() {
+	    	var d = new Date();
+			var year = d.getFullYear();
+			var month = d.getMonth() + 1;
+			var day = d.getDate();
+	    	if(month.length == 1) {
+	    		month = "0"+month;
+	    	}
+	    	if(day.length == 1) {
+	    		day = "0"+day;
+	    	}
+	    	return year+"-"+month+"-"+day;
+	    }
+	    
+	    function passInfo(flag){
             var row = $('#dataList').datagrid('getSelected');
             if (row){
-            	cleanErrMsg();
-                $('#dataForm').form('load',row);
-                $('#dataWin').window('open');
-                url = '${ctx}/cms/comment/saveByUpdate.do?id='+row.id;
-            }    	
-        }
-        var loadi;
-        function saveInfo(){
-            $('#dataForm').form('submit',{
-                url: url,
-                onSubmit: function(param){
-                	if($(this).form('validate')) {
-                		loadi = layer.load(2, {time: layerLoadMaxTime});
-                	}
-                    return $(this).form('validate');
-                },
-                success: function(info){
-                	layer.close(loadi);
-                    cleanErrMsg();
-                	data = eval('(' + info + ')');
-                    if (data.success=="<%=StringConstant.TRUE%>"){
-                        layer.msg("操作成功！", {offset: 'rb',icon: 6,shift: 8,time: layerMsgTime});
-                		$('#dataWin').window('close'); 
-                		reloadData();
-                    } else {
-	                    layer.msg("操作失败！", {offset: 'rb',icon: 5,shift: 8,time: layerMsgTime});
-	                    renderErrMsg(data.message);
+                $.messager.confirm('确认','你确定审核通过该记录吗？',function(r){
+                    if (r){
+                    	$.ajax({
+							type: "post",
+							url: '${ctx}/cms/comment/saveByUpdate.do',
+							data: {id:row.id,auditUserId:'${currentUser.id}',auditDate:getCurrentDate(),delFlag:flag},
+							dataType: 'json',
+							beforeSend: function(XMLHttpRequest){
+								loadi = layer.load(2, {time: layerLoadMaxTime});
+							},
+							success: function(data, textStatus){
+								layer.close(loadi);
+								if (data.success=="<%=StringConstant.TRUE%>"){
+			                        layer.msg("操作成功！", {offset: 'rb',icon: 6,shift: 8,time: layerMsgTime});
+									reloadData();
+			                    } else {
+				                    layer.msg("操作失败！", {offset: 'rb',icon: 5,shift: 8,time: layerMsgTime});
+			                    }
+							}
+						});
                     }
-                }
-            });
+                });
+            }
         }
+
         function destroyInfo(){
             var row = $('#dataList').datagrid('getSelected');
             if (row){

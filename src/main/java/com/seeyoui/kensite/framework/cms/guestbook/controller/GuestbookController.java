@@ -27,7 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.seeyoui.kensite.common.base.controller.BaseController;
 import com.seeyoui.kensite.common.constants.StringConstant;
 import com.seeyoui.kensite.common.util.RequestResponseUtil;
-
+import com.seeyoui.kensite.common.util.StringUtils;
 import com.seeyoui.kensite.common.constants.StringConstant;
 import com.seeyoui.kensite.common.base.domain.EasyUIDataGrid;
 import com.seeyoui.kensite.common.base.controller.BaseController;
@@ -55,7 +55,7 @@ public class GuestbookController extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequiresPermissions("cms:guestbook:view")
+	//@RequiresPermissions("cms:guestbook:view")
 	@RequestMapping(value = "/showPageList")
 	public ModelAndView showGuestbookPageList(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
@@ -70,7 +70,7 @@ public class GuestbookController extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequiresPermissions("cms:guestbook:select")
+	//@RequiresPermissions("cms:guestbook:select")
 	@RequestMapping(value = "/getListData", method=RequestMethod.POST)
 	@ResponseBody
 	public String getListData(HttpSession session,
@@ -91,7 +91,7 @@ public class GuestbookController extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequiresPermissions("cms:guestbook:select")
+	//@RequiresPermissions("cms:guestbook:select")
 	@RequestMapping(value = "/getAllListData", method=RequestMethod.POST)
 	@ResponseBody
 	public String getAllListData(HttpSession session,
@@ -110,7 +110,7 @@ public class GuestbookController extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequiresPermissions("cms:guestbook:insert")
+	//@RequiresPermissions("cms:guestbook:insert")
 	@RequestMapping(value = "/saveByAdd", method=RequestMethod.POST)
 	@ResponseBody
 	public String saveGuestbookByAdd(HttpSession session,
@@ -120,6 +120,7 @@ public class GuestbookController extends BaseController {
 			RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
 			return null;
 		}
+		guestbook.setIp(StringUtils.getRemoteAddr(request));
 		guestbookService.saveGuestbook(guestbook);
 		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
@@ -132,7 +133,7 @@ public class GuestbookController extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequiresPermissions("cms:guestbook:update")
+	//@RequiresPermissions("cms:guestbook:update")
 	@RequestMapping(value = "/saveByUpdate", method=RequestMethod.POST)
 	@ResponseBody
 	public String saveGuestbookByUpdate(HttpSession session,
@@ -154,7 +155,7 @@ public class GuestbookController extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequiresPermissions("cms:guestbook:delete")
+	//@RequiresPermissions("cms:guestbook:delete")
 	@RequestMapping(value = "/delete", method=RequestMethod.POST)
 	@ResponseBody
 	public String delete(HttpSession session,
