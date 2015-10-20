@@ -600,6 +600,12 @@
 			<version>2.5.0</version>
 		</dependency>
 		
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20150729</version>
+		</dependency>
+		
 		<!-- TEST begin -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -621,6 +627,13 @@
 			<version>1.0</version>
 			<scope>system</scope>
 			<systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/rapid-generator.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>com.seeyoui.kensite</groupId>
+			<artifactId>ueditor-1.1.1.jar</artifactId>
+			<version>1.1.1</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/ueditor-1.1.1.jar</systemPath>
 		</dependency>
 		
 		<!-- 使用 Jetty JSP引擎 
