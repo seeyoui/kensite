@@ -81,7 +81,7 @@ ${column.columnNameLower}:sel_${column.columnNameLower}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <title>${table.remarks}</title>
+    <title>${table.tableAlias}</title>
 	<%@ include file="/WEB-INF/view/taglib/header.jsp" %>
 	<%@ include file="/WEB-INF/view/taglib/easyui.jsp" %>
 	<%@ include file="/WEB-INF/view/taglib/layer.jsp" %>
@@ -89,7 +89,7 @@ ${column.columnNameLower}:sel_${column.columnNameLower}
   <body>
  	<div style="position:absolute;top:0px;left:0px;right:0px;bottom:0px;">
 		<div style="position:absolute;top:0px;left:0px;right:0px;bottom:0px;">
-		    <table id="dataList" title="${table.remarks}列表" class="easyui-datagrid" style="width:100%;height:100%"
+		    <table id="dataList" title="${table.tableAlias}列表" class="easyui-datagrid" style="width:100%;height:100%"
 		    		url="${"${"}ctx${"}"}/${moduleC}${table.classNameFirstLower}/getListData.do"
 		            toolbar="#toolbar" pagination="true"
 		            rownumbers="true" fitColumns="true" singleSelect="true">
@@ -116,8 +116,8 @@ ${column.columnNameLower}:sel_${column.columnNameLower}
 			    </#list>
 			    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="selectData()">查询</a>
 		    </div>
-		    <div id="dataWin" class="easyui-window" title="${table.remarks}信息维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:400px;height:260px;padding:10px;">
-		        <div class="ftitle">${table.remarks}信息维护</div>
+		    <div id="dataWin" class="easyui-window" title="${table.tableAlias}信息维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:400px;height:260px;padding:10px;">
+		        <div class="ftitle">${table.tableAlias}信息维护</div>
 		        <form id="dataForm" method="post">
 					<#list table.columns as column>
 		            	<#if (column.columnName?lower_case=="id"||column.columnName?lower_case=="createuser"||column.columnName?lower_case=="createdate"||column.columnName?lower_case=="updateuser"||column.columnName?lower_case=="updatedate"||column.columnName?lower_case=="remarks"||column.columnName?lower_case=="delflag") >

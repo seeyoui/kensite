@@ -30,11 +30,11 @@ import com.seeyoui.kensite.common.base.domain.DataEntity;
 <#include "/java_imports.include">
 
 public class ${className} extends DataEntity<${className}> {
-	private static final long serialVersionUID = 5454155825314635342L;
+	private static final long serialVersionUID = 1L;
     
     <#list table.columns as column>
     <#if (column.columnName?lower_case=="id"||column.columnName?lower_case=="createuser"||column.columnName?lower_case=="createdate"||column.columnName?lower_case=="updateuser"||column.columnName?lower_case=="updatedate"||column.columnName?lower_case=="remarks"||column.columnName?lower_case=="delflag") ><#else>
-	private ${getJavaType(column)} ${column.columnNameLower};//${column.remarks}${column.columnNameLower}
+	private ${getJavaType(column)} ${column.columnNameLower};//${column.columnAlias}
     </#if>
     </#list>
 
