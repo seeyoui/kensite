@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.seeyoui.kensite.framework.plugin.db.userTabColumns.persistence.UserTabColumnsMapper" >
+	<!-- 查询单表的字段 -->
+	<sql id="tableColumns">
+	    T.TABLE_NAME AS "tableName",
+	    T.COLUMN_NAME AS "columnName",
+	    T.DATA_TYPE AS "dataType",
+	    T.DATA_LENGTH AS "dataLength",
+	    T.DATA_PRECISION AS "dataPrecision",
+	    T.DATA_SCALE AS "dataScale",
+	    T.NULLABLE AS "nullable",
+	    T.COLUMN_ID AS "columnId",
+	    T.NUM_DISTINCT AS "numDistinct",
+	    T.DENSITY AS "density",
+	    T.NUM_NULLS AS "numNulls",
+	    T.NUM_BUCKETS AS "numBuckets",
+	    T.AVG_COL_LEN AS "avgColLen",
+	    T.CHAR_LENGTH AS "charLength",
+	    T.CHAR_USED AS "charUsed",
+	    CC.COMMENTS AS "comments"
+	</sql>
+	<!-- 查询过滤条件 -->
+	<sql id="whereStr">
+		<where>
+			1=1
+			<if test="tableName != null and tableName != ''">
+				AND T.TABLE_NAME LIKE '%'||#{tableName}||'%'
+			</if>
+			<if test="columnName != null and columnName != ''">
+				AND T.COLUMN_NAME LIKE '%'||#{columnName}||'%'
+			</if>
+			<if test="dataType != null and dataType != ''">
+				AND T.DATA_TYPE LIKE '%'||#{dataType}||'%'
+			</if>
+			<if test="nullable != null and nullable != ''">
+				AND T.NULLABLE LIKE '%'||#{nullable}||'%'
+			</if>
+			<if test="comments != null and comments != ''">
+				AND CC.COMMENTS LIKE '%'||#{comments}||'%'
+			</if>
+		</where>
+	</sql>
+	<sql id="joinOn">
+		LEFT JOIN USER_COL_COMMENTS CC ON T.TABLE_NAME=CC.TABLE_NAME AND T.COLUMN_NAME=CC.COLUMN_NAME
+	</sql>
+	<sql id="orderBy">
+		ORDER BY T.COLUMN_ID ASC 
+	</sql>
+	
+	<!-- 根据ID查询单条数据 -->
+	<select id="findUserTabColumnsById" resultType="com.seeyoui.kensite.framework.plugin.db.userTabColumns.domain.UserTabColumns">
+		SELECT
+		<include refid="tableColumns" />
+		FROM USER_TAB_COLUMNS T
+		<include refid="joinOn" />
+		WHERE T.COLUMN_NAME = #{columnName}
+	</select>
+	
+	<!-- 查询数据集合 -->
+	<select id="findUserTabColumnsList" resultType="com.seeyoui.kensite.framework.plugin.db.userTabColumns.domain.UserTabColumns">
+		select * from(select T.*,rownum rn from(
+			SELECT
+			<include refid="tableColumns"/>
+			FROM USER_TAB_COLUMNS T
+			<include refid="joinOn" />
+			<include refid="whereStr"/>
+			<include refid="orderBy"/>
+		) T WHERE rownum &lt; = #{page}*#{rows}) where rn &gt; (#{page}-1)*#{rows}
+	</select>
+	
+	<!-- 查询所有数据集合 -->
+	<select id="findAllUserTabColumnsList" resultType="com.seeyoui.kensite.framework.plugin.db.userTabColumns.domain.UserTabColumns">
+		SELECT
+		<include refid="tableColumns"/>
+		FROM USER_TAB_COLUMNS T
+		<include refid="joinOn" />
+		<include refid="whereStr"/>
+		<include refid="orderBy"/>
+	</select>
+	
+	<!-- 查询数据总数 -->
+	<select id="findUserTabColumnsListTotal" resultType="EasyUIDataGrid">
+		SELECT
+		COUNT(1) total
+		FROM USER_TAB_COLUMNS T
+		<include refid="joinOn" />
+		<include refid="whereStr"/>
+	</select>
+	
+	<!-- 查询数据总数 -->
+	<select id="findUserTabColumnsTotal" resultType="Integer">
+		SELECT
+		COUNT(1) total
+		FROM USER_TAB_COLUMNS T
+		<include refid="joinOn" />
+		<include refid="whereStr"/>
+	</select>
+	
+</mapper>

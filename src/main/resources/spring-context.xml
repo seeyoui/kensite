@@ -107,6 +107,7 @@
 			<mvc:exclude-mapping path="/upload/**"/>
 			<mvc:exclude-mapping path="/login/**"/>
 			<mvc:exclude-mapping path="/cms/**"/>
+			<mvc:exclude-mapping path="/sys/**"/>
 			<mvc:exclude-mapping path="/"/>
 			<bean class="com.seeyoui.kensite.common.interceptor.AuthorityInterceptor" />
 		</mvc:interceptor>

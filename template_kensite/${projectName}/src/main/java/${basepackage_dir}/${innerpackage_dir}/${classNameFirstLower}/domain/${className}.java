@@ -25,10 +25,12 @@ java.util.Date
 
 package ${basepackage}.${innerpackage}.${table.classNameFirstLower}.domain;  
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.seeyoui.kensite.common.base.domain.DataEntity;
 
 <#include "/java_imports.include">
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ${className} extends DataEntity<${className}> {
 	private static final long serialVersionUID = 1L;
     

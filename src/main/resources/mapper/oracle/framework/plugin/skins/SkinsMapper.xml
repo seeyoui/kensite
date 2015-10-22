@@ -71,7 +71,7 @@
 	</select>
 	
 	<!-- 查询数据总数 -->
-	<select id="findSkinsTotal">
+	<select id="findSkinsTotal" resultType="Integer">
 		SELECT
 		COUNT(1) total
 		FROM SYS_SKINS t

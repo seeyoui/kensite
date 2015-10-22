@@ -79,7 +79,7 @@
 	</select>
 	
 	<!-- 查询数据总数 -->
-	<select id="findDictTotal">
+	<select id="findDictTotal" resultType="Integer">
 		SELECT
 		COUNT(1) total
 		FROM SYS_DICT t

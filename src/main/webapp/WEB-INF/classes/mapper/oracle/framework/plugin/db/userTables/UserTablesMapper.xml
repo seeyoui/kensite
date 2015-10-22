@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.seeyoui.kensite.framework.plugin.db.userTables.persistence.UserTablesMapper" >
+	<!-- 查询单表的字段 -->
+	<sql id="tableColumns">
+	    T.TABLE_NAME AS "tableName",
+	    T.TABLESPACE_NAME AS "tablespaceName",
+	    T.NUM_ROWS AS "numRows",
+	    TC.TABLE_TYPE AS "tableType",
+	    TC.COMMENTS AS "comments"
+	</sql>
+	<!-- 查询过滤条件 -->
+	<sql id="whereStr">
+		<where>
+			1=1
+			<if test="tableName != null and tableName != ''">
+				AND T.TABLE_NAME LIKE '%'||#{tableName}||'%'
+			</if>
+			<if test="tablespaceName != null and tablespaceName != ''">
+				AND T.TABLESPACE_NAME LIKE '%'||#{tablespaceName}||'%'
+			</if>
+			<if test="numRows != null and numRows != ''">
+				AND T.NUM_ROWS = #{numRows}
+			</if>
+			<if test="tableType != null and tableType != ''">
+				AND TC.TABLE_TYPE = #{tableType}
+			</if>
+			<if test="comments != null and comments != ''">
+				AND TC.COMMENTS = #{comments}
+			</if>
+		</where>
+	</sql>
+	<sql id="joinOn">
+		LEFT JOIN USER_TAB_COMMENTS TC ON T.TABLE_NAME = TC.TABLE_NAME
+	</sql>
+	<sql id="orderBy">
+		ORDER BY T.TABLE_NAME ASC 
+	</sql>
+	
+	<!-- 根据ID查询单条数据 -->
+	<select id="findUserTablesById" resultType="com.seeyoui.kensite.framework.plugin.db.userTables.domain.UserTables">
+		SELECT
+		<include refid="tableColumns" />
+		FROM USER_TABLES T
+		<include refid="joinOn" />
+		WHERE T.TABLE_NAME = #{tableName}
+	</select>
+	
+	<!-- 查询数据集合 -->
+	<select id="findUserTablesList" resultType="com.seeyoui.kensite.framework.plugin.db.userTables.domain.UserTables">
+		select * from(select T.*,rownum rn from(
+			SELECT
+			<include refid="tableColumns"/>
+			FROM USER_TABLES T
+			<include refid="joinOn" />
+			<include refid="whereStr"/>
+			<include refid="orderBy"/>
+		) T WHERE rownum &lt; = #{page}*#{rows}) where rn &gt; (#{page}-1)*#{rows}
+	</select>
+	
+	<!-- 查询所有数据集合 -->
+	<select id="findAllUserTablesList" resultType="com.seeyoui.kensite.framework.plugin.db.userTables.domain.UserTables">
+		SELECT
+		<include refid="tableColumns"/>
+		FROM USER_TABLES T
+		<include refid="joinOn" />
+		<include refid="whereStr"/>
+		<include refid="orderBy"/>
+	</select>
+	
+	<!-- 查询数据总数 -->
+	<select id="findUserTablesListTotal" resultType="EasyUIDataGrid">
+		SELECT
+		COUNT(1) total
+		FROM USER_TABLES T
+		<include refid="joinOn" />
+		<include refid="whereStr"/>
+	</select>
+	
+	<!-- 查询数据总数 -->
+	<select id="findUserTablesTotal" resultType="Integer">
+		SELECT
+		COUNT(1) total
+		FROM USER_TABLES T
+		<include refid="joinOn" />
+		<include refid="whereStr"/>
+	</select>
+	
+</mapper>
