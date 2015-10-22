@@ -58,14 +58,14 @@
 			<if test="reContent != null and reContent != ''">
 				AND T.RE_CONTENT LIKE '%'||#{reContent}||'%'
 			</if>
-			<if test="createUser != null and createUser != ''">
-				AND T.CREATE_USER LIKE '%'||#{createUser}||'%'
+			<if test="createUser != null and createUser.userName != ''">
+				AND T.CREATE_USER LIKE '%'||#{createUser.userName}||'%'
 			</if>
 			<if test="createDate != null and createDate != ''">
 				AND T.CREATE_DATE = #{createDate}
 			</if>
-			<if test="updateUser != null and updateUser != ''">
-				AND T.UPDATE_USER LIKE '%'||#{updateUser}||'%'
+			<if test="updateUser != null and updateUser.userName != ''">
+				AND T.UPDATE_USER LIKE '%'||#{updateUser.userName}||'%'
 			</if>
 			<if test="updateDate != null and updateDate != ''">
 				AND T.UPDATE_DATE = #{updateDate}
@@ -119,7 +119,7 @@
 	</select>
 	
 	<!-- 查询数据总数 -->
-	<select id="findGuestbookTotal">
+	<select id="findGuestbookTotal" resultType="Integer">
 		SELECT
 		COUNT(1) total
 		FROM CMS_GUESTBOOK T

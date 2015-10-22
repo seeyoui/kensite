@@ -95,7 +95,7 @@
 	</select>
 	
 	<!-- 查询数据总数 -->
-	<select id="findTableTotal">
+	<select id="findTableTotal" resultType="Integer">
 		SELECT
 		COUNT(1) total
 		FROM MOD_TABLE T
