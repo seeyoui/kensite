@@ -13,7 +13,7 @@
   <body style="overflow:hidden">
  	<div style="position:absolute;top:0px;left:0px;right:0px;bottom:0px;">
 		<div style="position:absolute;top:0px;bottom:0px;width:600px;">
-		    <table id="dataList" title="系统数据字典列表" class="easyui-datagrid" style="width:100%;height:100%"
+		    <table id="dataList" title="数据表" class="easyui-datagrid" style="width:100%;height:100%"
 		    		url="${ctx}/sys/userTables/getListData.do"
 		            toolbar="#toolbar" pagination="true"
 		            rownumbers="true" fitColumns="true" singleSelect="false">
@@ -34,11 +34,10 @@
 				注释<input id="sel_tab_comments" name="sel_tab_comments" class="easyui-textbox" data-options="" style="width:100px;"/>
 				表空间<input id="sel_tablespaceName" name="sel_tablespaceName" class="easyui-textbox" data-options="" style="width:100px;"/>
 			    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="selectData()">查询</a>
-			    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="expertExcel()">导出</a>
 		    </div>
 	    </div>
 		<div style="position:absolute;top:0px;right:0px;left:600px;bottom:0px;">
-		    <table id="subDataList" title="列" class="easyui-datagrid" style="width:100%;height:100%"
+		    <table id="subDataList" title="数据列" class="easyui-datagrid" style="width:100%;height:100%"
 		            toolbar="#subtoolbar" pagination="true"
 		            rownumbers="true" fitColumns="true" singleSelect="true">
 		        <thead>
@@ -46,7 +45,7 @@
 					    <th field="columnId" width="50px" align="right" hidden>顺序号</th>
 					    <th field="tableName" width="100px" hidden>表名</th>
 					    <th field="columnName" width="100px">列名</th>
-					    <th field="dataType" width="100px" formatter="formatDataType">类型</th>
+					    <th field="viewDataType" width="100px">类型</th>
 					    <th field="dataLength" width="50px" align="right" hidden>长度</th>
 					    <th field="dataPrecision" width="50px" align="right" hidden>精度</th>
 					    <th field="dataScale" width="50px" align="right" hidden>量级</th>
@@ -68,6 +67,7 @@
 				是否可为空<input id="sel_nullable" name="sel_nullable" class="easyui-combobox" data-options="panelHeight: 'auto',valueField: 'value',textField: 'text'" style="width:40px;"/>
 				注释<input id="sel_col_comments" name="sel_col_comments" class="easyui-textbox" data-options="" style="width:100px;"/>
 				<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="selectSubData()">查询</a>
+			    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-page_excel" plain="true" onclick="expertExcel()">导出</a>
 		    </div>
 	    </div>
     </div>
@@ -79,7 +79,7 @@
 		$('#sel_tableType').combobox('loadData', typeJson);
 		$('#sel_nullable').combobox('loadData', nullableJson);
     	$('#dataList').datagrid({
-			onClickRow: function(index,row){
+    		onDblClickRow: function(index,row){
 				tableName = row.tableName;
 				changeTabCol(row.tableName);
 			}
@@ -163,12 +163,10 @@
     }
     
     function expertExcel() {
-    	var rows = $('#dataList').datagrid('getChecked');
-    	var tableNames = "";
-    	for(var i=0; i<rows.length; i++) {
-    		tableNames += ","+rows[i].tableName;
+    	if(tableName == null) {
+    		return;
     	}
-    	alert(tableNames);
+    	window.open("${ctx}/sys/db/export.do?tableName="+tableName);
     }
     </script>
   </body>

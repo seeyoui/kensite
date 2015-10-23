@@ -1,6 +1,3 @@
-/**
- * Copyright (c) 2005-2012 springside.org.cn
- */
 package com.seeyoui.kensite.common.util;
 
 import java.lang.reflect.Field;

@@ -4,34 +4,23 @@
  */
 package com.seeyoui.kensite.framework.plugin.db;  
  
-import java.sql.*;
-import java.util.*;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.seeyoui.kensite.common.base.controller.BaseController;
-import com.seeyoui.kensite.common.constants.StringConstant;
-import com.seeyoui.kensite.common.util.RequestResponseUtil;
-
-import com.seeyoui.kensite.common.constants.StringConstant;
-import com.seeyoui.kensite.common.base.domain.EasyUIDataGrid;
-import com.seeyoui.kensite.common.base.controller.BaseController;
-import com.seeyoui.kensite.common.util.RequestResponseUtil;
+import com.seeyoui.kensite.common.util.DateUtils;
+import com.seeyoui.kensite.common.util.excel.ExportExcel;
 import com.seeyoui.kensite.framework.plugin.db.userTabColumns.domain.UserTabColumns;
 import com.seeyoui.kensite.framework.plugin.db.userTabColumns.service.UserTabColumnsService;
 /**
@@ -44,6 +33,9 @@ import com.seeyoui.kensite.framework.plugin.db.userTabColumns.service.UserTabCol
 @Controller
 @RequestMapping(value = "sys/db")
 public class DBColumnsController extends BaseController {
+	
+	@Autowired
+	UserTabColumnsService userTabColumnsService;
 	
 	/**
 	 * 展示列表页面
@@ -59,4 +51,21 @@ public class DBColumnsController extends BaseController {
 		return new ModelAndView("framework/plugin/db/db", modelMap);
 	}
 	
+	/**
+	 * 导出所有数据
+	 * @param modelMap
+	 * @param userTabColumns
+	 * @return
+	 * @throws Exception
+	 */
+//	@RequiresPermissions("sys:userTabColumns:export")
+	@RequestMapping(value = "/export")
+	public String export(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap, UserTabColumns userTabColumns) throws Exception{
+		String fileName = "DATABASE_DICTIONARY"+DateUtils.getDate("yyyyMMddHHmmss")+".xlsx";
+		List<UserTabColumns> userTabColumnsList = userTabColumnsService.findAllUserTabColumnsList(userTabColumns);
+		new ExportExcel(userTabColumns.getTableName(), UserTabColumns.class).setDataList(userTabColumnsList).write(response, fileName).dispose();
+		return null;
+	}
 }

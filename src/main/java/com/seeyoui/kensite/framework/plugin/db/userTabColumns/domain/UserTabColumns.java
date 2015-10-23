@@ -5,6 +5,8 @@
 package com.seeyoui.kensite.framework.plugin.db.userTabColumns.domain;  
 
 import com.seeyoui.kensite.common.base.domain.DataEntity;
+import com.seeyoui.kensite.common.util.StringUtils;
+import com.seeyoui.kensite.common.util.excel.annotation.ExcelField;
 
 /**
  * UserTabColumns
@@ -17,11 +19,15 @@ public class UserTabColumns extends DataEntity<UserTabColumns> {
 	private static final long serialVersionUID = 1L;
     
 	private String tableName;//tableName
+	@ExcelField(title="列名", type=1, align=2, sort=1)
 	private String columnName;//columnName
+	@ExcelField(title="类型", type=1, align=2, sort=10)
+	private String viewDataType;//用于显示类型，例：CHAR(32)
 	private String dataType;//dataType
 	private String dataLength;//dataLength
 	private String dataPrecision;//dataPrecision
 	private String dataScale;//dataScale
+	@ExcelField(title="是否可为空", type=1, align=2, sort=20, dictType="yes_no")
 	private String nullable;//nullable
 	private String columnId;//columnId
 	private String numDistinct;//不重复记录数
@@ -31,6 +37,7 @@ public class UserTabColumns extends DataEntity<UserTabColumns> {
 	private String avgColLen;//avgColLen
 	private String charLength;//charLength
 	private String charUsed;//charUsed
+	@ExcelField(title="注释", type=1, align=2, sort=30)
 	private String comments;//comments
 
 	public void setTableName(String tableName) {
@@ -47,6 +54,26 @@ public class UserTabColumns extends DataEntity<UserTabColumns> {
 	public String getColumnName() {
 		return this.columnName;
 	}
+	public String getViewDataType() {
+		String dataType = this.dataType;
+		if("CHAR".equals(dataType) || "VARCHAR2".equals(dataType) || "NVARCHAR2".equals(dataType)) {
+			dataType += "("+this.charLength+")";
+    	} else if("DATE".equals(dataType)) {
+    		dataType += "";
+    	} else if("NUMBER".equals(dataType)) {
+    		if(StringUtils.isNotBlank(this.dataPrecision) && !"0".equals(this.dataScale)) {
+    			dataType += "("+this.dataPrecision+","+this.dataScale+")";
+    		} else if(StringUtils.isNotBlank(this.dataPrecision)) {
+    			dataType += "("+this.dataPrecision+")";
+    		}
+    	}
+		return dataType;
+	}
+
+	public void setViewDataType(String viewDataType) {
+		this.viewDataType = viewDataType;
+	}
+
 	public void setDataType(String dataType) {
 		this.dataType = dataType;
 	}
