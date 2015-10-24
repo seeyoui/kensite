@@ -33,6 +33,13 @@ public interface SysRoleMapper {
 	public List<SysRole> findSysRoleList(SysRole sysRole);
 	
 	/**
+	 * 查询数据集合
+	 * @param sysRole
+	 * @return
+	 */
+	public List<SysRole> findAllSysRoleList(SysRole sysRole);
+	
+	/**
 	 * 查询用户权限集合
 	 * @param map
 	 * @return

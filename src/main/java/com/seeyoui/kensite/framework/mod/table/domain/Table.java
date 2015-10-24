@@ -16,6 +16,7 @@ public class Table extends DataEntity<Table> {
 	private static final long serialVersionUID = 5454155825314635342L;
     
 	private String name;//名称name
+	private String newName;//新名字newName
 	private String comments;//描述comments
 	private String parentTable;//关联父表parentTable
 	private String parentTableFk;//关联父表外键parentTableFk
@@ -27,6 +28,14 @@ public class Table extends DataEntity<Table> {
 	public String getName() {
 		return this.name;
 	}
+	public String getNewName() {
+		return newName;
+	}
+
+	public void setNewName(String newName) {
+		this.newName = newName;
+	}
+
 	public void setComments(String comments) {
 		this.comments = comments;
 	}

@@ -15,6 +15,7 @@ import com.seeyoui.kensite.common.base.service.BaseService;
 import com.seeyoui.kensite.common.exception.CRUDException;
 import com.seeyoui.kensite.common.util.*;
 import com.seeyoui.kensite.common.constants.StringConstant;
+import com.seeyoui.kensite.framework.mod.db.persistence.DBMapper;
 import com.seeyoui.kensite.framework.mod.table.domain.Table;
 import com.seeyoui.kensite.framework.mod.table.persistence.TableMapper;
 import com.seeyoui.kensite.framework.act.idgenerator.GeneratorUUID;
@@ -30,6 +31,8 @@ public class TableService extends BaseService {
 	
 	@Autowired
 	private TableMapper tableMapper;
+	@Autowired
+	private DBMapper dbMapper;
 
 	/**
 	 * 根据ID查询单条数据
@@ -89,6 +92,8 @@ public class TableService extends BaseService {
 	public void saveTable(Table table) throws CRUDException{
 		table.preInsert();
 		tableMapper.saveTable(table);
+		dbMapper.createTable(table);
+		dbMapper.commentTable(table);
 	}
 	
 	/**
@@ -98,7 +103,8 @@ public class TableService extends BaseService {
 	 */
 	public void updateTable(Table table) throws CRUDException{
 		table.preUpdate();
-		tableMapper.updateTable(table);			
+		tableMapper.updateTable(table);
+		dbMapper.commentTable(table);
 	}
 	
 	/**
@@ -107,6 +113,10 @@ public class TableService extends BaseService {
 	 * @throws CRUDException
 	 */
 	public void deleteTable(List<String> listId) throws CRUDException {
+		for(String id : listId) {
+			Table table = tableMapper.findTableById(id);
+			dbMapper.dropTable(table);
+		}
 		tableMapper.deleteTable(listId);
 	}
 	

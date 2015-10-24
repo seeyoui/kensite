@@ -48,6 +48,16 @@ public class SysRoleService extends BaseService {
 	}
 	
 	/**
+	 * 查询数据集合
+	 * @param sysRole
+	 * @return
+	 * @throws CRUDException
+	 */
+	public List<SysRole> findAllSysRoleList(SysRole sysRole) throws CRUDException {
+		return sysRoleMapper.findAllSysRoleList(sysRole);
+	}
+	
+	/**
 	 * 查询用户权限集合
 	 * @param sysRole
 	 * @return

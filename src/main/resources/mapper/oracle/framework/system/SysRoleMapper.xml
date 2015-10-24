@@ -45,6 +45,15 @@
 		) t where rownum &lt; = #{page}*#{rows}) where rn &gt; (#{page}-1)*#{rows}
 	</select>
 	
+	<!-- 查询数据集合 -->
+	<select id="findAllSysRoleList" resultType="com.seeyoui.kensite.framework.system.domain.SysRole">
+		SELECT
+		<include refid="tableColumns"/>
+		FROM SYS_ROLE t
+		<include refid="whereStr"/>
+		<include refid="orderBy"/>
+	</select>
+	
 	<!-- 查询用户权限集合 -->
 	<select id="findSysUserRoleList" resultType="com.seeyoui.kensite.framework.system.domain.SysRole" parameterType="SysUser">
 		select 

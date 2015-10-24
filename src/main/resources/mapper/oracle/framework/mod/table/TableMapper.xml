@@ -105,11 +105,6 @@
 	<!-- 数据新增 -->
 	<insert id="saveTable" parameterType="com.seeyoui.kensite.framework.mod.table.domain.Table">
 		INSERT INTO MOD_TABLE (
-	    	
-	    	
-	    	
-	    	
-	    	
 	    	NAME,
 	    	COMMENTS,
 	    	PARENT_TABLE,
@@ -121,11 +116,6 @@
 		    ID
 		)
 		VALUES (
-			
-			
-			
-			
-			
 			#{name,jdbcType=VARCHAR},
 			#{comments,jdbcType=VARCHAR},
 			#{parentTable,jdbcType=VARCHAR},
@@ -142,11 +132,6 @@
 	<update id="updateTable" parameterType="com.seeyoui.kensite.framework.mod.table.domain.Table">
 		UPDATE MOD_TABLE
 		<set>
-	    	
-	    	
-	    	
-	    	
-	    	
 	    	<if test="name !=null and name !=''">
 			NAME=#{name},
 			</if>

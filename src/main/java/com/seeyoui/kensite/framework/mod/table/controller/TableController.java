@@ -4,8 +4,8 @@
  */
 package com.seeyoui.kensite.framework.mod.table.controller;  
  
-import java.sql.*;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,18 +20,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.seeyoui.kensite.common.base.controller.BaseController;
-import com.seeyoui.kensite.common.constants.StringConstant;
-import com.seeyoui.kensite.common.util.RequestResponseUtil;
-
-import com.seeyoui.kensite.common.constants.StringConstant;
 import com.seeyoui.kensite.common.base.domain.EasyUIDataGrid;
-import com.seeyoui.kensite.common.base.controller.BaseController;
+import com.seeyoui.kensite.common.constants.StringConstant;
 import com.seeyoui.kensite.common.util.RequestResponseUtil;
+import com.seeyoui.kensite.framework.mod.db.service.DBService;
 import com.seeyoui.kensite.framework.mod.table.domain.Table;
 import com.seeyoui.kensite.framework.mod.table.service.TableService;
 /**
@@ -46,6 +42,9 @@ public class TableController extends BaseController {
 	
 	@Autowired
 	private TableService tableService;
+	
+	@Autowired
+	private DBService dbService;
 	
 	/**
 	 * 展示列表页面
