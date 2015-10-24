@@ -18,6 +18,7 @@ import com.seeyoui.kensite.common.constants.StringConstant;
 import com.seeyoui.kensite.framework.mod.db.persistence.DBMapper;
 import com.seeyoui.kensite.framework.mod.table.domain.Table;
 import com.seeyoui.kensite.framework.mod.table.persistence.TableMapper;
+import com.seeyoui.kensite.framework.mod.tableColumn.domain.TableColumn;
 import com.seeyoui.kensite.framework.act.idgenerator.GeneratorUUID;
 
 /**
@@ -94,6 +95,36 @@ public class TableService extends BaseService {
 		tableMapper.saveTable(table);
 		dbMapper.createTable(table);
 		dbMapper.commentTable(table);
+		TableColumn column = new TableColumn();
+		column.setTableName(table.getName());
+		column.setName("ID");
+		column.setComments("主键");
+		dbMapper.commentColumn(column);
+		dbMapper.addPrimaryKey(column);
+
+		column.setName("CREATE_DATE");
+		column.setComments("创建日期");
+		dbMapper.commentColumn(column);
+
+		column.setName("CREATE_USER");
+		column.setComments("创建用户");
+		dbMapper.commentColumn(column);
+
+		column.setName("UPDATE_DATE");
+		column.setComments("修改日期");
+		dbMapper.commentColumn(column);
+
+		column.setName("UPDATE_USER");
+		column.setComments("修改用户");
+		dbMapper.commentColumn(column);
+
+		column.setName("REMARKS");
+		column.setComments("备注信息");
+		dbMapper.commentColumn(column);
+
+		column.setName("DEL_FLAG");
+		column.setComments("删除标记");
+		dbMapper.commentColumn(column);
 	}
 	
 	/**

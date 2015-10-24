@@ -13,6 +13,7 @@ import com.seeyoui.kensite.common.base.service.BaseService;
 import com.seeyoui.kensite.common.exception.CRUDException;
 import com.seeyoui.kensite.framework.mod.db.persistence.DBMapper;
 import com.seeyoui.kensite.framework.mod.table.domain.Table;
+import com.seeyoui.kensite.framework.mod.tableColumn.domain.TableColumn;
 
 /**
  * @author cuichen
@@ -33,6 +34,36 @@ public class DBService extends BaseService {
 	 */
 	public void createTable(Table table) throws CRUDException{
 		dbMapper.createTable(table);
+		TableColumn column = new TableColumn();
+		column.setTableName(table.getName());
+		column.setName("ID");
+		column.setComments("主键");
+		dbMapper.commentColumn(column);
+		dbMapper.addPrimaryKey(column);
+
+		column.setName("CREATE_DATE");
+		column.setComments("创建日期");
+		dbMapper.commentColumn(column);
+
+		column.setName("CREATE_USER");
+		column.setComments("创建用户");
+		dbMapper.commentColumn(column);
+
+		column.setName("UPDATE_DATE");
+		column.setComments("修改日期");
+		dbMapper.commentColumn(column);
+
+		column.setName("UPDATE_USER");
+		column.setComments("修改用户");
+		dbMapper.commentColumn(column);
+
+		column.setName("REMARKS");
+		column.setComments("备注信息");
+		dbMapper.commentColumn(column);
+
+		column.setName("DEL_FLAG");
+		column.setComments("删除标记");
+		dbMapper.commentColumn(column);
 	}
 	
 	/**
@@ -62,4 +93,57 @@ public class DBService extends BaseService {
 		dbMapper.dropTable(table);
 	}
 	
+	/**
+	 * 增加字段
+	 * @param tableColumn
+	 * @throws CRUDException
+	 */
+	public void addColumn(TableColumn tableColumn) throws CRUDException{
+		dbMapper.addColumn(tableColumn);
+	}
+
+	/**
+	 * 修改字段
+	 * @param tableColumn
+	 * @throws CRUDException
+	 */
+	public void modifyColumn(TableColumn tableColumn) throws CRUDException{
+		dbMapper.modifyColumn(tableColumn);
+	}
+
+	/**
+	 * 删除字段
+	 * @param tableColumn
+	 * @throws CRUDException
+	 */
+	public void dropColumn(TableColumn tableColumn) throws CRUDException{
+		dbMapper.dropColumn(tableColumn);
+	}
+
+	/**
+	 * 给表添加注释
+	 * @param tableColumn
+	 * @throws CRUDException
+	 */
+	public void commentColumn(TableColumn tableColumn) throws CRUDException{
+		dbMapper.commentColumn(tableColumn);
+	}
+
+	/**
+	 * 给表添加主键
+	 * @param tableColumn
+	 * @throws CRUDException
+	 */
+	public void addPrimaryKey(TableColumn tableColumn) throws CRUDException{
+		dbMapper.addPrimaryKey(tableColumn);
+	}
+
+	/**
+	 * 给表删除主键
+	 * @param tableColumn
+	 * @throws CRUDException
+	 */
+	public void dropPrimaryKey(TableColumn tableColumn) throws CRUDException{
+		dbMapper.dropPrimaryKey(tableColumn);
+	}
 }

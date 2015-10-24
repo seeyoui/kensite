@@ -20,40 +20,27 @@
 		        <thead>
 		            <tr>
 					    <th field="id" width="100px" hidden>主键</th>
-					    
-					    
-					    
-					    
 					    <th field="name" width="100px">名称</th>
 					    <th field="comments" width="100px">描述</th>
 					    <th field="parentTable" width="100px">关联父表</th>
 					    <th field="parentTableFk" width="100px">关联父表外键</th>
-					    
-					    
 		            </tr>
 		        </thead>
 		    </table>
 		    <div id="toolbar">
-		    	<shiro:hasPermission name="table:insert">
+		    	<shiro:hasPermission name="sys:table:insert">
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newInfo()">新建</a>
 		        </shiro:hasPermission>
-		        <shiro:hasPermission name="table:update">
+		        <shiro:hasPermission name="sys:table:update">
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editInfo()">修改</a>
 		        </shiro:hasPermission>
-		        <shiro:hasPermission name="table:delete">
+		        <shiro:hasPermission name="sys:table:delete">
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyInfo()">删除</a>
 		        </shiro:hasPermission>
-
-
-
-
-
 				名称<input id="sel_name" name="sel_name" class="easyui-textbox" data-options=""/>
 				描述<input id="sel_comments" name="sel_comments" class="easyui-textbox" data-options=""/>
 				关联父表<input id="sel_parentTable" name="sel_parentTable" class="easyui-textbox" data-options=""/>
 				关联父表外键<input id="sel_parentTableFk" name="sel_parentTableFk" class="easyui-textbox" data-options=""/>
-
-
 			    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="selectData()">查询</a>
 		    </div>
 		    <div id="dataWin" class="easyui-window" title="业务表信息维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:400px;height:260px;padding:10px;">

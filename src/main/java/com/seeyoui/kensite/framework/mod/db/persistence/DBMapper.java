@@ -5,6 +5,7 @@
 package com.seeyoui.kensite.framework.mod.db.persistence;  
 
 import com.seeyoui.kensite.framework.mod.table.domain.Table;
+import com.seeyoui.kensite.framework.mod.tableColumn.domain.TableColumn;
 
 /**
  * @author cuichen
@@ -38,4 +39,39 @@ public interface DBMapper {
 	 */
 	public void dropTable(Table table);
 	
+	/**
+	 * 增加字段
+	 * @param tableColumn
+	 */
+	public void addColumn(TableColumn tableColumn);
+
+	/**
+	 * 修改字段
+	 * @param tableColumn
+	 */
+	public void modifyColumn(TableColumn tableColumn);
+
+	/**
+	 * 删除字段
+	 * @param tableColumn
+	 */
+	public void dropColumn(TableColumn tableColumn);
+
+	/**
+	 * 给表添加注释
+	 * @param tableColumn
+	 */
+	public void commentColumn(TableColumn tableColumn);
+
+	/**
+	 * 给表添加主键
+	 * @param tableColumn
+	 */
+	public void addPrimaryKey(TableColumn tableColumn);
+
+	/**
+	 * 给表删除主键
+	 * @param tableColumn
+	 */
+	public void dropPrimaryKey(TableColumn tableColumn);
 }

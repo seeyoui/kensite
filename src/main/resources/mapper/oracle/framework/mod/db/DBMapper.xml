@@ -20,14 +20,44 @@
 		rename ${name} to ${newName}
 	</update>
 	
+	<!-- 删除表 -->
+	<update id="dropTable" parameterType="com.seeyoui.kensite.framework.mod.table.domain.Table">
+		drop table ${name} cascade constraints
+	</update>
+	
 	<!-- 给表添加注释 -->
 	<update id="commentTable" parameterType="com.seeyoui.kensite.framework.mod.table.domain.Table">
 		comment on table ${name} is '${comments}'
 	</update>
 	
-	<!-- 删除表 -->
-	<update id="dropTable" parameterType="com.seeyoui.kensite.framework.mod.table.domain.Table">
-		drop table ${name} cascade constraints
+	<!-- 增加字段 -->
+	<update id="addColumn" parameterType="com.seeyoui.kensite.framework.mod.tableColumn.domain.TableColumn">
+		alter table ${tableName} add ${name} ${jdbcType}
+	</update>
+	
+	<!-- 修改字段 -->
+	<update id="modifyColumn" parameterType="com.seeyoui.kensite.framework.mod.tableColumn.domain.TableColumn">
+		alter table ${tableName} modify ${name} ${jdbcType}
+	</update>
+	
+	<!-- 删除字段 -->
+	<update id="dropColumn" parameterType="com.seeyoui.kensite.framework.mod.tableColumn.domain.TableColumn">
+		alter table ${tableName} drop column ${name}
+	</update>
+	
+	<!-- 给表添加注释 -->
+	<update id="commentColumn" parameterType="com.seeyoui.kensite.framework.mod.tableColumn.domain.TableColumn">
+		comment on column ${tableName}.${name} is '${comments}'
+	</update>
+	
+	<!-- 给表添加主键 -->
+	<update id="addPrimaryKey" parameterType="com.seeyoui.kensite.framework.mod.tableColumn.domain.TableColumn">
+		alter table ${tableName} add constraint ${tableName}_ID primary key(${name})
+	</update>
+	
+	<!-- 给表删除主键 -->
+	<update id="dropPrimaryKey" parameterType="com.seeyoui.kensite.framework.mod.tableColumn.domain.TableColumn">
+		alter table ${tableName} drop constraint ${tableName}_ID
 	</update>
 	
 </mapper>

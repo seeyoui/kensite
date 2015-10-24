@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.seeyoui.kensite.framework.mod.tableColumn.persistence.TableColumnMapper" >
+	<!-- 查询单表的字段 -->
+	<sql id="tableColumns">
+	    T.ID AS "id",
+	    T.CREATE_DATE AS "createDate",
+	    T.CREATE_USER AS "createUser",
+	    T.UPDATE_DATE AS "updateDate",
+	    T.UPDATE_USER AS "updateUser",
+	    T.TABLE_NAME AS "tableName",
+	    T.NAME AS "name",
+	    T.COMMENTS AS "comments",
+	    T.JDBC_TYPE AS "jdbcType",
+	    T.IS_PK AS "isPk",
+	    T.IS_NULL AS "isNull",
+	    T.IS_INSERT AS "isInsert",
+	    T.IS_EDIT AS "isEdit",
+	    T.IS_LIST AS "isList",
+	    T.IS_QUERY AS "isQuery",
+	    T.QUERY_TYPE AS "queryType",
+	    T.CATEGORY AS "category",
+	    T.SORT_TYPE AS "sortType",
+	    T.DEFAULT_VALUE AS "defaultValue",
+	    T.VALID_TYPE AS "validType",
+	    T.SETTINGS AS "settings",
+	    T.REMARKS AS "remarks",
+	    T.DEL_FLAG AS "delFlag"
+	</sql>
+	<!-- 查询过滤条件 -->
+	<sql id="whereStr">
+		<where>
+			1=1
+			<if test="id != null and id != ''">
+				AND T.ID LIKE '%'||#{id}||'%'
+			</if>
+			<if test="createDate != null and createDate != ''">
+				AND T.CREATE_DATE = #{createDate}
+			</if>
+			<if test="createUser != null and createUser != ''">
+				AND T.CREATE_USER LIKE '%'||#{createUser}||'%'
+			</if>
+			<if test="updateDate != null and updateDate != ''">
+				AND T.UPDATE_DATE = #{updateDate}
+			</if>
+			<if test="updateUser != null and updateUser != ''">
+				AND T.UPDATE_USER LIKE '%'||#{updateUser}||'%'
+			</if>
+			<if test="tableName != null and tableName != ''">
+				AND T.TABLE_NAME LIKE '%'||#{tableName}||'%'
+			</if>
+			<if test="name != null and name != ''">
+				AND T.NAME LIKE '%'||#{name}||'%'
+			</if>
+			<if test="comments != null and comments != ''">
+				AND T.COMMENTS LIKE '%'||#{comments}||'%'
+			</if>
+			<if test="jdbcType != null and jdbcType != ''">
+				AND T.JDBC_TYPE LIKE '%'||#{jdbcType}||'%'
+			</if>
+			<if test="isPk != null and isPk != ''">
+				AND T.IS_PK LIKE '%'||#{isPk}||'%'
+			</if>
+			<if test="isNull != null and isNull != ''">
+				AND T.IS_NULL LIKE '%'||#{isNull}||'%'
+			</if>
+			<if test="isInsert != null and isInsert != ''">
+				AND T.IS_INSERT LIKE '%'||#{isInsert}||'%'
+			</if>
+			<if test="isEdit != null and isEdit != ''">
+				AND T.IS_EDIT LIKE '%'||#{isEdit}||'%'
+			</if>
+			<if test="isList != null and isList != ''">
+				AND T.IS_LIST LIKE '%'||#{isList}||'%'
+			</if>
+			<if test="isQuery != null and isQuery != ''">
+				AND T.IS_QUERY LIKE '%'||#{isQuery}||'%'
+			</if>
+			<if test="queryType != null and queryType != ''">
+				AND T.QUERY_TYPE LIKE '%'||#{queryType}||'%'
+			</if>
+			<if test="category != null and category != ''">
+				AND T.CATEGORY LIKE '%'||#{category}||'%'
+			</if>
+			<if test="sortType != null and sortType != ''">
+				AND T.SORT_TYPE LIKE '%'||#{sortType}||'%'
+			</if>
+			<if test="defaultValue != null and defaultValue != ''">
+				AND T.DEFAULT_VALUE LIKE '%'||#{defaultValue}||'%'
+			</if>
+			<if test="validType != null and validType != ''">
+				AND T.VALID_TYPE LIKE '%'||#{validType}||'%'
+			</if>
+			<if test="settings != null and settings != ''">
+				AND T.SETTINGS LIKE '%'||#{settings}||'%'
+			</if>
+			<if test="remarks != null and remarks != ''">
+				AND T.REMARKS LIKE '%'||#{remarks}||'%'
+			</if>
+			<if test="delFlag != null and delFlag != ''">
+				AND T.DEL_FLAG LIKE '%'||#{delFlag}||'%'
+			</if>
+		</where>
+	</sql>
+	<sql id="orderBy">
+		ORDER BY T.CREATE_DATE DESC 
+	</sql>
+	
+	<!-- 根据ID查询单条数据 -->
+	<select id="findTableColumnById" resultType="com.seeyoui.kensite.framework.mod.tableColumn.domain.TableColumn">
+		SELECT
+		<include refid="tableColumns" />
+		FROM MOD_TABLE_COLUMN T
+		WHERE T.ID = #{id}
+	</select>
+	
+	<!-- 查询数据集合 -->
+	<select id="findTableColumnList" resultType="com.seeyoui.kensite.framework.mod.tableColumn.domain.TableColumn">
+		select * from(select T.*,rownum rn from(
+			SELECT
+			<include refid="tableColumns"/>
+			FROM MOD_TABLE_COLUMN T
+			<include refid="whereStr"/>
+			<include refid="orderBy"/>
+		) T WHERE rownum &lt; = #{page}*#{rows}) where rn &gt; (#{page}-1)*#{rows}
+	</select>
+	
+	<!-- 查询所有数据集合 -->
+	<select id="findAllTableColumnList" resultType="com.seeyoui.kensite.framework.mod.tableColumn.domain.TableColumn">
+		SELECT
+		<include refid="tableColumns"/>
+		FROM MOD_TABLE_COLUMN T
+		<include refid="whereStr"/>
+		<include refid="orderBy"/>
+	</select>
+	
+	<!-- 查询数据总数 -->
+	<select id="findTableColumnListTotal" resultType="EasyUIDataGrid">
+		SELECT
+		COUNT(1) total
+		FROM MOD_TABLE_COLUMN T
+		<include refid="whereStr"/>
+	</select>
+	
+	<!-- 查询数据总数 -->
+	<select id="findTableColumnTotal" resultType="Integer">
+		SELECT
+		COUNT(1) total
+		FROM MOD_TABLE_COLUMN T
+		<include refid="whereStr"/>
+	</select>
+	
+	<!-- 数据新增 -->
+	<insert id="saveTableColumn" parameterType="com.seeyoui.kensite.framework.mod.tableColumn.domain.TableColumn">
+		INSERT INTO MOD_TABLE_COLUMN (
+	    	
+	    	
+	    	
+	    	
+	    	
+	    	TABLE_NAME,
+	    	NAME,
+	    	COMMENTS,
+	    	JDBC_TYPE,
+	    	IS_PK,
+	    	IS_NULL,
+	    	IS_INSERT,
+	    	IS_EDIT,
+	    	IS_LIST,
+	    	IS_QUERY,
+	    	QUERY_TYPE,
+	    	CATEGORY,
+	    	SORT_TYPE,
+	    	DEFAULT_VALUE,
+	    	VALID_TYPE,
+	    	SETTINGS,
+	    	REMARKS,
+	    	DEL_FLAG,
+		    CREATE_USER,
+		    CREATE_DATE,
+		    ID
+		)
+		VALUES (
+			
+			
+			
+			
+			
+			#{tableName,jdbcType=VARCHAR},
+			#{name,jdbcType=VARCHAR},
+			#{comments,jdbcType=VARCHAR},
+			#{jdbcType,jdbcType=VARCHAR},
+			#{isPk,jdbcType=VARCHAR},
+			#{isNull,jdbcType=VARCHAR},
+			#{isInsert,jdbcType=VARCHAR},
+			#{isEdit,jdbcType=VARCHAR},
+			#{isList,jdbcType=VARCHAR},
+			#{isQuery,jdbcType=VARCHAR},
+			#{queryType,jdbcType=VARCHAR},
+			#{category,jdbcType=VARCHAR},
+			#{sortType,jdbcType=VARCHAR},
+			#{defaultValue,jdbcType=VARCHAR},
+			#{validType,jdbcType=VARCHAR},
+			#{settings,jdbcType=VARCHAR},
+			#{remarks,jdbcType=VARCHAR},
+			#{delFlag,jdbcType=VARCHAR},
+			#{createUser.userName},
+			sysdate,
+		    #{id}
+		)
+	</insert>
+	
+	<!-- 数据修改 -->
+	<update id="updateTableColumn" parameterType="com.seeyoui.kensite.framework.mod.tableColumn.domain.TableColumn">
+		UPDATE MOD_TABLE_COLUMN
+		<set>
+	    	
+	    	
+	    	
+	    	
+	    	
+	    	<if test="tableName !=null and tableName !=''">
+			TABLE_NAME=#{tableName},
+			</if>
+	    	<if test="name !=null and name !=''">
+			NAME=#{name},
+			</if>
+	    	<if test="comments !=null and comments !=''">
+			COMMENTS=#{comments},
+			</if>
+	    	<if test="jdbcType !=null and jdbcType !=''">
+			JDBC_TYPE=#{jdbcType},
+			</if>
+	    	<if test="isPk !=null and isPk !=''">
+			IS_PK=#{isPk},
+			</if>
+	    	<if test="isNull !=null and isNull !=''">
+			IS_NULL=#{isNull},
+			</if>
+	    	<if test="isInsert !=null and isInsert !=''">
+			IS_INSERT=#{isInsert},
+			</if>
+	    	<if test="isEdit !=null and isEdit !=''">
+			IS_EDIT=#{isEdit},
+			</if>
+	    	<if test="isList !=null and isList !=''">
+			IS_LIST=#{isList},
+			</if>
+	    	<if test="isQuery !=null and isQuery !=''">
+			IS_QUERY=#{isQuery},
+			</if>
+	    	<if test="queryType !=null and queryType !=''">
+			QUERY_TYPE=#{queryType},
+			</if>
+	    	<if test="category !=null and category !=''">
+			CATEGORY=#{category},
+			</if>
+	    	<if test="sortType !=null and sortType !=''">
+			SORT_TYPE=#{sortType},
+			</if>
+	    	<if test="defaultValue !=null and defaultValue !=''">
+			DEFAULT_VALUE=#{defaultValue},
+			</if>
+	    	<if test="validType !=null and validType !=''">
+			VALID_TYPE=#{validType},
+			</if>
+	    	<if test="settings !=null and settings !=''">
+			SETTINGS=#{settings},
+			</if>
+	    	<if test="remarks !=null and remarks !=''">
+			REMARKS=#{remarks},
+			</if>
+	    	<if test="delFlag !=null and delFlag !=''">
+			DEL_FLAG=#{delFlag},
+			</if>
+		    UPDATE_USER = #{updateUser.userName},
+		    UPDATE_DATE = sysdate,
+		    ID = #{id}
+		</set>
+		WHERE ID = #{id}
+	</update>
+	
+	<!-- 数据删除 -->
+	<delete id="deleteTableColumn">
+		DELETE FROM MOD_TABLE_COLUMN WHERE id IN 
+		<foreach item="listId" collection="list"
+			open="(" separator="," close=")">
+			#{listId}
+		</foreach>
+	</delete>
+</mapper>
