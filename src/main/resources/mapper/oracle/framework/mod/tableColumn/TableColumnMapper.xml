@@ -103,7 +103,7 @@
 		</where>
 	</sql>
 	<sql id="orderBy">
-		ORDER BY T.CREATE_DATE DESC 
+		ORDER BY T.CREATE_DATE ASC 
 	</sql>
 	
 	<!-- 根据ID查询单条数据 -->
@@ -278,6 +278,17 @@
 		    ID = #{id}
 		</set>
 		WHERE ID = #{id}
+	</update>
+	
+	<!-- 数据修改 -->
+	<update id="renameTableName" parameterType="com.seeyoui.kensite.framework.mod.tableColumn.domain.TableColumn">
+		UPDATE MOD_TABLE_COLUMN
+		<set>
+	    	<if test="tableName !=null and tableName !=''">
+			TABLE_NAME=#{tableName},
+			</if>
+		</set>
+		WHERE TABLE_NAME = #{oldTableName}
 	</update>
 	
 	<!-- 数据删除 -->

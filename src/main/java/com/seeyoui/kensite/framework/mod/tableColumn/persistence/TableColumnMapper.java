@@ -65,6 +65,12 @@ public interface TableColumnMapper {
 	public void updateTableColumn(TableColumn tableColumn);
 	
 	/**
+	 * 表名重命名
+	 * @param tableColumn
+	 */
+	public void renameTableName(TableColumn tableColumn);
+	
+	/**
 	 * 数据删除
 	 * @param listId
 	 */

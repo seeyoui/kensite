@@ -34,6 +34,9 @@ public class TableColumn extends DataEntity<TableColumn> {
 	private String defaultValue;//默认值
 	private String validType;//校验类型
 	private String settings;//扩展设置
+	private String modifyStr;//修改字符串
+	private String oldName;//修改之前的名字
+	private String oldTableName;//修改之前的表名字
 
 	public void setTableName(String tableName) {
 		this.tableName = tableName;
@@ -147,4 +150,29 @@ public class TableColumn extends DataEntity<TableColumn> {
 	public String getSettings() {
 		return this.settings;
 	}
+
+	public String getModifyStr() {
+		return modifyStr;
+	}
+
+	public void setModifyStr(String modifyStr) {
+		this.modifyStr = modifyStr;
+	}
+
+	public String getOldName() {
+		return oldName;
+	}
+
+	public void setOldName(String oldName) {
+		this.oldName = oldName;
+	}
+
+	public String getOldTableName() {
+		return oldTableName;
+	}
+
+	public void setOldTableName(String oldTableName) {
+		this.oldTableName = oldTableName;
+	}
+
 }

@@ -53,7 +53,7 @@
 					    <th field="tableName" width="100px" hidden>业务表</th>
 					    <th field="name" width="100px">列名</th>
 					    <th field="comments" width="100px">注释</th>
-					    <th field="jdbcType" width="60px">类型</th>
+					    <th field="jdbcType" width="120px">类型</th>
 					    <th field="isPk" width="60px" formatter="formatNullable">是否主键</th>
 					    <th field="isNull" width="60px" formatter="formatNullable">是否为空</th>
 					    <th field="isInsert" width="60px" formatter="formatNullable">是否插入</th>
@@ -196,8 +196,8 @@
 		$('#isQuery').combobox('loadData', nullableJson);
     	$('#dataList').datagrid({
     		onDblClickRow: function(index,row){
-				tableName = row.tableName;
-				changeTabCol(row.tableName);
+				tableName = row.name;
+				changeTabCol(row.name);
 			}
 		});
     	$('#dataSubList').datagrid('loadData',{total:0,rows:[]});
@@ -216,6 +216,10 @@
     		name:sel_name,
 		    comments:sel_comments
     	});
+    }
+    function reloadData() {
+    	selectData();
+    	$('#dataSubList').datagrid('loadData',{total:0,rows:[]});
     }
     
     function formatNullable(val,row) {
@@ -238,6 +242,9 @@
 		    comments:sel_comments,
 		    jdbcType:sel_jdbcType
     	});
+    }
+    function reloadSubData() {
+    	selectSubData();
     }
     
     </script>
@@ -314,7 +321,12 @@
     var url;
     function newSubInfo(){
         cleanErrMsg();
+        if(tableName==null || tableName=="") {
+        	layer.msg("请选择数据表", {offset: 'rb',icon: 6,shift: 8,time: layerMsgTime});
+        	return;
+        }
         $('#dataSubForm').form('clear');
+        $("#tableName").val(tableName);
         $('#dataSubWin').window('open');
         url = '${ctx}/sys/tableColumn/saveByAdd.do';
     }
@@ -323,6 +335,7 @@
         if (row){
         	cleanErrMsg();
             $('#dataSubForm').form('load',row);
+            $("#tableName").val(tableName);
             $('#dataSubWin').window('open');
             url = '${ctx}/sys/tableColumn/saveByUpdate.do?id='+row.id;
         }    	
@@ -344,7 +357,7 @@
                 if (data.success=="<%=StringConstant.TRUE%>"){
                     layer.msg("操作成功！", {offset: 'rb',icon: 6,shift: 8,time: layerMsgTime});
             		$('#dataSubWin').window('close'); 
-            		reloadData();
+            		reloadSubData();
                 } else {
                     layer.msg("操作失败！", {offset: 'rb',icon: 5,shift: 8,time: layerMsgTime});
                     renderErrMsg(data.message);
@@ -369,7 +382,7 @@
 							layer.close(loadi);
 							if (data.success=="<%=StringConstant.TRUE%>"){
 		                        layer.msg("操作成功！", {offset: 'rb',icon: 6,shift: 8,time: layerMsgTime});
-								reloadData();
+								reloadSubData();
 		                    } else {
 			                    layer.msg("操作失败！", {offset: 'rb',icon: 5,shift: 8,time: layerMsgTime});
 		                    }

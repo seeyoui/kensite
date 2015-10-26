@@ -64,6 +64,12 @@ public interface TableMapper {
 	public void updateTable(Table table);
 	
 	/**
+	 * 数据外键关联修改
+	 * @param table
+	 */
+	public void updateTableFk(Table table);
+	
+	/**
 	 * 数据删除
 	 * @param listId
 	 */

@@ -99,7 +99,12 @@
 		SELECT
 		COUNT(1) total
 		FROM MOD_TABLE T
-		<include refid="whereStr"/>
+		<where>
+			1=1
+			<if test="name != null and name != ''">
+				AND T.NAME LIKE #{name}
+			</if>
+		</where>
 	</select>
 	
 	<!-- 数据新增 -->
@@ -155,6 +160,17 @@
 		    ID = #{id}
 		</set>
 		WHERE ID = #{id}
+	</update>
+	
+	<!-- 数据修改 -->
+	<update id="updateTableFk" parameterType="com.seeyoui.kensite.framework.mod.table.domain.Table">
+		UPDATE MOD_TABLE
+		<set>
+	    	<if test="name !=null and name !=''">
+			PARENT_TABLE=#{name}
+			</if>
+		</set>
+		WHERE PARENT_TABLE = #{oldName}
 	</update>
 	
 	<!-- 数据删除 -->

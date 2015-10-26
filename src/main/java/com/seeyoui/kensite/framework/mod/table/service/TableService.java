@@ -3,23 +3,19 @@
  * Since 2014 - 2015
  */package com.seeyoui.kensite.framework.mod.table.service;  
  
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.seeyoui.kensite.common.base.service.BaseService;
-
-import java.util.*;
 
 import com.seeyoui.kensite.common.base.domain.EasyUIDataGrid;
 import com.seeyoui.kensite.common.base.service.BaseService;
 import com.seeyoui.kensite.common.exception.CRUDException;
-import com.seeyoui.kensite.common.util.*;
-import com.seeyoui.kensite.common.constants.StringConstant;
 import com.seeyoui.kensite.framework.mod.db.persistence.DBMapper;
 import com.seeyoui.kensite.framework.mod.table.domain.Table;
 import com.seeyoui.kensite.framework.mod.table.persistence.TableMapper;
 import com.seeyoui.kensite.framework.mod.tableColumn.domain.TableColumn;
-import com.seeyoui.kensite.framework.act.idgenerator.GeneratorUUID;
+import com.seeyoui.kensite.framework.mod.tableColumn.persistence.TableColumnMapper;
 
 /**
  * @author cuichen
@@ -32,6 +28,8 @@ public class TableService extends BaseService {
 	
 	@Autowired
 	private TableMapper tableMapper;
+	@Autowired
+	private TableColumnMapper tableColumnMapper;
 	@Autowired
 	private DBMapper dbMapper;
 
@@ -133,9 +131,21 @@ public class TableService extends BaseService {
 	 * @throws CRUDException
 	 */
 	public void updateTable(Table table) throws CRUDException{
+		Table tableOld = tableMapper.findTableById(table.getId());
 		table.preUpdate();
 		tableMapper.updateTable(table);
-		dbMapper.commentTable(table);
+		if(table.getName()!=null && !table.getName().equals(tableOld.getName())) {
+			table.setOldName(tableOld.getName());
+			dbMapper.renameTable(table);
+			tableMapper.updateTableFk(table);
+			TableColumn tableColumn = new TableColumn();
+			tableColumn.setOldTableName(tableOld.getName());
+			tableColumn.setTableName(table.getName());
+			tableColumnMapper.renameTableName(tableColumn);
+		}
+		if(table.getComments()!=null && !table.getComments().equals(tableOld.getComments())) {
+			dbMapper.commentTable(table);
+		}
 	}
 	
 	/**

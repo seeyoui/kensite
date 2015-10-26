@@ -11,13 +11,13 @@
 			update_date DATE default SYSDATE,
 			update_user VARCHAR2(50),
 			remarks     VARCHAR2(255),
-			del_flag    CHAR(1) default '0' not null
+			del_flag    CHAR(1) default '0'
 		)
 	</update>
 	
 	<!-- 表重命名 -->
 	<update id="renameTable" parameterType="com.seeyoui.kensite.framework.mod.table.domain.Table">
-		rename ${name} to ${newName}
+		rename ${oldName} to ${name}
 	</update>
 	
 	<!-- 删除表 -->
@@ -32,12 +32,26 @@
 	
 	<!-- 增加字段 -->
 	<update id="addColumn" parameterType="com.seeyoui.kensite.framework.mod.tableColumn.domain.TableColumn">
-		alter table ${tableName} add ${name} ${jdbcType}
+		alter table ${tableName} add ${name} ${jdbcType} 
+		<if test="defaultValue != null and defaultValue != ''">
+			default '${defaultValue}' 
+		</if>
+		<if test="isNull != null and isNull != '' and isNull == 'N'.toString()">
+			not null 
+		</if>
+		<if test="isNull != null and isNull != '' and isNull == 'Y'.toString()">
+			null 
+		</if>
 	</update>
 	
 	<!-- 修改字段 -->
 	<update id="modifyColumn" parameterType="com.seeyoui.kensite.framework.mod.tableColumn.domain.TableColumn">
-		alter table ${tableName} modify ${name} ${jdbcType}
+		alter table ${tableName} modify ${name} ${modifyStr} 
+	</update>
+	
+	<!-- 修改字段 -->
+	<update id="renameColumn" parameterType="com.seeyoui.kensite.framework.mod.tableColumn.domain.TableColumn">
+		alter table ${tableName} rename column ${oldName} to ${name}
 	</update>
 	
 	<!-- 删除字段 -->

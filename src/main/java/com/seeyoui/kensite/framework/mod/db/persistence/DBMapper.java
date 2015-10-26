@@ -52,6 +52,12 @@ public interface DBMapper {
 	public void modifyColumn(TableColumn tableColumn);
 
 	/**
+	 * 字段重命名
+	 * @param tableColumn
+	 */
+	public void renameColumn(TableColumn tableColumn);
+	
+	/**
 	 * 删除字段
 	 * @param tableColumn
 	 */

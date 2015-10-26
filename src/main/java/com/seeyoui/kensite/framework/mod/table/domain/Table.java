@@ -15,11 +15,11 @@ import com.seeyoui.kensite.common.base.domain.DataEntity;
 public class Table extends DataEntity<Table> {
 	private static final long serialVersionUID = 5454155825314635342L;
     
-	private String name;//名称name
-	private String newName;//新名字newName
-	private String comments;//描述comments
-	private String parentTable;//关联父表parentTable
-	private String parentTableFk;//关联父表外键parentTableFk
+	private String name;//名称
+	private String oldName;//修改之前的名字
+	private String comments;//描述
+	private String parentTable;//关联父表
+	private String parentTableFk;//关联父表外键
 
 	public void setName(String name) {
 		this.name = name;
@@ -28,12 +28,13 @@ public class Table extends DataEntity<Table> {
 	public String getName() {
 		return this.name;
 	}
-	public String getNewName() {
-		return newName;
+
+	public String getOldName() {
+		return oldName;
 	}
 
-	public void setNewName(String newName) {
-		this.newName = newName;
+	public void setOldName(String oldName) {
+		this.oldName = oldName;
 	}
 
 	public void setComments(String comments) {
