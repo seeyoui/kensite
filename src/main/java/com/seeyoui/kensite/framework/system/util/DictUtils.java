@@ -24,10 +24,10 @@ public class DictUtils {
 
 	public static final String CACHE_DICT_MAP = "dictMap";
 	
-	public static String getDictLabel(String value, String type, String defaultValue){
-		if (StringUtils.isNotBlank(type) && StringUtils.isNotBlank(value)){
-			for (Dict dict : getDictList(type)){
-				if (type.equals(dict.getCategory()) && value.equals(dict.getValue())){
+	public static String getDictLabel(String value, String category, String defaultValue){
+		if (StringUtils.isNotBlank(category) && StringUtils.isNotBlank(value)){
+			for (Dict dict : getDictList(category)){
+				if (category.equals(dict.getCategory()) && value.equals(dict.getValue())){
 					return dict.getLabel();
 				}
 			}
@@ -35,21 +35,21 @@ public class DictUtils {
 		return defaultValue;
 	}
 	
-	public static String getDictLabels(String values, String type, String defaultValue){
-		if (StringUtils.isNotBlank(type) && StringUtils.isNotBlank(values)){
+	public static String getDictLabels(String values, String category, String defaultValue){
+		if (StringUtils.isNotBlank(category) && StringUtils.isNotBlank(values)){
 			List<String> valueList = Lists.newArrayList();
 			for (String value : StringUtils.split(values, ",")){
-				valueList.add(getDictLabel(value, type, defaultValue));
+				valueList.add(getDictLabel(value, category, defaultValue));
 			}
 			return StringUtils.join(valueList, ",");
 		}
 		return defaultValue;
 	}
 
-	public static String getDictValue(String label, String type, String defaultLabel){
-		if (StringUtils.isNotBlank(type) && StringUtils.isNotBlank(label)){
-			for (Dict dict : getDictList(type)){
-				if (type.equals(dict.getCategory()) && label.equals(dict.getLabel())){
+	public static String getDictValue(String label, String category, String defaultLabel){
+		if (StringUtils.isNotBlank(category) && StringUtils.isNotBlank(label)){
+			for (Dict dict : getDictList(category)){
+				if (category.equals(dict.getCategory()) && label.equals(dict.getLabel())){
 					return dict.getValue();
 				}
 			}
@@ -57,7 +57,7 @@ public class DictUtils {
 		return defaultLabel;
 	}
 	
-	public static List<Dict> getDictList(String type){
+	public static List<Dict> getDictList(String category){
 		@SuppressWarnings("unchecked")
 		Map<String, List<Dict>> dictMap = (Map<String, List<Dict>>)CacheUtils.get(CACHE_DICT_MAP);
 		if (dictMap==null){
@@ -72,7 +72,7 @@ public class DictUtils {
 			}
 			CacheUtils.put(CACHE_DICT_MAP, dictMap);
 		}
-		List<Dict> dictList = dictMap.get(type);
+		List<Dict> dictList = dictMap.get(category);
 		if (dictList == null){
 			dictList = Lists.newArrayList();
 		}
@@ -81,11 +81,11 @@ public class DictUtils {
 	
 	/**
 	 * 返回字典列表（JSON）
-	 * @param type
+	 * @param category
 	 * @return
 	 */
-	public static String getDictListJson(String type){
-		return JsonMapper.toJsonString(getDictList(type));
+	public static String getDictListJson(String category){
+		return JsonMapper.toJsonString(getDictList(category));
 	}
 	
 }

@@ -18,6 +18,7 @@ import com.seeyoui.kensite.common.constants.StringConstant;
 import com.seeyoui.kensite.framework.plugin.dict.domain.Dict;
 import com.seeyoui.kensite.framework.plugin.dict.persistence.DictMapper;
 import com.seeyoui.kensite.framework.system.domain.SysDepartment;
+import com.seeyoui.kensite.framework.system.util.DictUtils;
 import com.seeyoui.kensite.framework.act.idgenerator.GeneratorUUID;
 
 /**
@@ -98,6 +99,7 @@ public class DictService extends BaseService {
 	public void saveDict(Dict dict) throws CRUDException{
 		dict.preInsert();
 		dictMapper.saveDict(dict);
+		CacheUtils.remove(DictUtils.CACHE_DICT_MAP);
 	}
 	
 	/**
@@ -107,7 +109,8 @@ public class DictService extends BaseService {
 	 */
 	public void updateDict(Dict dict) throws CRUDException{
 		dict.preUpdate();
-		dictMapper.updateDict(dict);			
+		dictMapper.updateDict(dict);
+		CacheUtils.remove(DictUtils.CACHE_DICT_MAP);
 	}
 	
 	/**
@@ -117,6 +120,7 @@ public class DictService extends BaseService {
 	 */
 	public void deleteDict(List<String> listId) throws CRUDException {
 		dictMapper.deleteDict(listId);
+		CacheUtils.remove(DictUtils.CACHE_DICT_MAP);
 	}
 	
 }

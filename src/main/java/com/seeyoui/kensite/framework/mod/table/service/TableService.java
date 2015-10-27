@@ -156,6 +156,10 @@ public class TableService extends BaseService {
 	public void deleteTable(List<String> listId) throws CRUDException {
 		for(String id : listId) {
 			Table table = tableMapper.findTableById(id);
+			TableColumn column = new TableColumn();
+			column.setTableName(table.getName());
+			column.setName("ID");
+			dbMapper.dropPrimaryKey(column);
 			dbMapper.dropTable(table);
 		}
 		tableMapper.deleteTable(listId);

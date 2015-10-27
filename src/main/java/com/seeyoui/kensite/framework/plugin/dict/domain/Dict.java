@@ -20,6 +20,7 @@ public class Dict extends DataEntity<Dict> {
 	private String description;
 	private Long sequence;
 	private String parentId;
+	private String defaultKey;
 
 	public void setValue(String value) {
 		this.value = value;
@@ -62,5 +63,13 @@ public class Dict extends DataEntity<Dict> {
     
 	public String getParentId() {
 		return this.parentId;
+	}
+
+	public String getDefaultKey() {
+		return defaultKey;
+	}
+
+	public void setDefaultKey(String defaultKey) {
+		this.defaultKey = defaultKey;
 	}
 }

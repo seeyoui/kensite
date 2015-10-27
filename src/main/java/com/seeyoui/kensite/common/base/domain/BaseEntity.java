@@ -47,6 +47,7 @@ public abstract class BaseEntity<T> implements Serializable {
 		this.id = id;
 	}
 	
+	@JsonIgnore
 	public int getPage() {
 		if(this.page == 0) {
 			return 1;
@@ -58,6 +59,7 @@ public abstract class BaseEntity<T> implements Serializable {
 		this.page = page;
 	}
 
+	@JsonIgnore
 	public int getRows() {
 		if(this.rows == 0) {
 			return 20;
@@ -69,6 +71,7 @@ public abstract class BaseEntity<T> implements Serializable {
 		this.rows = rows;
 	}
 
+	@JsonIgnore
 	public int getRow() {
 		if(this.row == 0) {
 			return (this.page-1)*this.rows;

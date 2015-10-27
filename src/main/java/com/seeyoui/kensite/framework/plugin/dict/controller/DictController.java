@@ -36,6 +36,7 @@ import com.seeyoui.kensite.common.util.RequestResponseUtil;
 import com.seeyoui.kensite.framework.plugin.dict.domain.Dict;
 import com.seeyoui.kensite.framework.plugin.dict.service.DictService;
 import com.seeyoui.kensite.framework.system.domain.SysDepartment;
+import com.seeyoui.kensite.framework.system.util.DictUtils;
 /**
  * @author cuichen
  * @version 1.0
@@ -127,6 +128,54 @@ public class DictController extends BaseController {
 		TreeJson.getTree(tList, root);
 		JSONArray jsonObj = JSONArray.fromObject(root);
 		return jsonObj.toString();
+	}
+	
+	/**
+	 * 获取字典JSON数据
+	 * @return
+	 * @throws Exception
+	 */
+	@RequiresUser
+	@RequestMapping(value = "/getDictJson")
+	@ResponseBody
+	public String getDictJson(Dict dict) throws Exception {
+		return DictUtils.getDictListJson(dict.getCategory());
+	}
+	
+	/**
+	 * 获取字典LIST数据
+	 * @return
+	 * @throws Exception
+	 */
+	@RequiresUser
+	@RequestMapping(value = "/getDictList")
+	@ResponseBody
+	public List<Dict> getDictList(Dict dict) throws Exception {
+		return DictUtils.getDictList(dict.getCategory());
+	}
+	
+	/**
+	 * 获取字典LABEL数据
+	 * @return
+	 * @throws Exception
+	 */
+	@RequiresUser
+	@RequestMapping(value = "/getDictLabel")
+	@ResponseBody
+	public String getDictLabel(Dict dict) throws Exception {
+		return DictUtils.getDictLabel(dict.getValue(), dict.getCategory(), dict.getDefaultKey());
+	}
+	
+	/**
+	 * 获取字典VALUE数据
+	 * @return
+	 * @throws Exception
+	 */
+	@RequiresUser
+	@RequestMapping(value = "/getDictValue")
+	@ResponseBody
+	public String getDictValue(Dict dict) throws Exception {
+		return DictUtils.getDictValue(dict.getLabel(), dict.getCategory(), dict.getDefaultKey());
 	}
 	
 	/**

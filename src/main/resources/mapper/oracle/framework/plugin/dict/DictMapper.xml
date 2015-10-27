@@ -39,7 +39,7 @@
 		</where>
 	</sql>
 	<sql id="orderBy">
-		ORDER BY t.id DESC 
+		ORDER BY t.sequence asc
 	</sql>
 	
 	<!-- 根据ID查询单条数据 -->

@@ -4,6 +4,8 @@
  */
 package com.seeyoui.kensite.framework.mod.tableColumn.domain;  
 
+import org.springframework.web.util.HtmlUtils;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.seeyoui.kensite.common.base.domain.DataEntity;
 
@@ -148,7 +150,7 @@ public class TableColumn extends DataEntity<TableColumn> {
 	}
     
 	public String getSettings() {
-		return this.settings;
+		return HtmlUtils.htmlUnescape(this.settings);
 	}
 
 	public String getModifyStr() {
