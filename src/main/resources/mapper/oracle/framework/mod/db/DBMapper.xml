@@ -32,7 +32,7 @@
 	
 	<!-- 增加字段 -->
 	<update id="addColumn" parameterType="com.seeyoui.kensite.framework.mod.tableColumn.domain.TableColumn">
-		alter table ${tableName} add ${name} ${jdbcType} 
+		alter table ${tableName} add ${name} ${jdbcType}(${jdbcLength}) 
 		<if test="defaultValue != null and defaultValue != ''">
 			default '${defaultValue}' 
 		</if>

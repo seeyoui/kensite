@@ -31,6 +31,10 @@ public final class StringConstant {
 	public static final String TRUE = "T";
 	public static final String FALSE = "F";
 	
+	//字符串表示是&否
+	public static final String YES = "Y";
+	public static final String NO = "N";
+	
 	//jsp表单模板存放路径
 	public static final String TEMPLAT_JSP_URL = "/WebContent/WEB-INF/view/templat/jsp/";
 	//jsp表单模板后缀

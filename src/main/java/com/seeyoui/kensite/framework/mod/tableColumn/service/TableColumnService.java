@@ -47,6 +47,16 @@ public class TableColumnService extends BaseService {
 	}
 	
 	/**
+	 * 查询单条数据
+	 * @param tableColumn
+	 * @return
+	 * @throws CRUDException
+	 */
+	public TableColumn findTableColumn(TableColumn tableColumn) throws CRUDException{
+		return tableColumnMapper.findTableColumn(tableColumn);
+	}
+	
+	/**
 	 * 查询数据集合
 	 * @param tableColumn
 	 * @return
@@ -115,11 +125,13 @@ public class TableColumnService extends BaseService {
 			dbMapper.commentColumn(tableColumn);
 		}
 		String modifyStr = "";
-		if(tableColumn.getJdbcType()!=null && !tableColumn.getJdbcType().equals(tableColumnOld.getJdbcType())) {
+		if(StringUtils.isNoneBlank(tableColumn.getJdbcLength())) {
+			modifyStr += tableColumn.getJdbcType()+"("+tableColumn.getJdbcLength()+")";
+		} else {
 			modifyStr += tableColumn.getJdbcType();
 		}
 		if(tableColumn.getDefaultValue()!=null && !tableColumn.getDefaultValue().equals(tableColumnOld.getDefaultValue())) {
-			modifyStr += "default '"+tableColumn.getDefaultValue()+"'";
+			modifyStr += " default '"+tableColumn.getDefaultValue()+"'";
 		}
 		if(tableColumn.getIsNull()!=null && !tableColumn.getIsNull().equals(tableColumnOld.getIsNull())) {
 			if("Y".equals(tableColumn.getIsNull())) {

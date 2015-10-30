@@ -53,16 +53,11 @@
 					    <th field="tableName" width="100px" hidden>业务表</th>
 					    <th field="name" width="100px">列名</th>
 					    <th field="comments" width="100px">注释</th>
-					    <th field="jdbcType" width="120px">类型</th>
-					    <th field="isPk" width="60px" formatter="formatNullable">是否主键</th>
+					    <th field="jdbcType" width="60px">类型</th>
+					    <th field="jdbcLength" width="60px">长度</th>
 					    <th field="isNull" width="60px" formatter="formatNullable">是否为空</th>
-					    <th field="isInsert" width="60px" formatter="formatNullable">是否插入</th>
 					    <th field="isEdit" width="60px" formatter="formatNullable">是否编辑</th>
-					    <th field="isList" width="60px" formatter="formatNullable">是否列表</th>
-					    <th field="isQuery" width="60px" formatter="formatNullable">是否查询</th>
-					    <th field="queryType" width="60px" hidden>查询方式</th>
 					    <th field="category" width="100px" hidden>生成方案</th>
-					    <th field="sortType" width="100px" hidden>排序（升序）</th>
 					    <th field="defaultValue" width="100px" hidden>默认值</th>
 					    <th field="validType" width="100px" hidden>校验类型</th>
 					    <th field="settings" width="100px" hidden>扩展设置</th>
@@ -122,57 +117,44 @@
         <form id="dataSubForm" method="post">
 					<div class="fitem">
 		                <label>列名</label>
-		                <input id="name" name="name" class="easyui-textbox" data-options="required:true"/>
+		                <input id="name" name="name" class="easyui-textbox" data-options="required:true,validType:'jdbcType'"/>
 		                <span id="msg-name" class="err-msg"></span>
 		                <label>注释</label>
 		                <input id="comments" name="comments" class="easyui-textbox" data-options="required:true"/>
 		                <span id="msg-comments" class="err-msg"></span>
+		            </div>
+					<div class="fitem">
 		                <label>类型</label>
 		                <input id="jdbcType" name="jdbcType" class="easyui-textbox" data-options="required:true"/>
 		                <span id="msg-jdbctype" class="err-msg"></span>
+		                <label>长度</label>
+		                <input id="jdbcLength" name="jdbcLength" class="easyui-textbox" data-options="validType:'jdbcLength'"/>
+		                <span id="msg-ispk" class="err-msg"></span>
+		                <label>默认值</label>
+		                <input id="defaultValue" name="defaultValue" class="easyui-textbox" data-options=""/>
+		                <span id="msg-defaultvalue" class="err-msg"></span>
 		            </div>
 					<div class="fitem">
-		                <label>默认值</label>
-		                <input id="defaultValue" name="defaultValue" class="easyui-textbox" data-options="required:true"/>
-		                <span id="msg-defaultvalue" class="err-msg"></span>
-		                <!-- <label>是否主键</label>
-		                <input id="isPk" name="isPk" class="easyui-combobox" data-options="editable:false,panelHeight: 'auto',required:true,valueField: 'value',textField: 'label'"/>
-		                <span id="msg-ispk" class="err-msg"></span> -->
 		                <label>是否为空</label>
 		                <input id="isNull" name="isNull" class="easyui-combobox" data-options="editable:false,panelHeight: 'auto',required:true,valueField: 'value',textField: 'label'"/>
 		                <span id="msg-isnull" class="err-msg"></span>
-		                <label>是否插入</label>
-		                <input id="isInsert" name="isInsert" class="easyui-combobox" data-options="editable:false,panelHeight: 'auto',required:true,valueField: 'value',textField: 'label'"/>
-		                <span id="msg-isinsert" class="err-msg"></span>
-		            </div>
-					<div class="fitem">
 		                <label>是否编辑</label>
 		                <input id="isEdit" name="isEdit" class="easyui-combobox" data-options="editable:false,panelHeight: 'auto',required:true,valueField: 'value',textField: 'label'"/>
 		                <span id="msg-isedit" class="err-msg"></span>
-		                <label>是否列表</label>
-		                <input id="isList" name="isList" class="easyui-combobox" data-options="editable:false,panelHeight: 'auto',required:true,valueField: 'value',textField: 'label'"/>
-		                <span id="msg-islist" class="err-msg"></span>
-		                <label>是否查询</label>
-		                <input id="isQuery" name="isQuery" class="easyui-combobox" data-options="editable:false,panelHeight: 'auto',required:true,valueField: 'value',textField: 'label'"/>
-		                <span id="msg-isquery" class="err-msg"></span>
-		            </div>
-					<div class="fitem">
-		                <label>查询方式</label>
-		                <input id="queryType" name="queryType" class="easyui-combobox" data-options="editable:false,panelHeight: 'auto',required:true,valueField: 'value',textField: 'label'"/>
-		                <span id="msg-querytype" class="err-msg"></span>
 		                <label>校验类型</label>
-		                <input id="validType" name="validType" class="easyui-combobox" data-options="editable:false,panelHeight: 'auto',required:true,valueField: 'value',textField: 'label'"/>
+		                <input id="validType" name="validType" class="easyui-combobox" data-options="editable:false,panelHeight: 'auto',valueField: 'value',textField: 'label'"/>
 		                <span id="msg-validtype" class="err-msg"></span>
-		                <label>排序（升序）</label>
-		                <input id="sortType" name="sortType" class="easyui-combobox" data-options="editable:false,panelHeight: 'auto',required:true,valueField: 'value',textField: 'label'"/>
-		                <span id="msg-sorttype" class="err-msg"></span>
 		            </div>
 					<div class="fitem">
 		                <label>生成方案</label>
-		                <input id="category" name="category" class="easyui-textbox" data-options="required:true"/>
+		                <!-- <input id="category" name="category" class="easyui-combobox" data-options="editable:false,panelHeight: 'auto',required:true,valueField: 'value',textField: 'label'"/> -->
+		                <input id="category" name="category" class="easyui-textbox" data-options="buttonText:'配置',buttonIcon:'icon-26422',required:true"/>
 		                <span id="msg-category" class="err-msg"></span>
 		                <label>扩展设置</label>
-		                <input id="settings" name="settings" class="easyui-textbox" data-options="required:true" style="width:410px;"/>
+		                <input id="settings" name="settings" class="easyui-textbox" data-options=""/><!-- style="width:410px;" -->
+		                <span id="msg-settings" class="err-msg"></span>
+		                <label>扩展HTML</label>
+		                <input id="htmlInner" name="htmlInner" class="easyui-textbox" data-options=""/><!-- style="width:410px;" -->
 		                <span id="msg-settings" class="err-msg"></span>
 		            </div>
 		            
@@ -186,16 +168,14 @@
     </div>
     <script type="text/javascript">
     var nullableJson;
-    var sortTypeJson;
-    var queryTypeJson;
     var validTypeJson;
+    var categoryJson;
     
     var tableName;
     $(document).ready(function(){
-    	getSortTypeJson();
-    	getQueryTypeJson();
     	getValidTypeJson();
     	getNullableJson();
+    	//getCategoryJson();
     	$('#dataList').datagrid({
     		onDblClickRow: function(index,row){
 				tableName = row.name;
@@ -203,6 +183,18 @@
 			}
 		});
     	$('#dataSubList').datagrid('loadData',{total:0,rows:[]});
+    	$('#category').textbox({
+    		onClickButton: function(){
+    			layer.open({
+    				title: '字段配置',
+    			    type: 2,
+    			    area: ['500px', '450px'],
+    			    fix: false, //不固定
+    			    maxmin: false,
+    			    content: '${ctx_static}/form/mod/textbox.html'
+    			});
+    		}
+    	});
     });
     
     function changeTabCol(tableName) {
@@ -407,27 +399,11 @@
 			},
 			success: function(data, textStatus){
 				nullableJson = data;
-				$('#isPk').combobox('loadData', nullableJson);
 				$('#isNull').combobox('loadData', nullableJson);
 				$('#isInsert').combobox('loadData', nullableJson);
 				$('#isEdit').combobox('loadData', nullableJson);
 				$('#isList').combobox('loadData', nullableJson);
 				$('#isQuery').combobox('loadData', nullableJson);
-			}
-		});
-    }
-    
-    function getSortTypeJson() {
-    	$.ajax({
-			type: "post",
-			url: '${ctx}/sys/dict/getDictJson.do',
-			data: {category:'sort'},
-			dataType: 'json',
-			beforeSend: function(XMLHttpRequest){
-			},
-			success: function(data, textStatus){
-				sortTypeJson = data;
-				$('#sortType').combobox('loadData', sortTypeJson);
 			}
 		});
     }
@@ -447,17 +423,17 @@
 		});
     }
     
-    function getQueryTypeJson() {
+    function getCategoryJson() {
     	$.ajax({
 			type: "post",
 			url: '${ctx}/sys/dict/getDictJson.do',
-			data: {category:'query'},
+			data: {category:'columnCategory'},
 			dataType: 'json',
 			beforeSend: function(XMLHttpRequest){
 			},
 			success: function(data, textStatus){
-				queryTypeJson = data;
-				$('#queryType').combobox('loadData', queryTypeJson);
+				categoryJson = data;
+				$('#category').combobox('loadData', categoryJson);
 			}
 		});
     }

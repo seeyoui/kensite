@@ -25,6 +25,13 @@ public interface TableColumnMapper {
 	public TableColumn findTableColumnById(String id);
 	
 	/**
+	 * 查询单条数据
+	 * @param tableColumn
+	 * @return
+	 */
+	public TableColumn findTableColumn(TableColumn tableColumn);
+	
+	/**
 	 * 查询数据集合
 	 * @param tableColumn
 	 * @return

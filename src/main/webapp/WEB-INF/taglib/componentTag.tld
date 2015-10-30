@@ -7,11 +7,25 @@
 	<short-name>ks</short-name>
 	<uri>/kensitetaglib</uri>
 	<tag>
+		<!-- 指定标签名 -->
 		<name>formTag</name>
+		<!-- 指定标签类文件的全路径 -->
 		<tag-class>com.seeyoui.kensite.common.taglib.ComponentTag</tag-class>
+		<!--如果不需要标签体则设置empty，反之设定jsp -->
 		<body-content>empty</body-content>
+		<!-- 设定属性(如果有的话) -->
 		<attribute>
-			<name>tagname</name>
+			<!-- 指定属性名 -->
+			<!-- 表名 -->
+			<name>table</name>
+			<!-- 是否是必须，如果非必须没设置则为空 -->
+			<required>false</required>
+			<!-- 是否可在属性中使用表达式 -->
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<!-- 列名 -->
+			<name>column</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
