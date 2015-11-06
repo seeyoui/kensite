@@ -23,6 +23,7 @@ public class DictUtils {
 	private static DictMapper dictMapper = SpringContextHolder.getBean(DictMapper.class);
 
 	public static final String CACHE_DICT_MAP = "dictMap";
+	public static final String CACHE_DICT_LIST = "dictList";
 	
 	public static String getDictLabel(String value, String category, String defaultValue){
 		if (StringUtils.isNotBlank(category) && StringUtils.isNotBlank(value)){
@@ -55,6 +56,26 @@ public class DictUtils {
 			}
 		}
 		return defaultLabel;
+	}
+
+	public static Dict getDict(String id){
+		if (StringUtils.isNotBlank(id)){
+			for (Dict dict : getDictList()){
+				if(dict.getId().equals(id));
+				return dict;
+			}
+		}
+		return null;
+	}
+
+	public static List<Dict> getDictList(){
+		@SuppressWarnings("unchecked")
+		List<Dict> dictList = (List<Dict>)CacheUtils.get(CACHE_DICT_LIST);
+		if(dictList==null) {
+			dictList = dictMapper.findAllDictList(new Dict());
+			CacheUtils.put(CACHE_DICT_LIST, dictList);
+		}
+		return dictList;
 	}
 	
 	public static List<Dict> getDictList(String category){

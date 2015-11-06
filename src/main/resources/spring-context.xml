@@ -72,6 +72,12 @@
 		<property name="filters" value="stat" />
 	</bean>
 	
+	<bean id="dataBean" class="com.seeyoui.kensite.common.util.DBUtils">  
+        <property name="dataSource">  
+            <ref bean="dataSource"/>  
+        </property>  
+    </bean>  
+	
 	<!-- 创建SqlSessionFactory，同时指定数据源 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />

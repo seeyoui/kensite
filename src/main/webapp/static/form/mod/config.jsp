@@ -37,6 +37,9 @@
 					VALUE列<input id="valueStr" type="text" class="txt" style="width:60px;"/>
 					LABEL列<input id="labelStr" type="text" class="txt" style="width:60px;"/>
 				</div>
+				<div id="dict" title="字典" data-options="iconCls:'icon-uicomponent-text'" style="padding:10px">
+					系统字典<input id="dictStr" class="easyui-combotree" style="width:160px;" url="${ctx}/sys/dict/getTreeJson.do"/>
+				</div>
 			</div>
 		</div>
 		<div id="radiobox" title="单选" data-options="iconCls:'icon-uicomponent-radio'" style="padding:10px">
@@ -50,6 +53,9 @@
 					VALUE列<input id="valueStr" type="text" class="txt" style="width:60px;"/>
 					LABEL列<input id="labelStr" type="text" class="txt" style="width:60px;"/>
 				</div>
+				<div id="dict" title="字典" data-options="iconCls:'icon-uicomponent-text'" style="padding:10px">
+					系统字典<input id="dictStr" class="easyui-combotree" style="width:160px;" url="${ctx}/sys/dict/getTreeJson.do"/>
+				</div>
 			</div>
 		</div>
 		<div id="checkbox" title="多选" data-options="iconCls:'icon-uicomponent-check'" style="padding:10px">
@@ -62,6 +68,9 @@
 					SQL语句<input id="sqlStr" type="text" class="txt"/><br/><br/>
 					VALUE列<input id="valueStr" type="text" class="txt" style="width:60px;"/>
 					LABEL列<input id="labelStr" type="text" class="txt" style="width:60px;"/>
+				</div>
+				<div id="dict" title="字典" data-options="iconCls:'icon-uicomponent-text'" style="padding:10px">
+					系统字典<input id="dictStr" class="easyui-combotree" style="width:160px;" url="${ctx}/sys/dict/getTreeJson.do"/>
 				</div>
 			</div>
 		</div>
@@ -153,6 +162,9 @@
 					$('#'+componentType+' #sql #valueStr').val(sqlArr[1]);
 					$('#'+componentType+' #sql #labelStr').val(sqlArr[2]);
 					$('#'+componentType+'Tab').tabs('select', 1);
+				} else if(componentConfig.indexOf("DICT>") != -1) {
+					$('#'+componentType+' #dict #dictStr').combotree('setValue', componentConfig.replace("DICT>", ""));
+					$('#'+componentType+'Tab').tabs('select', 2);
 				} else {
 					$('#'+componentType+' #string #config').val(componentConfig);
 					$('#'+componentType+'Tab').tabs('select', 0);
@@ -166,7 +178,10 @@
 					$('#'+componentType+' #sql #valueStr').val(sqlArr[1]);
 					$('#'+componentType+' #sql #labelStr').val(sqlArr[2]);
 					$('#'+componentType+'Tab').tabs('select', 1);
-				} else {
+				} else if(componentConfig.indexOf("DICT>") != -1) {
+					$('#'+componentType+' #dict #dictStr').combotree('setValue', componentConfig.replace("DICT>", ""));
+					$('#'+componentType+'Tab').tabs('select', 2);
+				}  else {
 					$('#'+componentType+' #string #config').val(componentConfig);
 					$('#'+componentType+'Tab').tabs('select', 0);
 				}
@@ -179,7 +194,10 @@
 					$('#'+componentType+' #sql #valueStr').val(sqlArr[1]);
 					$('#'+componentType+' #sql #labelStr').val(sqlArr[2]);
 					$('#'+componentType+'Tab').tabs('select', 1);
-				} else {
+				} else if(componentConfig.indexOf("DICT>") != -1) {
+					$('#'+componentType+' #dict #dictStr').combotree('setValue', componentConfig.replace("DICT>", ""));
+					$('#'+componentType+'Tab').tabs('select', 2);
+				}  else {
 					$('#'+componentType+' #string #config').val(componentConfig);
 					$('#'+componentType+'Tab').tabs('select', 0);
 				}
@@ -222,6 +240,9 @@
 				}
 				if(index == 1) {
 					componentConfig = "SQL>"+$('#'+componentType+' #sql #sqlStr').val()+"|"+$('#'+componentType+' #sql #valueStr').val()+"|"+$('#'+componentType+' #sql #labelStr').val();
+				}
+				if(index == 2) {
+					componentConfig = "DICT>"+$('#'+componentType+' #dict #dictStr').combotree('getValue');
 				}
 			}
 			var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
@@ -333,6 +354,12 @@
 					}
 				}
 				if(index == 1) {
+					var sql = $('#'+componentType+' #sql #sqlStr').val();
+					var value = $('#'+componentType+' #sql #valueStr').val();
+					var label = $('#'+componentType+' #sql #labelStr').val();
+					getComponentBySql(componentType, sql, value, label);
+				}
+				if(index == 2) {
 					var sql = $('#'+componentType+' #sql #sqlStr').val();
 					var value = $('#'+componentType+' #sql #valueStr').val();
 					var label = $('#'+componentType+' #sql #labelStr').val();

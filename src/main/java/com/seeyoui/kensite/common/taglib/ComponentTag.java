@@ -1,18 +1,20 @@
 package com.seeyoui.kensite.common.taglib;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.TagSupport;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.seeyoui.kensite.common.constants.StringConstant;
+import com.seeyoui.kensite.common.util.DBUtils;
 import com.seeyoui.kensite.common.util.SpringContextHolder;
 import com.seeyoui.kensite.common.util.StringUtils;
 import com.seeyoui.kensite.framework.mod.tableColumn.domain.TableColumn;
 import com.seeyoui.kensite.framework.mod.tableColumn.persistence.TableColumnMapper;
-import com.seeyoui.kensite.framework.mod.tableColumn.service.TableColumnService;
-import com.seeyoui.kensite.framework.system.persistence.SysUserMapper;
+import com.seeyoui.kensite.framework.plugin.dict.domain.Dict;
+import com.seeyoui.kensite.framework.system.util.DictUtils;
 
 public class ComponentTag extends TagSupport {
 	private static final long serialVersionUID = 1L;
@@ -117,12 +119,32 @@ public class ComponentTag extends TagSupport {
 					result.append("value:'"+tableColumn.getDefaultValue()+"',");
 				}
 				if(StringUtils.isNoneBlank(tableColumn.getSettings())) {
-					result.append("valueField: 'label',textField: 'value',");
+					result.append("valueField: 'value',textField: 'label',");
 					if(CHECKBOX.equals(tableColumn.getCategory())) {
 						result.append("multiple:true,");
 					}
 					String settings = tableColumn.getSettings();
-					if(settings.indexOf("SQL>") == -1) {
+					if(settings.indexOf("SQL>") != -1) {
+						result.append("data: [");
+						String[] settingsArr = settings.split("\\|");
+						String sql = settingsArr[0].replace("SQL>", "");
+						String value = settingsArr[1];
+						String label = settingsArr[2];
+						List<Map<Object, Object>> list = DBUtils.executeQuery(sql);
+						for(Map<Object, Object> map : list) {
+							result.append("{value: '"+map.get(value.toUpperCase())+"',label: '"+map.get(label.toUpperCase())+"'},");
+						}
+						result.substring(0, result.lastIndexOf(","));
+						result.append("]");
+					} else if(settings.indexOf("DICT>") != -1) {
+						result.append("data: [");
+						List<Dict> dictList = DictUtils.getDictList(DictUtils.getDict(settings.replace("DICT>", "")).getValue());
+						for(Dict dict : dictList) {
+							result.append("{value: '"+dict.getValue()+"',label: '"+dict.getLabel()+"'},");
+						}
+						result.substring(0, result.lastIndexOf(","));
+						result.append("]");
+					} else  {
 						result.append("data: [");
 						String[] settingsArr = settings.split("\\|");
 						for(String set : settingsArr) {
@@ -130,13 +152,12 @@ public class ComponentTag extends TagSupport {
 								result.append("{label: '"+set+"',value: '"+set+"'},");
 							} else {
 								String[] setArr = set.split(":");
-								result.append("{label: '"+setArr[0]+"',value: '"+setArr[1]+"'},");
+								result.append("{value: '"+setArr[0]+"',label: '"+setArr[1]+"'},");
 							}
 						}
 						result.substring(0, result.lastIndexOf(","));
 						result.append("]");
 					}
-					result.append("");
 				}
 				result.append("\" "+tableColumn.getHtmlInner());
 				result.append("/>");

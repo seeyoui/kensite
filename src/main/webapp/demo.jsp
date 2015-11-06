@@ -15,5 +15,6 @@
 	<ks:formTag table="T_TEST_W" column="BIRTHDAY"/>
 	<ks:formTag table="T_TEST_W" column="SEX"/>
 	<ks:formTag table="T_TEST_W" column="DESCRIBE"/>
+	<ks:formTag table="T_TEST_W" column="ISDEL"/>
 </body>
 </html>
