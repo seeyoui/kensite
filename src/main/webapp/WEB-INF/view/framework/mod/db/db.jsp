@@ -147,14 +147,17 @@
 		            </div>
 					<div class="fitem">
 		                <label>生成方案</label>
-		                <!-- <input id="category" name="category" class="easyui-combobox" data-options="editable:false,panelHeight: 'auto',required:true,valueField: 'value',textField: 'label'"/> -->
-		                <input id="category" name="category" class="easyui-textbox" data-options="buttonText:'配置',buttonIcon:'icon-26422',required:true"/>
+		                <input id="category" name="category" class="easyui-combobox" data-options="readonly:true,editable:false,panelHeight: 'auto',required:true,valueField: 'value',textField: 'label'" style="width:105px;"/>
+		                <!-- <input id="category" name="category" class="easyui-textbox" data-options="readonly:true,required:true" style="width:105px;"/> --><!-- ,buttonText:'配置',buttonIcon:'icon-26422' -->
+		                <a id="config" href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-26422'">配置</a>
 		                <span id="msg-category" class="err-msg"></span>
+		                <div style="display:none">
 		                <label>扩展设置</label>
-		                <input id="settings" name="settings" class="easyui-textbox" data-options=""/><!-- style="width:410px;" -->
+		                <input id="settings" name="settings" class="easyui-textbox" data-options="readonly:true"/><!-- style="width:410px;" -->
 		                <span id="msg-settings" class="err-msg"></span>
+		                </div>
 		                <label>扩展HTML</label>
-		                <input id="htmlInner" name="htmlInner" class="easyui-textbox" data-options=""/><!-- style="width:410px;" -->
+		                <input id="htmlInner" name="htmlInner" class="easyui-textbox" data-options="" style="width:410px;"/><!-- style="width:410px;" -->
 		                <span id="msg-settings" class="err-msg"></span>
 		            </div>
 		            
@@ -175,7 +178,7 @@
     $(document).ready(function(){
     	getValidTypeJson();
     	getNullableJson();
-    	//getCategoryJson();
+    	getCategoryJson();
     	$('#dataList').datagrid({
     		onDblClickRow: function(index,row){
 				tableName = row.name;
@@ -183,15 +186,25 @@
 			}
 		});
     	$('#dataSubList').datagrid('loadData',{total:0,rows:[]});
+    	$('#config').bind('click', function(){
+    		layer.open({
+				title: '字段配置',
+			    type: 2,
+			    area: ['400px', '330px'],
+			    fix: false, //不固定
+			    maxmin: false,
+			    content: '${ctx_static}/form/mod/config.jsp'
+			});
+        });
     	$('#category').textbox({
-    		onClickButton: function(){
+    		onClick: function(){
     			layer.open({
     				title: '字段配置',
     			    type: 2,
-    			    area: ['500px', '450px'],
+    			    area: ['400px', '330px'],
     			    fix: false, //不固定
     			    maxmin: false,
-    			    content: '${ctx_static}/form/mod/textbox.html'
+    			    content: '${ctx_static}/form/mod/config.jsp'
     			});
     		}
     	});

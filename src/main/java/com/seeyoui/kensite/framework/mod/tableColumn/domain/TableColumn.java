@@ -117,7 +117,7 @@ public class TableColumn extends DataEntity<TableColumn> {
 	}
 
 	public String getHtmlInner() {
-		return htmlInner;
+		return HtmlUtils.htmlUnescape(htmlInner);
 	}
 
 	public void setHtmlInner(String htmlInner) {

@@ -7,9 +7,13 @@
 	<%@ include file="/WEB-INF/view/taglib/header.jsp" %>
 	<%@ include file="/WEB-INF/view/taglib/easyui.jsp" %>
 	<%@ include file="/WEB-INF/view/taglib/layer.jsp" %>
+	<%@ include file="/WEB-INF/view/taglib/uedit.jsp" %>
 </head>
 
 <body>
-	<ks:formTag table="T_TEST_W" column="name"></ks:formTag>
+	<ks:formTag table="T_TEST_W" column="NAME"/>
+	<ks:formTag table="T_TEST_W" column="BIRTHDAY"/>
+	<ks:formTag table="T_TEST_W" column="SEX"/>
+	<ks:formTag table="T_TEST_W" column="DESCRIBE"/>
 </body>
 </html>

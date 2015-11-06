@@ -104,6 +104,24 @@ public class TableColumnService extends BaseService {
 	public void saveTableColumn(TableColumn tableColumn) throws CRUDException{
 		tableColumn.preInsert();
 		tableColumnMapper.saveTableColumn(tableColumn);
+		String modifyStr = "";
+		if(StringUtils.isNoneBlank(tableColumn.getJdbcLength())) {
+			modifyStr += tableColumn.getJdbcType()+"("+tableColumn.getJdbcLength()+")";
+		} else {
+			modifyStr += tableColumn.getJdbcType();
+		}
+		if(tableColumn.getDefaultValue()!=null) {
+			modifyStr += " default '"+tableColumn.getDefaultValue()+"'";
+		}
+		if(tableColumn.getIsNull()!=null) {
+			if("Y".equals(tableColumn.getIsNull())) {
+				modifyStr += " null";
+			}
+			if("N".equals(tableColumn.getIsNull())) {
+				modifyStr += " not null";
+			}
+		}
+		tableColumn.setModifyStr(modifyStr);
 		dbMapper.addColumn(tableColumn);
 		dbMapper.commentColumn(tableColumn);
 	}
@@ -117,23 +135,26 @@ public class TableColumnService extends BaseService {
 		TableColumn tableColumnOld = tableColumnMapper.findTableColumnById(tableColumn.getId());
 		tableColumn.preUpdate();
 		tableColumnMapper.updateTableColumn(tableColumn);
-		if(tableColumn.getName()!=null && !tableColumn.getName().equals(tableColumnOld.getName())) {
+		if(StringUtils.isNotBlank(tableColumn.getName()) && !tableColumn.getName().equals(tableColumnOld.getName())) {
 			tableColumn.setOldName(tableColumnOld.getName());
 			dbMapper.renameColumn(tableColumn);
 		}
-		if(tableColumn.getComments()!=null && !tableColumn.getComments().equals(tableColumnOld.getComments())) {
+		if(StringUtils.isNotBlank(tableColumn.getComments()) && !tableColumn.getComments().equals(tableColumnOld.getComments())) {
 			dbMapper.commentColumn(tableColumn);
 		}
 		String modifyStr = "";
-		if(StringUtils.isNoneBlank(tableColumn.getJdbcLength())) {
-			modifyStr += tableColumn.getJdbcType()+"("+tableColumn.getJdbcLength()+")";
-		} else {
-			modifyStr += tableColumn.getJdbcType();
+		if(StringUtils.isNotBlank(tableColumn.getJdbcType()) && !tableColumn.getJdbcType().equals(tableColumnOld.getJdbcType())) {
+			if(StringUtils.isNoneBlank(tableColumn.getJdbcLength()) && !tableColumn.getJdbcLength().equals(tableColumnOld.getJdbcLength())) {
+				modifyStr += tableColumn.getJdbcType();
+				modifyStr += "("+tableColumn.getJdbcLength()+")";
+			} else {
+				modifyStr += tableColumn.getJdbcType();
+			}
 		}
-		if(tableColumn.getDefaultValue()!=null && !tableColumn.getDefaultValue().equals(tableColumnOld.getDefaultValue())) {
+		if(StringUtils.isNotBlank(tableColumn.getDefaultValue()) && !tableColumn.getDefaultValue().equals(tableColumnOld.getDefaultValue())) {
 			modifyStr += " default '"+tableColumn.getDefaultValue()+"'";
 		}
-		if(tableColumn.getIsNull()!=null && !tableColumn.getIsNull().equals(tableColumnOld.getIsNull())) {
+		if(StringUtils.isNotBlank(tableColumn.getIsNull()) && !tableColumn.getIsNull().equals(tableColumnOld.getIsNull())) {
 			if("Y".equals(tableColumn.getIsNull())) {
 				modifyStr += " null";
 			}
@@ -141,7 +162,7 @@ public class TableColumnService extends BaseService {
 				modifyStr += " not null";
 			}
 		}
-		if(!"".equals(modifyStr)) {
+		if(StringUtils.isNotBlank(modifyStr)) {
 			tableColumn.setModifyStr(modifyStr);
 			dbMapper.modifyColumn(tableColumn);
 		}

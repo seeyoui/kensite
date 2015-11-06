@@ -20,10 +20,10 @@ public class SendMailUtil {
 
 	// private static final String smtphost = "192.168.1.70";
 	private static final String from = "seeyouiken@163.com";
-	private static final String fromName = "测试公司";
+	private static final String fromName = "KenSite";
 	private static final String charSet = "utf-8";
 	private static final String username = "seeyouiken@163.com";
-	private static final String password = "123456";
+	private static final String password = "ediaxmkdrkrhqmme";
 
 	private static Map<String, String> hostMap = new HashMap<String, String>();
 	static {

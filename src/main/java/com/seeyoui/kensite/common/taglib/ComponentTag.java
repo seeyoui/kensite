@@ -19,10 +19,10 @@ public class ComponentTag extends TagSupport {
 	private static final String TEXTBOX = "textbox";
 	private static final String NUMBERBOX = "numberbox";
 	private static final String COMBOBOX = "combobox";
-	private static final String RADIO = "radio";
+	private static final String RADIOBOX = "radiobox";
 	private static final String CHECKBOX = "checkbox";
-	private static final String DATETIMEBOX = "datetimebox";
-	private static final String CLOBBOX = "clobbox";
+	private static final String DATEBOX = "datebox";
+	private static final String HTMLDESIGN = "htmldesign";
 	private static final String TEXTAREA = "textarea";
 	private static final String COMBOTREE = "combotree";
 	private static final String COMBOGRID = "combogrid";
@@ -45,12 +45,20 @@ public class ComponentTag extends TagSupport {
 			}
 			JspWriter out = this.pageContext.getOut();
 			StringBuffer result = new StringBuffer();
-			if(TEXTBOX.equals(tableColumn.getCategory())) {
+			column = StringUtils.toCamelCase(column);
+			result.append("<label>"+tableColumn.getComments()+"</label>");
+			if(TEXTBOX.equals(tableColumn.getCategory()) || TEXTAREA.equals(tableColumn.getCategory())) {
 				result.append("<input class=\"easyui-textbox\" id=\"");
 				result.append(column);
 				result.append("\" name=\"");
 				result.append(column);
 				result.append("\" data-options=\"");
+				if(TEXTAREA.equals(tableColumn.getCategory())) {
+					result.append("multiline:true,");
+				}
+				if(StringConstant.NO.equals(tableColumn.getIsEdit())) {
+					result.append("editable:false,");
+				}
 				if(StringConstant.YES.equals(tableColumn.getIsNull())) {
 					result.append("required:true,");
 				}
@@ -60,9 +68,112 @@ public class ComponentTag extends TagSupport {
 				if(StringUtils.isNoneBlank(tableColumn.getDefaultValue())) {
 					result.append("value:'"+tableColumn.getDefaultValue()+"',");
 				}
-				result.append("\" "+tableColumn.getSettings());
+				if(StringUtils.isNoneBlank(tableColumn.getSettings())) {
+					result.append(tableColumn.getSettings());
+				}
+				result.append("\" "+tableColumn.getHtmlInner());
 				result.append("/>");
 			}
+			if(NUMBERBOX.equals(tableColumn.getCategory())) {
+				result.append("<input class=\"easyui-numberbox\" id=\"");
+				result.append(column);
+				result.append("\" name=\"");
+				result.append(column);
+				result.append("\" data-options=\"");
+				if(StringConstant.NO.equals(tableColumn.getIsEdit())) {
+					result.append("editable:false,");
+				}
+				if(StringConstant.YES.equals(tableColumn.getIsNull())) {
+					result.append("required:true,");
+				}
+				if(StringUtils.isNoneBlank(tableColumn.getValidType())) {
+					result.append("validType:'"+tableColumn.getValidType()+"',");
+				}
+				if(StringUtils.isNoneBlank(tableColumn.getDefaultValue())) {
+					result.append("value:'"+tableColumn.getDefaultValue()+"',");
+				}
+				if(StringUtils.isNoneBlank(tableColumn.getSettings())) {
+					result.append(tableColumn.getSettings());
+				}
+				result.append("\" "+tableColumn.getHtmlInner());
+				result.append("/>");
+			}
+			if(COMBOBOX.equals(tableColumn.getCategory()) || RADIOBOX.equals(tableColumn.getCategory()) || CHECKBOX.equals(tableColumn.getCategory())) {
+				result.append("<input class=\"easyui-combobox\" id=\"");
+				result.append(column);
+				result.append("\" name=\"");
+				result.append(column);
+				result.append("\" data-options=\"");
+				if(StringConstant.NO.equals(tableColumn.getIsEdit())) {
+					result.append("editable:false,");
+				}
+				if(StringConstant.YES.equals(tableColumn.getIsNull())) {
+					result.append("required:true,");
+				}
+				if(StringUtils.isNoneBlank(tableColumn.getValidType())) {
+					result.append("validType:'"+tableColumn.getValidType()+"',");
+				}
+				if(StringUtils.isNoneBlank(tableColumn.getDefaultValue())) {
+					result.append("value:'"+tableColumn.getDefaultValue()+"',");
+				}
+				if(StringUtils.isNoneBlank(tableColumn.getSettings())) {
+					result.append("valueField: 'label',textField: 'value',");
+					if(CHECKBOX.equals(tableColumn.getCategory())) {
+						result.append("multiple:true,");
+					}
+					String settings = tableColumn.getSettings();
+					if(settings.indexOf("SQL>") == -1) {
+						result.append("data: [");
+						String[] settingsArr = settings.split("\\|");
+						for(String set : settingsArr) {
+							if(set.indexOf(":") == -1) {
+								result.append("{label: '"+set+"',value: '"+set+"'},");
+							} else {
+								String[] setArr = set.split(":");
+								result.append("{label: '"+setArr[0]+"',value: '"+setArr[1]+"'},");
+							}
+						}
+						result.substring(0, result.lastIndexOf(","));
+						result.append("]");
+					}
+					result.append("");
+				}
+				result.append("\" "+tableColumn.getHtmlInner());
+				result.append("/>");
+			}
+			if(DATEBOX.equals(tableColumn.getCategory())) {
+				result.append("<input id=\"");
+				result.append(column);
+				result.append("\" name=\"");
+				result.append(column);
+				result.append("\" "+tableColumn.getHtmlInner());
+				if(StringUtils.isNoneBlank(tableColumn.getSettings())) {
+					result.append(" onClick=\"WdatePicker({");
+					result.append(tableColumn.getSettings());
+					result.append("})\"");
+				} else {
+					result.append(" onClick=\"WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})\"");
+				}
+				result.append("/>");
+			}
+			if(HTMLDESIGN.equals(tableColumn.getCategory())) {
+				result.append("<script id=\"");
+				result.append(column);
+				result.append("\" name=\"");
+				result.append(column);
+				result.append("\" type=\"text/plain\">");
+				if(StringUtils.isNoneBlank(tableColumn.getDefaultValue())) {
+					result.append(tableColumn.getDefaultValue());
+				}
+				result.append("</script>");
+				result.append("<script type=\"text/javascript\">");
+				result.append("var ue = UE.getEditor('"+column+"', {autoHeight: false});");
+				if(StringUtils.isNoneBlank(tableColumn.getSettings())) {
+					result.append("ue.ready(function() {ue.setHeight("+tableColumn.getSettings()+");});");
+				}
+				result.append("</script>");
+			}
+			result.append("<span id=\"msg-"+column+"\" class=\"err-msg\"></span>");
 			out.println(result.toString());
 		} catch (Exception e) {
 			throw new JspException(e.getMessage());
