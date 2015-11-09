@@ -1,7 +1,7 @@
 /*for buttons*/
 *{ padding:0px; margin:0px;}
 body{ padding-top:60px;}
-#buttons_box{ position:fixed; left:0px; top:0px; height:51px; overflow:hidden; background-image:url(images/buttons_box_bg.png); background-repeat:repeat-x; width:100%; padding-top:8px;text-align:right;}
+#buttons_box{ position:fixed; left:0px; top:0px; height:51px; overflow:hidden; background-image:url(images/buttons_box_bg.png); background-repeat:repeat-x; width:100%; padding-top:8px;text-align:right;z-index:99999999;}
 *html #buttons_box /* IE6 Í·²¿¹Ì¶¨ */{position:absolute;bottom:auto;top:expression(eval(document.documentElement.scrollTop)); }
 #buttons_box ul{ padding:0 10px; float:right;}
 *html,*html body{background-image:url(about:blank);background-attachment:fixed;}

@@ -118,6 +118,7 @@ public class ComponentTag extends TagSupport {
 				if(StringUtils.isNoneBlank(tableColumn.getDefaultValue())) {
 					result.append("value:'"+tableColumn.getDefaultValue()+"',");
 				}
+				int dataCount = 0;
 				if(StringUtils.isNoneBlank(tableColumn.getSettings())) {
 					result.append("valueField: 'value',textField: 'label',");
 					if(CHECKBOX.equals(tableColumn.getCategory())) {
@@ -132,22 +133,25 @@ public class ComponentTag extends TagSupport {
 						String label = settingsArr[2];
 						List<Map<Object, Object>> list = DBUtils.executeQuery(sql);
 						for(Map<Object, Object> map : list) {
+							dataCount++;
 							result.append("{value: '"+map.get(value.toUpperCase())+"',label: '"+map.get(label.toUpperCase())+"'},");
 						}
-						result.substring(0, result.lastIndexOf(","));
+						result.substring(0, result.lastIndexOf(",")-1);
 						result.append("]");
 					} else if(settings.indexOf("DICT>") != -1) {
 						result.append("data: [");
 						List<Dict> dictList = DictUtils.getDictList(DictUtils.getDict(settings.replace("DICT>", "")).getValue());
 						for(Dict dict : dictList) {
+							dataCount++;
 							result.append("{value: '"+dict.getValue()+"',label: '"+dict.getLabel()+"'},");
 						}
-						result.substring(0, result.lastIndexOf(","));
+						result.substring(0, result.lastIndexOf(",")-1);
 						result.append("]");
 					} else  {
 						result.append("data: [");
 						String[] settingsArr = settings.split("\\|");
 						for(String set : settingsArr) {
+							dataCount++;
 							if(set.indexOf(":") == -1) {
 								result.append("{label: '"+set+"',value: '"+set+"'},");
 							} else {
@@ -155,9 +159,12 @@ public class ComponentTag extends TagSupport {
 								result.append("{value: '"+setArr[0]+"',label: '"+setArr[1]+"'},");
 							}
 						}
-						result.substring(0, result.lastIndexOf(","));
+						result.substring(0, result.lastIndexOf(",")-1);
 						result.append("]");
 					}
+				}
+				if(dataCount <= 5) {
+					result.append(",panelHeight:'auto',");
 				}
 				result.append("\" "+tableColumn.getHtmlInner());
 				result.append("/>");

@@ -11,18 +11,12 @@
 </head>
 
 <body>
-	<script id="myFormdesign" type="text/plain" style="widht:100%">
-		这里是Ueditor Formdesign 内容
+	<script id="formdesign" type="text/plain" style="widht:80%;height:500px;">
 	</script>
-	<br/>
-	<button type="button" onclick="leipiEditor.execCommand('text');" class="btn btn-info">文本框</button>
 	<script type="text/javascript">
 		//实例一个Ueditor
-		var leipiEditor = UE.getEditor('myFormdesign',{
-		        toolleipi:true,//是否在toolbars显示，表单设计器的图标 
-		       //toolbars:[['FullScreen', 'Source']],//这里是工具拦
-		       textarea: 'design_content',//编辑器的表单名称   
-		        //更多其他参数，请参考ueditor.config.js中的配置项
+		var kenFormDesign = UE.getEditor('formdesign',{
+		        toolken:true//是否在toolbars显示，表单设计器的图标
 		});
 	</script>
 </body>

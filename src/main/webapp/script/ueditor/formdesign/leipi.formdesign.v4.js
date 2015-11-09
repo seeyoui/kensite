@@ -983,7 +983,7 @@ UE.registerUI('button_template',function(editor,uiName){
     editor.registerCommand(uiName,{
         execCommand:function(){
             try {
-                leipiFormDesign.exec('leipi_template');
+                editor.execCommand('leipi_template');
                 //leipiFormDesign.fnCheckForm('save');
             } catch ( e ) {
                 alert('打开模板异常');
