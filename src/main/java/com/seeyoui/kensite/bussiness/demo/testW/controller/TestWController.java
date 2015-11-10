@@ -2,11 +2,10 @@
  * Powered By cuichen
  * Since 2014 - 2015
  */
-package com.seeyoui.kensite.bussiness.test.testW.controller;  
+package com.seeyoui.kensite.bussiness.demo.testW.controller;  
  
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.sql.*;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,32 +13,35 @@ import javax.servlet.http.HttpSession;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-import net.sf.json.JsonConfig;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.seeyoui.kensite.bussiness.test.testW.domain.TestW;
-import com.seeyoui.kensite.bussiness.test.testW.service.TestWService;
-import com.seeyoui.kensite.common.base.controller.BaseController;
-import com.seeyoui.kensite.common.base.domain.EasyUIDataGrid;
+import com.seeyoui.kensite.common.util.DateUtils;
 import com.seeyoui.kensite.common.constants.StringConstant;
-import com.seeyoui.kensite.common.util.JsonDateValueProcessor;
+import com.seeyoui.kensite.common.base.domain.EasyUIDataGrid;
+import com.seeyoui.kensite.common.base.controller.BaseController;
 import com.seeyoui.kensite.common.util.RequestResponseUtil;
+import com.seeyoui.kensite.common.util.excel.ExportExcel;
+import com.seeyoui.kensite.bussiness.demo.testW.domain.TestW;
+import com.seeyoui.kensite.bussiness.demo.testW.service.TestWService;
 /**
  * 测试1
  * @author cuichen
  * @version 1.0
  * @since 1.0
- * @date 2015-11-09
+ * @date 2015-11-10
  */
 @Controller
-@RequestMapping(value = "test/testW")
+@RequestMapping(value = "demo/testW")
 public class TestWController extends BaseController {
 	
 	@Autowired
@@ -52,30 +54,12 @@ public class TestWController extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/showPageList")
-	public ModelAndView showTestWPageList(HttpSession session,
+	@RequiresPermissions("demo:testW:view")
+	@RequestMapping(value = "/{page}")
+	public ModelAndView view(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap) throws Exception {
-		return new ModelAndView("bussiness/test/testW/testW", modelMap);
-	}
-	
-	/**
-	 * 展示列表页面
-	 * @param modelMap
-	 * @param module
-	 * @return
-	 * @throws Exception
-	 */
-	@RequestMapping(value = "/form")
-	public ModelAndView form(HttpSession session,
-			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap, String id) throws Exception {
-		TestW testW = testWService.findTestWById(id);
-		JsonConfig jsonConfig = new JsonConfig();
-		jsonConfig.registerJsonValueProcessor(Date.class, new JsonDateValueProcessor("yyyy-MM-dd"));
-		JSONObject jsonObject = JSONObject.fromObject(testW, jsonConfig);
-		modelMap.put("formData", jsonObject.toString());
-		return new ModelAndView("bussiness/test/testW/form", modelMap);
+			ModelMap modelMap, @PathVariable String page) throws Exception {
+		return new ModelAndView("bussiness/demo/testW/"+page, modelMap);
 	}
 	
 	/**
@@ -85,17 +69,18 @@ public class TestWController extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/getListData", method=RequestMethod.POST)
+	@RequiresPermissions("demo:testW:select")
+	@RequestMapping(value = "/list/data", method=RequestMethod.POST)
 	@ResponseBody
-	public String getListData(HttpSession session,
+	public Object listData(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, TestW testW) throws Exception{
-		List<TestW> testWList = testWService.findTestWList(testW);
-		EasyUIDataGrid eudg = testWService.findTestWListTotal(testW);
+		List<TestW> testWList = testWService.findList(testW);
+		int total = testWService.findTotal(testW);
+		EasyUIDataGrid eudg = new EasyUIDataGrid();
+		eudg.setTotal(String.valueOf(total));
 		eudg.setRows(testWList);
-		JSONObject jsonObj = JSONObject.fromObject(eudg);
-		RequestResponseUtil.putResponseStr(session, response, request, jsonObj);
-		return null;
+		return eudg;
 	}
 	
 	/**
@@ -105,15 +90,14 @@ public class TestWController extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/getAllListData", method=RequestMethod.POST)
+	@RequiresPermissions("demo:testW:select")
+	@RequestMapping(value = "/list/all", method=RequestMethod.POST)
 	@ResponseBody
-	public String getAllListData(HttpSession session,
+	public Object listAll(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, TestW testW) throws Exception{
-		List<TestW> testWList = testWService.findAllTestWList(testW);
-		JSONArray jsonObj = JSONArray.fromObject(testWList);
-		RequestResponseUtil.putResponseStr(session, response, request, jsonObj);
-		return null;
+		List<TestW> testWList = testWService.findAll(testW);
+		return testWList;
 	}
 	
 	/**
@@ -123,16 +107,17 @@ public class TestWController extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/saveByAdd", method=RequestMethod.POST)
+	@RequiresPermissions("demo:testW:insert")
+	@RequestMapping(value = "/save", method=RequestMethod.POST)
 	@ResponseBody
-	public String saveTestWByAdd(HttpSession session,
+	public String save(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, TestW testW) throws Exception{
 		if (!beanValidator(modelMap, testW)){
 			RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
 			return null;
 		}
-		testWService.saveTestW(testW);
+		testWService.save(testW);
 		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}
@@ -144,16 +129,17 @@ public class TestWController extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/saveByUpdate", method=RequestMethod.POST)
+	@RequiresPermissions("demo:testW:update")
+	@RequestMapping(value = "/update", method=RequestMethod.POST)
 	@ResponseBody
-	public String saveTestWByUpdate(HttpSession session,
+	public String update(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, TestW testW) throws Exception{
 		if (!beanValidator(modelMap, testW)){
 			RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
 			return null;
 		}
-		testWService.updateTestW(testW);
+		testWService.update(testW);
 		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}
@@ -165,14 +151,33 @@ public class TestWController extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
+	@RequiresPermissions("demo:testW:delete")
 	@RequestMapping(value = "/delete", method=RequestMethod.POST)
 	@ResponseBody
 	public String delete(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap, String delDataId) throws Exception {
-		List<String> listId = Arrays.asList(delDataId.split(","));
-		testWService.deleteTestW(listId);
+			ModelMap modelMap, String id) throws Exception {
+		List<String> listId = Arrays.asList(id.split(","));
+		testWService.delete(listId);
 		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
+		return null;
+	}
+
+	/**
+	 * 导出Excel数据
+	 * @param modelMap
+	 * @param testW
+	 * @return
+	 * @throws Exception
+	 */
+	@RequiresPermissions("demo:testW:export")
+	@RequestMapping(value = "/export")
+	public String export(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap, TestW testW) throws Exception{
+		String fileName = DateUtils.getDate("yyyyMMddHHmmss")+".xlsx";
+		List<TestW> testWList = testWService.findAll(testW);
+		new ExportExcel(null, TestW.class).setDataList(testWList).write(response, fileName).dispose();
 		return null;
 	}
 }

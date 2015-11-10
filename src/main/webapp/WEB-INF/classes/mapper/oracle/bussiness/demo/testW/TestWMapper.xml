@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.seeyoui.kensite.bussiness.test.testW.persistence.TestWMapper" >
+<mapper namespace="com.seeyoui.kensite.bussiness.demo.testW.persistence.TestWMapper" >
 	<!-- 查询单表的字段 -->
 	<sql id="tableColumns">
 	    T.ID AS "id",
@@ -63,7 +63,7 @@
 	</sql>
 	
 	<!-- 根据ID查询单条数据 -->
-	<select id="findTestWById" resultType="com.seeyoui.kensite.bussiness.test.testW.domain.TestW">
+	<select id="findOne" resultType="com.seeyoui.kensite.bussiness.demo.testW.domain.TestW">
 		SELECT
 		<include refid="tableColumns" />
 		FROM T_TEST_W T
@@ -71,7 +71,7 @@
 	</select>
 	
 	<!-- 查询数据集合 -->
-	<select id="findTestWList" resultType="com.seeyoui.kensite.bussiness.test.testW.domain.TestW">
+	<select id="findList" resultType="com.seeyoui.kensite.bussiness.demo.testW.domain.TestW">
 		select * from(select T.*,rownum rn from(
 			SELECT
 			<include refid="tableColumns"/>
@@ -82,7 +82,7 @@
 	</select>
 	
 	<!-- 查询所有数据集合 -->
-	<select id="findAllTestWList" resultType="com.seeyoui.kensite.bussiness.test.testW.domain.TestW">
+	<select id="findAll" resultType="com.seeyoui.kensite.bussiness.demo.testW.domain.TestW">
 		SELECT
 		<include refid="tableColumns"/>
 		FROM T_TEST_W T
@@ -91,15 +91,7 @@
 	</select>
 	
 	<!-- 查询数据总数 -->
-	<select id="findTestWListTotal" resultType="EasyUIDataGrid">
-		SELECT
-		COUNT(1) total
-		FROM T_TEST_W T
-		<include refid="whereStr"/>
-	</select>
-	
-	<!-- 查询数据总数 -->
-	<select id="findTestWTotal" resultType="Integer">
+	<select id="findTotal" resultType="Integer">
 		SELECT
 		COUNT(1) total
 		FROM T_TEST_W T
@@ -107,7 +99,7 @@
 	</select>
 	
 	<!-- 数据新增 -->
-	<insert id="saveTestW" parameterType="com.seeyoui.kensite.bussiness.test.testW.domain.TestW">
+	<insert id="save" parameterType="com.seeyoui.kensite.bussiness.demo.testW.domain.TestW">
 		INSERT INTO T_TEST_W (
 	    	
 	    	
@@ -145,7 +137,7 @@
 	</insert>
 	
 	<!-- 数据修改 -->
-	<update id="updateTestW" parameterType="com.seeyoui.kensite.bussiness.test.testW.domain.TestW">
+	<update id="update" parameterType="com.seeyoui.kensite.bussiness.demo.testW.domain.TestW">
 		UPDATE T_TEST_W
 		<set>
 	    	
@@ -182,7 +174,7 @@
 	</update>
 	
 	<!-- 数据删除 -->
-	<delete id="deleteTestW">
+	<delete id="delete">
 		DELETE FROM T_TEST_W WHERE id IN 
 		<foreach item="listId" collection="list"
 			open="(" separator="," close=")">

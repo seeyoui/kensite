@@ -1,7 +1,7 @@
 /*
  * Powered By cuichen
  * Since 2014 - 2015
- */package com.seeyoui.kensite.bussiness.test.testW.service;  
+ */package com.seeyoui.kensite.bussiness.demo.testW.service;  
  
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,8 +15,8 @@ import com.seeyoui.kensite.common.base.service.BaseService;
 import com.seeyoui.kensite.common.exception.CRUDException;
 import com.seeyoui.kensite.common.util.*;
 import com.seeyoui.kensite.common.constants.StringConstant;
-import com.seeyoui.kensite.bussiness.test.testW.domain.TestW;
-import com.seeyoui.kensite.bussiness.test.testW.persistence.TestWMapper;
+import com.seeyoui.kensite.bussiness.demo.testW.domain.TestW;
+import com.seeyoui.kensite.bussiness.demo.testW.persistence.TestWMapper;
 import com.seeyoui.kensite.framework.act.idgenerator.GeneratorUUID;
 
 /**
@@ -24,7 +24,7 @@ import com.seeyoui.kensite.framework.act.idgenerator.GeneratorUUID;
  * @author cuichen
  * @version 1.0
  * @since 1.0
- * @date 2015-11-09
+ * @date 2015-11-10
  */
 @Service
 public class TestWService extends BaseService {
@@ -38,8 +38,8 @@ public class TestWService extends BaseService {
 	 * @return
 	 * @throws CRUDException
 	 */
-	public TestW findTestWById(String id) throws CRUDException{
-		return testWMapper.findTestWById(id);
+	public TestW findOne(String id) throws CRUDException{
+		return testWMapper.findOne(id);
 	}
 	
 	/**
@@ -48,8 +48,8 @@ public class TestWService extends BaseService {
 	 * @return
 	 * @throws CRUDException
 	 */
-	public List<TestW> findTestWList(TestW testW) throws CRUDException {
-		return testWMapper.findTestWList(testW);
+	public List<TestW> findList(TestW testW) throws CRUDException {
+		return testWMapper.findList(testW);
 	}
 	
 	/**
@@ -58,8 +58,8 @@ public class TestWService extends BaseService {
 	 * @return
 	 * @throws CRUDException
 	 */
-	public List<TestW> findAllTestWList(TestW testW) throws CRUDException {
-		return testWMapper.findAllTestWList(testW);
+	public List<TestW> findAll(TestW testW) throws CRUDException {
+		return testWMapper.findAll(testW);
 	}
 	
 	/**
@@ -68,18 +68,8 @@ public class TestWService extends BaseService {
 	 * @return
 	 * @throws CRUDException
 	 */
-	public EasyUIDataGrid findTestWListTotal(TestW testW) throws CRUDException {
-		return testWMapper.findTestWListTotal(testW);
-	}
-	
-	/**
-	 * 查询数据总数
-	 * @param testW
-	 * @return
-	 * @throws CRUDException
-	 */
-	public int findTestWTotal(TestW testW) throws CRUDException {
-		return testWMapper.findTestWTotal(testW);
+	public int findTotal(TestW testW) throws CRUDException {
+		return testWMapper.findTotal(testW);
 	}
 	
 	/**
@@ -87,9 +77,9 @@ public class TestWService extends BaseService {
 	 * @param testW
 	 * @throws CRUDException
 	 */
-	public void saveTestW(TestW testW) throws CRUDException{
+	public void save(TestW testW) throws CRUDException{
 		testW.preInsert();
-		testWMapper.saveTestW(testW);
+		testWMapper.save(testW);
 	}
 	
 	/**
@@ -97,9 +87,9 @@ public class TestWService extends BaseService {
 	 * @param testW
 	 * @throws CRUDException
 	 */
-	public void updateTestW(TestW testW) throws CRUDException{
+	public void update(TestW testW) throws CRUDException{
 		testW.preUpdate();
-		testWMapper.updateTestW(testW);			
+		testWMapper.update(testW);			
 	}
 	
 	/**
@@ -107,8 +97,8 @@ public class TestWService extends BaseService {
 	 * @param listId
 	 * @throws CRUDException
 	 */
-	public void deleteTestW(List<String> listId) throws CRUDException {
-		testWMapper.deleteTestW(listId);
+	public void delete(List<String> listId) throws CRUDException {
+		testWMapper.delete(listId);
 	}
 	
 }

@@ -8,13 +8,13 @@
 	</comment>
 	<entry key="basepackage">com.seeyoui.kensite</entry>
 	<!-- 当前模块所属包路径 -->
-	<entry key="innerpackage">framework.cms</entry>
+	<entry key="innerpackage">bussiness.demo</entry>
 	<!-- 当前功能名，对应工作空间的文件夹名，注意大小写 -->
 	<entry key="projectName">kensite</entry>
 	<!-- 当前模块名，@RequestMapping(value = "guestbook")==@RequestMapping(value = "cms/guestbook") -->
-	<entry key="moduleC">cms/</entry>
+	<entry key="moduleC">demo/</entry>
 	<!-- 当前模块名，@RequiresPermissions("guestbook:view")==@RequiresPermissions("cms:guestbook:view") -->
-	<entry key="moduleP">cms:</entry>
+	<entry key="moduleP">demo:</entry>
 	
 	<!-- jsp namespace: web/${namespace}/${className}/list.jsp -->
 	<entry key="namespace">WEB-INF/view</entry>
