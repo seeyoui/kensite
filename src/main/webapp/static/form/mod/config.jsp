@@ -247,6 +247,7 @@
 			}
 			var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
 			parent.$('#category').combobox('setValue', componentType);
+			alert(componentConfig);
 			parent.$('#settings').textbox('setValue', componentConfig);
 			parent.layer.close(index);
 		}

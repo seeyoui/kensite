@@ -218,9 +218,6 @@
 	    	<if test="validType !=null and validType !=''">
 			VALID_TYPE=#{validType},
 			</if>
-	    	<if test="settings !=null and settings !=''">
-			SETTINGS=#{settings},
-			</if>
 	    	<if test="htmlInner !=null and htmlInner !=''">
 			HTML_INNER=#{htmlInner},
 			</if>
@@ -230,6 +227,7 @@
 	    	<if test="delFlag !=null and delFlag !=''">
 			DEL_FLAG=#{delFlag},
 			</if>
+			SETTINGS=#{settings},
 		    UPDATE_USER = #{updateUser.userName},
 		    UPDATE_DATE = sysdate,
 		    ID = #{id}

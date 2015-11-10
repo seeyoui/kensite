@@ -229,6 +229,7 @@ public class CompUtils {
 	}
 	
 	public static void removeCache(TableColumn tableColumn) {
+		CacheUtils.remove(CACHE_COMP+CACHE_SPLIT+tableColumn.getTableName()+CACHE_SPLIT+tableColumn.getName());
 		CacheUtils.remove(CACHE_COMP+CACHE_SPLIT+CACHE_EASYUI+CACHE_SPLIT+tableColumn.getTableName()+CACHE_SPLIT+tableColumn.getName());
 	}
 }
