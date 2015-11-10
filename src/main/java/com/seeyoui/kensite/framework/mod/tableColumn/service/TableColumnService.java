@@ -19,6 +19,7 @@ import com.seeyoui.kensite.framework.mod.db.persistence.DBMapper;
 import com.seeyoui.kensite.framework.mod.table.domain.Table;
 import com.seeyoui.kensite.framework.mod.tableColumn.domain.TableColumn;
 import com.seeyoui.kensite.framework.mod.tableColumn.persistence.TableColumnMapper;
+import com.seeyoui.kensite.framework.system.util.CompUtils;
 import com.seeyoui.kensite.framework.act.idgenerator.GeneratorUUID;
 
 /**
@@ -134,6 +135,8 @@ public class TableColumnService extends BaseService {
 	public void updateTableColumn(TableColumn tableColumn) throws CRUDException{
 		TableColumn tableColumnOld = tableColumnMapper.findTableColumnById(tableColumn.getId());
 		tableColumn.preUpdate();
+		CompUtils.removeCache(tableColumnOld);
+		CompUtils.removeCache(tableColumn);
 		tableColumnMapper.updateTableColumn(tableColumn);
 		if(StringUtils.isNotBlank(tableColumn.getName()) && !tableColumn.getName().equals(tableColumnOld.getName())) {
 			tableColumn.setOldName(tableColumnOld.getName());
@@ -175,6 +178,7 @@ public class TableColumnService extends BaseService {
 	 */
 	public void renameTableName(TableColumn tableColumn) throws CRUDException{
 		tableColumn.preUpdate();
+		CompUtils.removeCache(tableColumn);
 		tableColumnMapper.updateTableColumn(tableColumn);
 	}
 	
@@ -187,6 +191,7 @@ public class TableColumnService extends BaseService {
 		for(String id : listId) {
 			TableColumn tableColumn = tableColumnMapper.findTableColumnById(id);
 			dbMapper.dropColumn(tableColumn);
+			CompUtils.removeCache(tableColumn);
 		}
 		tableColumnMapper.deleteTableColumn(listId);
 	}
