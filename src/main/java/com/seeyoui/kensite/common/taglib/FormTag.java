@@ -8,16 +8,16 @@ import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.TagSupport;
 
 import com.seeyoui.kensite.common.constants.StringConstant;
+import com.seeyoui.kensite.common.taglib.util.FormUtils;
 import com.seeyoui.kensite.common.util.DBUtils;
 import com.seeyoui.kensite.common.util.SpringContextHolder;
 import com.seeyoui.kensite.common.util.StringUtils;
 import com.seeyoui.kensite.framework.mod.tableColumn.domain.TableColumn;
 import com.seeyoui.kensite.framework.mod.tableColumn.persistence.TableColumnMapper;
 import com.seeyoui.kensite.framework.plugin.dict.domain.Dict;
-import com.seeyoui.kensite.framework.system.util.CompUtils;
 import com.seeyoui.kensite.framework.system.util.DictUtils;
 
-public class ComponentTag extends TagSupport {
+public class FormTag extends TagSupport {
 	private static final long serialVersionUID = 1L;
 	
 	private String table;
@@ -30,7 +30,7 @@ public class ComponentTag extends TagSupport {
 			TableColumn tableColumn = new TableColumn();
 			tableColumn.setTableName(table);
 			tableColumn.setName(column);
-			StringBuffer result = CompUtils.getTableColumnStr(tableColumn);
+			StringBuffer result = FormUtils.getTableColumnStr(tableColumn);
 			if (StringUtils.isBlank(result)) {
 				return SKIP_BODY;
 			}

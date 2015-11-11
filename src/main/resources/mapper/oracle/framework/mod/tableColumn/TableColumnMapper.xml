@@ -15,6 +15,8 @@
 	    T.JDBC_LENGTH AS "jdbcLength",
 	    T.IS_NULL AS "isNull",
 	    T.IS_EDIT AS "isEdit",
+	    T.IS_LIST AS "isList",
+	    T.IS_QUERY AS "isQuery",
 	    T.CATEGORY AS "category",
 	    T.DEFAULT_VALUE AS "defaultValue",
 	    T.VALID_TYPE AS "validType",
@@ -62,6 +64,12 @@
 			</if>
 			<if test="isEdit != null and isEdit != ''">
 				AND T.IS_EDIT LIKE '%'||#{isEdit}||'%'
+			</if>
+			<if test="isList != null and isList != ''">
+				AND T.IS_LIST LIKE '%'||#{isList}||'%'
+			</if>
+			<if test="isQuery != null and isQuery != ''">
+				AND T.IS_QUERY LIKE '%'||#{isQuery}||'%'
 			</if>
 			<if test="category != null and category != ''">
 				AND T.CATEGORY LIKE '%'||#{category}||'%'
@@ -152,6 +160,8 @@
 	    	JDBC_LENGTH,
 	    	IS_NULL,
 	    	IS_EDIT,
+	    	IS_LIST,
+	    	IS_QUERY,
 	    	CATEGORY,
 	    	DEFAULT_VALUE,
 	    	VALID_TYPE,
@@ -171,6 +181,8 @@
 			#{jdbcLength,jdbcType=VARCHAR},
 			#{isNull,jdbcType=VARCHAR},
 			#{isEdit,jdbcType=VARCHAR},
+			#{isList,jdbcType=VARCHAR},
+			#{isQuery,jdbcType=VARCHAR},
 			#{category,jdbcType=VARCHAR},
 			#{defaultValue,jdbcType=VARCHAR},
 			#{validType,jdbcType=VARCHAR},
@@ -208,6 +220,12 @@
 			</if>
 	    	<if test="isEdit !=null and isEdit !=''">
 			IS_EDIT=#{isEdit},
+			</if>
+	    	<if test="isList !=null and isList !=''">
+			IS_LIST=#{isList},
+			</if>
+	    	<if test="isQuery !=null and isQuery !=''">
+			IS_QUERY=#{isQuery},
 			</if>
 	    	<if test="category !=null and category !=''">
 			CATEGORY=#{category},

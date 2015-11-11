@@ -19,17 +19,11 @@
 		        <thead>
 		            <tr>
 					    <th field="id" width="100px" hidden>主键</th>
-					    
-					    
-					    
-					    
-					    
-					    
-					    <th field="name" width="100px">姓名</th>
-					    <th field="birthday" width="100px" align="center">出生日期</th>
-					    <th field="sex" width="100px">性别</th>
-					    <th field="describe" width="100px">简历</th>
-					    <th field="isdel" width="100px">是否屏蔽</th>
+					    <ks:listTag table="T_TEST_W" column="NAME"/>
+					    <ks:listTag table="T_TEST_W" column="BIRTHDAY"/>
+						<ks:listTag table="T_TEST_W" column="SEX"/>
+						<ks:listTag table="T_TEST_W" column="DESCRIBE"/>
+						<ks:listTag table="T_TEST_W" column="ISDEL"/>
 		            </tr>
 		        </thead>
 		    </table>

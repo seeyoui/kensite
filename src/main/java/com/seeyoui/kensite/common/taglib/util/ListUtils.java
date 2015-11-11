@@ -1,0 +1,142 @@
+package com.seeyoui.kensite.common.taglib.util;
+
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.jsp.JspException;
+
+import com.seeyoui.kensite.common.constants.StringConstant;
+import com.seeyoui.kensite.common.taglib.constants.TableColumnConstants;
+import com.seeyoui.kensite.common.util.CacheUtils;
+import com.seeyoui.kensite.common.util.DBUtils;
+import com.seeyoui.kensite.common.util.SpringContextHolder;
+import com.seeyoui.kensite.common.util.StringUtils;
+import com.seeyoui.kensite.framework.mod.tableColumn.domain.TableColumn;
+import com.seeyoui.kensite.framework.mod.tableColumn.persistence.TableColumnMapper;
+import com.seeyoui.kensite.framework.plugin.dict.domain.Dict;
+import com.seeyoui.kensite.framework.system.util.DictUtils;
+
+/**
+ * 表单控件工具类
+ * @author Ken
+ * @version 2015-11-10
+ */
+public class ListUtils {
+	
+	private static TableColumnMapper tableColumnMapper = SpringContextHolder.getBean(TableColumnMapper.class);
+
+	
+	public static TableColumn getTableColumn(TableColumn tableColumn){
+		TableColumn tc = null;
+		if (tableColumn!=null){
+			tc = (TableColumn)CacheUtils.get(TableColumnConstants.CACHE_COLUMN+TableColumnConstants.CACHE_SPLIT+tableColumn.getTableName()+TableColumnConstants.CACHE_SPLIT+tableColumn.getName());
+			if (tc ==  null){
+				tc = tableColumnMapper.findTableColumn(tableColumn);
+				if(tc == null) {
+					return null;
+				}
+				CacheUtils.put(TableColumnConstants.CACHE_COLUMN+TableColumnConstants.CACHE_SPLIT+tableColumn.getTableName()+TableColumnConstants.CACHE_SPLIT+tableColumn.getName(), tc);
+			}
+		}
+		return tc;
+	}
+	
+	public static StringBuffer getTableColumnStr(TableColumn tableColumn) throws Exception {
+		TableColumn tc = getTableColumn(tableColumn);
+		if(tc == null) {
+			return null;
+		}
+		StringBuffer result = getEasyUIStr(tc);
+		return result;
+	}
+	
+	private static StringBuffer getEasyUIStr(TableColumn tableColumn) throws Exception {
+		StringBuffer result = (StringBuffer)CacheUtils.get(TableColumnConstants.CACHE_LIST+TableColumnConstants.CACHE_SPLIT+TableColumnConstants.CACHE_EASYUI+TableColumnConstants.CACHE_SPLIT+tableColumn.getTableName()+TableColumnConstants.CACHE_SPLIT+tableColumn.getName());
+		if (result !=  null){
+			return result;
+		}
+		boolean needCache = true;
+		result = new StringBuffer();
+		String column = tableColumn.getName();
+		column = StringUtils.toCamelCase(column);
+		//data-options="field:'price',align:'right'"
+		result.append("<th data-options=\"halign:'center',");
+		result.append("field:'"+column+"',");
+		if(StringUtils.isNoneBlank(tableColumn.getListWidth())) {
+			result.append(" width:"+tableColumn.getListWidth()+",");
+		} else {
+			result.append(" width:100,");
+		}
+		if(StringUtils.isNoneBlank(tableColumn.getIsList()) && StringConstant.FALSE.equals(tableColumn.getIsList())) {
+			result.append(" hidden:true,");
+		}
+		if(TableColumnConstants.TEXTBOX.equals(tableColumn.getCategory()) || TableColumnConstants.TEXTAREA.equals(tableColumn.getCategory())) {
+		}
+		if(TableColumnConstants.NUMBERBOX.equals(tableColumn.getCategory())) {
+			result.append(" align:'right',");
+		}
+		if(TableColumnConstants.COMBOBOX.equals(tableColumn.getCategory()) || TableColumnConstants.RADIOBOX.equals(tableColumn.getCategory()) || TableColumnConstants.CHECKBOX.equals(tableColumn.getCategory())) {
+			needCache = false;
+			result.append(" formatter: function(val,row,index){");
+			StringBuffer sb = new StringBuffer();
+			if(StringUtils.isNoneBlank(tableColumn.getSettings())) {
+				if(TableColumnConstants.CHECKBOX.equals(tableColumn.getCategory())) {
+				}
+				String settings = tableColumn.getSettings();
+				if(settings.indexOf("SQL>") != -1) {
+					sb.append("var jsonObj = [");
+					String[] settingsArr = settings.split("\\|");
+					String sql = settingsArr[0].replace("SQL>", "");
+					String value = settingsArr[1];
+					String label = settingsArr[2];
+					List<Map<Object, Object>> list = DBUtils.executeQuery(sql);
+					for(Map<Object, Object> map : list) {
+						sb.append("{value: '"+map.get(value.toUpperCase())+"',label: '"+map.get(label.toUpperCase())+"'},");
+					}
+					sb.substring(0, sb.lastIndexOf(",")-1);
+					sb.append("];");
+				} else if(settings.indexOf("DICT>") != -1) {
+					sb.append("var jsonObj = [");
+					System.out.println(settings.replace("DICT>", ""));
+					System.out.println(DictUtils.getDict(settings.replace("DICT>", "")).getValue());
+					List<Dict> dictList = DictUtils.getDictList(DictUtils.getDict(settings.replace("DICT>", "")).getValue());
+					for(Dict dict : dictList) {
+						sb.append("{value: '"+dict.getValue()+"',label: '"+dict.getLabel()+"'},");
+					}
+					sb.substring(0, sb.lastIndexOf(",")-1);
+					sb.append("];");
+				} else  {
+					sb.append("var jsonObj = [");
+					String[] settingsArr = settings.split("\\|");
+					for(String set : settingsArr) {
+						if(set.indexOf(":") == -1) {
+							sb.append("{label: '"+set+"',value: '"+set+"'},");
+						} else {
+							String[] setArr = set.split(":");
+							sb.append("{value: '"+setArr[0]+"',label: '"+setArr[1]+"'},");
+						}
+					}
+					sb.substring(0, sb.lastIndexOf(",")-1);
+					sb.append("];");
+				}
+			}
+			result.append(sb);
+			result.append("if(jsonObj == null) {'';}for(var obj in jsonObj) {if(jsonObj[obj].value == val) {return jsonObj[obj].label;}}},");
+		}
+		if(TableColumnConstants.DATEBOX.equals(tableColumn.getCategory())) {
+			result.append(" align:'center',");
+		}
+		if(TableColumnConstants.HTMLDESIGN.equals(tableColumn.getCategory())) {
+		}
+		result.append("\">"+tableColumn.getComments()+"</th>");
+		if(needCache) {
+			CacheUtils.put(TableColumnConstants.CACHE_LIST+TableColumnConstants.CACHE_SPLIT+TableColumnConstants.CACHE_EASYUI+TableColumnConstants.CACHE_SPLIT+tableColumn.getTableName()+TableColumnConstants.CACHE_SPLIT+tableColumn.getName(), result);
+		}
+		return result;
+	}
+	
+	public static void removeCache(TableColumn tableColumn) {
+		CacheUtils.remove(TableColumnConstants.CACHE_COLUMN+TableColumnConstants.CACHE_SPLIT+tableColumn.getTableName()+TableColumnConstants.CACHE_SPLIT+tableColumn.getName());
+		CacheUtils.remove(TableColumnConstants.CACHE_LIST+TableColumnConstants.CACHE_SPLIT+TableColumnConstants.CACHE_EASYUI+TableColumnConstants.CACHE_SPLIT+tableColumn.getTableName()+TableColumnConstants.CACHE_SPLIT+tableColumn.getName());
+	}
+}

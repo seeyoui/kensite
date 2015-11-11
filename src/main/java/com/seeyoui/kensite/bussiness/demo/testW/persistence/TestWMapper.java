@@ -58,6 +58,12 @@ public interface TestWMapper {
 	public void update(TestW testW);
 	
 	/**
+	 * 移除假删除
+	 * @param testW
+	 */
+	public void remove(TestW testW);
+	
+	/**
 	 * 数据删除
 	 * @param listId
 	 */

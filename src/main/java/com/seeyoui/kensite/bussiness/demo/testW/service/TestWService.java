@@ -93,6 +93,16 @@ public class TestWService extends BaseService {
 	}
 	
 	/**
+	 * 移除假删除
+	 * @param testW
+	 * @throws CRUDException
+	 */
+	public void remove(TestW testW) throws CRUDException{
+		testW.preUpdate();
+		testWMapper.remove(testW);			
+	}
+	
+	/**
 	 * 数据删除
 	 * @param listId
 	 * @throws CRUDException

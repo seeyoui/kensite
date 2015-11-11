@@ -57,6 +57,8 @@
 					    <th field="jdbcLength" width="60px">长度</th>
 					    <th field="isNull" width="60px" formatter="formatNullable">是否为空</th>
 					    <th field="isEdit" width="60px" formatter="formatNullable">是否编辑</th>
+					    <th field="isList" width="60px" formatter="formatNullable">是否列表</th>
+					    <th field="isQuery" width="60px" formatter="formatNullable">是否查询</th>
 					    <th field="category" width="100px" hidden>生成方案</th>
 					    <th field="defaultValue" width="100px" hidden>默认值</th>
 					    <th field="validType" width="100px" hidden>校验类型</th>
@@ -144,6 +146,14 @@
 		                <label>校验类型</label>
 		                <input id="validType" name="validType" class="easyui-combobox" data-options="editable:false,panelHeight: 'auto',valueField: 'value',textField: 'label'"/>
 		                <span id="msg-validtype" class="err-msg"></span>
+		            </div>
+					<div class="fitem">
+		                <label>是否列表</label>
+		                <input id="isList" name="isList" class="easyui-combobox" data-options="editable:false,panelHeight: 'auto',required:true,valueField: 'value',textField: 'label'"/>
+		                <span id="msg-isList" class="err-msg"></span>
+		                <label>是否查询</label>
+		                <input id="isQuery" name="isQuery" class="easyui-combobox" data-options="editable:false,panelHeight: 'auto',required:true,valueField: 'value',textField: 'label'"/>
+		                <span id="msg-isQuery" class="err-msg"></span>
 		            </div>
 					<div class="fitem">
 		                <label>生成方案</label>

@@ -27,6 +27,10 @@ public class TableColumn extends DataEntity<TableColumn> {
 	private String jdbcLength;//是否主键
 	private String isNull;//是否可为空
 	private String isEdit;//是否编辑字段
+	private String isList;//是否列表字段
+	private String isQuery;//是否查询字段
+	private String listWidth;//列表显示宽度
+	private String queryWidth;//查询框宽度
 	private String category;//字段生成方案
 	private String defaultValue;//默认值
 	private String validType;//校验类型
@@ -87,6 +91,38 @@ public class TableColumn extends DataEntity<TableColumn> {
 	public String getIsEdit() {
 		return this.isEdit;
 	}
+	public String getIsList() {
+		return isList;
+	}
+
+	public void setIsList(String isList) {
+		this.isList = isList;
+	}
+
+	public String getIsQuery() {
+		return isQuery;
+	}
+
+	public void setIsQuery(String isQuery) {
+		this.isQuery = isQuery;
+	}
+
+	public String getListWidth() {
+		return listWidth;
+	}
+
+	public void setListWidth(String listWidth) {
+		this.listWidth = listWidth;
+	}
+
+	public String getQueryWidth() {
+		return queryWidth;
+	}
+
+	public void setQueryWidth(String queryWidth) {
+		this.queryWidth = queryWidth;
+	}
+
 	public void setCategory(String category) {
 		this.category = category;
 	}

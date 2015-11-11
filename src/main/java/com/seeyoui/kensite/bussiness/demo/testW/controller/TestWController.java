@@ -145,6 +145,28 @@ public class TestWController extends BaseController {
 	}
 	
 	/**
+	 * 移除假删除
+	 * @param modelMap
+	 * @param testW
+	 * @return
+	 * @throws Exception
+	 */
+	@RequiresPermissions("demo:testW:remove")
+	@RequestMapping(value = "/remove", method=RequestMethod.POST)
+	@ResponseBody
+	public String remove(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap, TestW testW) throws Exception{
+		if (!beanValidator(modelMap, testW)){
+			RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
+			return null;
+		}
+		testWService.remove(testW);
+		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
+		return null;
+	}
+	
+	/**
 	 * 删除数据库
 	 * @param modelMap
 	 * @param testWId
