@@ -13,7 +13,7 @@ import java.util.*;
  * @author cuichen
  * @version 1.0
  * @since 1.0
- * @date 2015-11-10
+ * @date 2015-11-11
  */
 public interface TestWMapper {
 
@@ -56,12 +56,6 @@ public interface TestWMapper {
 	 * @param testW
 	 */
 	public void update(TestW testW);
-	
-	/**
-	 * 移除假删除
-	 * @param testW
-	 */
-	public void remove(TestW testW);
 	
 	/**
 	 * 数据删除

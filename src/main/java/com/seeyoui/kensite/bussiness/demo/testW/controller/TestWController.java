@@ -38,7 +38,7 @@ import com.seeyoui.kensite.bussiness.demo.testW.service.TestWService;
  * @author cuichen
  * @version 1.0
  * @since 1.0
- * @date 2015-11-10
+ * @date 2015-11-11
  */
 @Controller
 @RequestMapping(value = "demo/testW")
@@ -140,28 +140,6 @@ public class TestWController extends BaseController {
 			return null;
 		}
 		testWService.update(testW);
-		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
-		return null;
-	}
-	
-	/**
-	 * 移除假删除
-	 * @param modelMap
-	 * @param testW
-	 * @return
-	 * @throws Exception
-	 */
-	@RequiresPermissions("demo:testW:remove")
-	@RequestMapping(value = "/remove", method=RequestMethod.POST)
-	@ResponseBody
-	public String remove(HttpSession session,
-			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap, TestW testW) throws Exception{
-		if (!beanValidator(modelMap, testW)){
-			RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
-			return null;
-		}
-		testWService.remove(testW);
 		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}

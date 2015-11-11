@@ -14,7 +14,7 @@ import com.seeyoui.kensite.common.util.excel.annotation.ExcelField;
  * @author cuichen
  * @version 1.0
  * @since 1.0
- * @date 2015-11-10
+ * @date 2015-11-11
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TestW extends DataEntity<TestW> {

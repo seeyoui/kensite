@@ -173,17 +173,6 @@
 		WHERE ID = #{id}
 	</update>
 	
-	<!-- 移除假删除 -->
-	<update id="remove" parameterType="com.seeyoui.kensite.bussiness.demo.testW.domain.TestW">
-		UPDATE T_TEST_W
-		<set>
-			DEL_FLAG = '1',
-		    UPDATE_USER = #{updateUser.userName},
-		    UPDATE_DATE = sysdate
-		</set>
-		WHERE ID = #{id}
-	</update>
-	
 	<!-- 数据删除 -->
 	<delete id="delete">
 		DELETE FROM T_TEST_W WHERE id IN 

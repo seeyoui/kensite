@@ -24,7 +24,7 @@ import com.seeyoui.kensite.framework.act.idgenerator.GeneratorUUID;
  * @author cuichen
  * @version 1.0
  * @since 1.0
- * @date 2015-11-10
+ * @date 2015-11-11
  */
 @Service
 public class TestWService extends BaseService {
@@ -90,16 +90,6 @@ public class TestWService extends BaseService {
 	public void update(TestW testW) throws CRUDException{
 		testW.preUpdate();
 		testWMapper.update(testW);			
-	}
-	
-	/**
-	 * 移除假删除
-	 * @param testW
-	 * @throws CRUDException
-	 */
-	public void remove(TestW testW) throws CRUDException{
-		testW.preUpdate();
-		testWMapper.remove(testW);			
 	}
 	
 	/**
