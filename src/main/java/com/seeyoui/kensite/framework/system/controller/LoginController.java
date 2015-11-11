@@ -49,7 +49,7 @@ public class LoginController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/login", method=RequestMethod.POST)
+	@RequestMapping(value = {"", "/login"}, method=RequestMethod.POST)
 	public String loginIn(HttpSession session, HttpServletRequest request, HttpServletResponse response, ModelMap modelMap) {
 		String info = "";
 		Boolean status = true;

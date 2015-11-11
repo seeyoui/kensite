@@ -41,7 +41,7 @@
 
 <body>
 	<div id="bg_div"><img src="${ctx_login}/login_index/img/login_bg.jpg" /></div>
-	<form class="form-1" method="post" id="loginForm" name="loginForm" action="${ctx}/login/login.do">
+	<form class="form-1" method="post" id="loginForm" name="loginForm" action="${ctx}/login">
 		<p class="field">
 			<input type="text" id="userName" name="userName" placeholder="帐号"/>
 			<i class="icon-user icon-large"></i>

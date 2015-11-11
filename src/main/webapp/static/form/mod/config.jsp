@@ -9,79 +9,113 @@
 	<%@ include file="/WEB-INF/view/taglib/header.jsp" %>
 	<%@ include file="/WEB-INF/view/taglib/easyui.jsp" %>
 	<%@ include file="/WEB-INF/view/taglib/layer.jsp" %>
-	<style type="text/css">
-		body{ font-size:14px;}
-		input{ vertical-align:middle; margin:0; padding:0}
-		.txt{ height:22px; border:1px solid #cdcdcd; width:180px;}
-		.btn{ background-color:#FFF; border:1px solid #CDCDCD;height:24px; width:70px;}
-	</style>
   </head>
 <body>
 	<div id="configTab" class="easyui-tabs" data-options="plain: true, narrow: false, pill: true, tabPosition: 'left', headerWidth: 120, tools:'#tab-tools'" style="width:100%;height:280px">
 		<div id="textbox" title="单行" data-options="iconCls:'icon-uicomponent-text'" style="padding:10px">
-			背景字<input id="prompt" type="text" class="txt"/>
+			<form class="configForm">
+				<div class="fitem">
+					<label>背景字</label><input id="prompt" class="easyui-textbox" data-options="required:true" style="width:150px;"/>
+				</div>
+			</form>
 		</div>
 		<div id="numberbox" title="数值" data-options="iconCls:'icon-uicomponent-number'" style="padding:10px">
-			上限<input id="max" type="text" class="txt"/><br/><br/>
-			下限<input id="min" type="text" class="txt"/><br/><br/>
-			精度<input id="precision" type="text" class="txt"/>
+			<div class="fitem">
+				<label>上限</label><input id="max" class="easyui-numberbox" data-options="precision:0,value:999999" style="width:150px;"/>
+			</div>
+			<div class="fitem">
+				<label>下限</label><input id="min"  class="easyui-numberbox" data-options="precision:0,value:-999999" style="width:150px;"/>
+			</div>
+			<div class="fitem">
+				<label>精度</label><input id="precision" class="easyui-numberbox" data-options="min:0,max:2,value:0" style="width:150px;"/>
+			</div>
 		</div>
 		<div id="combobox" title="列表" data-options="iconCls:'icon-uicomponent-combox'" style="padding:10px">
 			<div id="comboboxTab" class="easyui-tabs" data-options="plain: false, narrow: false, pill: true" style="width:100%;height:120px">
 				<div id="string" title="常量" data-options="iconCls:'icon-uicomponent-text'" style="padding:10px">
-					选项<input id="config" type="text" class="txt"/><br/><br/>
+					<div class="fitem">
+						<label>选项</label><input id="config" class="easyui-textbox" data-options="" style="width:150px;"/>
+					</div>
 					<span>&gt;&gt;value1[:label1]|value2[:label2]&lt;&lt;</span>
 				</div>
 				<div id="sql" title="SQL" data-options="iconCls:'icon-uicomponent-text'" style="padding:10px">
-					SQL语句<input id="sqlStr" type="text" class="txt"/><br/><br/>
-					VALUE列<input id="valueStr" type="text" class="txt" style="width:60px;"/>
-					LABEL列<input id="labelStr" type="text" class="txt" style="width:60px;"/>
+					<div class="fitem">
+						<label>SQL语句</label><input id="sqlStr" class="easyui-textbox" data-options="" style="width:150px;"/>
+					</div>
+					<div class="fitem">
+						VALUE列<input id="valueStr" class="easyui-textbox" data-options="" style="width:63px;"/>
+						LABEL列<input id="labelStr" class="easyui-textbox" data-options="" style="width:63px;"/>
+					</div>
 				</div>
 				<div id="dict" title="字典" data-options="iconCls:'icon-uicomponent-text'" style="padding:10px">
-					系统字典<input id="dictStr" class="easyui-combotree" style="width:160px;" url="${ctx}/sys/dict/getTreeJson.do"/>
+					<div class="fitem">
+						<label>系统字典</label><input id="dictStr" class="easyui-combotree" style="width:150px;" url="${ctx}/sys/dict/getTreeJson.do"/>
+					</div>
 				</div>
 			</div>
 		</div>
 		<div id="radiobox" title="单选" data-options="iconCls:'icon-uicomponent-radio'" style="padding:10px">
 			<div id="radioboxTab" class="easyui-tabs" data-options="plain: false, narrow: false, pill: true" style="width:100%;height:120px">
 				<div id="string" title="常量" data-options="iconCls:'icon-uicomponent-text'" style="padding:10px">
-					选项<input id="config" type="text" class="txt"/><br/><br/>
+					<div class="fitem">
+						<label>选项</label><input id="config" class="easyui-textbox" data-options="" style="width:150px;"/>
+					</div>
 					<span>&gt;&gt;value1[:label1]|value2[:label2]&lt;&lt;</span>
 				</div>
 				<div id="sql" title="SQL" data-options="iconCls:'icon-uicomponent-text'" style="padding:10px">
-					SQL语句<input id="sqlStr" type="text" class="txt"/><br/><br/>
-					VALUE列<input id="valueStr" type="text" class="txt" style="width:60px;"/>
-					LABEL列<input id="labelStr" type="text" class="txt" style="width:60px;"/>
+					<div class="fitem">
+						<label>SQL语句</label><input id="sqlStr" class="easyui-textbox" data-options="" style="width:150px;"/>
+					</div>
+					<div class="fitem">
+						VALUE列<input id="valueStr" class="easyui-textbox" data-options="" style="width:63px;"/>
+						LABEL列<input id="labelStr" class="easyui-textbox" data-options="" style="width:63px;"/>
+					</div>
 				</div>
 				<div id="dict" title="字典" data-options="iconCls:'icon-uicomponent-text'" style="padding:10px">
-					系统字典<input id="dictStr" class="easyui-combotree" style="width:160px;" url="${ctx}/sys/dict/getTreeJson.do"/>
+					<div class="fitem">
+						<label>系统字典</label><input id="dictStr" class="easyui-combotree" style="width:150px;" url="${ctx}/sys/dict/getTreeJson.do"/>
+					</div>
 				</div>
 			</div>
 		</div>
 		<div id="checkbox" title="多选" data-options="iconCls:'icon-uicomponent-check'" style="padding:10px">
 			<div id="checkboxTab" class="easyui-tabs" data-options="plain: false, narrow: false, pill: true" style="width:100%;height:120px">
 				<div id="string" title="常量" data-options="iconCls:'icon-uicomponent-text'" style="padding:10px">
-					选项<input id="config" type="text" class="txt"/><br/><br/>
+					<div class="fitem">
+						<label>选项</label><input id="config" class="easyui-textbox" data-options="" style="width:150px;"/>
+					</div>
 					<span>&gt;&gt;value1[:label1]|value2[:label2]&lt;&lt;</span>
 				</div>
 				<div id="sql" title="SQL" data-options="iconCls:'icon-uicomponent-text'" style="padding:10px">
-					SQL语句<input id="sqlStr" type="text" class="txt"/><br/><br/>
-					VALUE列<input id="valueStr" type="text" class="txt" style="width:60px;"/>
-					LABEL列<input id="labelStr" type="text" class="txt" style="width:60px;"/>
+					<div class="fitem">
+						<label>SQL语句</label><input id="sqlStr" class="easyui-textbox" data-options="" style="width:150px;"/>
+					</div>
+					<div class="fitem">
+						VALUE列<input id="valueStr" class="easyui-textbox" data-options="" style="width:63px;"/>
+						LABEL列<input id="labelStr" class="easyui-textbox" data-options="" style="width:63px;"/>
+					</div>
 				</div>
 				<div id="dict" title="字典" data-options="iconCls:'icon-uicomponent-text'" style="padding:10px">
-					系统字典<input id="dictStr" class="easyui-combotree" style="width:160px;" url="${ctx}/sys/dict/getTreeJson.do"/>
+					<div class="fitem">
+						<label>系统字典</label><input id="dictStr" class="easyui-combotree" style="width:150px;" url="${ctx}/sys/dict/getTreeJson.do"/>
+					</div>
 				</div>
 			</div>
 		</div>
 		<div id="datebox" title="日期" data-options="iconCls:'icon-uicomponent-date'" style="padding:10px">
-			格式<input id="config" type="text" class="txt" value="yyyy-MM-dd HH:mm:ss"/>
+			<div class="fitem">
+				<label>格式</label><input id="config" class="easyui-textbox" data-options="value:'yyyy-MM-dd HH:mm:ss'" style="width:150px;"/>
+			</div>
 		</div>
 		<div id="textarea" title="多行" data-options="iconCls:'icon-uicomponent-textArea'" style="padding:10px">
-			背景字<input id="prompt" type="text" class="txt"/>
+			<div class="fitem">
+				<label>背景字</label><input id="prompt" class="easyui-textbox" data-options="" style="width:150px;"/>
+			</div>
 		</div>
 		<div id="htmldesign" title="HTML" data-options="iconCls:'icon-uicomponent-htmlEditor'" style="padding:10px">
-			固定高度<input id="config" type="text" class="txt"/>
+			<div class="fitem">
+				<label>固定高度</label><input id="config" class="easyui-numberbox" data-options="min:0,value:100" style="width:150px;"/>
+			</div>
 		</div>
 	</div>
 	<div id="tab-tools">
@@ -130,6 +164,9 @@
 		
 		function initData() {
 			componentType = parent.$('#category').combobox('getValue');
+			if(componentType==null || componentType=="") {
+				componentType = "textbox";
+			}
 			var componentConfig = parent.$('#settings').textbox('getValue');
 			if(componentType=="textbox") {
 				$('#'+componentType+' #prompt').val(componentConfig.replace("prompt:'", "").replace("'",""));
@@ -205,6 +242,10 @@
 		}
 		
 		function save() {
+			alert($('#'+componentType+' .configForm').form('validate'));
+			if(!$('#'+componentType+' .configForm').form('validate')) {
+				return;
+			}
 			if(componentType=="textbox") {
 				componentConfig = "prompt:'"+$('#'+componentType+' #prompt').val()+"'";
 			}

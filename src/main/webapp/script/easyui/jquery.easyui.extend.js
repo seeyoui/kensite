@@ -111,11 +111,17 @@ $.extend($.fn.validatebox.defaults.rules,{
 		message:'请输入汉字'
 	},
 	english:{//验证英语
-			validator:function(value){
-				return/^[A-Za-z]+$/i.test(value);
-			},
-			message:'请输入英文'
+		validator:function(value){
+			return/^[A-Za-z]+$/i.test(value);
 		},
+		message:'请输入英文'
+	},
+	ChEn:{//验证中文或英文
+		validator:function(value){
+			return/^([A-Za-z]|[\u4E00-\u9FA5])+$/i.test(value);
+		},
+		message:'请输入中文或英文'
+	},
 	ip:{//验证IP地址
 		validator:function(value){
 			return/\d+\.\d+\.\d+\.\d+/.test(value);
@@ -180,7 +186,7 @@ $.extend($.fn.validatebox.defaults.rules,{
 		validator:function(value,param){
 			return/^[+]?[0-9]\d*$/.test(value);
 		},
-		message:'请输入整数'
+		message:'请输入正整数'
 	},
 	range:{
 		validator:function(value,param){
