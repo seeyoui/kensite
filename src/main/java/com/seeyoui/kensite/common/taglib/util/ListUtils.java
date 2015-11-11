@@ -23,26 +23,8 @@ import com.seeyoui.kensite.framework.system.util.DictUtils;
  */
 public class ListUtils {
 	
-	private static TableColumnMapper tableColumnMapper = SpringContextHolder.getBean(TableColumnMapper.class);
-
-	
-	public static TableColumn getTableColumn(TableColumn tableColumn){
-		TableColumn tc = null;
-		if (tableColumn!=null){
-			tc = (TableColumn)CacheUtils.get(TableColumnConstants.CACHE_COLUMN+TableColumnConstants.CACHE_SPLIT+tableColumn.getTableName()+TableColumnConstants.CACHE_SPLIT+tableColumn.getName());
-			if (tc ==  null){
-				tc = tableColumnMapper.findTableColumn(tableColumn);
-				if(tc == null) {
-					return null;
-				}
-				CacheUtils.put(TableColumnConstants.CACHE_COLUMN+TableColumnConstants.CACHE_SPLIT+tableColumn.getTableName()+TableColumnConstants.CACHE_SPLIT+tableColumn.getName(), tc);
-			}
-		}
-		return tc;
-	}
-	
 	public static StringBuffer getTableColumnStr(TableColumn tableColumn) throws Exception {
-		TableColumn tc = getTableColumn(tableColumn);
+		TableColumn tc = TagCacheUtils.getTableColumn(tableColumn);
 		if(tc == null) {
 			return null;
 		}
@@ -59,7 +41,6 @@ public class ListUtils {
 		result = new StringBuffer();
 		String column = tableColumn.getName();
 		column = StringUtils.toCamelCase(column);
-		//data-options="field:'price',align:'right'"
 		result.append("<th data-options=\"halign:'center',");
 		result.append("field:'"+column+"',");
 		if(StringUtils.isNoneBlank(tableColumn.getListWidth())) {
@@ -67,7 +48,7 @@ public class ListUtils {
 		} else {
 			result.append(" width:100,");
 		}
-		if(StringUtils.isNoneBlank(tableColumn.getIsList()) && StringConstant.FALSE.equals(tableColumn.getIsList())) {
+		if((StringUtils.isNoneBlank(tableColumn.getIsList()) && StringConstant.FALSE.equals(tableColumn.getIsList()))) {
 			result.append(" hidden:true,");
 		}
 		if(TableColumnConstants.TEXTBOX.equals(tableColumn.getCategory()) || TableColumnConstants.TEXTAREA.equals(tableColumn.getCategory())) {
@@ -97,8 +78,6 @@ public class ListUtils {
 					sb.append("];");
 				} else if(settings.indexOf("DICT>") != -1) {
 					sb.append("var jsonObj = [");
-					System.out.println(settings.replace("DICT>", ""));
-					System.out.println(DictUtils.getDict(settings.replace("DICT>", "")).getValue());
 					List<Dict> dictList = DictUtils.getDictList(DictUtils.getDict(settings.replace("DICT>", "")).getValue());
 					for(Dict dict : dictList) {
 						sb.append("{value: '"+dict.getValue()+"',label: '"+dict.getLabel()+"'},");
@@ -133,10 +112,5 @@ public class ListUtils {
 			CacheUtils.put(TableColumnConstants.CACHE_LIST+TableColumnConstants.CACHE_SPLIT+TableColumnConstants.CACHE_EASYUI+TableColumnConstants.CACHE_SPLIT+tableColumn.getTableName()+TableColumnConstants.CACHE_SPLIT+tableColumn.getName(), result);
 		}
 		return result;
-	}
-	
-	public static void removeCache(TableColumn tableColumn) {
-		CacheUtils.remove(TableColumnConstants.CACHE_COLUMN+TableColumnConstants.CACHE_SPLIT+tableColumn.getTableName()+TableColumnConstants.CACHE_SPLIT+tableColumn.getName());
-		CacheUtils.remove(TableColumnConstants.CACHE_LIST+TableColumnConstants.CACHE_SPLIT+TableColumnConstants.CACHE_EASYUI+TableColumnConstants.CACHE_SPLIT+tableColumn.getTableName()+TableColumnConstants.CACHE_SPLIT+tableColumn.getName());
 	}
 }

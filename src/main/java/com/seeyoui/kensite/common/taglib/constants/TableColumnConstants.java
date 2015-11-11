@@ -5,6 +5,8 @@ public class TableColumnConstants {
 	public static final String CACHE_COLUMN = "column";
 	public static final String CACHE_FORM = "form";
 	public static final String CACHE_LIST = "list";
+	public static final String CACHE_QUERY = "query";
+	public static final String CACHE_QUERY_JS = "queryJs";
 	public static final String CACHE_SPLIT = "-";
 	public static final String CACHE_EASYUI = "easyui";
 

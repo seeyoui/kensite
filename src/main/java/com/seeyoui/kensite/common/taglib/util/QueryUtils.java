@@ -21,7 +21,7 @@ import com.seeyoui.kensite.framework.system.util.DictUtils;
  * @author Ken
  * @version 2015-11-10
  */
-public class FormUtils {
+public class QueryUtils {
 	
 	public static StringBuffer getTableColumnStr(TableColumn tableColumn) throws Exception {
 		TableColumn tc = TagCacheUtils.getTableColumn(tableColumn);
@@ -33,7 +33,7 @@ public class FormUtils {
 	}
 	
 	private static StringBuffer getEasyUIStr(TableColumn tableColumn) throws Exception {
-		StringBuffer result = (StringBuffer)CacheUtils.get(TableColumnConstants.CACHE_FORM+TableColumnConstants.CACHE_SPLIT+TableColumnConstants.CACHE_EASYUI+TableColumnConstants.CACHE_SPLIT+tableColumn.getTableName()+TableColumnConstants.CACHE_SPLIT+tableColumn.getName());
+		StringBuffer result = (StringBuffer)CacheUtils.get(TableColumnConstants.CACHE_QUERY+TableColumnConstants.CACHE_SPLIT+TableColumnConstants.CACHE_EASYUI+TableColumnConstants.CACHE_SPLIT+tableColumn.getTableName()+TableColumnConstants.CACHE_SPLIT+tableColumn.getName());
 		if (result !=  null){
 			return result;
 		}
@@ -41,52 +41,20 @@ public class FormUtils {
 		result = new StringBuffer();
 		String column = tableColumn.getName();
 		column = StringUtils.toCamelCase(column);
-		result.append("<label>"+tableColumn.getComments()+"</label>");
-		if(TableColumnConstants.TEXTBOX.equals(tableColumn.getCategory()) || TableColumnConstants.TEXTAREA.equals(tableColumn.getCategory())) {
-			result.append("<input class=\"easyui-textbox\" id=\"");
+		result.append("<span>"+tableColumn.getComments()+"</span>");
+		if(TableColumnConstants.TEXTBOX.equals(tableColumn.getCategory()) || TableColumnConstants.TEXTAREA.equals(tableColumn.getCategory()) || TableColumnConstants.HTMLDESIGN.equals(tableColumn.getCategory())) {
+			result.append("<input class=\"easyui-textbox\" id=\"sel_");
 			result.append(column);
-			result.append("\" name=\"");
+			result.append("\" name=\"sel_");
 			result.append(column);
-			result.append("\" data-options=\"");
-			if(TableColumnConstants.TEXTAREA.equals(tableColumn.getCategory())) {
-				result.append("multiline:true,");
-			}
-			if(StringConstant.NO.equals(tableColumn.getIsEdit())) {
-				result.append("editable:false,");
-			}
-			if(StringConstant.YES.equals(tableColumn.getIsNull())) {
-				result.append("required:true,");
-			}
-			if(StringUtils.isNoneBlank(tableColumn.getValidType())) {
-				result.append("validType:'"+tableColumn.getValidType()+"',");
-			}
-			if(StringUtils.isNoneBlank(tableColumn.getDefaultValue())) {
-				result.append("value:'"+tableColumn.getDefaultValue()+"',");
-			}
-			if(StringUtils.isNoneBlank(tableColumn.getSettings())) {
-				result.append(tableColumn.getSettings());
-			}
-			result.append("\" "+tableColumn.getHtmlInner());
-			result.append("/>");
+			result.append("\" data-options=\"\"/>");
 		}
 		if(TableColumnConstants.NUMBERBOX.equals(tableColumn.getCategory())) {
-			result.append("<input class=\"easyui-numberbox\" id=\"");
+			result.append("<input class=\"easyui-numberbox\" id=\"sel_");
 			result.append(column);
-			result.append("\" name=\"");
+			result.append("\" name=\"sel_");
 			result.append(column);
 			result.append("\" data-options=\"");
-			if(StringConstant.NO.equals(tableColumn.getIsEdit())) {
-				result.append("editable:false,");
-			}
-			if(StringConstant.YES.equals(tableColumn.getIsNull())) {
-				result.append("required:true,");
-			}
-			if(StringUtils.isNoneBlank(tableColumn.getValidType())) {
-				result.append("validType:'"+tableColumn.getValidType()+"',");
-			}
-			if(StringUtils.isNoneBlank(tableColumn.getDefaultValue())) {
-				result.append("value:'"+tableColumn.getDefaultValue()+"',");
-			}
 			if(StringUtils.isNoneBlank(tableColumn.getSettings())) {
 				result.append(tableColumn.getSettings());
 			}
@@ -95,29 +63,17 @@ public class FormUtils {
 		}
 		if(TableColumnConstants.COMBOBOX.equals(tableColumn.getCategory()) || TableColumnConstants.RADIOBOX.equals(tableColumn.getCategory()) || TableColumnConstants.CHECKBOX.equals(tableColumn.getCategory())) {
 			needCache = false;
-			result.append("<input class=\"easyui-combobox\" id=\"");
+			result.append("<input class=\"easyui-combobox\" id=\"sel_");
 			result.append(column);
-			result.append("\" name=\"");
+			result.append("\" name=\"sel_");
 			result.append(column);
 			result.append("\" data-options=\"");
-			if(StringConstant.NO.equals(tableColumn.getIsEdit())) {
-				result.append("editable:false,");
-			}
-			if(StringConstant.YES.equals(tableColumn.getIsNull())) {
-				result.append("required:true,");
-			}
-			if(StringUtils.isNoneBlank(tableColumn.getValidType())) {
-				result.append("validType:'"+tableColumn.getValidType()+"',");
-			}
-			if(StringUtils.isNoneBlank(tableColumn.getDefaultValue())) {
-				result.append("value:'"+tableColumn.getDefaultValue()+"',");
-			}
 			int dataCount = 0;
 			if(StringUtils.isNoneBlank(tableColumn.getSettings())) {
 				result.append("valueField: 'value',textField: 'label',");
-				if(TableColumnConstants.CHECKBOX.equals(tableColumn.getCategory())) {
-					result.append("multiple:true,");
-				}
+//				if(TableColumnConstants.CHECKBOX.equals(tableColumn.getCategory())) {
+//					result.append("multiple:true,");
+//				}
 				String settings = tableColumn.getSettings();
 				if(settings.indexOf("SQL>") != -1) {
 					result.append("data: [");
@@ -160,13 +116,12 @@ public class FormUtils {
 			if(dataCount <= 5) {
 				result.append(",panelHeight:'auto',");
 			}
-			result.append("\" "+tableColumn.getHtmlInner());
-			result.append("/>");
+			result.append("\" "+tableColumn.getHtmlInner()+"/>");
 		}
 		if(TableColumnConstants.DATEBOX.equals(tableColumn.getCategory())) {
-			result.append("<input id=\"");
+			result.append("<input id=\"sel_");
 			result.append(column);
-			result.append("\" name=\"");
+			result.append("\" name=\"sel_");
 			result.append(column);
 			result.append("\" "+tableColumn.getHtmlInner());
 			if(StringUtils.isNoneBlank(tableColumn.getSettings())) {
@@ -178,26 +133,8 @@ public class FormUtils {
 			}
 			result.append("/>");
 		}
-		if(TableColumnConstants.HTMLDESIGN.equals(tableColumn.getCategory())) {
-			result.append("<script id=\"");
-			result.append(column);
-			result.append("\" name=\"");
-			result.append(column);
-			result.append("\" type=\"text/plain\">");
-			if(StringUtils.isNoneBlank(tableColumn.getDefaultValue())) {
-				result.append(tableColumn.getDefaultValue());
-			}
-			result.append("</script>");
-			result.append("<script type=\"text/javascript\">");
-			result.append("var ue = UE.getEditor('"+column+"', {autoHeight: false});");
-			if(StringUtils.isNoneBlank(tableColumn.getSettings())) {
-				result.append("ue.ready(function() {ue.setHeight("+tableColumn.getSettings()+");});");
-			}
-			result.append("</script>");
-		}
-		result.append("<span id=\"msg-"+column+"\" class=\"err-msg\"></span>");
 		if(needCache) {
-			CacheUtils.put(TableColumnConstants.CACHE_FORM+TableColumnConstants.CACHE_SPLIT+TableColumnConstants.CACHE_EASYUI+TableColumnConstants.CACHE_SPLIT+tableColumn.getTableName()+TableColumnConstants.CACHE_SPLIT+tableColumn.getName(), result);
+			CacheUtils.put(TableColumnConstants.CACHE_QUERY+TableColumnConstants.CACHE_SPLIT+TableColumnConstants.CACHE_EASYUI+TableColumnConstants.CACHE_SPLIT+tableColumn.getTableName()+TableColumnConstants.CACHE_SPLIT+tableColumn.getName(), result);
 		}
 		return result;
 	}

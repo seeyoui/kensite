@@ -18,7 +18,7 @@
 		            rownumbers="true" fitColumns="true" singleSelect="true">
 		        <thead>
 		            <tr>
-					    <th field="id" width="100px" hidden>主键</th>
+					    <th data-options="field:'id',hidden:true">ID</th>
 					    <ks:listTag table="T_TEST_W" column="NAME"/>
 					    <ks:listTag table="T_TEST_W" column="BIRTHDAY"/>
 						<ks:listTag table="T_TEST_W" column="SEX"/>
@@ -40,18 +40,11 @@
 		        <shiro:hasPermission name="demo:testW:export">
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-page_excel" plain="true" onclick="exportExcel()">导出</a>
 		        </shiro:hasPermission>
-
-
-
-
-
-
-
-				姓名<input id="sel_name" name="sel_name" class="easyui-textbox" data-options=""/>
-				出生日期<input id="sel_birthday" name="sel_birthday" class="easyui-textbox" data-options="" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
-				性别<input id="sel_sex" name="sel_sex" class="easyui-textbox" data-options=""/>
-				简历<input id="sel_describe" name="sel_describe" class="easyui-textbox" data-options=""/>
-				是否屏蔽<input id="sel_isdel" name="sel_isdel" class="easyui-textbox" data-options=""/>
+			    <ks:queryTag table="T_TEST_W" column="NAME"/>
+			    <ks:queryTag table="T_TEST_W" column="BIRTHDAY"/>
+				<ks:queryTag table="T_TEST_W" column="SEX"/>
+				<ks:queryTag table="T_TEST_W" column="DESCRIBE"/>
+				<ks:queryTag table="T_TEST_W" column="ISDEL"/>
 			    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="selectData()">查询</a>
 		    </div>
 	    </div>
@@ -61,31 +54,17 @@
 	    });
 	    
 	    function selectData() {
-		    
-		    
-		    
-		    
-		    
-		    
-		    
-		    var sel_name = $("#sel_name").val();
-		    var sel_birthday = $("#sel_birthday").val();
-		    var sel_sex = $("#sel_sex").val();
-		    var sel_describe = $("#sel_describe").val();
-		    var sel_isdel = $("#sel_isdel").val();
-        	$('#dataList').datagrid('load',{
-    		    
-    		    
-    		    
-    		    
-    		    
-    		    
-    		    
-    		    name:sel_name,
-    		    birthday:sel_birthday,
-    		    sex:sel_sex,
-    		    describe:sel_describe,
-    		    isdel:sel_isdel
+        	$('#dataList').datagrid('load', {
+			    <ks:queryJsTag table="T_TEST_W" column="NAME"/>,
+			    <ks:queryJsTag table="T_TEST_W" column="BIRTHDAY"/>,
+				<ks:queryJsTag table="T_TEST_W" column="SEX"/>,
+				<ks:queryJsTag table="T_TEST_W" column="DESCRIBE"/>,
+				<ks:queryJsTag table="T_TEST_W" column="ISDEL"/>
+				/* name : $('#sel_name').textbox('getValue'),
+			    birthday : $('#sel_birthday').val(),
+				sex : $('#sel_sex').combobox('getValue'),
+				describe : $('#sel_describe').textbox('getValue'),
+				isdel : $('#sel_isdel').combobox('getValue') */
         	});
         }
 	    function reloadData() {

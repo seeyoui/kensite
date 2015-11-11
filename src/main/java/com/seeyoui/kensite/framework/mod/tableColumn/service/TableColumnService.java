@@ -3,24 +3,19 @@
  * Since 2014 - 2015
  */package com.seeyoui.kensite.framework.mod.tableColumn.service;  
  
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.seeyoui.kensite.common.base.service.BaseService;
-
-import java.util.*;
 
 import com.seeyoui.kensite.common.base.domain.EasyUIDataGrid;
 import com.seeyoui.kensite.common.base.service.BaseService;
 import com.seeyoui.kensite.common.exception.CRUDException;
-import com.seeyoui.kensite.common.taglib.util.FormUtils;
-import com.seeyoui.kensite.common.util.*;
-import com.seeyoui.kensite.common.constants.StringConstant;
+import com.seeyoui.kensite.common.taglib.util.TagCacheUtils;
+import com.seeyoui.kensite.common.util.StringUtils;
 import com.seeyoui.kensite.framework.mod.db.persistence.DBMapper;
-import com.seeyoui.kensite.framework.mod.table.domain.Table;
 import com.seeyoui.kensite.framework.mod.tableColumn.domain.TableColumn;
 import com.seeyoui.kensite.framework.mod.tableColumn.persistence.TableColumnMapper;
-import com.seeyoui.kensite.framework.act.idgenerator.GeneratorUUID;
 
 /**
  * 业务表字段
@@ -135,8 +130,8 @@ public class TableColumnService extends BaseService {
 	public void updateTableColumn(TableColumn tableColumn) throws CRUDException{
 		TableColumn tableColumnOld = tableColumnMapper.findTableColumnById(tableColumn.getId());
 		tableColumn.preUpdate();
-		FormUtils.removeCache(tableColumnOld);
-		FormUtils.removeCache(tableColumn);
+		TagCacheUtils.removeCache(tableColumnOld);
+		TagCacheUtils.removeCache(tableColumn);
 		tableColumnMapper.updateTableColumn(tableColumn);
 		if(StringUtils.isNotBlank(tableColumn.getName()) && !tableColumn.getName().equals(tableColumnOld.getName())) {
 			tableColumn.setOldName(tableColumnOld.getName());
@@ -178,7 +173,7 @@ public class TableColumnService extends BaseService {
 	 */
 	public void renameTableName(TableColumn tableColumn) throws CRUDException{
 		tableColumn.preUpdate();
-		FormUtils.removeCache(tableColumn);
+		TagCacheUtils.removeCache(tableColumn);
 		tableColumnMapper.updateTableColumn(tableColumn);
 	}
 	
@@ -191,7 +186,7 @@ public class TableColumnService extends BaseService {
 		for(String id : listId) {
 			TableColumn tableColumn = tableColumnMapper.findTableColumnById(id);
 			dbMapper.dropColumn(tableColumn);
-			FormUtils.removeCache(tableColumn);
+			TagCacheUtils.removeCache(tableColumn);
 		}
 		tableColumnMapper.deleteTableColumn(listId);
 	}

@@ -61,8 +61,9 @@ public class DictUtils {
 	public static Dict getDict(String id){
 		if (StringUtils.isNotBlank(id)){
 			for (Dict dict : getDictList()){
-				if(dict.getId().equals(id));
-				return dict;
+				if(dict.getId().equals(id)) {
+					return dict;
+				}
 			}
 		}
 		return null;
