@@ -76,8 +76,11 @@ ${column.columnNameLower}:sel_${column.columnNameLower}
 		            rownumbers="true" fitColumns="true" singleSelect="true">
 		        <thead>
 		            <tr>
-		            	<#list table.columns as column>
-					    ${getTableHeaderHtml(column)}
+					    <th data-options="field:'id',hidden:true">ID</th>
+			        	<#list table.columns as column>
+				    	<#if (column.columnName?lower_case=="id"||column.columnName?lower_case=="createuser"||column.columnName?lower_case=="createdate"||column.columnName?lower_case=="updateuser"||column.columnName?lower_case=="updatedate"||column.columnName?lower_case=="remarks"||column.columnName?lower_case=="delflag") ><#else>
+				    	<ks:listTag table="${table.sqlName}" column="${column.sqlName}"/>
+						</#if>
 					    </#list>
 		            </tr>
 		        </thead>
@@ -95,8 +98,10 @@ ${column.columnNameLower}:sel_${column.columnNameLower}
 		        <shiro:hasPermission name="${moduleP}${table.classNameFirstLower}:export">
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-page_excel" plain="true" onclick="exportExcel()">导出</a>
 		        </shiro:hasPermission>
-		        <#list table.columns as column>
-			    <#if (column.columnName?lower_case=="id"||column.columnName?lower_case=="createuser"||column.columnName?lower_case=="createdate"||column.columnName?lower_case=="updateuser"||column.columnName?lower_case=="updatedate"||column.columnName?lower_case=="remarks"||column.columnName?lower_case=="delflag") ><#else>				${column.columnAlias}</#if>${getSelectPanelHtml(column)}
+	        	<#list table.columns as column>
+		    	<#if (column.columnName?lower_case=="id"||column.columnName?lower_case=="createuser"||column.columnName?lower_case=="createdate"||column.columnName?lower_case=="updateuser"||column.columnName?lower_case=="updatedate"||column.columnName?lower_case=="remarks"||column.columnName?lower_case=="delflag") ><#else>
+		    	<ks:queryTag table="${table.sqlName}" column="${column.sqlName}"/>
+				</#if>
 			    </#list>
 			    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="selectData()">查询</a>
 		    </div>
@@ -107,13 +112,12 @@ ${column.columnNameLower}:sel_${column.columnNameLower}
 	    });
 	    
 	    function selectData() {
-        	<#list table.columns as column>
-		    ${getSelectJsVarHtml(column)}
-		    </#list>
         	$('#dataList').datagrid('load',{
-        		<#list table.columns as column>
-    		    ${getSelectJsParamHtml(column)}<#if (column.columnName?lower_case=="id"||column.columnName?lower_case=="createuser"||column.columnName?lower_case=="createdate"||column.columnName?lower_case=="updateuser"||column.columnName?lower_case=="updatedate"||colname=="remarks"||colname=="delflag") ><#else><#if column_has_next>,</#if></#if>
-    		    </#list>
+	        	<#list table.columns as column>
+		    	<#if (column.columnName?lower_case=="id"||column.columnName?lower_case=="createuser"||column.columnName?lower_case=="createdate"||column.columnName?lower_case=="updateuser"||column.columnName?lower_case=="updatedate"||column.columnName?lower_case=="remarks"||column.columnName?lower_case=="delflag") ><#else>
+		    	<ks:queryJsTag table="${table.sqlName}" column="${column.sqlName}"/><#if column_has_next>,</#if>
+				</#if>
+			    </#list>
         	});
         }
 	    function reloadData() {
