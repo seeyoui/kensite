@@ -9,15 +9,9 @@
 	<%@ include file="/WEB-INF/view/taglib/easyui.jsp" %>
 	<%@ include file="/WEB-INF/view/taglib/layer.jsp" %>
 	<%@ include file="/WEB-INF/view/taglib/uedit.jsp" %>
-	<%@ include file="/WEB-INF/view/taglib/formStyle.jsp" %>
   </head>
   <body>
-  	<div id="buttons_box">
-		<ul>
-			<li><a href="javascript:void(0)" onclick="submitInfo()">保存</a></li>
-		</ul>
-	</div>
- 	<div style="position:absolute;top:55px;left:20px;right:20px;bottom:10px;">
+ 	<div class="fbody">
         <form id="dataForm" method="post">
 		    <div class="fitem">
                 <ks:formTag table="T_TEST_W" column="NAME"/>
@@ -46,6 +40,7 @@
             <input id="id" name="id" type="hidden"/>
 		</form>
     </div>
+	<div class="layui-layer-btn" style="position: absolute; bottom: 0px;right: 0px"><a class="layui-layer-btn0" onclick="submitInfo()">保存</a></div>
     <script type="text/javascript">
 	    var loadi,url,index = parent.layer.getFrameIndex(window.name);
 	    $(document).ready(function(){

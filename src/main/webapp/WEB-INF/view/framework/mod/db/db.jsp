@@ -53,7 +53,7 @@
 					    <th field="tableName" width="100px" hidden>业务表</th>
 					    <th field="name" width="100px">列名</th>
 					    <th field="comments" width="100px">注释</th>
-					    <th field="jdbcType" width="60px">类型</th>
+					    <th field="jdbcType" width="80px">类型</th>
 					    <th field="jdbcLength" width="60px">长度</th>
 					    <th field="isNull" width="60px" formatter="formatNullable">是否为空</th>
 					    <th field="isEdit" width="60px" formatter="formatNullable">是否编辑</th>
@@ -114,7 +114,7 @@
 	        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dataWin').window('close')" style="width:90px">取消</a>
 	    </div>
     </div>
-    <div id="dataSubWin" class="easyui-window" title="业务表字段信息维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:800px;height:260px;padding:10px;">
+    <div id="dataSubWin" class="easyui-window" title="业务表字段信息维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:800px;height:280px;padding:10px;">
         <div class="ftitle">业务表字段信息维护</div>
         <form id="dataSubForm" method="post">
 					<div class="fitem">
@@ -127,7 +127,7 @@
 		            </div>
 					<div class="fitem">
 		                <label>类型</label>
-		                <input id="jdbcType" name="jdbcType" class="easyui-textbox" data-options="required:true"/>
+		                <input id="jdbcType" name="jdbcType" class="easyui-combobox" data-options="editable:false,panelHeight: 'auto',required:true,valueField: 'value',textField: 'label'"/>
 		                <span id="msg-jdbctype" class="err-msg"></span>
 		                <label>长度</label>
 		                <input id="jdbcLength" name="jdbcLength" class="easyui-textbox" data-options="validType:'jdbcLength'"/>
@@ -144,16 +144,24 @@
 		                <input id="isEdit" name="isEdit" class="easyui-combobox" data-options="editable:false,panelHeight: 'auto',required:true,valueField: 'value',textField: 'label'"/>
 		                <span id="msg-isedit" class="err-msg"></span>
 		                <label>校验类型</label>
-		                <input id="validType" name="validType" class="easyui-combobox" data-options="editable:false,valueField: 'value',textField: 'label'"/>
+		                <input id="validType" name="validType" class="easyui-combobox" data-options="valueField: 'value',textField: 'label'"/>
 		                <span id="msg-validtype" class="err-msg"></span>
 		            </div>
 					<div class="fitem">
 		                <label>是否列表</label>
 		                <input id="isList" name="isList" class="easyui-combobox" data-options="editable:false,panelHeight: 'auto',required:true,valueField: 'value',textField: 'label'"/>
 		                <span id="msg-isList" class="err-msg"></span>
-		                <label>是否查询</label>
+		                <label>列表宽度</label>
+		                <input id="listWidth" name="listWidth" class="easyui-numberbox" data-options="min:0,precision:0,value:100"/>
+		                <span id="msg-listWidth" class="err-msg"></span>
+		            </div>
+					<div class="fitem">
+		                <label>是否列表</label>
 		                <input id="isQuery" name="isQuery" class="easyui-combobox" data-options="editable:false,panelHeight: 'auto',required:true,valueField: 'value',textField: 'label'"/>
 		                <span id="msg-isQuery" class="err-msg"></span>
+		                <label>查询宽度</label>
+		                <input id="queryWidth" name="queryWidth" class="easyui-numberbox" data-options="min:0,precision:0,value:100"/>
+		                <span id="msg-queryWidth" class="err-msg"></span>
 		            </div>
 					<div class="fitem">
 		                <label>生成方案</label>
@@ -183,12 +191,14 @@
     var nullableJson;
     var validTypeJson;
     var categoryJson;
+    var jdbcTypeJson;
     
     var tableName;
     $(document).ready(function(){
     	getValidTypeJson();
     	getNullableJson();
     	getCategoryJson();
+    	getJdbcTypeJson();
     	$('#dataList').datagrid({
     		onDblClickRow: function(index,row){
 				tableName = row.name;
@@ -206,24 +216,41 @@
 			    content: '${ctx_static}/form/mod/config.jsp'
 			});
         });
-    	$('#category').textbox({
-    		onClick: function(){
-    			layer.open({
-    				title: '字段配置',
-    			    type: 2,
-    			    area: ['400px', '330px'],
-    			    fix: false, //不固定
-    			    maxmin: false,
-    			    content: '${ctx_static}/form/mod/config.jsp'
-    			});
+    	$('#jdbcType').combobox({
+    		onSelect: function(record){
+    			changeJdbcLength(record.value);
     		}
     	});
+		$('#jdbcLength').textbox('readonly', true);
     });
     
     function changeTabCol(tableName) {
     	//清空历史查询结果
     	$('#dataSubList').datagrid('loadData',{total:0,rows:[]});
     	$('#dataSubList').datagrid({url:'${ctx}/sys/tableColumn/getListData.do?tableName='+tableName});
+    }
+    
+    function changeJdbcLength(jdbcType) {
+    	if(jdbcType == 'CHAR') {
+    		$('#jdbcLength').textbox('readonly', false);
+    		$('#jdbcLength').textbox('setValue', '32');
+    	}
+    	if(jdbcType == 'VARCHAR2') {
+    		$('#jdbcLength').textbox('readonly', false);
+    		$('#jdbcLength').textbox('setValue', '100');
+    	}
+    	if(jdbcType == 'NUMBER') {
+    		$('#jdbcLength').textbox('readonly', false);
+    		$('#jdbcLength').textbox('setValue', '10,2');
+    	}
+    	if(jdbcType == 'DATE') {
+    		$('#jdbcLength').textbox('readonly', true);
+    		$('#jdbcLength').textbox('setValue', '');
+    	}
+    	if(jdbcType == 'CLOB') {
+    		$('#jdbcLength').textbox('readonly', true);
+    		$('#jdbcLength').textbox('setValue', '');
+    	}
     }
     
     function selectData() {
@@ -410,6 +437,21 @@
                 }
             });
         }
+    }
+    
+    function getJdbcTypeJson() {
+    	$.ajax({
+			type: "post",
+			url: '${ctx}/sys/dict/getDictJson.do',
+			data: {category:'jdbcType'},
+			dataType: 'json',
+			beforeSend: function(XMLHttpRequest){
+			},
+			success: function(data, textStatus){
+				jdbcTypeJson = data;
+				$('#jdbcType').combobox('loadData', jdbcTypeJson);
+			}
+		});
     }
     
     function getNullableJson() {

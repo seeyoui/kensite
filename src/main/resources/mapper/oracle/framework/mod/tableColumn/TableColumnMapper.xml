@@ -17,6 +17,8 @@
 	    T.IS_EDIT AS "isEdit",
 	    T.IS_LIST AS "isList",
 	    T.IS_QUERY AS "isQuery",
+	    T.LIST_WIDTH AS "listWidth",
+	    T.QUERY_WIDTH AS "queryWidth",
 	    T.CATEGORY AS "category",
 	    T.DEFAULT_VALUE AS "defaultValue",
 	    T.VALID_TYPE AS "validType",
@@ -70,6 +72,12 @@
 			</if>
 			<if test="isQuery != null and isQuery != ''">
 				AND T.IS_QUERY LIKE '%'||#{isQuery}||'%'
+			</if>
+			<if test="listWidth != null and listWidth != ''">
+				AND T.LIST_WIDTH LIKE '%'||#{listWidth}||'%'
+			</if>
+			<if test="queryWidth != null and queryWidth != ''">
+				AND T.QUERY_WIDTH LIKE '%'||#{queryWidth}||'%'
 			</if>
 			<if test="category != null and category != ''">
 				AND T.CATEGORY LIKE '%'||#{category}||'%'
@@ -162,6 +170,8 @@
 	    	IS_EDIT,
 	    	IS_LIST,
 	    	IS_QUERY,
+	    	LIST_WIDTH,
+	    	QUERY_WIDTH,
 	    	CATEGORY,
 	    	DEFAULT_VALUE,
 	    	VALID_TYPE,
@@ -183,6 +193,8 @@
 			#{isEdit,jdbcType=VARCHAR},
 			#{isList,jdbcType=VARCHAR},
 			#{isQuery,jdbcType=VARCHAR},
+			#{listWidth,jdbcType=VARCHAR},
+			#{queryWidth,jdbcType=VARCHAR},
 			#{category,jdbcType=VARCHAR},
 			#{defaultValue,jdbcType=VARCHAR},
 			#{validType,jdbcType=VARCHAR},
@@ -227,17 +239,17 @@
 	    	<if test="isQuery !=null and isQuery !=''">
 			IS_QUERY=#{isQuery},
 			</if>
+	    	<if test="listWidth !=null and listWidth !=''">
+			LIST_WIDTH=#{listWidth},
+			</if>
+	    	<if test="queryWidth !=null and queryWidth !=''">
+			QUERY_WIDTH=#{queryWidth},
+			</if>
 	    	<if test="category !=null and category !=''">
 			CATEGORY=#{category},
 			</if>
 	    	<if test="defaultValue !=null and defaultValue !=''">
 			DEFAULT_VALUE=#{defaultValue},
-			</if>
-	    	<if test="validType !=null and validType !=''">
-			VALID_TYPE=#{validType},
-			</if>
-	    	<if test="htmlInner !=null and htmlInner !=''">
-			HTML_INNER=#{htmlInner},
 			</if>
 	    	<if test="remarks !=null and remarks !=''">
 			REMARKS=#{remarks},
@@ -245,6 +257,8 @@
 	    	<if test="delFlag !=null and delFlag !=''">
 			DEL_FLAG=#{delFlag},
 			</if>
+			VALID_TYPE=#{validType},
+			HTML_INNER=#{htmlInner},
 			SETTINGS=#{settings},
 		    UPDATE_USER = #{updateUser.userName},
 		    UPDATE_DATE = sysdate,

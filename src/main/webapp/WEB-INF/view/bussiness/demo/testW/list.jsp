@@ -88,10 +88,10 @@
         	layer.open({
         	    type: 2,
         	    title: '演示DEMO基本信息',
-        	    area: ['400px', '350px'],
+        	    area: ['440px', '350px'],
         	    fix: false, //不固定
         	    maxmin: false,
-        	    content: url
+        	    content: url,
         	});
         }
         var loadi;

@@ -100,7 +100,7 @@ public class ListUtils {
 				}
 			}
 			result.append(sb);
-			result.append("if(jsonObj == null) {'';}for(var obj in jsonObj) {if(jsonObj[obj].value == val) {return jsonObj[obj].label;}}},");
+			result.append("if(jsonObj == null) {return '';}var varArr = val.split(',');var result = '';for(var i=0; i<varArr.length; i++) {for(var obj in jsonObj) {if(jsonObj[obj].value == varArr[i]) {result += (jsonObj[obj].label+',');}}}return result.substring(0, result.length-1);},");
 		}
 		if(TableColumnConstants.DATEBOX.equals(tableColumn.getCategory())) {
 			result.append(" align:'center',");
