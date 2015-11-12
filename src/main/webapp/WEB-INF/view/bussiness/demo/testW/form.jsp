@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <title>测试1</title>
+    <title>演示DEMO</title>
 	<%@ include file="/WEB-INF/view/taglib/header.jsp" %>
 	<%@ include file="/WEB-INF/view/taglib/easyui.jsp" %>
 	<%@ include file="/WEB-INF/view/taglib/layer.jsp" %>
@@ -38,6 +38,10 @@
 		    <div class="fitem">
                 <ks:formTag table="T_TEST_W" column="ISDEL"/>
                 <span id="msg-isdel" class="err-msg"></span>
+            </div>
+		    <div class="fitem">
+                <ks:formTag table="T_TEST_W" column="MANAGER"/>
+                <span id="msg-manager" class="err-msg"></span>
             </div>
             <input id="id" name="id" type="hidden"/>
 		</form>

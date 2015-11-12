@@ -56,27 +56,27 @@ WEB访问路径<input id="sel_url" name="sel_url" class="easyui-textbox" data-op
 		        <form id="dataForm" method="post">
 							<div class="fitem">
 				                <label>文件原名</label>
-				                <input id="viewname" name="viewname" class="easyui-validatebox textbox" data-options="required:true"/>
+				                <input id="viewname" name="viewname" class="easyui-textbox" data-options="required:true"/>
 				            </div>
 							<div class="fitem">
 				                <label>文件存储名</label>
-				                <input id="realname" name="realname" class="easyui-validatebox textbox" data-options="required:true"/>
+				                <input id="realname" name="realname" class="easyui-textbox" data-options="required:true"/>
 				            </div>
 							<div class="fitem">
 				                <label>WEB访问路径</label>
-				                <input id="url" name="url" class="easyui-validatebox textbox" data-options="required:true"/>
+				                <input id="url" name="url" class="easyui-textbox" data-options="required:true"/>
 				            </div>
 							<div class="fitem">
 				                <label>服务器真实路径</label>
-				                <input id="realurl" name="realurl" class="easyui-validatebox textbox" data-options="required:true"/>
+				                <input id="realurl" name="realurl" class="easyui-textbox" data-options="required:true"/>
 				            </div>
 							<div class="fitem">
 				                <label>后缀名</label>
-				                <input id="suffix" name="suffix" class="easyui-validatebox textbox" data-options="required:true"/>
+				                <input id="suffix" name="suffix" class="easyui-textbox" data-options="required:true"/>
 				            </div>
 							<div class="fitem">
 				                <label>文件大小</label>
-				                <input id="filesize" name="filesize" class="easyui-validatebox textbox" data-options="required:true"/>
+				                <input id="filesize" name="filesize" class="easyui-textbox" data-options="required:true"/>
 				            </div>
 				</form>
 				

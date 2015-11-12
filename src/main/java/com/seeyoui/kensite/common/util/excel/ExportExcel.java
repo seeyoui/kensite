@@ -33,9 +33,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.Lists;
+import com.seeyoui.kensite.common.constants.StringConstant;
+import com.seeyoui.kensite.common.taglib.constants.TableColumnConstants;
+import com.seeyoui.kensite.common.taglib.util.TagCacheUtils;
+import com.seeyoui.kensite.common.util.DBUtils;
 import com.seeyoui.kensite.common.util.Encodes;
 import com.seeyoui.kensite.common.util.Reflections;
 import com.seeyoui.kensite.common.util.excel.annotation.ExcelField;
+import com.seeyoui.kensite.framework.mod.tableColumn.domain.TableColumn;
+import com.seeyoui.kensite.framework.plugin.dict.domain.Dict;
 import com.seeyoui.kensite.framework.system.util.DictUtils;
 
 /**
@@ -378,9 +384,68 @@ public class ExportExcel {
 							val = Reflections.invokeMethod(e, ((Method)os[1]).getName(), new Class[] {}, new Object[] {});
 						}
 					}
-					// If is dict, get dict label
-					if (StringUtils.isNotBlank(ef.dictType())){
-						val = DictUtils.getDictLabel(val==null?"":val.toString(), ef.dictType(), "");
+					if (StringUtils.isNotBlank(ef.dict())){
+						val = DictUtils.getDictLabel(val==null?"":val.toString(), ef.dict(), "");
+					} else if (StringUtils.isNotBlank(ef.constants())){
+						String[] settingsArr = ef.constants().split("\\|");
+						for(String set : settingsArr) {
+							if(set.indexOf(":") != -1) {
+								String[] setArr = set.split(":");
+								if(val.equals(setArr[0])) {
+									val = setArr[1];
+								}
+							}
+						}
+					} else if (StringUtils.isNotBlank(ef.sql())){
+						String[] settingsArr = ef.sql().split("\\|");
+						String sql = settingsArr[0];
+						String value = settingsArr[1];
+						String label = settingsArr[2];
+						List<Map<Object, Object>> listMap = DBUtils.executeQuery(sql);
+						for(Map<Object, Object> map : listMap) {
+							if(val.equals(map.get(value.toUpperCase()).toString())) {
+								val = map.get(label.toUpperCase()).toString();
+								break;
+							}
+						}
+					} else if (StringUtils.isNotBlank(ef.mod())){
+						String[] settingsArr = ef.mod().split("\\|");
+						String table = settingsArr[0];
+						String column = settingsArr[1];
+						TableColumn tableColumn = new TableColumn();
+						tableColumn.setTableName(table);
+						tableColumn.setName(column);
+						tableColumn = TagCacheUtils.getTableColumn(tableColumn);
+						if(tableColumn != null && com.seeyoui.kensite.common.util.StringUtils.isNoneBlank(tableColumn.getSettings()) && com.seeyoui.kensite.common.util.StringUtils.isNoneBlank(tableColumn.getCategory())) {
+							if(TableColumnConstants.COMBOBOX.equals(tableColumn.getCategory()) || TableColumnConstants.RADIOBOX.equals(tableColumn.getCategory()) || TableColumnConstants.CHECKBOX.equals(tableColumn.getCategory())) {
+								String settings = tableColumn.getSettings();
+								if(settings.indexOf("SQL>") != -1) {
+									String[] arr = settings.split("\\|");
+									String sql = arr[0].replace("SQL>", "");
+									String value = arr[1];
+									String label = arr[2];
+									List<Map<Object, Object>> listMap = DBUtils.executeQuery(sql);
+									for(Map<Object, Object> map : listMap) {
+										if(val.equals(map.get(value.toUpperCase()).toString())) {
+											val = map.get(label.toUpperCase()).toString();
+											break;
+										}
+									}
+								} else if(settings.indexOf("DICT>") != -1) {
+									val = DictUtils.getDict(settings.replace("DICT>", "")).getLabel();
+								} else  {
+									String[] arr = settings.split("\\|");
+									for(String set : arr) {
+										if(set.indexOf(":") != -1) {
+											String[] setArr = set.split(":");
+											if(val.equals(setArr[0])) {
+												val = setArr[1];
+											}
+										}
+									}
+								}
+							}
+						}
 					}
 				}catch(Exception ex) {
 					// Failure to ignore

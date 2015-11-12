@@ -54,22 +54,22 @@
 		        <form id="dataForm" method="post">
 							<div class="fitem">
 				                <label>数据值</label>
-				                <input id="value" name="value" class="easyui-validatebox textbox" data-options="required:true"/>
+				                <input id="value" name="value" class="easyui-textbox" data-options="required:true"/>
 				                <span id="msg-value" class="err-msg"></span>
 				            </div>
 							<div class="fitem">
 				                <label>标签名</label>
-				                <input id="label" name="label" class="easyui-validatebox textbox" data-options="required:true"/>
+				                <input id="label" name="label" class="easyui-textbox" data-options="required:true"/>
 				                <span id="msg-label" class="err-msg"></span>
 				            </div>
 							<div class="fitem">
 				                <label>分类</label>
-				                <input id="category" name="category" class="easyui-validatebox textbox" data-options="required:true"/>
+				                <input id="category" name="category" class="easyui-textbox" data-options="required:true"/>
 				                <span id="msg-category" class="err-msg"></span>
 				            </div>
 							<div class="fitem">
 				                <label>描述</label>
-				                <input id="description" name="description" class="easyui-validatebox textbox" data-options="required:true"/>
+				                <input id="description" name="description" class="easyui-textbox" data-options="required:true"/>
 				                <span id="msg-description" class="err-msg"></span>
 				            </div>
 							<div class="fitem">

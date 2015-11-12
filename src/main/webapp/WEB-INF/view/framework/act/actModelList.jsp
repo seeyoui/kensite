@@ -50,19 +50,19 @@
 		        <form id="dataForm" method="post" enctype="multipart/form-data">
 							<div class="fitem">
 				                <label>流程分类</label>
-				                <input id="category" name="category" class="easyui-validatebox textbox" data-options="required:true"/>
+				                <input id="category" name="category" class="easyui-textbox" data-options="required:true"/>
 				            </div>
 							<div class="fitem">
 				                <label>模型标识</label>
-				                <input id="key" name="key" class="easyui-validatebox textbox" data-options="required:true"/>
+				                <input id="key" name="key" class="easyui-textbox" data-options="required:true"/>
 				            </div>
 							<div class="fitem">
 				                <label>模型名称</label>
-				                <input id="name" name="name" class="easyui-validatebox textbox" data-options="required:true"/>
+				                <input id="name" name="name" class="easyui-textbox" data-options="required:true"/>
 				            </div>
 							<div class="fitem">
 				                <label>描述</label>
-				                <input id="description" name="description" class="easyui-validatebox textbox" data-options="required:true"/>
+				                <input id="description" name="description" class="easyui-textbox" data-options="required:true"/>
 				            </div>
 				</form>
 				

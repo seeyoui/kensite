@@ -40,9 +40,31 @@ public @interface ExcelField {
 	int sort() default 0;
 
 	/**
-	 * 如果是字典类型，请设置字典的type值
+	 * 如果是字典类型，请设置字典的category值
+	 * 优先级dict>constants>sql>mod
 	 */
-	String dictType() default "";
+	String dict() default "";
+	
+	/**
+	 * 如果是常量类型，请设置常量的值
+	 * 优先级dict>constants>sql>mod
+	 * 例：value1[:label1]|value2[:label2]|value3[:label3]
+	 */
+	String constants() default "";
+	
+	/**
+	 * 如果是SQL类型，请设置常量的值
+	 * 优先级dict>constants>sql>mod
+	 * 例：select value,label from table|value|label
+	 */
+	String sql() default "";
+	
+	/**
+	 * 如果是MOD配置类型，请设置常量的值
+	 * 优先级dict>constants>sql>mod
+	 * 例：table|column
+	 */
+	String mod() default "";
 	
 	/**
 	 * 反射类型

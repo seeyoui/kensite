@@ -50,7 +50,7 @@
 		        <form id="dataForm" method="post">
 					<div class="fitem">
 		                <label>账号</label>
-		                <input id="userName" name="userName" class="easyui-validatebox textbox" data-options="required:true"/>
+		                <input id="userName" name="userName" class="easyui-textbox" data-options="required:true"/>
 		            </div>
             		<div class="fitem">
 						<label>用户密码:</label>
@@ -58,7 +58,7 @@
 		            </div>
 					<div class="fitem">
 		                <label>用户名</label>
-		                <input id="name" name="name" class="easyui-validatebox textbox" data-options="required:true"/>
+		                <input id="name" name="name" class="easyui-textbox" data-options="required:true"/>
 		            </div>
 					<div class="fitem">
 		                <label>部门</label>

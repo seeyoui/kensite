@@ -48,22 +48,22 @@
 		        <form id="dataForm" method="post">
 							<div class="fitem">
 				                <label>名称</label>
-				                <input id="name" name="name" class="easyui-validatebox textbox" data-options="required:true"/>
+				                <input id="name" name="name" class="easyui-textbox" data-options="required:true"/>
 				                <span id="msg-name" class="err-msg"></span>
 				            </div>
 							<div class="fitem">
 				                <label>描述</label>
-				                <input id="comments" name="comments" class="easyui-validatebox textbox" data-options="required:true"/>
+				                <input id="comments" name="comments" class="easyui-textbox" data-options="required:true"/>
 				                <span id="msg-comments" class="err-msg"></span>
 				            </div>
 							<div class="fitem">
 				                <label>关联父表</label>
-				                <input id="parentTable" name="parentTable" class="easyui-validatebox textbox" data-options="required:true"/>
+				                <input id="parentTable" name="parentTable" class="easyui-textbox" data-options="required:true"/>
 				                <span id="msg-parenttable" class="err-msg"></span>
 				            </div>
 							<div class="fitem">
 				                <label>关联父表外键</label>
-				                <input id="parentTableFk" name="parentTableFk" class="easyui-validatebox textbox" data-options="required:true"/>
+				                <input id="parentTableFk" name="parentTableFk" class="easyui-textbox" data-options="required:true"/>
 				                <span id="msg-parenttablefk" class="err-msg"></span>
 				            </div>
 				</form>

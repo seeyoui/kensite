@@ -72,82 +72,82 @@
 		        <form id="dataForm" method="post">
 							<div class="fitem">
 				                <label>业务表</label>
-				                <input id="tableName" name="tableName" class="easyui-validatebox textbox" data-options="required:true"/>
+				                <input id="tableName" name="tableName" class="easyui-textbox" data-options="required:true"/>
 				                <span id="msg-tablename" class="err-msg"></span>
 				            </div>
 							<div class="fitem">
 				                <label>列名</label>
-				                <input id="name" name="name" class="easyui-validatebox textbox" data-options="required:true"/>
+				                <input id="name" name="name" class="easyui-textbox" data-options="required:true"/>
 				                <span id="msg-name" class="err-msg"></span>
 				            </div>
 							<div class="fitem">
 				                <label>注释</label>
-				                <input id="comments" name="comments" class="easyui-validatebox textbox" data-options="required:true"/>
+				                <input id="comments" name="comments" class="easyui-textbox" data-options="required:true"/>
 				                <span id="msg-comments" class="err-msg"></span>
 				            </div>
 							<div class="fitem">
 				                <label>数据库类型及长度</label>
-				                <input id="jdbcType" name="jdbcType" class="easyui-validatebox textbox" data-options="required:true"/>
+				                <input id="jdbcType" name="jdbcType" class="easyui-textbox" data-options="required:true"/>
 				                <span id="msg-jdbctype" class="err-msg"></span>
 				            </div>
 							<div class="fitem">
 				                <label>是否主键</label>
-				                <input id="isPk" name="isPk" class="easyui-validatebox textbox" data-options="required:true"/>
+				                <input id="isPk" name="isPk" class="easyui-textbox" data-options="required:true"/>
 				                <span id="msg-ispk" class="err-msg"></span>
 				            </div>
 							<div class="fitem">
 				                <label>是否可为空</label>
-				                <input id="isNull" name="isNull" class="easyui-validatebox textbox" data-options="required:true"/>
+				                <input id="isNull" name="isNull" class="easyui-textbox" data-options="required:true"/>
 				                <span id="msg-isnull" class="err-msg"></span>
 				            </div>
 							<div class="fitem">
 				                <label>是否为插入字段</label>
-				                <input id="isInsert" name="isInsert" class="easyui-validatebox textbox" data-options="required:true"/>
+				                <input id="isInsert" name="isInsert" class="easyui-textbox" data-options="required:true"/>
 				                <span id="msg-isinsert" class="err-msg"></span>
 				            </div>
 							<div class="fitem">
 				                <label>是否编辑字段</label>
-				                <input id="isEdit" name="isEdit" class="easyui-validatebox textbox" data-options="required:true"/>
+				                <input id="isEdit" name="isEdit" class="easyui-textbox" data-options="required:true"/>
 				                <span id="msg-isedit" class="err-msg"></span>
 				            </div>
 							<div class="fitem">
 				                <label>是否列表字段</label>
-				                <input id="isList" name="isList" class="easyui-validatebox textbox" data-options="required:true"/>
+				                <input id="isList" name="isList" class="easyui-textbox" data-options="required:true"/>
 				                <span id="msg-islist" class="err-msg"></span>
 				            </div>
 							<div class="fitem">
 				                <label>是否查询字段</label>
-				                <input id="isQuery" name="isQuery" class="easyui-validatebox textbox" data-options="required:true"/>
+				                <input id="isQuery" name="isQuery" class="easyui-textbox" data-options="required:true"/>
 				                <span id="msg-isquery" class="err-msg"></span>
 				            </div>
 							<div class="fitem">
 				                <label>查询方式（等于、不等于、大于、小于、范围、左LIKE、右LIKE、左右LIKE）</label>
-				                <input id="queryType" name="queryType" class="easyui-validatebox textbox" data-options="required:true"/>
+				                <input id="queryType" name="queryType" class="easyui-textbox" data-options="required:true"/>
 				                <span id="msg-querytype" class="err-msg"></span>
 				            </div>
 							<div class="fitem">
 				                <label>字段生成方案</label>
-				                <input id="category" name="category" class="easyui-validatebox textbox" data-options="required:true"/>
+				                <input id="category" name="category" class="easyui-textbox" data-options="required:true"/>
 				                <span id="msg-category" class="err-msg"></span>
 				            </div>
 							<div class="fitem">
 				                <label>排序（升序）</label>
-				                <input id="sortType" name="sortType" class="easyui-validatebox textbox" data-options="required:true"/>
+				                <input id="sortType" name="sortType" class="easyui-textbox" data-options="required:true"/>
 				                <span id="msg-sorttype" class="err-msg"></span>
 				            </div>
 							<div class="fitem">
 				                <label>默认值</label>
-				                <input id="defaultValue" name="defaultValue" class="easyui-validatebox textbox" data-options="required:true"/>
+				                <input id="defaultValue" name="defaultValue" class="easyui-textbox" data-options="required:true"/>
 				                <span id="msg-defaultvalue" class="err-msg"></span>
 				            </div>
 							<div class="fitem">
 				                <label>校验类型</label>
-				                <input id="validType" name="validType" class="easyui-validatebox textbox" data-options="required:true"/>
+				                <input id="validType" name="validType" class="easyui-textbox" data-options="required:true"/>
 				                <span id="msg-validtype" class="err-msg"></span>
 				            </div>
 							<div class="fitem">
 				                <label>扩展设置</label>
-				                <input id="settings" name="settings" class="easyui-validatebox textbox" data-options="required:true"/>
+				                <input id="settings" name="settings" class="easyui-textbox" data-options="required:true"/>
 				                <span id="msg-settings" class="err-msg"></span>
 				            </div>
 				</form>

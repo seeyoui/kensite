@@ -50,11 +50,11 @@
 		        <form id="dataForm" method="post">
 					<div class="fitem">
 		                <label>部门名称</label>
-		                <input id="name" name="name" class="easyui-validatebox textbox" data-options="required:true"/>
+		                <input id="name" name="name" class="easyui-textbox" data-options="required:true"/>
 		            </div>
 					<div class="fitem">
 		                <label>部门编号</label>
-		                <input id="code" name="code" class="easyui-validatebox textbox" data-options="required:true"/>
+		                <input id="code" name="code" class="easyui-textbox" data-options="required:true"/>
 		                <span id="msg-code" class="err-msg"></span>
 		            </div>
 		            <div class="fitem">

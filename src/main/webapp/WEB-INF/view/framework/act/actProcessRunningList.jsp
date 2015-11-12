@@ -38,7 +38,7 @@
 		        <form id="dataForm" method="post" enctype="multipart/form-data">
 							<div class="fitem">
 				                <label>原因</label>
-				                <input id="reason" name="reason" class="easyui-validatebox textbox" data-options="required:true"/>
+				                <input id="reason" name="reason" class="easyui-textbox" data-options="required:true"/>
 				            </div>
 				</form>
 				

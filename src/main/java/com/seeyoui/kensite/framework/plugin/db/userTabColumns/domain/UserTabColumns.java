@@ -27,7 +27,7 @@ public class UserTabColumns extends DataEntity<UserTabColumns> {
 	private String dataLength;//dataLength
 	private String dataPrecision;//dataPrecision
 	private String dataScale;//dataScale
-	@ExcelField(title="是否可为空", type=1, align=2, sort=20, dictType="yes_no")
+	@ExcelField(title="是否可为空", type=1, align=2, sort=20, dict="yes_no")
 	private String nullable;//nullable
 	private String columnId;//columnId
 	private String numDistinct;//不重复记录数

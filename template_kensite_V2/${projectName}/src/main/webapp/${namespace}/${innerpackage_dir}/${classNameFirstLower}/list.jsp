@@ -1,61 +1,6 @@
 <#include "/custom.include">
 <#assign className = table.className>
 <#assign classNameLower = className?uncap_first>
-<#function getTableHeaderHtml column>
-<#assign dbtype=column.sqlTypeName?lower_case>
-<#assign colname=column.columnName?lower_case>
-<#assign colcnname=column.columnAlias>
-<#assign rtn>
-<#if (colname=="createuser"||colname=="createdate"||colname=="updateuser"||colname=="updatedate"||colname=="remarks"||colname=="delflag") ><#elseif (colname=="id")>
-<th field="${column.columnNameLower}" width="100px" hidden>${colcnname}</th>
-<#else>
-	<#if dbtype=="date">
-	<th field="${column.columnNameLower}" width="100px" align="center">${colcnname}</th>
-	<#elseif (dbtype=="number")>
-	<th field="${column.columnNameLower}" width="50px" align="right">${colcnname}</th>
-	<#else>
-	<th field="${column.columnNameLower}" width="100px">${colcnname}</th>
-	</#if>
-</#if>
-</#assign>
-<#return rtn?trim>
-</#function>
-<#function getSelectPanelHtml column>
-<#assign dbtype=column.sqlTypeName?lower_case>
-<#assign colname=column.columnName?lower_case>
-<#assign rtn>
-<#if (colname=="id"||colname=="createuser"||colname=="createdate"||colname=="updateuser"||colname=="updatedate"||colname=="remarks"||colname=="delflag") ><#else>
-	<#if dbtype=="number" >
-	<input id="sel_${column.columnNameLower}" name="sel_${column.columnNameLower}" class="easyui-numberbox" data-options="min:0,max:999999,precision:${column.decimalDigits}"/>
-	<#elseif (dbtype=="varchar2"||dbtype=="char"||dbtype=="clob")  >
-	<input id="sel_${column.columnNameLower}" name="sel_${column.columnNameLower}" class="easyui-textbox" data-options=""/>
-	<#elseif (dbtype=="date")>
-	<input id="sel_${column.columnNameLower}" name="sel_${column.columnNameLower}" class="easyui-textbox" data-options="" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
-	</#if>
-</#if>
-</#assign>
-<#return rtn?trim>
-</#function>
-<#function getSelectJsVarHtml column>
-<#assign dbtype=column.sqlTypeName?lower_case>
-<#assign colname=column.columnName?lower_case>
-<#assign rtn>
-<#if (colname=="id"||colname=="createuser"||colname=="createdate"||colname=="updateuser"||colname=="updatedate"||colname=="remarks"||colname=="delflag") ><#else>
-var sel_${column.columnNameLower} = $("#sel_${column.columnNameLower}").val();
-</#if>
-</#assign>
-<#return rtn?trim>
-</#function>
-<#function getSelectJsParamHtml column>
-<#assign dbtype=column.sqlTypeName?lower_case>
-<#assign colname=column.columnName?lower_case>
-<#assign rtn>
-<#if (colname=="id"||colname=="createuser"||colname=="createdate"||colname=="updateuser"||colname=="updatedate"||colname=="remarks"||colname=="delflag") ><#else>
-${column.columnNameLower}:sel_${column.columnNameLower}
-</#if>
-</#assign>
-<#return rtn?trim>
-</#function>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/view/taglib/common.jsp" %>

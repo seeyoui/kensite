@@ -53,7 +53,7 @@
 		        <form id="dataForm" method="post">
 					<div class="fitem">
 		                <label>名称</label>
-		                <input id="name" name="name" class="easyui-validatebox textbox" data-options="required:true"/>
+		                <input id="name" name="name" class="easyui-textbox" data-options="required:true"/>
 		            </div>
 		            <div class="fitem">
 		                <label>上级菜单</label>
@@ -61,7 +61,7 @@
 		            </div>
 					<div class="fitem">
 		                <label>URL</label>
-		                <input id="url" name="url" class="easyui-validatebox textbox" data-options="required:true"/>
+		                <input id="url" name="url" class="easyui-textbox" data-options="required:true"/>
 		            </div>
 					<div class="fitem">
 		                <label>排序</label>
@@ -69,11 +69,11 @@
 		            </div>
 					<div class="fitem">
 		                <label>打开方式</label>
-		                <input id="target" name="target" class="easyui-validatebox textbox" data-options="required:true" value="_blank"/>
+		                <input id="target" name="target" class="easyui-combobox" data-options="required:true,editable:false,valueField: 'value',textField: 'label',data: [{value: '_blank',label: 'BLANK'},{value: '_parent',label: 'PARENT'},{value: '_self',label: 'SELF'},{value: '_top',label: 'TOP'}],panelHeight:'auto'"/>
 		            </div>
 					<div class="fitem">
 		                <label>图标</label>
-		                <input id="icon" name="icon" class="easyui-validatebox textbox" data-options=""/>
+		                <input id="icon" name="icon" class="easyui-textbox" data-options=""/>
 		            </div>
 		            <div id="icon_li" class="fitem" style="background:#D2E9FF">
 		            	<c:forEach var="menuIcon" items="${menuIconList}" varStatus="status">

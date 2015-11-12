@@ -130,7 +130,6 @@ public class TableColumnService extends BaseService {
 	public void updateTableColumn(TableColumn tableColumn) throws CRUDException{
 		TableColumn tableColumnOld = tableColumnMapper.findTableColumnById(tableColumn.getId());
 		tableColumn.preUpdate();
-		TagCacheUtils.removeCache(tableColumnOld);
 		TagCacheUtils.removeCache(tableColumn);
 		tableColumnMapper.updateTableColumn(tableColumn);
 		if(StringUtils.isNotBlank(tableColumn.getName()) && !tableColumn.getName().equals(tableColumnOld.getName())) {

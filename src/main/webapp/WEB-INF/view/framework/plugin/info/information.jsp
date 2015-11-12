@@ -51,19 +51,19 @@
 		        <form id="dataForm" method="post">
 							<div class="fitem">
 				                <label>消息内容</label>
-				                <input id="content" name="content" class="easyui-validatebox textbox" data-options="required:true"/>
+				                <input id="content" name="content" class="easyui-textbox" data-options="required:true"/>
 				            </div>
 							<div class="fitem">
 				                <label>消息类型</label>
-				                <input id="type" name="type" class="easyui-validatebox textbox" data-options="required:true"/>
+				                <input id="type" name="type" class="easyui-textbox" data-options="required:true"/>
 				            </div>
 							<div class="fitem">
 				                <label>发送者</label>
-				                <input id="sender" name="sender" class="easyui-validatebox textbox" data-options="required:true"/>
+				                <input id="sender" name="sender" class="easyui-textbox" data-options="required:true"/>
 				            </div>
 							<div class="fitem">
 				                <label>接收者</label>
-				                <input id="receiver" name="receiver" class="easyui-validatebox textbox" data-options="required:true"/>
+				                <input id="receiver" name="receiver" class="easyui-textbox" data-options="required:true"/>
 				            </div>
 							<div class="fitem">
 				                <label>时效</label>

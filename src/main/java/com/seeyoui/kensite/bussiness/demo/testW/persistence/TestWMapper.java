@@ -9,11 +9,11 @@ import com.seeyoui.kensite.bussiness.demo.testW.domain.TestW;
 import java.util.*;
 
 /**
- * 测试1
+ * 演示DEMO
  * @author cuichen
  * @version 1.0
  * @since 1.0
- * @date 2015-11-11
+ * @date 2015-11-12
  */
 public interface TestWMapper {
 

@@ -56,12 +56,12 @@
 		        <form id="dataForm" method="post">
 					<div class="fitem">
 		                <label>站点名称</label>
-		                <input id="name" name="name" class="easyui-validatebox textbox" data-options="required:true"/>
+		                <input id="name" name="name" class="easyui-textbox" data-options="required:true"/>
 		                <span id="msg-name" class="err-msg"></span>
 		            </div>
 					<div class="fitem">
 		                <label>站点标题</label>
-		                <input id="title" name="title" class="easyui-validatebox textbox" data-options="required:true"/>
+		                <input id="title" name="title" class="easyui-textbox" data-options="required:true"/>
 		                <span id="msg-title" class="err-msg"></span>
 		            </div>
 					<div class="fitem">
@@ -79,32 +79,32 @@
 		            </div>
 					<div class="fitem">
 		                <label>站点域名</label>
-		                <input id="domain" name="domain" class="easyui-validatebox textbox" data-options="required:true"/>
+		                <input id="domain" name="domain" class="easyui-textbox" data-options="required:true"/>
 		                <span id="msg-domain" class="err-msg"></span>
 		            </div>
 					<div class="fitem">
 		                <label>描述</label>
-		                <input id="description" name="description" class="easyui-validatebox textbox" data-options="required:true"/>
+		                <input id="description" name="description" class="easyui-textbox" data-options="required:true"/>
 		                <span id="msg-description" class="err-msg"></span>
 		            </div>
 					<div class="fitem">
 		                <label>关键字</label>
-		                <input id="keywords" name="keywords" class="easyui-validatebox textbox" data-options="required:true"/>
+		                <input id="keywords" name="keywords" class="easyui-textbox" data-options="required:true"/>
 		                <span id="msg-keywords" class="err-msg"></span>
 		            </div>
 					<div class="fitem">
 		                <label>主题</label>
-		                <input id="theme" name="theme" class="easyui-validatebox textbox" data-options="required:true"/>
+		                <input id="theme" name="theme" class="easyui-textbox" data-options="required:true"/>
 		                <span id="msg-theme" class="err-msg"></span>
 		            </div>
 					<div class="fitem">
 		                <label>版权信息</label>
-		                <input id="copyright" name="copyright" class="easyui-validatebox textbox" data-options="required:true"/>
+		                <input id="copyright" name="copyright" class="easyui-textbox" data-options="required:true"/>
 		                <span id="msg-copyright" class="err-msg"></span>
 		            </div>
 					<div class="fitem">
 		                <label>自定义站点首页视图</label>
-		                <input id="customView" name="customView" class="easyui-validatebox textbox" data-options="required:true"/>
+		                <input id="customView" name="customView" class="easyui-textbox" data-options="required:true"/>
 		                <span id="msg-customview" class="err-msg"></span>
 		            </div>
 				</form>

@@ -47,17 +47,17 @@
 		        <form id="dataForm" method="post">
 							<div class="fitem">
 				                <label>说明</label>
-				                <input id="name" name="name" class="easyui-validatebox textbox" data-options="required:true"/>
+				                <input id="name" name="name" class="easyui-textbox" data-options="required:true"/>
 				                <span id="msg-name" class="err-msg"></span>
 				            </div>
 							<div class="fitem">
 				                <label>页面路径</label>
-				                <input id="url" name="url" class="easyui-validatebox textbox" data-options="required:true"/>
+				                <input id="url" name="url" class="easyui-textbox" data-options="required:true"/>
 				                <span id="msg-url" class="err-msg"></span>
 				            </div>
 							<div class="fitem">
 				                <label>页面名</label>
-				                <input id="main" name="main" class="easyui-validatebox textbox" data-options="required:true"/>
+				                <input id="main" name="main" class="easyui-textbox" data-options="required:true"/>
 				                <span id="msg-main" class="err-msg"></span>
 				            </div>
 				</form>

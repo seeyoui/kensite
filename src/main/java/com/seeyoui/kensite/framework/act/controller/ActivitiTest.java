@@ -53,7 +53,6 @@ public class ActivitiTest {
 //		Deployment deployment=repositoryService.createDeployment().addInputStream("bpmn20.xml", is).name("holidayRequest").deploy();
 		Deployment deployment = repositoryService.createDeployment().addClasspathResource("act/diagrams/holidayRequest.bpmn").deploy();
 		Assert.assertNotNull(deployment);
-		System.out.println("deployId:" + deployment.getId());
 		//查询流程定义
 		ProcessDefinition processDefinition=repositoryService.createProcessDefinitionQuery().deploymentId(deployment.getId()).singleResult();
 		

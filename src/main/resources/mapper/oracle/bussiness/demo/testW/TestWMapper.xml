@@ -14,7 +14,8 @@
 	    T.BIRTHDAY AS "birthday",
 	    T.SEX AS "sex",
 	    T.DESCRIBE AS "describe",
-	    T.ISDEL AS "isdel"
+	    T.ISDEL AS "isdel",
+	    T.MANAGER AS "manager"
 	</sql>
 	<!-- 查询过滤条件 -->
 	<sql id="whereStr">
@@ -55,6 +56,9 @@
 			</if>
 			<if test="isdel != null and isdel != ''">
 				AND T.ISDEL LIKE '%'||#{isdel}||'%'
+			</if>
+			<if test="manager != null and manager != ''">
+				AND T.MANAGER LIKE '%'||#{manager}||'%'
 			</if>
 		</where>
 	</sql>
@@ -113,6 +117,7 @@
 	    	SEX,
 	    	DESCRIBE,
 	    	ISDEL,
+	    	MANAGER,
 		    CREATE_USER,
 		    CREATE_DATE,
 		    ID
@@ -130,6 +135,7 @@
 			#{sex,jdbcType=VARCHAR},
 			#{describe,jdbcType=CLOB},
 			#{isdel,jdbcType=VARCHAR},
+			#{manager,jdbcType=VARCHAR},
 			#{createUser.userName},
 			sysdate,
 		    #{id}
@@ -165,6 +171,9 @@
 			</if>
 	    	<if test="isdel !=null and isdel !=''">
 			ISDEL=#{isdel},
+			</if>
+	    	<if test="manager !=null and manager !=''">
+			MANAGER=#{manager},
 			</if>
 		    UPDATE_USER = #{updateUser.userName},
 		    UPDATE_DATE = sysdate,

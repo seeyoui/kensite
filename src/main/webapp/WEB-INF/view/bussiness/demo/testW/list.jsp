@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <title>测试1</title>
+    <title>演示DEMO</title>
 	<%@ include file="/WEB-INF/view/taglib/header.jsp" %>
 	<%@ include file="/WEB-INF/view/taglib/easyui.jsp" %>
 	<%@ include file="/WEB-INF/view/taglib/layer.jsp" %>
@@ -12,7 +12,7 @@
   <body>
  	<div style="position:absolute;top:0px;left:0px;right:0px;bottom:0px;">
 		<div style="position:absolute;top:0px;left:0px;right:0px;bottom:0px;">
-		    <table id="dataList" title="测试1列表" class="easyui-datagrid" style="width:100%;height:100%"
+		    <table id="dataList" title="演示DEMO列表" class="easyui-datagrid" style="width:100%;height:100%"
 		    		url="${ctx}/demo/testW/list/data"
 		            toolbar="#toolbar" pagination="true"
 		            rownumbers="true" fitColumns="true" singleSelect="true">
@@ -24,6 +24,7 @@
 				    	<ks:listTag table="T_TEST_W" column="SEX"/>
 				    	<ks:listTag table="T_TEST_W" column="DESCRIBE"/>
 				    	<ks:listTag table="T_TEST_W" column="ISDEL"/>
+				    	<ks:listTag table="T_TEST_W" column="MANAGER"/>
 		            </tr>
 		        </thead>
 		    </table>
@@ -45,6 +46,7 @@
 		    	<ks:queryTag table="T_TEST_W" column="SEX"/>
 		    	<ks:queryTag table="T_TEST_W" column="DESCRIBE"/>
 		    	<ks:queryTag table="T_TEST_W" column="ISDEL"/>
+		    	<ks:queryTag table="T_TEST_W" column="MANAGER"/>
 			    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="selectData()">查询</a>
 		    </div>
 	    </div>
@@ -59,7 +61,8 @@
 		    	<ks:queryJsTag table="T_TEST_W" column="BIRTHDAY"/>,
 		    	<ks:queryJsTag table="T_TEST_W" column="SEX"/>,
 		    	<ks:queryJsTag table="T_TEST_W" column="DESCRIBE"/>,
-		    	<ks:queryJsTag table="T_TEST_W" column="ISDEL"/>
+		    	<ks:queryJsTag table="T_TEST_W" column="ISDEL"/>,
+		    	<ks:queryJsTag table="T_TEST_W" column="MANAGER"/>
         	});
         }
 	    function reloadData() {
@@ -84,7 +87,7 @@
             url = '${ctx}/demo/testW/form';
         	layer.open({
         	    type: 2,
-        	    title: '测试1基本信息',
+        	    title: '演示DEMO基本信息',
         	    area: ['400px', '350px'],
         	    fix: false, //不固定
         	    maxmin: false,

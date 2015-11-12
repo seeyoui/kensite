@@ -144,7 +144,7 @@
 		                <input id="isEdit" name="isEdit" class="easyui-combobox" data-options="editable:false,panelHeight: 'auto',required:true,valueField: 'value',textField: 'label'"/>
 		                <span id="msg-isedit" class="err-msg"></span>
 		                <label>校验类型</label>
-		                <input id="validType" name="validType" class="easyui-combobox" data-options="editable:false,panelHeight: 'auto',valueField: 'value',textField: 'label'"/>
+		                <input id="validType" name="validType" class="easyui-combobox" data-options="editable:false,valueField: 'value',textField: 'label'"/>
 		                <span id="msg-validtype" class="err-msg"></span>
 		            </div>
 					<div class="fitem">

@@ -20,11 +20,11 @@ import com.seeyoui.kensite.bussiness.demo.testW.persistence.TestWMapper;
 import com.seeyoui.kensite.framework.act.idgenerator.GeneratorUUID;
 
 /**
- * 测试1
+ * 演示DEMO
  * @author cuichen
  * @version 1.0
  * @since 1.0
- * @date 2015-11-11
+ * @date 2015-11-12
  */
 @Service
 public class TestWService extends BaseService {

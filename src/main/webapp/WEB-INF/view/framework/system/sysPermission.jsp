@@ -44,11 +44,11 @@
 		        <form id="dataForm" method="post">
 					<div class="fitem">
 		                <label>权限</label>
-		                <input id="id" name="id" class="easyui-validatebox textbox" data-options="required:true"/>
+		                <input id="id" name="id" class="easyui-textbox" data-options="required:true"/>
 		            </div>
 					<div class="fitem">
 		                <label>权限名</label>
-		                <input id="name" name="name" class="easyui-validatebox textbox" data-options="required:true"/>
+		                <input id="name" name="name" class="easyui-textbox" data-options="required:true"/>
 		            </div>
 					<div class="fitem">
 		                <label>排序</label>

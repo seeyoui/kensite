@@ -34,11 +34,11 @@ import com.seeyoui.kensite.common.util.excel.ExportExcel;
 import com.seeyoui.kensite.bussiness.demo.testW.domain.TestW;
 import com.seeyoui.kensite.bussiness.demo.testW.service.TestWService;
 /**
- * 测试1
+ * 演示DEMO
  * @author cuichen
  * @version 1.0
  * @since 1.0
- * @date 2015-11-11
+ * @date 2015-11-12
  */
 @Controller
 @RequestMapping(value = "demo/testW")
@@ -74,7 +74,7 @@ public class TestWController extends BaseController {
 	@ResponseBody
 	public Object listData(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap, TestW testW) throws Exception{
+			ModelMap modelMap, TestW testW) throws Exception {
 		List<TestW> testWList = testWService.findList(testW);
 		int total = testWService.findTotal(testW);
 		EasyUIDataGrid eudg = new EasyUIDataGrid();
@@ -95,7 +95,7 @@ public class TestWController extends BaseController {
 	@ResponseBody
 	public Object listAll(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap, TestW testW) throws Exception{
+			ModelMap modelMap, TestW testW) throws Exception {
 		List<TestW> testWList = testWService.findAll(testW);
 		return testWList;
 	}
@@ -112,7 +112,7 @@ public class TestWController extends BaseController {
 	@ResponseBody
 	public String save(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap, TestW testW) throws Exception{
+			ModelMap modelMap, TestW testW) throws Exception {
 		if (!beanValidator(modelMap, testW)){
 			RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
 			return null;
@@ -134,7 +134,7 @@ public class TestWController extends BaseController {
 	@ResponseBody
 	public String update(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap, TestW testW) throws Exception{
+			ModelMap modelMap, TestW testW) throws Exception {
 		if (!beanValidator(modelMap, testW)){
 			RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
 			return null;
@@ -174,7 +174,7 @@ public class TestWController extends BaseController {
 	@RequestMapping(value = "/export")
 	public String export(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap, TestW testW) throws Exception{
+			ModelMap modelMap, TestW testW) throws Exception {
 		String fileName = DateUtils.getDate("yyyyMMddHHmmss")+".xlsx";
 		List<TestW> testWList = testWService.findAll(testW);
 		new ExportExcel(null, TestW.class).setDataList(testWList).write(response, fileName).dispose();

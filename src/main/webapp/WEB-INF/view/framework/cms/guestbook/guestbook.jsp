@@ -52,13 +52,13 @@
 		        <form id="dataForm" method="post">
 					<div class="fitem">
 		                <label>回复时间</label>
-		                <input id="reDate" name="reDate" class="easyui-validatebox textbox" data-options="readonly:true"/>
+		                <input id="reDate" name="reDate" class="easyui-textbox" data-options="readonly:true"/>
 		                <input id="reUserId" name="reUserId" type="hidden"/>
 		                <span id="msg-redate" class="err-msg"></span>
 		            </div>
 					<div class="fitem">
 		                <label>回复内容</label>
-		                <input id="reContent" name="reContent" class="easyui-validatebox textbox" data-options="multiline:true,required:true" style="height:100px"/>
+		                <input id="reContent" name="reContent" class="easyui-textbox" data-options="multiline:true,required:true" style="height:100px"/>
 		                <span id="msg-recontent" class="err-msg"></span>
 		            </div>
 				</form>

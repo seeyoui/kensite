@@ -71,7 +71,7 @@ public class ${className}Controller extends BaseController {
 	@ResponseBody
 	public Object listData(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap, ${className} ${table.classNameFirstLower}) throws Exception{
+			ModelMap modelMap, ${className} ${table.classNameFirstLower}) throws Exception {
 		List<${className}> ${table.classNameFirstLower}List = ${table.classNameFirstLower}Service.findList(${table.classNameFirstLower});
 		int total = ${table.classNameFirstLower}Service.findTotal(${table.classNameFirstLower});
 		EasyUIDataGrid eudg = new EasyUIDataGrid();
@@ -92,7 +92,7 @@ public class ${className}Controller extends BaseController {
 	@ResponseBody
 	public Object listAll(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap, ${className} ${table.classNameFirstLower}) throws Exception{
+			ModelMap modelMap, ${className} ${table.classNameFirstLower}) throws Exception {
 		List<${className}> ${table.classNameFirstLower}List = ${table.classNameFirstLower}Service.findAll(${table.classNameFirstLower});
 		return ${table.classNameFirstLower}List;
 	}
@@ -109,7 +109,7 @@ public class ${className}Controller extends BaseController {
 	@ResponseBody
 	public String save(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap, ${className} ${table.classNameFirstLower}) throws Exception{
+			ModelMap modelMap, ${className} ${table.classNameFirstLower}) throws Exception {
 		if (!beanValidator(modelMap, ${table.classNameFirstLower})){
 			RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
 			return null;
@@ -131,7 +131,7 @@ public class ${className}Controller extends BaseController {
 	@ResponseBody
 	public String update(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap, ${className} ${table.classNameFirstLower}) throws Exception{
+			ModelMap modelMap, ${className} ${table.classNameFirstLower}) throws Exception {
 		if (!beanValidator(modelMap, ${table.classNameFirstLower})){
 			RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
 			return null;
@@ -171,7 +171,7 @@ public class ${className}Controller extends BaseController {
 	@RequestMapping(value = "/export")
 	public String export(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap, TestW testW) throws Exception{
+			ModelMap modelMap, TestW testW) throws Exception {
 		String fileName = DateUtils.getDate("yyyyMMddHHmmss")+".xlsx";
 		List<${className}> ${table.classNameFirstLower}List = ${table.classNameFirstLower}Service.findAll(${table.classNameFirstLower});
 		new ExportExcel(null, ${className}.class).setDataList(${table.classNameFirstLower}List).write(response, fileName).dispose();

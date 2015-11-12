@@ -41,7 +41,7 @@ public class ${className} extends DataEntity<${className}> {
     <#if (column.sqlTypeName?lower_case=="date")>
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     </#if>
-    @ExcelField(title="${column.columnAlias}", type=1, align=2, sort=${column_index})
+    @ExcelField(title="${column.columnAlias}", type=1, align=2, sort=${column_index}, mod="${table.sqlName}|${column.sqlName}")
     private ${getJavaType(column)} ${column.columnNameLower};//${column.columnAlias}
     </#if>
     </#list>

@@ -78,7 +78,7 @@
 				</div>
 			</div>
 		</div>
-		<div id="checkbox" title="多选" data-options="iconCls:'icon-uicomponent-check'" style="padding:10px">
+		<div id="checkbox" title="复选" data-options="iconCls:'icon-uicomponent-check'" style="padding:10px">
 			<div id="checkboxTab" class="easyui-tabs" data-options="plain: false, narrow: false, pill: true" style="width:100%;height:120px">
 				<div id="string" title="常量" data-options="iconCls:'icon-uicomponent-text'" style="padding:10px">
 					<div class="fitem">
@@ -119,8 +119,8 @@
 		</div>
 	</div>
 	<div id="tab-tools">
-		<a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-4336'" onclick="save()">保存</a>
-		<a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-5571'" onclick="run()">运行</a>
+		<a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-4336'" onclick="save()">确定</a>
+		<a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-5571'" onclick="run()">试用</a>
 	</div>
 	<div style="position:absolute;left:130px;right:0px;bottom:0px;height:150px;">
 		<div class="easyui-panel" title="展示区" style="width:100%;height:140px;padding:10px;">
@@ -146,7 +146,7 @@
 					if(title == "单选") {
 						componentType = "radiobox";
 					}
-					if(title == "多选") {
+					if(title == "复选") {
 						componentType = "checkbox";
 					}
 					if(title == "日期") {
@@ -169,41 +169,41 @@
 			}
 			var componentConfig = parent.$('#settings').textbox('getValue');
 			if(componentType=="textbox") {
-				$('#'+componentType+' #prompt').val(componentConfig.replace("prompt:'", "").replace("'",""));
+				$('#'+componentType+' #prompt').textbox('setValue', componentConfig.replace("prompt:'", "").replace("'",""));
 				$('#configTab').tabs('select', 0);
 			}
 			if(componentType=="numberbox") {
 				var numberArr = componentConfig.split(",");
-				$('#'+componentType+' #max').val(numberArr[0].replace("max:", "").replace("'",""));
-				$('#'+componentType+' #min').val(numberArr[1].replace("min:", "").replace("'",""));
-				$('#'+componentType+' #precision').val(numberArr[2].replace("precision:", "").replace("'",""));
+				$('#'+componentType+' #max').numberbox('setValue', numberArr[0].replace("max:", "").replace("'",""));
+				$('#'+componentType+' #min').numberbox('setValue', numberArr[1].replace("min:", "").replace("'",""));
+				$('#'+componentType+' #precision').numberbox('setValue', numberArr[2].replace("precision:", "").replace("'",""));
 				$('#configTab').tabs('select', 1);
 			}
 			if(componentType=="textarea") {
-				$('#'+componentType+' #prompt').val(componentConfig.replace("multiline:true,prompt:'", "").replace("'",""));
+				$('#'+componentType+' #prompt').textbox('setValue', componentConfig.replace("multiline:true,prompt:'", "").replace("'",""));
 				$('#configTab').tabs('select', 6);
 			}
 			if(componentType=="datebox") {
-				$('#'+componentType+' #config').val(componentConfig.replace("dateFmt:'", "").replace("'",""));
+				$('#'+componentType+' #config').textbox('setValue', componentConfig.replace("dateFmt:'", "").replace("'",""));
 				$('#configTab').tabs('select', 5);
 			}
 			if(componentType=="htmldesign") {
-				$('#'+componentType+' #config').val(componentConfig);
+				$('#'+componentType+' #config').textbox('setValue', componentConfig);
 				$('#configTab').tabs('select', 7);
 			}
 			if(componentType=="combobox") {
 				$('#configTab').tabs('select', 2);
 				if(componentConfig.indexOf("SQL>") != -1) {
 					var sqlArr = componentConfig.split("|");
-					$('#'+componentType+' #sql #sqlStr').val(sqlArr[0].replace("SQL>", ""));
-					$('#'+componentType+' #sql #valueStr').val(sqlArr[1]);
-					$('#'+componentType+' #sql #labelStr').val(sqlArr[2]);
+					$('#'+componentType+' #sql #sqlStr').textbox('setValue', sqlArr[0].replace("SQL>", ""));
+					$('#'+componentType+' #sql #valueStr').textbox('setValue', sqlArr[1]);
+					$('#'+componentType+' #sql #labelStr').textbox('setValue', sqlArr[2]);
 					$('#'+componentType+'Tab').tabs('select', 1);
 				} else if(componentConfig.indexOf("DICT>") != -1) {
 					$('#'+componentType+' #dict #dictStr').combotree('setValue', componentConfig.replace("DICT>", ""));
 					$('#'+componentType+'Tab').tabs('select', 2);
 				} else {
-					$('#'+componentType+' #string #config').val(componentConfig);
+					$('#'+componentType+' #string #config').textbox('setValue', componentConfig);
 					$('#'+componentType+'Tab').tabs('select', 0);
 				}
 			}
@@ -211,15 +211,15 @@
 				$('#configTab').tabs('select', 3);
 				if(componentConfig.indexOf("SQL>") != -1) {
 					var sqlArr = componentConfig.split("|");
-					$('#'+componentType+' #sql #sqlStr').val(sqlArr[0].replace("SQL>", ""));
-					$('#'+componentType+' #sql #valueStr').val(sqlArr[1]);
-					$('#'+componentType+' #sql #labelStr').val(sqlArr[2]);
+					$('#'+componentType+' #sql #sqlStr').textbox('setValue', sqlArr[0].replace("SQL>", ""));
+					$('#'+componentType+' #sql #valueStr').textbox('setValue', sqlArr[1]);
+					$('#'+componentType+' #sql #labelStr').textbox('setValue', sqlArr[2]);
 					$('#'+componentType+'Tab').tabs('select', 1);
 				} else if(componentConfig.indexOf("DICT>") != -1) {
 					$('#'+componentType+' #dict #dictStr').combotree('setValue', componentConfig.replace("DICT>", ""));
 					$('#'+componentType+'Tab').tabs('select', 2);
 				}  else {
-					$('#'+componentType+' #string #config').val(componentConfig);
+					$('#'+componentType+' #string #config').textbox('setValue', componentConfig);
 					$('#'+componentType+'Tab').tabs('select', 0);
 				}
 			}
@@ -227,15 +227,15 @@
 				$('#configTab').tabs('select', 4);
 				if(componentConfig.indexOf("SQL>") != -1) {
 					var sqlArr = componentConfig.split("|");
-					$('#'+componentType+' #sql #sqlStr').val(sqlArr[0].replace("SQL>", ""));
-					$('#'+componentType+' #sql #valueStr').val(sqlArr[1]);
-					$('#'+componentType+' #sql #labelStr').val(sqlArr[2]);
+					$('#'+componentType+' #sql #sqlStr').textbox('setValue', sqlArr[0].replace("SQL>", ""));
+					$('#'+componentType+' #sql #valueStr').textbox('setValue', sqlArr[1]);
+					$('#'+componentType+' #sql #labelStr').textbox('setValue', sqlArr[2]);
 					$('#'+componentType+'Tab').tabs('select', 1);
 				} else if(componentConfig.indexOf("DICT>") != -1) {
 					$('#'+componentType+' #dict #dictStr').combotree('setValue', componentConfig.replace("DICT>", ""));
 					$('#'+componentType+'Tab').tabs('select', 2);
 				}  else {
-					$('#'+componentType+' #string #config').val(componentConfig);
+					$('#'+componentType+' #string #config').textbox('setValue', componentConfig);
 					$('#'+componentType+'Tab').tabs('select', 0);
 				}
 			}
