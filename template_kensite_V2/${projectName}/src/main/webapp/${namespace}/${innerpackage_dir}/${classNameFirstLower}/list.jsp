@@ -83,15 +83,29 @@
         function exportExcel() {
         	window.open("${"${"}ctx${"}"}/${moduleC}${table.classNameFirstLower}/export");
         }
+        var iframeWin = null, iframeBody=null;
         function layerOpen(url) {
             url = '${"${"}ctx${"}"}/${moduleC}${table.classNameFirstLower}/form';
         	layer.open({
         	    type: 2,
         	    title: '${table.tableAlias}基本信息',
-        	    area: ['400px', '350px'],
+        	    area: ['300px', '350px'],
         	    fix: false, //不固定
         	    maxmin: false,
-        	    content: url
+        	    content: url,
+        	    btn: ['保存', '取消'],
+	            success: function(layero, index){
+	                iframeBody = layer.getChildFrame('body', index);
+	                iframeWin = window[layero.find('iframe')[0]['name']];
+	            },
+        	    yes: function(index, layero) {
+        	    	if(iframeWin != null) {
+        	    		iframeWin.submitInfo();
+        	    	}
+        	    },
+        	    cancel: function(index){
+        	    	layer.close(index);
+        	    }
         	});
         }
         var loadi;

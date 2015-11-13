@@ -9,14 +9,8 @@
 	<%@ include file="/WEB-INF/view/taglib/easyui.jsp" %>
 	<%@ include file="/WEB-INF/view/taglib/layer.jsp" %>
 	<%@ include file="/WEB-INF/view/taglib/uedit.jsp" %>
-	<%@ include file="/WEB-INF/view/taglib/formStyle.jsp" %>
   </head>
   <body>
-  	<div id="buttons_box">
-		<ul>
-			<li><a href="javascript:void(0)" onclick="submitInfo()">保存</a></li>
-		</ul>
-	</div>
  	<div style="position:absolute;top:55px;left:20px;right:20px;bottom:10px;">
         <form id="dataForm" method="post">
         	<#list table.columns as column>
@@ -55,9 +49,9 @@
 	                cleanErrMsg();
 	                var data = eval('(' + data + ')');
 	                if (data.success==TRUE){
-	                	parent.layer.msg("操作成功！", {offset: 'rb',icon: 6,shift: 8,time: layerMsgTime});
-	            		parent.reloadData();
 	            		parent.layer.close(index);
+	            		parent.reloadData();
+	                	parent.layer.msg("操作成功！", {offset: 'rb',icon: 6,shift: 8,time: layerMsgTime});
 	                } else {
 	                    renderErrMsg(data.message);
 	                }
