@@ -47,7 +47,7 @@ public class FormUtils {
 			result.append(column);
 			result.append("\" name=\"");
 			result.append(column);
-			result.append("\" data-options=\"");
+			result.append("\" data-options=\"tipPosition:'bottom',");
 			if(TableColumnConstants.TEXTAREA.equals(tableColumn.getCategory())) {
 				result.append("multiline:true,");
 			}
@@ -74,7 +74,7 @@ public class FormUtils {
 			result.append(column);
 			result.append("\" name=\"");
 			result.append(column);
-			result.append("\" data-options=\"");
+			result.append("\" data-options=\"tipPosition:'bottom',");
 			if(StringConstant.NO.equals(tableColumn.getIsEdit())) {
 				result.append("editable:false,");
 			}
@@ -99,7 +99,7 @@ public class FormUtils {
 			result.append(column);
 			result.append("\" name=\"");
 			result.append(column);
-			result.append("\" data-options=\"");
+			result.append("\" data-options=\"tipPosition:'bottom',");
 			if(StringConstant.NO.equals(tableColumn.getIsEdit())) {
 				result.append("editable:false,");
 			}

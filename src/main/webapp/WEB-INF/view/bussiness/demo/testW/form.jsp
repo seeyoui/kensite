@@ -40,7 +40,6 @@
             <input id="id" name="id" type="hidden"/>
 		</form>
     </div>
-	<div class="layui-layer-btn" style="position: absolute; bottom: 0px;right: 0px"><a class="layui-layer-btn0" onclick="submitInfo()">保存</a></div>
     <script type="text/javascript">
 	    var loadi,url,index = parent.layer.getFrameIndex(window.name);
 	    $(document).ready(function(){

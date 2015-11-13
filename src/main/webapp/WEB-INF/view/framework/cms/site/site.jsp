@@ -56,7 +56,7 @@
 		        <form id="dataForm" method="post">
 					<div class="fitem">
 		                <label>站点名称</label>
-		                <input id="name" name="name" class="easyui-textbox" data-options="required:true"/>
+		                <input id="name" name="name" class="easyui-textbox" data-options="required:true'"/>
 		                <span id="msg-name" class="err-msg"></span>
 		            </div>
 					<div class="fitem">

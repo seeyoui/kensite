@@ -69,7 +69,7 @@
         	selectData();
         }
 	    
-        var url;
+        var url = '${ctx}/demo/testW/form';
         function newInfo(){
         	$('#dataList').datagrid('clearSelections');
             layerOpen(url);
@@ -83,15 +83,28 @@
         function exportExcel() {
         	window.open("${ctx}/demo/testW/export");
         }
+        var iframeWin = null, iframeBody=null;
         function layerOpen(url) {
-            url = '${ctx}/demo/testW/form';
         	layer.open({
         	    type: 2,
         	    title: '演示DEMO基本信息',
-        	    area: ['440px', '350px'],
+        	    area: ['300px', '350px'],
         	    fix: false, //不固定
         	    maxmin: false,
         	    content: url,
+        	    btn: ['保存', '取消'],
+	            success: function(layero, index){
+	                iframeBody = layer.getChildFrame('body', index);
+	                iframeWin = window[layero.find('iframe')[0]['name']];
+	            },
+        	    yes: function(index, layero) {
+        	    	if(iframeWin != null) {
+        	    		iframeWin.submitInfo();
+        	    	}
+        	    },
+        	    cancel: function(index){
+        	    	layer.close(index);
+        	    }
         	});
         }
         var loadi;
