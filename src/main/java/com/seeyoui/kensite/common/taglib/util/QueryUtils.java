@@ -25,7 +25,7 @@ public class QueryUtils {
 	
 	public static StringBuffer getTableColumnStr(TableColumn tableColumn) throws Exception {
 		TableColumn tc = TagCacheUtils.getTableColumn(tableColumn);
-		if(tc == null) {
+		if(tc == null || StringConstant.NO.equals(tc.getIsQuery())) {
 			return null;
 		}
 		StringBuffer result = getEasyUIStr(tc);

@@ -49,9 +49,9 @@
 	                cleanErrMsg();
 	                var data = eval('(' + data + ')');
 	                if (data.success==TRUE){
-	            		parent.layer.close(index);
 	            		parent.reloadData();
 	                	parent.layer.msg("操作成功！", {offset: 'rb',icon: 6,shift: 8,time: layerMsgTime});
+	            		parent.layer.close(index);
 	                } else {
 	                    renderErrMsg(data.message);
 	                }

@@ -25,7 +25,7 @@ public class QueryJsUtils {
 	
 	public static StringBuffer getTableColumnStr(TableColumn tableColumn) throws Exception {
 		TableColumn tc = TagCacheUtils.getTableColumn(tableColumn);
-		if(tc == null) {
+		if(tc == null || StringConstant.NO.equals(tc.getIsQuery())) {
 			return null;
 		}
 		StringBuffer result = getEasyUIStr(tc);
@@ -60,6 +60,7 @@ public class QueryJsUtils {
 		if(TableColumnConstants.DATEBOX.equals(tableColumn.getCategory())) {
 			result.append("val()");
 		}
+		result.append(",");
 		if(needCache) {
 			CacheUtils.put(TableColumnConstants.CACHE_QUERY_JS+TableColumnConstants.CACHE_SPLIT+TableColumnConstants.CACHE_EASYUI+TableColumnConstants.CACHE_SPLIT+tableColumn.getTableName()+TableColumnConstants.CACHE_SPLIT+tableColumn.getName(), result);
 		}

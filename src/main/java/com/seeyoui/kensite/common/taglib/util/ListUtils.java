@@ -48,7 +48,7 @@ public class ListUtils {
 		} else {
 			result.append(" width:100,");
 		}
-		if((StringUtils.isNoneBlank(tableColumn.getIsList()) && StringConstant.FALSE.equals(tableColumn.getIsList()))) {
+		if((StringUtils.isNoneBlank(tableColumn.getIsList()) && StringConstant.NO.equals(tableColumn.getIsList()))) {
 			result.append(" hidden:true,");
 		}
 		if(TableColumnConstants.TEXTBOX.equals(tableColumn.getCategory()) || TableColumnConstants.TEXTAREA.equals(tableColumn.getCategory())) {

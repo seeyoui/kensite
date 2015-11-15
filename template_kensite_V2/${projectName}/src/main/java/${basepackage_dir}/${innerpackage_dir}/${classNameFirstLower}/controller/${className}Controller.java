@@ -171,7 +171,7 @@ public class ${className}Controller extends BaseController {
 	@RequestMapping(value = "/export")
 	public String export(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap, TestW testW) throws Exception {
+			ModelMap modelMap, ${className} ${table.classNameFirstLower}) throws Exception {
 		String fileName = DateUtils.getDate("yyyyMMddHHmmss")+".xlsx";
 		List<${className}> ${table.classNameFirstLower}List = ${table.classNameFirstLower}Service.findAll(${table.classNameFirstLower});
 		new ExportExcel(null, ${className}.class).setDataList(${table.classNameFirstLower}List).write(response, fileName).dispose();

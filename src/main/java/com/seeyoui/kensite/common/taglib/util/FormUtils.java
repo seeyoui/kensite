@@ -54,7 +54,7 @@ public class FormUtils {
 			if(StringConstant.NO.equals(tableColumn.getIsEdit())) {
 				result.append("editable:false,");
 			}
-			if(StringConstant.YES.equals(tableColumn.getIsNull())) {
+			if(StringConstant.NO.equals(tableColumn.getIsNull())) {
 				result.append("required:true,");
 			}
 			if(StringUtils.isNoneBlank(tableColumn.getValidType())) {
