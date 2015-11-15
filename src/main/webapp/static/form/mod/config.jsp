@@ -52,6 +52,15 @@
 						<label>系统字典</label><input id="dictStr" class="easyui-combotree" style="width:150px;" url="${ctx}/sys/dict/getTreeJson.do"/>
 					</div>
 				</div>
+				<div id="url" title="URL" data-options="iconCls:'icon-uicomponent-text'" style="padding:10px">
+					<div class="fitem">
+						<label>URL</label><input id="urlStr" class="easyui-textbox" data-options="" style="width:150px;"/>
+					</div>
+					<div class="fitem">
+						VALUE列<input id="valueStr" class="easyui-textbox" data-options="" style="width:63px;"/>
+						LABEL列<input id="labelStr" class="easyui-textbox" data-options="" style="width:63px;"/>
+					</div>
+				</div>
 			</div>
 		</div>
 		<div id="radiobox" title="单选" data-options="iconCls:'icon-uicomponent-radio'" style="padding:10px">
@@ -76,6 +85,15 @@
 						<label>系统字典</label><input id="dictStr" class="easyui-combotree" style="width:150px;" url="${ctx}/sys/dict/getTreeJson.do"/>
 					</div>
 				</div>
+				<div id="url" title="URL" data-options="iconCls:'icon-uicomponent-text'" style="padding:10px">
+					<div class="fitem">
+						<label>URL</label><input id="urlStr" class="easyui-textbox" data-options="" style="width:150px;"/>
+					</div>
+					<div class="fitem">
+						VALUE列<input id="valueStr" class="easyui-textbox" data-options="" style="width:63px;"/>
+						LABEL列<input id="labelStr" class="easyui-textbox" data-options="" style="width:63px;"/>
+					</div>
+				</div>
 			</div>
 		</div>
 		<div id="checkbox" title="复选" data-options="iconCls:'icon-uicomponent-check'" style="padding:10px">
@@ -98,6 +116,15 @@
 				<div id="dict" title="字典" data-options="iconCls:'icon-uicomponent-text'" style="padding:10px">
 					<div class="fitem">
 						<label>系统字典</label><input id="dictStr" class="easyui-combotree" style="width:150px;" url="${ctx}/sys/dict/getTreeJson.do"/>
+					</div>
+				</div>
+				<div id="url" title="URL" data-options="iconCls:'icon-uicomponent-text'" style="padding:10px">
+					<div class="fitem">
+						<label>URL</label><input id="urlStr" class="easyui-textbox" data-options="" style="width:150px;"/>
+					</div>
+					<div class="fitem">
+						VALUE列<input id="valueStr" class="easyui-textbox" data-options="" style="width:63px;"/>
+						LABEL列<input id="labelStr" class="easyui-textbox" data-options="" style="width:63px;"/>
 					</div>
 				</div>
 			</div>
@@ -202,6 +229,12 @@
 				} else if(componentConfig.indexOf("DICT>") != -1) {
 					$('#'+componentType+' #dict #dictStr').combotree('setValue', componentConfig.replace("DICT>", ""));
 					$('#'+componentType+'Tab').tabs('select', 2);
+				} else if(componentConfig.indexOf("URL>") != -1) {
+					var sqlArr = componentConfig.split("|");
+					$('#'+componentType+' #url #urlStr').textbox('setValue', sqlArr[0].replace("URL>", ""));
+					$('#'+componentType+' #url #valueStr').textbox('setValue', sqlArr[1]);
+					$('#'+componentType+' #url #labelStr').textbox('setValue', sqlArr[2]);
+					$('#'+componentType+'Tab').tabs('select', 3);
 				} else {
 					$('#'+componentType+' #string #config').textbox('setValue', componentConfig);
 					$('#'+componentType+'Tab').tabs('select', 0);
@@ -218,7 +251,13 @@
 				} else if(componentConfig.indexOf("DICT>") != -1) {
 					$('#'+componentType+' #dict #dictStr').combotree('setValue', componentConfig.replace("DICT>", ""));
 					$('#'+componentType+'Tab').tabs('select', 2);
-				}  else {
+				} else if(componentConfig.indexOf("URL>") != -1) {
+					var sqlArr = componentConfig.split("|");
+					$('#'+componentType+' #url #urlStr').textbox('setValue', sqlArr[0].replace("URL>", ""));
+					$('#'+componentType+' #url #valueStr').textbox('setValue', sqlArr[1]);
+					$('#'+componentType+' #url #labelStr').textbox('setValue', sqlArr[2]);
+					$('#'+componentType+'Tab').tabs('select', 3);
+				} else {
 					$('#'+componentType+' #string #config').textbox('setValue', componentConfig);
 					$('#'+componentType+'Tab').tabs('select', 0);
 				}
@@ -234,7 +273,13 @@
 				} else if(componentConfig.indexOf("DICT>") != -1) {
 					$('#'+componentType+' #dict #dictStr').combotree('setValue', componentConfig.replace("DICT>", ""));
 					$('#'+componentType+'Tab').tabs('select', 2);
-				}  else {
+				} else if(componentConfig.indexOf("URL>") != -1) {
+					var sqlArr = componentConfig.split("|");
+					$('#'+componentType+' #url #urlStr').textbox('setValue', sqlArr[0].replace("URL>", ""));
+					$('#'+componentType+' #url #valueStr').textbox('setValue', sqlArr[1]);
+					$('#'+componentType+' #url #labelStr').textbox('setValue', sqlArr[2]);
+					$('#'+componentType+'Tab').tabs('select', 3);
+				} else {
 					$('#'+componentType+' #string #config').textbox('setValue', componentConfig);
 					$('#'+componentType+'Tab').tabs('select', 0);
 				}
@@ -283,6 +328,9 @@
 				}
 				if(index == 2) {
 					componentConfig = "DICT>"+$('#'+componentType+' #dict #dictStr').combotree('getValue');
+				}
+				if(index == 3) {
+					componentConfig = "URL>"+$('#'+componentType+' #url #urlStr').val()+"|"+$('#'+componentType+' #url #valueStr').val()+"|"+$('#'+componentType+' #url #labelStr').val();
 				}
 			}
 			var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
