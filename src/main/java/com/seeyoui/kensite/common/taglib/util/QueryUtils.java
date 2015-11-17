@@ -85,12 +85,12 @@ public class QueryUtils {
 				} else {
 					result.append(" width:100,");
 				}
-				result.append("valueField: 'value',textField: 'label',");
 //				if(TableColumnConstants.CHECKBOX.equals(tableColumn.getCategory())) {
 //					result.append("multiple:true,");
 //				}
 				String settings = tableColumn.getSettings();
 				if(settings.indexOf("SQL>") != -1) {
+					result.append("valueField: 'value',textField: 'label',");
 					result.append("data: [");
 					String[] settingsArr = settings.split("\\|");
 					String sql = settingsArr[0].replace("SQL>", "");
@@ -104,6 +104,7 @@ public class QueryUtils {
 					result.substring(0, result.lastIndexOf(",")-1);
 					result.append("]");
 				} else if(settings.indexOf("DICT>") != -1) {
+					result.append("valueField: 'value',textField: 'label',");
 					result.append("data: [");
 					List<Dict> dictList = DictUtils.getDictList(DictUtils.getDict(settings.replace("DICT>", "")).getValue());
 					for(Dict dict : dictList) {
@@ -112,7 +113,15 @@ public class QueryUtils {
 					}
 					result.substring(0, result.lastIndexOf(",")-1);
 					result.append("]");
+				} else if(settings.indexOf("URL>") != -1) {
+					String[] settingsArr = settings.split("\\|");
+					String url = settingsArr[0].replace("URL>", "");
+					String value = settingsArr[1];
+					String label = settingsArr[2];
+					result.append("valueField: '"+value+"',textField: '"+label+"',");
+					result.append("url:'/kensite"+url+"'");
 				} else  {
+					result.append("valueField: 'value',textField: 'label',");
 					result.append("data: [");
 					String[] settingsArr = settings.split("\\|");
 					for(String set : settingsArr) {

@@ -156,7 +156,7 @@
 		                <span id="msg-listWidth" class="err-msg"></span>
 		            </div>
 					<div class="fitem">
-		                <label>是否列表</label>
+		                <label>是否查询</label>
 		                <input id="isQuery" name="isQuery" class="easyui-combobox" data-options="editable:false,panelHeight: 'auto',required:true,valueField: 'value',textField: 'label'"/>
 		                <span id="msg-isQuery" class="err-msg"></span>
 		                <label>查询宽度</label>

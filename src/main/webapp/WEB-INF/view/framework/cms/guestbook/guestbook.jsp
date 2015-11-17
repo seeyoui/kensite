@@ -108,8 +108,8 @@
             if (row){
             	cleanErrMsg();
                 $('#dataForm').form('load',row);
-                $('#reUserId').val('${currentUser.id}');
-                $('#reDate').val(getCurrentDate());
+                $('#reUserId').textbox('setValue', '${currentUser.id}');
+                $('#reDate').textbox('setValue', getCurrentDate());
                 $('#dataWin').window('open');
                 url = '${ctx}/cms/guestbook/saveByUpdate.do?id='+row.id;
             }    	

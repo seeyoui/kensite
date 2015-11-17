@@ -110,7 +110,7 @@
 	    	});
 	    	$("#icon_li img").click(function(){
 	    		var obj = $(this);
-	    		$("#icon").val(obj.attr("id"));
+	    		$("#icon").textbox('setValue', obj.attr("id"));
 	    	});
 	    	$('#dataList').datagrid({
 	    		url:'${ctx}/sysMenu/getListData.do',

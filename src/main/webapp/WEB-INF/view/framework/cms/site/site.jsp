@@ -144,8 +144,7 @@
 	  //回调函数(文件对象,提示信息)
 		function afterMineUpload(file, uf, message) {
 	    	var fileName =uf.url+ uf.realname;
-			alert(fileName);
-	    	$("#logo").val(fileName);
+	    	$("#logo").textbox('setValue', fileName);
 	    	$("#logoImg").attr("src","${ctx}/"+fileName);
 		}
 	    
