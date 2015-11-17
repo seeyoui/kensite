@@ -11,7 +11,7 @@
 	<%@ include file="/WEB-INF/view/taglib/uedit.jsp" %>
   </head>
   <body>
- 	<div style="position:absolute;top:55px;left:20px;right:20px;bottom:10px;">
+ 	<div style="position:absolute;top:10px;left:20px;right:20px;bottom:10px;">
         <form id="dataForm" method="post">
         	<#list table.columns as column>
 	    	<#if (column.columnName?lower_case=="id"||column.columnName?lower_case=="createuser"||column.columnName?lower_case=="createdate"||column.columnName?lower_case=="updateuser"||column.columnName?lower_case=="updatedate"||column.columnName?lower_case=="remarks"||column.columnName?lower_case=="delflag") ><#else>
