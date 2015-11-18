@@ -73,7 +73,7 @@ public class DictUtils {
 		@SuppressWarnings("unchecked")
 		List<Dict> dictList = (List<Dict>)CacheUtils.get(CACHE_DICT_LIST);
 		if(dictList==null) {
-			dictList = dictMapper.findAllDictList(new Dict());
+			dictList = dictMapper.findAll(new Dict());
 			CacheUtils.put(CACHE_DICT_LIST, dictList);
 		}
 		return dictList;
@@ -84,7 +84,7 @@ public class DictUtils {
 		Map<String, List<Dict>> dictMap = (Map<String, List<Dict>>)CacheUtils.get(CACHE_DICT_MAP);
 		if (dictMap==null){
 			dictMap = Maps.newHashMap();
-			for (Dict dict : dictMapper.findAllDictList(new Dict())){
+			for (Dict dict : dictMapper.findAll(new Dict())){
 				List<Dict> dictList = dictMap.get(dict.getCategory());
 				if (dictList != null){
 					dictList.add(dict);

@@ -3,153 +3,142 @@
 <mapper namespace="com.seeyoui.kensite.framework.plugin.dict.persistence.DictMapper" >
 	<!-- 查询单表的字段 -->
 	<sql id="tableColumns">
-	    t.id as "id",
-	    t.value as "value",
-	    t.label as "label",
-	    t.category as "category",
-	    t.description as "description",
-	    t.sequence as "sequence",
-	    t.parent_id as "parentId"
+	    T.ID AS "id",
+	    T.VALUE AS "value",
+	    T.LABEL AS "label",
+	    T.CATEGORY AS "category",
+	    T.DESCRIPTION AS "description",
+	    T.SEQUENCE AS "sequence",
+	    T.PARENT_ID AS "parentId"
 	</sql>
 	<!-- 查询过滤条件 -->
 	<sql id="whereStr">
 		<where>
 			1=1
 			<if test="id != null and id != ''">
-				and t.id LIKE '%'||#{id}||'%'
+				AND T.ID LIKE '%'||#{id}||'%'
 			</if>
 			<if test="value != null and value != ''">
-				and t.value LIKE '%'||#{value}||'%'
+				AND T.VALUE LIKE '%'||#{value}||'%'
 			</if>
 			<if test="label != null and label != ''">
-				and t.label LIKE '%'||#{label}||'%'
+				AND T.LABEL LIKE '%'||#{label}||'%'
 			</if>
 			<if test="category != null and category != ''">
-				and t.category LIKE '%'||#{category}||'%'
+				AND T.CATEGORY LIKE '%'||#{category}||'%'
 			</if>
 			<if test="description != null and description != ''">
-				and t.description LIKE '%'||#{description}||'%'
+				AND T.DESCRIPTION LIKE '%'||#{description}||'%'
 			</if>
 			<if test="sequence != null and sequence != ''">
-				and t.sequence = #{sequence}
+				AND T.SEQUENCE = #{sequence}
 			</if>
 			<if test="parentId != null and parentId != ''">
-				and t.parent_id LIKE '%'||#{parentId}||'%'
+				AND T.PARENT_ID LIKE '%'||#{parentId}||'%'
 			</if>
 		</where>
 	</sql>
 	<sql id="orderBy">
-		ORDER BY t.sequence asc
+		ORDER BY T.SEQUENCE ASC
 	</sql>
 	
 	<!-- 根据ID查询单条数据 -->
-	<select id="findDictById" resultType="com.seeyoui.kensite.framework.plugin.dict.domain.Dict">
+	<select id="findOne" resultType="com.seeyoui.kensite.framework.plugin.dict.domain.Dict">
 		SELECT
 		<include refid="tableColumns" />
-		FROM SYS_DICT t
-		WHERE id = #{id}
+		FROM SYS_DICT T
+		WHERE T.ID = #{id}
 	</select>
 	
 	<!-- 查询数据集合 -->
-	<select id="findDictList" resultType="com.seeyoui.kensite.framework.plugin.dict.domain.Dict">
+	<select id="findList" resultType="com.seeyoui.kensite.framework.plugin.dict.domain.Dict">
 		select * from(select t.*,rownum rn from(
 			SELECT
 			<include refid="tableColumns"/>
-			FROM SYS_DICT t
+			FROM SYS_DICT T
 			<include refid="whereStr"/>
 			<include refid="orderBy"/>
 		) t where rownum &lt; = #{page}*#{rows}) where rn &gt; (#{page}-1)*#{rows}
 	</select>
 	
 	<!-- 查询所有数据集合 -->
-	<select id="findAllDictList" resultType="com.seeyoui.kensite.framework.plugin.dict.domain.Dict">
+	<select id="findAll" resultType="com.seeyoui.kensite.framework.plugin.dict.domain.Dict">
 		SELECT
 		<include refid="tableColumns"/>
-		FROM SYS_DICT t
+		FROM SYS_DICT T
 		<include refid="whereStr"/>
 		<include refid="orderBy"/>
 	</select>
 	
 	<!-- 查询数据总数 -->
-	<select id="findDictListTotal" resultType="EasyUIDataGrid">
+	<select id="findTotal" resultType="Integer">
 		SELECT
-		COUNT(1) total
-		FROM SYS_DICT t
-		<include refid="whereStr"/>
-	</select>
-	
-	<!-- 查询数据总数 -->
-	<select id="findDictTotal" resultType="Integer">
-		SELECT
-		COUNT(1) total
-		FROM SYS_DICT t
+		COUNT(1) AS "total"
+		FROM SYS_DICT T
 		<include refid="whereStr"/>
 	</select>
 	
 	<!-- 获取数据用于生成TREE -->
-	<select id="getTreeJson" resultType="com.seeyoui.kensite.framework.plugin.dict.domain.Dict">  
+	<select id="findTree" resultType="com.seeyoui.kensite.framework.plugin.dict.domain.Dict">  
 		SELECT 
 		<include refid="tableColumns" />
-		FROM SYS_DICT t 
+		FROM SYS_DICT T 
 		<include refid="whereStr"/>
-		ORDER BY t.sequence ASC
+		<include refid="orderBy"/>
 	</select>
 	
 	<!-- 数据新增 -->
-	<insert id="saveDict" parameterType="com.seeyoui.kensite.framework.plugin.dict.domain.Dict">
+	<insert id="save" parameterType="com.seeyoui.kensite.framework.plugin.dict.domain.Dict">
 		INSERT INTO SYS_DICT (
-	    	
-	    	value,
-	    	label,
-	    	category,
-	    	description,
-	    	sequence,
-	    	parent_id,
-		    id
+	    	VALUE,
+	    	LABEL,
+	    	CATEGORY,
+	    	DESCRIPTION,
+	    	SEQUENCE,
+	    	PARENT_ID,
+		    ID
 		)
 		VALUES (
-			
-			#{value},
-			#{label},
-			#{category},
-			#{description},
-			#{sequence},
-			#{parentId},
-		    #{id}
+			#{value,jdbcType=VARCHAR},
+			#{label,jdbcType=VARCHAR},
+			#{category,jdbcType=VARCHAR},
+			#{description,jdbcType=VARCHAR},
+			#{sequence,jdbcType=VARCHAR},
+			#{parentId,jdbcType=VARCHAR},
+		    #{id,jdbcType=VARCHAR}
 		)
 	</insert>
 	
 	<!-- 数据修改 -->
-	<update id="updateDict" parameterType="com.seeyoui.kensite.framework.plugin.dict.domain.Dict">
+	<update id="update" parameterType="com.seeyoui.kensite.framework.plugin.dict.domain.Dict">
 		UPDATE SYS_DICT
 		<set>
-	    	
 	    	<if test="value !=null and value !=''">
-			value=#{value},
+			VALUE=#{value},
 			</if>
 	    	<if test="label !=null and label !=''">
-			label=#{label},
+			LABEL=#{label},
 			</if>
 	    	<if test="category !=null and category !=''">
-			category=#{category},
+			CATEGORY=#{category},
 			</if>
 	    	<if test="description !=null and description !=''">
-			description=#{description},
+			DESCRIPTION=#{description},
 			</if>
 	    	<if test="sequence !=null and sequence !=''">
-			sequence=#{sequence},
+			SEQUENCE=#{sequence},
 			</if>
 	    	<if test="parentId !=null and parentId !=''">
-			parent_id=#{parentId},
+			PARENT_ID=#{parentId},
 			</if>
-		    id = #{id}
+		    ID = #{id}
 		</set>
-		WHERE id = #{id}
+		WHERE ID = #{id}
 	</update>
 	
 	<!-- 数据删除 -->
-	<delete id="deleteDict">
-		DELETE FROM SYS_DICT WHERE id IN 
+	<delete id="delete">
+		DELETE FROM SYS_DICT WHERE ID IN 
 		<foreach item="listId" collection="list"
 			open="(" separator="," close=")">
 			#{listId}

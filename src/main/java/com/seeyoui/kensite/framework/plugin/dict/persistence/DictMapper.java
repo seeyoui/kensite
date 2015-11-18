@@ -23,58 +23,51 @@ public interface DictMapper {
 	 * @param id
 	 * @return
 	 */
-	public Dict findDictById(String id);
+	public Dict findOne(String id);
 	
 	/**
 	 * 查询数据集合
 	 * @param dict
 	 * @return
 	 */
-	public List<Dict> findDictList(Dict dict);
+	public List<Dict> findList(Dict dict);
 	
 	/**
 	 * 查询所有数据集合
 	 * @param dict
 	 * @return
 	 */
-	public List<Dict> findAllDictList(Dict dict);
+	public List<Dict> findAll(Dict dict);
 	
 	/**
 	 * 查询数据总数
 	 * @param dict
 	 * @return
 	 */
-	public EasyUIDataGrid findDictListTotal(Dict dict);
-	
-	/**
-	 * 查询数据总数
-	 * @param dict
-	 * @return
-	 */
-	public int findDictTotal(Dict dict);
+	public int findTotal(Dict dict);
 	
 	/**
 	 * 获取生成TREE Json的
 	 * @return
 	 * @throws CRUDException
 	 */
-	public List<Dict> getTreeJson(Dict dict);
+	public List<Dict> findTree(Dict dict);
 	
 	/**
 	 * 数据新增
 	 * @param dict
 	 */
-	public void saveDict(Dict dict);
+	public void save(Dict dict);
 	
 	/**
 	 * 数据修改
 	 * @param dict
 	 */
-	public void updateDict(Dict dict);
+	public void update(Dict dict);
 	
 	/**
 	 * 数据删除
 	 * @param listId
 	 */
-	public void deleteDict(List<String> listId);
+	public void delete(List<String> listId);
 }

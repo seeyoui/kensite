@@ -38,8 +38,8 @@ public class DictService extends BaseService {
 	 * @return
 	 * @throws CRUDException
 	 */
-	public Dict findDictById(String id) throws CRUDException{
-		return dictMapper.findDictById(id);
+	public Dict findOne(String id) throws CRUDException{
+		return dictMapper.findOne(id);
 	}
 	
 	/**
@@ -48,8 +48,8 @@ public class DictService extends BaseService {
 	 * @return
 	 * @throws CRUDException
 	 */
-	public List<Dict> findDictList(Dict dict) throws CRUDException {
-		return dictMapper.findDictList(dict);
+	public List<Dict> findList(Dict dict) throws CRUDException {
+		return dictMapper.findList(dict);
 	}
 	
 	/**
@@ -58,8 +58,8 @@ public class DictService extends BaseService {
 	 * @return
 	 * @throws CRUDException
 	 */
-	public List<Dict> findAllDictList(Dict dict) throws CRUDException {
-		return dictMapper.findAllDictList(dict);
+	public List<Dict> findAll(Dict dict) throws CRUDException {
+		return dictMapper.findAll(dict);
 	}
 	
 	/**
@@ -68,18 +68,8 @@ public class DictService extends BaseService {
 	 * @return
 	 * @throws CRUDException
 	 */
-	public EasyUIDataGrid findDictListTotal(Dict dict) throws CRUDException {
-		return dictMapper.findDictListTotal(dict);
-	}
-	
-	/**
-	 * 查询数据总数
-	 * @param dict
-	 * @return
-	 * @throws CRUDException
-	 */
-	public int findDictTotal(Dict dict) throws CRUDException {
-		return dictMapper.findDictTotal(dict);
+	public int findTotal(Dict dict) throws CRUDException {
+		return dictMapper.findTotal(dict);
 	}
 	
 	/**
@@ -87,8 +77,8 @@ public class DictService extends BaseService {
 	 * @return
 	 * @throws CRUDException
 	 */
-	public List<Dict> getTreeJson(Dict dict) throws CRUDException {
-		return dictMapper.getTreeJson(dict);
+	public List<Dict> findTree(Dict dict) throws CRUDException {
+		return dictMapper.findTree(dict);
 	}
 	
 	/**
@@ -96,10 +86,11 @@ public class DictService extends BaseService {
 	 * @param dict
 	 * @throws CRUDException
 	 */
-	public void saveDict(Dict dict) throws CRUDException{
+	public void save(Dict dict) throws CRUDException{
 		dict.preInsert();
-		dictMapper.saveDict(dict);
+		dictMapper.save(dict);
 		CacheUtils.remove(DictUtils.CACHE_DICT_MAP);
+		CacheUtils.remove(DictUtils.CACHE_DICT_LIST);
 	}
 	
 	/**
@@ -107,10 +98,11 @@ public class DictService extends BaseService {
 	 * @param dict
 	 * @throws CRUDException
 	 */
-	public void updateDict(Dict dict) throws CRUDException{
+	public void update(Dict dict) throws CRUDException{
 		dict.preUpdate();
-		dictMapper.updateDict(dict);
+		dictMapper.update(dict);
 		CacheUtils.remove(DictUtils.CACHE_DICT_MAP);
+		CacheUtils.remove(DictUtils.CACHE_DICT_LIST);
 	}
 	
 	/**
@@ -118,9 +110,10 @@ public class DictService extends BaseService {
 	 * @param listId
 	 * @throws CRUDException
 	 */
-	public void deleteDict(List<String> listId) throws CRUDException {
-		dictMapper.deleteDict(listId);
+	public void delete(List<String> listId) throws CRUDException {
+		dictMapper.delete(listId);
 		CacheUtils.remove(DictUtils.CACHE_DICT_MAP);
+		CacheUtils.remove(DictUtils.CACHE_DICT_LIST);
 	}
 	
 }

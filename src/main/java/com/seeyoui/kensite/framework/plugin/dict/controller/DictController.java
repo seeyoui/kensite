@@ -19,12 +19,14 @@ import org.apache.shiro.authz.annotation.RequiresUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.seeyoui.kensite.bussiness.demo.demo.domain.Demo;
 import com.seeyoui.kensite.common.base.controller.BaseController;
 import com.seeyoui.kensite.common.constants.StringConstant;
 import com.seeyoui.kensite.common.util.RequestResponseUtil;
@@ -57,11 +59,11 @@ public class DictController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequiresPermissions("dict:view")
-	@RequestMapping(value = "/showPageList")
+	@RequestMapping(value = "/{page}")
 	public ModelAndView showDictPageList(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap) throws Exception {
-		return new ModelAndView("framework/plugin/dict/dict", modelMap);
+			ModelMap modelMap, @PathVariable String page) throws Exception {
+		return new ModelAndView("framework/plugin/dict/"+page, modelMap);
 	}
 	
 	/**
@@ -72,17 +74,17 @@ public class DictController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequiresPermissions("dict:select")
-	@RequestMapping(value = "/getListData", method=RequestMethod.POST)
+	@RequestMapping(value = "/list/data", method=RequestMethod.POST)
 	@ResponseBody
-	public String getListData(HttpSession session,
+	public Object listData(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, Dict dict) throws Exception{
-		List<Dict> dictList = dictService.findDictList(dict);
-		EasyUIDataGrid eudg = dictService.findDictListTotal(dict);
-		eudg.setRows(dictList);
-		JSONObject jsonObj = JSONObject.fromObject(eudg);
-		RequestResponseUtil.putResponseStr(session, response, request, jsonObj);
-		return null;
+		List<Dict> demoList = dictService.findList(dict);
+		int total = dictService.findTotal(dict);
+		EasyUIDataGrid eudg = new EasyUIDataGrid();
+		eudg.setTotal(String.valueOf(total));
+		eudg.setRows(demoList);
+		return eudg;
 	}
 	
 	/**
@@ -93,15 +95,13 @@ public class DictController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequiresPermissions("dict:select")
-	@RequestMapping(value = "/getAllListData", method=RequestMethod.POST)
+	@RequestMapping(value = "/list/all", method=RequestMethod.POST)
 	@ResponseBody
-	public String getAllListData(HttpSession session,
+	public Object listAll(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, Dict dict) throws Exception{
-		List<Dict> dictList = dictService.findDictList(dict);
-		JSONArray jsonObj = JSONArray.fromObject(dictList);
-		RequestResponseUtil.putResponseStr(session, response, request, jsonObj);
-		return null;
+		List<Dict> dictList = dictService.findAll(dict);
+		return dictList;
 	}
 	
 	/**
@@ -110,16 +110,16 @@ public class DictController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequiresUser
-	@RequestMapping(value = "/getTreeJson", method=RequestMethod.POST)
+	@RequestMapping(value = "/tree", method=RequestMethod.POST)
 	@ResponseBody
-	public String getTreeJson(Dict dict) throws Exception {
-		List<Dict> mList = dictService.getTreeJson(dict);
+	public Object tree(Dict dict) throws Exception {
+		List<Dict> mList = dictService.findTree(dict);
 		List<TreeJson> tList = new ArrayList<TreeJson>();
 		for(int i=0; i<mList.size(); i++) {
 			TreeJson tj = new TreeJson();
 			tj.setId(mList.get(i).getId());
 			tj.setPid(mList.get(i).getParentId());
-			tj.setText(mList.get(i).getLabel()+"["+mList.get(i).getCategory()+"]");
+			tj.setText(mList.get(i).getLabel());
 			tList.add(tj);
 		}
 		TreeJson root = new TreeJson();
@@ -127,7 +127,7 @@ public class DictController extends BaseController {
 		root.setText("系统字典");
 		TreeJson.getTree(tList, root);
 		JSONArray jsonObj = JSONArray.fromObject(root);
-		return jsonObj.toString();
+		return jsonObj;
 	}
 	
 	/**
@@ -136,7 +136,7 @@ public class DictController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequiresUser
-	@RequestMapping(value = "/getDictJson")
+	@RequestMapping(value = "/cache/json")
 	@ResponseBody
 	public String getDictJson(Dict dict) throws Exception {
 		return DictUtils.getDictListJson(dict.getCategory());
@@ -148,7 +148,7 @@ public class DictController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequiresUser
-	@RequestMapping(value = "/getDictList")
+	@RequestMapping(value = "/cache/list")
 	@ResponseBody
 	public List<Dict> getDictList(Dict dict) throws Exception {
 		return DictUtils.getDictList(dict.getCategory());
@@ -160,7 +160,7 @@ public class DictController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequiresUser
-	@RequestMapping(value = "/getDictLabel")
+	@RequestMapping(value = "/cache/label")
 	@ResponseBody
 	public String getDictLabel(Dict dict) throws Exception {
 		return DictUtils.getDictLabel(dict.getValue(), dict.getCategory(), dict.getDefaultKey());
@@ -172,7 +172,7 @@ public class DictController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequiresUser
-	@RequestMapping(value = "/getDictValue")
+	@RequestMapping(value = "/cache/value")
 	@ResponseBody
 	public String getDictValue(Dict dict) throws Exception {
 		return DictUtils.getDictValue(dict.getLabel(), dict.getCategory(), dict.getDefaultKey());
@@ -186,16 +186,16 @@ public class DictController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequiresPermissions("dict:insert")
-	@RequestMapping(value = "/saveByAdd", method=RequestMethod.POST)
+	@RequestMapping(value = "/save", method=RequestMethod.POST)
 	@ResponseBody
-	public String saveDictByAdd(HttpSession session,
+	public String save(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, Dict dict) throws Exception{
 		if (!beanValidator(modelMap, dict)){
 			RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
 			return null;
 		}
-		dictService.saveDict(dict);
+		dictService.save(dict);
 		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}
@@ -208,16 +208,16 @@ public class DictController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequiresPermissions("dict:update")
-	@RequestMapping(value = "/saveByUpdate", method=RequestMethod.POST)
+	@RequestMapping(value = "/update", method=RequestMethod.POST)
 	@ResponseBody
-	public String saveDictByUpdate(HttpSession session,
+	public String update(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, Dict dict) throws Exception{
 		if (!beanValidator(modelMap, dict)){
 			RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
 			return null;
 		}
-		dictService.updateDict(dict);
+		dictService.update(dict);
 		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}
@@ -234,9 +234,9 @@ public class DictController extends BaseController {
 	@ResponseBody
 	public String delete(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap, String delDataId) throws Exception {
-		List<String> listId = Arrays.asList(delDataId.split(","));
-		dictService.deleteDict(listId);
+			ModelMap modelMap, String id) throws Exception {
+		List<String> listId = Arrays.asList(id.split(","));
+		dictService.delete(listId);
 		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}
