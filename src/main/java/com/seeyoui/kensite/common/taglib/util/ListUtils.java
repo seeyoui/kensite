@@ -84,6 +84,8 @@ public class ListUtils {
 					}
 					sb.substring(0, sb.lastIndexOf(",")-1);
 					sb.append("];");
+				} else if(settings.indexOf("URL>") != -1) {
+					sb.append("var jsonObj = null;");
 				} else  {
 					sb.append("var jsonObj = [");
 					String[] settingsArr = settings.split("\\|");
@@ -100,7 +102,7 @@ public class ListUtils {
 				}
 			}
 			result.append(sb);
-			result.append("if(jsonObj == null) {return '';}var varArr = val.split(',');var result = '';for(var i=0; i<varArr.length; i++) {for(var obj in jsonObj) {if(jsonObj[obj].value == varArr[i]) {result += (jsonObj[obj].label+',');}}}return result.substring(0, result.length-1);},");
+			result.append("if(jsonObj == null) {return val;}var varArr = val.split(',');var result = '';for(var i=0; i<varArr.length; i++) {for(var obj in jsonObj) {if(jsonObj[obj].value == varArr[i]) {result += (jsonObj[obj].label+',');}}}return result.substring(0, result.length-1);},");
 		}
 		if(TableColumnConstants.DATEBOX.equals(tableColumn.getCategory())) {
 			result.append(" align:'center',");

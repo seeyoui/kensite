@@ -143,7 +143,7 @@ public class QueryUtils {
 			result.append("\" "+tableColumn.getHtmlInner()+"/>");
 		}
 		if(TableColumnConstants.DATEBOX.equals(tableColumn.getCategory())) {
-			result.append("<input id=\"sel_");
+			result.append("<input class=\"date-input\" id=\"sel_");
 			result.append(column);
 			result.append("\" name=\"sel_");
 			result.append(column);

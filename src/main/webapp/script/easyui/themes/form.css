@@ -20,6 +20,11 @@ form{
     width:160px;
 }
 
+.fitem .date-input{
+	height:22px;
+	border:1px solid #cdcdcd;
+}
+
 .fbody{
 	position:absolute;
 	top:20px;

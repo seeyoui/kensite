@@ -78,7 +78,7 @@ public class FormUtils {
 			if(StringConstant.NO.equals(tableColumn.getIsEdit())) {
 				result.append("editable:false,");
 			}
-			if(StringConstant.YES.equals(tableColumn.getIsNull())) {
+			if(StringConstant.NO.equals(tableColumn.getIsNull())) {
 				result.append("required:true,");
 			}
 			if(StringUtils.isNoneBlank(tableColumn.getValidType())) {
@@ -103,7 +103,7 @@ public class FormUtils {
 			if(StringConstant.NO.equals(tableColumn.getIsEdit())) {
 				result.append("editable:false,");
 			}
-			if(StringConstant.YES.equals(tableColumn.getIsNull())) {
+			if(StringConstant.NO.equals(tableColumn.getIsNull())) {
 				result.append("required:true,");
 			}
 			if(StringUtils.isNoneBlank(tableColumn.getValidType())) {
@@ -148,8 +148,9 @@ public class FormUtils {
 					String value = settingsArr[1];
 					String label = settingsArr[2];
 					result.append("valueField: '"+value+"',textField: '"+label+"',");
-					result.append("url:'/kensite"+url+"'");
+					result.append("url:'/park"+url+"'");
 				} else  {
+					result.append("valueField: 'value',textField: 'label',");
 					result.append("data: [");
 					String[] settingsArr = settings.split("\\|");
 					for(String set : settingsArr) {
@@ -172,7 +173,7 @@ public class FormUtils {
 			result.append("/>");
 		}
 		if(TableColumnConstants.DATEBOX.equals(tableColumn.getCategory())) {
-			result.append("<input id=\"");
+			result.append("<input class=\"date-input\" id=\"");
 			result.append(column);
 			result.append("\" name=\"");
 			result.append(column);

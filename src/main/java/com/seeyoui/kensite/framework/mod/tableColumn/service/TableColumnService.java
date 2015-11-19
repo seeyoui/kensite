@@ -106,8 +106,16 @@ public class TableColumnService extends BaseService {
 		} else {
 			modifyStr += tableColumn.getJdbcType();
 		}
-		if(tableColumn.getDefaultValue()!=null) {
-			modifyStr += " default '"+tableColumn.getDefaultValue()+"'";
+		if(tableColumn.getJdbcType().equals("NUMBER")) {
+			if(StringUtils.isNoneBlank(tableColumn.getDefaultValue())) {
+				modifyStr += " default "+tableColumn.getDefaultValue();
+			} else {
+				modifyStr += " default 0";
+			}
+		} else {
+			if(StringUtils.isNoneBlank(tableColumn.getDefaultValue())) {
+				modifyStr += " default '"+tableColumn.getDefaultValue()+"'";
+			}
 		}
 		if(tableColumn.getIsNull()!=null) {
 			if("Y".equals(tableColumn.getIsNull())) {
@@ -149,7 +157,11 @@ public class TableColumnService extends BaseService {
 			}
 		}
 		if(StringUtils.isNotBlank(tableColumn.getDefaultValue()) && !tableColumn.getDefaultValue().equals(tableColumnOld.getDefaultValue())) {
-			modifyStr += " default '"+tableColumn.getDefaultValue()+"'";
+			if(tableColumn.getJdbcType().equals("NUMBER")) {
+				modifyStr += " default "+tableColumn.getDefaultValue();
+			} else {
+				modifyStr += " default '"+tableColumn.getDefaultValue()+"'";
+			}
 		}
 		if(StringUtils.isNotBlank(tableColumn.getIsNull()) && !tableColumn.getIsNull().equals(tableColumnOld.getIsNull())) {
 			if("Y".equals(tableColumn.getIsNull())) {
