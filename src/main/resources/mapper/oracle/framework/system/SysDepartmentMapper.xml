@@ -31,11 +31,11 @@
 		</where>
 	</sql>
 	<sql id="orderBy">
-		ORDER BY t.sequence DESC 
+		ORDER BY t.sequence asc 
 	</sql>
 	
 	<!-- 根据ID查询单条数据 -->
-	<select id="findSysDepartmentById" resultType="com.seeyoui.kensite.framework.system.domain.SysDepartment">
+	<select id="findOne" resultType="com.seeyoui.kensite.framework.system.domain.SysDepartment">
 		SELECT
 		<include refid="tableColumns" />
 		FROM SYS_DEPARTMENT t
@@ -43,7 +43,7 @@
 	</select>
 	
 	<!-- 查询数据集合 -->
-	<select id="findSysDepartmentList" resultType="com.seeyoui.kensite.framework.system.domain.SysDepartment">
+	<select id="findList" resultType="com.seeyoui.kensite.framework.system.domain.SysDepartment">
 		select * from(select t.*,rownum rn from(
 			SELECT
 			<include refid="tableColumns"/>
@@ -53,24 +53,24 @@
 		) t where rownum &lt; = #{page}*#{rows}) where rn &gt; (#{page}-1)*#{rows}
 	</select>
 	
-	<!-- 查询数据总数 -->
-	<select id="findSysDepartmentListTotal" resultType="EasyUIDataGrid">
+	<!-- 查询数据集合 -->
+	<select id="findAll" resultType="com.seeyoui.kensite.framework.system.domain.SysDepartment">
 		SELECT
-		COUNT(id)total
+		<include refid="tableColumns"/>
+		FROM SYS_DEPARTMENT t
+		<include refid="whereStr"/>
+		<include refid="orderBy"/>
+	</select>
+	
+	<!-- 查询数据总数 -->
+	<select id="findTotal" resultType="Integer">
+		SELECT COUNT(1)
 		FROM SYS_DEPARTMENT t
 		<include refid="whereStr"/>
 	</select>
 	
-	<!-- 获取数据用于生成TREE -->
-	<select id="getTreeJson" resultType="com.seeyoui.kensite.framework.system.domain.SysDepartment" >  
-		SELECT 
-		<include refid="tableColumns" />
-		FROM sys_department t 
-		ORDER BY t.sequence ASC
-	</select>
-	
 	<!-- 数据新增 -->
-	<insert id="saveSysDepartment" parameterType="com.seeyoui.kensite.framework.system.domain.SysDepartment">
+	<insert id="save" parameterType="com.seeyoui.kensite.framework.system.domain.SysDepartment">
 		INSERT INTO SYS_DEPARTMENT (
 	    	parent_id,
 	    	sequence,
@@ -88,7 +88,7 @@
 	</insert>
 	
 	<!-- 数据修改 -->
-	<update id="updateSysDepartment" parameterType="com.seeyoui.kensite.framework.system.domain.SysDepartment">
+	<update id="update" parameterType="com.seeyoui.kensite.framework.system.domain.SysDepartment">
 		UPDATE SYS_DEPARTMENT
 		<set>
 	    	<if test="parentId !=null and parentId !=''">
@@ -109,7 +109,7 @@
 	</update>
 	
 	<!-- 数据删除 -->
-	<delete id="deleteSysDepartment">
+	<delete id="delete">
 		DELETE FROM SYS_DEPARTMENT WHERE id IN 
 		<foreach item="listId" collection="list"
 			open="(" separator="," close=")">

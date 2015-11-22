@@ -22,44 +22,44 @@ public interface SysDepartmentMapper {
 	 * @param id
 	 * @return
 	 */
-	public SysDepartment findSysDepartmentById(String id);
+	public SysDepartment findOne(String id);
 	
 	/**
 	 * 查询数据集合
 	 * @param sysDepartment
 	 * @return
 	 */
-	public List<SysDepartment> findSysDepartmentList(SysDepartment sysDepartment);
+	public List<SysDepartment> findList(SysDepartment sysDepartment);
+	
+	/**
+	 * 查询数据集合
+	 * @param sysDepartment
+	 * @return
+	 */
+	public List<SysDepartment> findAll(SysDepartment sysDepartment);
 	
 	/**
 	 * 查询数据总数
-	 * @param userinfo
+	 * @param sysDepartment
 	 * @return
 	 */
-	public EasyUIDataGrid findSysDepartmentListTotal(SysDepartment sysDepartment);
-	
-	/**
-	 * 获取生成TREE Json的
-	 * @return
-	 * @throws CRUDException
-	 */
-	public List<SysDepartment> getTreeJson();
+	public Integer findTotal(SysDepartment sysDepartment);
 	
 	/**
 	 * 数据新增
 	 * @param sysDepartment
 	 */
-	public void saveSysDepartment(SysDepartment sysDepartment);
+	public void save(SysDepartment sysDepartment);
 	
 	/**
 	 * 数据修改
 	 * @param sysDepartment
 	 */
-	public void updateSysDepartment(SysDepartment sysDepartment);
+	public void update(SysDepartment sysDepartment);
 	
 	/**
 	 * 数据删除
 	 * @param listId
 	 */
-	public void deleteSysDepartment(List<String> listId);
+	public void delete(List<String> listId);
 }

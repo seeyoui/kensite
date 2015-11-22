@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -54,11 +55,11 @@ public class SysDepartmentController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequiresPermissions("sysDepartment:view")
-	@RequestMapping(value = "/showPageList")
+	@RequestMapping(value = "/{page}")
 	public ModelAndView showSysDepartmentPageList(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap) throws Exception {
-		return new ModelAndView("framework/system/sysDepartment", modelMap);
+			ModelMap modelMap, @PathVariable String page) throws Exception {
+		return new ModelAndView("framework/system/department/"+page, modelMap);
 	}
 	
 	/**
@@ -69,17 +70,34 @@ public class SysDepartmentController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequiresPermissions("sysDepartment:select")
-	@RequestMapping(value = "/getListData", method=RequestMethod.POST)
+	@RequestMapping(value = "/list/data", method=RequestMethod.POST)
 	@ResponseBody
-	public String getListData(HttpSession session,
+	public Object findList(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, SysDepartment sysDepartment) throws Exception{
-		List<SysDepartment> sysDepartmentList = sysDepartmentService.findSysDepartmentList(sysDepartment);
-		EasyUIDataGrid eudg = sysDepartmentService.findSysDepartmentListTotal(sysDepartment);
+		List<SysDepartment> sysDepartmentList = sysDepartmentService.findList(sysDepartment);
+		Integer total = sysDepartmentService.findTotal(sysDepartment);
+		EasyUIDataGrid eudg = new EasyUIDataGrid();
 		eudg.setRows(sysDepartmentList);
-		JSONObject jsonObj = JSONObject.fromObject(eudg);
-		RequestResponseUtil.putResponseStr(session, response, request, jsonObj);
-		return null;
+		eudg.setTotal(String.valueOf(total));
+		return eudg;
+	}
+	
+	/**
+	 * 获取列表展示数据
+	 * @param modelMap
+	 * @param sysDepartment
+	 * @return
+	 * @throws Exception
+	 */
+	@RequiresPermissions("sysDepartment:select")
+	@RequestMapping(value = "/list/all", method=RequestMethod.POST)
+	@ResponseBody
+	public Object findAll(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap, SysDepartment sysDepartment) throws Exception{
+		List<SysDepartment> sysDepartmentList = sysDepartmentService.findAll(sysDepartment);
+		return sysDepartmentList;
 	}
 	
 	/**
@@ -90,8 +108,8 @@ public class SysDepartmentController extends BaseController {
 	@RequiresUser
 	@RequestMapping(value = "/getTreeJson", method=RequestMethod.POST)
 	@ResponseBody
-	public String getTreeJson() throws Exception {
-		List<SysDepartment> mList = sysDepartmentService.getTreeJson();
+	public Object getTreeJson() throws Exception {
+		List<SysDepartment> mList = sysDepartmentService.findAll(null);
 		List<TreeJson> tList = new ArrayList<TreeJson>();
 		for(int i=0; i<mList.size(); i++) {
 			TreeJson tj = new TreeJson();
@@ -102,9 +120,10 @@ public class SysDepartmentController extends BaseController {
 		}
 		TreeJson root = new TreeJson();
 		root.setId(StringConstant.ROOT_ID_32);
+		root.setText("系统部门");
 		TreeJson.getTree(tList, root);
-		JSONArray jsonObj = JSONArray.fromObject(root.getChildren());
-		return jsonObj.toString();
+		JSONArray jsonObj = JSONArray.fromObject(root);
+		return jsonObj;
 	}
 	
 	/**
@@ -115,16 +134,16 @@ public class SysDepartmentController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequiresPermissions("sysDepartment:insert")
-	@RequestMapping(value = "/saveByAdd", method=RequestMethod.POST)
+	@RequestMapping(value = "/save", method=RequestMethod.POST)
 	@ResponseBody
-	public String saveSysDepartmentByAdd(HttpSession session,
+	public String save(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, SysDepartment sysDepartment) throws Exception{
 		if (!beanValidator(modelMap, sysDepartment)){
 			RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
 			return null;
 		}
-		sysDepartmentService.saveSysDepartment(sysDepartment);
+		sysDepartmentService.save(sysDepartment);
 		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}
@@ -137,16 +156,16 @@ public class SysDepartmentController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequiresPermissions("sysDepartment:update")
-	@RequestMapping(value = "/saveByUpdate", method=RequestMethod.POST)
+	@RequestMapping(value = "/update", method=RequestMethod.POST)
 	@ResponseBody
-	public String saveSysDepartmentByUpdate(HttpSession session,
+	public String update(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, SysDepartment sysDepartment) throws Exception{
 		if (!beanValidator(modelMap, sysDepartment)){
 			RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
 			return null;
 		}
-		sysDepartmentService.updateSysDepartment(sysDepartment);
+		sysDepartmentService.update(sysDepartment);
 		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}
@@ -163,9 +182,9 @@ public class SysDepartmentController extends BaseController {
 	@ResponseBody
 	public String delete(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap, String delDataId) throws Exception {
-		List<String> listId = Arrays.asList(delDataId.split(","));
-		sysDepartmentService.deleteSysDepartment(listId);
+			ModelMap modelMap, String id) throws Exception {
+		List<String> listId = Arrays.asList(id.split(","));
+		sysDepartmentService.delete(listId);
 		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}

@@ -32,8 +32,8 @@ public class SysDepartmentService extends BaseService {
 	 * @return
 	 * @throws CRUDException
 	 */
-	public SysDepartment findSysDepartmentById(String id) throws CRUDException{
-		return sysDepartmentMapper.findSysDepartmentById(id);
+	public SysDepartment findOne(String id) throws CRUDException{
+		return sysDepartmentMapper.findOne(id);
 	}
 	
 	/**
@@ -42,27 +42,28 @@ public class SysDepartmentService extends BaseService {
 	 * @return
 	 * @throws CRUDException
 	 */
-	public List<SysDepartment> findSysDepartmentList(SysDepartment sysDepartment) throws CRUDException {
-		return sysDepartmentMapper.findSysDepartmentList(sysDepartment);
+	public List<SysDepartment> findList(SysDepartment sysDepartment) throws CRUDException {
+		return sysDepartmentMapper.findList(sysDepartment);
+	}
+	
+	/**
+	 * 查询数据集合
+	 * @param sysDepartment
+	 * @return
+	 * @throws CRUDException
+	 */
+	public List<SysDepartment> findAll(SysDepartment sysDepartment) throws CRUDException {
+		return sysDepartmentMapper.findAll(sysDepartment);
 	}
 	
 	/**
 	 * 查询数据总数
-	 * @param userinfo
+	 * @param sysDepartment
 	 * @return
 	 * @throws CRUDException
 	 */
-	public EasyUIDataGrid findSysDepartmentListTotal(SysDepartment sysDepartment) throws CRUDException {
-		return sysDepartmentMapper.findSysDepartmentListTotal(sysDepartment);
-	}
-	
-	/**
-	 * 获取生成TREE Json的
-	 * @return
-	 * @throws CRUDException
-	 */
-	public List<SysDepartment> getTreeJson() throws CRUDException {
-		return sysDepartmentMapper.getTreeJson();
+	public Integer findTotal(SysDepartment sysDepartment) throws CRUDException {
+		return sysDepartmentMapper.findTotal(sysDepartment);
 	}
 	
 	/**
@@ -70,9 +71,9 @@ public class SysDepartmentService extends BaseService {
 	 * @param sysDepartment
 	 * @throws CRUDException
 	 */
-	public void saveSysDepartment(SysDepartment sysDepartment) throws CRUDException{
-		sysDepartment.setId(GeneratorUUID.getId());
-		sysDepartmentMapper.saveSysDepartment(sysDepartment);
+	public void save(SysDepartment sysDepartment) throws CRUDException{
+		sysDepartment.preInsert();
+		sysDepartmentMapper.save(sysDepartment);
 	}
 	
 	/**
@@ -80,8 +81,9 @@ public class SysDepartmentService extends BaseService {
 	 * @param sysDepartment
 	 * @throws CRUDException
 	 */
-	public void updateSysDepartment(SysDepartment sysDepartment) throws CRUDException{
-		sysDepartmentMapper.updateSysDepartment(sysDepartment);			
+	public void update(SysDepartment sysDepartment) throws CRUDException{
+		sysDepartment.preUpdate();
+		sysDepartmentMapper.update(sysDepartment);			
 	}
 	
 	/**
@@ -89,8 +91,8 @@ public class SysDepartmentService extends BaseService {
 	 * @param listId
 	 * @throws CRUDException
 	 */
-	public void deleteSysDepartment(List<String> listId) throws CRUDException {
-		sysDepartmentMapper.deleteSysDepartment(listId);
+	public void delete(List<String> listId) throws CRUDException {
+		sysDepartmentMapper.delete(listId);
 	}
 	
 }
