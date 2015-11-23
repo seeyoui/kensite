@@ -99,4 +99,17 @@ public final class StringConstant {
 		ACCOUNT_ROLE_STATE.put(STATE_UNRELATED, "未关联");
 		
 	}
+	
+	/**
+	 * 页面获取常量
+	 * @see ${fns:getConst('YES')}
+	 */
+	public static Object getConst(String field) {
+		try {
+			return StringConstant.class.getField(field).get(null);
+		} catch (Exception e) {
+			// 异常代表无配置，这里什么也不做
+		}
+		return null;
+	}
 }

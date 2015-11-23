@@ -16,5 +16,6 @@
 	<ks:formTag table="T_TEST_W" column="SEX"/>
 	<ks:formTag table="T_TEST_W" column="DESCRIBE"/>
 	<ks:formTag table="T_TEST_W" column="ISDEL"/>
+	${ksfn:getDate("yyyy-MM-dd")}
 </body>
 </html>

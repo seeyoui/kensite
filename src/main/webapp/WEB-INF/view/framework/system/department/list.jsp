@@ -9,12 +9,40 @@
 	<%@ include file="/WEB-INF/view/taglib/header.jsp" %>
 	<%@ include file="/WEB-INF/view/taglib/easyui.jsp" %>
 	<%@ include file="/WEB-INF/view/taglib/layer.jsp" %>
+	<%@ include file="/WEB-INF/view/taglib/zTree.jsp" %>
+	<script type="text/javascript">
+		var setting = {
+			async: {
+				enable: true,
+				url: "${ctx}/sysDepartment/list/all"
+			},
+			data: {
+				key: {
+					name: "name"
+				},
+				simpleData: {
+					enable: true,
+					idKey: 'id',
+					pIdKey: 'parentId',
+					rootPId: 'ffffffffffffffffffffffffffffffff'
+				}
+			},
+			callback: {
+				onClick: onClick
+			}
+		};
+		function onClick(event, treeId, treeNode, clickFlag) {
+			$('#sel_parentId').val(treeNode.id);
+			selectData();
+		}
+	</script>
   </head>
   <body>
   
   	<div style="position:absolute;top:0px;left:0px;right:0px;bottom:0px;">
   		<div style="position:absolute;top:0px;bottom:0px;width:200px;">
-        	<ul id="departmentTree" class="easyui-tree" url="${ctx}/sysDepartment/getTreeJson"></ul>
+  			<ul id=departmentTree class="ztree"></ul>
+        	<%-- <ul id="departmentTree" class="easyui-tree" url="${ctx}/sysDepartment/getTreeJson"></ul> --%>
         </div>
 		<div style="position:absolute;top:0px;left:200px;right:0px;bottom:0px;">
 		    <table id="dataList" title="" class="easyui-datagrid" style="width:100%;height:100%"
@@ -40,7 +68,7 @@
 		        <shiro:hasPermission name="sysDepartment:delete">
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyInfo()">删除</a>
 		        </shiro:hasPermission>
-				<input id="sel_parentId" name="sel_parentId" type="hidden" value=""/>
+				<input id="sel_parentId" name="sel_parentId" type="hidden" value="<%=StringConstant.ROOT_ID_32%>"/>
 				部门名称<input id="sel_name" name="sel_name" class="easyui-textbox" data-options=""/>
 				部门编号<input id="sel_code" name="sel_code" class="easyui-textbox" data-options=""/>
 			    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="selectData()">查询</a>
@@ -49,22 +77,7 @@
     </div>
     <script type="text/javascript">
 	    $(document).ready(function(){
-	    	$('#sel_parentId').val("<%=StringConstant.ROOT_ID_32%>");
-	    	$("#departmentTree").tree({
-	    		onClick: function(node){
-	    			$('#sel_parentId').val(node.id);
-	    			selectData();
-	    		},
-	    		onLoadSuccess: function(node, data){
-	    			$('#departmentTree').tree('collapseAll');
-	    			var nodeId = $('#sel_parentId').val();
-	    			if(nodeId == "") {
-	    				return;
-	    			}
-	    			var node = $('#departmentTree').tree('find', nodeId);
-	    			$('#departmentTree').tree('expandTo', node.target);
-	    		}
-	    	});
+			$.fn.zTree.init($("#departmentTree"), setting);
 	    	$('#dataList').datagrid({
 	    		url:'${ctx}/sysDepartment/list/data',
 	    		queryParams: {

@@ -4,6 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <%@ taglib prefix="ks" uri="/WEB-INF/taglib/componentTag.tld" %>
+<%@ taglib prefix="ksfn" uri="/WEB-INF/tlds/fns.tld" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <c:set var="ctx_script" value="${pageContext.request.contextPath}/script"/>
 <c:set var="ctx_activiti" value="${pageContext.request.contextPath}/act"/>
