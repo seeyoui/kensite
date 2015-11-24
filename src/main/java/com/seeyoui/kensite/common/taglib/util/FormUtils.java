@@ -168,16 +168,26 @@ public class FormUtils {
 			}
 			if(dataCount <= 5) {
 				result.append(",panelHeight:'auto',");
+			} else {
+				result.append(",panelHeight:'130',");
 			}
 			result.append("\" "+tableColumn.getHtmlInner());
 			result.append("/>");
 		}
 		if(TableColumnConstants.DATEBOX.equals(tableColumn.getCategory())) {
-			result.append("<input class=\"date-input\" id=\"");
+			result.append("<input class=\"date-input easyui-validatebox\" id=\"");
 			result.append(column);
 			result.append("\" name=\"");
 			result.append(column);
 			result.append("\" "+tableColumn.getHtmlInner());
+			result.append("\" data-options=\"tipPosition:'bottom',");
+			if(StringConstant.NO.equals(tableColumn.getIsEdit())) {
+				result.append("editable:false,");
+			}
+			if(StringConstant.NO.equals(tableColumn.getIsNull())) {
+				result.append("required:true,");
+			}
+			result.append("\"");
 			if(StringUtils.isNoneBlank(tableColumn.getSettings())) {
 				result.append(" onClick=\"WdatePicker({");
 				result.append(tableColumn.getSettings());

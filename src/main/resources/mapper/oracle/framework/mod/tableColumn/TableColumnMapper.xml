@@ -47,7 +47,7 @@
 				AND T.UPDATE_USER LIKE '%'||#{updateUser}||'%'
 			</if>
 			<if test="tableName != null and tableName != ''">
-				AND T.TABLE_NAME LIKE '%'||#{tableName}||'%'
+				AND T.TABLE_NAME LIKE #{tableName}
 			</if>
 			<if test="name != null and name != ''">
 				AND T.NAME LIKE '%'||#{name}||'%'
