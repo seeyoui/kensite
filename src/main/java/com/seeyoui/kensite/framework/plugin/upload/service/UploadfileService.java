@@ -74,12 +74,14 @@ public class UploadfileService extends BaseService {
 	 * 数据新增
 	 * @param uploadfile
 	 * @throws CRUDException
+	 * @throws IOException 
+	 * @throws IllegalStateException 
 	 */
-	public Uploadfile uploadfile(Uploadfile uploadfile, HttpServletRequest request) throws CRUDException{
+	public Uploadfile upload(Uploadfile uploadfile, HttpServletRequest request) throws CRUDException {
 		String ctxPath = request.getSession().getServletContext().getRealPath("/"); 
-		MultipartResolver resolver = new CommonsMultipartResolver(request.getSession().getServletContext());
-		MultipartHttpServletRequest multipartRequest = resolver.resolveMultipart(request);
-//		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+//		MultipartResolver resolver = new CommonsMultipartResolver(request.getSession().getServletContext());
+//		MultipartHttpServletRequest multipartRequest = resolver.resolveMultipart(request);
+		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 		Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
 		if (!ctxPath.endsWith(File.separator)) {
 			ctxPath = ctxPath + File.separator;
@@ -97,7 +99,7 @@ public class UploadfileService extends BaseService {
 		for (Map.Entry<String, MultipartFile> entity : fileMap.entrySet()) {    
             // 上传文件名 
 			Uploadfile uploadFile = new Uploadfile();
-            MultipartFile mf = entity.getValue();    
+            MultipartFile mf = entity.getValue();
             String fileName = mf.getOriginalFilename();
 //            String fName = fileName.indexOf(".") != -1 ? fileName.substring(0, fileName.lastIndexOf(".")) : fileName;
             String suffix = fileName.indexOf(".") != -1 ? fileName.substring(fileName.lastIndexOf("."), fileName.length()) : null;
@@ -116,14 +118,67 @@ public class UploadfileService extends BaseService {
             	if(!(url==null?"temp":url).startsWith("temp")) {
             		uploadfile.preInsert();
             		uploadfileMapper.saveUploadfile(uploadFile);
-            	} else {
-            		UUID = "";
             	}
                 FileCopyUtils.copy(mf.getBytes(), realFile);
                 return uploadFile;
 	        } catch (IOException e) {  
 	            e.printStackTrace();  
 	        }
+		}
+        return null;
+		
+	}
+	
+	/**
+	 * 数据新增
+	 * @param uploadfile
+	 * @throws CRUDException
+	 * @throws IOException 
+	 * @throws IllegalStateException 
+	 */
+	public Uploadfile uploadFile(MultipartFile file, Uploadfile uploadfile, HttpServletRequest request) throws CRUDException {
+		String ctxPath = request.getSession().getServletContext().getRealPath("/"); 
+		if (!ctxPath.endsWith(File.separator)) {
+			ctxPath = ctxPath + File.separator;
+		}
+		FileUtils.createDirectory(ctxPath);
+		String url = uploadfile.getUrl();
+		if(url==null || "".equals(url)) {
+			url = "temp";
+		}
+		ctxPath = ctxPath + StringConstant.UPLOAD_FILE_URL + url;
+		if (!ctxPath.endsWith(File.separator)) {
+			ctxPath = ctxPath + File.separator;
+		}
+		FileUtils.createDirectory(ctxPath);
+		try {
+			if (file != null) {
+				String fileName = file.getOriginalFilename();
+				String suffix = fileName.indexOf(".") != -1 ? fileName.substring(fileName.lastIndexOf("."), fileName.length()) : null;
+				String UUID = GeneratorUUID.getId();
+				String newFileName = UUID + suffix;// 构成新文件名。
+				File realFile = new File(ctxPath + newFileName);    
+				Uploadfile uploadFile = new Uploadfile();
+	            try {
+	            	uploadFile.setId(UUID);
+	                uploadFile.setViewname(fileName);
+	                uploadFile.setRealname(newFileName);
+	                String fileUrl = StringConstant.UPLOAD_FILE_URL + (url==null?"":url);
+	                uploadFile.setUrl(fileUrl.replaceAll("\\\\", "/"));
+	                uploadFile.setRealurl(ctxPath.replaceAll("\\\\", "/"));
+	                uploadFile.setSuffix(suffix);
+	                uploadFile.setFilesize(file.getSize()+"");
+	            	if(!(url==null?"temp":url).startsWith("temp")) {
+	            		uploadfile.preInsert();
+	            		uploadfileMapper.saveUploadfile(uploadFile);
+	            	}
+					file.transferTo(realFile);
+	                return uploadFile;
+		        } catch (IOException e) {  
+		            e.printStackTrace();  
+		        }
+			}
+		} catch (Exception e) {
 		}
         return null;
 		

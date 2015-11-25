@@ -20,6 +20,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.seeyoui.kensite.common.base.controller.BaseController;
@@ -90,13 +91,30 @@ public class UploadfileController extends BaseController {
 	 */
 	@RequestMapping(value = "/upload", method=RequestMethod.POST)
 	@ResponseBody
-	public String uploadfile(HttpSession session,
+	public Object uploadfile(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, Uploadfile uploadfile) throws Exception{
-		Uploadfile uf = uploadfileService.uploadfile(uploadfile, request);
+		Uploadfile uf = uploadfileService.upload(uploadfile, request);
 		JSONObject jsonObject = JSONObject.fromObject(uf);
 		RequestResponseUtil.putResponseStr(session, response, request, jsonObject.toString());
 		return null;
+	}
+	
+	/**
+	 * 保存新增的数据
+	 * @param modelMap
+	 * @param uploadfile
+	 * @param file
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/uploadFile", method=RequestMethod.POST)
+	@ResponseBody
+	public Object uploadFile(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap, MultipartFile file, Uploadfile uploadfile) throws Exception{
+		Uploadfile uf = uploadfileService.uploadFile(file, uploadfile, request);
+		return uf;
 	}
 	
 	/**
