@@ -192,42 +192,43 @@ ${column.columnNameLower}:sel_${column.columnNameLower}
                 	layer.close(loadi);
                     cleanErrMsg();
                 	data = eval('(' + info + ')');
-                    if (data.success=="<%=StringConstant.TRUE%>"){
-                        layer.msg("操作成功！", {offset: 'rb',icon: 6,shift: 8,time: layerMsgTime});
+                    if (data.success==TRUE){
+	                	layer.msg("操作成功！", {offset: 'rb',icon: 6,shift: 8,time: layerMsgTime});
                 		$('#dataWin').window('close'); 
-                		reloadData();
-                    } else {
+	            		reloadData();
+	                } else {
 	                    layer.msg("操作失败！", {offset: 'rb',icon: 5,shift: 8,time: layerMsgTime});
 	                    renderErrMsg(data.message);
-                    }
+	                }
                 }
             });
         }
         function destroyInfo(){
             var row = $('#dataList').datagrid('getSelected');
             if (row){
-                $.messager.confirm('确认','你确定删除该记录吗？',function(r){
-                    if (r){
-                    	$.ajax({
-							type: "post",
-							url: '${"${"}ctx${"}"}/${moduleC}${table.classNameFirstLower}/delete',
-							data: {id:row.id},
-							dataType: 'json',
-							beforeSend: function(XMLHttpRequest){
-								loadi = layer.load(2, {time: layerLoadMaxTime});
-							},
-							success: function(data, textStatus){
-								layer.close(loadi);
-								if (data.success=="<%=StringConstant.TRUE%>"){
-			                        layer.msg("操作成功！", {offset: 'rb',icon: 6,shift: 8,time: layerMsgTime});
-									reloadData();
-			                    } else {
-				                    layer.msg("操作失败！", {offset: 'rb',icon: 5,shift: 8,time: layerMsgTime});
-			                    }
-							}
-						});
-                    }
-                });
+            	layer.confirm('是否确认删除？', {
+            	    btn: ['确定','取消'] //按钮
+            	}, function(){
+            		$.ajax({
+						type: "post",
+						url: '${"${"}ctx${"}"}/${moduleC}${table.classNameFirstLower}/delete',
+						data: {id:row.id},
+						dataType: 'json',
+						beforeSend: function(XMLHttpRequest){
+							loadi = layer.load(2, {time: layerLoadMaxTime});
+						},
+						success: function(data, textStatus){
+							layer.close(loadi);
+							if (data.success==TRUE){
+		                        layer.msg("操作成功！", {offset: 'rb',icon: 6,shift: 8,time: layerMsgTime});
+								reloadData();
+		                    } else {
+			                    layer.msg("操作失败！", {offset: 'rb',icon: 5,shift: 8,time: layerMsgTime});
+		                    }
+						}
+					});
+            	}, function(){
+            	});
             }
         }
     </script>
