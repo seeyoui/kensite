@@ -123,7 +123,7 @@
                 success: function(info){
                     cleanErrMsg();
                 	data = eval('(' + info + ')');
-                    if (data.success=="<%=StringConstant.TRUE%>"){
+                    if (data.success==TRUE){
                         layer.msg("操作成功！", {offset: 'rb',icon: 6,shift: 8,time: layerMsgTime});
                 		$('#dataWin').window('close'); 
                 		reloadData();
@@ -138,52 +138,58 @@
         function destroyInfo(){
             var row = $('#dataList').datagrid('getSelected');
             if (row){
-                $.messager.confirm('确认','你确定删除该记录吗？',function(r){
-                    if (r){
-                    	$.ajax({
-							type: "post",
-							url: '${ctx}/sys/skins/delete',
-							data: {id:row.id},
-							dataType: 'json',
-							beforeSend: function(XMLHttpRequest){
-							},
-							success: function(data, textStatus){
-								if (data.success=="<%=StringConstant.TRUE%>"){
-			                        layer.msg("操作成功！", {offset: 'rb',icon: 6,shift: 8,time: layerMsgTime});
-									reloadData();
-			                    } else {
-				                    layer.msg("操作失败！", {offset: 'rb',icon: 5,shift: 8,time: layerMsgTime});
-			                    }
-							}
-						});
-                    }
-                });
+            	layer.confirm('是否确认删除？', {
+            	    btn: ['确定','取消'] //按钮
+            	}, function(){
+            		$.ajax({
+						type: "post",
+						url: '${ctx}/sys/skins/delete',
+						data: {id:row.id},
+						dataType: 'json',
+						beforeSend: function(XMLHttpRequest){
+							loadi = layer.load(2, {time: layerLoadMaxTime});
+						},
+						success: function(data, textStatus){
+							layer.close(loadi);
+							if (data.success==TRUE){
+		                        layer.msg("操作成功！", {offset: 'rb',icon: 6,shift: 8,time: layerMsgTime});
+								reloadData();
+		                    } else {
+			                    layer.msg("操作失败！", {offset: 'rb',icon: 5,shift: 8,time: layerMsgTime});
+		                    }
+						}
+					});
+            	}, function(){
+            	});
             }
         }
         
         function choseSkins() {
         	var row = $('#dataList').datagrid('getSelected');
             if (row){
-                $.messager.confirm('确认','你确定将该皮肤设置为系统默认皮肤吗？',function(r){
-                    if (r){
-                    	$.ajax({
-							type: "post",
-							url: '${ctx}/sys/skins/chose',
-							data: {id:row.id},
-							dataType: 'json',
-							beforeSend: function(XMLHttpRequest){
-							},
-							success: function(data, textStatus){
-								if (data.success=="<%=StringConstant.TRUE%>"){
-			                        layer.msg("设置成功！", {time: layerMsgTime});
-									reloadData();
-			                    } else {
-				                    layer.msg("设置失败！", {time: layerMsgTime});
-			                    }
-							}
-						});
-                    }
-                });
+            	layer.confirm('你确定将该皮肤设置为系统默认皮肤吗？', {
+            	    btn: ['确定','取消'] //按钮
+            	}, function(){
+            		$.ajax({
+						type: "post",
+						url: '${ctx}/sys/skins/chose',
+						data: {id:row.id},
+						dataType: 'json',
+						beforeSend: function(XMLHttpRequest){
+							loadi = layer.load(2, {time: layerLoadMaxTime});
+						},
+						success: function(data, textStatus){
+							layer.close(loadi);
+							if (data.success==TRUE){
+		                        layer.msg("设置成功！", {offset: 'rb',icon: 6,shift: 8,time: layerMsgTime});
+								reloadData();
+		                    } else {
+			                    layer.msg("设置失败！", {offset: 'rb',icon: 5,shift: 8,time: layerMsgTime});
+		                    }
+						}
+					});
+            	}, function(){
+            	});
             }
         }
     </script>

@@ -20,6 +20,7 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -50,10 +51,10 @@ public class ModDBController extends BaseController {
 	 * @throws Exception
 	 */
 //	@RequiresPermissions("sys:db:view")
-	@RequestMapping(value = "/showPageList")
+	@RequestMapping(value = "/{page}")
 	public ModelAndView showTablePageList(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap) throws Exception {
-		return new ModelAndView("framework/mod/db/db", modelMap);
+			ModelMap modelMap, @PathVariable String page) throws Exception {
+		return new ModelAndView("framework/mod/db/"+page, modelMap);
 	}
 }

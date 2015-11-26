@@ -15,7 +15,7 @@ public class TagCacheUtils {
 		if (tableColumn!=null){
 			tc = (TableColumn)CacheUtils.get(TableColumnConstants.CACHE_COLUMN+TableColumnConstants.CACHE_SPLIT+tableColumn.getTableName()+TableColumnConstants.CACHE_SPLIT+tableColumn.getName());
 			if (tc == null){
-				tc = tableColumnMapper.findTableColumn(tableColumn);
+				tc = tableColumnMapper.findOne(tableColumn);
 				CacheUtils.put(TableColumnConstants.CACHE_COLUMN+TableColumnConstants.CACHE_SPLIT+tableColumn.getTableName()+TableColumnConstants.CACHE_SPLIT+tableColumn.getName(), tc);
 			}
 		}

@@ -39,8 +39,8 @@ public class TableService extends BaseService {
 	 * @return
 	 * @throws CRUDException
 	 */
-	public Table findTableById(String id) throws CRUDException{
-		return tableMapper.findTableById(id);
+	public Table findOne(String id) throws CRUDException{
+		return tableMapper.findOne(id);
 	}
 	
 	/**
@@ -49,8 +49,8 @@ public class TableService extends BaseService {
 	 * @return
 	 * @throws CRUDException
 	 */
-	public List<Table> findTableList(Table table) throws CRUDException {
-		return tableMapper.findTableList(table);
+	public List<Table> findList(Table table) throws CRUDException {
+		return tableMapper.findList(table);
 	}
 	
 	/**
@@ -59,8 +59,8 @@ public class TableService extends BaseService {
 	 * @return
 	 * @throws CRUDException
 	 */
-	public List<Table> findAllTableList(Table table) throws CRUDException {
-		return tableMapper.findAllTableList(table);
+	public List<Table> findAll(Table table) throws CRUDException {
+		return tableMapper.findAll(table);
 	}
 	
 	/**
@@ -69,18 +69,8 @@ public class TableService extends BaseService {
 	 * @return
 	 * @throws CRUDException
 	 */
-	public EasyUIDataGrid findTableListTotal(Table table) throws CRUDException {
-		return tableMapper.findTableListTotal(table);
-	}
-	
-	/**
-	 * 查询数据总数
-	 * @param table
-	 * @return
-	 * @throws CRUDException
-	 */
-	public int findTableTotal(Table table) throws CRUDException {
-		return tableMapper.findTableTotal(table);
+	public int findTotal(Table table) throws CRUDException {
+		return tableMapper.findTotal(table);
 	}
 	
 	/**
@@ -88,9 +78,9 @@ public class TableService extends BaseService {
 	 * @param table
 	 * @throws CRUDException
 	 */
-	public void saveTable(Table table) throws CRUDException{
+	public void save(Table table) throws CRUDException{
 		table.preInsert();
-		tableMapper.saveTable(table);
+		tableMapper.save(table);
 		dbMapper.createTable(table);
 		dbMapper.commentTable(table);
 		TableColumn column = new TableColumn();
@@ -130,18 +120,18 @@ public class TableService extends BaseService {
 	 * @param table
 	 * @throws CRUDException
 	 */
-	public void updateTable(Table table) throws CRUDException{
-		Table tableOld = tableMapper.findTableById(table.getId());
+	public void update(Table table) throws CRUDException{
+		Table tableOld = tableMapper.findOne(table.getId());
 		table.preUpdate();
-		tableMapper.updateTable(table);
+		tableMapper.update(table);
 		if(table.getName()!=null && !table.getName().equals(tableOld.getName())) {
 			table.setOldName(tableOld.getName());
 			dbMapper.renameTable(table);
-			tableMapper.updateTableFk(table);
+			tableMapper.updateFk(table);
 			TableColumn tableColumn = new TableColumn();
 			tableColumn.setOldTableName(tableOld.getName());
 			tableColumn.setTableName(table.getName());
-			tableColumnMapper.renameTableName(tableColumn);
+			tableColumnMapper.rename(tableColumn);
 		}
 		if(table.getComments()!=null && !table.getComments().equals(tableOld.getComments())) {
 			dbMapper.commentTable(table);
@@ -153,16 +143,16 @@ public class TableService extends BaseService {
 	 * @param listId
 	 * @throws CRUDException
 	 */
-	public void deleteTable(List<String> listId) throws CRUDException {
+	public void delete(List<String> listId) throws CRUDException {
 		for(String id : listId) {
-			Table table = tableMapper.findTableById(id);
+			Table table = tableMapper.findOne(id);
 			TableColumn column = new TableColumn();
 			column.setTableName(table.getName());
 			column.setName("ID");
 			dbMapper.dropPrimaryKey(column);
 			dbMapper.dropTable(table);
 		}
-		tableMapper.deleteTable(listId);
+		tableMapper.delete(listId);
 	}
 	
 }

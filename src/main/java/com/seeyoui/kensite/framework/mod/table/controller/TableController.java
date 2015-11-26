@@ -49,21 +49,6 @@ public class TableController extends BaseController {
 	private DBService dbService;
 	
 	/**
-	 * 展示列表页面
-	 * @param modelMap
-	 * @param module
-	 * @return
-	 * @throws Exception
-	 */
-	@RequiresPermissions("sys:table:view")
-	@RequestMapping(value = "/showPageList")
-	public ModelAndView showTablePageList(HttpSession session,
-			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap) throws Exception {
-		return new ModelAndView("framework/mod/table/table", modelMap);
-	}
-	
-	/**
 	 * 获取列表展示数据
 	 * @param modelMap
 	 * @param table
@@ -71,17 +56,17 @@ public class TableController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequiresPermissions("sys:table:select")
-	@RequestMapping(value = "/getListData", method=RequestMethod.POST)
+	@RequestMapping(value = "/list/data", method=RequestMethod.POST)
 	@ResponseBody
-	public String getListData(HttpSession session,
+	public Object listData(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, Table table) throws Exception{
-		List<Table> tableList = tableService.findTableList(table);
-		EasyUIDataGrid eudg = tableService.findTableListTotal(table);
+		List<Table> tableList = tableService.findList(table);
+		int total = tableService.findTotal(table);
+		EasyUIDataGrid eudg = new EasyUIDataGrid();
 		eudg.setRows(tableList);
-		JSONObject jsonObj = JSONObject.fromObject(eudg);
-		RequestResponseUtil.putResponseStr(session, response, request, jsonObj);
-		return null;
+		eudg.setTotal(String.valueOf(total));
+		return eudg;
 	}
 	
 	/**
@@ -92,15 +77,13 @@ public class TableController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequiresPermissions("sys:table:select")
-	@RequestMapping(value = "/getAllListData", method=RequestMethod.POST)
+	@RequestMapping(value = "/list/all", method=RequestMethod.POST)
 	@ResponseBody
-	public String getAllListData(HttpSession session,
+	public Object listAll(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, Table table) throws Exception{
-		List<Table> tableList = tableService.findAllTableList(table);
-		JSONArray jsonObj = JSONArray.fromObject(tableList);
-		RequestResponseUtil.putResponseStr(session, response, request, jsonObj);
-		return null;
+		List<Table> tableList = tableService.findAll(table);
+		return tableList;
 	}
 	
 	/**
@@ -111,9 +94,9 @@ public class TableController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequiresPermissions("sys:table:insert")
-	@RequestMapping(value = "/saveByAdd", method=RequestMethod.POST)
+	@RequestMapping(value = "/save", method=RequestMethod.POST)
 	@ResponseBody
-	public String saveTableByAdd(HttpSession session,
+	public String save(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, Table table) throws Exception{
 		if (!beanValidator(modelMap, table)){
@@ -122,7 +105,7 @@ public class TableController extends BaseController {
 		}
 		Table validTable = new Table();
 		validTable.setName(table.getName());
-		int tableNum = tableService.findTableTotal(validTable);
+		int tableNum = tableService.findTotal(validTable);
 		if(tableNum != 0) {
 			Map<String, String> messageMap = new HashMap<String, String>();
 			messageMap.put("name", "数据表已存在");
@@ -130,7 +113,7 @@ public class TableController extends BaseController {
 			RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
 			return null;
 		}
-		tableService.saveTable(table);
+		tableService.save(table);
 		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}
@@ -143,16 +126,16 @@ public class TableController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequiresPermissions("sys:table:update")
-	@RequestMapping(value = "/saveByUpdate", method=RequestMethod.POST)
+	@RequestMapping(value = "/update", method=RequestMethod.POST)
 	@ResponseBody
-	public String saveTableByUpdate(HttpSession session,
+	public String update(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, Table table) throws Exception{
 		if (!beanValidator(modelMap, table)){
 			RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
 			return null;
 		}
-		tableService.updateTable(table);
+		tableService.update(table);
 		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}
@@ -169,9 +152,9 @@ public class TableController extends BaseController {
 	@ResponseBody
 	public String delete(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap, String delDataId) throws Exception {
-		List<String> listId = Arrays.asList(delDataId.split(","));
-		tableService.deleteTable(listId);
+			ModelMap modelMap, String id) throws Exception {
+		List<String> listId = Arrays.asList(id.split(","));
+		tableService.delete(listId);
 		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}

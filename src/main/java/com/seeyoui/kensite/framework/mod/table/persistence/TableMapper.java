@@ -21,57 +21,50 @@ public interface TableMapper {
 	 * @param id
 	 * @return
 	 */
-	public Table findTableById(String id);
+	public Table findOne(String id);
 	
 	/**
 	 * 查询数据集合
 	 * @param table
 	 * @return
 	 */
-	public List<Table> findTableList(Table table);
+	public List<Table> findList(Table table);
 	
 	/**
 	 * 查询所有数据集合
 	 * @param table
 	 * @return
 	 */
-	public List<Table> findAllTableList(Table table);
+	public List<Table> findAll(Table table);
 	
 	/**
 	 * 查询数据总数
 	 * @param table
 	 * @return
 	 */
-	public EasyUIDataGrid findTableListTotal(Table table);
-	
-	/**
-	 * 查询数据总数
-	 * @param table
-	 * @return
-	 */
-	public int findTableTotal(Table table);
+	public int findTotal(Table table);
 	
 	/**
 	 * 数据新增
 	 * @param table
 	 */
-	public void saveTable(Table table);
+	public void save(Table table);
 	
 	/**
 	 * 数据修改
 	 * @param table
 	 */
-	public void updateTable(Table table);
+	public void update(Table table);
 	
 	/**
 	 * 数据外键关联修改
 	 * @param table
 	 */
-	public void updateTableFk(Table table);
+	public void updateFk(Table table);
 	
 	/**
 	 * 数据删除
 	 * @param listId
 	 */
-	public void deleteTable(List<String> listId);
+	public void delete(List<String> listId);
 }

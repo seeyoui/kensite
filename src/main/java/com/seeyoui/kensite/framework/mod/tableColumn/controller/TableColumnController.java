@@ -49,20 +49,6 @@ public class TableColumnController extends BaseController {
 	private TableColumnService tableColumnService;
 	
 	/**
-	 * 展示列表页面
-	 * @param modelMap
-	 * @return
-	 * @throws Exception
-	 */
-	@RequiresPermissions("sys:tableColumn:view")
-	@RequestMapping(value = "/showPageList")
-	public ModelAndView showTableColumnPageList(HttpSession session,
-			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap) throws Exception {
-		return new ModelAndView("framework/mod/tableColumn/tableColumn", modelMap);
-	}
-	
-	/**
 	 * 获取列表展示数据
 	 * @param modelMap
 	 * @param tableColumn
@@ -70,17 +56,17 @@ public class TableColumnController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequiresPermissions("sys:tableColumn:select")
-	@RequestMapping(value = "/getListData", method=RequestMethod.POST)
+	@RequestMapping(value = "/list/data", method=RequestMethod.POST)
 	@ResponseBody
-	public String getListData(HttpSession session,
+	public Object listData(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, TableColumn tableColumn) throws Exception{
-		List<TableColumn> tableColumnList = tableColumnService.findTableColumnList(tableColumn);
-		EasyUIDataGrid eudg = tableColumnService.findTableColumnListTotal(tableColumn);
+		List<TableColumn> tableColumnList = tableColumnService.findList(tableColumn);
+		int total = tableColumnService.findTotal(tableColumn);
+		EasyUIDataGrid eudg = new EasyUIDataGrid();
 		eudg.setRows(tableColumnList);
-		JSONObject jsonObj = JSONObject.fromObject(eudg);
-		RequestResponseUtil.putResponseStr(session, response, request, jsonObj);
-		return null;
+		eudg.setTotal(String.valueOf(total));
+		return eudg;
 	}
 	
 	/**
@@ -91,15 +77,13 @@ public class TableColumnController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequiresPermissions("sys:tableColumn:select")
-	@RequestMapping(value = "/getAllListData", method=RequestMethod.POST)
+	@RequestMapping(value = "/list/all", method=RequestMethod.POST)
 	@ResponseBody
-	public String getAllListData(HttpSession session,
+	public Object listAll(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, TableColumn tableColumn) throws Exception{
-		List<TableColumn> tableColumnList = tableColumnService.findAllTableColumnList(tableColumn);
-		JSONArray jsonObj = JSONArray.fromObject(tableColumnList);
-		RequestResponseUtil.putResponseStr(session, response, request, jsonObj);
-		return null;
+		List<TableColumn> tableColumnList = tableColumnService.findAll(tableColumn);
+		return tableColumnList;
 	}
 	
 	/**
@@ -110,16 +94,16 @@ public class TableColumnController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequiresPermissions("sys:tableColumn:insert")
-	@RequestMapping(value = "/saveByAdd", method=RequestMethod.POST)
+	@RequestMapping(value = "/save", method=RequestMethod.POST)
 	@ResponseBody
-	public String saveTableColumnByAdd(HttpSession session,
+	public String save(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, TableColumn tableColumn) throws Exception{
 		if (!beanValidator(modelMap, tableColumn)){
 			RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
 			return null;
 		}
-		tableColumnService.saveTableColumn(tableColumn);
+		tableColumnService.save(tableColumn);
 		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}
@@ -132,16 +116,16 @@ public class TableColumnController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequiresPermissions("sys:tableColumn:update")
-	@RequestMapping(value = "/saveByUpdate", method=RequestMethod.POST)
+	@RequestMapping(value = "/update", method=RequestMethod.POST)
 	@ResponseBody
-	public String saveTableColumnByUpdate(HttpSession session,
+	public String update(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, TableColumn tableColumn) throws Exception{
 		if (!beanValidator(modelMap, tableColumn)){
 			RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
 			return null;
 		}
-		tableColumnService.updateTableColumn(tableColumn);
+		tableColumnService.update(tableColumn);
 		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}
@@ -158,9 +142,9 @@ public class TableColumnController extends BaseController {
 	@ResponseBody
 	public String delete(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap, String delDataId) throws Exception {
-		List<String> listId = Arrays.asList(delDataId.split(","));
-		tableColumnService.deleteTableColumn(listId);
+			ModelMap modelMap, String id) throws Exception {
+		List<String> listId = Arrays.asList(id.split(","));
+		tableColumnService.delete(listId);
 		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}

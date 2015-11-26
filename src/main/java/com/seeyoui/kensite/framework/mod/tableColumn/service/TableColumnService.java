@@ -33,23 +33,13 @@ public class TableColumnService extends BaseService {
 	private DBMapper dbMapper;
 
 	/**
-	 * 根据ID查询单条数据
-	 * @param id
-	 * @return
-	 * @throws CRUDException
-	 */
-	public TableColumn findTableColumnById(String id) throws CRUDException{
-		return tableColumnMapper.findTableColumnById(id);
-	}
-	
-	/**
 	 * 查询单条数据
 	 * @param tableColumn
 	 * @return
 	 * @throws CRUDException
 	 */
-	public TableColumn findTableColumn(TableColumn tableColumn) throws CRUDException{
-		return tableColumnMapper.findTableColumn(tableColumn);
+	public TableColumn findOne(TableColumn tableColumn) throws CRUDException{
+		return tableColumnMapper.findOne(tableColumn);
 	}
 	
 	/**
@@ -58,8 +48,8 @@ public class TableColumnService extends BaseService {
 	 * @return
 	 * @throws CRUDException
 	 */
-	public List<TableColumn> findTableColumnList(TableColumn tableColumn) throws CRUDException {
-		return tableColumnMapper.findTableColumnList(tableColumn);
+	public List<TableColumn> findList(TableColumn tableColumn) throws CRUDException {
+		return tableColumnMapper.findList(tableColumn);
 	}
 	
 	/**
@@ -68,8 +58,8 @@ public class TableColumnService extends BaseService {
 	 * @return
 	 * @throws CRUDException
 	 */
-	public List<TableColumn> findAllTableColumnList(TableColumn tableColumn) throws CRUDException {
-		return tableColumnMapper.findAllTableColumnList(tableColumn);
+	public List<TableColumn> findAll(TableColumn tableColumn) throws CRUDException {
+		return tableColumnMapper.findAll(tableColumn);
 	}
 	
 	/**
@@ -78,18 +68,8 @@ public class TableColumnService extends BaseService {
 	 * @return
 	 * @throws CRUDException
 	 */
-	public EasyUIDataGrid findTableColumnListTotal(TableColumn tableColumn) throws CRUDException {
-		return tableColumnMapper.findTableColumnListTotal(tableColumn);
-	}
-	
-	/**
-	 * 查询数据总数
-	 * @param tableColumn
-	 * @return
-	 * @throws CRUDException
-	 */
-	public int findTableColumnTotal(TableColumn tableColumn) throws CRUDException {
-		return tableColumnMapper.findTableColumnTotal(tableColumn);
+	public int findTotal(TableColumn tableColumn) throws CRUDException {
+		return tableColumnMapper.findTotal(tableColumn);
 	}
 	
 	/**
@@ -97,9 +77,9 @@ public class TableColumnService extends BaseService {
 	 * @param tableColumn
 	 * @throws CRUDException
 	 */
-	public void saveTableColumn(TableColumn tableColumn) throws CRUDException{
+	public void save(TableColumn tableColumn) throws CRUDException{
 		tableColumn.preInsert();
-		tableColumnMapper.saveTableColumn(tableColumn);
+		tableColumnMapper.save(tableColumn);
 		String modifyStr = "";
 		if(StringUtils.isNoneBlank(tableColumn.getJdbcLength())) {
 			modifyStr += tableColumn.getJdbcType()+"("+tableColumn.getJdbcLength()+")";
@@ -135,11 +115,11 @@ public class TableColumnService extends BaseService {
 	 * @param tableColumn
 	 * @throws CRUDException
 	 */
-	public void updateTableColumn(TableColumn tableColumn) throws CRUDException{
-		TableColumn tableColumnOld = tableColumnMapper.findTableColumnById(tableColumn.getId());
+	public void update(TableColumn tableColumn) throws CRUDException{
+		TableColumn tableColumnOld = tableColumnMapper.findById(tableColumn.getId());
 		tableColumn.preUpdate();
 		TagCacheUtils.removeCache(tableColumn);
-		tableColumnMapper.updateTableColumn(tableColumn);
+		tableColumnMapper.update(tableColumn);
 		if(StringUtils.isNotBlank(tableColumn.getName()) && !tableColumn.getName().equals(tableColumnOld.getName())) {
 			tableColumn.setOldName(tableColumnOld.getName());
 			dbMapper.renameColumn(tableColumn);
@@ -182,10 +162,10 @@ public class TableColumnService extends BaseService {
 	 * @param tableColumn
 	 * @throws CRUDException
 	 */
-	public void renameTableName(TableColumn tableColumn) throws CRUDException{
+	public void rename(TableColumn tableColumn) throws CRUDException{
 		tableColumn.preUpdate();
 		TagCacheUtils.removeCache(tableColumn);
-		tableColumnMapper.updateTableColumn(tableColumn);
+		tableColumnMapper.update(tableColumn);
 	}
 	
 	/**
@@ -193,13 +173,13 @@ public class TableColumnService extends BaseService {
 	 * @param listId
 	 * @throws CRUDException
 	 */
-	public void deleteTableColumn(List<String> listId) throws CRUDException {
+	public void delete(List<String> listId) throws CRUDException {
 		for(String id : listId) {
-			TableColumn tableColumn = tableColumnMapper.findTableColumnById(id);
+			TableColumn tableColumn = tableColumnMapper.findById(id);
 			dbMapper.dropColumn(tableColumn);
 			TagCacheUtils.removeCache(tableColumn);
 		}
-		tableColumnMapper.deleteTableColumn(listId);
+		tableColumnMapper.delete(listId);
 	}
 	
 }

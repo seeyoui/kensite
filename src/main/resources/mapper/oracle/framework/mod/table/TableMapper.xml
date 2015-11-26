@@ -59,7 +59,7 @@
 	</sql>
 	
 	<!-- 根据ID查询单条数据 -->
-	<select id="findTableById" resultType="com.seeyoui.kensite.framework.mod.table.domain.Table">
+	<select id="findOne" resultType="com.seeyoui.kensite.framework.mod.table.domain.Table">
 		SELECT
 		<include refid="tableColumns" />
 		FROM MOD_TABLE T
@@ -67,7 +67,7 @@
 	</select>
 	
 	<!-- 查询数据集合 -->
-	<select id="findTableList" resultType="com.seeyoui.kensite.framework.mod.table.domain.Table">
+	<select id="findList" resultType="com.seeyoui.kensite.framework.mod.table.domain.Table">
 		select * from(select T.*,rownum rn from(
 			SELECT
 			<include refid="tableColumns"/>
@@ -78,7 +78,7 @@
 	</select>
 	
 	<!-- 查询所有数据集合 -->
-	<select id="findAllTableList" resultType="com.seeyoui.kensite.framework.mod.table.domain.Table">
+	<select id="findAll" resultType="com.seeyoui.kensite.framework.mod.table.domain.Table">
 		SELECT
 		<include refid="tableColumns"/>
 		FROM MOD_TABLE T
@@ -87,15 +87,7 @@
 	</select>
 	
 	<!-- 查询数据总数 -->
-	<select id="findTableListTotal" resultType="EasyUIDataGrid">
-		SELECT
-		COUNT(1) total
-		FROM MOD_TABLE T
-		<include refid="whereStr"/>
-	</select>
-	
-	<!-- 查询数据总数 -->
-	<select id="findTableTotal" resultType="Integer">
+	<select id="findTotal" resultType="Integer">
 		SELECT
 		COUNT(1) total
 		FROM MOD_TABLE T
@@ -108,7 +100,7 @@
 	</select>
 	
 	<!-- 数据新增 -->
-	<insert id="saveTable" parameterType="com.seeyoui.kensite.framework.mod.table.domain.Table">
+	<insert id="save" parameterType="com.seeyoui.kensite.framework.mod.table.domain.Table">
 		INSERT INTO MOD_TABLE (
 	    	NAME,
 	    	COMMENTS,
@@ -134,7 +126,7 @@
 	</insert>
 	
 	<!-- 数据修改 -->
-	<update id="updateTable" parameterType="com.seeyoui.kensite.framework.mod.table.domain.Table">
+	<update id="update" parameterType="com.seeyoui.kensite.framework.mod.table.domain.Table">
 		UPDATE MOD_TABLE
 		<set>
 	    	<if test="name !=null and name !=''">
@@ -163,7 +155,7 @@
 	</update>
 	
 	<!-- 数据修改 -->
-	<update id="updateTableFk" parameterType="com.seeyoui.kensite.framework.mod.table.domain.Table">
+	<update id="updateFk" parameterType="com.seeyoui.kensite.framework.mod.table.domain.Table">
 		UPDATE MOD_TABLE
 		<set>
 	    	<if test="name !=null and name !=''">
@@ -174,7 +166,7 @@
 	</update>
 	
 	<!-- 数据删除 -->
-	<delete id="deleteTable">
+	<delete id="delete">
 		DELETE FROM MOD_TABLE WHERE id IN 
 		<foreach item="listId" collection="list"
 			open="(" separator="," close=")">

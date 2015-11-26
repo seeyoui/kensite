@@ -106,8 +106,8 @@
 		ORDER BY T.CREATE_DATE ASC 
 	</sql>
 	
-	<!-- 根据ID查询单条数据 -->
-	<select id="findTableColumnById" resultType="com.seeyoui.kensite.framework.mod.tableColumn.domain.TableColumn">
+	<!-- 查询单条数据 -->
+	<select id="findById" resultType="com.seeyoui.kensite.framework.mod.tableColumn.domain.TableColumn">
 		SELECT
 		<include refid="tableColumns" />
 		FROM MOD_TABLE_COLUMN T
@@ -115,7 +115,7 @@
 	</select>
 	
 	<!-- 查询单条数据 -->
-	<select id="findTableColumn" resultType="com.seeyoui.kensite.framework.mod.tableColumn.domain.TableColumn">
+	<select id="findOne" resultType="com.seeyoui.kensite.framework.mod.tableColumn.domain.TableColumn">
 		SELECT
 		<include refid="tableColumns" />
 		FROM MOD_TABLE_COLUMN T
@@ -134,7 +134,7 @@
 	</select>
 	
 	<!-- 查询数据集合 -->
-	<select id="findTableColumnList" resultType="com.seeyoui.kensite.framework.mod.tableColumn.domain.TableColumn">
+	<select id="findList" resultType="com.seeyoui.kensite.framework.mod.tableColumn.domain.TableColumn">
 		select * from(select T.*,rownum rn from(
 			SELECT
 			<include refid="tableColumns"/>
@@ -145,7 +145,7 @@
 	</select>
 	
 	<!-- 查询所有数据集合 -->
-	<select id="findAllTableColumnList" resultType="com.seeyoui.kensite.framework.mod.tableColumn.domain.TableColumn">
+	<select id="findAll" resultType="com.seeyoui.kensite.framework.mod.tableColumn.domain.TableColumn">
 		SELECT
 		<include refid="tableColumns"/>
 		FROM MOD_TABLE_COLUMN T
@@ -154,15 +154,7 @@
 	</select>
 	
 	<!-- 查询数据总数 -->
-	<select id="findTableColumnListTotal" resultType="EasyUIDataGrid">
-		SELECT
-		COUNT(1) total
-		FROM MOD_TABLE_COLUMN T
-		<include refid="whereStr"/>
-	</select>
-	
-	<!-- 查询数据总数 -->
-	<select id="findTableColumnTotal" resultType="Integer">
+	<select id="findTotal" resultType="Integer">
 		SELECT
 		COUNT(1) total
 		FROM MOD_TABLE_COLUMN T
@@ -170,7 +162,7 @@
 	</select>
 	
 	<!-- 数据新增 -->
-	<insert id="saveTableColumn" parameterType="com.seeyoui.kensite.framework.mod.tableColumn.domain.TableColumn">
+	<insert id="save" parameterType="com.seeyoui.kensite.framework.mod.tableColumn.domain.TableColumn">
 		INSERT INTO MOD_TABLE_COLUMN (
 	    	TABLE_NAME,
 	    	NAME,
@@ -220,7 +212,7 @@
 	</insert>
 	
 	<!-- 数据修改 -->
-	<update id="updateTableColumn" parameterType="com.seeyoui.kensite.framework.mod.tableColumn.domain.TableColumn">
+	<update id="update" parameterType="com.seeyoui.kensite.framework.mod.tableColumn.domain.TableColumn">
 		UPDATE MOD_TABLE_COLUMN
 		<set>
 	    	<if test="tableName !=null and tableName !=''">
@@ -234,9 +226,6 @@
 			</if>
 	    	<if test="jdbcType !=null and jdbcType !=''">
 			JDBC_TYPE=#{jdbcType},
-			</if>
-	    	<if test="jdbcLength !=null and jdbcLength !=''">
-			JDBC_LENGTH=#{jdbcLength},
 			</if>
 	    	<if test="isNull !=null and isNull !=''">
 			IS_NULL=#{isNull},
@@ -268,6 +257,7 @@
 	    	<if test="delFlag !=null and delFlag !=''">
 			DEL_FLAG=#{delFlag},
 			</if>
+			JDBC_LENGTH=#{jdbcLength},
 			VALID_TYPE=#{validType},
 			HTML_INNER=#{htmlInner},
 			SETTINGS=#{settings},
@@ -279,7 +269,7 @@
 	</update>
 	
 	<!-- 数据修改 -->
-	<update id="renameTableName" parameterType="com.seeyoui.kensite.framework.mod.tableColumn.domain.TableColumn">
+	<update id="rename" parameterType="com.seeyoui.kensite.framework.mod.tableColumn.domain.TableColumn">
 		UPDATE MOD_TABLE_COLUMN
 		<set>
 	    	<if test="tableName !=null and tableName !=''">
@@ -290,7 +280,7 @@
 	</update>
 	
 	<!-- 数据删除 -->
-	<delete id="deleteTableColumn">
+	<delete id="delete">
 		DELETE FROM MOD_TABLE_COLUMN WHERE id IN 
 		<foreach item="listId" collection="list"
 			open="(" separator="," close=")">

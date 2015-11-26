@@ -16,70 +16,63 @@ import java.util.*;
  * @date 2015-10-24
  */
 public interface TableColumnMapper {
-
+	
 	/**
-	 * 根据ID查询单条数据
+	 * 查询单条数据
 	 * @param id
 	 * @return
 	 */
-	public TableColumn findTableColumnById(String id);
-	
+	public TableColumn findById(String id);
+
 	/**
 	 * 查询单条数据
 	 * @param tableColumn
 	 * @return
 	 */
-	public TableColumn findTableColumn(TableColumn tableColumn);
+	public TableColumn findOne(TableColumn tableColumn);
 	
 	/**
 	 * 查询数据集合
 	 * @param tableColumn
 	 * @return
 	 */
-	public List<TableColumn> findTableColumnList(TableColumn tableColumn);
+	public List<TableColumn> findList(TableColumn tableColumn);
 	
 	/**
 	 * 查询所有数据集合
 	 * @param tableColumn
 	 * @return
 	 */
-	public List<TableColumn> findAllTableColumnList(TableColumn tableColumn);
+	public List<TableColumn> findAll(TableColumn tableColumn);
 	
 	/**
 	 * 查询数据总数
 	 * @param tableColumn
 	 * @return
 	 */
-	public EasyUIDataGrid findTableColumnListTotal(TableColumn tableColumn);
-	
-	/**
-	 * 查询数据总数
-	 * @param tableColumn
-	 * @return
-	 */
-	public int findTableColumnTotal(TableColumn tableColumn);
+	public int findTotal(TableColumn tableColumn);
 	
 	/**
 	 * 数据新增
 	 * @param tableColumn
 	 */
-	public void saveTableColumn(TableColumn tableColumn);
+	public void save(TableColumn tableColumn);
 	
 	/**
 	 * 数据修改
 	 * @param tableColumn
 	 */
-	public void updateTableColumn(TableColumn tableColumn);
+	public void update(TableColumn tableColumn);
 	
 	/**
 	 * 表名重命名
 	 * @param tableColumn
 	 */
-	public void renameTableName(TableColumn tableColumn);
+	public void rename(TableColumn tableColumn);
 	
 	/**
 	 * 数据删除
 	 * @param listId
 	 */
-	public void deleteTableColumn(List<String> listId);
+	public void delete(List<String> listId);
 }
