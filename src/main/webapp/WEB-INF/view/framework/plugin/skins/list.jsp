@@ -14,7 +14,7 @@
  	<div style="position:absolute;top:0px;left:0px;right:0px;bottom:0px;">
 		<div style="position:absolute;top:0px;left:0px;right:0px;bottom:0px;">
 		    <table id="dataList" title="系统皮肤列表" class="easyui-datagrid" style="width:100%;height:100%"
-		    		url="${ctx}/sys/skins/getListData.do"
+		    		url="${ctx}/sys/skins/list/data"
 		            toolbar="#toolbar" pagination="true"
 		            rownumbers="true" fitColumns="true" singleSelect="true">
 		        <thead>
@@ -45,21 +45,21 @@
 		    <div id="dataWin" class="easyui-window" title="系统皮肤信息维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:400px;height:200px;padding:10px;">
 		        <div class="ftitle">系统皮肤信息维护</div>
 		        <form id="dataForm" method="post">
-							<div class="fitem">
-				                <label>说明</label>
-				                <input id="name" name="name" class="easyui-textbox" data-options="required:true"/>
-				                <span id="msg-name" class="err-msg"></span>
-				            </div>
-							<div class="fitem">
-				                <label>页面路径</label>
-				                <input id="url" name="url" class="easyui-textbox" data-options="required:true"/>
-				                <span id="msg-url" class="err-msg"></span>
-				            </div>
-							<div class="fitem">
-				                <label>页面名</label>
-				                <input id="main" name="main" class="easyui-textbox" data-options="required:true"/>
-				                <span id="msg-main" class="err-msg"></span>
-				            </div>
+					<div class="fitem">
+		                <label>说明</label>
+		                <input id="name" name="name" class="easyui-textbox" data-options="required:true"/>
+		                <span id="msg-name" class="err-msg"></span>
+		            </div>
+					<div class="fitem">
+		                <label>页面路径</label>
+		                <input id="url" name="url" class="easyui-textbox" data-options="required:true"/>
+		                <span id="msg-url" class="err-msg"></span>
+		            </div>
+					<div class="fitem">
+		                <label>页面名</label>
+		                <input id="main" name="main" class="easyui-textbox" data-options="required:true"/>
+		                <span id="msg-main" class="err-msg"></span>
+		            </div>
 				</form>
 				
 			    <div id="dataWin-buttons">
@@ -99,7 +99,7 @@
             cleanErrMsg();
             $('#dataForm').form('clear');
             $('#dataWin').window('open');
-            url = '${ctx}/sys/skins/saveByAdd.do';
+            url = '${ctx}/sys/skins/save';
         }
         function editInfo(){
             var row = $('#dataList').datagrid('getSelected');
@@ -107,7 +107,7 @@
             	cleanErrMsg();
                 $('#dataForm').form('load',row);
                 $('#dataWin').window('open');
-                url = '${ctx}/sys/skins/saveByUpdate.do?id='+row.id;
+                url = '${ctx}/sys/skins/update?id='+row.id;
             }    	
         }
         var loadi;
@@ -142,8 +142,8 @@
                     if (r){
                     	$.ajax({
 							type: "post",
-							url: '${ctx}/sys/skins/delete.do',
-							data: {delDataId:row.id},
+							url: '${ctx}/sys/skins/delete',
+							data: {id:row.id},
 							dataType: 'json',
 							beforeSend: function(XMLHttpRequest){
 							},
@@ -168,7 +168,7 @@
                     if (r){
                     	$.ajax({
 							type: "post",
-							url: '${ctx}/sys/skins/choseSkins.do',
+							url: '${ctx}/sys/skins/chose',
 							data: {id:row.id},
 							dataType: 'json',
 							beforeSend: function(XMLHttpRequest){

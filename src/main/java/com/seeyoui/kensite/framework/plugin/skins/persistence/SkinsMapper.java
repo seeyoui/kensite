@@ -20,69 +20,62 @@ public interface SkinsMapper {
 	 * @param id
 	 * @return
 	 */
-	public Skins findSkinsById(String id);
+	public Skins findOne(String id);
 	
 	/**
 	 * 查询数据集合
 	 * @param skins
 	 * @return
 	 */
-	public List<Skins> findSkinsList(Skins skins);
+	public List<Skins> findList(Skins skins);
 	
 	/**
 	 * 查询所有数据集合
 	 * @param skins
 	 * @return
 	 */
-	public List<Skins> findAllSkinsList(Skins skins);
+	public List<Skins> findAll(Skins skins);
 	
 	/**
 	 * 查询数据总数
 	 * @param skins
 	 * @return
 	 */
-	public EasyUIDataGrid findSkinsListTotal(Skins skins);
-	
-	/**
-	 * 查询数据总数
-	 * @param skins
-	 * @return
-	 */
-	public int findSkinsTotal(Skins skins);
+	public int findTotal(Skins skins);
 	
 	/**
 	 * 数据新增
 	 * @param skins
 	 */
-	public void saveSkins(Skins skins);
+	public void save(Skins skins);
 	
 	/**
 	 * 数据修改
 	 * @param skins
 	 */
-	public void updateSkins(Skins skins);
+	public void update(Skins skins);
 	
 	/**
 	 * 数据删除
 	 * @param listId
 	 */
-	public void deleteSkins(List<String> listId);
+	public void delete(List<String> listId);
 	
 	/**
 	 * 查询当前系统皮肤
 	 * @return
 	 */
-	public Skins findCurrentSkins();
+	public Skins findCurrent();
 	
 	/**
 	 * 选中
 	 * @param skins
 	 */
-	public void choseSkins(Skins skins);
+	public void chose(Skins skins);
 	
 	/**
 	 * 清空
 	 * @param skins
 	 */
-	public void unchoseSkins(Skins skins);
+	public void unchose(Skins skins);
 }

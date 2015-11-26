@@ -18,6 +18,7 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,7 +28,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.seeyoui.kensite.common.base.controller.BaseController;
 import com.seeyoui.kensite.common.constants.StringConstant;
 import com.seeyoui.kensite.common.util.RequestResponseUtil;
-
 import com.seeyoui.kensite.common.constants.StringConstant;
 import com.seeyoui.kensite.common.base.domain.EasyUIDataGrid;
 import com.seeyoui.kensite.common.base.controller.BaseController;
@@ -54,11 +54,11 @@ public class SkinsController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequiresPermissions("skins:view")
-	@RequestMapping(value = "/showPageList")
-	public ModelAndView showSkinsPageList(HttpSession session,
+	@RequestMapping(value = "/{page}")
+	public ModelAndView view(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap) throws Exception {
-		return new ModelAndView("framework/plugin/skins/skins", modelMap);
+			ModelMap modelMap, @PathVariable String page) throws Exception {
+		return new ModelAndView("framework/plugin/skins/"+page, modelMap);
 	}
 	
 	/**
@@ -69,17 +69,17 @@ public class SkinsController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequiresPermissions("skins:select")
-	@RequestMapping(value = "/getListData", method=RequestMethod.POST)
+	@RequestMapping(value = "/list/data", method=RequestMethod.POST)
 	@ResponseBody
-	public String getListData(HttpSession session,
+	public Object listData(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, Skins skins) throws Exception{
-		List<Skins> skinsList = skinsService.findSkinsList(skins);
-		EasyUIDataGrid eudg = skinsService.findSkinsListTotal(skins);
+		List<Skins> skinsList = skinsService.findList(skins);
+		int total = skinsService.findTotal(skins);
+		EasyUIDataGrid eudg = new EasyUIDataGrid();
 		eudg.setRows(skinsList);
-		JSONObject jsonObj = JSONObject.fromObject(eudg);
-		RequestResponseUtil.putResponseStr(session, response, request, jsonObj);
-		return null;
+		eudg.setTotal(String.valueOf(total));
+		return eudg;
 	}
 	
 	/**
@@ -90,15 +90,13 @@ public class SkinsController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequiresPermissions("skins:select")
-	@RequestMapping(value = "/getAllListData", method=RequestMethod.POST)
+	@RequestMapping(value = "/list/all", method=RequestMethod.POST)
 	@ResponseBody
-	public String getAllListData(HttpSession session,
+	public Object listAll(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, Skins skins) throws Exception{
-		List<Skins> skinsList = skinsService.findSkinsList(skins);
-		JSONArray jsonObj = JSONArray.fromObject(skinsList);
-		RequestResponseUtil.putResponseStr(session, response, request, jsonObj);
-		return null;
+		List<Skins> skinsList = skinsService.findAll(skins);
+		return skinsList;
 	}
 	
 	/**
@@ -109,16 +107,16 @@ public class SkinsController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequiresPermissions("skins:insert")
-	@RequestMapping(value = "/saveByAdd", method=RequestMethod.POST)
+	@RequestMapping(value = "/save", method=RequestMethod.POST)
 	@ResponseBody
-	public String saveSkinsByAdd(HttpSession session,
+	public String save(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, Skins skins) throws Exception{
 		if (!beanValidator(modelMap, skins)){
 			RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
 			return null;
 		}
-		skinsService.saveSkins(skins);
+		skinsService.save(skins);
 		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}
@@ -131,16 +129,16 @@ public class SkinsController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequiresPermissions("skins:update")
-	@RequestMapping(value = "/saveByUpdate", method=RequestMethod.POST)
+	@RequestMapping(value = "/update", method=RequestMethod.POST)
 	@ResponseBody
-	public String saveSkinsByUpdate(HttpSession session,
+	public String update(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, Skins skins) throws Exception{
 		if (!beanValidator(modelMap, skins)){
 			RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
 			return null;
 		}
-		skinsService.updateSkins(skins);
+		skinsService.update(skins);
 		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}
@@ -157,9 +155,9 @@ public class SkinsController extends BaseController {
 	@ResponseBody
 	public String delete(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap, String delDataId) throws Exception {
-		List<String> listId = Arrays.asList(delDataId.split(","));
-		skinsService.deleteSkins(listId);
+			ModelMap modelMap, String id) throws Exception {
+		List<String> listId = Arrays.asList(id.split(","));
+		skinsService.delete(listId);
 		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}
@@ -172,12 +170,12 @@ public class SkinsController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequiresPermissions("skins:update")
-	@RequestMapping(value = "/choseSkins", method=RequestMethod.POST)
+	@RequestMapping(value = "/chose", method=RequestMethod.POST)
 	@ResponseBody
-	public String choseSkins(HttpSession session,
+	public String chose(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, Skins skins) throws Exception{
-		skinsService.choseSkins(skins);
+		skinsService.chose(skins);
 		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}

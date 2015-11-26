@@ -35,15 +35,15 @@
 	</sql>
 	
 	<!-- 根据ID查询单条数据 -->
-	<select id="findSkinsById" resultType="com.seeyoui.kensite.framework.plugin.skins.domain.Skins">
+	<select id="findOne" resultType="com.seeyoui.kensite.framework.plugin.skins.domain.Skins">
 		SELECT
 		<include refid="tableColumns" />
 		FROM SYS_SKINS t
-		WHERE id = #{id}
+		WHERE t.id = #{id}
 	</select>
 	
 	<!-- 查询数据集合 -->
-	<select id="findSkinsList" resultType="com.seeyoui.kensite.framework.plugin.skins.domain.Skins">
+	<select id="findList" resultType="com.seeyoui.kensite.framework.plugin.skins.domain.Skins">
 		select * from(select t.*,rownum rn from(
 			SELECT
 			<include refid="tableColumns"/>
@@ -54,7 +54,7 @@
 	</select>
 	
 	<!-- 查询所有数据集合 -->
-	<select id="findAllSkinsList" resultType="com.seeyoui.kensite.framework.plugin.skins.domain.Skins">
+	<select id="findAll" resultType="com.seeyoui.kensite.framework.plugin.skins.domain.Skins">
 		SELECT
 		<include refid="tableColumns"/>
 		FROM SYS_SKINS t
@@ -63,15 +63,7 @@
 	</select>
 	
 	<!-- 查询数据总数 -->
-	<select id="findSkinsListTotal" resultType="EasyUIDataGrid">
-		SELECT
-		COUNT(1) total
-		FROM SYS_SKINS t
-		<include refid="whereStr"/>
-	</select>
-	
-	<!-- 查询数据总数 -->
-	<select id="findSkinsTotal" resultType="Integer">
+	<select id="findTotal" resultType="Integer">
 		SELECT
 		COUNT(1) total
 		FROM SYS_SKINS t
@@ -79,7 +71,7 @@
 	</select>
 	
 	<!-- 数据新增 -->
-	<insert id="saveSkins" parameterType="com.seeyoui.kensite.framework.plugin.skins.domain.Skins">
+	<insert id="save" parameterType="com.seeyoui.kensite.framework.plugin.skins.domain.Skins">
 		INSERT INTO SYS_SKINS (
 	    	main,
 	    	name,
@@ -97,7 +89,7 @@
 	</insert>
 	
 	<!-- 数据修改 -->
-	<update id="updateSkins" parameterType="com.seeyoui.kensite.framework.plugin.skins.domain.Skins">
+	<update id="update" parameterType="com.seeyoui.kensite.framework.plugin.skins.domain.Skins">
 		UPDATE SYS_SKINS
 		<set>
 	    	<if test="main !=null and main !=''">
@@ -118,7 +110,7 @@
 	</update>
 	
 	<!-- 数据删除 -->
-	<delete id="deleteSkins">
+	<delete id="delete">
 		DELETE FROM SYS_SKINS WHERE id IN 
 		<foreach item="listId" collection="list"
 			open="(" separator="," close=")">
@@ -127,7 +119,7 @@
 	</delete>
 	
 	<!-- 查询当前系统皮肤 -->
-	<select id="findCurrentSkins" resultType="com.seeyoui.kensite.framework.plugin.skins.domain.Skins">
+	<select id="findCurrent" resultType="com.seeyoui.kensite.framework.plugin.skins.domain.Skins">
 		SELECT
 		<include refid="tableColumns" />
 		FROM 
@@ -137,14 +129,14 @@
 	</select>
 	
 	<!-- 选中 -->
-	<update id="choseSkins" parameterType="com.seeyoui.kensite.framework.plugin.skins.domain.Skins">
+	<update id="chose" parameterType="com.seeyoui.kensite.framework.plugin.skins.domain.Skins">
 		UPDATE SYS_SKINS
 		set state = '1'
 		WHERE id = #{id}
 	</update>
 	
 	<!-- 清空 -->
-	<update id="unchoseSkins" parameterType="com.seeyoui.kensite.framework.plugin.skins.domain.Skins">
+	<update id="unchose" parameterType="com.seeyoui.kensite.framework.plugin.skins.domain.Skins">
 		UPDATE SYS_SKINS
 		set state = '0'
 		WHERE state = '1'

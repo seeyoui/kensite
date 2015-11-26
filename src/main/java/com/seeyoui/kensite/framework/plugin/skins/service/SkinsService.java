@@ -37,8 +37,8 @@ public class SkinsService extends BaseService {
 	 * @return
 	 * @throws CRUDException
 	 */
-	public Skins findSkinsById(String id) throws CRUDException{
-		return skinsMapper.findSkinsById(id);
+	public Skins findOne(String id) throws CRUDException{
+		return skinsMapper.findOne(id);
 	}
 	
 	/**
@@ -47,8 +47,8 @@ public class SkinsService extends BaseService {
 	 * @return
 	 * @throws CRUDException
 	 */
-	public List<Skins> findSkinsList(Skins skins) throws CRUDException {
-		return skinsMapper.findSkinsList(skins);
+	public List<Skins> findList(Skins skins) throws CRUDException {
+		return skinsMapper.findList(skins);
 	}
 	
 	/**
@@ -57,8 +57,8 @@ public class SkinsService extends BaseService {
 	 * @return
 	 * @throws CRUDException
 	 */
-	public List<Skins> findAllSkinsList(Skins skins) throws CRUDException {
-		return skinsMapper.findAllSkinsList(skins);
+	public List<Skins> findAll(Skins skins) throws CRUDException {
+		return skinsMapper.findAll(skins);
 	}
 	
 	/**
@@ -67,18 +67,8 @@ public class SkinsService extends BaseService {
 	 * @return
 	 * @throws CRUDException
 	 */
-	public EasyUIDataGrid findSkinsListTotal(Skins skins) throws CRUDException {
-		return skinsMapper.findSkinsListTotal(skins);
-	}
-	
-	/**
-	 * 查询数据总数
-	 * @param skins
-	 * @return
-	 * @throws CRUDException
-	 */
-	public int findSkinsTotal(Skins skins) throws CRUDException {
-		return skinsMapper.findSkinsTotal(skins);
+	public int findTotal(Skins skins) throws CRUDException {
+		return skinsMapper.findTotal(skins);
 	}
 	
 	/**
@@ -86,9 +76,9 @@ public class SkinsService extends BaseService {
 	 * @param skins
 	 * @throws CRUDException
 	 */
-	public void saveSkins(Skins skins) throws CRUDException{
+	public void save(Skins skins) throws CRUDException{
 		skins.preInsert();
-		skinsMapper.saveSkins(skins);
+		skinsMapper.save(skins);
 	}
 	
 	/**
@@ -96,9 +86,9 @@ public class SkinsService extends BaseService {
 	 * @param skins
 	 * @throws CRUDException
 	 */
-	public void updateSkins(Skins skins) throws CRUDException{
+	public void update(Skins skins) throws CRUDException{
 		skins.preUpdate();
-		skinsMapper.updateSkins(skins);			
+		skinsMapper.update(skins);			
 	}
 	
 	/**
@@ -106,8 +96,8 @@ public class SkinsService extends BaseService {
 	 * @param listId
 	 * @throws CRUDException
 	 */
-	public void deleteSkins(List<String> listId) throws CRUDException {
-		skinsMapper.deleteSkins(listId);
+	public void delete(List<String> listId) throws CRUDException {
+		skinsMapper.delete(listId);
 	}
 	
 	/**
@@ -115,8 +105,8 @@ public class SkinsService extends BaseService {
 	 * @return
 	 * @throws CRUDException
 	 */
-	public Skins findCurrentSkins() throws CRUDException{
-		return skinsMapper.findCurrentSkins();
+	public Skins findCurrent() throws CRUDException{
+		return skinsMapper.findCurrent();
 	}
 	
 	/**
@@ -124,10 +114,10 @@ public class SkinsService extends BaseService {
 	 * @param skins
 	 * @throws CRUDException
 	 */
-	public void choseSkins(Skins skins) throws CRUDException{
+	public void chose(Skins skins) throws CRUDException{
 		skins.preUpdate();
-		skinsMapper.unchoseSkins(skins);
-		skinsMapper.choseSkins(skins);			
+		skinsMapper.unchose(skins);
+		skinsMapper.chose(skins);			
 	}
 	
 }
