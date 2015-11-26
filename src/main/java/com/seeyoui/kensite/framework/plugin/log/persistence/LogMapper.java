@@ -20,26 +20,26 @@ public interface LogMapper {
 	 * @param id
 	 * @return
 	 */
-	public Log findLogById(String id);
+	public Log findOne(String id);
 	
 	/**
 	 * 查询数据集合
 	 * @param log
 	 * @return
 	 */
-	public List<Log> findLogList(Log log);
+	public List<Log> findList(Log log);
 	
 	/**
 	 * 查询数据总数
 	 * @param userinfo
 	 * @return
 	 */
-	public EasyUIDataGrid findLogListTotal(Log log);
+	public int findTotal(Log log);
 	
 	/**
 	 * 数据新增
 	 * @param log
 	 */
-	public void saveLog(Log log);
+	public void save(Log log);
 	
 }

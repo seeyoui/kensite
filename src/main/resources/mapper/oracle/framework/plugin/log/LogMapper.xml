@@ -60,15 +60,15 @@
 	</sql>
 	
 	<!-- 根据ID查询单条数据 -->
-	<select id="findLogById" resultType="com.seeyoui.kensite.framework.plugin.log.domain.Log">
+	<select id="findOne" resultType="com.seeyoui.kensite.framework.plugin.log.domain.Log">
 		SELECT
 		<include refid="tableColumns" />
 		FROM SYS_LOG t
-		WHERE id = #{id}
+		WHERE t.id = #{id}
 	</select>
 	
 	<!-- 查询数据集合 -->
-	<select id="findLogList" resultType="com.seeyoui.kensite.framework.plugin.log.domain.Log">
+	<select id="findList" resultType="com.seeyoui.kensite.framework.plugin.log.domain.Log">
 		select * from(select t.*,rownum rn from(
 			SELECT
 			<include refid="tableColumns"/>
@@ -79,15 +79,15 @@
 	</select>
 	
 	<!-- 查询数据总数 -->
-	<select id="findLogListTotal" resultType="EasyUIDataGrid">
+	<select id="findTotal" resultType="Integer">
 		SELECT
-		COUNT(id)total
-		FROM SYS_LOG t
+		COUNT(1) AS "total"
+		FROM SYS_LOG T
 		<include refid="whereStr"/>
 	</select>
 	
 	<!-- 数据新增 -->
-	<insert id="saveLog" parameterType="com.seeyoui.kensite.framework.plugin.log.domain.Log">
+	<insert id="save" parameterType="com.seeyoui.kensite.framework.plugin.log.domain.Log">
 		INSERT INTO SYS_LOG (
 	    	type,
 	    	title,

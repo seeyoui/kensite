@@ -36,8 +36,8 @@ public class LogService extends BaseService {
 	 * @return
 	 * @throws CRUDException
 	 */
-	public Log findLogById(String id) throws CRUDException{
-		return logMapper.findLogById(id);
+	public Log findOne(String id) throws CRUDException{
+		return logMapper.findOne(id);
 	}
 	
 	/**
@@ -46,8 +46,8 @@ public class LogService extends BaseService {
 	 * @return
 	 * @throws CRUDException
 	 */
-	public List<Log> findLogList(Log log) throws CRUDException {
-		return logMapper.findLogList(log);
+	public List<Log> findList(Log log) throws CRUDException {
+		return logMapper.findList(log);
 	}
 	
 	/**
@@ -56,8 +56,8 @@ public class LogService extends BaseService {
 	 * @return
 	 * @throws CRUDException
 	 */
-	public EasyUIDataGrid findLogListTotal(Log log) throws CRUDException {
-		return logMapper.findLogListTotal(log);
+	public int findTotal(Log log) throws CRUDException {
+		return logMapper.findTotal(log);
 	}
 	
 	/**
@@ -65,9 +65,9 @@ public class LogService extends BaseService {
 	 * @param log
 	 * @throws CRUDException
 	 */
-	public void saveLog(Log log) throws CRUDException{
+	public void save(Log log) throws CRUDException{
 		log.preInsert();
-		logMapper.saveLog(log);
+		logMapper.save(log);
 	}
 	
 }

@@ -16,6 +16,7 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -46,11 +47,11 @@ public class LogController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequiresPermissions("sys:log:view")
-	@RequestMapping(value = "/showPageList")
-	public ModelAndView showLogPageList(HttpSession session,
+	@RequestMapping(value = "/{page}")
+	public ModelAndView view(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap) throws Exception {
-		return new ModelAndView("framework/cms/log", modelMap);
+			ModelMap modelMap, @PathVariable String page) throws Exception {
+		return new ModelAndView("framework/plugin/"+page, modelMap);
 	}
 	
 	/**
@@ -61,17 +62,17 @@ public class LogController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequiresPermissions("sys:log:select")
-	@RequestMapping(value = "/getListData", method=RequestMethod.POST)
+	@RequestMapping(value = "/list/data", method=RequestMethod.POST)
 	@ResponseBody
-	public String getListData(HttpSession session,
+	public Object listData(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, Log log) throws Exception{
-		List<Log> logList = siteService.findLogList(log);
-		EasyUIDataGrid eudg = siteService.findLogListTotal(log);
+		List<Log> logList = siteService.findList(log);
+		int total = siteService.findTotal(log);
+		EasyUIDataGrid eudg = new EasyUIDataGrid();
 		eudg.setRows(logList);
-		JSONObject jsonObj = JSONObject.fromObject(eudg);
-		RequestResponseUtil.putResponseStr(session, response, request, jsonObj);
-		return null;
+		eudg.setTotal(String.valueOf(total));
+		return eudg;
 	}
 	
 }

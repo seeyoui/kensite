@@ -34,7 +34,6 @@ public class LogUtils {
 	public static final String CACHE_MENU_NAME_PATH_MAP = "menuNamePathMap";
 	
 	private static LogMapper logMapper = SpringContextHolder.getBean(LogMapper.class);
-	private static SysMenuMapper sysMenuMapper = SpringContextHolder.getBean(SysMenuMapper.class);
 	
 	/**
 	 * 保存日志
@@ -100,7 +99,7 @@ public class LogUtils {
 			}
 			// 保存日志信息
 			log.preInsert();
-			logMapper.saveLog(log);
+			logMapper.save(log);
 		}
 	}
 
