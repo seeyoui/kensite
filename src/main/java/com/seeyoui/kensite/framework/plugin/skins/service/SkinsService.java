@@ -18,6 +18,7 @@ import com.seeyoui.kensite.common.util.*;
 import com.seeyoui.kensite.common.constants.StringConstant;
 import com.seeyoui.kensite.framework.plugin.skins.domain.Skins;
 import com.seeyoui.kensite.framework.plugin.skins.persistence.SkinsMapper;
+import com.seeyoui.kensite.framework.system.util.SkinsUtils;
 import com.seeyoui.kensite.framework.act.idgenerator.GeneratorUUID;
 
 /**
@@ -117,7 +118,8 @@ public class SkinsService extends BaseService {
 	public void chose(Skins skins) throws CRUDException{
 		skins.preUpdate();
 		skinsMapper.unchose(skins);
-		skinsMapper.chose(skins);			
+		skinsMapper.chose(skins);
+		SkinsUtils.cleanCache();
 	}
 	
 }

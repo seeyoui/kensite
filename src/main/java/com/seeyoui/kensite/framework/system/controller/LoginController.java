@@ -28,6 +28,7 @@ import com.seeyoui.kensite.common.util.MD5;
 import com.seeyoui.kensite.common.util.StringUtils;
 import com.seeyoui.kensite.framework.plugin.skins.domain.Skins;
 import com.seeyoui.kensite.framework.plugin.skins.service.SkinsService;
+import com.seeyoui.kensite.framework.system.util.SkinsUtils;
 import com.seeyoui.kensite.framework.system.util.UserUtils;
 
 /**
@@ -134,7 +135,7 @@ public class LoginController {
 	 * 获取系统皮肤方案
 	 */
 	public String getSysSkins() {
-    	Skins skin = skinsService.findCurrent();
+    	Skins skin = SkinsUtils.getCurSysSkins();
     	if(skin==null || skin.getUrl()==null || "".equals(skin.getUrl())) {
     		return "skins/poor/main";
     	} else {

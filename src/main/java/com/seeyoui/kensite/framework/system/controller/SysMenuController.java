@@ -35,6 +35,7 @@ import com.seeyoui.kensite.framework.plugin.skins.domain.Skins;
 import com.seeyoui.kensite.framework.plugin.skins.service.SkinsService;
 import com.seeyoui.kensite.framework.system.domain.SysMenu;
 import com.seeyoui.kensite.framework.system.service.SysMenuService;
+import com.seeyoui.kensite.framework.system.util.SkinsUtils;
 /**
  * @author cuichen
  * @version 1.0
@@ -63,7 +64,7 @@ public class SysMenuController extends BaseController {
 			ModelMap modelMap) throws Exception {
 		String ctxPath = request.getSession().getServletContext().getRealPath("/"); 
 		List<String> menuIconList = new ArrayList<String>();
-		Skins skin = skinsService.findCurrent();
+		Skins skin = SkinsUtils.getCurSysSkins();
 		String skinsUrl = "";
     	if(skin!=null && !"".equals(skin.getUrl())) {
     		skinsUrl = skin.getUrl();
