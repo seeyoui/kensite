@@ -49,21 +49,6 @@ public class UserTablesController extends BaseController {
 	private UserTablesService userTablesService;
 	
 	/**
-	 * 展示列表页面
-	 * @param modelMap
-	 * @param module
-	 * @return
-	 * @throws Exception
-	 */
-	@RequiresPermissions("sys:userTables:view")
-	@RequestMapping(value = "/showPageList")
-	public ModelAndView showUserTablesPageList(HttpSession session,
-			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap) throws Exception {
-		return new ModelAndView("framework/plugin/db/userTables/userTables", modelMap);
-	}
-	
-	/**
 	 * 获取列表展示数据
 	 * @param modelMap
 	 * @param userTables
@@ -71,17 +56,17 @@ public class UserTablesController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequiresPermissions("sys:userTables:select")
-	@RequestMapping(value = "/getListData", method=RequestMethod.POST)
+	@RequestMapping(value = "/list/data", method=RequestMethod.POST)
 	@ResponseBody
-	public String getListData(HttpSession session,
+	public Object listData(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, UserTables userTables) throws Exception{
-		List<UserTables> userTablesList = userTablesService.findUserTablesList(userTables);
-		EasyUIDataGrid eudg = userTablesService.findUserTablesListTotal(userTables);
+		List<UserTables> userTablesList = userTablesService.findList(userTables);
+		int total = userTablesService.findTotal(userTables);
+		EasyUIDataGrid eudg = new EasyUIDataGrid();
 		eudg.setRows(userTablesList);
-		JSONObject jsonObj = JSONObject.fromObject(eudg);
-		RequestResponseUtil.putResponseStr(session, response, request, jsonObj);
-		return null;
+		eudg.setTotal(String.valueOf(total));
+		return eudg;
 	}
 	
 	/**
@@ -92,15 +77,13 @@ public class UserTablesController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequiresPermissions("sys:userTables:select")
-	@RequestMapping(value = "/getAllListData", method=RequestMethod.POST)
+	@RequestMapping(value = "/list/all", method=RequestMethod.POST)
 	@ResponseBody
-	public String getAllListData(HttpSession session,
+	public Object listAll(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, UserTables userTables) throws Exception{
-		List<UserTables> userTablesList = userTablesService.findAllUserTablesList(userTables);
-		JSONArray jsonObj = JSONArray.fromObject(userTablesList);
-		RequestResponseUtil.putResponseStr(session, response, request, jsonObj);
-		return null;
+		List<UserTables> userTablesList = userTablesService.findAll(userTables);
+		return userTablesList;
 	}
 	
 }

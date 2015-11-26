@@ -34,12 +34,12 @@ public class UserTabColumnsService extends BaseService {
 
 	/**
 	 * 根据ID查询单条数据
-	 * @param id
+	 * @param columnName
 	 * @return
 	 * @throws CRUDException
 	 */
-	public UserTabColumns findUserTabColumnsById(String columnName) throws CRUDException{
-		return userTabColumnsMapper.findUserTabColumnsById(columnName);
+	public UserTabColumns findOne(String columnName) throws CRUDException{
+		return userTabColumnsMapper.findOne(columnName);
 	}
 	
 	/**
@@ -48,8 +48,8 @@ public class UserTabColumnsService extends BaseService {
 	 * @return
 	 * @throws CRUDException
 	 */
-	public List<UserTabColumns> findUserTabColumnsList(UserTabColumns userTabColumns) throws CRUDException {
-		return userTabColumnsMapper.findUserTabColumnsList(userTabColumns);
+	public List<UserTabColumns> findList(UserTabColumns userTabColumns) throws CRUDException {
+		return userTabColumnsMapper.findList(userTabColumns);
 	}
 	
 	/**
@@ -58,8 +58,8 @@ public class UserTabColumnsService extends BaseService {
 	 * @return
 	 * @throws CRUDException
 	 */
-	public List<UserTabColumns> findAllUserTabColumnsList(UserTabColumns userTabColumns) throws CRUDException {
-		return userTabColumnsMapper.findAllUserTabColumnsList(userTabColumns);
+	public List<UserTabColumns> findAll(UserTabColumns userTabColumns) throws CRUDException {
+		return userTabColumnsMapper.findAll(userTabColumns);
 	}
 	
 	/**
@@ -68,18 +68,8 @@ public class UserTabColumnsService extends BaseService {
 	 * @return
 	 * @throws CRUDException
 	 */
-	public EasyUIDataGrid findUserTabColumnsListTotal(UserTabColumns userTabColumns) throws CRUDException {
-		return userTabColumnsMapper.findUserTabColumnsListTotal(userTabColumns);
-	}
-	
-	/**
-	 * 查询数据总数
-	 * @param userTabColumns
-	 * @return
-	 * @throws CRUDException
-	 */
-	public int findUserTabColumnsTotal(UserTabColumns userTabColumns) throws CRUDException {
-		return userTabColumnsMapper.findUserTabColumnsTotal(userTabColumns);
+	public int findTotal(UserTabColumns userTabColumns) throws CRUDException {
+		return userTabColumnsMapper.findTotal(userTabColumns);
 	}
 	
 }

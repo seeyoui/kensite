@@ -34,12 +34,12 @@ public class UserTablesService extends BaseService {
 
 	/**
 	 * 根据ID查询单条数据
-	 * @param id
+	 * @param tableName
 	 * @return
 	 * @throws CRUDException
 	 */
-	public UserTables findUserTablesById(String tableName) throws CRUDException{
-		return userTablesMapper.findUserTablesById(tableName);
+	public UserTables findOne(String tableName) throws CRUDException{
+		return userTablesMapper.findOne(tableName);
 	}
 	
 	/**
@@ -48,8 +48,8 @@ public class UserTablesService extends BaseService {
 	 * @return
 	 * @throws CRUDException
 	 */
-	public List<UserTables> findUserTablesList(UserTables userTables) throws CRUDException {
-		return userTablesMapper.findUserTablesList(userTables);
+	public List<UserTables> findList(UserTables userTables) throws CRUDException {
+		return userTablesMapper.findList(userTables);
 	}
 	
 	/**
@@ -58,8 +58,8 @@ public class UserTablesService extends BaseService {
 	 * @return
 	 * @throws CRUDException
 	 */
-	public List<UserTables> findAllUserTablesList(UserTables userTables) throws CRUDException {
-		return userTablesMapper.findAllUserTablesList(userTables);
+	public List<UserTables> findAll(UserTables userTables) throws CRUDException {
+		return userTablesMapper.findAll(userTables);
 	}
 	
 	/**
@@ -68,18 +68,8 @@ public class UserTablesService extends BaseService {
 	 * @return
 	 * @throws CRUDException
 	 */
-	public EasyUIDataGrid findUserTablesListTotal(UserTables userTables) throws CRUDException {
-		return userTablesMapper.findUserTablesListTotal(userTables);
-	}
-	
-	/**
-	 * 查询数据总数
-	 * @param userTables
-	 * @return
-	 * @throws CRUDException
-	 */
-	public int findUserTablesTotal(UserTables userTables) throws CRUDException {
-		return userTablesMapper.findUserTablesTotal(userTables);
+	public int findTotal(UserTables userTables) throws CRUDException {
+		return userTablesMapper.findTotal(userTables);
 	}
 	
 }

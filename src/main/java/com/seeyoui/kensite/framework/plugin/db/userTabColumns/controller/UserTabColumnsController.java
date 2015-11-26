@@ -49,21 +49,6 @@ public class UserTabColumnsController extends BaseController {
 	private UserTabColumnsService userTabColumnsService;
 	
 	/**
-	 * 展示列表页面
-	 * @param modelMap
-	 * @param module
-	 * @return
-	 * @throws Exception
-	 */
-	@RequiresPermissions("sys:userTabColumns:view")
-	@RequestMapping(value = "/showPageList")
-	public ModelAndView showUserTabColumnsPageList(HttpSession session,
-			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap) throws Exception {
-		return new ModelAndView("framework/plugin/db/userTabColumns/userTabColumns", modelMap);
-	}
-	
-	/**
 	 * 获取列表展示数据
 	 * @param modelMap
 	 * @param userTabColumns
@@ -71,17 +56,17 @@ public class UserTabColumnsController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequiresPermissions("sys:userTabColumns:select")
-	@RequestMapping(value = "/getListData", method=RequestMethod.POST)
+	@RequestMapping(value = "/list/data", method=RequestMethod.POST)
 	@ResponseBody
-	public String getListData(HttpSession session,
+	public Object listData(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, UserTabColumns userTabColumns) throws Exception{
-		List<UserTabColumns> userTabColumnsList = userTabColumnsService.findUserTabColumnsList(userTabColumns);
-		EasyUIDataGrid eudg = userTabColumnsService.findUserTabColumnsListTotal(userTabColumns);
+		List<UserTabColumns> userTabColumnsList = userTabColumnsService.findList(userTabColumns);
+		int total = userTabColumnsService.findTotal(userTabColumns);
+		EasyUIDataGrid eudg = new EasyUIDataGrid();
 		eudg.setRows(userTabColumnsList);
-		JSONObject jsonObj = JSONObject.fromObject(eudg);
-		RequestResponseUtil.putResponseStr(session, response, request, jsonObj);
-		return null;
+		eudg.setTotal(String.valueOf(total));
+		return eudg;
 	}
 	
 	/**
@@ -92,15 +77,13 @@ public class UserTabColumnsController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequiresPermissions("sys:userTabColumns:select")
-	@RequestMapping(value = "/getAllListData", method=RequestMethod.POST)
+	@RequestMapping(value = "/list/all", method=RequestMethod.POST)
 	@ResponseBody
-	public String getAllListData(HttpSession session,
+	public Object listAll(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, UserTabColumns userTabColumns) throws Exception{
-		List<UserTabColumns> userTabColumnsList = userTabColumnsService.findAllUserTabColumnsList(userTabColumns);
-		JSONArray jsonObj = JSONArray.fromObject(userTabColumnsList);
-		RequestResponseUtil.putResponseStr(session, response, request, jsonObj);
-		return null;
+		List<UserTabColumns> userTabColumnsList = userTabColumnsService.findAll(userTabColumns);
+		return userTabColumnsList;
 	}
 	
 }

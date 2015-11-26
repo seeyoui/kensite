@@ -19,37 +19,30 @@ public interface UserTabColumnsMapper {
 
 	/**
 	 * 根据ID查询单条数据
-	 * @param id
+	 * @param columnName
 	 * @return
 	 */
-	public UserTabColumns findUserTabColumnsById(String columnName);
+	public UserTabColumns findOne(String columnName);
 	
 	/**
 	 * 查询数据集合
 	 * @param userTabColumns
 	 * @return
 	 */
-	public List<UserTabColumns> findUserTabColumnsList(UserTabColumns userTabColumns);
+	public List<UserTabColumns> findList(UserTabColumns userTabColumns);
 	
 	/**
 	 * 查询所有数据集合
 	 * @param userTabColumns
 	 * @return
 	 */
-	public List<UserTabColumns> findAllUserTabColumnsList(UserTabColumns userTabColumns);
+	public List<UserTabColumns> findAll(UserTabColumns userTabColumns);
 	
 	/**
 	 * 查询数据总数
 	 * @param userTabColumns
 	 * @return
 	 */
-	public EasyUIDataGrid findUserTabColumnsListTotal(UserTabColumns userTabColumns);
-	
-	/**
-	 * 查询数据总数
-	 * @param userTabColumns
-	 * @return
-	 */
-	public int findUserTabColumnsTotal(UserTabColumns userTabColumns);
+	public int findTotal(UserTabColumns userTabColumns);
 	
 }

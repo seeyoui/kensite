@@ -14,7 +14,7 @@
  	<div style="position:absolute;top:0px;left:0px;right:0px;bottom:0px;">
 		<div style="position:absolute;top:0px;bottom:0px;width:600px;">
 		    <table id="dataList" title="数据表" class="easyui-datagrid" style="width:100%;height:100%"
-		    		url="${ctx}/sys/userTables/getListData.do"
+		    		url="${ctx}/sys/userTables/list/data"
 		            toolbar="#toolbar" pagination="true"
 		            rownumbers="true" fitColumns="true" singleSelect="false">
 		        <thead>
@@ -90,7 +90,7 @@
     function changeTabCol(tableName) {
     	//清空历史查询结果
     	$('#subDataList').datagrid('loadData',{total:0,rows:[]});
-    	$('#subDataList').datagrid({url:'${ctx}/sys/userTabColumns/getListData.do?tableName='+tableName});
+    	$('#subDataList').datagrid({url:'${ctx}/sys/userTabColumns/list/data?tableName='+tableName});
     }
     
     function selectData() {
@@ -166,7 +166,7 @@
     	if(tableName == null) {
     		return;
     	}
-    	window.open("${ctx}/sys/db/export.do?tableName="+tableName);
+    	window.open("${ctx}/sys/db/export?tableName="+tableName);
     }
     </script>
   </body>

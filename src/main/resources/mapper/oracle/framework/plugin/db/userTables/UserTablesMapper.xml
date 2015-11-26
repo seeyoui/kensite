@@ -38,7 +38,7 @@
 	</sql>
 	
 	<!-- 根据ID查询单条数据 -->
-	<select id="findUserTablesById" resultType="com.seeyoui.kensite.framework.plugin.db.userTables.domain.UserTables">
+	<select id="findOne" resultType="com.seeyoui.kensite.framework.plugin.db.userTables.domain.UserTables">
 		SELECT
 		<include refid="tableColumns" />
 		FROM USER_TABLES T
@@ -47,7 +47,7 @@
 	</select>
 	
 	<!-- 查询数据集合 -->
-	<select id="findUserTablesList" resultType="com.seeyoui.kensite.framework.plugin.db.userTables.domain.UserTables">
+	<select id="findList" resultType="com.seeyoui.kensite.framework.plugin.db.userTables.domain.UserTables">
 		select * from(select T.*,rownum rn from(
 			SELECT
 			<include refid="tableColumns"/>
@@ -59,7 +59,7 @@
 	</select>
 	
 	<!-- 查询所有数据集合 -->
-	<select id="findAllUserTablesList" resultType="com.seeyoui.kensite.framework.plugin.db.userTables.domain.UserTables">
+	<select id="findAll" resultType="com.seeyoui.kensite.framework.plugin.db.userTables.domain.UserTables">
 		SELECT
 		<include refid="tableColumns"/>
 		FROM USER_TABLES T
@@ -69,16 +69,7 @@
 	</select>
 	
 	<!-- 查询数据总数 -->
-	<select id="findUserTablesListTotal" resultType="EasyUIDataGrid">
-		SELECT
-		COUNT(1) total
-		FROM USER_TABLES T
-		<include refid="joinOn" />
-		<include refid="whereStr"/>
-	</select>
-	
-	<!-- 查询数据总数 -->
-	<select id="findUserTablesTotal" resultType="Integer">
+	<select id="findTotal" resultType="Integer">
 		SELECT
 		COUNT(1) total
 		FROM USER_TABLES T

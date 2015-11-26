@@ -14,6 +14,7 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -44,11 +45,11 @@ public class DBColumnsController extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/showPageList")
+	@RequestMapping(value = "/{page}")
 	public ModelAndView showDBPageList(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap) throws Exception {
-		return new ModelAndView("framework/plugin/db/db", modelMap);
+			ModelMap modelMap, @PathVariable String page) throws Exception {
+		return new ModelAndView("framework/plugin/db/"+page, modelMap);
 	}
 	
 	/**
@@ -64,7 +65,7 @@ public class DBColumnsController extends BaseController {
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, UserTabColumns userTabColumns) throws Exception{
 		String fileName = "DATABASE_DICTIONARY"+DateUtils.getDate("yyyyMMddHHmmss")+".xlsx";
-		List<UserTabColumns> userTabColumnsList = userTabColumnsService.findAllUserTabColumnsList(userTabColumns);
+		List<UserTabColumns> userTabColumnsList = userTabColumnsService.findAll(userTabColumns);
 		new ExportExcel(userTabColumns.getTableName(), UserTabColumns.class).setDataList(userTabColumnsList).write(response, fileName).dispose();
 		return null;
 	}

@@ -22,34 +22,27 @@ public interface UserTablesMapper {
 	 * @param tableName
 	 * @return
 	 */
-	public UserTables findUserTablesById(String tableName);
+	public UserTables findOne(String tableName);
 	
 	/**
 	 * 查询数据集合
 	 * @param userTables
 	 * @return
 	 */
-	public List<UserTables> findUserTablesList(UserTables userTables);
+	public List<UserTables> findList(UserTables userTables);
 	
 	/**
 	 * 查询所有数据集合
 	 * @param userTables
 	 * @return
 	 */
-	public List<UserTables> findAllUserTablesList(UserTables userTables);
+	public List<UserTables> findAll(UserTables userTables);
 	
 	/**
 	 * 查询数据总数
 	 * @param userTables
 	 * @return
 	 */
-	public EasyUIDataGrid findUserTablesListTotal(UserTables userTables);
-	
-	/**
-	 * 查询数据总数
-	 * @param userTables
-	 * @return
-	 */
-	public int findUserTablesTotal(UserTables userTables);
+	public int findTotal(UserTables userTables);
 	
 }
