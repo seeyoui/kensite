@@ -63,7 +63,7 @@ public class SysMenuController extends BaseController {
 			ModelMap modelMap) throws Exception {
 		String ctxPath = request.getSession().getServletContext().getRealPath("/"); 
 		List<String> menuIconList = new ArrayList<String>();
-		Skins skin = skinsService.findCurrentSkins();
+		Skins skin = skinsService.findCurrent();
 		String skinsUrl = "";
     	if(skin!=null && !"".equals(skin.getUrl())) {
     		skinsUrl = skin.getUrl();

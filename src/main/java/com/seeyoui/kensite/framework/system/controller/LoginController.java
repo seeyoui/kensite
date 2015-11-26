@@ -134,7 +134,7 @@ public class LoginController {
 	 * 获取系统皮肤方案
 	 */
 	public String getSysSkins() {
-    	Skins skin = skinsService.findCurrentSkins();
+    	Skins skin = skinsService.findCurrent();
     	if(skin==null || skin.getUrl()==null || "".equals(skin.getUrl())) {
     		return "skins/poor/main";
     	} else {
