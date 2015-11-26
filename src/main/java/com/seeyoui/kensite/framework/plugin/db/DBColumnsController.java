@@ -46,7 +46,7 @@ public class DBColumnsController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/{page}")
-	public ModelAndView showDBPageList(HttpSession session,
+	public ModelAndView view(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, @PathVariable String page) throws Exception {
 		return new ModelAndView("framework/plugin/db/"+page, modelMap);
