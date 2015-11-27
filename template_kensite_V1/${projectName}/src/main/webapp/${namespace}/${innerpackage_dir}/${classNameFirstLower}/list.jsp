@@ -119,26 +119,6 @@ ${column.columnNameLower}:sel_${column.columnNameLower}
 			    </#list>
 			    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="selectData()">查询</a>
 		    </div>
-		    <div id="dataWin" class="easyui-window" title="${table.tableAlias}信息维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:400px;height:260px;padding:10px;">
-		        <div class="ftitle">${table.tableAlias}信息维护</div>
-		        <form id="dataForm" method="post">
-					<#list table.columns as column>
-		            	<#if (column.columnName?lower_case=="id"||column.columnName?lower_case=="createuser"||column.columnName?lower_case=="createdate"||column.columnName?lower_case=="updateuser"||column.columnName?lower_case=="updatedate"||column.columnName?lower_case=="remarks"||column.columnName?lower_case=="delflag") >
-		            	<#else>
-							<div class="fitem">
-				                <label>${column.columnAlias}</label>
-				                ${getFormInputHtml(column)}
-				                <span id="msg-${column.columnName?lower_case}" class="err-msg"></span>
-				            </div>
-						</#if>
-					</#list>
-				</form>
-				
-			    <div id="dataWin-buttons">
-			        <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveInfo()" style="width:90px">保存</a>
-			        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dataWin').window('close')" style="width:90px">取消</a>
-			    </div>
-		    </div>
 	    </div>
     </div>
     <script type="text/javascript">
@@ -161,48 +141,44 @@ ${column.columnNameLower}:sel_${column.columnNameLower}
 	    
         var url;
         function newInfo(){
-            cleanErrMsg();
-            $('#dataForm').form('clear');
-            $('#dataWin').window('open');
-            url = '${"${"}ctx${"}"}/${moduleC}${table.classNameFirstLower}/save';
+        	$('#dataList').datagrid('clearSelections');
+            layerOpen(url);
         }
         function editInfo(){
             var row = $('#dataList').datagrid('getSelected');
             if (row){
-            	cleanErrMsg();
-                $('#dataForm').form('load',row);
-                $('#dataWin').window('open');
-                url = '${"${"}ctx${"}"}/${moduleC}${table.classNameFirstLower}/update?id='+row.id;
+                 layerOpen(url);
             }    	
         }
         function exportExcel() {
         	window.open("${"${"}ctx${"}"}/${moduleC}${table.classNameFirstLower}/export");
         }
-        var loadi;
-        function saveInfo(){
-            $('#dataForm').form('submit',{
-                url: url,
-                onSubmit: function(param){
-                	if($(this).form('validate')) {
-                		loadi = layer.load(2, {time: layerLoadMaxTime});
-                	}
-                    return $(this).form('validate');
-                },
-                success: function(info){
-                	layer.close(loadi);
-                    cleanErrMsg();
-                	data = eval('(' + info + ')');
-                    if (data.success==TRUE){
-	                	layer.msg("操作成功！", {offset: 'rb',icon: 6,shift: 8,time: layerMsgTime});
-                		$('#dataWin').window('close'); 
-	            		reloadData();
-	                } else {
-	                    layer.msg("操作失败！", {offset: 'rb',icon: 5,shift: 8,time: layerMsgTime});
-	                    renderErrMsg(data.message);
-	                }
-                }
-            });
+        var iframeWin = null, iframeBody=null;
+        function layerOpen(url) {
+            url = '${"${"}ctx${"}"}/${moduleC}${table.classNameFirstLower}/form';
+        	layer.open({
+        	    type: 2,
+        	    title: '${table.tableAlias}基本信息',
+        	    area: ['300px', '350px'],
+        	    fix: false, //不固定
+        	    maxmin: false,
+        	    content: url,
+        	    btn: ['保存', '取消'],
+	            success: function(layero, index){
+	                iframeBody = layer.getChildFrame('body', index);
+	                iframeWin = window[layero.find('iframe')[0]['name']];
+	            },
+        	    yes: function(index, layero) {
+        	    	if(iframeWin != null) {
+        	    		iframeWin.submitInfo();
+        	    	}
+        	    },
+        	    cancel: function(index){
+        	    	layer.close(index);
+        	    }
+        	});
         }
+        var loadi;
         function destroyInfo(){
             var row = $('#dataList').datagrid('getSelected');
             if (row){
