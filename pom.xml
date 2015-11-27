@@ -40,6 +40,7 @@
 		<dozer.version>5.5.1</dozer.version>
 		<poi.version>3.9</poi.version>
 		<freemarker.version>2.3.20</freemarker.version>
+		<lucene.version>5.3.1</lucene.version><!-- 4.0.0 -->
 		
 		<!-- jdbc driver setting -->
 		<mysql.driver.version>5.1.30</mysql.driver.version>
@@ -543,6 +544,23 @@
 			<groupId>org.freemarker</groupId>
 			<artifactId>freemarker</artifactId>
 			<version>${freemarker.version}</version>
+		</dependency>
+		
+		<!-- lucene -->
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-core</artifactId>
+			<version>${lucene.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-queryparser</artifactId>
+			<version>${lucene.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-analyzers-common</artifactId>
+			<version>${lucene.version}</version>
 		</dependency>
 		
 		<!-- email -->
