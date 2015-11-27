@@ -43,7 +43,7 @@
 	</sql>
 	
 	<!-- 根据ID查询单条数据 -->
-	<select id="findSysMenuById" resultType="com.seeyoui.kensite.framework.system.domain.SysMenu">
+	<select id="findOne" resultType="com.seeyoui.kensite.framework.system.domain.SysMenu">
 		SELECT
 		<include refid="tableColumns" />
 		FROM SYS_MENU t
@@ -51,7 +51,7 @@
 	</select>
 	
 	<!-- 查询数据集合 -->
-	<select id="findSysMenuList" resultType="com.seeyoui.kensite.framework.system.domain.SysMenu">
+	<select id="findList" resultType="com.seeyoui.kensite.framework.system.domain.SysMenu">
 		select * from(select t.*,rownum rn from(
 			SELECT
 			<include refid="tableColumns"/>
@@ -61,16 +61,24 @@
 		) t where rownum &lt; = #{page}*#{rows}) where rn &gt; (#{page}-1)*#{rows}
 	</select>
 	
-	<!-- 查询数据总数 -->
-	<select id="findSysMenuListTotal" resultType="EasyUIDataGrid">
+	<!-- 查询数据集合 -->
+	<select id="findAll" resultType="com.seeyoui.kensite.framework.system.domain.SysMenu">
 		SELECT
-		COUNT(id)total
+		<include refid="tableColumns"/>
+		FROM SYS_MENU t
+		<include refid="whereStr"/>
+		<include refid="orderBy"/>
+	</select>
+	
+	<!-- 查询数据总数 -->
+	<select id="findTotal" resultType="Integer">
+		SELECT COUNT(1)
 		FROM SYS_MENU t
 		<include refid="whereStr"/>
 	</select>
 	
 	<!-- 查询数据TREE -->
-	<select id="findSysMenuTree" resultType="com.seeyoui.kensite.framework.system.domain.SysMenu" parameterType="com.seeyoui.kensite.framework.system.domain.SysUser">
+	<select id="findTree" resultType="com.seeyoui.kensite.framework.system.domain.SysMenu" parameterType="com.seeyoui.kensite.framework.system.domain.SysUser">
 		SELECT 
 		<include refid="tableColumns"/>
 		from sys_user su
@@ -91,19 +99,9 @@
 		ORDER BY t.sequence ASC
 	</select>
 	
-	<!-- 查询数据TREE -->
-	<select id="getTreeJson" resultType="com.seeyoui.kensite.framework.system.domain.SysMenu" parameterType="com.seeyoui.kensite.framework.system.domain.SysUser">
-		SELECT 
-		<include refid="tableColumns"/>
-		from 
-		sys_menu t
-		ORDER BY t.sequence ASC
-	</select>
-	
 	<!-- 数据新增 -->
-	<insert id="saveSysMenu" parameterType="com.seeyoui.kensite.framework.system.domain.SysMenu">
+	<insert id="save" parameterType="com.seeyoui.kensite.framework.system.domain.SysMenu">
 		INSERT INTO SYS_MENU (
-	    	
 	    	parent_id,
 	    	name,
 	    	url,
@@ -113,7 +111,6 @@
 		    id
 		)
 		VALUES (
-			
 			#{parentId},
 			#{name},
 			#{url},
@@ -125,10 +122,9 @@
 	</insert>
 	
 	<!-- 数据修改 -->
-	<update id="updateSysMenu" parameterType="com.seeyoui.kensite.framework.system.domain.SysMenu">
+	<update id="update" parameterType="com.seeyoui.kensite.framework.system.domain.SysMenu">
 		UPDATE SYS_MENU
 		<set>
-	    	
 	    	<if test="parentId !=null and parentId !=''">
 			parent_id=#{parentId},
 			</if>
@@ -153,7 +149,7 @@
 	</update>
 	
 	<!-- 数据删除 -->
-	<delete id="deleteSysMenu">
+	<delete id="delete">
 		DELETE FROM SYS_MENU WHERE id IN 
 		<foreach item="listId" collection="list"
 			open="(" separator="," close=")">

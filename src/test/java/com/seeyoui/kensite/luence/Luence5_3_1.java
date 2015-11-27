@@ -57,7 +57,7 @@ public class Luence5_3_1 {
 	    Query query;
 		try {
 			query = parser.parse("foreach");
-			ScoreDoc[] hits = isearcher.search(query, null, 1000).scoreDocs;
+			ScoreDoc[] hits = isearcher.search(query, 1000).scoreDocs;
 			//迭代输出结果
 			for (int i = 0; i < hits.length; i++) {
 				Document hitDoc = isearcher.doc(hits[i].doc);

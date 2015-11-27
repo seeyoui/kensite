@@ -38,8 +38,8 @@ public class SysMenuService extends BaseService {
 	 * @return
 	 * @throws CRUDException
 	 */
-	public SysMenu findSysMenuById(String id) throws CRUDException{
-		return sysMenuMapper.findSysMenuById(id);
+	public SysMenu findOne(String id) throws CRUDException{
+		return sysMenuMapper.findOne(id);
 	}
 	
 	/**
@@ -48,8 +48,28 @@ public class SysMenuService extends BaseService {
 	 * @return
 	 * @throws CRUDException
 	 */
-	public List<SysMenu> findSysMenuList(SysMenu sysMenu) throws CRUDException {
-		return sysMenuMapper.findSysMenuList(sysMenu);
+	public List<SysMenu> findList(SysMenu sysMenu) throws CRUDException {
+		return sysMenuMapper.findList(sysMenu);
+	}
+	
+	/**
+	 * 查询数据集合
+	 * @param sysMenu
+	 * @return
+	 * @throws CRUDException
+	 */
+	public List<SysMenu> findAll(SysMenu sysMenu) throws CRUDException {
+		return sysMenuMapper.findAll(sysMenu);
+	}
+	
+	/**
+	 * 查询数据集合
+	 * @param sysMenu
+	 * @return
+	 * @throws CRUDException
+	 */
+	public Integer findTotal(SysMenu sysMenu) throws CRUDException {
+		return sysMenuMapper.findTotal(sysMenu);
 	}
 	
 	/**
@@ -58,7 +78,7 @@ public class SysMenuService extends BaseService {
 	 * @return
 	 * @throws CRUDException
 	 */
-	public List<TreeJson> findSysMenuTree(SysUser sysUser) throws CRUDException {
+	public List<TreeJson> findTree(SysUser sysUser) throws CRUDException {
 		TreeJson root = UserUtils.getMenuTree();
 		return root.getChildren();
 	}
@@ -70,7 +90,7 @@ public class SysMenuService extends BaseService {
 	 * @throws CRUDException
 	 */
 	public List<TreeJson> getTreeJson() throws CRUDException {
-		List<SysMenu> mList = sysMenuMapper.getTreeJson();
+		List<SysMenu> mList = sysMenuMapper.findAll(null);
 		List<TreeJson> tList = new ArrayList<TreeJson>();
 		for(int i=0; i<mList.size(); i++) {
 			TreeJson tj = new TreeJson();
@@ -93,23 +113,13 @@ public class SysMenuService extends BaseService {
 	}
 	
 	/**
-	 * 查询数据总数
-	 * @param userinfo
-	 * @return
-	 * @throws CRUDException
-	 */
-	public EasyUIDataGrid findSysMenuListTotal(SysMenu sysMenu) throws CRUDException {
-		return sysMenuMapper.findSysMenuListTotal(sysMenu);
-	}
-	
-	/**
 	 * 数据新增
 	 * @param sysMenu
 	 * @throws CRUDException
 	 */
-	public void saveSysMenu(SysMenu sysMenu) throws CRUDException{
-		sysMenu.setId(GeneratorUUID.getId());
-		sysMenuMapper.saveSysMenu(sysMenu);
+	public void save(SysMenu sysMenu) throws CRUDException{
+		sysMenu.preInsert();
+		sysMenuMapper.save(sysMenu);
 	}
 	
 	/**
@@ -117,8 +127,9 @@ public class SysMenuService extends BaseService {
 	 * @param sysMenu
 	 * @throws CRUDException
 	 */
-	public void updateSysMenu(SysMenu sysMenu) throws CRUDException{
-		sysMenuMapper.updateSysMenu(sysMenu);			
+	public void update(SysMenu sysMenu) throws CRUDException{
+		sysMenu.preUpdate();
+		sysMenuMapper.update(sysMenu);			
 	}
 	
 	/**
@@ -126,8 +137,8 @@ public class SysMenuService extends BaseService {
 	 * @param listId
 	 * @throws CRUDException
 	 */
-	public void deleteSysMenu(List<String> listId) throws CRUDException {
-		sysMenuMapper.deleteSysMenu(listId);
+	public void delete(List<String> listId) throws CRUDException {
+		sysMenuMapper.delete(listId);
 	}
 	
 }

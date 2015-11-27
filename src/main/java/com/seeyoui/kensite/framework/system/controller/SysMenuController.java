@@ -20,6 +20,7 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -58,10 +59,10 @@ public class SysMenuController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequiresPermissions("sysMenu:view")
-	@RequestMapping(value = "/showPageList")
-	public ModelAndView showSysMenuPageList(HttpSession session,
+	@RequestMapping(value = "/{page}")
+	public ModelAndView view(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap) throws Exception {
+			ModelMap modelMap, @PathVariable String page) throws Exception {
 		String ctxPath = request.getSession().getServletContext().getRealPath("/"); 
 		List<String> menuIconList = new ArrayList<String>();
 		Skins skin = SkinsUtils.getCurSysSkins();
@@ -81,7 +82,7 @@ public class SysMenuController extends BaseController {
 			}
 		}
 		modelMap.put("menuIconList", menuIconList);
-		return new ModelAndView("framework/system/sysMenu", modelMap);
+		return new ModelAndView("framework/system/menu/"+page, modelMap);
 	}
 	
 	/**
@@ -92,17 +93,34 @@ public class SysMenuController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequiresPermissions("sysMenu:select")
-	@RequestMapping(value = "/getListData", method=RequestMethod.POST)
+	@RequestMapping(value = "/list/data", method=RequestMethod.POST)
 	@ResponseBody
-	public String getListData(HttpSession session,
+	public Object listData(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, SysMenu sysMenu) throws Exception{
-		List<SysMenu> sysMenuList = sysMenuService.findSysMenuList(sysMenu);
-		EasyUIDataGrid eudg = sysMenuService.findSysMenuListTotal(sysMenu);
+		List<SysMenu> sysMenuList = sysMenuService.findList(sysMenu);
+		int total = sysMenuService.findTotal(sysMenu);
+		EasyUIDataGrid eudg = new EasyUIDataGrid();
 		eudg.setRows(sysMenuList);
-		JSONObject jsonObj = JSONObject.fromObject(eudg);
-		RequestResponseUtil.putResponseStr(session, response, request, jsonObj);
-		return null;
+		eudg.setTotal(String.valueOf(total));
+		return eudg;
+	}
+	
+	/**
+	 * 获取列表展示数据
+	 * @param modelMap
+	 * @param sysMenu
+	 * @return
+	 * @throws Exception
+	 */
+	@RequiresPermissions("sysMenu:select")
+	@RequestMapping(value = "/list/all", method=RequestMethod.POST)
+	@ResponseBody
+	public Object listAll(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap, SysMenu sysMenu) throws Exception{
+		List<SysMenu> sysMenuList = sysMenuService.findAll(sysMenu);
+		return sysMenuList;
 	}
 	
 	/**
@@ -129,16 +147,16 @@ public class SysMenuController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequiresPermissions("sysMenu:insert")
-	@RequestMapping(value = "/saveByAdd", method=RequestMethod.POST)
+	@RequestMapping(value = "/save", method=RequestMethod.POST)
 	@ResponseBody
-	public String saveSysMenuByAdd(HttpSession session,
+	public String save(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, SysMenu sysMenu) throws Exception{
 		if (!beanValidator(modelMap, sysMenu)){
 			RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
 			return null;
 		}
-		sysMenuService.saveSysMenu(sysMenu);
+		sysMenuService.save(sysMenu);
 		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}
@@ -151,16 +169,16 @@ public class SysMenuController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequiresPermissions("sysMenu:update")
-	@RequestMapping(value = "/saveByUpdate", method=RequestMethod.POST)
+	@RequestMapping(value = "/update", method=RequestMethod.POST)
 	@ResponseBody
-	public String saveSysMenuByUpdate(HttpSession session,
+	public String update(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, SysMenu sysMenu) throws Exception{
 		if (!beanValidator(modelMap, sysMenu)){
 			RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
 			return null;
 		}
-		sysMenuService.updateSysMenu(sysMenu);
+		sysMenuService.update(sysMenu);
 		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}
@@ -177,9 +195,9 @@ public class SysMenuController extends BaseController {
 	@ResponseBody
 	public String delete(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap, String delDataId) throws Exception {
-		List<String> listId = Arrays.asList(delDataId.split(","));
-		sysMenuService.deleteSysMenu(listId);
+			ModelMap modelMap, String id) throws Exception {
+		List<String> listId = Arrays.asList(id.split(","));
+		sysMenuService.delete(listId);
 		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}

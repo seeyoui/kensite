@@ -163,7 +163,7 @@ public class UserUtils {
 		@SuppressWarnings("unchecked")
 		List<SysMenu> menuList = (List<SysMenu>)getCache(CACHE_MENU_LIST + sysUser.getId());
 		if (menuList == null){
-			menuList = sysMenuMapper.findSysMenuTree(sysUser);
+			menuList = sysMenuMapper.findTree(sysUser);
 			putCache(CACHE_MENU_LIST + sysUser.getId(), menuList);
 			putCache(CACHE_MENU_LIST + sysUser.getUserName(), menuList);
 		}
@@ -175,7 +175,7 @@ public class UserUtils {
 		@SuppressWarnings("unchecked")
 		TreeJson menuTree = (TreeJson)getCache(CACHE_MENU_TREE + sysUser.getId());
 		if (menuTree == null){
-			List<SysMenu> mList = sysMenuMapper.findSysMenuTree(sysUser);
+			List<SysMenu> mList = sysMenuMapper.findTree(sysUser);
 			ArrayList<TreeJson> tList = new ArrayList<TreeJson>();
 			for(int i=0; i<mList.size(); i++) {
 				TreeJson tj = new TreeJson();

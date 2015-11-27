@@ -4,31 +4,25 @@
  */
 package com.seeyoui.kensite.framework.system.domain;  
 
-import com.seeyoui.kensite.common.base.domain.Pager;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.seeyoui.kensite.common.base.domain.DataEntity;
 
 /**
  * @author cuichen
  * @version 1.0
  * @since 1.0
  */
-public class SysMenu extends Pager {  
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class SysMenu extends DataEntity<SysMenu> {
     private static final long serialVersionUID = 5454155825314635342L;  
       
-    private String id;  
-    private String parentId;  
-    private String name;  
-    private String url;  
-    private Long sequence;  
-    private String icon;  
-    private String target;  
+    private String parentId;
+    private String name;
+    private String url;
+    private Long sequence;
+    private String icon;
+    private String target;
  
-    public void setId(String id) {  
-        this.id = id;  
-    }  
-      
-    public String getId() {  
-        return this.id;  
-    }  
     public void setParentId(String parentId) {  
         this.parentId = parentId;  
     }  

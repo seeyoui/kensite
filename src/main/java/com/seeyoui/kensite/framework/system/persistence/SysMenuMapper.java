@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.seeyoui.kensite.common.base.domain.EasyUIDataGrid;
 import com.seeyoui.kensite.common.exception.CRUDException;
+import com.seeyoui.kensite.framework.system.domain.SysDepartment;
 import com.seeyoui.kensite.framework.system.domain.SysMenu;
 import com.seeyoui.kensite.framework.system.domain.SysRole;
 import com.seeyoui.kensite.framework.system.domain.SysUser;
@@ -24,53 +25,53 @@ public interface SysMenuMapper {
 	 * @param id
 	 * @return
 	 */
-	public SysMenu findSysMenuById(String id);
+	public SysMenu findOne(String id);
 	
 	/**
 	 * 查询数据集合
 	 * @param sysMenu
 	 * @return
 	 */
-	public List<SysMenu> findSysMenuList(SysMenu sysMenu);
+	public List<SysMenu> findList(SysMenu sysMenu);
 	
 	/**
 	 * 查询数据TREE
-	 * @param map
+	 * @param sysUser
 	 * @return
 	 * @throws CRUDException
 	 */
-	public List<SysMenu> findSysMenuTree(SysUser sysUser);
+	public List<SysMenu> findTree(SysUser sysUser);
 	
 	/**
 	 * 查询数据TREE
-	 * @param map
+	 * @param sysMenu
 	 * @return
 	 * @throws CRUDException
 	 */
-	public List<SysMenu> getTreeJson();
+	public List<SysMenu> findAll(SysMenu sysMenu);
 	
 	/**
 	 * 查询数据总数
-	 * @param userinfo
+	 * @param sysMenu
 	 * @return
 	 */
-	public EasyUIDataGrid findSysMenuListTotal(SysMenu sysMenu);
+	public Integer findTotal(SysMenu sysMenu);
 	
 	/**
 	 * 数据新增
 	 * @param sysMenu
 	 */
-	public void saveSysMenu(SysMenu sysMenu);
+	public void save(SysMenu sysMenu);
 	
 	/**
 	 * 数据修改
 	 * @param sysMenu
 	 */
-	public void updateSysMenu(SysMenu sysMenu);
+	public void update(SysMenu sysMenu);
 	
 	/**
 	 * 数据删除
 	 * @param listId
 	 */
-	public void deleteSysMenu(List<String> listId);
+	public void delete(List<String> listId);
 }
