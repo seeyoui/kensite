@@ -624,6 +624,29 @@
 			<version>20150729</version>
 		</dependency>
 		
+		<!-- 极光推送 -->
+		<dependency>
+		    <groupId>cn.jpush.api</groupId>
+		    <artifactId>jpush-client</artifactId>
+		    <version>3.1.3</version>
+		</dependency>
+		<dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.2.4</version>
+        </dependency>
+		<dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>17.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.okhttp</groupId>
+            <artifactId>mockwebserver</artifactId>
+            <version>1.5.4</version>
+            <scope>test</scope>
+        </dependency>
+		
 		<!-- TEST begin -->
 		<dependency>
 			<groupId>junit</groupId>
