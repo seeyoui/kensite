@@ -90,16 +90,16 @@ public class QueryUtils {
 //				}
 				String settings = tableColumn.getSettings();
 				if(settings.indexOf("SQL>") != -1) {
-					result.append("valueField: 'value',textField: 'label',");
-					result.append("data: [");
 					String[] settingsArr = settings.split("\\|");
 					String sql = settingsArr[0].replace("SQL>", "");
 					String value = settingsArr[1];
 					String label = settingsArr[2];
+					result.append("valueField: '"+StringUtils.toCamelCase(value)+"',textField: '"+StringUtils.toCamelCase(label)+"',");
+					result.append("data: [");
 					List<Map<Object, Object>> list = DBUtils.executeQuery(sql);
 					for(Map<Object, Object> map : list) {
 						dataCount++;
-						result.append("{value: '"+map.get(value.toUpperCase())+"',label: '"+map.get(label.toUpperCase())+"'},");
+						result.append("{"+StringUtils.toCamelCase(value)+": '"+map.get(value.toUpperCase())+"',"+StringUtils.toCamelCase(label)+": '"+map.get(label.toUpperCase())+"'},");
 					}
 					result.substring(0, result.lastIndexOf(",")-1);
 					result.append("]");
@@ -118,8 +118,8 @@ public class QueryUtils {
 					String url = settingsArr[0].replace("URL>", "");
 					String value = settingsArr[1];
 					String label = settingsArr[2];
-					result.append("valueField: '"+value+"',textField: '"+label+"',");
-					result.append("url:'/kensite"+url+"'");
+					result.append("valueField: '"+StringUtils.toCamelCase(value)+"',textField: '"+StringUtils.toCamelCase(label)+"',");
+					result.append("url:'/park"+url+"'");
 				} else  {
 					result.append("valueField: 'value',textField: 'label',");
 					result.append("data: [");
