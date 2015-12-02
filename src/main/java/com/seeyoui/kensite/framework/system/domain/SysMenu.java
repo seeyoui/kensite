@@ -22,6 +22,7 @@ public class SysMenu extends DataEntity<SysMenu> {
     private Long sequence;
     private String icon;
     private String target;
+    private String state;
  
     public void setParentId(String parentId) {  
         this.parentId = parentId;  
@@ -64,5 +65,13 @@ public class SysMenu extends DataEntity<SysMenu> {
       
     public String getTarget() {  
         return this.target;  
-    }  
+    }
+
+	public String getState() {
+		return "closed";
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}  
 }

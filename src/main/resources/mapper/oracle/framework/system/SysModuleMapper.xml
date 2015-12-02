@@ -23,7 +23,7 @@
 		</where>
 	</sql>
 	<sql id="orderBy">
-		ORDER BY t.id DESC 
+		ORDER BY t.shiro ASC 
 	</sql>
 	
 	<!-- 根据ID查询单条数据 -->
@@ -31,7 +31,7 @@
 		SELECT
 		<include refid="tableColumns" />
 		FROM SYS_MODULE t
-		WHERE id = #{id}
+		WHERE t.id = #{id}
 	</select>
 	
 	<!-- 查询数据集合 -->
