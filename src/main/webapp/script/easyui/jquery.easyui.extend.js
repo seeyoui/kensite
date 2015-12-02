@@ -1,7 +1,18 @@
 function renderErrMsg(errMsg) {
    	for(var item in errMsg){
    		if($("#msg-"+item) != null) {
-			$("#msg-"+item).html(errMsg[item]);
+			//$("#msg-"+item).html(errMsg[item]);
+			$("input[name='"+item+"']").prev().tooltip({
+	            position: 'bottom',
+	            content: '<span style="color:#000">'+errMsg[item]+'</span>',
+	            onShow: function(){
+	                $(this).tooltip('tip').css({
+	                    backgroundColor: '#FFFFCC',
+	                    borderColor: '#CC9933'
+	                });
+	            }
+	        });
+	        $("input[name='"+item+"']").prev().css("background-color","#fff3f3");
 		}
 	}
 }

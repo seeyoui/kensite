@@ -585,7 +585,7 @@
   box-shadow: 0 0 3px 0 #ddd;
 }
 .textbox-invalid {
-  border-color: #ffa8a8;
+  /* border-color: #ffa8a8; */
   background-color: #fff3f3;
 }
 .filebox .textbox-value {
@@ -665,7 +665,7 @@
   cursor: default;
 }
 .textbox-invalid {
-  border-color: #ffa8a8;
+  /* border-color: #ffa8a8; */
   background-color: #fff3f3;
 }
 .combobox-item,
@@ -2056,7 +2056,7 @@
   filter: alpha(opacity=50);
 }
 .textbox-invalid {
-  border-color: #ffa8a8;
+  /* border-color: #ffa8a8; */
   background-color: #fff3f3;
 }
 .slider-disabled {
@@ -2586,7 +2586,7 @@
   display: none;
 }
 .validatebox-invalid {
-  border-color: #ffa8a8;
+  /* border-color: #ffa8a8; */
   background-color: #fff3f3;
   color: #000;
 }
