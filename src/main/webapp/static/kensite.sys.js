@@ -11,3 +11,94 @@ $.ajaxSetup({
 		}
 	}
 });
+
+//当前客户端时间
+function curDateTime(formater) {
+    var d = new Date();
+    var year = d.getFullYear();
+    var month = d.getMonth()+1;
+    var date = d.getDate();
+    var hours = d.getHours();
+    var minutes = d.getMinutes();
+    var seconds = d.getSeconds();
+    var curDateTime= year;
+    if(month>9)
+        curDateTime = curDateTime +"-"+month;
+    else  
+        curDateTime = curDateTime +"-0"+month;  
+    if(date>9)
+        curDateTime = curDateTime +"-"+date;
+    else
+        curDateTime = curDateTime +"-0"+date;
+    if(formater=="yyyy-MM-dd HH:mm:ss") {
+    	curDateTime = curDateTime +" "+hours;
+    	if(minutes>9)
+            curDateTime = curDateTime +":"+minutes;
+        else
+            curDateTime = curDateTime +":0"+minutes;
+    	if(seconds>9)
+            curDateTime = curDateTime +":"+seconds;
+        else
+            curDateTime = curDateTime +":0"+seconds;
+    }
+    return curDateTime;
+}
+
+function getRootPath(){
+    //获取当前网址，如： http://localhost:8083/uimcardprj/share/meun.jsp
+    var curWwwPath=window.document.location.href;
+    //获取主机地址之后的目录，如： uimcardprj/share/meun.jsp
+    var pathName=window.document.location.pathname;
+    var pos=curWwwPath.indexOf(pathName);
+    //获取主机地址，如： http://localhost:8083
+    var localhostPaht=curWwwPath.substring(0,pos);
+    //获取带"/"的项目名，如：/uimcardprj
+    var projectName=pathName.substring(0,pathName.substr(1).indexOf('/')+1);
+    return (localhostPaht+projectName);
+}
+function getProjectName() {
+	//获取主机地址之后的目录，如： uimcardprj/share/meun.jsp
+    var pathName=window.document.location.pathname;
+    //获取带"/"的项目名，如：/uimcardprj
+    var projectName=pathName.substring(0,pathName.substr(1).indexOf('/')+1);
+    return projectName;
+}
+
+function do_js_beautify(txt,compress/*是否为压缩模式*/){/* 格式化JSON源码(对象转换为JSON文本) */
+    var indentChar = '    ';
+    if(/^\s*$/.test(txt)){
+        alert('数据为空,无法格式化! ');
+        return;
+    }
+    try{var data=eval('('+txt+')');}
+    catch(e){
+        alert('数据源语法错误,格式化失败! 错误信息: '+e.description,'err');
+        return;
+    };
+    var draw=[],last=false,This=this,line=compress?'':'\n',nodeCount=0,maxDepth=0;
+    
+    var notify=function(name,value,isLast,indent/*缩进*/,formObj){
+        nodeCount++;/*节点计数*/
+        for (var i=0,tab='';i<indent;i++ )tab+=indentChar;/* 缩进HTML */
+        tab=compress?'':tab;/*压缩模式忽略缩进*/
+        maxDepth=++indent;/*缩进递增并记录*/
+        if(value&&value.constructor==Array){/*处理数组*/
+            draw.push(tab+(formObj?('"'+name+'":'):'')+'['+line);/*缩进'[' 然后换行*/
+            for (var i=0;i<value.length;i++)
+                notify(i,value[i],i==value.length-1,indent,false);
+            draw.push(tab+']'+(isLast?line:(','+line)));/*缩进']'换行,若非尾元素则添加逗号*/
+        }else   if(value&&typeof value=='object'){/*处理对象*/
+                draw.push(tab+(formObj?('"'+name+'":'):'')+'{'+line);/*缩进'{' 然后换行*/
+                var len=0,i=0;
+                for(var key in value)len++;
+                for(var key in value)notify(key,value[key],++i==len,indent,true);
+                draw.push(tab+'}'+(isLast?line:(','+line)));/*缩进'}'换行,若非尾元素则添加逗号*/
+            }else{
+                    if(typeof value=='string')value='"'+value+'"';
+                    draw.push(tab+(formObj?('"'+name+'":'):'')+value+(isLast?'':',')+line);
+            };
+    };
+    var isLast=true,indent=0;
+    notify('',data,isLast,indent,false);
+    return draw.join('');
+}
