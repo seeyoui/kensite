@@ -64,7 +64,7 @@ function getProjectName() {
     return projectName;
 }
 
-function do_js_beautify(txt,compress/*是否为压缩模式*/){/* 格式化JSON源码(对象转换为JSON文本) */
+function do_json_beautify(txt,compress/*是否为压缩模式*/){/* 格式化JSON源码(对象转换为JSON文本) */
     var indentChar = '    ';
     if(/^\s*$/.test(txt)){
         alert('数据为空,无法格式化! ');
