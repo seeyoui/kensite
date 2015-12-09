@@ -126,7 +126,7 @@
 	                }
 	            }
 	        	return; */
-        		loadi = layer.load(2, {time: layerLoadMaxTime});
+        		loadi = layer.load(2, {shade: layerLoadShade,time: layerLoadMaxTime});
 	        	var url = "${ctx}/oa/leave/save.do";
 	        	$.ajax({
 	                cache: true,
@@ -165,7 +165,7 @@
 					});
 				}
 				// 发送任务完成请求
-        		loadi = layer.load(2, {time: layerLoadMaxTime});
+        		loadi = layer.load(2, {shade: layerLoadShade,time: layerLoadMaxTime});
 			    $.post('${ctx}/act/task/complete/', {
 			    	taskId: taskId,
 			        "vars.keys": keys,

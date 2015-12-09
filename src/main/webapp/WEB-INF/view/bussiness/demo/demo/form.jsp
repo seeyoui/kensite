@@ -76,7 +76,7 @@
 	            url: url,
 	            onSubmit: function(param){
 	            	if($(this).form('validate')) {
-	            		loadi = layer.load(2, {time: layerLoadMaxTime});
+	            		loadi = layer.load(2, {shade: layerLoadShade,time: layerLoadMaxTime});
 	            	}
 	                return $(this).form('validate');
 	            },

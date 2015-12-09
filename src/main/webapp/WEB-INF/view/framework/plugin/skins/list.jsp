@@ -116,7 +116,7 @@
                 url: url,
                 onSubmit: function(param){
                 	if($(this).form('validate')) {
-                		loadi = layer.load(2, {time: layerLoadMaxTime});
+                		loadi = layer.load(2, {shade: layerLoadShade,time: layerLoadMaxTime});
                 	}
                     return $(this).form('validate');
                 },
@@ -147,7 +147,7 @@
 						data: {id:row.id},
 						dataType: 'json',
 						beforeSend: function(XMLHttpRequest){
-							loadi = layer.load(2, {time: layerLoadMaxTime});
+							loadi = layer.load(2, {shade: layerLoadShade,time: layerLoadMaxTime});
 						},
 						success: function(data, textStatus){
 							layer.close(loadi);
@@ -176,7 +176,7 @@
 						data: {id:row.id},
 						dataType: 'json',
 						beforeSend: function(XMLHttpRequest){
-							loadi = layer.load(2, {time: layerLoadMaxTime});
+							loadi = layer.load(2, {shade: layerLoadShade,time: layerLoadMaxTime});
 						},
 						success: function(data, textStatus){
 							layer.close(loadi);

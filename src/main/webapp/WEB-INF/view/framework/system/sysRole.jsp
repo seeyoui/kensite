@@ -162,7 +162,7 @@
 					data: {roleId:roleId,moduleId:moduleId},
 					dataType: 'json',
 					beforeSend: function(XMLHttpRequest){
-						loadi = layer.load(2, {time: layerLoadMaxTime});
+						loadi = layer.load(2, {shade: layerLoadShade,time: layerLoadMaxTime});
 					},
 					success: function(data, textStatus){
 						if (data.success=="<%=StringConstant.TRUE%>"){
@@ -190,7 +190,7 @@
 					data: {roleId:roleId,menuId:menuId},
 					dataType: 'json',
 					beforeSend: function(XMLHttpRequest){
-						loadi = layer.load(2, {time: layerLoadMaxTime});
+						loadi = layer.load(2, {shade: layerLoadShade,time: layerLoadMaxTime});
 					},
 					success: function(data, textStatus){
 						if (data.success=="<%=StringConstant.TRUE%>"){
@@ -235,7 +235,7 @@
                 url: url,
                 onSubmit: function(param){
                 	if($(this).form('validate')) {
-                		loadi = layer.load(2, {time: layerLoadMaxTime});
+                		loadi = layer.load(2, {shade: layerLoadShade,time: layerLoadMaxTime});
                 	}
                     return $(this).form('validate');
                 },
@@ -263,7 +263,7 @@
 							data: {delDataId:row.id},
 							dataType: 'json',
 							beforeSend: function(XMLHttpRequest){
-								loadi = layer.load(2, {time: layerLoadMaxTime});
+								loadi = layer.load(2, {shade: layerLoadShade,time: layerLoadMaxTime});
 							},
 							success: function(data, textStatus){
 								if (data.success=="<%=StringConstant.TRUE%>"){

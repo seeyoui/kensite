@@ -147,7 +147,7 @@ WEB访问路径<input id="sel_url" name="sel_url" class="easyui-textbox" data-op
                 url: url,
                 onSubmit: function(param){
                 	if($(this).form('validate')) {
-                		loadi = layer.load(2, {time: layerLoadMaxTime});
+                		loadi = layer.load(2, {shade: layerLoadShade,time: layerLoadMaxTime});
                 	}
                     return $(this).form('validate');
                 },
