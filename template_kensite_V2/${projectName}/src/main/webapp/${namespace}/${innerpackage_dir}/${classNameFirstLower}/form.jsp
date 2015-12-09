@@ -14,7 +14,7 @@
  	<div style="position:absolute;top:10px;left:20px;right:20px;bottom:10px;">
         <form id="dataForm" method="post">
         	<#list table.columns as column>
-	    	<#if (column.columnName?lower_case=="id"||column.columnName?lower_case=="createuser"||column.columnName?lower_case=="createdate"||column.columnName?lower_case=="updateuser"||column.columnName?lower_case=="updatedate"||column.columnName?lower_case=="remarks"||column.columnName?lower_case=="delflag") ><#else>
+	    	<#if (column.columnName?lower_case=="id"||column.columnName?lower_case=="createuser"||column.columnName?lower_case=="createdate"||column.columnName?lower_case=="updateuser"||column.columnName?lower_case=="updatedate"||column.columnName?lower_case=="delflag") ><#else>
 		    <div class="fitem">
                 <ks:formTag table="${table.sqlName}" column="${column.sqlName}"/>
                 <span id="msg-${column.columnNameLower}" class="err-msg"></span>
@@ -40,7 +40,7 @@
 	            url: url,
 	            onSubmit: function(param){
 	            	if($(this).form('validate')) {
-	            		loadi = layer.load(2, {time: layerLoadMaxTime});
+	            		loadi = layer.load(2, {shade: layerLoadShade,time: layerLoadMaxTime});
 	            	}
 	                return $(this).form('validate');
 	            },
@@ -49,7 +49,7 @@
 	                cleanErrMsg();
 	                var data = eval('(' + data + ')');
 	                if (data.success==TRUE){
-	            		parent.reloadData();
+	            		parent.$.${table.classNameFirstLower}.reloadData();
 	                	parent.layer.msg("操作成功！", {offset: 'rb',icon: 6,shift: 8,time: layerMsgTime});
 	            		parent.layer.close(index);
 	                } else {

@@ -66,6 +66,7 @@ public class ${className}Controller extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
+	@RequiresPermissions("${moduleP}${table.classNameFirstLower}:select")
 	@RequestMapping(value = "/data/{id}")
 	@ResponseBody
 	public Object data(HttpSession session,

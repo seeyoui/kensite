@@ -63,7 +63,7 @@
 	            url: url,
 	            onSubmit: function(param){
 	            	if($(this).form('validate')) {
-	            		loadi = layer.load(2, {time: layerLoadMaxTime});
+	            		loadi = layer.load(2, {shade: layerLoadShade,time: layerLoadMaxTime});
 	            	}
 	                return $(this).form('validate');
 	            },
@@ -72,7 +72,7 @@
 	                cleanErrMsg();
 	                var data = eval('(' + data + ')');
 	                if (data.success==TRUE){
-	            		parent.reloadData();
+	            		parent.$.${table.classNameFirstLower}.reloadData();
 	                	parent.layer.msg("操作成功！", {offset: 'rb',icon: 6,shift: 8,time: layerMsgTime});
 	            		parent.layer.close(index);
 	                } else {
