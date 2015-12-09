@@ -67,12 +67,12 @@
 	            url: url,
 	            onSubmit: function(param){
 	            	if($(this).form('validate')) {
-	            		loadi = layer.load(2, {shade: layerLoadShade,time: layerLoadMaxTime});
+	            		loadi = parent.layer.load(2, {shade: layerLoadShade,time: layerLoadMaxTime});
 	            	}
 	                return $(this).form('validate');
 	            },
 	            success: function(data){
-	            	layer.close(loadi);
+	            	parent.layer.close(loadi);
 	                cleanErrMsg();
 	                var data = eval('(' + data + ')');
 	                if (data.success==TRUE){
