@@ -64,8 +64,15 @@ function getProjectName() {
     return projectName;
 }
 
-function do_json_beautify(txt,compress/*是否为压缩模式*/){/* 格式化JSON源码(对象转换为JSON文本) */
-    var indentChar = '    ';
+function do_json_beautify(txt,type,compress/*是否为压缩模式*/){/* 格式化JSON源码(对象转换为JSON文本) */
+    var indentChar = '    ', line=compress?'':'\n';
+    if(type == null || type == '') {
+    	indentChar = '    ';
+    	line=compress?'':'\n';
+    } else if(type == 'html') {
+    	indentChar = '&nbsp;&nbsp;&nbsp;&nbsp;';
+    	line=compress?'':'</br>';
+    }
     if(/^\s*$/.test(txt)){
         alert('数据为空,无法格式化! ');
         return;
@@ -75,7 +82,7 @@ function do_json_beautify(txt,compress/*是否为压缩模式*/){/* 格式化JSO
         alert('数据源语法错误,格式化失败! 错误信息: '+e.description,'err');
         return;
     };
-    var draw=[],last=false,This=this,line=compress?'':'\n',nodeCount=0,maxDepth=0;
+    var draw=[],last=false,This=this,nodeCount=0,maxDepth=0;
     
     var notify=function(name,value,isLast,indent/*缩进*/,formObj){
         nodeCount++;/*节点计数*/
@@ -101,4 +108,30 @@ function do_json_beautify(txt,compress/*是否为压缩模式*/){/* 格式化JSO
     var isLast=true,indent=0;
     notify('',data,isLast,indent,false);
     return draw.join('');
+}
+
+function html_encode(str) {
+	var s = "";
+	if (str.length == 0) return "";
+	s = str.replace(/&/g, "&gt;");
+	s = s.replace(/</g, "&lt;");
+	s = s.replace(/>/g, "&gt;");
+	s = s.replace(/ /g, "&nbsp;");
+	s = s.replace(/\'/g, "&#39;");
+	s = s.replace(/\"/g, "&quot;");
+	s = s.replace(/\n/g, "<br>");
+	return s;
+}
+
+function html_decode(str) {
+	var s = "";
+	if (str.length == 0) return "";
+	s = str.replace(/&gt;/g, "&");
+	s = s.replace(/&lt;/g, "<");
+	s = s.replace(/&gt;/g, ">");
+	s = s.replace(/&nbsp;/g, " ");
+	s = s.replace(/&#39;/g, "\'");
+	s = s.replace(/&quot;/g, "\"");
+	s = s.replace(/<br>/g, "\n");
+	return s;
 }
