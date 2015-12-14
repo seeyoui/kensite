@@ -37,6 +37,9 @@ public class FormUtils {
 		if (result !=  null){
 			return result;
 		}
+		if(StringUtils.isNoneBlank(tableColumn.getIsEdit()) && "H".equals(tableColumn.getIsEdit())) {
+			return new StringBuffer();
+		}
 		boolean needCache = true;
 		result = new StringBuffer();
 		String column = tableColumn.getName();
@@ -99,7 +102,7 @@ public class FormUtils {
 			result.append(column);
 			result.append("\" name=\"");
 			result.append(column);
-			result.append("\" data-options=\"tipPosition:'bottom',");
+			result.append("\" data-options=\"tipPosition:'top',");
 			if(StringConstant.NO.equals(tableColumn.getIsEdit())) {
 				result.append("editable:false,");
 			}

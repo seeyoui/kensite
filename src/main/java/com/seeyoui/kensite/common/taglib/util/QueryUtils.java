@@ -143,7 +143,7 @@ public class QueryUtils {
 			result.append("\" "+tableColumn.getHtmlInner()+"/>");
 		}
 		if(TableColumnConstants.DATEBOX.equals(tableColumn.getCategory())) {
-			result.append("<input class=\"date-input\" id=\"sel_");
+			result.append("<input class=\"date-input easyui-validatebox\" id=\"sel_");
 			result.append(column);
 			result.append("\" name=\"sel_");
 			result.append(column);
@@ -154,6 +154,11 @@ public class QueryUtils {
 				result.append("})\"");
 			} else {
 				result.append(" onClick=\"WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})\"");
+			}
+			if(StringUtils.isNoneBlank(tableColumn.getQueryWidth())) {
+				result.append(" style=\"width:"+tableColumn.getQueryWidth()+"px;\"");
+			} else {
+				result.append(" style=\"width:100px;\"");
 			}
 			result.append("/>");
 		}
