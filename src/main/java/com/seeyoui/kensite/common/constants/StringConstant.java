@@ -34,6 +34,8 @@ public final class StringConstant {
 	//字符串表示是&否
 	public static final String YES = "Y";
 	public static final String NO = "N";
+	public static final String HIDDEN = "H";
+	public static final String DISABLE = "D";
 	
 	//jsp表单模板存放路径
 	public static final String TEMPLAT_JSP_URL = "/WebContent/WEB-INF/view/templat/jsp/";

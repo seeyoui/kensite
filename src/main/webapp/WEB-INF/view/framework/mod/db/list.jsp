@@ -489,7 +489,7 @@
     	$.ajax({
 			type: "post",
 			url: '${ctx}/sys/dict/getDictJson.do',
-			data: {category:'yes_no_hidden'},
+			data: {category:'editable'},
 			dataType: 'json',
 			beforeSend: function(XMLHttpRequest){
 			},

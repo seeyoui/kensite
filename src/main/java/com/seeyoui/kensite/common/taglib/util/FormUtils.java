@@ -37,7 +37,7 @@ public class FormUtils {
 		if (result !=  null){
 			return result;
 		}
-		if(StringUtils.isNoneBlank(tableColumn.getIsEdit()) && "H".equals(tableColumn.getIsEdit())) {
+		if(StringUtils.isNoneBlank(tableColumn.getIsEdit()) && StringConstant.HIDDEN.equals(tableColumn.getIsEdit())) {
 			return new StringBuffer();
 		}
 		boolean needCache = true;
@@ -56,6 +56,9 @@ public class FormUtils {
 			}
 			if(StringConstant.NO.equals(tableColumn.getIsEdit())) {
 				result.append("editable:false,");
+			}
+			if(StringConstant.DISABLE.equals(tableColumn.getIsEdit())) {
+				result.append("disabled:true,");
 			}
 			if(StringConstant.NO.equals(tableColumn.getIsNull())) {
 				result.append("required:true,");
@@ -81,6 +84,9 @@ public class FormUtils {
 			if(StringConstant.NO.equals(tableColumn.getIsEdit())) {
 				result.append("editable:false,");
 			}
+			if(StringConstant.DISABLE.equals(tableColumn.getIsEdit())) {
+				result.append("disabled:true,");
+			}
 			if(StringConstant.NO.equals(tableColumn.getIsNull())) {
 				result.append("required:true,");
 			}
@@ -105,6 +111,9 @@ public class FormUtils {
 			result.append("\" data-options=\"tipPosition:'top',");
 			if(StringConstant.NO.equals(tableColumn.getIsEdit())) {
 				result.append("editable:false,");
+			}
+			if(StringConstant.DISABLE.equals(tableColumn.getIsEdit())) {
+				result.append("disabled:true,");
 			}
 			if(StringConstant.NO.equals(tableColumn.getIsNull())) {
 				result.append("required:true,");
@@ -186,6 +195,9 @@ public class FormUtils {
 			result.append("\" data-options=\"tipPosition:'bottom',");
 			if(StringConstant.NO.equals(tableColumn.getIsEdit())) {
 				result.append("editable:false,");
+			}
+			if(StringConstant.DISABLE.equals(tableColumn.getIsEdit())) {
+				result.append("disabled:true,");
 			}
 			if(StringConstant.NO.equals(tableColumn.getIsNull())) {
 				result.append("required:true,");
