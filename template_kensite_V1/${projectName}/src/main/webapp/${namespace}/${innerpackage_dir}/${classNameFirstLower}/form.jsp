@@ -40,7 +40,6 @@
 			<div class="fitem">
 				<label>${column.columnAlias}</label>
 				${getFormInputHtml(column)}
-				<span id="msg-${column.columnName?lower_case}" class="err-msg"></span>
 			</div>
 			</#if>
 		</#list>

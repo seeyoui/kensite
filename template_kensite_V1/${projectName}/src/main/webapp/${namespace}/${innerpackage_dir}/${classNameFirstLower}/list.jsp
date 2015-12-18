@@ -189,6 +189,7 @@ ${column.columnNameLower}:sel_${column.columnNameLower}
 							url: '${"${"}ctx${"}"}/${moduleC}${table.classNameFirstLower}/delete',
 							data: {id:row.id},
 							dataType: 'json',
+							timeout: layerLoadMaxTime,
 							beforeSend: function(XMLHttpRequest){
 								loadi = layer.load(2, {shade: layerLoadShade,time: layerLoadMaxTime});
 							},
