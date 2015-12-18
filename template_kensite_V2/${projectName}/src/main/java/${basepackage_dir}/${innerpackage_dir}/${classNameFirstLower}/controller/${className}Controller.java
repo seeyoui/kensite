@@ -1,11 +1,11 @@
 <#include "/custom.include">
 <#include "/java_copyright.include">
-<#assign className = table.className>   
+<#assign className = table.className>
 <#assign classNameLower = className?uncap_first>
 <#assign module = table.className[3..]?uncap_first>
 
-package ${basepackage}.${innerpackage}.${table.classNameFirstLower}.controller;  
- 
+package ${basepackage}.${innerpackage}.${table.classNameFirstLower}.controller;
+
 import java.sql.*;
 import java.util.*;
 

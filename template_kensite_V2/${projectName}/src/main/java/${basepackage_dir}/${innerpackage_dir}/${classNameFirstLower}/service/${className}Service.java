@@ -1,8 +1,8 @@
 <#include "/custom.include">
 <#include "/java_copyright.include">
-<#assign className = table.className>   
+<#assign className = table.className> 
 <#assign classNameLower = className?uncap_first>
-package ${basepackage}.${innerpackage}.${table.classNameFirstLower}.service;  
+package ${basepackage}.${innerpackage}.${table.classNameFirstLower}.service;
  
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
