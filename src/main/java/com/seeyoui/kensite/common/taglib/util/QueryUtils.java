@@ -1,7 +1,9 @@
 package com.seeyoui.kensite.common.taglib.util;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.servlet.jsp.JspException;
 
@@ -22,6 +24,8 @@ import com.seeyoui.kensite.framework.system.util.DictUtils;
  * @version 2015-11-10
  */
 public class QueryUtils {
+	
+	private static final String ALL_STR = "全部";
 	
 	public static StringBuffer getTableColumnStr(TableColumn tableColumn) throws Exception {
 		TableColumn tc = TagCacheUtils.getTableColumn(tableColumn);
@@ -77,7 +81,7 @@ public class QueryUtils {
 			result.append(column);
 			result.append("\" name=\"sel_");
 			result.append(column);
-			result.append("\" data-options=\"");
+			result.append("\" data-options=\"editable:false, ");
 			int dataCount = 0;
 			if(StringUtils.isNoneBlank(tableColumn.getSettings())) {
 				if(StringUtils.isNoneBlank(tableColumn.getQueryWidth())) {
@@ -96,22 +100,35 @@ public class QueryUtils {
 					String label = settingsArr[2];
 					result.append("valueField: '"+StringUtils.toCamelCase(value)+"',textField: '"+StringUtils.toCamelCase(label)+"',");
 					result.append("data: [");
+					result.append("{"+StringUtils.toCamelCase(value)+": '',"+StringUtils.toCamelCase(label)+": '"+ALL_STR+"'},");
 					List<Map<Object, Object>> list = DBUtils.executeQuery(sql);
 					for(Map<Object, Object> map : list) {
 						dataCount++;
-						result.append("{"+StringUtils.toCamelCase(value)+": '"+map.get(value.toUpperCase())+"',"+StringUtils.toCamelCase(label)+": '"+map.get(label.toUpperCase())+"'},");
+						Iterator entries = map.entrySet().iterator();
+						result.append("{"+StringUtils.toCamelCase(value)+": '"+map.get(value.toUpperCase())+"',"+StringUtils.toCamelCase(label)+": '"+map.get(label.toUpperCase())+"'");
+						while (entries.hasNext()) {
+						    Entry entry = (Entry) entries.next();
+						    String k = (String)entry.getKey();
+						    String v = (String)entry.getValue();
+						    if(value.toUpperCase().equals(k) || label.toUpperCase().equals(k)) {
+						    	continue;
+						    }
+						    result.append("," + StringUtils.toCamelCase(k)+": '"+v+"'");
+						}
+						result.append("},");
 					}
-					result.substring(0, result.lastIndexOf(",")-1);
+					result.deleteCharAt(result.lastIndexOf(","));
 					result.append("]");
 				} else if(settings.indexOf("DICT>") != -1) {
 					result.append("valueField: 'value',textField: 'label',");
 					result.append("data: [");
+					result.append("{value: '',label: '"+ALL_STR+"'},");
 					List<Dict> dictList = DictUtils.getDictList(DictUtils.getDict(settings.replace("DICT>", "")).getValue());
 					for(Dict dict : dictList) {
 						dataCount++;
 						result.append("{value: '"+dict.getValue()+"',label: '"+dict.getLabel()+"'},");
 					}
-					result.substring(0, result.lastIndexOf(",")-1);
+					result.deleteCharAt(result.lastIndexOf(","));
 					result.append("]");
 				} else if(settings.indexOf("URL>") != -1) {
 					String[] settingsArr = settings.split("\\|");
@@ -123,6 +140,7 @@ public class QueryUtils {
 				} else  {
 					result.append("valueField: 'value',textField: 'label',");
 					result.append("data: [");
+					result.append("{value: '',label: '"+ALL_STR+"'},");
 					String[] settingsArr = settings.split("\\|");
 					for(String set : settingsArr) {
 						dataCount++;
@@ -133,7 +151,7 @@ public class QueryUtils {
 							result.append("{value: '"+setArr[0]+"',label: '"+setArr[1]+"'},");
 						}
 					}
-					result.substring(0, result.lastIndexOf(",")-1);
+					result.deleteCharAt(result.lastIndexOf(","));
 					result.append("]");
 				}
 			}

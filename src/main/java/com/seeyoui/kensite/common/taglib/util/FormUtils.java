@@ -1,7 +1,9 @@
 package com.seeyoui.kensite.common.taglib.util;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.servlet.jsp.JspException;
 
@@ -55,7 +57,7 @@ public class FormUtils {
 				result.append("multiline:true,");
 			}
 			if(StringConstant.NO.equals(tableColumn.getIsEdit())) {
-				result.append("editable:false,");
+				result.append("readonly:false,");
 			}
 			if(StringConstant.DISABLE.equals(tableColumn.getIsEdit())) {
 				result.append("disabled:true,");
@@ -82,7 +84,7 @@ public class FormUtils {
 			result.append(column);
 			result.append("\" data-options=\"tipPosition:'bottom',");
 			if(StringConstant.NO.equals(tableColumn.getIsEdit())) {
-				result.append("editable:false,");
+				result.append("readonly:false,");
 			}
 			if(StringConstant.DISABLE.equals(tableColumn.getIsEdit())) {
 				result.append("disabled:true,");
@@ -109,8 +111,9 @@ public class FormUtils {
 			result.append("\" name=\"");
 			result.append(column);
 			result.append("\" data-options=\"tipPosition:'top',");
+			result.append("editable:false,");
 			if(StringConstant.NO.equals(tableColumn.getIsEdit())) {
-				result.append("editable:false,");
+				result.append("readonly:false,");
 			}
 			if(StringConstant.DISABLE.equals(tableColumn.getIsEdit())) {
 				result.append("disabled:true,");
@@ -140,9 +143,20 @@ public class FormUtils {
 					List<Map<Object, Object>> list = DBUtils.executeQuery(sql);
 					for(Map<Object, Object> map : list) {
 						dataCount++;
-						result.append("{"+StringUtils.toCamelCase(value)+": '"+map.get(value.toUpperCase())+"',"+StringUtils.toCamelCase(label)+": '"+map.get(label.toUpperCase())+"'},");
+						Iterator entries = map.entrySet().iterator();
+						result.append("{"+StringUtils.toCamelCase(value)+": '"+map.get(value.toUpperCase())+"',"+StringUtils.toCamelCase(label)+": '"+map.get(label.toUpperCase())+"'");
+						while (entries.hasNext()) {
+						    Entry entry = (Entry) entries.next();
+						    String k = (String)entry.getKey();
+						    String v = (String)entry.getValue();
+						    if(value.toUpperCase().equals(k) || label.toUpperCase().equals(k)) {
+						    	continue;
+						    }
+						    result.append("," + StringUtils.toCamelCase(k)+": '"+v+"'");
+						}
+						result.append("'},");
 					}
-					result.substring(0, result.lastIndexOf(",")-1);
+					result.deleteCharAt(result.lastIndexOf(","));
 					result.append("]");
 				} else if(settings.indexOf("DICT>") != -1) {
 					result.append("valueField: 'value',textField: 'label',");
@@ -152,7 +166,7 @@ public class FormUtils {
 						dataCount++;
 						result.append("{value: '"+dict.getValue()+"',label: '"+dict.getLabel()+"'},");
 					}
-					result.substring(0, result.lastIndexOf(",")-1);
+					result.deleteCharAt(result.lastIndexOf(","));
 					result.append("]");
 				} else if(settings.indexOf("URL>") != -1) {
 					String[] settingsArr = settings.split("\\|");
@@ -174,7 +188,7 @@ public class FormUtils {
 							result.append("{value: '"+setArr[0]+"',label: '"+setArr[1]+"'},");
 						}
 					}
-					result.substring(0, result.lastIndexOf(",")-1);
+					result.deleteCharAt(result.lastIndexOf(","));
 					result.append("]");
 				}
 			}
@@ -194,7 +208,7 @@ public class FormUtils {
 			result.append("\" "+tableColumn.getHtmlInner());
 			result.append("\" data-options=\"tipPosition:'bottom',");
 			if(StringConstant.NO.equals(tableColumn.getIsEdit())) {
-				result.append("editable:false,");
+				result.append("readonly:false,");
 			}
 			if(StringConstant.DISABLE.equals(tableColumn.getIsEdit())) {
 				result.append("disabled:true,");
@@ -203,12 +217,14 @@ public class FormUtils {
 				result.append("required:true,");
 			}
 			result.append("\"");
-			if(StringUtils.isNoneBlank(tableColumn.getSettings())) {
-				result.append(" onClick=\"WdatePicker({");
-				result.append(tableColumn.getSettings());
-				result.append("})\"");
-			} else {
-				result.append(" onClick=\"WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})\"");
+			if(!StringConstant.NO.equals(tableColumn.getIsEdit())) {
+				if(StringUtils.isNoneBlank(tableColumn.getSettings())) {
+					result.append(" onClick=\"WdatePicker({");
+					result.append(tableColumn.getSettings());
+					result.append("})\"");
+				} else {
+					result.append(" onClick=\"WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})\"");
+				}
 			}
 			result.append("/>");
 		}

@@ -27,7 +27,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.seeyoui.kensite.common.base.controller.BaseController;
 import com.seeyoui.kensite.common.constants.StringConstant;
 import com.seeyoui.kensite.common.util.RequestResponseUtil;
-
 import com.seeyoui.kensite.common.constants.StringConstant;
 import com.seeyoui.kensite.common.base.domain.EasyUIDataGrid;
 import com.seeyoui.kensite.common.base.controller.BaseController;
@@ -47,6 +46,7 @@ public class TableColumnController extends BaseController {
 	
 	@Autowired
 	private TableColumnService tableColumnService;
+	private static final String[] TABLE_COLUMN = {"ID", "CREATE_DATE", "CREATE_USER", "UPDATE_DATE", "UPDATE_USER", "REMARKS", "DEL_FLAG"};
 	
 	/**
 	 * 获取列表展示数据
@@ -102,6 +102,15 @@ public class TableColumnController extends BaseController {
 		if (!beanValidator(modelMap, tableColumn)){
 			RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
 			return null;
+		}
+		for(String columnName : TABLE_COLUMN) {
+			if(tableColumn.getName().equals(columnName)) {
+				Map<String, String> result = new HashMap<String, String>();
+				result.put("name", tableColumn.getName()+"是系统字段");
+				modelMap.put("message", result);
+				RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
+				return null;
+			}
 		}
 		tableColumnService.save(tableColumn);
 		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);

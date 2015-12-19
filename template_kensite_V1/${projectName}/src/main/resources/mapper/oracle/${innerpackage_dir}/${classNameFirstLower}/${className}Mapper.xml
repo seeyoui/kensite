@@ -82,7 +82,11 @@ ${"<if test=\""+column.columnNameLower+" !=null and "+column.columnNameLower+" !
 		</where>
 	</sql>
 	<sql id="orderBy">
-		ORDER BY T.CREATE_DATE DESC 
+		ORDER BY 
+		<if test="sort != null and sort != ''">
+			${sort} ${order},
+		</if>
+		T.CREATE_DATE DESC 
 	</sql>
 	
 	<!-- 根据ID查询单条数据 -->

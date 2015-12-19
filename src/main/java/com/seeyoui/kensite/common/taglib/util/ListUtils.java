@@ -42,6 +42,7 @@ public class ListUtils {
 		String column = tableColumn.getName();
 		column = StringUtils.toCamelCase(column);
 		result.append("<th data-options=\"halign:'center',");
+		result.append("sortable:true,");
 		result.append("field:'"+column+"',");
 		if(StringUtils.isNoneBlank(tableColumn.getListWidth())) {
 			result.append(" width:"+tableColumn.getListWidth()+",");
@@ -74,7 +75,9 @@ public class ListUtils {
 					for(Map<Object, Object> map : list) {
 						sb.append("{value: '"+map.get(value.toUpperCase())+"',label: '"+map.get(label.toUpperCase())+"'},");
 					}
-					sb.substring(0, sb.lastIndexOf(",")-1);
+					if(sb.lastIndexOf(",") > 1) {
+						sb.substring(0, sb.lastIndexOf(",")-1);
+					}
 					sb.append("];");
 				} else if(settings.indexOf("DICT>") != -1) {
 					sb.append("var jsonObj = [");
@@ -82,7 +85,9 @@ public class ListUtils {
 					for(Dict dict : dictList) {
 						sb.append("{value: '"+dict.getValue()+"',label: '"+dict.getLabel()+"'},");
 					}
-					sb.substring(0, sb.lastIndexOf(",")-1);
+					if(sb.lastIndexOf(",") > 1) {
+						sb.substring(0, sb.lastIndexOf(",")-1);
+					}
 					sb.append("];");
 				} else if(settings.indexOf("URL>") != -1) {
 					sb.append("var jsonObj = null;");
@@ -97,12 +102,14 @@ public class ListUtils {
 							sb.append("{value: '"+setArr[0]+"',label: '"+setArr[1]+"'},");
 						}
 					}
-					sb.substring(0, sb.lastIndexOf(",")-1);
+					if(sb.lastIndexOf(",") > 1) {
+						sb.substring(0, sb.lastIndexOf(",")-1);
+					}
 					sb.append("];");
 				}
 			}
 			result.append(sb);
-			result.append("if(jsonObj == null) {return val;}var varArr = val.split(',');var result = '';for(var i=0; i<varArr.length; i++) {for(var obj in jsonObj) {if(jsonObj[obj].value == varArr[i]) {result += (jsonObj[obj].label+',');}}}return result.substring(0, result.length-1);},");
+			result.append("if(jsonObj == null||val==null||val=='') {return val;}var varArr = val.split(',');var result = '';for(var i=0; i<varArr.length; i++) {for(var obj in jsonObj) {if(jsonObj[obj].value == varArr[i]) {result += (jsonObj[obj].label+',');}}}return result.substring(0, result.length-1);},");
 		}
 		if(TableColumnConstants.DATEBOX.equals(tableColumn.getCategory())) {
 			result.append(" align:'center',");
