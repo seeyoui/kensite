@@ -10,7 +10,6 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.seeyoui.kensite.bussiness.demo.demo.domain.Demo;
 import com.seeyoui.kensite.common.base.domain.DataEntity;
 import com.seeyoui.kensite.common.base.domain.Pager;
 
