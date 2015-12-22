@@ -173,7 +173,7 @@ public class FormUtils {
 					String url = settingsArr[0].replace("URL>", "");
 					String value = settingsArr[1];
 					String label = settingsArr[2];
-					result.append("valueField: '"+StringUtils.toCamelCase(value)+"',textField: '"+StringUtils.toCamelCase(label)+"',");
+					result.append("valueField: '"+value+"',textField: '"+label+"',");
 					result.append("url:'/park"+url+"'");
 				} else  {
 					result.append("valueField: 'value',textField: 'label',");
