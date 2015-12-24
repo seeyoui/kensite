@@ -49,7 +49,7 @@
 						var data = eval('(' + data + ')');
 						if (data.success==TRUE){
 							parent.$.${table.classNameFirstLower}.reloadData();
-							parent.layer.msg("操作成功！", {offset: 'rb',icon: 6,shift: 8,time: layerMsgTime});
+							parent.layer.msg("操作成功！", {offset: layerMsgOffset,icon: 6,shift: 8,time: layerMsgTime});
 							parent.layer.close(index);
 						} else {
 							renderErrMsg(data.message);

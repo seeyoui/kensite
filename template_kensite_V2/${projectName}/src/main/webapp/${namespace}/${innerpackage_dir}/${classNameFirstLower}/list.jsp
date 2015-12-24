@@ -101,10 +101,10 @@
 								success: function(data, textStatus){
 									layer.close(loadi);
 									if (data.success==TRUE){
-										layer.msg("操作成功！", {offset: 'rb',icon: 6,shift: 8,time: layerMsgTime});
+										layer.msg("操作成功！", {offset: layerMsgOffset,icon: 6,shift: 8,time: layerMsgTime});
 										$.${table.classNameFirstLower}.reloadData();
 									} else {
-										layer.msg("操作失败！", {offset: 'rb',icon: 5,shift: 8,time: layerMsgTime});
+										layer.msg("操作失败！", {offset: layerMsgOffset,icon: 5,shift: 8,time: layerMsgTime});
 									}
 								}
 							});
