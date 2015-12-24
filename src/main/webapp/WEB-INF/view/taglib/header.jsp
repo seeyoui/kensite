@@ -18,7 +18,8 @@
 		var ctx="${ctx }";
 		var TRUE = "<%=StringConstant.TRUE%>";
 		var FALSE = "<%=StringConstant.FALSE%>";
-		var layerMsgTime = 1000;//消息提示时间
+		var layerMsgOffset = 'rb';//右下角
+		var layerMsgTime = 1500;//消息提示时间
 		var layerLoadMaxTime = 10*1000;//加载遮罩最大时间
 		var layerLoadShade = [0.5,'#fff'];//加载遮罩背景色和透明度
 	</script>

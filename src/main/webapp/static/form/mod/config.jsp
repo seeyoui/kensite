@@ -15,7 +15,7 @@
 		<div id="textbox" title="单行" data-options="iconCls:'icon-uicomponent-text'" style="padding:10px">
 			<form class="configForm">
 				<div class="fitem">
-					<label>背景字</label><input id="prompt" class="easyui-textbox" data-options="required:true" style="width:150px;"/>
+					<label>背景字</label><input id="prompt" class="easyui-textbox" data-options="" style="width:150px;"/>
 				</div>
 			</form>
 		</div>
@@ -133,6 +133,15 @@
 			<div class="fitem">
 				<label>格式</label><input id="config" class="easyui-textbox" data-options="value:'yyyy-MM-dd HH:mm:ss'" style="width:150px;"/>
 			</div>
+			<div class="fitem">
+				<label>最大日期</label><input id="maxDate" class="easyui-textbox" data-options="value:''" style="width:150px;"/>
+			</div>
+			<div class="fitem">
+				<label>最小日期</label><input id="minDate" class="easyui-textbox" data-options="value:''" style="width:150px;"/>
+			</div>
+			<div class="fitem">
+				<label>参考地址</label><a href="http://www.my97.net/dp/demo/index.htm" target="_blank">日期范围限制</a>(二. 功能及示例>>4. 日期范围限制)
+			</div>
 		</div>
 		<div id="textarea" title="多行" data-options="iconCls:'icon-uicomponent-textArea'" style="padding:10px">
 			<div class="fitem">
@@ -211,7 +220,17 @@
 				$('#configTab').tabs('select', 6);
 			}
 			if(componentType=="datebox") {
-				$('#'+componentType+' #config').textbox('setValue', componentConfig.replace("dateFmt:'", "").replace("'",""));
+				var componentConfigArr = componentConfig.split(',');
+				if(componentConfigArr.length > 0) {
+					$('#'+componentType+' #config').textbox('setValue', componentConfigArr[0].replace("dateFmt:'", "").replace("'",""));
+				}
+				if(componentConfigArr.length > 1) {
+					$('#'+componentType+' #maxDate').textbox('setValue', componentConfigArr[1].substr(0,componentConfigArr[1].length-1).replace("maxDate:'", ""));
+				}
+				if(componentConfigArr.length > 2) {
+					$('#'+componentType+' #minDate').textbox('setValue', componentConfigArr[2].substr(0,componentConfigArr[2].length-1).replace("minDate:'", ""));
+				}
+				
 				$('#configTab').tabs('select', 5);
 			}
 			if(componentType=="htmldesign") {
@@ -297,7 +316,9 @@
 				componentConfig = "multiline:true,prompt:'"+$('#'+componentType+' #prompt').val()+"'";
 			}
 			if(componentType=="datebox") {
-				componentConfig = "dateFmt:'"+$('#'+componentType+' #config').val()+"'";
+				componentConfig += "dateFmt:'"+$('#'+componentType+' #config').val()+"',";
+				componentConfig += "maxDate:'"+$('#'+componentType+' #maxDate').val()+"',";
+				componentConfig += "minDate:'"+$('#'+componentType+' #minDate').val()+"'";
 			}
 			if(componentType=="numberbox") {
 				var max = $('#'+componentType+' #max').val();
@@ -359,7 +380,7 @@
 				}
 			}
 			if(componentType=="datebox") {
-				componentObj = "<input id=\"show\" class=\"easyui-textbox\" onClick=\"WdatePicker({dateFmt:'"+$('#'+componentType+' #config').val()+"'})\"/>";
+				componentObj = "<input id=\"show\" class=\"easyui-textbox\" onClick=\"WdatePicker({dateFmt:'"+$('#'+componentType+' #config').val()+"',maxDate:'"+$('#'+componentType+' #maxDate').val()+"',minDate:'"+$('#'+componentType+' #minDate').val()+"'})\"/>";
 				$('#showComponent').html(componentObj);
 				/* $('#show').textbox({
 					prompt:'请选择'

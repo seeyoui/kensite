@@ -77,8 +77,8 @@
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroySubInfo()">删除</a>
 		        </shiro:hasPermission>
 		        <br/>
-				列名<input id="sel_name" name="sel_name" class="easyui-textbox" data-options=""/>
-				注释<input id="sel_comments" name="sel_comments" class="easyui-textbox" data-options=""/>
+				列名<input id="sel_sub_name" name="sel_name" class="easyui-textbox" data-options=""/>
+				注释<input id="sel_sub_comments" name="sel_comments" class="easyui-textbox" data-options=""/>
 				类型<input id="sel_jdbcType" name="sel_jdbcType" class="easyui-textbox" data-options=""/>
 				<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="selectSubData()">查询</a>
 		    </div>
@@ -291,8 +291,8 @@
     }
     
     function selectSubData() {
-    	var sel_name = $("#sel_name").val();
-	    var sel_comments = $("#sel_comments").val();
+    	var sel_name = $("#sel_sub_name").val();
+	    var sel_comments = $("#sel_sub_comments").val();
 	    var sel_jdbcType = $("#sel_jdbcType").val();
     	$('#dataSubList').datagrid('load',{
     		name:sel_name,
@@ -489,7 +489,7 @@
     	$.ajax({
 			type: "post",
 			url: '${ctx}/sys/dict/getDictJson.do',
-			data: {category:'editable'},
+			data: {category:'yes_no_hidden'},
 			dataType: 'json',
 			beforeSend: function(XMLHttpRequest){
 			},
