@@ -42,7 +42,7 @@ public class ListUtils {
 		String column = tableColumn.getName();
 		column = StringUtils.toCamelCase(column);
 		result.append("<th data-options=\"halign:'center',");
-		result.append("sortable:true,");
+//		result.append("sortable:true,");
 		result.append("field:'"+column+"',");
 		if(StringUtils.isNoneBlank(tableColumn.getListWidth())) {
 			result.append(" width:"+tableColumn.getListWidth()+",");
@@ -56,6 +56,11 @@ public class ListUtils {
 		}
 		if(TableColumnConstants.NUMBERBOX.equals(tableColumn.getCategory())) {
 			result.append(" align:'right',");
+			result.append(" formatter: function(val,row,index){");
+			if(StringUtils.isNoneBlank(tableColumn.getSettings())) {
+				String[] settingsArr = tableColumn.getSettings().split(",");
+				result.append("if(val==null||val=='') {return val;} else {return parseFloat(val).toFixed("+settingsArr[2].replace("precision:", "")+");}}");
+			}
 		}
 		if(TableColumnConstants.COMBOBOX.equals(tableColumn.getCategory()) || TableColumnConstants.RADIOBOX.equals(tableColumn.getCategory()) || TableColumnConstants.CHECKBOX.equals(tableColumn.getCategory())) {
 			needCache = false;
@@ -76,7 +81,7 @@ public class ListUtils {
 						sb.append("{value: '"+map.get(value.toUpperCase())+"',label: '"+map.get(label.toUpperCase())+"'},");
 					}
 					if(sb.lastIndexOf(",") > 1) {
-						sb.substring(0, sb.lastIndexOf(",")-1);
+						result.deleteCharAt(result.lastIndexOf(","));
 					}
 					sb.append("];");
 				} else if(settings.indexOf("DICT>") != -1) {
@@ -86,7 +91,7 @@ public class ListUtils {
 						sb.append("{value: '"+dict.getValue()+"',label: '"+dict.getLabel()+"'},");
 					}
 					if(sb.lastIndexOf(",") > 1) {
-						sb.substring(0, sb.lastIndexOf(",")-1);
+						result.deleteCharAt(result.lastIndexOf(","));
 					}
 					sb.append("];");
 				} else if(settings.indexOf("URL>") != -1) {
@@ -103,7 +108,7 @@ public class ListUtils {
 						}
 					}
 					if(sb.lastIndexOf(",") > 1) {
-						sb.substring(0, sb.lastIndexOf(",")-1);
+						result.deleteCharAt(result.lastIndexOf(","));
 					}
 					sb.append("];");
 				}
