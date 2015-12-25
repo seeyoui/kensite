@@ -114,9 +114,10 @@ public class FormUtils {
 			result.append("editable:false,");
 			if(StringConstant.NO.equals(tableColumn.getIsEdit())) {
 				result.append("readonly:false,");
-			}
-			if(StringConstant.DISABLE.equals(tableColumn.getIsEdit())) {
+			} else if(StringConstant.DISABLE.equals(tableColumn.getIsEdit())) {
 				result.append("disabled:true,");
+			} else {
+				result.append("icons: [{iconCls:'icon-clear',handler: function(e){$(e.data.target).combobox('clear');}}],");
 			}
 			if(StringConstant.NO.equals(tableColumn.getIsNull())) {
 				result.append("required:true,");
