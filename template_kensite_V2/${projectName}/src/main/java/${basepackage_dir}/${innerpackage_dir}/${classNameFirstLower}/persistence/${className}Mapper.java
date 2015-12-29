@@ -40,6 +40,13 @@ public interface ${className}Mapper {
 	 * @return
 	 */
 	public int findTotal(${className} ${classNameLower});
+
+	/**
+	 * 查询数据总数排除当前数据
+	 * @param ${classNameLower}
+	 * @return
+	 */
+	public int findExTotal(${className} ${classNameLower});
 	
 	/**
 	 * 数据新增

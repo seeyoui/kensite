@@ -81,7 +81,7 @@ public class ListUtils {
 						sb.append("{value: '"+map.get(value.toUpperCase())+"',label: '"+map.get(label.toUpperCase())+"'},");
 					}
 					if(sb.lastIndexOf(",") > 1) {
-						result.deleteCharAt(result.lastIndexOf(","));
+						sb.deleteCharAt(sb.lastIndexOf(","));
 					}
 					sb.append("];");
 				} else if(settings.indexOf("DICT>") != -1) {
@@ -91,7 +91,7 @@ public class ListUtils {
 						sb.append("{value: '"+dict.getValue()+"',label: '"+dict.getLabel()+"'},");
 					}
 					if(sb.lastIndexOf(",") > 1) {
-						result.deleteCharAt(result.lastIndexOf(","));
+						sb.deleteCharAt(sb.lastIndexOf(","));
 					}
 					sb.append("];");
 				} else if(settings.indexOf("URL>") != -1) {
@@ -108,13 +108,65 @@ public class ListUtils {
 						}
 					}
 					if(sb.lastIndexOf(",") > 1) {
-						result.deleteCharAt(result.lastIndexOf(","));
+						sb.deleteCharAt(sb.lastIndexOf(","));
 					}
 					sb.append("];");
 				}
 			}
 			result.append(sb);
 			result.append("if(jsonObj == null||val==null||val=='') {return val;}var varArr = val.split(',');var result = '';for(var i=0; i<varArr.length; i++) {for(var obj in jsonObj) {if(jsonObj[obj].value == varArr[i]) {result += (jsonObj[obj].label+',');}}}return result.substring(0, result.length-1);},");
+		}
+		if(TableColumnConstants.COMBOTREE.equals(tableColumn.getCategory())) {
+			needCache = false;
+			result.append(" formatter: function(val,row,index){");
+			StringBuffer sb = new StringBuffer();
+			if(StringUtils.isNoneBlank(tableColumn.getSettings())) {
+				String settings = tableColumn.getSettings();
+				if(settings.indexOf("SQL>") != -1) {
+					sb.append("var jsonObj = [");
+					String[] settingsArr = settings.split("\\|");
+					String sql = settingsArr[0].replace("SQL>", "");
+					String value = settingsArr[1];
+					String label = settingsArr[2];
+					List<Map<Object, Object>> list = DBUtils.executeQuery(sql);
+					for(Map<Object, Object> map : list) {
+						sb.append("{value: '"+map.get(value.toUpperCase())+"',label: '"+map.get(label.toUpperCase())+"'},");
+					}
+					if(sb.lastIndexOf(",") > 1) {
+						sb.deleteCharAt(sb.lastIndexOf(","));
+					}
+					sb.append("];");
+				} else if(settings.indexOf("DICT>") != -1) {
+					sb.append("var jsonObj = [");
+					List<Dict> dictList = DictUtils.getDictList(DictUtils.getDict(settings.replace("DICT>", "")).getValue());
+					for(Dict dict : dictList) {
+						sb.append("{value: '"+dict.getValue()+"',label: '"+dict.getLabel()+"'},");
+					}
+					if(sb.lastIndexOf(",") > 1) {
+						sb.deleteCharAt(sb.lastIndexOf(","));
+					}
+					sb.append("];");
+				} else if(settings.indexOf("URL>") != -1) {
+					sb.append("var jsonObj = null;");
+				} else  {
+					sb.append("var jsonObj = [");
+					String[] settingsArr = settings.split("\\|");
+					for(String set : settingsArr) {
+						if(set.indexOf(":") == -1) {
+							sb.append("{label: '"+set+"',value: '"+set+"'},");
+						} else {
+							String[] setArr = set.split(":");
+							sb.append("{value: '"+setArr[0]+"',label: '"+setArr[1]+"'},");
+						}
+					}
+					if(sb.lastIndexOf(",") > 1) {
+						sb.deleteCharAt(sb.lastIndexOf(","));
+					}
+					sb.append("];");
+				}
+			}
+			result.append(sb);
+			result.append("if(jsonObj == null||val==null||val=='') {return val;}for(var obj in jsonObj) {if(jsonObj[obj].value == val) {return jsonObj[obj].label;}} return ''}");
 		}
 		if(TableColumnConstants.DATEBOX.equals(tableColumn.getCategory())) {
 			result.append(" align:'center',");

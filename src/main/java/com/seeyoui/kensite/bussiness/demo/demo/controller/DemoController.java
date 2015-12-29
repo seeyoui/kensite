@@ -1,10 +1,8 @@
-<#include "/custom.include">
-<#include "/java_copyright.include">
-<#assign className = table.className>
-<#assign classNameLower = className?uncap_first>
-<#assign module = table.className[3..]?uncap_first>
-
-package ${basepackage}.${innerpackage}.${table.classNameFirstLower}.controller;
+/*
+ * Powered By cuichen
+ * Since 2014 - 2015
+ */
+package com.seeyoui.kensite.bussiness.demo.demo.controller;
 
 import java.sql.*;
 import java.util.*;
@@ -27,22 +25,27 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import ${basepackage}.common.util.DateUtils;
-import ${basepackage}.common.constants.StringConstant;
-import ${basepackage}.common.base.domain.EasyUIDataGrid;
-import ${basepackage}.common.base.controller.BaseController;
-import ${basepackage}.common.util.RequestResponseUtil;
-import ${basepackage}.common.util.excel.ExportExcel;
-import ${basepackage}.${innerpackage}.${table.classNameFirstLower}.domain.${className};
-import ${basepackage}.${innerpackage}.${table.classNameFirstLower}.service.${className}Service;
-<#include "/java_imports.include">
-
+import com.seeyoui.kensite.common.util.DateUtils;
+import com.seeyoui.kensite.common.constants.StringConstant;
+import com.seeyoui.kensite.common.base.domain.EasyUIDataGrid;
+import com.seeyoui.kensite.common.base.controller.BaseController;
+import com.seeyoui.kensite.common.util.RequestResponseUtil;
+import com.seeyoui.kensite.common.util.excel.ExportExcel;
+import com.seeyoui.kensite.bussiness.demo.demo.domain.Demo;
+import com.seeyoui.kensite.bussiness.demo.demo.service.DemoService;
+/**
+ * 演示
+ * @author cuichen
+ * @version 1.0
+ * @since 1.0
+ * @date 2015-12-28
+ */
 @Controller
-@RequestMapping(value = "${moduleC}${table.classNameFirstLower}")
-public class ${className}Controller extends BaseController {
+@RequestMapping(value = "demo/demo")
+public class DemoController extends BaseController {
 	
 	@Autowired
-	private ${className}Service ${table.classNameFirstLower}Service;
+	private DemoService demoService;
 	
 	/**
 	 * 展示列表页面
@@ -51,12 +54,12 @@ public class ${className}Controller extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	//@RequiresPermissions("${moduleP}${table.classNameFirstLower}:view")
+	//@RequiresPermissions("demo:demo:view")
 	@RequestMapping(value = "/{page}")
 	public ModelAndView view(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, @PathVariable String page) throws Exception {
-		return new ModelAndView("${innerpackage_dir}/${table.classNameFirstLower}/"+page, modelMap);
+		return new ModelAndView("bussiness/demo/demo/"+page, modelMap);
 	}
 	
 	/**
@@ -66,72 +69,72 @@ public class ${className}Controller extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	//@RequiresPermissions("${moduleP}${table.classNameFirstLower}:select")
+	//@RequiresPermissions("demo:demo:select")
 	@RequestMapping(value = "/data/{id}")
 	@ResponseBody
 	public Object data(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, @PathVariable String id) throws Exception {
-		${className} ${table.classNameFirstLower} = ${table.classNameFirstLower}Service.findOne(id);
-		return ${table.classNameFirstLower};
+		Demo demo = demoService.findOne(id);
+		return demo;
 	}
 	
 	/**
 	 * 获取列表展示数据
 	 * @param modelMap
-	 * @param ${table.classNameFirstLower}
+	 * @param demo
 	 * @return
 	 * @throws Exception
 	 */
-	//@RequiresPermissions("${moduleP}${table.classNameFirstLower}:select")
+	//@RequiresPermissions("demo:demo:select")
 	@RequestMapping(value = "/list/data", method=RequestMethod.POST)
 	@ResponseBody
 	public Object listData(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap, ${className} ${table.classNameFirstLower}) throws Exception {
-		List<${className}> ${table.classNameFirstLower}List = ${table.classNameFirstLower}Service.findList(${table.classNameFirstLower});
-		int total = ${table.classNameFirstLower}Service.findTotal(${table.classNameFirstLower});
+			ModelMap modelMap, Demo demo) throws Exception {
+		List<Demo> demoList = demoService.findList(demo);
+		int total = demoService.findTotal(demo);
 		EasyUIDataGrid eudg = new EasyUIDataGrid();
 		eudg.setTotal(String.valueOf(total));
-		eudg.setRows(${table.classNameFirstLower}List);
+		eudg.setRows(demoList);
 		return eudg;
 	}
 	
 	/**
 	 * 获取所有数据
 	 * @param modelMap
-	 * @param ${table.classNameFirstLower}
+	 * @param demo
 	 * @return
 	 * @throws Exception
 	 */
-	//@RequiresPermissions("${moduleP}${table.classNameFirstLower}:select")
+	//@RequiresPermissions("demo:demo:select")
 	@RequestMapping(value = "/list/all", method=RequestMethod.POST)
 	@ResponseBody
 	public Object listAll(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap, ${className} ${table.classNameFirstLower}) throws Exception {
-		List<${className}> ${table.classNameFirstLower}List = ${table.classNameFirstLower}Service.findAll(${table.classNameFirstLower});
-		return ${table.classNameFirstLower}List;
+			ModelMap modelMap, Demo demo) throws Exception {
+		List<Demo> demoList = demoService.findAll(demo);
+		return demoList;
 	}
 	
 	/**
 	 * 保存新增的数据
 	 * @param modelMap
-	 * @param ${table.classNameFirstLower}
+	 * @param demo
 	 * @return
 	 * @throws Exception
 	 */
-	//@RequiresPermissions("${moduleP}${table.classNameFirstLower}:insert")
+	//@RequiresPermissions("demo:demo:insert")
 	@RequestMapping(value = "/save", method=RequestMethod.POST)
 	@ResponseBody
 	public String save(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap, ${className} ${table.classNameFirstLower}) throws Exception {
-		if (!beanValidator(modelMap, ${table.classNameFirstLower})){
+			ModelMap modelMap, Demo demo) throws Exception {
+		if (!beanValidator(modelMap, demo)){
 			RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
 			return null;
 		}
-		${table.classNameFirstLower}Service.save(${table.classNameFirstLower});
+		demoService.save(demo);
 		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}
@@ -139,21 +142,21 @@ public class ${className}Controller extends BaseController {
 	/**
 	 * 保存修改的数据
 	 * @param modelMap
-	 * @param ${table.classNameFirstLower}
+	 * @param demo
 	 * @return
 	 * @throws Exception
 	 */
-	//@RequiresPermissions("${moduleP}${table.classNameFirstLower}:update")
+	//@RequiresPermissions("demo:demo:update")
 	@RequestMapping(value = "/update", method=RequestMethod.POST)
 	@ResponseBody
 	public String update(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap, ${className} ${table.classNameFirstLower}) throws Exception {
-		if (!beanValidator(modelMap, ${table.classNameFirstLower})){
+			ModelMap modelMap, Demo demo) throws Exception {
+		if (!beanValidator(modelMap, demo)){
 			RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
 			return null;
 		}
-		${table.classNameFirstLower}Service.update(${table.classNameFirstLower});
+		demoService.update(demo);
 		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}
@@ -161,18 +164,18 @@ public class ${className}Controller extends BaseController {
 	/**
 	 * 删除数据库
 	 * @param modelMap
-	 * @param ${table.classNameFirstLower}Id
+	 * @param demoId
 	 * @return
 	 * @throws Exception
 	 */
-	//@RequiresPermissions("${moduleP}${table.classNameFirstLower}:delete")
+	//@RequiresPermissions("demo:demo:delete")
 	@RequestMapping(value = "/delete", method=RequestMethod.POST)
 	@ResponseBody
 	public String delete(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, String id) throws Exception {
 		List<String> listId = Arrays.asList(id.split(","));
-		${table.classNameFirstLower}Service.delete(listId);
+		demoService.delete(listId);
 		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}
@@ -180,18 +183,18 @@ public class ${className}Controller extends BaseController {
 	/**
 	 * 导出Excel数据
 	 * @param modelMap
-	 * @param ${table.classNameFirstLower}
+	 * @param demo
 	 * @return
 	 * @throws Exception
 	 */
-	//@RequiresPermissions("${moduleP}${table.classNameFirstLower}:export")
+	//@RequiresPermissions("demo:demo:export")
 	@RequestMapping(value = "/export")
 	public String export(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
-			ModelMap modelMap, ${className} ${table.classNameFirstLower}) throws Exception {
+			ModelMap modelMap, Demo demo) throws Exception {
 		String fileName = DateUtils.getDate("yyyyMMddHHmmss")+".xlsx";
-		List<${className}> ${table.classNameFirstLower}List = ${table.classNameFirstLower}Service.findAll(${table.classNameFirstLower});
-		new ExportExcel(null, ${className}.class).setDataList(${table.classNameFirstLower}List).write(response, fileName).dispose();
+		List<Demo> demoList = demoService.findAll(demo);
+		new ExportExcel(null, Demo.class).setDataList(demoList).write(response, fileName).dispose();
 		return null;
 	}
 }

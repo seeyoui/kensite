@@ -11,6 +11,7 @@ import com.seeyoui.kensite.common.constants.StringConstant;
 import com.seeyoui.kensite.common.taglib.constants.TableColumnConstants;
 import com.seeyoui.kensite.common.util.CacheUtils;
 import com.seeyoui.kensite.common.util.DBUtils;
+import com.seeyoui.kensite.common.util.Global;
 import com.seeyoui.kensite.common.util.SpringContextHolder;
 import com.seeyoui.kensite.common.util.StringUtils;
 import com.seeyoui.kensite.framework.mod.tableColumn.domain.TableColumn;
@@ -136,7 +137,7 @@ public class QueryUtils {
 					String value = settingsArr[1];
 					String label = settingsArr[2];
 					result.append("valueField: '"+StringUtils.toCamelCase(value)+"',textField: '"+StringUtils.toCamelCase(label)+"',");
-					result.append("url:'/park"+url+"'");
+					result.append("url:'/"+Global.getConfig("productName")+url+"'");
 				} else  {
 					result.append("valueField: 'value',textField: 'label',");
 					result.append("data: [");
@@ -159,6 +160,83 @@ public class QueryUtils {
 				result.append(",panelHeight:'auto',");
 			}
 			result.append("\" "+tableColumn.getHtmlInner()+"/>");
+		}
+		if(TableColumnConstants.COMBOTREE.equals(tableColumn.getCategory())) {
+			needCache = false;
+			result.append("<input class=\"easyui-combotree\" id=\"sel_");
+			result.append(column);
+			result.append("\" name=\"sel_");
+			result.append(column);
+			result.append("\" data-options=\"");
+			result.append("editable:false,");
+			result.append("icons: [{iconCls:'icon-clear',handler: function(e){$(e.data.target).combobox('clear');}}],");
+			int dataCount = 0;
+			if(StringUtils.isNoneBlank(tableColumn.getSettings())) {
+				String settings = tableColumn.getSettings();
+				if(settings.indexOf("SQL>") != -1) {
+					String[] settingsArr = settings.split("\\|");
+					String sql = settingsArr[0].replace("SQL>", "");
+					String id = settingsArr[1];
+					String text = settingsArr[2];
+					String parent = settingsArr[3];
+					result.append("idField: '"+StringUtils.toCamelCase(id)+"',textField: '"+StringUtils.toCamelCase(text)+"',parentField: '"+StringUtils.toCamelCase(parent)+"',");
+					result.append("data: [");
+					List<Map<Object, Object>> list = DBUtils.executeQuery(sql);
+					for(Map<Object, Object> map : list) {
+						dataCount++;
+						Iterator entries = map.entrySet().iterator();
+						result.append("{"+StringUtils.toCamelCase(id)+": '"+map.get(id.toUpperCase())+"',"+StringUtils.toCamelCase(text)+": '"+map.get(text.toUpperCase())+"',"+StringUtils.toCamelCase(parent)+": '"+map.get(parent.toUpperCase())+"'");
+						while (entries.hasNext()) {
+						    Entry entry = (Entry) entries.next();
+						    String k = (String)entry.getKey();
+						    String v = (String)entry.getValue();
+						    if(id.toUpperCase().equals(k) || text.toUpperCase().equals(k) || parent.toUpperCase().equals(k)) {
+						    	continue;
+						    }
+						    result.append("," + StringUtils.toCamelCase(k)+": '"+v+"'");
+						}
+						result.append("},");
+					}
+					result.deleteCharAt(result.lastIndexOf(","));
+					result.append("]");
+				} else if(settings.indexOf("DICT>") != -1) {
+					result.append("idField: 'value',textField: 'label',parentField: 'category',");
+					result.append("data: [");
+					List<Dict> dictList = DictUtils.getDictList(DictUtils.getDict(settings.replace("DICT>", "")).getValue());
+					for(Dict dict : dictList) {
+						dataCount++;
+						result.append("{value: '"+dict.getValue()+"',label: '"+dict.getLabel()+"',category: '"+dict.getCategory()+"'},");
+					}
+					result.deleteCharAt(result.lastIndexOf(","));
+					result.append("]");
+				} else if(settings.indexOf("URL>") != -1) {
+					String[] settingsArr = settings.split("\\|");
+					String url = settingsArr[0].replace("URL>", "");
+					String id = settingsArr[1];
+					String text = settingsArr[2];
+					String parent = settingsArr[3];
+					result.append("idField: '"+StringUtils.toCamelCase(id)+"',textField: '"+StringUtils.toCamelCase(text)+"',parentField: '"+StringUtils.toCamelCase(parent)+"',");
+					result.append("url:'/"+Global.getConfig("productName")+url+"'");
+				} else {
+					result.append("idField: 'id',textField: 'text',parentField: 'pid',");
+					result.append("data: [");
+					String[] settingsArr = settings.split("\\|");
+					for(String set : settingsArr) {
+						dataCount++;
+						String[] setArr = set.split(":");
+						result.append("{id: '"+setArr[0]+"',text: '"+setArr[1]+"',pid: '"+setArr[2]+"'},");
+					}
+					result.deleteCharAt(result.lastIndexOf(","));
+					result.append("]");
+				}
+			}
+			if(dataCount <= 5) {
+				result.append(",panelHeight:'auto',");
+			} else {
+				result.append(",panelHeight:'130',");
+			}
+			result.append("\" "+tableColumn.getHtmlInner());
+			result.append("/>");
 		}
 		if(TableColumnConstants.DATEBOX.equals(tableColumn.getCategory())) {
 			result.append("<input class=\"date-input easyui-validatebox\" id=\"sel_");

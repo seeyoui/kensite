@@ -147,9 +147,16 @@ ${column.columnNameLower}:sel_${column.columnNameLower}
 	        },
 	        editInfo : function (){
 	            var row = $('#dataList').datagrid('getSelected');
+	            //var row = $('#dataList').datagrid('getSelections');
 	            if (row){
-	            	${table.classNameFirstLower}.layerOpen(url);
-	            }    	
+	            	if(row.length != 1) {
+	            		layer.msg("只能选择一条记录修改！", {offset: 'rb',icon: 5,shift: 8,time: layerMsgTime});
+	            	} else {
+		            	$.${table.classNameFirstLower}.layerOpen(url);
+	            	}
+	            } else {
+					layer.msg("请先选择要修改的记录！", {offset: 'rb',icon: 5,shift: 8,time: layerMsgTime});
+				}
 	        },
 	        exportExcel : function () {
 	        	window.open("${"${"}ctx${"}"}/${moduleC}${table.classNameFirstLower}/export");
@@ -180,6 +187,7 @@ ${column.columnNameLower}:sel_${column.columnNameLower}
 	        },
 	        destroyInfo : function (){
 	            var row = $('#dataList').datagrid('getSelected');
+	            //var row = $('#dataList').datagrid('getSelections');
 	            if (row){
 	            	layer.confirm('是否确认删除？', {
 	            	    btn: ['确定','取消'] //按钮
@@ -205,7 +213,9 @@ ${column.columnNameLower}:sel_${column.columnNameLower}
 						});
 	            	}, function(){
 	            	});
-	            }
+	            } else {
+					layer.msg("请先选择要删除的记录！", {offset: 'rb',icon: 5,shift: 8,time: layerMsgTime});
+				}
 	        }
         }
     </script>

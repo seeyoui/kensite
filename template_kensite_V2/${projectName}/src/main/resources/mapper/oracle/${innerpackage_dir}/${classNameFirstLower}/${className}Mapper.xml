@@ -5,6 +5,7 @@
 <#assign dbtype=column.sqlTypeName?lower_case>
 <#assign colname=column.columnName?lower_case>
 <#assign rtn>
+<#if (colname=="id") ><#else>
 <#if dbtype=="number" >
 AND T.${column.sqlName} = ${"#{"+column.columnNameLower+"}"}
 <#elseif (dbtype=="varchar2"||dbtype=="char")>
@@ -12,6 +13,7 @@ AND T.${column.sqlName} LIKE '%'||${"#{"+column.columnNameLower+"}"}||'%'
 <#elseif (dbtype=="clob")>
 <#elseif (dbtype=="date")>
 AND T.${column.sqlName} = ${"#{"+column.columnNameLower+"}"}
+</#if>
 </#if>
 </#assign>
 <#return rtn?trim>
@@ -84,7 +86,7 @@ ${"<if test=\""+column.columnNameLower+" !=null and "+column.columnNameLower+" !
 	<sql id="orderBy">
 		ORDER BY 
 		<if test="sort != null and sort != ''">
-			${sort} ${order},
+			${"#{"}sort${"}"} ${"#{"}order${"}"},
 		</if>
 		T.CREATE_DATE DESC 
 	</sql>
@@ -123,6 +125,15 @@ ${"<if test=\""+column.columnNameLower+" !=null and "+column.columnNameLower+" !
 		COUNT(1) total
 		FROM ${table.sqlName} T
 		<include refid="whereStr"/>
+	</select>
+	
+	<!-- 查询数据总数排除当前数据 -->
+	<select id="findExTotal" resultType="Integer">
+		SELECT
+		COUNT(1) total
+		FROM ${table.sqlName} T
+		<include refid="whereStr"/>
+		AND T.ID != ${"#{"}id${"}"}
 	</select>
 	
 	<!-- 数据新增 -->

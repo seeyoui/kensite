@@ -60,6 +60,9 @@ public class QueryJsUtils {
 		if(TableColumnConstants.DATEBOX.equals(tableColumn.getCategory())) {
 			result.append("val()");
 		}
+		if(TableColumnConstants.COMBOTREE.equals(tableColumn.getCategory())) {
+			result.append("combotree('getValue')");
+		}
 		result.append(",");
 		if(needCache) {
 			CacheUtils.put(TableColumnConstants.CACHE_QUERY_JS+TableColumnConstants.CACHE_SPLIT+TableColumnConstants.CACHE_EASYUI+TableColumnConstants.CACHE_SPLIT+tableColumn.getTableName()+TableColumnConstants.CACHE_SPLIT+tableColumn.getName(), result);

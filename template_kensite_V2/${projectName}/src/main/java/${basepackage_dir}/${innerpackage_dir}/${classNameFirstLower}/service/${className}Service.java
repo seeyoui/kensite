@@ -69,6 +69,16 @@ public class ${className}Service extends BaseService {
 	}
 	
 	/**
+	 * 查询数据总数排除当前数据
+	 * @param ${classNameLower}
+	 * @return
+	 * @throws CRUDException
+	 */
+	public int findExTotal(${className} ${classNameLower}) throws CRUDException {
+		return ${classNameLower}Mapper.findExTotal(${classNameLower});
+	}
+	
+	/**
 	 * 数据新增
 	 * @param ${classNameLower}
 	 * @throws CRUDException

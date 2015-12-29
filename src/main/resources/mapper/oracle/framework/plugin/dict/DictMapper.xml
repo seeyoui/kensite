@@ -34,7 +34,7 @@
 				AND T.SEQUENCE = #{sequence}
 			</if>
 			<if test="parentId != null and parentId != ''">
-				AND T.PARENT_ID LIKE '%'||#{parentId}||'%'
+				AND T.PARENT_ID LIKE #{parentId}
 			</if>
 		</where>
 	</sql>

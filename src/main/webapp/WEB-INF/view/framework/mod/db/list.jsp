@@ -14,7 +14,7 @@
  	<div style="position:absolute;top:0px;left:0px;right:0px;bottom:0px;">
 		<div style="position:absolute;top:0px;bottom:0px;width:450px;">
 		    <table id="dataList" title="数据表" class="easyui-datagrid" style="width:100%;height:100%"
-		    		url="${ctx}/sys/table/getListData.do"
+		    		url="${ctx}/sys/table/list/data"
 		            toolbar="#toolbar" pagination="true"
 		            rownumbers="true" fitColumns="true" singleSelect="true">
 		        <thead>
@@ -212,7 +212,7 @@
     		layer.open({
 				title: '字段配置',
 			    type: 2,
-			    area: ['400px', '330px'],
+			    area: ['420px', '355px'],
 			    fix: false, //不固定
 			    maxmin: false,
 			    content: '${ctx_static}/form/mod/config.jsp'
@@ -229,7 +229,7 @@
     function changeTabCol(tableName) {
     	//清空历史查询结果
     	$('#dataSubList').datagrid('loadData',{total:0,rows:[]});
-    	$('#dataSubList').datagrid({url:'${ctx}/sys/tableColumn/getListData.do?tableName='+tableName});
+    	$('#dataSubList').datagrid({url:'${ctx}/sys/tableColumn/list/data?tableName='+tableName});
     }
     
     function changeJdbcLength(jdbcType) {
@@ -313,7 +313,7 @@
         $('#dataForm').form('clear');
         $('#dataForm #name').textbox('readonly', false);
         $('#dataWin').window('open');
-        url = '${ctx}/sys/table/saveByAdd.do';
+        url = '${ctx}/sys/table/save';
     }
     function editInfo(){
         var row = $('#dataList').datagrid('getSelected');
@@ -322,7 +322,7 @@
             $('#dataForm').form('load',row);
             $('#dataForm #name').textbox('readonly', true);
             $('#dataWin').window('open');
-            url = '${ctx}/sys/table/saveByUpdate.do?id='+row.id;
+            url = '${ctx}/sys/table/update?id='+row.id;
         }    	
     }
     var loadi;
@@ -357,8 +357,8 @@
                 if (r){
                 	$.ajax({
 						type: "post",
-						url: '${ctx}/sys/table/delete.do',
-						data: {delDataId:row.id},
+						url: '${ctx}/sys/table/delete',
+						data: {id:row.id},
 						dataType: 'json',
 						beforeSend: function(XMLHttpRequest){
 						},
@@ -387,7 +387,7 @@
         $('#dataSubForm').form('clear');
         $("#tableName").val(tableName);
         $('#dataSubWin').window('open');
-        url = '${ctx}/sys/tableColumn/saveByAdd.do';
+        url = '${ctx}/sys/tableColumn/save';
     }
     function editSubInfo(){
         var row = $('#dataSubList').datagrid('getSelected');
@@ -396,7 +396,7 @@
             $('#dataSubForm').form('load',row);
             $("#tableName").val(tableName);
             $('#dataSubWin').window('open');
-            url = '${ctx}/sys/tableColumn/saveByUpdate.do?id='+row.id;
+            url = '${ctx}/sys/tableColumn/update?id='+row.id;
         }    	
     }
     var loadi;
@@ -431,8 +431,8 @@
                 if (r){
                 	$.ajax({
 						type: "post",
-						url: '${ctx}/sys/tableColumn/delete.do',
-						data: {delDataId:row.id},
+						url: '${ctx}/sys/tableColumn/delete',
+						data: {id:row.id},
 						dataType: 'json',
 						beforeSend: function(XMLHttpRequest){
 							loadi = layer.load(2, {shade: layerLoadShade,time: layerLoadMaxTime});
@@ -455,7 +455,7 @@
     function getJdbcTypeJson() {
     	$.ajax({
 			type: "post",
-			url: '${ctx}/sys/dict/getDictJson.do',
+			url: '${ctx}/sys/dict/list/all',
 			data: {category:'jdbcType'},
 			dataType: 'json',
 			beforeSend: function(XMLHttpRequest){
@@ -470,7 +470,7 @@
     function getNullableJson() {
     	$.ajax({
 			type: "post",
-			url: '${ctx}/sys/dict/getDictJson.do',
+			url: '${ctx}/sys/dict/list/all',
 			data: {category:'yes_no'},
 			dataType: 'json',
 			beforeSend: function(XMLHttpRequest){
@@ -488,7 +488,7 @@
     function getEditableJson() {
     	$.ajax({
 			type: "post",
-			url: '${ctx}/sys/dict/getDictJson.do',
+			url: '${ctx}/sys/dict/list/all',
 			data: {category:'yes_no_hidden'},
 			dataType: 'json',
 			beforeSend: function(XMLHttpRequest){
@@ -503,7 +503,7 @@
     function getValidTypeJson() {
     	$.ajax({
 			type: "post",
-			url: '${ctx}/sys/dict/getDictJson.do',
+			url: '${ctx}/sys/dict/list/all',
 			data: {category:'valid'},
 			dataType: 'json',
 			beforeSend: function(XMLHttpRequest){
@@ -518,7 +518,7 @@
     function getCategoryJson() {
     	$.ajax({
 			type: "post",
-			url: '${ctx}/sys/dict/getDictJson.do',
+			url: '${ctx}/sys/dict/list/all',
 			data: {category:'columnCategory'},
 			dataType: 'json',
 			beforeSend: function(XMLHttpRequest){

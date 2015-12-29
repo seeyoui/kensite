@@ -1,8 +1,8 @@
 <#include "/custom.include">
 <#include "/java_copyright.include">
-<#assign className = table.className>   
+<#assign className = table.className> 
 <#assign classNameLower = className?uncap_first>
-package ${basepackage}.${innerpackage}.${table.classNameFirstLower}.service;  
+package ${basepackage}.${innerpackage}.${table.classNameFirstLower}.service;
  
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -66,6 +66,16 @@ public class ${className}Service extends BaseService {
 	 */
 	public int findTotal(${className} ${classNameLower}) throws CRUDException {
 		return ${classNameLower}Mapper.findTotal(${classNameLower});
+	}
+	
+	/**
+	 * 查询数据总数排除当前数据
+	 * @param ${classNameLower}
+	 * @return
+	 * @throws CRUDException
+	 */
+	public int findExTotal(${className} ${classNameLower}) throws CRUDException {
+		return ${classNameLower}Mapper.findExTotal(${classNameLower});
 	}
 	
 	/**

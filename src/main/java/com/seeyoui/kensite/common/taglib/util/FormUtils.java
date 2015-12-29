@@ -7,10 +7,13 @@ import java.util.Map.Entry;
 
 import javax.servlet.jsp.JspException;
 
+import org.apache.poi.hssf.util.HSSFColor.GOLD;
+
 import com.seeyoui.kensite.common.constants.StringConstant;
 import com.seeyoui.kensite.common.taglib.constants.TableColumnConstants;
 import com.seeyoui.kensite.common.util.CacheUtils;
 import com.seeyoui.kensite.common.util.DBUtils;
+import com.seeyoui.kensite.common.util.Global;
 import com.seeyoui.kensite.common.util.SpringContextHolder;
 import com.seeyoui.kensite.common.util.StringUtils;
 import com.seeyoui.kensite.framework.mod.tableColumn.domain.TableColumn;
@@ -57,7 +60,7 @@ public class FormUtils {
 				result.append("multiline:true,");
 			}
 			if(StringConstant.NO.equals(tableColumn.getIsEdit())) {
-				result.append("readonly:false,");
+				result.append("readonly:true,");
 			}
 			if(StringConstant.DISABLE.equals(tableColumn.getIsEdit())) {
 				result.append("disabled:true,");
@@ -84,7 +87,7 @@ public class FormUtils {
 			result.append(column);
 			result.append("\" data-options=\"tipPosition:'bottom',");
 			if(StringConstant.NO.equals(tableColumn.getIsEdit())) {
-				result.append("readonly:false,");
+				result.append("readonly:true,");
 			}
 			if(StringConstant.DISABLE.equals(tableColumn.getIsEdit())) {
 				result.append("disabled:true,");
@@ -113,7 +116,7 @@ public class FormUtils {
 			result.append("\" data-options=\"tipPosition:'top',");
 			result.append("editable:false,");
 			if(StringConstant.NO.equals(tableColumn.getIsEdit())) {
-				result.append("readonly:false,");
+				result.append("readonly:true,");
 			} else if(StringConstant.DISABLE.equals(tableColumn.getIsEdit())) {
 				result.append("disabled:true,");
 			} else {
@@ -155,7 +158,7 @@ public class FormUtils {
 						    }
 						    result.append("," + StringUtils.toCamelCase(k)+": '"+v+"'");
 						}
-						result.append("'},");
+						result.append("},");
 					}
 					result.deleteCharAt(result.lastIndexOf(","));
 					result.append("]");
@@ -175,8 +178,8 @@ public class FormUtils {
 					String value = settingsArr[1];
 					String label = settingsArr[2];
 					result.append("valueField: '"+value+"',textField: '"+label+"',");
-					result.append("url:'/park"+url+"'");
-				} else  {
+					result.append("url:'/"+Global.getConfig("productName")+url+"'");
+				} else {
 					result.append("valueField: 'value',textField: 'label',");
 					result.append("data: [");
 					String[] settingsArr = settings.split("\\|");
@@ -201,6 +204,101 @@ public class FormUtils {
 			result.append("\" "+tableColumn.getHtmlInner());
 			result.append("/>");
 		}
+		if(TableColumnConstants.COMBOTREE.equals(tableColumn.getCategory())) {
+			needCache = false;
+			result.append("<input class=\"easyui-combotree\" id=\"");
+			result.append(column);
+			result.append("\" name=\"");
+			result.append(column);
+			result.append("\" data-options=\"tipPosition:'top',");
+			result.append("editable:false,");
+			if(StringConstant.NO.equals(tableColumn.getIsEdit())) {
+				result.append("readonly:true,");
+			} else if(StringConstant.DISABLE.equals(tableColumn.getIsEdit())) {
+				result.append("disabled:true,");
+			} else {
+				result.append("icons: [{iconCls:'icon-clear',handler: function(e){$(e.data.target).combobox('clear');}}],");
+			}
+			if(StringConstant.NO.equals(tableColumn.getIsNull())) {
+				result.append("required:true,");
+			}
+			if(StringUtils.isNoneBlank(tableColumn.getValidType())) {
+				result.append("validType:'"+tableColumn.getValidType()+"',");
+			}
+			if(StringUtils.isNoneBlank(tableColumn.getDefaultValue())) {
+				result.append("value:'"+tableColumn.getDefaultValue()+"',");
+			}
+			int dataCount = 0;
+			if(StringUtils.isNoneBlank(tableColumn.getSettings())) {
+				if(TableColumnConstants.CHECKBOX.equals(tableColumn.getCategory())) {
+					result.append("multiple:true,");
+				}
+				String settings = tableColumn.getSettings();
+				if(settings.indexOf("SQL>") != -1) {
+					String[] settingsArr = settings.split("\\|");
+					String sql = settingsArr[0].replace("SQL>", "");
+					String id = settingsArr[1];
+					String text = settingsArr[2];
+					String parent = settingsArr[3];
+					result.append("idField: '"+StringUtils.toCamelCase(id)+"',textField: '"+StringUtils.toCamelCase(text)+"',parentField: '"+StringUtils.toCamelCase(parent)+"',");
+					result.append("data: [");
+					List<Map<Object, Object>> list = DBUtils.executeQuery(sql);
+					for(Map<Object, Object> map : list) {
+						dataCount++;
+						Iterator entries = map.entrySet().iterator();
+						result.append("{"+StringUtils.toCamelCase(id)+": '"+map.get(id.toUpperCase())+"',"+StringUtils.toCamelCase(text)+": '"+map.get(text.toUpperCase())+"',"+StringUtils.toCamelCase(parent)+": '"+map.get(parent.toUpperCase())+"'");
+						while (entries.hasNext()) {
+						    Entry entry = (Entry) entries.next();
+						    String k = (String)entry.getKey();
+						    String v = (String)entry.getValue();
+						    if(id.toUpperCase().equals(k) || text.toUpperCase().equals(k) || parent.toUpperCase().equals(k)) {
+						    	continue;
+						    }
+						    result.append("," + StringUtils.toCamelCase(k)+": '"+v+"'");
+						}
+						result.append("},");
+					}
+					result.deleteCharAt(result.lastIndexOf(","));
+					result.append("]");
+				} else if(settings.indexOf("DICT>") != -1) {
+					result.append("idField: 'value',textField: 'label',parentField: 'category',");
+					result.append("data: [");
+					List<Dict> dictList = DictUtils.getDictList(DictUtils.getDict(settings.replace("DICT>", "")).getValue());
+					for(Dict dict : dictList) {
+						dataCount++;
+						result.append("{value: '"+dict.getValue()+"',label: '"+dict.getLabel()+"',category:'"+dict.getCategory()+"'},");
+					}
+					result.deleteCharAt(result.lastIndexOf(","));
+					result.append("]");
+				} else if(settings.indexOf("URL>") != -1) {
+					String[] settingsArr = settings.split("\\|");
+					String url = settingsArr[0].replace("URL>", "");
+					String id = settingsArr[1];
+					String text = settingsArr[2];
+					String parent = settingsArr[3];
+					result.append("idField: '"+StringUtils.toCamelCase(id)+"',textField: '"+StringUtils.toCamelCase(text)+"',parentField: '"+StringUtils.toCamelCase(parent)+"',");
+					result.append("url:'/"+Global.getConfig("productName")+url+"'");
+				} else {
+					result.append("idField: 'id',textField: 'text',parentField: 'pid',");
+					result.append("data: [");
+					String[] settingsArr = settings.split("\\|");
+					for(String set : settingsArr) {
+						dataCount++;
+						String[] setArr = set.split(":");
+						result.append("{id: '"+setArr[0]+"',text: '"+setArr[1]+"',pid:'"+setArr[2]+"'},");
+					}
+					result.deleteCharAt(result.lastIndexOf(","));
+					result.append("]");
+				}
+			}
+			if(dataCount <= 5) {
+				result.append(",panelHeight:'auto',");
+			} else {
+				result.append(",panelHeight:'130',");
+			}
+			result.append("\" "+tableColumn.getHtmlInner());
+			result.append("/>");
+		}
 		if(TableColumnConstants.DATEBOX.equals(tableColumn.getCategory())) {
 			result.append("<input class=\"date-input easyui-validatebox\" id=\"");
 			result.append(column);
@@ -209,7 +307,7 @@ public class FormUtils {
 			result.append("\" "+tableColumn.getHtmlInner());
 			result.append("\" data-options=\"tipPosition:'bottom',");
 			if(StringConstant.NO.equals(tableColumn.getIsEdit())) {
-				result.append("readonly:false,");
+				result.append("readonly:true,");
 			}
 			if(StringConstant.DISABLE.equals(tableColumn.getIsEdit())) {
 				result.append("disabled:true,");

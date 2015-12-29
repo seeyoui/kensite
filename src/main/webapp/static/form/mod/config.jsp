@@ -9,56 +9,62 @@
 	<%@ include file="/WEB-INF/view/taglib/header.jsp" %>
 	<%@ include file="/WEB-INF/view/taglib/easyui.jsp" %>
 	<%@ include file="/WEB-INF/view/taglib/layer.jsp" %>
+	<style>
+		.fitem label {
+		    display: inline-block;
+		    width: 50px;
+		}
+	</style>
   </head>
 <body>
-	<div id="configTab" class="easyui-tabs" data-options="plain: true, narrow: false, pill: true, tabPosition: 'left', headerWidth: 120, tools:'#tab-tools'" style="width:100%;height:280px">
+	<div id="configTab" class="easyui-tabs" data-options="plain: true, narrow: false, pill: true, tabPosition: 'left', headerWidth: 120, tools:'#tab-tools'" style="width:100%;height:310px">
 		<div id="textbox" title="单行" data-options="iconCls:'icon-uicomponent-text'" style="padding:10px">
 			<form class="configForm">
 				<div class="fitem">
-					<label>背景字</label><input id="prompt" class="easyui-textbox" data-options="" style="width:150px;"/>
+					<label>背景字</label><input id="prompt" class="easyui-textbox" data-options="" style="width:200px;"/>
 				</div>
 			</form>
 		</div>
 		<div id="numberbox" title="数值" data-options="iconCls:'icon-uicomponent-number'" style="padding:10px">
 			<div class="fitem">
-				<label>上限</label><input id="max" class="easyui-numberbox" data-options="precision:0,value:999999" style="width:150px;"/>
+				<label>上限</label><input id="max" class="easyui-numberbox" data-options="precision:0,value:999999" style="width:200px;"/>
 			</div>
 			<div class="fitem">
-				<label>下限</label><input id="min"  class="easyui-numberbox" data-options="precision:0,value:-999999" style="width:150px;"/>
+				<label>下限</label><input id="min"  class="easyui-numberbox" data-options="precision:0,value:-999999" style="width:200px;"/>
 			</div>
 			<div class="fitem">
-				<label>精度</label><input id="precision" class="easyui-numberbox" data-options="min:0,max:2,value:0" style="width:150px;"/>
+				<label>精度</label><input id="precision" class="easyui-numberbox" data-options="min:0,max:2,value:0" style="width:200px;"/>
 			</div>
 		</div>
 		<div id="combobox" title="列表" data-options="iconCls:'icon-uicomponent-combox'" style="padding:10px">
 			<div id="comboboxTab" class="easyui-tabs" data-options="plain: false, narrow: false, pill: true" style="width:100%;height:120px">
 				<div id="string" title="常量" data-options="iconCls:'icon-uicomponent-text'" style="padding:10px">
 					<div class="fitem">
-						<label>选项</label><input id="config" class="easyui-textbox" data-options="" style="width:150px;"/>
+						<label>选项</label><input id="config" class="easyui-textbox" data-options="" style="width:200px;"/>
 					</div>
 					<span>&gt;&gt;value1[:label1]|value2[:label2]&lt;&lt;</span>
 				</div>
 				<div id="sql" title="SQL" data-options="iconCls:'icon-uicomponent-text'" style="padding:10px">
 					<div class="fitem">
-						<label>SQL语句</label><input id="sqlStr" class="easyui-textbox" data-options="" style="width:150px;"/>
+						<label>SQL语句</label><input id="sqlStr" class="easyui-textbox" data-options="" style="width:200px;"/>
 					</div>
 					<div class="fitem">
-						VALUE列<input id="valueStr" class="easyui-textbox" data-options="" style="width:63px;"/>
-						LABEL列<input id="labelStr" class="easyui-textbox" data-options="" style="width:63px;"/>
+						<label>VALUE列</label><input id="valueStr" class="easyui-textbox" data-options="" style="width:73px;"/>
+						<label>LABEL列</label><input id="labelStr" class="easyui-textbox" data-options="" style="width:73px;"/>
 					</div>
 				</div>
 				<div id="dict" title="字典" data-options="iconCls:'icon-uicomponent-text'" style="padding:10px">
 					<div class="fitem">
-						<label>系统字典</label><input id="dictStr" class="easyui-combotree" style="width:150px;" url="${ctx}/sys/dict/getTreeJson.do"/>
+						<label>系统字典</label><input id="dictStr" class="easyui-combotree" style="width:200px;" url="${ctx}/sys/dict/tree"/>
 					</div>
 				</div>
 				<div id="url" title="URL" data-options="iconCls:'icon-uicomponent-text'" style="padding:10px">
 					<div class="fitem">
-						<label>URL</label><input id="urlStr" class="easyui-textbox" data-options="" style="width:150px;"/>
+						<label>URL</label><input id="urlStr" class="easyui-textbox" data-options="" style="width:200px;"/>
 					</div>
 					<div class="fitem">
-						VALUE列<input id="valueStr" class="easyui-textbox" data-options="" style="width:63px;"/>
-						LABEL列<input id="labelStr" class="easyui-textbox" data-options="" style="width:63px;"/>
+						<label>VALUE列</label><input id="valueStr" class="easyui-textbox" data-options="" style="width:73px;"/>
+						<label>LABEL列</label><input id="labelStr" class="easyui-textbox" data-options="" style="width:73px;"/>
 					</div>
 				</div>
 			</div>
@@ -67,31 +73,31 @@
 			<div id="radioboxTab" class="easyui-tabs" data-options="plain: false, narrow: false, pill: true" style="width:100%;height:120px">
 				<div id="string" title="常量" data-options="iconCls:'icon-uicomponent-text'" style="padding:10px">
 					<div class="fitem">
-						<label>选项</label><input id="config" class="easyui-textbox" data-options="" style="width:150px;"/>
+						<label>选项</label><input id="config" class="easyui-textbox" data-options="" style="width:200px;"/>
 					</div>
 					<span>&gt;&gt;value1[:label1]|value2[:label2]&lt;&lt;</span>
 				</div>
 				<div id="sql" title="SQL" data-options="iconCls:'icon-uicomponent-text'" style="padding:10px">
 					<div class="fitem">
-						<label>SQL语句</label><input id="sqlStr" class="easyui-textbox" data-options="" style="width:150px;"/>
+						<label>SQL语句</label><input id="sqlStr" class="easyui-textbox" data-options="" style="width:200px;"/>
 					</div>
 					<div class="fitem">
-						VALUE列<input id="valueStr" class="easyui-textbox" data-options="" style="width:63px;"/>
-						LABEL列<input id="labelStr" class="easyui-textbox" data-options="" style="width:63px;"/>
+						<label>VALUE列</label><input id="valueStr" class="easyui-textbox" data-options="" style="width:73px;"/>
+						<label>LABEL列</label><input id="labelStr" class="easyui-textbox" data-options="" style="width:73px;"/>
 					</div>
 				</div>
 				<div id="dict" title="字典" data-options="iconCls:'icon-uicomponent-text'" style="padding:10px">
 					<div class="fitem">
-						<label>系统字典</label><input id="dictStr" class="easyui-combotree" style="width:150px;" url="${ctx}/sys/dict/getTreeJson.do"/>
+						<label>系统字典</label><input id="dictStr" class="easyui-combotree" style="width:200px;" url="${ctx}/sys/dict/tree"/>
 					</div>
 				</div>
 				<div id="url" title="URL" data-options="iconCls:'icon-uicomponent-text'" style="padding:10px">
 					<div class="fitem">
-						<label>URL</label><input id="urlStr" class="easyui-textbox" data-options="" style="width:150px;"/>
+						<label>URL</label><input id="urlStr" class="easyui-textbox" data-options="" style="width:200px;"/>
 					</div>
 					<div class="fitem">
-						VALUE列<input id="valueStr" class="easyui-textbox" data-options="" style="width:63px;"/>
-						LABEL列<input id="labelStr" class="easyui-textbox" data-options="" style="width:63px;"/>
+						<label>VALUE列</label><input id="valueStr" class="easyui-textbox" data-options="" style="width:73px;"/>
+						<label>LABEL列</label><input id="labelStr" class="easyui-textbox" data-options="" style="width:73px;"/>
 					</div>
 				</div>
 			</div>
@@ -100,44 +106,44 @@
 			<div id="checkboxTab" class="easyui-tabs" data-options="plain: false, narrow: false, pill: true" style="width:100%;height:120px">
 				<div id="string" title="常量" data-options="iconCls:'icon-uicomponent-text'" style="padding:10px">
 					<div class="fitem">
-						<label>选项</label><input id="config" class="easyui-textbox" data-options="" style="width:150px;"/>
+						<label>选项</label><input id="config" class="easyui-textbox" data-options="" style="width:200px;"/>
 					</div>
 					<span>&gt;&gt;value1[:label1]|value2[:label2]&lt;&lt;</span>
 				</div>
 				<div id="sql" title="SQL" data-options="iconCls:'icon-uicomponent-text'" style="padding:10px">
 					<div class="fitem">
-						<label>SQL语句</label><input id="sqlStr" class="easyui-textbox" data-options="" style="width:150px;"/>
+						<label>SQL语句</label><input id="sqlStr" class="easyui-textbox" data-options="" style="width:200px;"/>
 					</div>
 					<div class="fitem">
-						VALUE列<input id="valueStr" class="easyui-textbox" data-options="" style="width:63px;"/>
-						LABEL列<input id="labelStr" class="easyui-textbox" data-options="" style="width:63px;"/>
+						<label>VALUE列</label><input id="valueStr" class="easyui-textbox" data-options="" style="width:73px;"/>
+						<label>LABEL列</label><input id="labelStr" class="easyui-textbox" data-options="" style="width:73px;"/>
 					</div>
 				</div>
 				<div id="dict" title="字典" data-options="iconCls:'icon-uicomponent-text'" style="padding:10px">
 					<div class="fitem">
-						<label>系统字典</label><input id="dictStr" class="easyui-combotree" style="width:150px;" url="${ctx}/sys/dict/getTreeJson.do"/>
+						<label>系统字典</label><input id="dictStr" class="easyui-combotree" style="width:200px;" url="${ctx}/sys/dict/tree"/>
 					</div>
 				</div>
 				<div id="url" title="URL" data-options="iconCls:'icon-uicomponent-text'" style="padding:10px">
 					<div class="fitem">
-						<label>URL</label><input id="urlStr" class="easyui-textbox" data-options="" style="width:150px;"/>
+						<label>URL</label><input id="urlStr" class="easyui-textbox" data-options="" style="width:200px;"/>
 					</div>
 					<div class="fitem">
-						VALUE列<input id="valueStr" class="easyui-textbox" data-options="" style="width:63px;"/>
-						LABEL列<input id="labelStr" class="easyui-textbox" data-options="" style="width:63px;"/>
+						<label>VALUE列</label><input id="valueStr" class="easyui-textbox" data-options="" style="width:73px;"/>
+						<label>LABEL列</label><input id="labelStr" class="easyui-textbox" data-options="" style="width:73px;"/>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div id="datebox" title="日期" data-options="iconCls:'icon-uicomponent-date'" style="padding:10px">
 			<div class="fitem">
-				<label>格式</label><input id="config" class="easyui-textbox" data-options="value:'yyyy-MM-dd HH:mm:ss'" style="width:150px;"/>
+				<label>格式</label><input id="config" class="easyui-textbox" data-options="value:'yyyy-MM-dd HH:mm:ss'" style="width:200px;"/>
 			</div>
 			<div class="fitem">
-				<label>最大日期</label><input id="maxDate" class="easyui-textbox" data-options="value:''" style="width:150px;"/>
+				<label>最大日期</label><input id="maxDate" class="easyui-textbox" data-options="value:''" style="width:200px;"/>
 			</div>
 			<div class="fitem">
-				<label>最小日期</label><input id="minDate" class="easyui-textbox" data-options="value:''" style="width:150px;"/>
+				<label>最小日期</label><input id="minDate" class="easyui-textbox" data-options="value:''" style="width:200px;"/>
 			</div>
 			<div class="fitem">
 				<label>参考地址</label><a href="http://www.my97.net/dp/demo/index.htm" target="_blank">日期范围限制</a>(二. 功能及示例>>4. 日期范围限制)
@@ -145,12 +151,47 @@
 		</div>
 		<div id="textarea" title="多行" data-options="iconCls:'icon-uicomponent-textArea'" style="padding:10px">
 			<div class="fitem">
-				<label>背景字</label><input id="prompt" class="easyui-textbox" data-options="" style="width:150px;"/>
+				<label>背景字</label><input id="prompt" class="easyui-textbox" data-options="" style="width:200px;"/>
+			</div>
+		</div>
+		<div id="combotree" title="下拉树" data-options="iconCls:'icon-uicomponent-tree'" style="padding:10px">
+			<div id="combotreeTab" class="easyui-tabs" data-options="plain: false, narrow: false, pill: true" style="width:100%;height:120px">
+				<div id="string" title="常量" data-options="iconCls:'icon-uicomponent-text'" style="padding:10px">
+					<div class="fitem">
+						<label>选项</label><input id="config" class="easyui-textbox" data-options="" style="width:200px;"/>
+					</div>
+					<span>&gt;&gt;id:text:pid|id:text:pid|id:text:pid&lt;&lt;</span>
+				</div>
+				<div id="sql" title="SQL" data-options="iconCls:'icon-uicomponent-text'" style="padding:10px">
+					<div class="fitem">
+						<label>SQL语句</label><input id="sqlStr" class="easyui-textbox" data-options="" style="width:200px;"/>
+					</div>
+					<div class="fitem">
+						id&nbsp;<input id="idStr" class="easyui-textbox" data-options="" style="width:63px;"/>
+						text&nbsp;<input id="textStr" class="easyui-textbox" data-options="" style="width:63px;"/>
+						pid&nbsp;<input id="pidStr" class="easyui-textbox" data-options="" style="width:63px;"/>
+					</div>
+				</div>
+				<div id="dict" title="字典" data-options="iconCls:'icon-uicomponent-text'" style="padding:10px">
+					<div class="fitem">
+						<label>系统字典</label><input id="dictStr" class="easyui-combotree" style="width:200px;" url="${ctx}/sys/dict/tree"/>
+					</div>
+				</div>
+				<div id="url" title="URL" data-options="iconCls:'icon-uicomponent-text'" style="padding:10px">
+					<div class="fitem">
+						<label>URL</label><input id="urlStr" class="easyui-textbox" data-options="" style="width:200px;"/>
+					</div>
+					<div class="fitem">
+						id&nbsp;<input id="idStr" class="easyui-textbox" data-options="" style="width:63px;"/>
+						text&nbsp;<input id="textStr" class="easyui-textbox" data-options="" style="width:63px;"/>
+						pid&nbsp;<input id="pidStr" class="easyui-textbox" data-options="" style="width:63px;"/>
+					</div>
+				</div>
 			</div>
 		</div>
 		<div id="htmldesign" title="HTML" data-options="iconCls:'icon-uicomponent-htmlEditor'" style="padding:10px">
 			<div class="fitem">
-				<label>固定高度</label><input id="config" class="easyui-numberbox" data-options="min:0,value:100" style="width:150px;"/>
+				<label>固定高度</label><input id="config" class="easyui-numberbox" data-options="min:0,value:100" style="width:200px;"/>
 			</div>
 		</div>
 	</div>
@@ -183,7 +224,10 @@
 						componentType = "radiobox";
 					}
 					if(title == "复选") {
-						componentType = "checkbox";
+						componentType = "combotree";
+					}
+					if(title == "下拉树") {
+						componentType = "combotree";
 					}
 					if(title == "日期") {
 						componentType = "datebox";
@@ -235,7 +279,7 @@
 			}
 			if(componentType=="htmldesign") {
 				$('#'+componentType+' #config').textbox('setValue', componentConfig);
-				$('#configTab').tabs('select', 7);
+				$('#configTab').tabs('select', 8);
 			}
 			if(componentType=="combobox") {
 				$('#configTab').tabs('select', 2);
@@ -303,6 +347,30 @@
 					$('#'+componentType+'Tab').tabs('select', 0);
 				}
 			}
+			if(componentType=="combotree") {
+				$('#configTab').tabs('select', 7);
+				if(componentConfig.indexOf("SQL>") != -1) {
+					var sqlArr = componentConfig.split("|");
+					$('#'+componentType+' #sql #sqlStr').textbox('setValue', sqlArr[0].replace("SQL>", ""));
+					$('#'+componentType+' #sql #idStr').textbox('setValue', sqlArr[1]);
+					$('#'+componentType+' #sql #textStr').textbox('setValue', sqlArr[2]);
+					$('#'+componentType+' #sql #pidStr').textbox('setValue', sqlArr[3]);
+					$('#'+componentType+'Tab').tabs('select', 1);
+				} else if(componentConfig.indexOf("DICT>") != -1) {
+					$('#'+componentType+' #dict #dictStr').combotree('setValue', componentConfig.replace("DICT>", ""));
+					$('#'+componentType+'Tab').tabs('select', 2);
+				} else if(componentConfig.indexOf("URL>") != -1) {
+					var sqlArr = componentConfig.split("|");
+					$('#'+componentType+' #url #urlStr').textbox('setValue', sqlArr[0].replace("URL>", ""));
+					$('#'+componentType+' #sql #idStr').textbox('setValue', sqlArr[1]);
+					$('#'+componentType+' #sql #textStr').textbox('setValue', sqlArr[2]);
+					$('#'+componentType+' #sql #pidStr').textbox('setValue', sqlArr[3]);
+					$('#'+componentType+'Tab').tabs('select', 3);
+				} else {
+					$('#'+componentType+' #string #config').textbox('setValue', componentConfig);
+					$('#'+componentType+'Tab').tabs('select', 0);
+				}
+			}
 		}
 		
 		function save() {
@@ -352,6 +420,24 @@
 				}
 				if(index == 3) {
 					componentConfig = "URL>"+$('#'+componentType+' #url #urlStr').val()+"|"+$('#'+componentType+' #url #valueStr').val()+"|"+$('#'+componentType+' #url #labelStr').val();
+				}
+			}
+			if(componentType=="combotree") {
+				var tab = $('#'+componentType+'Tab').tabs('getSelected');
+				var index = $('#'+componentType+'Tab').tabs('getTabIndex', tab);
+				if(index == 0) {
+					componentConfig = $('#'+componentType+' #string #config').val();
+				}
+				if(index == 1) {
+					componentConfig = "SQL>"+$('#'+componentType+' #sql #sqlStr').val()+"|"+$('#'+componentType+' #sql #idStr').val()+"|"+$('#'+componentType+' #sql #textStr').val()+"|"+$('#'+componentType+' #sql #pidStr').val();
+				}
+				if(index == 2) {
+					var dictStr = $('#'+componentType+' #dict #dictStr').combotree('getValue');
+					//if(dictStr == null || dictStr == '' || dictStr == '${ksfn:getConst("ROOT_ID_32")}') {}
+					componentConfig = "DICT>"+$('#'+componentType+' #dict #dictStr').combotree('getValue');
+				}
+				if(index == 3) {
+					componentConfig = "URL>"+$('#'+componentType+' #url #urlStr').val()+"|"+$('#'+componentType+' #url #idStr').val()+"|"+$('#'+componentType+' #url #textStr').val()+"|"+$('#'+componentType+' #url #pidStr').val();
 				}
 			}
 			var index = parent.layer.getFrameIndex(window.name); //获取窗口索引

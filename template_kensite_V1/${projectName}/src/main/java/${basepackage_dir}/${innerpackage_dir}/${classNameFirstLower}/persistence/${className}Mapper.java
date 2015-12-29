@@ -1,9 +1,9 @@
 <#include "/custom.include">
 <#include "/java_copyright.include">
-<#assign className = table.className>   
+<#assign className = table.className> 
 <#assign classNameLower = className?uncap_first>
 
-package ${basepackage}.${innerpackage}.${table.classNameFirstLower}.persistence;  
+package ${basepackage}.${innerpackage}.${table.classNameFirstLower}.persistence;
 
 import ${basepackage}.common.base.domain.EasyUIDataGrid;
 import ${basepackage}.${innerpackage}.${table.classNameFirstLower}.domain.${className};
@@ -40,6 +40,13 @@ public interface ${className}Mapper {
 	 * @return
 	 */
 	public int findTotal(${className} ${classNameLower});
+
+	/**
+	 * 查询数据总数排除当前数据
+	 * @param ${classNameLower}
+	 * @return
+	 */
+	public int findExTotal(${className} ${classNameLower});
 	
 	/**
 	 * 数据新增

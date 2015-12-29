@@ -1,4 +1,4 @@
-<#assign className = table.className>   
+<#assign className = table.className> 
 <#assign classNameLower = className?uncap_first>
 
 <#function getWhereStr column>
@@ -7,7 +7,7 @@
 <#assign rtn>
 <#if dbtype=="number" >
 AND T.${column.sqlName} = ${"#{"+column.columnNameLower+"}"}
-<#elseif (dbtype=="varchar2"||dbtype=="char")  >
+<#elseif (dbtype=="varchar2"||dbtype=="char")>
 AND T.${column.sqlName} LIKE '%'||${"#{"+column.columnNameLower+"}"}||'%'
 <#elseif (dbtype=="clob")>
 <#elseif (dbtype=="date")>
@@ -35,9 +35,9 @@ ${column.sqlName},
 <#if (colname=="id"||colname=="createdate"||colname=="updatedate"||colname=="updateuser"||colname=="createuser") ><#else>
 <#if (dbtype=="number"&&column.decimalDigits==0) >
 ${"#{"+column.columnNameLower+",jdbcType=NUMERIC}"},
-<#elseif (dbtype=="number"&&column.decimalDigits!=0)  >
+<#elseif (dbtype=="number"&&column.decimalDigits!=0)>
 ${"#{"+column.columnNameLower+",jdbcType=NUMERIC}"},
-<#elseif (dbtype=="varchar2"||dbtype=="char")  >
+<#elseif (dbtype=="varchar2"||dbtype=="char")>
 ${"#{"+column.columnNameLower+",jdbcType=VARCHAR}"},
 <#elseif (dbtype=="clob")>
 ${"#{"+column.columnNameLower+",jdbcType=CLOB}"},
@@ -67,18 +67,20 @@ ${"<if test=\""+column.columnNameLower+" !=null and "+column.columnNameLower+" !
 	<!-- 查询单表的字段 -->
 	<sql id="tableColumns">
 		<#list table.columns as column>
-	    T.${column.sqlName} AS "${column.columnNameLower}"<#if column_has_next>,</#if>
-	    </#list>
+		T.${column.sqlName} AS "${column.columnNameLower}"<#if column_has_next>,</#if>
+		</#list>
 	</sql>
 	<!-- 查询过滤条件 -->
 	<sql id="whereStr">
 		<where>
 			1=1
 			<#list table.columns as column>
+			<#if (colname=="id") ><#else>
 			<if test="${column.columnNameLower} != null and ${column.columnNameLower} != ''">
 				${getWhereStr(column)}
 			</if>
-		    </#list>
+			</#if>
+		</#list>
 		</where>
 	</sql>
 	<sql id="orderBy">
@@ -125,15 +127,24 @@ ${"<if test=\""+column.columnNameLower+" !=null and "+column.columnNameLower+" !
 		<include refid="whereStr"/>
 	</select>
 	
+	<!-- 查询数据总数排除当前数据 -->
+	<select id="findExTotal" resultType="Integer">
+		SELECT
+		COUNT(1) total
+		FROM ${table.sqlName} T
+		<include refid="whereStr"/>
+		AND T.ID != ${"#{"}id${"}"}
+	</select>
+	
 	<!-- 数据新增 -->
 	<insert id="save" parameterType="${basepackage}.${innerpackage}.${table.classNameFirstLower}.domain.${className}">
 		INSERT INTO ${table.sqlName} (
-		    <#list table.columns as column>
-	    	${getInsertColStr(column)}
-		    </#list>
-		    CREATE_USER,
-		    CREATE_DATE,
-		    ID
+			<#list table.columns as column>
+			${getInsertColStr(column)}
+			</#list>
+			CREATE_USER,
+			CREATE_DATE,
+			ID
 		)
 		VALUES (
 			<#list table.columns as column>
@@ -141,7 +152,7 @@ ${"<if test=\""+column.columnNameLower+" !=null and "+column.columnNameLower+" !
 			</#list>
 			${"#{"}createUser.userName${"}"},
 			sysdate,
-		    ${"#{"}id${"}"}
+			${"#{"}id${"}"}
 		)
 	</insert>
 	
@@ -149,12 +160,12 @@ ${"<if test=\""+column.columnNameLower+" !=null and "+column.columnNameLower+" !
 	<update id="update" parameterType="${basepackage}.${innerpackage}.${table.classNameFirstLower}.domain.${className}">
 		UPDATE ${table.sqlName}
 		<set>
-		    <#list table.columns as column>
-	    	${getUpdateStr(column)}
-		    </#list>
-		    UPDATE_USER = ${"#{"}updateUser.userName${"}"},
-		    UPDATE_DATE = sysdate,
-		    ID = ${"#{"}id${"}"}
+			<#list table.columns as column>
+			${getUpdateStr(column)}
+			</#list>
+			UPDATE_USER = ${"#{"}updateUser.userName${"}"},
+			UPDATE_DATE = sysdate,
+			ID = ${"#{"}id${"}"}
 		</set>
 		WHERE ID = ${"#{"}id${"}"}
 	</update>
