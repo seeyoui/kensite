@@ -13,335 +13,301 @@
 	});
 </script>
 <script type="text/javascript">
-	var myChart;
+	var myChart = null;
+	var echartObj = null;
 	// 使用
 	require(
-			[
-				'echarts', 'echarts/chart/bar', // 使用柱状图就加载bar模块，按需加载
-				'echarts', 'echarts/chart/line'
-			],
-			function(ec) {
-				// 基于准备好的dom，初始化echarts图表
-				myChart = ec.init(document.getElementById('main'));
-				/* myChart.showLoading({
-				    text: '正在努力的读取数据中...',    //loading话术
-				    effect: 'bubble'	//loading效果，可选为：'spin' | 'bar' | 'ring' | 'whirling' | 'dynamicLine' | 'bubble'，支持外部装载
-				}); */
-				option = {
-					//标题，每个图表最多仅有一个标题控件，每个标题控件可设主副标题  
-	                title: {  
-	                    //主标题文本，'\n'指定换行  
-	                    text: '2013年广州降水量与蒸发量统计报表',  
-	                    //主标题文本超链接  
-	                    link: 'http://www.tqyb.com.cn/weatherLive/climateForecast/2014-01-26/157.html',  
-	                    //副标题文本，'\n'指定换行  
-	                    subtext: 'www.stepday.com',  
-	                    //副标题文本超链接  
-	                    sublink: 'http://www.stepday.com/myblog/?Echarts',  
-	                    //水平安放位置，默认为左侧，可选为：'center' | 'left' | 'right' | {number}（x坐标，单位px）  
-	                    x: 'left',  
-	                    //垂直安放位置，默认为全图顶端，可选为：'top' | 'bottom' | 'center' | {number}（y坐标，单位px）  
-	                    y: 'top'  
-	                },
-	              	//提示框，鼠标悬浮交互时的信息提示  
-	                tooltip: {  
-	                    //触发类型，默认（'item'）数据触发，可选为：'item' | 'axis'  
-	                    trigger: 'axis'  
-	                },  
-	              //图例，每个图表最多仅有一个图例  
-	                legend: {  
-	                    //显示策略，可选为：true（显示） | false（隐藏），默认值为true  
-	                    show: true,  
-	                    //水平安放位置，默认为全图居中，可选为：'center' | 'left' | 'right' | {number}（x坐标，单位px）  
-	                    x: 'center',  
-	                    //垂直安放位置，默认为全图顶端，可选为：'top' | 'bottom' | 'center' | {number}（y坐标，单位px）  
-	                    y: 'top',  
-	                    //legend的data: 用于设置图例，data内的字符串数组需要与sereis数组内每一个series的name值对应  
-	                    data: ['蒸发量','降水量']  
-	                }, 
-					toolbox : {
-						//显示策略，可选为：true（显示） | false（隐藏），默认值为false
-						show : true,
-						orient : 'horizontal', 	// 布局方式，默认为水平布局，可选为：
-													// 'horizontal' ¦ 'vertical'
-						x : 'right', 				// 水平安放位置，默认为全图右对齐，可选为：
-													// 'center' ¦ 'left' ¦ 'right'
-													// ¦ {number}（x坐标，单位px）
-						y : 'top', 					// 垂直安放位置，默认为全图顶端，可选为：
-													// 'top' ¦ 'bottom' ¦ 'center'
-													// ¦ {number}（y坐标，单位px）
-						color : [ '#1e90ff', '#22bb22', '#4b0082', '#d2691e' ],
-						backgroundColor : 'rgba(0,0,0,0)', // 工具箱背景颜色
-						borderColor : '#ccc', // 工具箱边框颜色
-						borderWidth : 0, // 工具箱边框线宽，单位px，默认为0（无边框）
-						padding : 5, // 工具箱内边距，单位px，默认各方向内边距为5，
-						showTitle : true,
-						//启用功能，目前支持feature，工具箱自定义功能回调处理 
-						feature : {
-							mark : {
-								show : true,
-								title : {
-									mark : '辅助线-开关',
-									markUndo : '辅助线-删除',
-									markClear : '辅助线-清空'
-								},
-								lineStyle : {
-									width : 1,
-									color : '#1e90ff',
-									type : 'dashed'
-								}
-							},
-							dataZoom : {
-								show : true,
-								title : {
-									dataZoom : '区域缩放',
-									dataZoomReset : '区域缩放-后退'
-								}
-							},
-							dataView : {
-								show : true,
-								title : '数据视图',
-								readOnly : true,
-								lang : [ '数据视图', '关闭', '刷新' ],
-								optionToContent : function(opt) {
-									var axisData = opt.xAxis[0].data;
-									var series = opt.series;
-									var table = '<table style="width:100%;text-align:center"><tbody><tr>'
-											+ '<td>时间</td>' + '<td>' + series[0].name + '</td>' + '<td>' + series[1].name + '</td>' + '</tr>';
-									for (var i = 0, l = axisData.length; i < l; i++) {
-										table += '<tr>' + '<td>' + axisData[i] + '</td>' + '<td>' + series[0].data[i] + '</td>' + '<td>' + series[1].data[i] + '</td>' + '</tr>';
-									}
-									table += '</tbody></table>';
-									return table;
-								}
-							},
-							magicType : {
-								show : true,
-								title : {
-									line : '动态类型切换-折线图',
-									bar : '动态类型切换-柱形图',
-									stack : '动态类型切换-堆积',
-									tiled : '动态类型切换-平铺'
-								},
-								type : [ 'line', 'bar', 'stack', 'tiled' ]
-							},
-							restore : {
-								show : true,
-								title : '还原',
-								color : 'black'
-							},
-							saveAsImage : {
-								show : true,
-								title : '保存为图片',
-								type : 'jpeg',
-								lang : [ '点击本地保存' ]
-							},
-							myTool : {
-								show : true,
-								title : '自定义扩展方法',
-								icon : 'image://../asset/ico/favicon.png',
-								onclick : function() {
-									alert('myToolHandler')
-								}
-							}
-						}
-					},
-					//是否启用拖拽重计算特性，默认关闭(即值为false) 
-					calculable : true,
-					dataZoom : {
-						show : true,
-						realtime : true,
-						start : 20,
-						end : 80
-					},
-					//直角坐标系中横轴数组，数组中每一项代表一条横轴坐标轴，仅有一条时可省略数值  
-	                //横轴通常为类目型，但条形图时则横轴为数值型，散点图时则横纵均为数值型  
-					xAxis : [ {
-						//显示策略，可选为：true（显示） | false（隐藏），默认值为true  
-                        show: true,  
-                        //坐标轴类型，横轴默认为类目型'category'  
-                        type: 'category',  
-						boundaryGap : false,
-						data : function() {
-							var list = [];
-							for (var i = 1; i <= 31; i++) {
-								list.push('2016-01-' + i);
-							}
-							return list;
-						}()
-					} ],
-					//直角坐标系中纵轴数组，数组中每一项代表一条纵轴坐标轴，仅有一条时可省略数值  
-	                //纵轴通常为数值型，但条形图时则纵轴为类目型  
-					yAxis : [ {
-						//显示策略，可选为：true（显示） | false（隐藏），默认值为true  
-                        show: true,  
-                        //坐标轴类型，纵轴默认为数值型'value'  
-                        type: 'value',  
-                        //分隔区域，默认不显示  
-                        splitArea: {show: true}  
-					} ],
-					series : [ {
-						name : '蒸发量',
-						type : 'line',
-						data : function() {
-							var list = [];
-							for (var i = 1; i <= 30; i++) {
-								list.push(Math.round(Math.random() * 30));
-							}
-							return list;
-						}()
-					}, {
-						name : '降水量',
-						type : 'line',
-						data : function() {
-							var list = [];
-							for (var i = 1; i <= 30; i++) {
-								list.push(Math.round(Math.random() * 10));
-							}
-							return list;
-						}()
-					} ]
-				};
-
-				// 为echarts对象加载数据 
-				myChart.setOption(option);
-				myChart.setTheme('macarons');
-				//myChart.hideLoading();
-			});
+		[
+			'echarts', 'echarts/chart/bar', // 使用柱状图就加载bar模块，按需加载
+			'echarts', 'echarts/chart/line', // 使用柱状图就加载bar模块，按需加载
+			'echarts', 'echarts/chart/pie'
+		],
+		function(ec) {
+			// 基于准备好的dom，初始化echarts图表
+			echartObj = ec;
+		});
 </script>
 <script type="text/javascript">
 var propertygrid_data = {"total":1000,"rows":[
-	{"name":"show","value":"true","group":"标题设置","editor":{
+	{"name":"title_show","value":"true","group":"标题设置","editor":{
 		"type":"checkbox",
 		"options":{
 			"on":true,
 			"off":false
 		}
 	}},
-	{"name":"text","value":"","group":"标题设置","editor":"text"},
-	{"name":"link","value":"","group":"标题设置","editor":{
+	{"name":"title_text","value":"","group":"标题设置","editor":"text"},
+	{"name":"title_link","value":"","group":"标题设置","editor":{
 		"type":"validatebox",
 		"options":{
 			"validType":"url"
 		}
 	}},
-	{"name":"target","value":"blank","group":"标题设置","editor":{
+	{"name":"title_target","value":"blank","group":"标题设置","editor":{
         "type":"combobox",
         "options":{
             "valueField":"value",
             "textField":"text",
             "method":"get",
+            "editable":false,
             "data":[{"value":"","text":"none"},{"value":"self","text":"self"},{"value":"blank","text":"blank"}],
             "panelHeight":"auto"
         }
     }},
-	{"name":"subtext","value":"","group":"标题设置","editor":"text"},
-	{"name":"sublink","value":"","group":"标题设置","editor":{
+	{"name":"title_subtext","value":"","group":"标题设置","editor":"text"},
+	{"name":"title_sublink","value":"","group":"标题设置","editor":{
 		"type":"validatebox",
 		"options":{
 			"validType":"url"
 		}
 	}},
-	{"name":"subtarget","value":"blank","group":"标题设置","editor":{
+	{"name":"title_subtarget","value":"blank","group":"标题设置","editor":{
         "type":"combobox",
         "options":{
             "valueField":"value",
             "textField":"text",
             "method":"get",
+            "editable":false,
             "data":[{"value":"","text":"none"},{"value":"self","text":"self"},{"value":"blank","text":"blank"}],
             "panelHeight":"auto"
         }
     }},
-	{"name":"x","value":"left","group":"标题设置","editor":{
+	{"name":"title_x","value":"left","group":"标题设置","editor":{
         "type":"combobox",
         "options":{
             "valueField":"value",
             "textField":"text",
             "method":"get",
+            //"editable":false,
             "data":[{"value":"center","text":"center"},{"value":"left","text":"left"},{"value":"right","text":"right"}],
             "panelHeight":"auto"
         }
     }},
-	{"name":"y","value":"top","group":"标题设置","editor":{
+	{"name":"title_y","value":"top","group":"标题设置","editor":{
         "type":"combobox",
         "options":{
             "valueField":"value",
             "textField":"text",
             "method":"get",
+            //"editable":false,
             "data":[{"value":"top","text":"top"},{"value":"bottom","text":"bottom"},{"value":"center","text":"center"}],
             "panelHeight":"auto"
         }
     }},
     /*******************************/
-	{"name":"show","value":"true","group":"工具栏设置","editor":{
+	{"name":"toolbox_show","value":"true","group":"工具栏设置","editor":{
 		"type":"checkbox",
 		"options":{
 			"on":true,
 			"off":false
 		}
 	}},
-	{"name":"x","value":"left","group":"工具栏设置","editor":{
+	{"name":"toolbox_orient","value":"horizontal","group":"工具栏设置","editor":{
         "type":"combobox",
         "options":{
             "valueField":"value",
             "textField":"text",
             "method":"get",
+            "editable":false,
+            "data":[{"value":"horizontal","text":"horizontal"},{"value":"vertical","text":"vertical"}],
+            "panelHeight":"auto"
+        }
+    }},
+	{"name":"toolbox_showTitle","value":"true","group":"工具栏设置","editor":{
+		"type":"checkbox",
+		"options":{
+			"on":true,
+			"off":false
+		}
+	}},
+	{"name":"toolbox_x","value":"right","group":"工具栏设置","editor":{
+        "type":"combobox",
+        "options":{
+            "valueField":"value",
+            "textField":"text",
+            "method":"get",
+            //"editable":false,
             "data":[{"value":"center","text":"center"},{"value":"left","text":"left"},{"value":"right","text":"right"}],
             "panelHeight":"auto"
         }
     }},
-	{"name":"y","value":"top","group":"工具栏设置","editor":{
+	{"name":"toolbox_y","value":"top","group":"工具栏设置","editor":{
         "type":"combobox",
         "options":{
             "valueField":"value",
             "textField":"text",
             "method":"get",
+            //"editable":false,
             "data":[{"value":"top","text":"top"},{"value":"bottom","text":"bottom"},{"value":"center","text":"center"}],
             "panelHeight":"auto"
         }
     }},
-	{"name":"feature","value":"top","group":"工具栏设置","editor":{
-        "type":"combobox",
-        "options":{
-            "valueField":"value",
-            "textField":"text",
-            "method":"get",
-            "data":[{"value":"top","text":"top"},{"value":"bottom","text":"bottom"},{"value":"center","text":"center"}],
-            "panelHeight":"auto"
-        }
-    }},
-    
-    
-	{"name":"Email","value":"bill@gmail.com","group":"Marketing Settings","editor":{
-		"type":"validatebox",
-		"options":{
-			"validType":"email"
-		}
-	}},
-	{"name":"FrequentBuyer","value":"false","group":"Marketing Settings","editor":{
+	{"name":"toolbox_feature_mark","value":"true","group":"工具栏设置","editor":{
 		"type":"checkbox",
 		"options":{
 			"on":true,
 			"off":false
+		}
+	}},
+	{"name":"toolbox_feature_dataZoom","value":"true","group":"工具栏设置","editor":{
+		"type":"checkbox",
+		"options":{
+			"on":true,
+			"off":false
+		}
+	}},
+	{"name":"toolbox_feature_dataView","value":"true","group":"工具栏设置","editor":{
+		"type":"checkbox",
+		"options":{
+			"on":true,
+			"off":false
+		}
+	}},
+	{"name":"toolbox_feature_magicType","value":"true","group":"工具栏设置","editor":{
+		"type":"checkbox",
+		"options":{
+			"on":true,
+			"off":false
+		}
+	}},
+	{"name":"toolbox_feature_restore","value":"true","group":"工具栏设置","editor":{
+		"type":"checkbox",
+		"options":{
+			"on":true,
+			"off":false
+		}
+	}},
+	{"name":"toolbox_feature_saveAsImage","value":"true","group":"工具栏设置","editor":{
+		"type":"checkbox",
+		"options":{
+			"on":true,
+			"off":false
+		}
+	}},
+    /*******************************/
+	{"name":"tooltip_show","value":"true","group":"提示框设置","editor":{
+		"type":"checkbox",
+		"options":{
+			"on":true,
+			"off":false
+		}
+	}},
+	{"name":"tooltip_trigger","value":"item","group":"提示框设置","editor":{
+        "type":"combobox",
+        "options":{
+            "valueField":"value",
+            "textField":"text",
+            "method":"get",
+            "editable":false,
+            "data":[{"value":"item","text":"item"},{"value":"axis","text":"axis"}],
+            "panelHeight":"auto"
+        }
+    }},
+    /*******************************/
+	{"name":"legend_show","value":"true","group":"图例设置","editor":{
+		"type":"checkbox",
+		"options":{
+			"on":true,
+			"off":false
+		}
+	}},
+	{"name":"legend_orient","value":"horizontal","group":"图例设置","editor":{
+        "type":"combobox",
+        "options":{
+            "valueField":"value",
+            "textField":"text",
+            "method":"get",
+            "editable":false,
+            "data":[{"value":"horizontal","text":"horizontal"},{"value":"vertical","text":"vertical"}],
+            "panelHeight":"auto"
+        }
+    }},
+	{"name":"legend_x","value":"center","group":"图例设置","editor":{
+        "type":"combobox",
+        "options":{
+            "valueField":"value",
+            "textField":"text",
+            "method":"get",
+            //"editable":false,
+            "data":[{"value":"center","text":"center"},{"value":"left","text":"left"},{"value":"right","text":"right"}],
+            "panelHeight":"auto"
+        }
+    }},
+	{"name":"legend_y","value":"top","group":"图例设置","editor":{
+        "type":"combobox",
+        "options":{
+            "valueField":"value",
+            "textField":"text",
+            "method":"get",
+            //"editable":false,
+            "data":[{"value":"top","text":"top"},{"value":"bottom","text":"bottom"},{"value":"center","text":"center"}],
+            "panelHeight":"auto"
+        }
+    }},
+	{"name":"legend_data","value":"","group":"图例设置","editor":"text"},
+	/*******************************/
+	{"name":"yAxis_show_l","value":"true","group":"Y坐标轴设置","editor":{
+		"type":"checkbox",
+		"options":{
+			"on":true,
+			"off":false
+		}
+	}},
+	{"name":"yAxis_axisLabel_l","value":"","group":"Y坐标轴设置","editor":"text"},
+	{"name":"yAxis_show_r","value":"false","group":"Y坐标轴设置","editor":{
+		"type":"checkbox",
+		"options":{
+			"on":true,
+			"off":false
+		}
+	}},
+	{"name":"yAxis_axisLabel_r","value":"","group":"Y坐标轴设置","editor":"text"},
+    /*******************************/
+	{"name":"xAxis_show_l","value":"true","group":"X坐标轴设置","editor":{
+		"type":"checkbox",
+		"options":{
+			"on":true,
+			"off":false
+		}
+	}},
+	{"name":"xAxis_data_l","value":"","group":"X坐标轴设置","editor":"text"},
+	{"name":"xAxis_axisLabel_l","value":"","group":"X坐标轴设置","editor":"text"},
+	{"name":"xAxis_show_r","value":"false","group":"X坐标轴设置","editor":{
+		"type":"checkbox",
+		"options":{
+			"on":true,
+			"off":false
+		}
+	}},
+	{"name":"xAxis_data_r","value":"","group":"X坐标轴设置","editor":"text"},
+	{"name":"xAxis_axisLabel_r","value":"","group":"X坐标轴设置","editor":"text"},
+    /*******************************/
+	{"name":"series_","value":"","group":"数据内容数组","editor":{
+		"type":"textbox",
+		"options":{
+			"editable":false,
+			"icons": [{
+				"iconCls":"icon-add",
+				"handler": function(e){
+					$(e.data.target).textbox("setValue", "Something added!");
+				}
+			}]
 		}
 	}}
 ]}
 </script>
 <script type="text/javascript">
-function run() {
-	runTitle();
-}
 function runTitle() {
 	var rows = $('#property').datagrid('getRows');
-	var show = rows[0].value;
-	var text = rows[1].value;
-	var link = rows[2].value;
-	var target = rows[3].value;
-	var subtext = rows[4].value;
-	var sublink = rows[5].value;
-	var subtarget = rows[6].value;
-	var x = rows[7].value;
-	var y = rows[8].value;
+	var show = getRowValueByName('title_show');
+	var text = getRowValueByName('title_text');
+	var link  = getRowValueByName('title_link');
+	var target = getRowValueByName('title_target');
+	var subtext = getRowValueByName('title_subtext');
+	var sublink = getRowValueByName('title_sublink');
+	var subtarget = getRowValueByName('title_subtarget');
+	var x = getRowValueByName('title_x');
+	var y = getRowValueByName('title_y');
 	myChart.setOption({
 		title : {
 			show : show=='true',
@@ -355,6 +321,277 @@ function runTitle() {
 			y : y
 		}
 	});
+}
+function runToolbox() {
+	var show = getRowValueByName('toolbox_show');
+	var orient = getRowValueByName('toolbox_orient');
+	var x = getRowValueByName('toolbox_x');
+	var y = getRowValueByName('toolbox_y');
+	var showTitle = getRowValueByName('toolbox_showTitle');
+	var mark = getRowValueByName('toolbox_feature_mark');
+	var dataZoom = getRowValueByName('toolbox_feature_dataZoom');
+	var dataView = getRowValueByName('toolbox_feature_dataView');
+	var magicType = getRowValueByName('toolbox_feature_magicType');
+	var restore = getRowValueByName('toolbox_feature_restore');
+	var saveAsImage = getRowValueByName('toolbox_feature_saveAsImage');
+	//var show = getRowValueByName('toolbox_');
+	myChart.setOption({
+		toolbox: {
+	        show: show=='true',
+	        orient: orient,      // 布局方式，默认为水平布局，可选为：
+	                                   // 'horizontal' ¦ 'vertical'
+	        x: x,                // 水平安放位置，默认为全图右对齐，可选为：
+	                                   // 'center' ¦ 'left' ¦ 'right'
+	                                   // ¦ {number}（x坐标，单位px）
+	        y: y,                  // 垂直安放位置，默认为全图顶端，可选为：
+	                                   // 'top' ¦ 'bottom' ¦ 'center'
+	                                   // ¦ {number}（y坐标，单位px）
+	        color : ['#1e90ff','#22bb22','#4b0082','#d2691e'],
+	        backgroundColor: 'rgba(0,0,0,0)', // 工具箱背景颜色
+	        borderColor: '#ccc',       // 工具箱边框颜色
+	        borderWidth: 0,            // 工具箱边框线宽，单位px，默认为0（无边框）
+	        padding: 5,                // 工具箱内边距，单位px，默认各方向内边距为5，
+	        showTitle: showTitle == 'true',
+	        feature : {
+	            mark : {
+	                show : mark == 'true',
+	                title : {
+	                    mark : '辅助线-开关',
+	                    markUndo : '辅助线-删除',
+	                    markClear : '辅助线-清空'
+	                },
+	                lineStyle : {
+	                    width : 1,
+	                    color : '#1e90ff',
+	                    type : 'dashed'
+	                }
+	            },
+	            dataZoom : {
+	                show : dataZoom == 'true',
+	                title : {
+	                    dataZoom : '区域缩放',
+	                    dataZoomReset : '区域缩放-后退'
+	                }
+	            },
+	            dataView : {
+	                show : dataView == 'true',
+	                title : '数据视图',
+	                readOnly: true,
+	                lang : ['数据视图', '关闭', '刷新'],
+	                optionToContent: function(opt) {
+						try {
+							if (typeof(eval('optionToContent')) == "function") {
+	    	                	var result = optionToContent(opt);
+								return result;
+							}
+						} catch(e) {}
+						return 'function optionToContent is not define';
+	                }
+	            },
+	            magicType: {
+	                show : magicType == 'true',
+	                title : {
+	                    line : '动态类型切换-折线图',
+	                    bar : '动态类型切换-柱形图',
+	                    stack : '动态类型切换-堆积',
+	                    tiled : '动态类型切换-平铺'
+	                },
+	                type : ['line', 'bar', 'stack', 'tiled']
+	            },
+	            restore : {
+	                show : restore == 'true',
+	                title : '还原',
+	                color : 'black'
+	            },
+	            saveAsImage : {
+	                show : saveAsImage == 'true',
+	                title : '保存为图片',
+	                type : 'jpeg',
+	                lang : ['点击本地保存'] 
+	            }
+	        }
+	    }
+	});
+}
+function runTooltip() {
+	var show = getRowValueByName('tooltip_show');
+	var trigger = getRowValueByName('tooltip_trigger');
+	myChart.setOption({
+		tooltip : {
+			show: show == 'true',
+	        trigger: trigger
+		}
+	});
+}
+function runLegend() {
+	var show = getRowValueByName('legend_show');
+	var orient = getRowValueByName('legend_orient');
+	var x = getRowValueByName('legend_x');
+	var y = getRowValueByName('legend_y');
+	var data = getRowValueByName('legend_data');
+	if(data==null||data=='') {
+		data = new Array();
+	} else {
+		data = data.split(',');
+	}
+	myChart.setOption({
+		legend: {
+			show: show == 'true',
+	        orient: orient,
+	        x: x,
+	        y: y,
+	        data: data
+		}
+	});
+}
+function runYAxis() {
+	var show_l = getRowValueByName('yAxis_show_l');
+	var axisLabel_l = getRowValueByName('yAxis_axisLabel_l');
+	var show_r = getRowValueByName('yAxis_show_r');
+	var axisLabel_r = getRowValueByName('yAxis_axisLabel_r');
+	myChart.setOption({
+		yAxis: [{
+			show : show_l == 'true',
+			position : 'left',
+			type : 'value',
+			axisLabel : {
+                formatter: '{value}'+axisLabel_l
+            }
+		},{
+			show : show_r == 'true',
+			position : 'right',
+			type : 'value',
+			axisLabel : {
+                formatter: '{value}'+axisLabel_r
+            }
+		}]
+	});
+}
+function runXAxis() {
+	var show_l = getRowValueByName('xAxis_show_l');
+	var axisLabel_l = getRowValueByName('xAxis_axisLabel_l');
+	var data_l = getRowValueByName('xAxis_data_l');
+	var show_r = getRowValueByName('xAxis_show_r');
+	var axisLabel_r = getRowValueByName('xAxis_axisLabel_r');
+	var data_r = getRowValueByName('xAxis_data_r');
+	if(data_l==null||data_l=='') {
+		data_l = new Array();
+	} else {
+		data_l = data_l.split(',');
+	}
+	if(data_r==null||data_r=='') {
+		data_r = data_l;
+	} else {
+		data_r = data_r.split(',');
+	}
+	myChart.setOption({
+		xAxis: [{
+			show : show_l == 'true',
+			position : 'bottom',
+			type : 'category',
+			axisLabel : {
+                formatter: '{value}'+axisLabel_l
+            },
+            data : data_l
+		},{
+			show : show_r == 'true',
+			position : 'top',
+			type : 'category',
+			axisLabel : {
+                formatter: '{value}'+axisLabel_r
+            },
+            data : data_r
+		}]
+	});
+}
+function runSeries() {
+	myChart.setOption({
+		series : [ {
+			name : '蒸发量',
+			type : 'line',
+			data : function() {
+				var list = [];
+				for (var i = 1; i <= 5; i++) {
+					list.push(Math.round(Math.random() * 30));
+				}
+				return list;
+			}()
+		} ,{
+			name : '降水量',
+			type : 'line',
+			data : function() {
+				var list = [];
+				for (var i = 1; i <= 5; i++) {
+					list.push(Math.round(Math.random() * 10));
+				}
+				return list;
+			}()
+		}]
+	});
+}
+
+function run() {
+	if(myChart) {
+		myChart.dispose();
+	}
+	myChart = echartObj.init(document.getElementById('main'));
+	myChart.setTheme('macarons');
+	myChart.showLoading({
+	    text: '正在努力的读取数据中...',    //loading话术
+	    effect: 'bubble'	//loading效果，可选为：'spin' | 'bar' | 'ring' | 'whirling' | 'dynamicLine' | 'bubble'，支持外部装载
+	});
+	runTitle();
+	runToolbox();
+	runTooltip();
+	runLegend();
+	runYAxis();
+	runXAxis();
+	runSeries();
+	myChart.hideLoading();
+}
+function save() {
+	showMessage(do_json_beautify(JSON.stringify(myChart.getOption()), 'html'));
+}
+function getRowValueByName(name) {
+	var rows = $('#property').datagrid('getRows');
+	for(var i=0; i<rows.length; i++) {
+		if(rows[i].name == name) {
+			return rows[i].value;
+		}
+	}
+}
+function showMessage(message) {
+	layer.open({
+		title: '返回值',
+	    type: 1,
+	    skin: 'layui-layer-demo', //样式类名
+	    closeBtn: 0, //不显示关闭按钮
+	    shift: 2,
+	    area: ['550px', '550px'], //宽高
+	    shadeClose: true, //开启遮罩关闭
+	    content: message
+	});
+}
+function optionToContent(opt) {
+	var axisData = opt.xAxis[0].data;
+    var series = opt.series;
+    var table = '<table id="dg" style="width:98%;text-align:center"><thead><tr>'
+                 + '<th data-options="field:\'time\'" style="color:red;">时间</th>'
+                 + '<th data-options="field:\'name\'">' + series[0].name + '</th>'
+                 + '</tr>';
+    table += '</thead><tbody>';
+    for (var i = 0, l = axisData.length; i < l; i++) {
+        table += '<tr>'
+                 + '<td>' + axisData[i] + '</td>'
+                 + '<td>' + series[0].data[i] + '</td>'
+                 + '</tr>';
+    }
+    table += '</tbody></table>';
+    //table = '<table id="dg"><thead><tr><th data-options="field:\'code\'">Code</th><th data-options="field:\'name\'">Name</th><th data-options="field:\'price\'">Price</th></tr></thead><tbody><tr><td>001</td><td>name1</td><td>2323</td></tr><tr><td>002</td><td>name2</td><td>4612</td></tr></tbody></table>';
+    setTimeout(function (){
+    	$('#dg').datagrid();
+    }, 200);
+    return table;
 }
 </script>
 </head>
