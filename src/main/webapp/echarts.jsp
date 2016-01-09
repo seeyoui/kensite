@@ -282,16 +282,51 @@ var propertygrid_data = {"total":1000,"rows":[
 	{"name":"xAxis_data_r","value":"","group":"X坐标轴设置","editor":"text"},
 	{"name":"xAxis_axisLabel_r","value":"","group":"X坐标轴设置","editor":"text"},
     /*******************************/
-	{"name":"series_","value":"","group":"数据内容数组","editor":{
+	{"name":"series_data","value":"","group":"数据内容数组","editor":{
 		"type":"textbox",
 		"options":{
 			"editable":false,
 			"icons": [{
 				"iconCls":"icon-add",
 				"handler": function(e){
-					$(e.data.target).textbox("setValue", "Something added!");
+					$(e.data.target).textbox("setValue", '[{"name": "蒸发量","type": "line","data": function() {var list = [];for (var i = 1; i <= 5; i++) {list.push(Math.round(Math.random() * 30));}return list;} ()}]');
 				}
 			}]
+		}
+	}},
+	/*******************************/
+	{"name":"dataZoom_show","value":"false","group":"数据区域缩放设置","editor":{
+		"type":"checkbox",
+		"options":{
+			"on":true,
+			"off":false
+		}
+	}},
+	{"name":"dataZoom_orient","value":"horizontal","group":"数据区域缩放设置","editor":{
+        "type":"combobox",
+        "options":{
+            "valueField":"value",
+            "textField":"text",
+            "method":"get",
+            "editable":false,
+            "data":[{"value":"horizontal","text":"horizontal"},{"value":"vertical","text":"vertical"}],
+            "panelHeight":"auto"
+        }
+    }},
+    {"name":"dataZoom_start","value":"40","group":"数据区域缩放设置","editor":{
+		"type":"numberbox",
+		"options":{
+			"min":0,
+			"max":0,
+			"precision":0
+		}
+	}},
+    {"name":"dataZoom_end","value":"60","group":"数据区域缩放设置","editor":{
+		"type":"numberbox",
+		"options":{
+			"min":0,
+			"max":0,
+			"precision":0
 		}
 	}}
 ]}
@@ -505,28 +540,33 @@ function runXAxis() {
 	});
 }
 function runSeries() {
+	var serise = getRowValueByName('series_data');
+	var series_data = eval("("+serise+")")
+	myChart.setSeries(series_data);
+}
+function runDataZoom() {
+	var show = getRowValueByName('dataZoom_show');
+	var orient = getRowValueByName('dataZoom_orient');
+	var start = getRowValueByName('dataZoom_start');
+	var end = getRowValueByName('dataZoom_end');
 	myChart.setOption({
-		series : [ {
-			name : '蒸发量',
-			type : 'line',
-			data : function() {
-				var list = [];
-				for (var i = 1; i <= 5; i++) {
-					list.push(Math.round(Math.random() * 30));
-				}
-				return list;
-			}()
-		} ,{
-			name : '降水量',
-			type : 'line',
-			data : function() {
-				var list = [];
-				for (var i = 1; i <= 5; i++) {
-					list.push(Math.round(Math.random() * 10));
-				}
-				return list;
-			}()
-		}]
+		dataZoom : {
+	        show : show == 'true',
+	        orient: orient,
+	        //realtime : true,
+	        //x: 0,
+	        //y: 36,
+	        //width: 400,
+	        //height: 20,
+	        //backgroundColor: 'rgba(221,160,221,0.5)',
+	        //dataBackgroundColor: 'rgba(138,43,226,0.5)',
+	        //fillerColor: 'rgba(38,143,26,0.6)',
+	        //handleColor: 'rgba(128,43,16,0.8)',
+	        //xAxisIndex:[],
+	        //yAxisIndex:[],
+	        start : start,
+	        end : end
+	    }
 	});
 }
 
@@ -547,6 +587,7 @@ function run() {
 	runYAxis();
 	runXAxis();
 	runSeries();
+	runDataZoom();
 	myChart.hideLoading();
 }
 function save() {
