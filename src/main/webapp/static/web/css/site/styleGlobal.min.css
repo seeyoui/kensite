@@ -1,0 +1,275 @@
+
+body {
+    background-color: #f7f7f7;
+    color: #333;
+    font-size: 12px;
+    overflow: hidden;
+}
+.bodyWrap {
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 0;
+    position: relative;
+    width: 1000px;
+}
+.aset {
+    color: #1b7ad1;
+    text-decoration: none;
+}
+.aset:hover {
+    color: #f30;
+}
+.basicSetting {
+    background-color: #d4e2f2;
+    font-weight: bold;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+}
+.titleWidth {
+    width: 85px;
+}
+.set4second {
+    width: 140px;
+}
+.settingTable {
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-size: 12px;
+    line-height: 24px;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+.settingTitlePanel {
+    height: 24px;
+    line-height: 24px;
+    text-align: right;
+}
+.settingTitlePanel .settingTitle {
+    line-height: 24px;
+    text-align: right;
+}
+.rightTitleSet {
+    float: left;
+    width: 85px;
+}
+.bgmSet {
+    float: left;
+    height: 24px;
+    line-height: 24px;
+    width: 80px;
+}
+.basicSettintWrap {
+    float: left;
+    height: 100%;
+    margin: 0;
+    padding: 0 10px;
+    width: 450px;
+}
+.verticalLinkWrap {
+    float: left;
+    height: 100%;
+    width: 1%;
+}
+.verticalLink {
+    border-left: 1px solid #b8c7d5;
+    float: left;
+    height: 100%;
+    width: 1px;
+}
+.webSearchWrap {
+    float: left;
+    height: 100%;
+    margin: 0;
+    padding: 0 10px;
+    width: 380px;
+}
+.webSearchTitleWrap {
+    background-color: #d4e2f2;
+    font-weight: bold;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+}
+.webSearchTitle {
+    display: inline-block;
+}
+.webSearchSettingWrap {
+    float: left;
+    height: 150px;
+    padding-top: 5px;
+}
+.webSearchSettingItem {
+    clear: both;
+    line-height: 16px;
+}
+.webSearchSettingTitle {
+    float: left;
+    height: 80px;
+    padding: 2px 0;
+    text-align: right;
+    width: 100px;
+}
+.webSearchIcon {
+    background: rgba(0, 0, 0, 0) url("../..../../image/bg01.png?v=201512071738") no-repeat scroll -1277px -107px;
+    cursor: default;
+}
+.pageSettingWrap {
+    float: left;
+    height: 100%;
+    padding: 0 10px;
+    width: 380px;
+}
+.pageSetting {
+    background-color: #d4e2f2;
+    font-weight: bold;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+}
+.settingLine {
+    height: 26px;
+    line-height: 26px;
+}
+.settingLine .settingTitle {
+    text-align: right;
+    width: 85px;
+}
+#advanceFuncFrame {
+    height: 205px;
+    width: 900px;
+}
+#businessFunc {
+    height: 205px;
+    position: relative;
+    width: 900px;
+}
+.businessSettingWrap {
+    float: left;
+    height: 100%;
+    padding: 4px 0 0 7px;
+    width: 99%;
+}
+.businessSetting {
+    background-color: #d4e2f2;
+    font-weight: bold;
+    height: 26px;
+    line-height: 26px;
+    padding-left: 10px;
+}
+.top {
+    display: inline-block;
+}
+.contentLeft {
+    background: #e0e6eb none repeat scroll 0 0;
+    float: left;
+    font-family: "Microsoft Yahei","微软雅黑",sans-serif;
+    height: 187px;
+    padding-top: 18px;
+    position: relative;
+    text-align: center;
+    width: 100px;
+}
+.contentLeft ul {
+    float: right;
+}
+.contentTopBg {
+    background: #f7f7f7 url("../..../../image/panesMenuBg.png?v=201501101710") no-repeat scroll 0 2px;
+    height: 20px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+.contentBottomBg {
+    background: #f7f7f7 url("../..../../image/panesMenuBg.png?v=201501101710") no-repeat scroll left bottom;
+    bottom: 0;
+    height: 20px;
+    left: 0;
+    position: absolute;
+    width: 100%;
+}
+.menu {
+    color: #333;
+    cursor: pointer;
+    height: 30px;
+    line-height: 30px;
+    width: 92px;
+}
+.menuHovor {
+    background-color: #eceff1;
+}
+.menuCheck {
+    background-color: #f7f7f7;
+}
+.contentRight {
+    float: left;
+    font-family: "Microsoft Yahei","微软雅黑",sans-serif;
+    height: 205px;
+    overflow: hidden;
+    width: 900px;
+}
+#siteSetting {
+    height: 200px;
+    padding-top: 5px;
+    position: relative;
+    width: 900px;
+}
+#navManage {
+    bottom: 10px;
+    color: #555;
+    left: 10px;
+    position: absolute;
+    text-decoration: none;
+}
+#navManage .navManageDiv {
+    border: 1px solid #e0e6eb;
+    cursor: pointer;
+    height: 20px;
+    line-height: 20px;
+    padding-right: 7px;
+}
+#navManage .navManageDiv .siteIco {
+    background: rgba(0, 0, 0, 0) url("../..../../image/bg02.png?v=201511091906") no-repeat scroll -372px -402px;
+    float: left;
+    height: 20px;
+    width: 25px;
+}
+#navManage:hover {
+    background: #e8f3fe none repeat scroll 0 0;
+    color: #555;
+}
+#navManage:hover .navManageDiv {
+    border-color: #3298fe;
+}
+#navManage:hover .navManageDiv .siteIco {
+    background: rgba(0, 0, 0, 0) url("../..../../image/bg02.png?v=201511091906") no-repeat scroll -372px -365px;
+}
+#pdIndependenceDiv a {
+    margin: 0 1px 0 -1px;
+}
+#ndIndependenceDiv a {
+    margin: 0 1px 0 -1px;
+}
+#prIndependenceDiv a {
+    margin: 0 1px 0 -1px;
+}
+#nrIndependenceDiv a {
+    margin: 0 1px 0 -1px;
+}
+#pdIndependenceDiv span {
+    margin: 0 1px 0 -1px;
+}
+#ndIndependenceDiv span {
+    margin: 0 1px 0 -1px;
+}
+#prIndependenceDiv span {
+    margin: 0 1px 0 -1px;
+}
+#nrIndependenceDiv span {
+    margin: 0 1px 0 -1px;
+}
+.settingItemContent {
+    width: 140px;
+}

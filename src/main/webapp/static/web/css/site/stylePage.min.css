@@ -1,0 +1,382 @@
+
+body {
+    background-color: #f7f7f7;
+    color: #333;
+    overflow: hidden;
+}
+.bodyWrap {
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 0;
+    position: relative;
+    width: 1000px;
+}
+.allSiteSeoTab {
+    float: left;
+    height: 256px;
+    margin: 0;
+    overflow: hidden;
+    padding: 0 10px;
+    width: 450px;
+}
+.stylePageItem {
+    line-height: 25px;
+}
+.stylePageItemTitle1 {
+    display: inline-block;
+    text-align: right;
+    width: 100px;
+}
+.stylePageItemTitle2 {
+    display: inline-block;
+    text-align: right;
+    width: 85px;
+}
+.topTitle {
+    height: 25px;
+}
+.topTitleFree {
+    background: #d5e2f3 none repeat scroll 0 0;
+    height: 26px;
+    line-height: 26px;
+    margin-left: 7px;
+    padding-left: 10px;
+}
+.imgSet {
+    margin: 0 3px;
+}
+.aset {
+    color: #1b7ad1;
+    text-decoration: none;
+}
+.topTitleLeft {
+    background-color: #d4e2f2;
+    float: left;
+    font-weight: bold;
+    height: 25px;
+    line-height: 25px;
+    margin: 0 10px;
+    text-align: center;
+    width: 450px;
+}
+.topTitleRight {
+    background-color: #d4e2f2;
+    float: left;
+    font-weight: bold;
+    height: 25px;
+    line-height: 25px;
+    margin: 0 10px;
+    text-align: center;
+    width: 380px;
+}
+.verticalLinkWrap {
+    float: left;
+    height: 100%;
+    width: 1px;
+}
+.verticalLink {
+    border-left: 1px solid #b8c7d5;
+    float: left;
+    height: 100%;
+    width: 1px;
+}
+.webSearchWrap {
+    float: left;
+    height: 175px;
+    padding: 0 10px;
+    width: 380px;
+}
+.contentLeft {
+    background: #e0e6eb none repeat scroll 0 0;
+    float: left;
+    font-family: "Microsoft Yahei","微软雅黑",sans-serif;
+    height: 187px;
+    padding-top: 18px;
+    position: relative;
+    text-align: center;
+    width: 100px;
+}
+.contentLeft ul {
+    float: right;
+}
+.contentTopBg {
+    background: #f7f7f7 url("../..../../image/panesMenuBg.png?v=201501101710") no-repeat scroll 0 2px;
+    height: 20px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+.contentBottomBg {
+    background: #f7f7f7 url("../..../../image/panesMenuBg.png?v=201501101710") no-repeat scroll left bottom;
+    bottom: 0;
+    height: 20px;
+    left: 0;
+    position: absolute;
+    width: 100%;
+}
+.menu {
+    color: #333;
+    cursor: pointer;
+    height: 30px;
+    line-height: 30px;
+    width: 92px;
+}
+.menuHovor {
+    background-color: #eceff1;
+}
+.menuCheck {
+    background-color: #f7f7f7;
+}
+.contentRight {
+    float: left;
+    font-family: "Microsoft Yahei","微软雅黑",sans-serif;
+    height: 205px;
+    width: 900px;
+}
+#siteSeo {
+    font-family: "Microsoft Yahei","微软雅黑",sans-serif;
+    height: 200px;
+    padding-top: 4px;
+}
+.webSearchSettingItem {
+    clear: both;
+    line-height: 16px;
+    padding-top: 8px;
+}
+.webSearchSettingTitle {
+    float: left;
+    height: 80px;
+    padding: 2px 0;
+    text-align: right;
+    width: 90px;
+}
+#siteSetting {
+    color: #000;
+    padding: 10px 0 5px 15px;
+}
+#siteSetting a {
+    text-decoration: none;
+}
+.siteSetting-title {
+    color: #000;
+    font: bold 14px/18px "Microsoft YaHei","微软雅黑",sans-serif;
+    height: 18px;
+}
+.siteSetting-title a {
+    color: #b5453a;
+    font: 12px/18px "Microsoft YaHei","微软雅黑",sans-serif;
+    margin-left: 10px;
+    text-decoration: underline !important;
+}
+.siteSetting-title a:hover {
+    color: red;
+}
+.progressBar-box {
+    height: 55px;
+    position: relative;
+}
+.progressBar {
+    background: transparent url("../..../../image/BaiduOptimization/progressBarbg.jpg?v=201401131741") repeat scroll 0 0;
+    border: 1px solid #d6d6d6;
+    height: 10px;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    top: 13px;
+    width: 295px;
+}
+#progressBar {
+    background: transparent url("../..../../image/BaiduOptimization/optimizationIcon.gif?v=201401131741") repeat scroll 0 -134px;
+    height: 100%;
+    width: 0;
+}
+#progressNum {
+    color: #55bc00;
+    font-size: 24px;
+    left: 325px;
+    position: absolute;
+    top: 6px;
+}
+#checkDetail {
+    background: transparent url("../..../../image/BaiduOptimization/checkDetail.gif?v=201401151502") no-repeat scroll 0 0;
+    color: #fff;
+    display: block;
+    font: 12px/20px "Microsoft YaHei","微软雅黑",sans-serif;
+    height: 20px;
+    left: 470px;
+    position: absolute;
+    text-align: center;
+    text-indent: -99999px;
+    top: 10px;
+    width: 60px;
+}
+#checkDetail:hover {
+    background: transparent url("../..../../image/BaiduOptimization/checkDetailHover.gif?v=201401151502") no-repeat scroll 0 0;
+}
+#checkAgain {
+    background: transparent url("../..../../image/BaiduOptimization/checkAgain.gif?v=201401151502") no-repeat scroll 0 0;
+    color: #fff;
+    display: block;
+    font: 12px/20px "Microsoft YaHei","微软雅黑",sans-serif;
+    height: 20px;
+    left: 390px;
+    position: absolute;
+    text-align: center;
+    text-indent: -99999px;
+    top: 10px;
+    width: 60px;
+}
+#checkAgain:hover {
+    background: transparent url("../..../../image/BaiduOptimization/checkAgainHover.gif?v=201401151502") no-repeat scroll 0 0;
+}
+.prompt {
+    color: #666;
+    padding: 0 0 0 5px;
+}
+.prompt2 {
+    color: #666;
+}
+.msgList-box {
+    background: #efefef none repeat scroll 0 0;
+    border: 1px solid #cbcbcb;
+    height: 64px;
+    margin-top: 10px;
+    padding: 10px 0 0 15px;
+    position: relative;
+    width: 610px;
+}
+.msgList-box ul {
+    width: 230px;
+}
+.msgList-box li {
+    height: 25px;
+    line-height: 25px;
+    padding: 0 0 0 18px;
+}
+.msgList-box-triangle {
+    background: transparent url("../..../../image/BaiduOptimization/triangle.gif?v=201401151502") no-repeat scroll 0 0;
+    height: 7px;
+    left: 14px;
+    position: absolute;
+    top: -6px;
+    width: 10px;
+}
+#urlHover a.hover {
+    color: red;
+}
+.failing {
+    background: transparent url("../..../../image/BaiduOptimization/optimizationIcon.gif?v=201401131741") no-repeat scroll 0 8px;
+}
+.correct {
+    background: transparent url("../..../../image/BaiduOptimization/optimizationIcon.gif?v=201401131741") no-repeat scroll 0 -12px;
+}
+.fontBlue {
+    color: #1b7ad1;
+}
+.fontOrange {
+    color: #f26e00;
+}
+.fontRed {
+    color: #d00000;
+}
+.fl {
+    float: left;
+}
+.fr {
+    float: right;
+}
+.keyWordWrap {
+    position: relative;
+}
+.keyWordTips {
+    background: #efefef none repeat scroll 0 0;
+    border: 1px solid #cacaca;
+    color: #666;
+    font-family: "微软雅黑";
+    font-size: 12px;
+    padding: 5px 8px;
+    position: absolute;
+    top: 38px;
+    width: 285px;
+    z-index: 1;
+}
+.keyWordWrap-text .keyWordTips {
+    top: 43px;
+}
+.keyWordTips em {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: transparent transparent #cacaca;
+    border-image: none;
+    border-style: solid;
+    border-width: 8px;
+    display: block;
+    height: 0;
+    left: 50px;
+    position: absolute;
+    top: -16px;
+    width: 0;
+}
+.keyWordTips span {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: transparent transparent #efefef;
+    border-image: none;
+    border-style: solid;
+    border-width: 8px;
+    display: block;
+    height: 0;
+    left: 50px;
+    position: absolute;
+    top: -15px;
+    width: 0;
+}
+.keyWordTips p {
+    line-height: 16px;
+}
+.keyword-tips-icon {
+    background: rgba(0, 0, 0, 0) url("../..../../image/bg01.png?v=201512071738") no-repeat scroll -708px -340px;
+    cursor: pointer;
+    display: inline-block;
+    height: 18px;
+    line-height: 20px;
+    margin-left: 4px;
+    position: relative;
+    text-decoration: none;
+    width: 18px;
+}
+.keyword-tips-text {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 center;
+    color: #1b7ad1;
+    height: auto;
+    line-height: 14px;
+    width: auto;
+}
+.keyword-tips-icon:hover {
+    color: #1b7ad1;
+}
+.keyWordWrap-spcial .keyWordTips {
+    top: 28px;
+}
+.keyWordWrap-up .keyWordTips {
+    top: -72px;
+}
+.keyWordWrap-up .keyWordTips em {
+    border-bottom-color: transparent;
+    border-top-color: #cacaca;
+    bottom: -16px;
+    top: auto;
+}
+.keyWordWrap-up .keyWordTips span {
+    border-bottom-color: transparent;
+    border-top-color: #efefef;
+    bottom: -15px;
+    height: 0;
+    top: auto;
+    width: 0;
+}

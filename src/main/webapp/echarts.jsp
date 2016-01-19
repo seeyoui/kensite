@@ -18,8 +18,8 @@
 	// 使用
 	require(
 		[
-			'echarts', 'echarts/chart/bar', // 使用柱状图就加载bar模块，按需加载
-			'echarts', 'echarts/chart/line', // 使用柱状图就加载bar模块，按需加载
+			'echarts', 'echarts/chart/bar',// 使用柱状图就加载bar模块，按需加载
+			'echarts', 'echarts/chart/line',// 使用柱状图就加载bar模块，按需加载
 			'echarts', 'echarts/chart/pie'
 		],
 		function(ec) {
@@ -287,7 +287,7 @@ var propertygrid_data = {"total":1000,"rows":[
 		"options":{
 			"editable":false,
 			"icons": [{
-				"iconCls":"icon-add",
+				"iconCls":"icon-chart_line",
 				"handler": function(e){
 					$(e.data.target).textbox("setValue", '[{"name": "蒸发量","type": "line","data": function() {var list = [];for (var i = 1; i <= 5; i++) {list.push(Math.round(Math.random() * 30));}return list;} ()}]');
 				}
@@ -593,6 +593,9 @@ function run() {
 function save() {
 	showMessage(do_json_beautify(JSON.stringify(myChart.getOption()), 'html'));
 }
+function conf() {
+	
+}
 function getRowValueByName(name) {
 	var rows = $('#property').datagrid('getRows');
 	for(var i=0; i<rows.length; i++) {
@@ -646,12 +649,13 @@ function optionToContent(opt) {
 					fit: true,
 					showGroup: true,
 					border: true,
-					footer:'#ft'
+					toolbar:'#ft'
 				">
 			</table>
 			<div id="ft">
-				<a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-4336'" onclick="save()">确定</a>
+				<a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-28013'" onclick="conf()">配置</a>
 				<a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-5571'" onclick="run()">试用</a>
+				<a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-4336'" onclick="save()">确定</a>
 			</div>
 		</div>
 		<div id="main" style="position: absolute; top: 0px; left: 400px; right: 0px; bottom: 0px;"></div>

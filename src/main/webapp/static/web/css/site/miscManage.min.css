@@ -1,0 +1,181 @@
+
+.clear {
+    clear: both;
+}
+body {
+    background-color: #f7f7f7;
+    color: #333;
+    font-size: 12px;
+    height: 205px;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    position: relative;
+    width: 900px;
+}
+.topTitle {
+    background: #d5e2f3 none repeat scroll 0 0;
+    height: 26px;
+    line-height: 26px;
+    padding-left: 10px;
+}
+.fc-red {
+    color: red;
+}
+.fc-gray {
+    color: gray;
+}
+.pl-18 {
+    padding: 0 0 0 18px;
+}
+.miscManClear {
+    border-bottom: 1px dashed #b8c7d5;
+    clear: both;
+    height: 1px;
+    line-height: 1px;
+    width: 90%;
+}
+#contentDiv {
+    height: 175px;
+    overflow-y: auto;
+    position: relative;
+    width: 890px;
+}
+.contentLeft {
+    background: rgba(0, 0, 0, 0) url("../..../../image/panesMenuBg.png") no-repeat scroll center center;
+    float: left;
+    height: 187px;
+    padding-top: 18px;
+    position: relative;
+    text-align: center;
+    width: 100px;
+}
+.contentLeft ul {
+    float: right;
+}
+.menu {
+    color: #333;
+    cursor: pointer;
+    height: 30px;
+    line-height: 30px;
+    width: 92px;
+}
+.menuHovor {
+    background-color: #eceff1;
+}
+.menuCheck {
+    background-color: #f7f7f7;
+}
+.contentRight {
+    float: left;
+    height: 205px;
+    width: 900px;
+}
+#advanceFunc {
+    font-family: "Microsoft Yahei","微软雅黑",sans-serif;
+    height: 201px;
+    padding: 4px 0 0 7px;
+}
+.contentPageLeft {
+    float: left;
+    height: auto;
+    overflow: hidden;
+    position: relative;
+    width: 420px;
+}
+.contentPageRight {
+    float: left;
+    height: auto;
+    overflow: hidden;
+    position: relative;
+    width: 450px;
+}
+#BizFunc {
+    height: 100%;
+}
+.BizFuncFrame {
+    height: 205px;
+    width: 900px;
+}
+.visitorCounterShow {
+    border: 1px solid #999;
+    padding: 1px 2px;
+    text-align: center;
+    width: 100px;
+}
+#rsVisitorCounter:hover {
+    text-decoration: underline;
+}
+.imgSet {
+    margin: 0 3px;
+}
+.aset {
+    color: #1b7ad1;
+    text-decoration: none;
+}
+.tipsSet {
+    float: left;
+    height: 26px;
+    line-height: 26px;
+    margin-left: 10px;
+    padding: 0 15px;
+    text-align: center;
+    width: 530px;
+}
+.rightArrow {
+    cursor: pointer;
+    display: inline-block;
+    height: 100%;
+    margin-left: 5px;
+    width: 9px;
+}
+.downArrow {
+    background: rgba(0, 0, 0, 0) url("../..../../image/bg02.png?v=201511091906") no-repeat scroll -426px -235px;
+}
+.set-line {
+    clear: both;
+    height: 28px;
+    line-height: 28px;
+}
+.set-line span {
+    cursor: pointer;
+}
+.set-line label {
+    cursor: pointer;
+}
+.set-line .itemSetting {
+    color: #1b7ad1;
+    display: none;
+    margin-left: 10px;
+}
+.set-line .itemSetting:hover {
+    color: red;
+}
+.set-title {
+    float: left;
+    height: 28px;
+    line-height: 28px;
+    text-align: right;
+}
+.set-textline {
+    clear: both;
+    height: 28px;
+    line-height: 28px;
+}
+.set-ctrl {
+    float: left;
+    height: 28px;
+    line-height: 28px;
+}
+.set-radio span {
+    cursor: pointer;
+}
+.uploadFavcionTitle {
+    width: 104px;
+}
+.grayscaleOpenTip {
+    color: #666;
+    cursor: default !important;
+    display: none;
+    margin-left: 10px;
+}

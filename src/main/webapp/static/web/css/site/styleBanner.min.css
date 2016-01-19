@@ -1,0 +1,530 @@
+
+html {
+    overflow: hidden;
+}
+body {
+    font-size: 12px;
+    overflow: hidden;
+    width: 100%;
+}
+image {
+    border: 0 none;
+}
+.bannerPanel {
+    background-color: #f7f7f7;
+    padding: 0;
+    width: 100%;
+}
+.bannerType {
+    height: 19px;
+    margin: 0;
+    padding: 0;
+}
+.bannerType span {
+    display: inline-block;
+    line-height: 19px;
+}
+.typePanel {
+    padding-left: 0;
+    padding-top: 10px;
+    width: auto;
+}
+.typePanelFlash {
+    height: 157px;
+    padding-top: 10px;
+    width: 890px;
+}
+.bannerEffectsFrame {
+    height: 205px;
+    width: 900px;
+}
+#panelLibWeight {
+    float: left;
+    width: 100px;
+}
+#panelLibTrade {
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #adadad;
+    float: left;
+    height: 18px;
+    margin-top: 4px;
+    width: 160px;
+}
+#bannerCountChoice {
+    float: left;
+    width: 40px;
+}
+#bannerTypeChoice {
+    float: left;
+    width: 60px;
+}
+.sortList {
+    float: left;
+    text-align: left;
+    width: 100%;
+}
+.sortList ul {
+    height: auto;
+    list-style: outside none none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+.sortList ul li {
+    border: 1px solid #b5c8eb;
+    float: left;
+    height: 90px;
+    margin: 10px 10px 0 0;
+    padding: 0;
+    width: 150px;
+}
+.panelLibFilter {
+    height: 26px;
+    overflow: hidden;
+    padding-left: 2px;
+    position: relative;
+}
+.panelLibFilter span {
+    display: inline-block;
+    height: 26px;
+    line-height: 26px;
+}
+.panelLibList {
+    float: left;
+    height: 160px;
+    margin-top: 7px;
+    overflow-y: auto;
+    padding-left: 10px;
+    position: relative;
+    text-align: left;
+    width: 748px;
+}
+.panelLibList-fixWidth {
+    width: 642px;
+}
+.panelLibItem, .cloneBanner, .panelLibItemT {
+    border: 1px solid #b5c8eb;
+    cursor: pointer;
+    float: left;
+    margin: 0 2px 2px 0;
+    overflow: hidden;
+    padding: 0;
+    position: relative;
+}
+.panelLibItemHover {
+    background: #eef1f6 none repeat scroll 0 0;
+}
+.bannerChoice {
+    top: 3px;
+}
+.bannerChoice .ui-autocomplete-input {
+    height: 18px;
+    line-height: 18px;
+}
+.clearSearch {
+    display: inline-block;
+    float: left;
+    height: 14px;
+    line-height: 14px;
+    width: 16px;
+}
+.find {
+    background: rgba(0, 0, 0, 0) url("../..../../image/bg01.png?v=201512071738") no-repeat scroll -1436px 8px;
+    cursor: pointer;
+}
+.unfind {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 center;
+    cursor: default;
+}
+.searchInput {
+    border: 1px solid #bfbfbf;
+    float: left;
+    font-family: 微软雅黑,"microsoft yahei",宋体,新宋体,sans-serif;
+    font-size: 12px;
+    height: 18px;
+    line-height: 18px;
+    margin-top: 3px;
+    outline: 0 none;
+    padding: 0;
+    width: 50px;
+}
+.searchTitle {
+    float: left;
+    margin-left: 10px;
+}
+.checked {
+    display: none;
+}
+.bannerDown .checked {
+    background: rgba(0, 0, 0, 0) url("../..../../image/styleBanner/bannerIcon.png?v=201410081739") no-repeat scroll 0 -160px;
+    bottom: 0;
+    display: block;
+    height: 13px;
+    left: 0;
+    position: absolute;
+    width: 14px;
+}
+.bannerPlaceholder {
+    background: rgba(0, 0, 0, 0) url("../..../../image/site/bannerPlaceholder1.gif") no-repeat scroll 0 0;
+    float: left;
+    height: 32px;
+    margin: 2px 5px 1px 1px;
+    width: 102px;
+}
+.bannerContainer {
+    float: left;
+    height: 36px;
+    width: auto;
+}
+.picDelPen {
+    background: #ffc url("../..../../image/ui-icons_cd0a0a_256x240.png") no-repeat scroll -81px -129px;
+    cursor: pointer;
+    height: 16px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 16px;
+    z-index: 0;
+}
+.bannderBtnEdit {
+    background: rgba(0, 0, 0, 0) url("../..../../image/styleBanner/bannerIcon.png?v=201503231713") no-repeat scroll -37px 0;
+    cursor: pointer;
+    height: 16px;
+    position: absolute;
+    right: 18px;
+    top: 0;
+    width: 17px;
+    z-index: 0;
+}
+.bannderBtnEdit:hover {
+    background: rgba(0, 0, 0, 0) url("../..../../image/styleBanner/bannerIcon.png?v=201503231713") no-repeat scroll -37px -40px;
+}
+.bannderBtnDel {
+    background: rgba(0, 0, 0, 0) url("../..../../image/styleBanner/bannerIcon.png?v=201503231713") no-repeat scroll -37px -80px;
+    cursor: pointer;
+    height: 16px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 18px;
+    z-index: 0;
+}
+.bannderBtnDel:hover {
+    background: rgba(0, 0, 0, 0) url("../..../../image/styleBanner/bannerIcon.png?v=201503231713") no-repeat scroll -37px -120px;
+}
+.ui-autocomplete {
+    max-height: 155px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+* html .ui-autocomplete {
+    height: 140px;
+}
+.uploadmsg {
+    background: #ebffeb none repeat scroll 0 0;
+    border: 1px solid #ddf0dd;
+    display: none;
+    float: left;
+    height: 20px;
+    line-height: 20px;
+    margin-left: 8px;
+    overflow: hidden;
+    text-indent: 6px;
+    width: 120px;
+}
+.bannerstyle {
+    color: red;
+    display: inline-block;
+    float: left;
+    height: 20px;
+    line-height: 20px;
+    margin-left: 1px;
+}
+.panelLeft {
+    background: #e0e6eb none repeat scroll 0 0;
+    float: left;
+    font-family: "Microsoft YaHei","微软雅黑",sans-serif;
+    height: 187px;
+    padding-top: 18px;
+    position: relative;
+    text-align: center;
+    width: 100px;
+}
+.panelLeft ul {
+    float: right;
+}
+.panelTopBg {
+    background: #f7f7f7 url("../..../../image/panesMenuBg.png?v=201501101710") no-repeat scroll 0 2px;
+    height: 20px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+.panelBottomBg {
+    background: #f7f7f7 url("../..../../image/panesMenuBg.png?=201501101710") no-repeat scroll left bottom;
+    bottom: 0;
+    height: 20px;
+    left: 0;
+    position: absolute;
+    width: 100%;
+}
+.menu {
+    color: #333;
+    cursor: pointer;
+    height: 30px;
+    line-height: 30px;
+    width: 92px;
+}
+.menuHovor {
+    background-color: #eceff1;
+}
+.menuCheck {
+    background-color: #f7f7f7;
+}
+.panelRight {
+    float: left;
+    font-family: "Microsoft YaHei","微软雅黑",sans-serif;
+    width: 900px;
+}
+.typeCheckHot {
+    background: rgba(0, 0, 0, 0) url("../..../../image/typeCheckHot.png") no-repeat scroll 0 0;
+    height: 14px;
+    position: absolute;
+    right: 1px;
+    top: 1px;
+    width: 23px;
+}
+.typeCheckMenu-hover {
+    background-color: #d9dbe1;
+}
+.typeCheckMenu-checked {
+    background-color: #d0d3dc;
+}
+#typePanelTemplate .title {
+    float: left;
+    height: 40px;
+    line-height: 40px;
+    padding-left: 10px;
+    width: auto;
+}
+.bannerContainerLast {
+    margin-right: 1px !important;
+}
+#advancedFilter {
+    float: left;
+    height: 26px;
+    overflow: hidden;
+    width: auto;
+}
+.advFilRight {
+    background: rgba(0, 0, 0, 0) url("../..../../image/bg02.png?v=201511091906") no-repeat scroll -172px -427px;
+    cursor: pointer;
+    float: left;
+    height: 15px;
+    margin-left: 8px;
+    margin-top: 6px;
+    width: 15px;
+}
+.advFilRight-hover {
+    background: rgba(0, 0, 0, 0) url("../..../../image/bg02.png?v=201511091906") no-repeat scroll -188px -427px;
+}
+.advFilLeft {
+    background: rgba(0, 0, 0, 0) url("../..../../image/bg02.png?v=201511091906") no-repeat scroll -172px -450px;
+    cursor: pointer;
+    float: left;
+    height: 15px;
+    margin-left: 8px;
+    margin-top: 6px;
+    width: 15px;
+}
+.advFilLeft-hover {
+    background: rgba(0, 0, 0, 0) url("../..../../image/bg02.png?v=201511091906") no-repeat scroll -188px -450px;
+}
+.dropdownInput {
+    background: rgba(0, 0, 0, 0) url("../..../../image/site/rapidsite/input_ico.png") no-repeat scroll 145px center;
+    border: 0 none;
+    cursor: pointer;
+    height: 18px;
+    line-height: 18px;
+    margin: 0;
+    padding: 0 0 0 5px;
+    width: 155px;
+}
+#currentBannerArea {
+    background: rgba(0, 0, 0, 0) url("../..../../image/bg01.png?v=201512071738") no-repeat scroll -754px -264px;
+    float: right;
+    height: 25px;
+    width: 25px;
+}
+#uploadButton {
+    background-color: #f8f8f8;
+    color: #555;
+    float: right;
+    margin: 3px 5px 0 0;
+    text-decoration: none;
+}
+#uploadButton .uploadButtonDiv {
+    border: 1px solid #acacac;
+    cursor: pointer;
+    float: left;
+    height: 20px;
+    line-height: 20px;
+    padding-right: 7px;
+}
+#uploadButton .uploadButtonDiv .siteIco {
+    background: rgba(0, 0, 0, 0) url("../..../../image/bg02.png?v=201511091906") no-repeat scroll -370px -293px;
+    float: left;
+    height: 20px;
+    width: 25px;
+}
+#uploadButton:hover {
+    background-color: #e8f3fe;
+}
+#uploadButton:hover .uploadButtonDiv {
+    border-color: #3298fe;
+}
+#uploadButton:hover .uploadButtonDiv .siteIco {
+    background: rgba(0, 0, 0, 0) url("../..../../image/bg02.png?v=201511091906") no-repeat scroll -370px -328px;
+}
+.bannerLinkBtn {
+    background-color: #f8f8f8;
+    color: #555;
+    float: right;
+    margin: 3px 5px 0 0;
+    text-decoration: none;
+}
+.bannerLinkBtn .bannerLinkBtnDiv {
+    border: 1px solid #acacac;
+    cursor: pointer;
+    float: left;
+    height: 20px;
+    line-height: 20px;
+    padding-right: 7px;
+}
+.bannerLinkBtn .bannerLinkBtnDiv .siteIco {
+    background: rgba(0, 0, 0, 0) url("../..../../image/bg02.png?v=201511091906") no-repeat scroll -424px -328px;
+    float: left;
+    height: 20px;
+    width: 25px;
+}
+.bannerLinkBtn:hover {
+    background-color: #e8f3fe;
+}
+.bannerLinkBtn:hover .bannerLinkBtnDiv {
+    border-color: #3298fe;
+}
+.bannerLinkBtn:hover .bannerLinkBtnDiv .siteIco {
+    background: rgba(0, 0, 0, 0) url("../..../../image/bg02.png?v=201511091906") no-repeat scroll -424px -364px;
+}
+.advanceSet {
+    background-color: #f8f8f8;
+    color: #555;
+    float: right;
+    margin: 3px 24px 0 0;
+    text-decoration: none;
+}
+.advanceSet .advanceSetDiv {
+    border: 1px solid #acacac;
+    cursor: pointer;
+    float: left;
+    height: 20px;
+    line-height: 20px;
+    padding-right: 7px;
+}
+.advanceSet .advanceSetDiv .siteIco {
+    background: rgba(0, 0, 0, 0) url("../..../../image/bg02.png?v=201511091906") no-repeat scroll -370px -237px;
+    float: left;
+    height: 20px;
+    width: 25px;
+}
+.advanceSet:hover {
+    background-color: #e8f3fe;
+    color: #555;
+}
+.advanceSet:hover .advanceSetDiv {
+    border-color: #3298fe;
+}
+.advanceSet:hover .advanceSetDiv .siteIco {
+    background: rgba(0, 0, 0, 0) url("../..../../image/bg02.png?v=201511091906") no-repeat scroll -370px -265px;
+}
+.recentTypePanelTitle {
+    color: #555;
+    height: 18px;
+    padding-left: 10px;
+    text-align: left;
+}
+.selectedBannerContainer {
+    background: #f3f4f4 none repeat scroll 0 0;
+    float: left;
+    padding: 7px 14px 0 8px;
+}
+.selectedBannerContainer.fixPadding {
+    padding: 7px 4px 0 8px;
+}
+.selectedBannerBox {
+    border: 1px solid #bfccd9;
+    float: left;
+    padding: 6px 5px 0;
+}
+#selectedBannerBox2 {
+    border-left: medium none;
+}
+.selectedBanner {
+    height: 30px;
+    margin: 0 0 5px;
+    overflow: hidden;
+    width: 106px;
+}
+.panelLibListAutoWidth {
+    width: auto !important;
+}
+.add-box {
+    background: rgba(0, 0, 0, 0) url("../..../../image/styleBanner/bannerIcon.png?v=201410081739") no-repeat scroll 0 -210px;
+    cursor: pointer;
+}
+.add-hoverBox {
+    background: #fff url("../..../../image/styleBanner/bannerIcon.png?v=201410081739") no-repeat scroll 0 -270px;
+    cursor: pointer;
+}
+.delete-box {
+    background: rgba(0, 0, 0, 0) url("../..../../image/styleBanner/bannerIcon.png?v=201410081739") no-repeat scroll -170px -210px;
+    cursor: pointer;
+}
+.delete-hoverBox {
+    background: #fff url("../..../../image/styleBanner/bannerIcon.png?v=201410081739") no-repeat scroll -170px -270px;
+    cursor: pointer;
+}
+.virtual-box {
+    background: rgba(0, 0, 0, 0) url("../..../../image/styleBanner/bannerIcon.png?v=201410081739") no-repeat scroll 0 -330px;
+}
+.virtual-hoverBox {
+    background: rgba(0, 0, 0, 0) url("../..../../image/styleBanner/bannerIcon.png?v=201410081739") no-repeat scroll 0 -330px;
+}
+.canSort-box {
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #bfccd9;
+    height: 24px;
+    padding: 2px;
+    width: 100px;
+}
+.canSort-hoverBox {
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #bfccd9;
+    height: 24px;
+    padding: 2px;
+    width: 100px;
+}
+.ui-state-highlight {
+    background: #b2d9f6 none repeat scroll 0 0;
+    height: 30px;
+    margin: 0 0 5px;
+    width: 104px;
+}
+.ui-item-holder {
+    background: transparent url("../..../../image/styleBanner/bannerIcon.png?v=201410081739") no-repeat scroll 0 -330px;
+    border: 0 none;
+    height: 30px;
+    padding: 0;
+    width: 106px;
+}

@@ -13,12 +13,24 @@
 <body>
 	<script type="text/javascript">
     $(document).ready(function() {
-        $("#mycolor").colorpicker({
-            defaultPalette: 'web'
-        });
+    	$('#colorpickerField').ColorPicker({
+    		onSubmit: function(hsb, hex, rgb, el) {
+    			$(el).val(hex);
+    			for(var o in rgb) {
+    				alert(o+'='+rgb[o]);
+    			}
+    			$(el).ColorPickerHide();
+    		},
+    		onBeforeShow: function () {
+    			$(this).ColorPickerSetColor(this.value);
+    		}
+    	})
+    	.bind('keyup', function(){
+    		$(this).ColorPickerSetColor(this.value);
+    	});
     });
 </script>
 
-<input style="width:100px;" id="mycolor" />
+<input type="text" maxlength="6" size="6" id="colorpickerField" value="00ff00" />
 </body>
 </html>

@@ -1,0 +1,83 @@
+
+body {
+    background-color: #f7f7f7;
+}
+.contentLeft {
+    background: #e0e6eb none repeat scroll 0 0;
+    float: left;
+    font-family: "Microsoft YaHei","微软雅黑",sans-serif;
+    height: 187px;
+    padding-top: 18px;
+    position: relative;
+    text-align: center;
+    width: 100px;
+}
+.contentLeft ul {
+    float: right;
+}
+.contentTopBg {
+    background: #f7f7f7 url("../../image/panesMenuBg.png?v=201501101710") no-repeat scroll 0 2px;
+    height: 20px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+.contentBottomBg {
+    background: #f7f7f7 url("../../image/panesMenuBg.png?v=201501101710") no-repeat scroll left bottom;
+    bottom: 0;
+    height: 20px;
+    left: 0;
+    position: absolute;
+    width: 100%;
+}
+.menu {
+    color: #333;
+    cursor: pointer;
+    height: 30px;
+    line-height: 30px;
+    width: 92px;
+}
+.menuHovor {
+    background-color: #eceff1;
+}
+.menuCheck {
+    background-color: #f7f7f7;
+}
+.contentRight {
+    float: left;
+    font-family: "Microsoft YaHei","微软雅黑",sans-serif;
+    width: 900px;
+}
+.panelMenuTitle {
+    background: #84abcc none repeat scroll 0 0;
+    color: #fff;
+    float: left;
+    height: 20px;
+    line-height: 20px;
+    margin: 5px 3px 0 0;
+    padding: 0 5px;
+    position: relative;
+}
+.panelMenuTitleIco {
+    border-color: transparent transparent transparent #84abcc;
+    border-style: solid;
+    border-width: 3px;
+    font-size: 0;
+    height: 0;
+    line-height: 0;
+    position: absolute;
+    right: -6px;
+    top: 6px;
+    width: 0;
+}
+.help {
+    color: #555;
+    float: left;
+    margin-left: 5px;
+    text-decoration: none;
+}
+.help:hover {
+    color: #1b7ad1;
+    font-weight: bold;
+}

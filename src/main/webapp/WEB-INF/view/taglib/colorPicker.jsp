@@ -1,3 +1,3 @@
-<link rel="stylesheet" type="text/css" href="${ctx_script}/colorpicker/evol.colorpicker.min.css"/>
+<link rel="stylesheet" type="text/css" href="${ctx_script}/colorpicker/css/colorpicker.css"/>
 
-<script type="text/javascript" src="${ctx_script}/colorpicker/evol.colorpicker.min.js"></script>
+<script type="text/javascript" src="${ctx_script}/colorpicker/js/colorpicker.js"></script>

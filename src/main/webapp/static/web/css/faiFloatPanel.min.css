@@ -1,0 +1,902 @@
+
+.faiFloatPanelIconContainer {
+    cursor: move;
+    font-family: 微软雅黑,"microsoft yahei",宋体,新宋体,sans-serif;
+    left: 56px;
+    position: absolute;
+    top: 40%;
+    width: 59px;
+    z-index: 9030;
+}
+.faiFloatPanelIconBox {
+    height: 64px;
+    width: 100%;
+}
+.faiFloatPanelIconBox-first {
+    padding: 0 0 15px;
+}
+.faiFloatPanelIconContainer .faiFloatPanel_addNewModule {
+    background: rgba(0, 0, 0, 0) url("../image/faiFloatPanel.png?v=201508172031") no-repeat scroll -383px -495px;
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+.faiFloatPanelIconContainer .faiFloatPanel_setSiteStyle {
+    background: rgba(0, 0, 0, 0) url("../image/faiFloatPanel.png?v=201508172031") no-repeat scroll -464px -495px;
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+.faiFloatPanelIconContainer .draggableIcon {
+    cursor: move;
+}
+.drag-faiFloatPanelIconContainer .faiFloatPanel_addNewModule:hover {
+    background: rgba(0, 0, 0, 0) url("../image/faiFloatPanel.png?v=201508172031") no-repeat scroll -14px -586px;
+}
+.drag-faiFloatPanelIconContainer .faiFloatPanel_setSiteStyle:hover {
+    background: rgba(0, 0, 0, 0) url("../image/faiFloatPanel.png?v=201508172031") no-repeat scroll -201px -586px;
+}
+.faiFloatPanelIconContainer_left, .faiFloatPanelIconContainer_right {
+    width: 23px;
+}
+.faiFloatPanelIconContainer_left .faiFloatPanelIconBox {
+    height: 52px;
+}
+.faiFloatPanelIconContainer_left .faiFloatPanel_addNewModule {
+    background: rgba(0, 0, 0, 0) url("../image/faiFloatPanel.png?v=201508172031") no-repeat scroll -15px -496px;
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+.faiFloatPanelIconContainer_left .faiFloatPanel_setSiteStyle {
+    background: rgba(0, 0, 0, 0) url("../image/faiFloatPanel.png?v=201508172031") no-repeat scroll -262px -496px;
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+.faiFloatPanelIconContainer_left .faiFloatPanel_addNewModule:hover {
+    background: rgba(0, 0, 0, 0) url("../image/faiFloatPanel.png?v=201508172031") no-repeat scroll -15px -496px;
+}
+.faiFloatPanelIconContainer_left .faiFloatPanel_setSiteStyle:hover {
+    background: rgba(0, 0, 0, 0) url("../image/faiFloatPanel.png?v=201508172031") no-repeat scroll -262px -496px;
+}
+.faiFloatPanelIconContainer_right .faiFloatPanel_addNewModule {
+    background: rgba(0, 0, 0, 0) url("../image/faiFloatPanel.png?v=201508172031") no-repeat scroll -140px -496px;
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+.faiFloatPanelIconContainer_right .faiFloatPanel_setSiteStyle {
+    background: rgba(0, 0, 0, 0) url("../image/faiFloatPanel.png?v=201508172031") no-repeat scroll -316px -496px;
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+.faiFloatPanelIconContainer_right .faiFloatPanel_addNewModule:hover {
+    background: rgba(0, 0, 0, 0) url("../image/faiFloatPanel.png?v=201508172031") no-repeat scroll -140px -496px;
+}
+.faiFloatPanelIconContainer_right .faiFloatPanel_setSiteStyle:hover {
+    background: rgba(0, 0, 0, 0) url("../image/faiFloatPanel.png?v=201508172031") no-repeat scroll -316px -496px;
+}
+.faiFloatPanel {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background: #fff none repeat scroll 0 0;
+    border-color: -moz-use-text-color #517aa6 -moz-use-text-color -moz-use-text-color;
+    border-image: none;
+    border-style: none solid none none;
+    border-width: 0 1px 0 0;
+    color: #000;
+    font-family: 微软雅黑,"microsoft yahei",宋体,新宋体,sans-serif;
+    font-size: 12px;
+    left: 0;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    width: 340px;
+    z-index: 9031;
+}
+.faiFloatPanel_right {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: -moz-use-text-color -moz-use-text-color -moz-use-text-color #517aa6;
+    border-image: none;
+    border-style: none none none solid;
+    border-width: 0 0 0 1px;
+}
+.faiFloatPanel ul, .faiFloatPanel li, .faiFloatPanel p, .faiFloatPanel fieldset, .faiFloatPanel legend, .faiFloatPanel input {
+    margin: 0;
+    padding: 0;
+}
+.faiFloatPanel li {
+    list-style: outside none none;
+}
+.faiFloatPanel a {
+    color: #000;
+    font-family: 微软雅黑,"microsoft yahei",宋体,新宋体,sans-serif;
+    font-size: 12px;
+    text-decoration: none;
+}
+.faiFloatPanel input[type="checkbox"] {
+    vertical-align: -2px;
+}
+.faiFloatPanel input[type="radio"] {
+    cursor: pointer;
+    margin: 0 2px 0 3px;
+    vertical-align: -2px;
+}
+.faiFloatPanel .labelForInput {
+    cursor: pointer;
+}
+.faiFloatPanel .left {
+    float: left;
+}
+.faiFloatPanelOverLay {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 center;
+    cursor: move;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 9;
+}
+.faiFloatPanelNavContainer {
+    height: 38px;
+    overflow: hidden;
+}
+.faiFloatPanelNav {
+    float: left;
+    overflow: hidden;
+}
+.faiFloatPanelNav li {
+    border-right: 1px solid #7aacd7;
+    color: #000;
+    float: left;
+    overflow: hidden;
+    width: 101px;
+}
+.faiFloatPanelNav li a {
+    display: block;
+    font-weight: bold;
+    height: 38px;
+    line-height: 38px;
+    outline: 0 none;
+    text-align: center;
+}
+.faiFloatPanelNav li a.addModule {
+    background: #4188c6 url("../image/faiFloatPanel.png?v=201508172031") no-repeat scroll 27px -55px;
+    color: #fff;
+}
+.faiFloatPanelNav li a.setSiteStyle {
+    background: #4188c6 url("../image/faiFloatPanel.png?v=201508172031") no-repeat scroll 28px -167px;
+    color: #fff;
+}
+.faiFloatPanelNav li a.sectionModule {
+    background: #4188c6 url("../image/faiFloatPanel.png?v=201508172031") no-repeat scroll -128px -54px;
+    color: #fff;
+}
+.faiFloatPanelNav li a.addModule:hover {
+    background: #3577bb url("../image/faiFloatPanel.png?v=201508172031") no-repeat scroll 27px -55px;
+}
+.faiFloatPanelNav li a.setSiteStyle:hover {
+    background: #3577bb url("../image/faiFloatPanel.png?v=201508172031") no-repeat scroll 28px -167px;
+}
+.faiFloatPanelNav li a.sectionModule:hover {
+    background: #3577bb url("../image/faiFloatPanel.png?v=201508172031") no-repeat scroll -128px -54px;
+}
+.faiFloatPanelNav li.on a.addModule {
+    background: #f7f7f7 url("../image/faiFloatPanel.png?v=201508172031") no-repeat scroll 27px -1px;
+    color: #000;
+}
+.faiFloatPanelNav li.on a.setSiteStyle {
+    background: #f7f7f7 url("../image/faiFloatPanel.png?v=201508172031") no-repeat scroll 28px -110px;
+    color: #000;
+}
+.faiFloatPanelNav li.on a.sectionModule {
+    background: #f7f7f7 url("../image/faiFloatPanel.png?v=201508172031") no-repeat scroll -128px 0;
+    color: #000;
+}
+.faiFloatPanelNav li.on a.addModule:hover {
+    background: #f7f7f7 url("../image/faiFloatPanel.png?v=201508172031") no-repeat scroll 27px -1px;
+    color: #000;
+}
+.faiFloatPanelNav li.on a.sectionModule:hover {
+    background: #f7f7f7 url("../image/faiFloatPanel.png?v=201508172031") no-repeat scroll -128px 0;
+    color: #000;
+}
+.faiFloatPanel_closeBtnContainer {
+    float: left;
+    height: 100%;
+    width: 34px;
+}
+.faiFloatPanel_closeBtn {
+    background: #4188c6 url("../image/faiFloatPanel.png?v=201508172031") no-repeat scroll -5px -220px;
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+.faiFloatPanel_closeBtn:hover {
+    background: #3577bb url("../image/faiFloatPanel.png?v=201508172031") no-repeat scroll -5px -220px;
+}
+.faiFloatPanelContent .panelFootBtnBox {
+    border-top: 1px solid #dfdfdf;
+    height: 34px;
+    position: relative;
+}
+.faiFloatPanelContent .panelBtn {
+    border: 1px solid #bfbfbf;
+    display: block;
+    height: 22px;
+    line-height: 22px;
+    padding: 0 6px 0 0;
+    position: absolute;
+    right: 10px;
+    text-align: right;
+    top: 4px;
+    width: 70px;
+}
+.panelAddNewModule {
+    cursor: pointer;
+    display: block;
+    float: left;
+    height: 70px;
+    margin: 10px 13px 28px;
+    width: 70px;
+}
+.panelAddNewModule .panelRightIcon {
+    color: #6c6f79;
+    font-size: 12px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    width: 70px;
+}
+.panelAddNewModule .panelLeftIcon {
+    height: 66px;
+    position: relative;
+    width: 70px;
+}
+.panelAddNewModule_ico_hover {
+    background: rgba(0, 0, 0, 0) url("../image/styleDesign/styleModule.png?v=201512071738") no-repeat scroll 3px 2px;
+}
+.panelAddNewModule_rich {
+    background: rgba(0, 0, 0, 0) url("../image/styleDesign/styleModule.png?v=201512071738") no-repeat scroll 3px -77px;
+}
+.panelAddNewModule_link {
+    background: rgba(0, 0, 0, 0) url("../image/styleDesign/styleModule.png?v=201512071738") no-repeat scroll -80px -77px;
+}
+.panelMenuContainer {
+    background: #f7f7f7 none repeat scroll 0 0;
+    border-bottom: 1px solid #bfbfbf;
+    overflow: hidden;
+    padding: 0 0 0 10px;
+    width: 100%;
+}
+.panelMenuList li {
+    float: left;
+    height: 21px;
+    line-height: 21px;
+    padding: 8px 10px 8px 0;
+    position: relative;
+    white-space: nowrap;
+}
+.panelMenuList li a {
+    display: block;
+    outline: 0 none;
+    padding: 0 6px 0 10px;
+}
+.panelMenuList li span.panelCorner {
+    cursor: pointer;
+    display: block;
+    height: 22px;
+    position: absolute;
+    right: 5px;
+    top: 7px;
+    width: 5px;
+}
+.panelMenuList li span.panelTriangle {
+    display: block;
+    height: 5px;
+    left: 42%;
+    position: absolute;
+    top: 28px;
+    width: 8px;
+}
+.panelMenuList li.on a {
+    background: rgba(0, 0, 0, 0) url("../image/faiFloatPanel.png?v=201508172031") no-repeat scroll -15px -388px;
+    color: #fff;
+}
+.panelMenuList li.on span.panelCorner {
+    background: rgba(0, 0, 0, 0) url("../image/faiFloatPanel.png?v=201508172031") no-repeat scroll -20px -424px;
+}
+.panelMenuList li.on span.panelTriangle {
+    background: rgba(0, 0, 0, 0) url("../image/faiFloatPanel.png?v=201508172031") no-repeat scroll -15px -468px;
+}
+.panelMenuList li.hover a {
+    background: rgba(0, 0, 0, 0) url("../image/faiFloatPanel.png?v=201508172031") no-repeat scroll -15px -388px;
+    color: #fff;
+}
+.panelMenuList li.hover span.panelCorner {
+    background: rgba(0, 0, 0, 0) url("../image/faiFloatPanel.png?v=201508172031") no-repeat scroll -20px -424px;
+}
+.panelMenuList li.hover span.panelTriangle {
+    background: rgba(0, 0, 0, 0) url("../image/faiFloatPanel.png?v=201508172031") no-repeat scroll -15px -468px;
+}
+.panelContentContainer {
+    overflow-y: auto;
+}
+.panelContentContainer legend {
+    color: #1b7ad1;
+    margin-left: -1px;
+    padding: 0 2px;
+}
+.panelContentContainer fieldset {
+    border: 1px solid #dfdfdf;
+    padding: 0 10px 10px;
+}
+.panelContentContainer .panelItemContainer {
+    padding: 8px 8px 0;
+}
+.setSiteStyleContentContainer .panelItemContainer {
+    padding: 8px 8px 7px;
+}
+.panelContentContainer .panelOptionBox {
+    padding: 8px 0 0;
+}
+.panelContentContainer .panelOptionTitle {
+    background: #f2f2f2 none repeat scroll 0 0;
+    clear: both;
+    height: 18px;
+    line-height: 18px;
+    padding: 2px 0 2px 10px;
+}
+.panelContentContainer .panelOptionContent {
+    padding: 8px 0 0 10px;
+}
+.panelContentContainer .panelOptionContent .contentFirst {
+    padding: 0 0 6px;
+}
+.panelContentContainer .panelOptionContent .optionRow {
+    clear: both;
+    overflow: hidden;
+    padding: 2px 0;
+}
+.panelContentContainer .panelOptionContent .labelForLeftTitle {
+    float: left;
+    height: 24px;
+    line-height: 24px;
+    text-align: right;
+    width: 68px;
+}
+.panelContentContainer .panelOptionContent .labelForLeftTitle2 {
+    float: left;
+    height: 24px;
+    line-height: 24px;
+    text-align: right;
+    width: 68px;
+}
+.panelContentContainer .panelOptionContent .optionRowOfInput {
+    float: left;
+    height: 24px;
+    line-height: 24px;
+    padding: 2px 0 0;
+}
+.panelContentContainer .panelOptionContent .optionRowOfInput2 {
+    float: left;
+    height: 24px;
+    line-height: 24px;
+    padding: 1px 0 0;
+}
+.panelContentContainer .panelOptionContent .optionRowOfSelect {
+    float: left;
+    height: 24px;
+    line-height: 24px;
+}
+.panelContentContainer .panelOptionContent .colorPicker {
+    border: 1px solid #999;
+    cursor: pointer;
+    float: left;
+    height: 21px;
+    line-height: 21px;
+    width: 21px;
+}
+.panelContentContainer .panelOptionContent .uploadmsg {
+    padding: 5px 0 0;
+}
+.panelContentContainer .panelOptionContent .uploadmsg a {
+    cursor: pointer;
+    margin-left: 4px;
+    text-decoration: underline;
+}
+.panelContentContainer .panelOptionContent .uploadmsg a:hover {
+    color: red;
+}
+.panelContentContainer .panelOptionContent .f-previewContent-none {
+    display: none;
+}
+.panelContentContainer .panelOptionContent .f-previewWrap {
+    padding-left: 68px;
+}
+.panelContentContainer .panelOptionContent .f-preview {
+    border: 1px solid #dedede;
+    height: 75px;
+    line-height: 75px;
+    overflow: hidden;
+    text-align: center;
+    width: 180px;
+}
+.panelContentContainer .panelOptionContent .f-previewImg {
+    display: inline-block !important;
+    vertical-align: middle;
+}
+.panelContentContainer .panelOptionContent .w-resize {
+    cursor: w-resize;
+}
+.panelContentContainer .panelOptionContent .setSliderBar {
+    background: #9db9cf none repeat scroll 0 0;
+    border: 0 none;
+    float: left;
+    height: 3px;
+    margin: 10px 0 0;
+    position: relative;
+    width: 112px;
+}
+.panelContentContainer .panelOptionContent .setSliderLetter {
+    float: left;
+}
+.panelContentContainer .panelOptionContent .setSliderLetter span {
+    text-indent: 16px;
+}
+.panelContentContainer .panelOptionContent .setSliderBar a {
+    background: rgba(0, 0, 0, 0) url("../image/comm/fai/faiui01.png?v=201503161711") no-repeat scroll -104px -485px;
+    border: 0 none;
+    cursor: w-resize;
+    display: block;
+    height: 14px;
+    left: 0;
+    position: absolute;
+    top: -5px;
+    width: 14px;
+}
+.panelContentContainer .panelOptionContent .settingHeightInputWrap {
+    float: left;
+    padding: 5px 0 0 6px;
+    white-space: nowrap;
+    width: 90px;
+}
+.panelContentContainer .panelOptionContent .settingHeightInput {
+    width: 48px;
+}
+.panelContentContainer .panelOptionContent .footOptionRow {
+    height: 24px;
+    line-height: 24px;
+    padding: 2px 0;
+}
+.panelContentContainer .panelOptionContent .footOptionRow label {
+    margin: 0 0 0 8px;
+}
+.panelContentContainer .panelOptionContent .posInput {
+    width: 30px;
+}
+.panelContentContainer .panelOptionContent .footerNavTextCus {
+    padding: 2px 0 2px 21px;
+}
+.panelContentContainer .panelOptionContent .footerNavTextCus label {
+    margin: 0 0 0 10px;
+}
+.faiFloatPanelContent .panelBtn_setSiteStyle {
+    background: transparent url("../image/faiFloatPanel.png?v=201508172031") no-repeat scroll -11px -279px;
+}
+.faiFloatPanelContent .panelBtn_setSiteStyle:hover {
+    background: #f6f6f6 url("../image/faiFloatPanel.png?v=201508172031") no-repeat scroll -11px -279px;
+}
+.faiFloatPanelContent .panelBtn_manageModule {
+    background: transparent url("../image/faiFloatPanel.png?v=201508172031") no-repeat scroll -11px -331px;
+}
+.faiFloatPanelContent .panelBtn_manageModule:hover {
+    background: #f6f6f6 url("../image/faiFloatPanel.png?v=201508172031") no-repeat scroll -11px -331px;
+}
+.panelContentContainer .panelOptionContent .moduleTextCus {
+    padding: 2px 0 2px 21px;
+}
+.panelContentContainer .panelOptionContent .moduleTextCus label {
+    margin: 0 0 0 10px;
+}
+.panelContentContainer .panelModuleIconContainer {
+    overflow: hidden;
+}
+.panelContentContainer .panelModuleIconContent {
+    float: left;
+    padding: 10px 16px 0;
+}
+.panelContentContainer .panelModuleIcon {
+    cursor: pointer;
+    display: block;
+    height: 59px;
+    width: 63px;
+}
+.panelContentContainer .panelModuleIcon:hover {
+    background: rgba(0, 0, 0, 0) url("../image/styleDesign/styleModule.png?v=201512071738") no-repeat scroll 0 0;
+}
+.panelContentContainer .panelModuleTitle {
+    color: #666;
+    cursor: pointer;
+    display: block;
+    height: 14px;
+    line-height: 14px;
+    margin: 5px 0 0;
+    overflow: hidden;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 63px;
+}
+.panelContentContainer .panelModuleIcon_rich {
+    background: rgba(0, 0, 0, 0) url("../image/styleDesign/styleModule.png?v=201512071738") no-repeat scroll 16px -69px;
+}
+.panelContentContainer .panelModuleIcon_link {
+    background: rgba(0, 0, 0, 0) url("../image/styleDesign/styleModule.png?v=201512071738") no-repeat scroll -67px -69px;
+}
+.panelContentContainer .panelModuleIcon_notice {
+    background: rgba(0, 0, 0, 0) url("../image/styleDesign/styleModule.png?v=201512071738") no-repeat scroll -150px -69px;
+}
+.panelContentContainer .panelModuleIcon_map {
+    background: rgba(0, 0, 0, 0) url("../image/styleDesign/styleModule.png?v=201512071738") no-repeat scroll -233px -69px;
+}
+.panelContentContainer .panelModuleIcon_serviceOnline {
+    background: rgba(0, 0, 0, 0) url("../image/styleDesign/styleModule.png?v=201512071738") no-repeat scroll -316px -69px;
+}
+.panelContentContainer .panelModuleIcon_nav {
+    background: rgba(0, 0, 0, 0) url("../image/styleDesign/styleModule.png?v=201512071738") no-repeat scroll -399px -69px;
+}
+.panelContentContainer .panelModuleIcon_memberLogin {
+    background: rgba(0, 0, 0, 0) url("../image/styleDesign/styleModule.png?v=201512071738") no-repeat scroll -482px -69px;
+}
+.panelContentContainer .panelModuleIcon_siteSearch {
+    background: rgba(0, 0, 0, 0) url("../image/styleDesign/styleModule.png?v=201512071738") no-repeat scroll -565px -69px;
+}
+.panelContentContainer .panelModuleIcon_weather {
+    background: rgba(0, 0, 0, 0) url("../image/styleDesign/styleModule.png?v=201512071738") no-repeat scroll -648px -69px;
+}
+.panelContentContainer .panelModuleIcon_floatImg {
+    background: rgba(0, 0, 0, 0) url("../image/styleDesign/styleModule.png?v=201512071738") no-repeat scroll -399px -336px;
+}
+.panelContentContainer .panelModuleIcon_floatBtn {
+    background: rgba(0, 0, 0, 0) url("../image/styleDesign/styleModule.png?v=201512071738") no-repeat scroll -67px -425px;
+}
+.panelContentContainer .panelModuleIcon_tab {
+    background: rgba(0, 0, 0, 0) url("../image/styleDesign/styleModule.png?v=201512071738") no-repeat scroll -731px -69px;
+}
+.panelContentContainer .panelModuleIcon_mulModuleCol-two {
+    background: rgba(0, 0, 0, 0) url("../image/styleDesign/styleModule.png?v=201512071738") no-repeat scroll -565px -336px;
+}
+.panelContentContainer .panelModuleIcon_mulModuleCol-three {
+    background: rgba(0, 0, 0, 0) url("../image/styleDesign/styleModule.png?v=201512071738") no-repeat scroll -648px -336px;
+}
+.panelContentContainer .panelModuleIcon_mulModuleCol-four {
+    background: rgba(0, 0, 0, 0) url("../image/styleDesign/styleModule.png?v=201512071738") no-repeat scroll -731px -336px;
+}
+.panelContentContainer .panelModuleIcon_mulModuleCol-five {
+    background: rgba(0, 0, 0, 0) url("../image/styleDesign/styleModule.png?v=201512071738") no-repeat scroll -814px -336px;
+}
+.panelContentContainer .panelModuleIcon_fullmeasure {
+    background: rgba(0, 0, 0, 0) url("../image/styleDesign/styleModule.png?v=201512071738") no-repeat scroll 16px -425px;
+}
+.panelContentContainer .panelModuleIcon_product {
+    background: rgba(0, 0, 0, 0) url("../image/styleDesign/styleModule.png?v=201512071738") no-repeat scroll -316px -158px;
+}
+.panelContentContainer .panelModuleIcon_productGroup {
+    background: rgba(0, 0, 0, 0) url("../image/styleDesign/styleModule.png?v=201512071738") no-repeat scroll -399px -158px;
+}
+.panelContentContainer .panelModuleIcon_productLabel {
+    background: rgba(0, 0, 0, 0) url("../image/styleDesign/styleModule.png?v=201512071738") no-repeat scroll -482px -158px;
+}
+.panelContentContainer .panelModuleIcon_catalog {
+    background: rgba(0, 0, 0, 0) url("../image/styleDesign/styleModule.png?v=201512071738") no-repeat scroll -565px -158px;
+}
+.panelContentContainer .panelModuleIcon_filter {
+    background: rgba(0, 0, 0, 0) url("../image/styleDesign/styleModule.png?v=201512071738") no-repeat scroll -648px -158px;
+}
+.panelContentContainer .panelModuleIcon_productSearch {
+    background: rgba(0, 0, 0, 0) url("../image/styleDesign/styleModule.png?v=201512071738") no-repeat scroll -648px -247px;
+}
+.panelContentContainer .panelModuleIcon_productMallGroup {
+    background: rgba(0, 0, 0, 0) url("../image/styleDesign/styleModule.png?v=201512071738") no-repeat scroll -482px -336px;
+}
+.panelContentContainer .panelModuleIcon_article {
+    background: rgba(0, 0, 0, 0) url("../image/styleDesign/styleModule.png?v=201512071738") no-repeat scroll 16px -158px;
+}
+.panelContentContainer .panelModuleIcon_newsgroup {
+    background: rgba(0, 0, 0, 0) url("../image/styleDesign/styleModule.png?v=201512071738") no-repeat scroll -67px -158px;
+}
+.panelContentContainer .panelModuleIcon_photo {
+    background: rgba(0, 0, 0, 0) url("../image/styleDesign/styleModule.png?v=201512071738") no-repeat scroll -150px -158px;
+}
+.panelContentContainer .panelModuleIcon_photoGroup {
+    background: rgba(0, 0, 0, 0) url("../image/styleDesign/styleModule.png?v=201512071738") no-repeat scroll -233px -158px;
+}
+.panelContentContainer .panelModuleIcon_media {
+    background: rgba(0, 0, 0, 0) url("../image/styleDesign/styleModule.png?v=201512071738") no-repeat scroll -731px -158px;
+}
+.panelContentContainer .panelModuleIcon_flash {
+    background: rgba(0, 0, 0, 0) url("../image/styleDesign/styleModule.png?v=201512071738") no-repeat scroll -814px -158px;
+}
+.panelContentContainer .panelModuleIcon_file {
+    background: rgba(0, 0, 0, 0) url("../image/styleDesign/styleModule.png?v=201512071738") no-repeat scroll 16px -247px;
+}
+.panelContentContainer .panelModuleIcon_table {
+    background: rgba(0, 0, 0, 0) url("../image/styleDesign/styleModule.png?v=201512071738") no-repeat scroll -67px -247px;
+}
+.panelContentContainer .panelModuleIcon_vote {
+    background: rgba(0, 0, 0, 0) url("../image/styleDesign/styleModule.png?v=201512071738") no-repeat scroll -150px -247px;
+}
+.panelContentContainer .panelModuleIcon_siteForm {
+    background: rgba(0, 0, 0, 0) url("../image/styleDesign/styleModule.png?v=201512071738") no-repeat scroll -233px -247px;
+}
+.panelContentContainer .panelModuleIcon_shareTo {
+    background: rgba(0, 0, 0, 0) url("../image/styleDesign/styleModule.png?v=201512071738") no-repeat scroll -731px -247px;
+}
+.panelContentContainer .panelModuleIcon_date {
+    background: rgba(0, 0, 0, 0) url("../image/styleDesign/styleModule.png?v=201512071738") no-repeat scroll -150px -336px;
+}
+.panelContentContainer .panelModuleIcon_location {
+    background: rgba(0, 0, 0, 0) url("../image/styleDesign/styleModule.png?v=201512071738") no-repeat scroll 16px -336px;
+}
+.panelContentContainer .panelModuleIcon_siteQrCode {
+    background: rgba(0, 0, 0, 0) url("../image/styleDesign/styleModule.png?v=201512071738") no-repeat scroll -814px -247px;
+}
+.panelContentContainer .panelModuleIcon_indexFavorite {
+    background: rgba(0, 0, 0, 0) url("../image/styleDesign/styleModule.png?v=201512071738") no-repeat scroll -67px -336px;
+}
+.panelContentContainer .panelModuleIcon_iframe {
+    background: rgba(0, 0, 0, 0) url("../image/styleDesign/styleModule.png?v=201512071738") no-repeat scroll -316px -247px;
+}
+.panelContentContainer .panelModuleIcon_code {
+    background: rgba(0, 0, 0, 0) url("../image/styleDesign/styleModule.png?v=201512071738") no-repeat scroll -399px -247px;
+}
+.panelContentContainer .panelModuleIcon_cust {
+    background: rgba(0, 0, 0, 0) url("../image/styleDesign/styleModule.png?v=201512071738") no-repeat scroll -482px -247px;
+}
+.panelContentContainer .panelModuleIcon_weiboShow {
+    background: rgba(0, 0, 0, 0) url("../image/styleDesign/styleModule.png?v=201512071738") no-repeat scroll -565px -247px;
+}
+.panelContentContainer .panelModuleIcon_msgSubmit {
+    background: rgba(0, 0, 0, 0) url("../image/styleDesign/styleModule.png?v=201512071738") no-repeat scroll -233px -336px;
+}
+.panelContentContainer .panelModuleIcon_shoppingCart {
+    background: rgba(0, 0, 0, 0) url("../image/styleDesign/styleModule.png?v=201512071738") no-repeat scroll -150px -425px;
+}
+.panelContentContainer .panelModuleIcon_photoCard {
+    background: rgba(0, 0, 0, 0) url("../image/styleDesign/styleModule.png?v=201511171937") no-repeat scroll -233px -425px;
+}
+.panelContentContainer .panelModuleIcon_sys {
+    background: rgba(0, 0, 0, 0) url("../image/styleDesign/styleModule.png?v=201511171937") no-repeat scroll -233px -336px;
+}
+.panelContentContainer .panelModuleIcon_qqonline {
+    background: rgba(0, 0, 0, 0) url("../image/styleDesign/styleModule.png?v=201512071738") no-repeat scroll -233px -336px;
+}
+.panelContentContainer .panelModuleIcon_newModule {
+    background: rgba(0, 0, 0, 0) url("../image/styleDesign/styleModule.png?v=201512071738") no-repeat scroll -233px -336px;
+}
+#g_main li.panelModuleIconContent {
+    display: none;
+    height: 0;
+    width: 0;
+}
+#g_main li.g_middlePlaceholder {
+    list-style: outside none none;
+}
+#g_main li.noPlaceholder {
+    display: none;
+    height: 0;
+    width: 0;
+}
+.faiFloatPanelContent .understandPrompt {
+    color: red;
+    margin-left: 6px;
+    text-decoration: underline;
+}
+.faiFloatPanelContent .panelPrompt {
+    background: #fff6d0 none repeat scroll 0 0;
+    border: 1px solid #f4e190;
+    line-height: 20px;
+    padding: 4px 8px;
+    text-align: center;
+}
+.faiFloatPanelContent .panelSiteGroupOMid {
+    background: rgba(0, 0, 0, 0) url("../image/sitemid.png?v=201411102015") no-repeat scroll left center;
+    line-height: 16px;
+    padding: 0 2px 0 20px;
+}
+.faiFloatPanelContent .panelSiteGroupOMid2 {
+    background: rgba(0, 0, 0, 0) url("../image/sitemid.png?v=201411102015") no-repeat scroll center center;
+    display: inline-block;
+    height: 20px;
+    width: 24px;
+}
+.faiFloatPanelContent .panelSiteGroupOMid3 {
+    background: rgba(0, 0, 0, 0) url("../image/siteexp.png?v=201503301537") no-repeat scroll left center;
+    line-height: 16px;
+    padding: 0 2px 0 20px;
+}
+#panelAddNewModulePrompt {
+    opacity: 0.8 !important;
+}
+.panelAddNewModulePrompt-div {
+    height: 310px;
+    position: absolute;
+    width: 380px;
+}
+.panelAddNewModulePrompt-left {
+    background: rgba(0, 0, 0, 0) url("../image/panelAddNewModulePrompt-left.png?v=201509212135") no-repeat scroll 0 0;
+    left: 18px;
+    top: 125px;
+}
+.panelAddNewModulePrompt-right {
+    background: rgba(0, 0, 0, 0) url("../image/panelAddNewModulePrompt-right.png?v=201509212135") no-repeat scroll 0 0;
+    right: 183px;
+    top: 125px;
+}
+.panelAddNewModule-understandPrompt {
+    display: block;
+    height: 58px;
+    position: absolute;
+    width: 112px;
+}
+.panelAddNewModule-understandPrompt-left {
+    left: 117px;
+    top: 226px;
+}
+.panelAddNewModule-understandPrompt-right {
+    left: 122px;
+    top: 196px;
+}
+.faiFloatPanelContent .mCSB_container {
+    margin-right: 12px !important;
+}
+.sectionModuleContentContainer .sectionModuleIcon {
+    margin: 0 0 0 4px;
+    position: relative;
+}
+.sectionModuleContentContainer .panelCheckTip {
+    background: rgba(0, 0, 0, 0) url("../image/bg01.png?v=201512071738") no-repeat scroll -781px -247px;
+    bottom: 20px;
+    display: block;
+    height: 16px;
+    position: absolute;
+    right: 16px;
+    width: 18px;
+}
+.sectionModuleContentContainer .panelDisabledTip {
+    background: rgba(0, 0, 0, 0) url("../image/bg01.png?v=201512071738") no-repeat scroll -781px -229px;
+    bottom: 20px;
+    display: block;
+    height: 16px;
+    position: absolute;
+    right: 16px;
+    width: 18px;
+}
+.panelSectionModuleContent {
+    padding: 0 0 0 16px;
+}
+.currentSectionModuleContainer {
+    padding: 12px 0 0;
+}
+.currentSectionModuleContainer .nowModuleButtonDiv {
+    position: absolute;
+    right: 0;
+    top: 10px;
+}
+.currentSectionModuleContainer a {
+    display: block;
+    height: 15px;
+    margin-bottom: 1px;
+    width: 15px;
+}
+.currentSectionModuleContainer .findButton {
+    background: rgba(0, 0, 0, 0) url("../image/bg01.png?v=201512071738") no-repeat scroll -758px -318px;
+}
+.currentSectionModuleContainer .findButton:hover {
+    background: rgba(0, 0, 0, 0) url("../image/bg01.png?v=201512071738") no-repeat scroll -758px -293px;
+}
+.currentSectionModuleContainer .setButton {
+    background: rgba(0, 0, 0, 0) url("../image/bg01.png?v=201512071738") no-repeat scroll -732px -318px;
+}
+.currentSectionModuleContainer .setButton:hover {
+    background: rgba(0, 0, 0, 0) url("../image/bg01.png?v=201512071738") no-repeat scroll -732px -293px;
+}
+.currentSectionModuleContainer .delButton {
+    background: rgba(0, 0, 0, 0) url("../image/bg01.png?v=201512071738") no-repeat scroll -758px -369px;
+}
+.currentSectionModuleContainer .delButton:hover {
+    background: rgba(0, 0, 0, 0) url("../image/bg01.png?v=201512071738") no-repeat scroll -758px -344px;
+}
+.otherSectionModuleContainer {
+    font-family: 微软雅黑,"microsoft yahei",宋体,新宋体,sans-serif;
+}
+.otherSectionSelecterContainer {
+    height: 24px;
+    line-height: 24px;
+    padding: 10px 0 10px 20px;
+    position: relative;
+    z-index: 9;
+}
+.otherSectionSelecterContainer label {
+    vertical-align: 1px;
+}
+.otherSectionSelecterContainer .otherSectionSelecterPrompt {
+    background: #fff6d0 none repeat scroll 0 0;
+    border: 1px solid #f4e190;
+    left: 86px;
+    padding: 2px 8px;
+    position: absolute;
+    top: 42px;
+}
+.otherSectionSelecterContainer .otherSectionSelecterPrompt-tip {
+    background: rgba(0, 0, 0, 0) url("../image/comm/poshytip/tip-yellowsimple_arrows.gif?v=201311121807") no-repeat scroll 0 0;
+    height: 6px;
+    left: 20px;
+    position: absolute;
+    top: -5px;
+    width: 9px;
+}
+.panelOtherSectionSelecter {
+    font-family: 微软雅黑,"microsoft yahei",宋体,新宋体,sans-serif;
+    width: 150px;
+}
+.faiFloatPanel .input-num {
+    width: 48px;
+}
+.faiFloatPanel .patternChoiceBox {
+    overflow: hidden;
+}
+.faiFloatPanel .patternChoiceBox li {
+    float: left;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+.faiFloatPanel .patternChoice {
+    border: 2px solid #dcdcdc;
+    border-radius: 5px;
+    display: block;
+    padding: 5px;
+}
+.faiFloatPanel .patternChoice:hover {
+    border-color: #7bcaff;
+}
+.faiFloatPanel .patternChoice-selected {
+    border-color: #7bcaff;
+}
+.faiFloatPanel .pattern-normal {
+    background: rgba(0, 0, 0, 0) url("../image/styleFooter/normal.jpg?v=201410201725") no-repeat scroll 0 0;
+    height: 67px;
+    width: 115px;
+}
+.faiFloatPanel .pattern-level {
+    background: rgba(0, 0, 0, 0) url("../image/styleFooter/level.jpg?v=201410201725") no-repeat scroll 0 0;
+    height: 67px;
+    width: 115px;
+}
+.faiFloatPanel .pattern-vertical {
+    background: rgba(0, 0, 0, 0) url("../image/styleFooter/vertical.jpg?v=201410201725") no-repeat scroll 0 0;
+    height: 67px;
+    width: 115px;
+}
+.faiFloatPanel .faiPanelInputWarp {
+    float: left;
+    padding: 5px 0 0 6px;
+    white-space: nowrap;
+    width: 90px;
+}
+.faiFloatPanel .labelforInput2 {
+    line-height: 24px;
+    margin-left: 7px;
+}
+.faiFloatPanel .footerSecondText {
+    margin-bottom: 180px;
+}

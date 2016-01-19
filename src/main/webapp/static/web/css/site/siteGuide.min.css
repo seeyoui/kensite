@@ -1,0 +1,372 @@
+
+.guideQuickIco {
+    background: rgba(0, 0, 0, 0) url("../..../../image/guide/siteGuideIco.gif?v=201409151747") no-repeat scroll 0 0;
+    cursor: pointer;
+    height: 42px;
+    left: 58px;
+    position: absolute;
+    top: 35%;
+    width: 50px;
+    z-index: 9030;
+}
+.guideTitle {
+    background-color: #4188c6;
+    color: #fff;
+    height: 45px;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+.guideTitle span {
+    float: left;
+    font-weight: normal;
+    line-height: 45px;
+}
+.guideTitle .guideTitleText {
+    font-size: 16px;
+    margin: auto 42px;
+}
+.guideTitle .guideProgress {
+    float: left;
+    height: 46px;
+    line-height: 45px;
+    width: 235px;
+}
+.guideProgress span {
+    float: right;
+    line-height: 12px;
+    margin-right: 10px;
+    width: 26px;
+}
+.guideProgress .progress {
+    float: left;
+    font-weight: normal;
+}
+.guideProgress .progressBar {
+    background-color: #fff;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    float: right;
+    height: 11px;
+    margin-top: 16px;
+    overflow: hidden;
+    width: 190px;
+}
+.guideProgress #progressBar {
+    background: rgba(0, 0, 0, 0) url("../..../../image/guide/03.gif?v=20140701153506") repeat scroll 0 0;
+    border-radius: 2px;
+    float: left;
+    height: 12px;
+    width: 95px;
+}
+.sgCloseBtn {
+    margin: 9px;
+}
+#siteGuide {
+    height: 100%;
+    table-layout: fixed;
+    width: 100%;
+}
+#siteGuide .siteGuideNav {
+    height: 100%;
+    left: 0;
+    top: 0;
+    width: 185px;
+}
+.siteGuideNav .guidenav {
+    background-color: #eee;
+    border-right: 1px solid #d7d7d7;
+    height: 100%;
+    width: 100%;
+}
+.guidenav .navList {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.navList .itemContent {
+    height: 15px;
+    margin: 23px 0 23px 26px;
+    width: 110px;
+}
+.itemContent .isOk {
+    background: rgba(0, 0, 0, 0) url("../..../../image/guide/02.gif?v=20140702114015") no-repeat scroll 0 0;
+    display: none;
+    float: left;
+    height: 10px;
+    margin-top: 3px;
+    width: 14px;
+}
+.itemContent .itemtText {
+    color: #555;
+    float: right;
+    font-size: 14px;
+    line-height: 14px;
+}
+.itemContent .selected {
+    color: #0090f4;
+}
+.itemContent .done {
+    background: rgba(0, 0, 0, 0) url("../..../../image/guide/01.gif?v=20140702114010") no-repeat scroll 0 0;
+}
+.guidenav li {
+    border-bottom: 1px solid #d7d7d7;
+    border-top: 1px solid #fff;
+    cursor: pointer;
+    height: 55px;
+}
+.guidenav .navBtnList {
+    border-top: 1px solid #fff;
+}
+.guidenav .navBtns {
+    bottom: 30px;
+    position: absolute;
+}
+.guidenav .navBtn {
+    background-color: #f4f4f4;
+    border: 1px solid #d7d7d7;
+    color: #555;
+    cursor: pointer;
+    height: 43px;
+    margin: 0 15px;
+    width: 153px;
+}
+.navBtn .navBtnText {
+    font-size: 14px;
+    line-height: 42px;
+    margin: 0 auto;
+    width: 85px;
+}
+.navBtn:hover {
+    background-color: #ff7200;
+    border-color: #fb5300;
+    color: #fff;
+}
+#siteGuide .siteGuideContent {
+    height: 83%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
+    width: auto;
+}
+.siteGuideContent .guideContent {
+    height: 92%;
+    margin: 25px auto 0 45px;
+    width: auto;
+}
+.content .contentTitle {
+    color: #2587c8;
+    font-size: 16px;
+}
+.contentTitle .acctUrl {
+    color: #ff7200;
+    text-decoration: underline;
+}
+#guideReg {
+    color: #8e8e8e;
+    float: left;
+    font-size: 14px;
+    height: auto;
+    line-height: 24px;
+    width: 90%;
+}
+#guideGoal {
+    color: #494949;
+    float: left;
+    font-size: 14px;
+    height: auto;
+    line-height: 24px;
+    width: 90%;
+}
+#guideGoal a {
+    color: #2587c8;
+}
+#guideStyle {
+    color: #8e8e8e;
+    float: left;
+    font-size: 14px;
+    height: auto;
+    line-height: 24px;
+    position: relative;
+    width: 90%;
+}
+#guideStyle span {
+    color: #494949;
+}
+#guideDesign {
+    color: #8e8e8e;
+    float: left;
+    font-size: 14px;
+    height: auto;
+    line-height: 24px;
+    width: 100%;
+}
+#guideDesign span {
+    color: #494949;
+}
+#guideOther {
+    color: #494949;
+    float: left;
+    font-size: 14px;
+    height: auto;
+    line-height: 24px;
+    width: 90%;
+}
+#popularize {
+    color: #8e8e8e;
+    float: left;
+    font-size: 14px;
+    height: auto;
+    line-height: 24px;
+    width: 90%;
+}
+#popularize a {
+    color: #ff7200;
+    text-decoration: underline;
+}
+.guideContentBtn {
+    bottom: 30px;
+    height: auto;
+    position: absolute;
+    width: 100%;
+}
+.guideContentBtn .ContentBtn {
+    height: 45px;
+    margin: 0 auto;
+    width: 359px;
+}
+.ContentBtn .pBtn {
+    background-color: #f4f4f4;
+    border: 1px solid #d7d7d7;
+    color: #888;
+    cursor: pointer;
+    float: left;
+    font-size: 16px;
+    height: 42px;
+    line-height: 42px;
+    margin-left: 30px;
+    text-align: center;
+    width: 129px;
+}
+.ContentBtn .nBtn {
+    background-color: #f4f4f4;
+    border: 1px solid #d7d7d7;
+    color: #888;
+    cursor: pointer;
+    float: left;
+    font-size: 16px;
+    height: 42px;
+    line-height: 42px;
+    margin-left: 30px;
+    text-align: center;
+    width: 129px;
+}
+.ContentBtn .cBtn {
+    background-color: #f4f4f4;
+    border: 1px solid #d7d7d7;
+    color: #888;
+    cursor: pointer;
+    float: left;
+    font-size: 16px;
+    height: 42px;
+    line-height: 42px;
+    margin-left: 30px;
+    text-align: center;
+    width: 129px;
+}
+.ContentBtn .enterBtn {
+    background-color: #39aaf8;
+    border-color: #1899ec;
+    color: #fff;
+}
+.ContentBtn .oneBtn {
+    margin-left: 110px;
+}
+.guideImg1 {
+    background: rgba(0, 0, 0, 0) url("../..../../image/guide/siteGuide01.jpg?v=201409151747") no-repeat scroll 0 0;
+    height: 248px;
+    margin: 29px auto 0;
+    width: 314px;
+}
+.guideImg2 {
+    background: rgba(0, 0, 0, 0) url("../..../../image/guide/siteGuide02.jpg?v=201409151747") no-repeat scroll 0 0;
+    height: 134px;
+    margin-left: 56px;
+    width: 387px;
+}
+.guideImg3 {
+    background: rgba(0, 0, 0, 0) url("../..../../image/guide/siteGuide03.jpg?v=201409151747") no-repeat scroll 0 0;
+    height: 187px;
+    margin-left: 56px;
+    width: 380px;
+}
+.guideImg4 {
+    background: rgba(0, 0, 0, 0) url("../..../../image/guide/siteGuide04.jpg?v=201409151747") no-repeat scroll 0 0;
+    height: 259px;
+    margin: 15px 0 0 70px;
+    width: 383px;
+}
+.guideImg5 {
+    background: rgba(0, 0, 0, 0) url("../..../../image/guide/siteGuide05.jpg?v=201409151747") no-repeat scroll 0 0;
+    height: 224px;
+    margin-left: 50px;
+    width: 429px;
+}
+.guideImg6 {
+    background: rgba(0, 0, 0, 0) url("../..../../image/guide/siteGuide06.jpg?v=201409151747") no-repeat scroll 0 0;
+    height: 261px;
+    margin: 20px 0 0 50px;
+    width: 453px;
+}
+.guideImg7 {
+    background: rgba(0, 0, 0, 0) url("../..../../image/guide/siteGuide07.jpg?v=201409151747") no-repeat scroll 0 0;
+    height: 383px;
+    margin-left: 35px;
+    width: 455px;
+}
+.guideImg8 {
+    background: rgba(0, 0, 0, 0) url("../..../../image/guide/10.gif?v=20140704160453") repeat scroll 0 0;
+    display: inline-block !important;
+    height: 22px;
+    width: 74px;
+}
+.newTip {
+    height: 76px;
+    position: absolute;
+    right: 3px;
+    top: 48px;
+    width: 200px;
+}
+.tipText {
+    border: 2px solid #ff7200;
+    float: left;
+    height: 24px;
+    width: 86px;
+}
+.tipImg {
+    background: rgba(0, 0, 0, 0) url("../..../../image/guide/ball.png?v=20140704214205") repeat scroll 0 0;
+    height: 100%;
+    margin-left: 70px;
+    margin-top: 12px;
+    width: 104px;
+}
+.tipClose {
+    cursor: pointer;
+    float: right;
+    height: 25px;
+    margin-top: 13px;
+    width: 25px;
+}
+.guideN {
+    height: 93%;
+    left: 0;
+    position: absolute;
+    width: 23%;
+}
+.sgMove {
+    background: rgba(0, 0, 0, 0) url("../..../../image/guide/opacityImg.gif?v=201407141810") repeat-x scroll 0 0;
+    cursor: move;
+    height: 45px;
+    position: absolute;
+    width: 100%;
+}

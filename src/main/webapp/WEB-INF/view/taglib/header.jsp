@@ -7,6 +7,7 @@
 	<meta name="author" content="seeyoui" />
 	<meta name="keywords" content="seeyoui,kensite,ken,site">
 	<meta name="description" content="kensite" />
+    <link rel='canonical' href='http://www.seeyoui.com'>
 	<link rel="shortcut icon" type="image/x-icon" href="${ctx_common}/img/favicon.ico" />
 	<script type="text/javascript" src="${ctx_static}/jquery-1.11.1.min.js"></script>
 	<script src="${ctx_static}/cookieUtil.js"></script>
