@@ -25,7 +25,7 @@
 				AND T.LABEL LIKE '%'||#{label}||'%'
 			</if>
 			<if test="category != null and category != ''">
-				AND T.CATEGORY LIKE '%'||#{category}||'%'
+				AND T.CATEGORY LIKE #{category}
 			</if>
 			<if test="description != null and description != ''">
 				AND T.DESCRIPTION LIKE '%'||#{description}||'%'

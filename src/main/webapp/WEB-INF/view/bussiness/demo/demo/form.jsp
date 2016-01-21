@@ -19,6 +19,9 @@
 				<div class="fitem">
 					<ks:formTag table="BO_DEMO" column="TREE_ID"/>
 				</div>
+				<div class="fitem">
+					<ks:formTag table="BO_DEMO" column="EXPRESSION"/>
+				</div>
 				<input id="id" name="id" type="hidden"/>
 			</form>
 		</div>

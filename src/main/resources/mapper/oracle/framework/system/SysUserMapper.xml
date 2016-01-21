@@ -10,7 +10,10 @@
 	    t.department_id as "departmentId",
 	    t.state as "state",
 	    t.email as "email",
-	    t.phone as "phone"
+	    t.phone as "phone",
+	    d.id as "sysDepartment.id",
+	    d.name as "sysDepartment.name",
+	    d.code as "sysDepartment.code"
 	</sql>
 	<!-- 查询过滤条件 -->
 	<sql id="whereStr">
@@ -42,8 +45,11 @@
 			</if>
 		</where>
 	</sql>
+	<sql id="joinOn">
+		left join sys_department d on t.department_id=d.id
+	</sql>
 	<sql id="orderBy">
-		ORDER BY t.id DESC 
+		ORDER BY t.user_name 
 	</sql>
 	
 	<!-- 根据ID查询单条数据 -->
@@ -51,6 +57,7 @@
 		SELECT
 		<include refid="tableColumns" />
 		FROM SYS_USER t
+		<include refid="joinOn" />
 		WHERE id = #{id}
 	</select>
 	
@@ -59,6 +66,7 @@
 		SELECT
 		<include refid="tableColumns" />
 		FROM SYS_USER t
+		<include refid="joinOn" />
 		WHERE user_name = #{userName}
 	</select>
 	
@@ -78,6 +86,7 @@
 			SELECT
 			<include refid="tableColumns"/>
 			FROM SYS_USER t
+			<include refid="joinOn" />
 			<include refid="whereStr"/>
 			<include refid="orderBy"/>
 		) t where rownum &lt; = #{page}*#{rows}) where rn &gt; (#{page}-1)*#{rows}
@@ -88,6 +97,7 @@
 		SELECT
 		<include refid="tableColumns"/>
 		FROM SYS_USER t
+		<include refid="joinOn" />
 		<include refid="whereStr"/>
 		<include refid="orderBy"/>
 	</select>

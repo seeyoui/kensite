@@ -183,6 +183,41 @@ $.fn.combotree.defaults.loadFilter = function (data, parent) {
     }
     return data;
 };
+//扩展treegrid支持简单数据格式
+$.fn.treegrid.defaults.loadFilter = function (data, parent) {
+    var opt = $(this).data().treegrid.options;
+    var idField,
+    treeField,
+    parentField;
+    if (opt.parentField) {
+        idField = opt.idField || 'id';
+        treeField = opt.treeField || 'text';
+        parentField = opt.parentField;
+         
+        var i,
+        l,
+        treeData = [],
+        tmpMap = [];
+         
+        for (i = 0, l = data.length; i < l; i++) {
+            tmpMap[data[i][idField]] = data[i];
+        }
+         
+        for (i = 0, l = data.length; i < l; i++) {
+            if (tmpMap[data[i][parentField]] && data[i][idField] != data[i][parentField]) {
+                if (!tmpMap[data[i][parentField]]['children'])
+                    tmpMap[data[i][parentField]]['children'] = [];
+                data[i]['text'] = data[i][treeField];
+                tmpMap[data[i][parentField]]['children'].push(data[i]);
+            } else {
+                data[i]['text'] = data[i][treeField];
+                treeData.push(data[i]);
+            }
+        }
+        return treeData;
+    }
+    return data;
+};
 //扩展校验
 $.extend($.fn.validatebox.defaults.rules,{
 	CHS:{
