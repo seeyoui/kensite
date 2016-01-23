@@ -42,7 +42,7 @@ body {
     width: 890px;
 }
 .contentLeft {
-    background: rgba(0, 0, 0, 0) url("../..../../image/panesMenuBg.png") no-repeat scroll center center;
+    background: rgba(0, 0, 0, 0) url("../../image/panesMenuBg.png") no-repeat scroll center center;
     float: left;
     height: 187px;
     padding-top: 18px;
@@ -72,7 +72,7 @@ body {
     width: 900px;
 }
 #advanceFunc {
-    font-family: "Microsoft Yahei","å¾®è½¯é›…é»‘",sans-serif;
+    font-family: "Microsoft Yahei","Î¢ÈíÑÅºÚ",sans-serif;
     height: 201px;
     padding: 4px 0 0 7px;
 }
@@ -130,7 +130,7 @@ body {
     width: 9px;
 }
 .downArrow {
-    background: rgba(0, 0, 0, 0) url("../..../../image/bg02.png?v=201511091906") no-repeat scroll -426px -235px;
+    background: rgba(0, 0, 0, 0) url("../../image/bg02.png?v=201511091906") no-repeat scroll -426px -235px;
 }
 .set-line {
     clear: both;

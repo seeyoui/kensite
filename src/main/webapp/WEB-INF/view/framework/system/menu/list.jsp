@@ -14,7 +14,7 @@
   <body>
   
   	<div style="position:absolute;top:0px;left:0px;right:0px;bottom:0px;">
-  		<div style="position:absolute;top:0px;bottom:0px;width:200px;">
+  		<div style="position:absolute;top:0px;bottom:0px;width:200px;overflow: auto;">
         	<ul id="menuTree" class="easyui-tree" url="${ctx}/sysMenu/getTreeJson.do"></ul>
         </div>
         <div style="position:absolute;top:0px;left:200px;right:0px;bottom:0px;">

@@ -112,7 +112,7 @@ body {
     width: 100px;
 }
 .webSearchIcon {
-    background: rgba(0, 0, 0, 0) url("../..../../image/bg01.png?v=201512071738") no-repeat scroll -1277px -107px;
+    background: rgba(0, 0, 0, 0) url("../../image/bg01.png?v=201512071738") no-repeat scroll -1277px -107px;
     cursor: default;
 }
 .pageSettingWrap {
@@ -164,7 +164,7 @@ body {
 .contentLeft {
     background: #e0e6eb none repeat scroll 0 0;
     float: left;
-    font-family: "Microsoft Yahei","å¾®è½¯é›…é»‘",sans-serif;
+    font-family: "Microsoft Yahei","Î¢ÈíÑÅºÚ",sans-serif;
     height: 187px;
     padding-top: 18px;
     position: relative;
@@ -175,7 +175,7 @@ body {
     float: right;
 }
 .contentTopBg {
-    background: #f7f7f7 url("../..../../image/panesMenuBg.png?v=201501101710") no-repeat scroll 0 2px;
+    background: #f7f7f7 url("../../image/panesMenuBg.png?v=201501101710") no-repeat scroll 0 2px;
     height: 20px;
     left: 0;
     position: absolute;
@@ -183,7 +183,7 @@ body {
     width: 100%;
 }
 .contentBottomBg {
-    background: #f7f7f7 url("../..../../image/panesMenuBg.png?v=201501101710") no-repeat scroll left bottom;
+    background: #f7f7f7 url("../../image/panesMenuBg.png?v=201501101710") no-repeat scroll left bottom;
     bottom: 0;
     height: 20px;
     left: 0;
@@ -205,7 +205,7 @@ body {
 }
 .contentRight {
     float: left;
-    font-family: "Microsoft Yahei","å¾®è½¯é›…é»‘",sans-serif;
+    font-family: "Microsoft Yahei","Î¢ÈíÑÅºÚ",sans-serif;
     height: 205px;
     overflow: hidden;
     width: 900px;
@@ -231,7 +231,7 @@ body {
     padding-right: 7px;
 }
 #navManage .navManageDiv .siteIco {
-    background: rgba(0, 0, 0, 0) url("../..../../image/bg02.png?v=201511091906") no-repeat scroll -372px -402px;
+    background: rgba(0, 0, 0, 0) url("../../image/bg02.png?v=201511091906") no-repeat scroll -372px -402px;
     float: left;
     height: 20px;
     width: 25px;
@@ -244,7 +244,7 @@ body {
     border-color: #3298fe;
 }
 #navManage:hover .navManageDiv .siteIco {
-    background: rgba(0, 0, 0, 0) url("../..../../image/bg02.png?v=201511091906") no-repeat scroll -372px -365px;
+    background: rgba(0, 0, 0, 0) url("../../image/bg02.png?v=201511091906") no-repeat scroll -372px -365px;
 }
 #pdIndependenceDiv a {
     margin: 0 1px 0 -1px;

@@ -1,6 +1,6 @@
 
 .guideQuickIco {
-    background: rgba(0, 0, 0, 0) url("../..../../image/guide/siteGuideIco.gif?v=201409151747") no-repeat scroll 0 0;
+    background: rgba(0, 0, 0, 0) url("../../image/guide/siteGuideIco.gif?v=201409151747") no-repeat scroll 0 0;
     cursor: pointer;
     height: 42px;
     left: 58px;
@@ -53,7 +53,7 @@
     width: 190px;
 }
 .guideProgress #progressBar {
-    background: rgba(0, 0, 0, 0) url("../..../../image/guide/03.gif?v=20140701153506") repeat scroll 0 0;
+    background: rgba(0, 0, 0, 0) url("../../image/guide/03.gif?v=20140701153506") repeat scroll 0 0;
     border-radius: 2px;
     float: left;
     height: 12px;
@@ -90,7 +90,7 @@
     width: 110px;
 }
 .itemContent .isOk {
-    background: rgba(0, 0, 0, 0) url("../..../../image/guide/02.gif?v=20140702114015") no-repeat scroll 0 0;
+    background: rgba(0, 0, 0, 0) url("../../image/guide/02.gif?v=20140702114015") no-repeat scroll 0 0;
     display: none;
     float: left;
     height: 10px;
@@ -107,7 +107,7 @@
     color: #0090f4;
 }
 .itemContent .done {
-    background: rgba(0, 0, 0, 0) url("../..../../image/guide/01.gif?v=20140702114010") no-repeat scroll 0 0;
+    background: rgba(0, 0, 0, 0) url("../../image/guide/01.gif?v=20140702114010") no-repeat scroll 0 0;
 }
 .guidenav li {
     border-bottom: 1px solid #d7d7d7;
@@ -283,49 +283,49 @@
     margin-left: 110px;
 }
 .guideImg1 {
-    background: rgba(0, 0, 0, 0) url("../..../../image/guide/siteGuide01.jpg?v=201409151747") no-repeat scroll 0 0;
+    background: rgba(0, 0, 0, 0) url("../../image/guide/siteGuide01.jpg?v=201409151747") no-repeat scroll 0 0;
     height: 248px;
     margin: 29px auto 0;
     width: 314px;
 }
 .guideImg2 {
-    background: rgba(0, 0, 0, 0) url("../..../../image/guide/siteGuide02.jpg?v=201409151747") no-repeat scroll 0 0;
+    background: rgba(0, 0, 0, 0) url("../../image/guide/siteGuide02.jpg?v=201409151747") no-repeat scroll 0 0;
     height: 134px;
     margin-left: 56px;
     width: 387px;
 }
 .guideImg3 {
-    background: rgba(0, 0, 0, 0) url("../..../../image/guide/siteGuide03.jpg?v=201409151747") no-repeat scroll 0 0;
+    background: rgba(0, 0, 0, 0) url("../../image/guide/siteGuide03.jpg?v=201409151747") no-repeat scroll 0 0;
     height: 187px;
     margin-left: 56px;
     width: 380px;
 }
 .guideImg4 {
-    background: rgba(0, 0, 0, 0) url("../..../../image/guide/siteGuide04.jpg?v=201409151747") no-repeat scroll 0 0;
+    background: rgba(0, 0, 0, 0) url("../../image/guide/siteGuide04.jpg?v=201409151747") no-repeat scroll 0 0;
     height: 259px;
     margin: 15px 0 0 70px;
     width: 383px;
 }
 .guideImg5 {
-    background: rgba(0, 0, 0, 0) url("../..../../image/guide/siteGuide05.jpg?v=201409151747") no-repeat scroll 0 0;
+    background: rgba(0, 0, 0, 0) url("../../image/guide/siteGuide05.jpg?v=201409151747") no-repeat scroll 0 0;
     height: 224px;
     margin-left: 50px;
     width: 429px;
 }
 .guideImg6 {
-    background: rgba(0, 0, 0, 0) url("../..../../image/guide/siteGuide06.jpg?v=201409151747") no-repeat scroll 0 0;
+    background: rgba(0, 0, 0, 0) url("../../image/guide/siteGuide06.jpg?v=201409151747") no-repeat scroll 0 0;
     height: 261px;
     margin: 20px 0 0 50px;
     width: 453px;
 }
 .guideImg7 {
-    background: rgba(0, 0, 0, 0) url("../..../../image/guide/siteGuide07.jpg?v=201409151747") no-repeat scroll 0 0;
+    background: rgba(0, 0, 0, 0) url("../../image/guide/siteGuide07.jpg?v=201409151747") no-repeat scroll 0 0;
     height: 383px;
     margin-left: 35px;
     width: 455px;
 }
 .guideImg8 {
-    background: rgba(0, 0, 0, 0) url("../..../../image/guide/10.gif?v=20140704160453") repeat scroll 0 0;
+    background: rgba(0, 0, 0, 0) url("../../image/guide/10.gif?v=20140704160453") repeat scroll 0 0;
     display: inline-block !important;
     height: 22px;
     width: 74px;
@@ -344,7 +344,7 @@
     width: 86px;
 }
 .tipImg {
-    background: rgba(0, 0, 0, 0) url("../..../../image/guide/ball.png?v=20140704214205") repeat scroll 0 0;
+    background: rgba(0, 0, 0, 0) url("../../image/guide/ball.png?v=20140704214205") repeat scroll 0 0;
     height: 100%;
     margin-left: 70px;
     margin-top: 12px;
@@ -364,7 +364,7 @@
     width: 23%;
 }
 .sgMove {
-    background: rgba(0, 0, 0, 0) url("../..../../image/guide/opacityImg.gif?v=201407141810") repeat-x scroll 0 0;
+    background: rgba(0, 0, 0, 0) url("../../image/guide/opacityImg.gif?v=201407141810") repeat-x scroll 0 0;
     cursor: move;
     height: 45px;
     position: absolute;

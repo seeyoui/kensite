@@ -5,27 +5,25 @@
 <head>
 	<title></title>
 	<%@ include file="/WEB-INF/view/taglib/header.jsp" %>
-	<link type="text/css" rel="stylesheet" href="../css/manage.min.css?v=201601041813"/>
-	<script type="text/javascript" src="../js/comm/jquery/jquery-core.min.js?v=201503161711"></script>
-	<script type="text/javascript" src="../js/comm/fai.min.js?v=201512071738"></script>
-	<script type="text/javascript" src="../js/comm/jquery/jquery-ui-core.min.js?v=201511231730"></script>
-	<script type="text/javascript" src="../js/comm/pinyin.min.js?v=201306041217"></script>
-	<script type="text/javascript" src="../js/comm/faiui.min.js?v=201601111801"></script>
-	<script type="text/javascript" src="../js/site.min.js?v=201601131153"></script>
-	<script type="text/javascript" src="../js/manage.min.js?v=201601121610"></script>
+	<%
+		String id = request.getParameter("id");
+		String popupID = request.getParameter("popupID");
+	%>
+	<link type="text/css" rel="stylesheet" href="${ctx_web}/css/manage.min.css?v=201601041813"/>
+	<script type="text/javascript" src="${ctx_web}/js/comm/jquery/jquery-core.min.js?v=201503161711"></script>
+	<script type="text/javascript" src="${ctx_web}/js/comm/fai.min.js?v=201512071738"></script>
+	<script type="text/javascript" src="${ctx_web}/js/comm/jquery/jquery-ui-core.min.js?v=201511231730"></script>
+	<script type="text/javascript" src="${ctx_web}/js/comm/pinyin.min.js?v=201306041217"></script>
+	<script type="text/javascript" src="${ctx_web}/js/comm/faiui.min.js?v=201601111801"></script>
+	<script type="text/javascript" src="${ctx_web}/js/site.min.js?v=201601131153"></script>
+	<script type="text/javascript" src="${ctx_web}/js/manage.min.js?v=201601121610"></script>
 	<script type="text/javascript">
 	try {
 		Fai.top = parent.Fai.top;
 	} catch (e) {
 	}
 	</script>
-	<link type="text/css" rel="stylesheet" href="../css/site/floatBtnEdit.min.css?v=201509071734"/>
-
-<%
-	String id = request.getParameter("id");
-	String popupID = request.getParameter("popupID");
-%>
-
+	<link type="text/css" rel="stylesheet" href="${ctx_web}/css/site/floatBtnEdit.min.css?v=201509071734"/>
 <script type="text/javascript">
 var addMode = false,
 	g_id = <%=id%>,
@@ -378,8 +376,8 @@ function loadBtnCssLink (cssNum){
 	if(arguments.length == 0){
 		if(addMode){
 			cssLinkType["1"] = 1;
-			if(top.$("link[href='../css/floatBtn1.min.css?v=201510121802']").length == 0 ){
-				top.$('<link type="text/css" href="../css/floatBtn1.min.css?v=201510121802" rel="stylesheet">').appendTo(top.$("head"));
+			if(top.$("link[href='${ctx_web}/css/floatBtn1.min.css?v=201510121802']").length == 0 ){
+				top.$('<link type="text/css" href="${ctx_web}/css/floatBtn1.min.css?v=201510121802" rel="stylesheet">').appendTo(top.$("head"));
 			}
 		}else{
 			var count = parseInt(flBtnStyleData.bns/500) + 1;

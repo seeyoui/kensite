@@ -240,7 +240,7 @@
     background-color: rgba(255, 255, 255, 0.9);
 }
 .mCSB_scrollTools .mCSB_buttonUp, .mCSB_scrollTools .mCSB_buttonDown, .mCSB_scrollTools .mCSB_buttonLeft, .mCSB_scrollTools .mCSB_buttonRight {
-    background-image: url("../..../../image/mCSB_buttons.png?v=201407221643");
+    background-image: url("../../image/mCSB_buttons.png?v=201407221643");
     background-repeat: no-repeat;
     opacity: 0.4;
 }

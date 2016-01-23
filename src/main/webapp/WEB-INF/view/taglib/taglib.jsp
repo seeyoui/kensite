@@ -10,6 +10,7 @@
 <c:set var="ctx_activiti" value="${pageContext.request.contextPath}/act"/>
 <c:set var="ctx_static" value="${pageContext.request.contextPath}/static"/>
 <c:set var="ctx_common" value="${pageContext.request.contextPath}/static/common"/>
+<c:set var="ctx_web" value="${pageContext.request.contextPath}/static/web"/>
 <c:set var="ctx_skins" value="${pageContext.request.contextPath}/static/skins"/>
 <c:set var="ctx_login" value="${pageContext.request.contextPath}/static/login"/>
 <c:set var="ctx_assets" value="${pageContext.request.contextPath}/assets"/>

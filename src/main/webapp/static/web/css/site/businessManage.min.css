@@ -1,6 +1,6 @@
 
 body {
-    font-family: "Microsoft Yahei","å¾®è½¯é›…é»‘",Arial,sans-serif;
+    font-family: "Microsoft Yahei","Î¢ÈíÑÅºÚ",Arial,sans-serif;
 }
 .uploadMsg {
     float: left;
@@ -152,7 +152,7 @@ body {
     background: #efefef none repeat scroll 0 0;
     border: 1px solid #cacaca;
     color: #666;
-    font-family: "å¾®è½¯é›…é»‘";
+    font-family: "Î¢ÈíÑÅºÚ";
     font-size: 12px;
     padding: 5px 8px;
     position: absolute;
@@ -196,7 +196,7 @@ body {
     line-height: 16px;
 }
 .keyword-tips-icon {
-    background: rgba(0, 0, 0, 0) url("../..../../image/bg01.png?v=201512071738") no-repeat scroll -708px -340px;
+    background: rgba(0, 0, 0, 0) url("../../image/bg01.png?v=201512071738") no-repeat scroll -708px -340px;
     cursor: pointer;
     display: inline-block;
     height: 18px;

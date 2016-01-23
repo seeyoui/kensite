@@ -89,7 +89,7 @@ body {
 .contentLeft {
     background: #e0e6eb none repeat scroll 0 0;
     float: left;
-    font-family: "Microsoft Yahei","微软雅黑",sans-serif;
+    font-family: "Microsoft Yahei","΢���ź�",sans-serif;
     height: 187px;
     padding-top: 18px;
     position: relative;
@@ -100,7 +100,7 @@ body {
     float: right;
 }
 .contentTopBg {
-    background: #f7f7f7 url("../..../../image/panesMenuBg.png?v=201501101710") no-repeat scroll 0 2px;
+    background: #f7f7f7 url("../../image/panesMenuBg.png?v=201501101710") no-repeat scroll 0 2px;
     height: 20px;
     left: 0;
     position: absolute;
@@ -108,7 +108,7 @@ body {
     width: 100%;
 }
 .contentBottomBg {
-    background: #f7f7f7 url("../..../../image/panesMenuBg.png?v=201501101710") no-repeat scroll left bottom;
+    background: #f7f7f7 url("../../image/panesMenuBg.png?v=201501101710") no-repeat scroll left bottom;
     bottom: 0;
     height: 20px;
     left: 0;
@@ -130,12 +130,12 @@ body {
 }
 .contentRight {
     float: left;
-    font-family: "Microsoft Yahei","微软雅黑",sans-serif;
+    font-family: "Microsoft Yahei","΢���ź�",sans-serif;
     height: 205px;
     width: 900px;
 }
 #siteSeo {
-    font-family: "Microsoft Yahei","微软雅黑",sans-serif;
+    font-family: "Microsoft Yahei","΢���ź�",sans-serif;
     height: 200px;
     padding-top: 4px;
 }
@@ -160,12 +160,12 @@ body {
 }
 .siteSetting-title {
     color: #000;
-    font: bold 14px/18px "Microsoft YaHei","微软雅黑",sans-serif;
+    font: bold 14px/18px "Microsoft YaHei","΢���ź�",sans-serif;
     height: 18px;
 }
 .siteSetting-title a {
     color: #b5453a;
-    font: 12px/18px "Microsoft YaHei","微软雅黑",sans-serif;
+    font: 12px/18px "Microsoft YaHei","΢���ź�",sans-serif;
     margin-left: 10px;
     text-decoration: underline !important;
 }
@@ -177,7 +177,7 @@ body {
     position: relative;
 }
 .progressBar {
-    background: transparent url("../..../../image/BaiduOptimization/progressBarbg.jpg?v=201401131741") repeat scroll 0 0;
+    background: transparent url("../../image/BaiduOptimization/progressBarbg.jpg?v=201401131741") repeat scroll 0 0;
     border: 1px solid #d6d6d6;
     height: 10px;
     left: 0;
@@ -187,7 +187,7 @@ body {
     width: 295px;
 }
 #progressBar {
-    background: transparent url("../..../../image/BaiduOptimization/optimizationIcon.gif?v=201401131741") repeat scroll 0 -134px;
+    background: transparent url("../../image/BaiduOptimization/optimizationIcon.gif?v=201401131741") repeat scroll 0 -134px;
     height: 100%;
     width: 0;
 }
@@ -199,10 +199,10 @@ body {
     top: 6px;
 }
 #checkDetail {
-    background: transparent url("../..../../image/BaiduOptimization/checkDetail.gif?v=201401151502") no-repeat scroll 0 0;
+    background: transparent url("../../image/BaiduOptimization/checkDetail.gif?v=201401151502") no-repeat scroll 0 0;
     color: #fff;
     display: block;
-    font: 12px/20px "Microsoft YaHei","微软雅黑",sans-serif;
+    font: 12px/20px "Microsoft YaHei","΢���ź�",sans-serif;
     height: 20px;
     left: 470px;
     position: absolute;
@@ -212,13 +212,13 @@ body {
     width: 60px;
 }
 #checkDetail:hover {
-    background: transparent url("../..../../image/BaiduOptimization/checkDetailHover.gif?v=201401151502") no-repeat scroll 0 0;
+    background: transparent url("../../image/BaiduOptimization/checkDetailHover.gif?v=201401151502") no-repeat scroll 0 0;
 }
 #checkAgain {
-    background: transparent url("../..../../image/BaiduOptimization/checkAgain.gif?v=201401151502") no-repeat scroll 0 0;
+    background: transparent url("../../image/BaiduOptimization/checkAgain.gif?v=201401151502") no-repeat scroll 0 0;
     color: #fff;
     display: block;
-    font: 12px/20px "Microsoft YaHei","微软雅黑",sans-serif;
+    font: 12px/20px "Microsoft YaHei","΢���ź�",sans-serif;
     height: 20px;
     left: 390px;
     position: absolute;
@@ -228,7 +228,7 @@ body {
     width: 60px;
 }
 #checkAgain:hover {
-    background: transparent url("../..../../image/BaiduOptimization/checkAgainHover.gif?v=201401151502") no-repeat scroll 0 0;
+    background: transparent url("../../image/BaiduOptimization/checkAgainHover.gif?v=201401151502") no-repeat scroll 0 0;
 }
 .prompt {
     color: #666;
@@ -255,7 +255,7 @@ body {
     padding: 0 0 0 18px;
 }
 .msgList-box-triangle {
-    background: transparent url("../..../../image/BaiduOptimization/triangle.gif?v=201401151502") no-repeat scroll 0 0;
+    background: transparent url("../../image/BaiduOptimization/triangle.gif?v=201401151502") no-repeat scroll 0 0;
     height: 7px;
     left: 14px;
     position: absolute;
@@ -266,10 +266,10 @@ body {
     color: red;
 }
 .failing {
-    background: transparent url("../..../../image/BaiduOptimization/optimizationIcon.gif?v=201401131741") no-repeat scroll 0 8px;
+    background: transparent url("../../image/BaiduOptimization/optimizationIcon.gif?v=201401131741") no-repeat scroll 0 8px;
 }
 .correct {
-    background: transparent url("../..../../image/BaiduOptimization/optimizationIcon.gif?v=201401131741") no-repeat scroll 0 -12px;
+    background: transparent url("../../image/BaiduOptimization/optimizationIcon.gif?v=201401131741") no-repeat scroll 0 -12px;
 }
 .fontBlue {
     color: #1b7ad1;
@@ -293,7 +293,7 @@ body {
     background: #efefef none repeat scroll 0 0;
     border: 1px solid #cacaca;
     color: #666;
-    font-family: "微软雅黑";
+    font-family: "΢���ź�";
     font-size: 12px;
     padding: 5px 8px;
     position: absolute;
@@ -340,7 +340,7 @@ body {
     line-height: 16px;
 }
 .keyword-tips-icon {
-    background: rgba(0, 0, 0, 0) url("../..../../image/bg01.png?v=201512071738") no-repeat scroll -708px -340px;
+    background: rgba(0, 0, 0, 0) url("../../image/bg01.png?v=201512071738") no-repeat scroll -708px -340px;
     cursor: pointer;
     display: inline-block;
     height: 18px;

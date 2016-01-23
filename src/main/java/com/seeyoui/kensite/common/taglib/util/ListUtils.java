@@ -7,6 +7,7 @@ import javax.servlet.jsp.JspException;
 
 import com.seeyoui.kensite.common.constants.StringConstant;
 import com.seeyoui.kensite.common.taglib.constants.TableColumnConstants;
+import com.seeyoui.kensite.common.taglib.expression.ExpressionUtils;
 import com.seeyoui.kensite.common.util.CacheUtils;
 import com.seeyoui.kensite.common.util.DBUtils;
 import com.seeyoui.kensite.common.util.SpringContextHolder;
@@ -27,6 +28,12 @@ public class ListUtils {
 		TableColumn tc = TagCacheUtils.getTableColumn(tableColumn);
 		if(tc == null) {
 			return null;
+		}
+		if(StringUtils.isNotBlank(tc.getDefaultValue())) {
+			tc.setDefaultValue(ExpressionUtils.parse(tc.getDefaultValue()));
+		}
+		if(StringUtils.isNoneBlank(tc.getSettings())) {
+			tc.setSettings(ExpressionUtils.parse(tc.getSettings()));
 		}
 		StringBuffer result = getEasyUIStr(tc);
 		return result;

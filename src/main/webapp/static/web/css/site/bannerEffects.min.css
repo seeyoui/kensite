@@ -39,7 +39,7 @@ ul, li {
     position: relative;
 }
 .closeEff .effectsImg {
-    background: rgba(0, 0, 0, 0) url("../..../../image/template/bannerEffects/close.jpg?v=201310170034") no-repeat scroll center center;
+    background: rgba(0, 0, 0, 0) url("../../image/template/bannerEffects/close.jpg?v=201310170034") no-repeat scroll center center;
     border: 1px solid #ddd;
     height: 50px;
     padding: 2px;
@@ -52,12 +52,12 @@ ul, li {
     clear: both;
 }
 .siteProFunc {
-    background: transparent url("../..../../image/sitepro.png") no-repeat scroll 0 4px;
+    background: transparent url("../../image/sitepro.png") no-repeat scroll 0 4px;
     height: 23px !important;
     line-height: 23px !important;
 }
 .siteMidFunc {
-    background: transparent url("../..../../image/sitemid.png?v=201411102015") no-repeat scroll 0 4px;
+    background: transparent url("../../image/sitemid.png?v=201411102015") no-repeat scroll 0 4px;
     height: 23px !important;
     line-height: 23px !important;
 }
@@ -184,7 +184,7 @@ ul, li {
     width: 65px;
 }
 .effectsCheckButton {
-    background: #ffc url("../..../../image/bg01.png?v=201512071738") no-repeat scroll -1406px -323px;
+    background: #ffc url("../../image/bg01.png?v=201512071738") no-repeat scroll -1406px -323px;
     bottom: 1px;
     display: none;
     height: 15px;
@@ -200,7 +200,7 @@ ul, li {
     width: auto;
 }
 .advFilRight {
-    background: rgba(0, 0, 0, 0) url("../..../../image/bg02.png?v=201511091906") no-repeat scroll -172px -427px;
+    background: rgba(0, 0, 0, 0) url("../../image/bg02.png?v=201511091906") no-repeat scroll -172px -427px;
     cursor: pointer;
     float: left;
     height: 15px;
@@ -209,10 +209,10 @@ ul, li {
     width: 15px;
 }
 .advFilRight-hover {
-    background: rgba(0, 0, 0, 0) url("../..../../image/bg02.png?v=201511091906") no-repeat scroll -188px -427px;
+    background: rgba(0, 0, 0, 0) url("../../image/bg02.png?v=201511091906") no-repeat scroll -188px -427px;
 }
 .advFilLeft {
-    background: rgba(0, 0, 0, 0) url("../..../../image/bg02.png?v=201511091906") no-repeat scroll -172px -450px;
+    background: rgba(0, 0, 0, 0) url("../../image/bg02.png?v=201511091906") no-repeat scroll -172px -450px;
     cursor: pointer;
     float: left;
     height: 15px;
@@ -221,7 +221,7 @@ ul, li {
     width: 15px;
 }
 .advFilLeft-hover {
-    background: rgba(0, 0, 0, 0) url("../..../../image/bg02.png?v=201511091906") no-repeat scroll -188px -450px;
+    background: rgba(0, 0, 0, 0) url("../../image/bg02.png?v=201511091906") no-repeat scroll -188px -450px;
 }
 .searchInput {
     border: 1px solid #d2dcec;
@@ -246,6 +246,6 @@ ul, li {
     cursor: default;
 }
 .find {
-    background: rgba(0, 0, 0, 0) url("../..../../image/bg01.png?v=201512071738") no-repeat scroll -1436px 5px;
+    background: rgba(0, 0, 0, 0) url("../../image/bg01.png?v=201512071738") no-repeat scroll -1436px 5px;
     cursor: pointer;
 }

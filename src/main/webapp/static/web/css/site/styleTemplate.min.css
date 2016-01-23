@@ -25,7 +25,7 @@ image {
     width: auto;
 }
 .quickDressTemplate {
-    font-family: "Microsoft YaHei","å¾®è½¯é›…é»‘",sans-serif;
+    font-family: "Microsoft YaHei","Î¢ÈíÑÅºÚ",sans-serif;
     overflow: hidden;
     position: relative;
     width: 100%;
@@ -100,7 +100,7 @@ image {
     width: 24px;
 }
 .vipBottom .themesColor .innerColorChecked {
-    background: rgba(0, 0, 0, 0) url("../..../../image/themesColorCheck.png?v=201501121712") repeat scroll 0 0;
+    background: rgba(0, 0, 0, 0) url("../../image/themesColorCheck.png?v=201501121712") repeat scroll 0 0;
     height: 18px;
     left: 2px;
     overflow: hidden;
@@ -117,7 +117,7 @@ image {
     z-index: 3;
 }
 .vipBottom .themesColor.themesColorChecked:hover .innerColor {
-    background: rgba(0, 0, 0, 0) url("../..../../image/themesColorCheck.png?v=201501121712") repeat scroll 0 0;
+    background: rgba(0, 0, 0, 0) url("../../image/themesColorCheck.png?v=201501121712") repeat scroll 0 0;
     height: 18px;
     left: 2px;
     overflow: hidden;
@@ -137,7 +137,7 @@ image {
     top: 0;
 }
 .freeIcon {
-    background: rgba(0, 0, 0, 0) url("../..../../image/newFreeIco.gif") no-repeat scroll center center;
+    background: rgba(0, 0, 0, 0) url("../../image/newFreeIco.gif") no-repeat scroll center center;
     height: 15px;
     position: absolute;
     right: 3px;
@@ -145,7 +145,7 @@ image {
     width: 42px;
 }
 .stdIcon {
-    background: rgba(0, 0, 0, 0) url("../..../../image/newStdIco.gif") no-repeat scroll center center;
+    background: rgba(0, 0, 0, 0) url("../../image/newStdIco.gif") no-repeat scroll center center;
     height: 15px;
     position: absolute;
     right: 3px;
@@ -153,7 +153,7 @@ image {
     width: 42px;
 }
 .popIcon {
-    background: rgba(0, 0, 0, 0) url("../..../../image/newPopIco.gif") no-repeat scroll center center;
+    background: rgba(0, 0, 0, 0) url("../../image/newPopIco.gif") no-repeat scroll center center;
     height: 15px;
     position: absolute;
     right: 3px;
@@ -161,7 +161,7 @@ image {
     width: 42px;
 }
 .bizIcon {
-    background: rgba(0, 0, 0, 0) url("../..../../image/newBizIco.gif") no-repeat scroll center center;
+    background: rgba(0, 0, 0, 0) url("../../image/newBizIco.gif") no-repeat scroll center center;
     height: 15px;
     position: absolute;
     right: 3px;
@@ -169,7 +169,7 @@ image {
     width: 42px;
 }
 .lowIcon {
-    background: rgba(0, 0, 0, 0) url("../..../../image/new_cjb.gif?v=201501121712") no-repeat scroll center center;
+    background: rgba(0, 0, 0, 0) url("../../image/new_cjb.gif?v=201501121712") no-repeat scroll center center;
     height: 46px;
     left: -3px;
     position: absolute;
@@ -177,7 +177,7 @@ image {
     width: 46px;
 }
 .midIcon {
-    background: rgba(0, 0, 0, 0) url("../..../../image/new_zjb.gif?v=201501121712") no-repeat scroll center center;
+    background: rgba(0, 0, 0, 0) url("../../image/new_zjb.gif?v=201501121712") no-repeat scroll center center;
     height: 46px;
     left: -3px;
     position: absolute;
@@ -185,7 +185,7 @@ image {
     width: 46px;
 }
 .advIcon {
-    background: rgba(0, 0, 0, 0) url("../..../../image/new_gjb.gif?v=201504301149") no-repeat scroll center center;
+    background: rgba(0, 0, 0, 0) url("../../image/new_gjb.gif?v=201504301149") no-repeat scroll center center;
     height: 46px;
     left: -3px;
     position: absolute;
@@ -220,7 +220,7 @@ image {
     width: 16px;
 }
 .find {
-    background: rgba(0, 0, 0, 0) url("../..../../image/bg01.png?v=201512071738") no-repeat scroll -1436px 5px;
+    background: rgba(0, 0, 0, 0) url("../../image/bg01.png?v=201512071738") no-repeat scroll -1436px 5px;
     cursor: pointer;
     margin-top: 1px;
 }
@@ -246,7 +246,7 @@ image {
     margin-left: 10px;
 }
 .closeDemoTemplate {
-    background: rgba(0, 0, 0, 0) url("../..../../image/bg01.png?v=201512071738") no-repeat scroll -1281px -362px;
+    background: rgba(0, 0, 0, 0) url("../../image/bg01.png?v=201512071738") no-repeat scroll -1281px -362px;
     cursor: pointer;
     float: right;
     height: 19px;
@@ -256,7 +256,7 @@ image {
     width: 19px;
 }
 .closeDemoTemplate:hover {
-    background: rgba(0, 0, 0, 0) url("../..../../image/bg01.png?v=201512071738") no-repeat scroll -1281px -381px;
+    background: rgba(0, 0, 0, 0) url("../../image/bg01.png?v=201512071738") no-repeat scroll -1281px -381px;
 }
 .cloner {
     border: 1px solid #f7f7f7;
@@ -303,7 +303,7 @@ image {
     float: right;
 }
 .panelTopBg {
-    background: #f7f7f7 url("../..../../image/panesMenuBg.png?v=201501101710") no-repeat scroll 0 2px;
+    background: #f7f7f7 url("../../image/panesMenuBg.png?v=201501101710") no-repeat scroll 0 2px;
     height: 20px;
     left: 0;
     position: absolute;
@@ -311,7 +311,7 @@ image {
     width: 100%;
 }
 .panelBottomBg {
-    background: #f7f7f7 url("../..../../image/panesMenuBg.png?v=201501101710") no-repeat scroll left bottom;
+    background: #f7f7f7 url("../../image/panesMenuBg.png?v=201501101710") no-repeat scroll left bottom;
     bottom: 0;
     height: 20px;
     left: 0;
@@ -428,7 +428,7 @@ image {
     width: auto;
 }
 .advFilRight {
-    background: rgba(0, 0, 0, 0) url("../..../../image/bg02.png?v=201511091906") no-repeat scroll -172px -427px;
+    background: rgba(0, 0, 0, 0) url("../../image/bg02.png?v=201511091906") no-repeat scroll -172px -427px;
     cursor: pointer;
     float: left;
     height: 15px;
@@ -437,10 +437,10 @@ image {
     width: 15px;
 }
 .advFilRight-hover {
-    background: rgba(0, 0, 0, 0) url("../..../../image/bg02.png?v=201511091906") no-repeat scroll -188px -427px;
+    background: rgba(0, 0, 0, 0) url("../../image/bg02.png?v=201511091906") no-repeat scroll -188px -427px;
 }
 .advFilLeft {
-    background: rgba(0, 0, 0, 0) url("../..../../image/bg02.png?v=201511091906") no-repeat scroll -172px -450px;
+    background: rgba(0, 0, 0, 0) url("../../image/bg02.png?v=201511091906") no-repeat scroll -172px -450px;
     cursor: pointer;
     float: left;
     height: 15px;
@@ -449,7 +449,7 @@ image {
     width: 15px;
 }
 .advFilLeft-hover {
-    background: rgba(0, 0, 0, 0) url("../..../../image/bg02.png?v=201511091906") no-repeat scroll -188px -450px;
+    background: rgba(0, 0, 0, 0) url("../../image/bg02.png?v=201511091906") no-repeat scroll -188px -450px;
 }
 .rapidSiteClass {
     background: #e8f3fe none repeat scroll 0 0;
@@ -467,7 +467,7 @@ image {
     padding-right: 7px;
 }
 .rapidSiteClass .rapidSiteDiv .siteIco {
-    background: rgba(0, 0, 0, 0) url("../..../../image/bg02.png?v=201511091906") no-repeat scroll -150px -373px;
+    background: rgba(0, 0, 0, 0) url("../../image/bg02.png?v=201511091906") no-repeat scroll -150px -373px;
     float: left;
     height: 20px;
     width: 25px;
@@ -488,7 +488,7 @@ image {
     width: 55px;
 }
 .newTmpTag {
-    background: rgba(0, 0, 0, 0) url("../..../../image/hot.png?v=201409221731") no-repeat scroll 0 0;
+    background: rgba(0, 0, 0, 0) url("../../image/hot.png?v=201409221731") no-repeat scroll 0 0;
     height: 33px;
     position: absolute;
     width: 33px;
@@ -498,14 +498,14 @@ image {
     position: relative;
 }
 .tempTipSearchBar {
-    background: rgba(0, 0, 0, 0) url("../..../../image/siteTempTip1.png?v=201409221731") no-repeat scroll 0 -11px;
+    background: rgba(0, 0, 0, 0) url("../../image/siteTempTip1.png?v=201409221731") no-repeat scroll 0 -11px;
     height: 40px;
     position: absolute;
     top: 0;
     width: 515px;
 }
 .tempTipFloat {
-    background: rgba(0, 0, 0, 0) url("../..../../image/siteTempTip2.png?v=201409221731") no-repeat scroll 0 0;
+    background: rgba(0, 0, 0, 0) url("../../image/siteTempTip2.png?v=201409221731") no-repeat scroll 0 0;
     cursor: pointer;
     height: 124px;
     margin-left: 150px;
@@ -534,8 +534,8 @@ image {
     width: 46px;
 }
 .new_primaryIcon {
-    background: rgba(0, 0, 0, 0) url("../..../../image/new_cjb.gif?v=201501121712") no-repeat scroll center center;
+    background: rgba(0, 0, 0, 0) url("../../image/new_cjb.gif?v=201501121712") no-repeat scroll center center;
 }
 .new_intermediateIcon {
-    background: rgba(0, 0, 0, 0) url("../..../../image/new_zjb.gif?v=201501121712") no-repeat scroll center center;
+    background: rgba(0, 0, 0, 0) url("../../image/new_zjb.gif?v=201501121712") no-repeat scroll center center;
 }

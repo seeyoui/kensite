@@ -13,18 +13,7 @@
         window.location.href = "http://seeyoui.faisco.cn/kill-IE.jsp";
       </script>
     <![endif]-->
-    <link type="text/css" href="./css/base.min.css?v=201601111801" rel="stylesheet" />
-    <link type="text/css" href="./css/template/4003.min.css?v=201511091906" rel="stylesheet" id="templateFrame" class="templateFrameClass" />
-    <link type="text/css" href="./css/bannerAnimation.min.css?v=201509241714" rel="stylesheet" />
-    <link type='text/css' href='./css/pattern3.min.css?v=201512281739' rel='stylesheet'/>
-    <link type='text/css' href='./css/searchBoxStyle1.min.css?v=201512141713' rel='stylesheet'/>
-    <link type='text/css' href='./css/floatBtn1.min.css?v=201510121802' rel='stylesheet'/>
-    <link type='text/css' href='./css/photoCard1.min.css?v=201601051532' rel='stylesheet'/>
-    <link type="text/css" href="./css/edit.min.css?v=201601111801" rel="stylesheet" />
-    <link type="text/css" href="./css/comm/jquery/poshytip/tip-yellowsimple.min.css?v=201410081739" rel="stylesheet" />
-    <link type="text/css" href="./css/faiFloatPanel.min.css?v=201512281739" rel="stylesheet" />
-    <link type="text/css" href="./css/site/mCustomScrollbar.min.css?v=201407221643" rel="stylesheet" />
-    <link type="text/css" href="./css/site/siteGuide.min.css?v=201410131744" rel="stylesheet" />
+	<%@ include file="/WEB-INF/view/taglib/webPortal.jsp" %>
     <style id='stylemodule'>
     #module479 {height:54px;}
 	#module479 {border:none;}
@@ -82,7 +71,7 @@
   <body class="g_bodyManage g_locale2052 g_cusSiteWidth">
     <iframe id="guideLowBrowser" style="display:none;position:absolute;z-index:10000;width:100%;height:100%;">
     </iframe>
-    <script type="text/javascript" src="./js/comm/testBrowser.min.js?v=201510121802"></script>
+    <script type="text/javascript" src="${ctx_web}/js/comm/testBrowser.min.js?v=201510121802"></script>
     <script type="text/javascript">
       domainLink = "http://www.seeyoui.icoc.in" + window.location.pathname + window.location.search;
     </script>
@@ -258,51 +247,6 @@
                 01月13日更新：企业邮箱全面升级
               </a>
             </div>
-            <div class='list'>
-              <a hidefocus='true' href="http://jz.faisco.com/news/3187" target='_blank'
-              onclick='Site.logDog(100038, 102);'>
-                <span class='iconPoint'>
-                  &nbsp;
-                </span>
-                01月06日更新：您的网站可开展作品评选活动
-              </a>
-            </div>
-            <div class='list'>
-              <a hidefocus='true' href="http://jz.faisco.com/news/3130" target='_blank'
-              onclick='Site.logDog(100038, 102);'>
-                <span class='iconPoint'>
-                  &nbsp;
-                </span>
-                12月30日更新：新上线魔方图册模块
-              </a>
-            </div>
-            <div class='list'>
-              <a hidefocus='true' href="http://jz.faisco.com/news/3050" target='_blank'
-              onclick='Site.logDog(100038, 102);'>
-                <span class='iconPoint'>
-                  &nbsp;
-                </span>
-                12月23日更新：新上线圣诞节日横幅
-              </a>
-            </div>
-            <div class='list'>
-              <a hidefocus='true' href="http://jz.faisco.com/news/2972" target='_blank'
-              onclick='Site.logDog(100038, 102);'>
-                <span class='iconPoint'>
-                  &nbsp;
-                </span>
-                12月16日更新：类似京东淘宝的购物车入口
-              </a>
-            </div>
-            <div class='list'>
-              <a hidefocus='true' href="http://jz.faisco.com/news/2903" target='_blank'
-              onclick='Site.logDog(100038, 102);'>
-                <span class='iconPoint'>
-                  &nbsp;
-                </span>
-                12月09日更新：商城网站支持促销活动
-              </a>
-            </div>
           </div>
         </div>
       </div>
@@ -426,7 +370,7 @@
                 <div id='logo' class='logo logo2' style='top:65px;left:58px;'>
                   <a id='logoLink' hidefocus='true' class='link-p' link='javascript:;' onclick='return false;'>
                     <img id='logoImg' title='智慧星河' alt='智慧星河' style='float:left;' height='50'
-                    width='187' src='./image/demo/ABUIABAEGAAg6ua7rgUoyMTtRDC7ATgy.png' />
+                    width='187' src='${ctx_web}/image/demo/ABUIABAEGAAg6ua7rgUoyMTtRDC7ATgy.png' />
                   </a>
                 </div>
               </div>
@@ -673,18 +617,6 @@
     <!--续费提示-->
     <div id="siteRenewNotice_small_box" class="siteRenewNotice_small_box"></div>
     <div id="bgMusic" class="bgMusic"></div>
-    <script type="text/javascript" src="./js/comm/jquery/jquery-core.min.js?v=201503161711"></script>
-    <script type="text/javascript" src="./js/comm/jquery/jquery-mousewheel.min.js?v=201408111734"></script>
-    <script type="text/javascript" src="./js/comm/fai.min.js?v=201512071738"></script>
-    <script type="text/javascript" src="./js/comm/jquery/jquery-ui-core.min.js?v=201511231730"></script>
-    <script type="text/javascript" src="./js/site.min.js?v=201601131153"></script>
-    <script type="text/javascript" src="./js/locale/2052.min.js?v=201512071738"></script>
-    <script type="text/javascript" src="./js/comm/ZeroClipboard/ZeroClipboard.min.js?v=201212061014"></script>
-    <script type="text/javascript" src="./js/comm/faiui.min.js?v=201601111801"></script>
-    <script type="text/javascript" src="./js/manage.js?v=201601121610"></script>
-    <script type="text/javascript" src="./js/module_shoppingCart.min.js?v=201512151958"></script>
-    <script type='text/javascript' src='./js/comm/jquery/jquery-menu-aim.min.js?v=201510191829'></script>
-    <link type='text/css' href='./css/fontsIco.min.css?v=201601111801' rel='stylesheet'/>
     <script type="text/javascript">
       // 为了避免用户误操作，在域名结尾输入多余字符导致cookie失效问题，这里校验一下浏览器的host是否与后台拿到的host一致
       //if (window.location.host != 'seeyoui.faisco.cn') { window.location.href = 'http://' + 'seeyoui.faisco.cn'; }
@@ -1380,7 +1312,7 @@ var _templateChangeLayoutList = {
           "style": 83,
           "className": "photoCard"
         }],
-        "faiSettingPanelStyleLink": "./css/site/faiSettingPanel.min.css?v=201512071738",
+        "faiSettingPanelStyleLink": "${ctx_web}/css/site/faiSettingPanel.min.css?v=201512071738",
         "colorDefList": [{
           "key": 1,
           "name": "棕黑"
@@ -1975,7 +1907,7 @@ var _templateChangeLayoutList = {
           "styleName": "P106",
           "colorType": 16
         }],
-        "modulePatternCssList": "{\"css_pattern1\":\"./css/pattern1.min.css?v=201512281739\"}",
+        "modulePatternCssList": "{\"css_pattern1\":\"${ctx_web}/css/pattern1.min.css?v=201512281739\"}",
         "allowedPattern": true,
         "minUrlViewPattern": "http://jz.faisco.com/proFunc.jsp",
         "minVerIconPattern": "siteGroupStd",
@@ -1991,13 +1923,13 @@ var _templateChangeLayoutList = {
       var _footerItemHasSecondChild = false;
       var file_size_limit = parseInt("1");
       //浮动按钮样式链接缓存
-      var _floatBtnCssLink = "./css/floatBtn1.min.css?v=201510121802";
+      var _floatBtnCssLink = "${ctx_web}/css/floatBtn1.min.css?v=201510121802";
       //浮动购物车样式链接缓存
-      var _shoppingCartCssLink = "./css/shoppingCart1.min.css?v=201512211736";
+      var _shoppingCartCssLink = "${ctx_web}/css/shoppingCart1.min.css?v=201512211736";
       //产品列表
-      var productGroupScriptLink = "./js/comm/jquery/jquery-menu-aim.min.js?v=201510191829";
+      var productGroupScriptLink = "${ctx_web}/js/comm/jquery/jquery-menu-aim.min.js?v=201510191829";
       //魔方图册
-      var _photoCardCssLink = "./css/photoCard1.min.css?v=201601051532";
+      var _photoCardCssLink = "${ctx_web}/css/photoCard1.min.css?v=201601051532";
       var _siteDemo = false;
 
       var _backToTop = false;
@@ -2015,15 +1947,15 @@ var _templateChangeLayoutList = {
         Site.pageOnload();
       };
 
-      $LAB.script("./js/productSlide.min.js?v=201512071738");
-      $LAB.script("./js/photoSlide.min.js?v=201601041813");
-      $LAB.script("./js/imageEffect.min.js?v=201601131153").wait(function() {
+      $LAB.script("${ctx_web}/js/productSlide.min.js?v=201512071738");
+      $LAB.script("${ctx_web}/js/photoSlide.min.js?v=201601041813");
+      $LAB.script("${ctx_web}/js/imageEffect.min.js?v=201601131153").wait(function() {
         Site.functionInterfaceTrigger({
           name: "ImageEffect.FUNC.BASIC.Init"
         });
       });
-      $LAB.script("./js/siteTemplates.min.js?v=201512221730").script("./js/faiSettingPanel.min.js?v=201512292011");
-      $LAB.script("./js/faiFloatPanel.min.js?v=201512281739").script("./js/faiFloatPanel_bindEvent.min.js?v=201601121610").wait(function() {
+      $LAB.script("${ctx_web}/js/siteTemplates.min.js?v=201512221730").script("${ctx_web}/js/faiSettingPanel.min.js?v=201512292011");
+      $LAB.script("${ctx_web}/js/faiFloatPanel.min.js?v=201512281739").script("${ctx_web}/js/faiFloatPanel_bindEvent.min.js?v=201601121610").wait(function() {
         Site.initFaiFloatPanelIcon(); //初始化浮动设置面板
         Site.siteGuideInit();
         if (false) {

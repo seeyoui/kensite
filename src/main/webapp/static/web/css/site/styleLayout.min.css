@@ -5,7 +5,7 @@ body {
 .contentLeft {
     background: #e0e6eb none repeat scroll 0 0;
     float: left;
-    font-family: "Microsoft YaHei","å¾®è½¯é›…é»‘",sans-serif;
+    font-family: "Microsoft YaHei","Î¢ÈíÑÅºÚ",sans-serif;
     height: 187px;
     padding-top: 18px;
     position: relative;
@@ -46,7 +46,7 @@ body {
 }
 .contentRight {
     float: left;
-    font-family: "Microsoft YaHei","å¾®è½¯é›…é»‘",sans-serif;
+    font-family: "Microsoft YaHei","Î¢ÈíÑÅºÚ",sans-serif;
     width: 900px;
 }
 .panelMenuTitle {

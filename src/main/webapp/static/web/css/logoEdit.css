@@ -1,0 +1,102 @@
+@charset "utf-8"; 
+
+body {
+	font-size: 12px;
+	OVERFLOW: auto;
+	OVERFLOW-X: HIDDEN
+}
+
+* {
+	font-size: 12px
+}
+
+.set-title {
+	width: 90px;
+	text-align: right
+}
+
+.settingPanel {
+	height: 260px;
+	_height: 250px;
+	overflow-x: hidden;
+	overflow-y: auto
+}
+
+.corpTitle {
+	width: 361px;
+	height: 84px;
+	border: 1px solid #CCC
+}
+
+.setLogoPanel .set-line {
+	height: 24px;
+	line-height: 24px;
+	margin: 5px 0;
+	clear: both
+}
+
+.setLogoPanel .set-line .set-title, .set-ctrl, .set-ctrl .upload {
+	float: left
+}
+
+.setLogoPanel .set-line .set-ctrl .uploadmsg {
+	width: 40px;
+	float: left;
+	margin-left: 8px;
+	height: 26px;
+	line-height: 26px;
+	overflow: hidden
+}
+
+.setLogoPanel .set-line .set-ctrl .upload .uploadmsg {
+	width: 40px;
+	float: left;
+	margin-left: 8px;
+	height: 26px;
+	line-height: 26px;
+	overflow: hidden
+}
+
+.setLogoPanel .logoImg {
+	margin-top: 10px
+}
+
+.logoLine {
+	clear: both;
+	height: 24px;
+	line-height: 24px;
+	margin: 5px 0
+}
+
+.logoTitle {
+	float: left;
+	width: 100px;
+	text-align: right
+}
+
+.setAdPanel .set-line {
+	height: 24px;
+	line-height: 24px;
+	padding: 2px 10px
+}
+
+.setAdPanel .set-line .set-title, .set-ctrl {
+	float: left
+}
+
+.setAdPanel .title-bar {
+	height: 24px;
+	line-height: 24px;
+	text-align: left;
+	text-indent: 10px;
+	font-weight: bold;
+	font-size: 13px;
+	color: #222;
+	background: #f2f2f2;
+	clear: both;
+	list-style-type: none
+}
+
+.setAdPanel .noFirst {
+	margin-top: 10px
+}
