@@ -1,0 +1,542 @@
+@charset "utf-8"; 
+
+body {
+	font-family: "微软雅黑", "宋体";
+	font-size: 12px;
+	color: #666
+}
+
+a {
+	font-family: "微软雅黑", "宋体";
+	font-size: 12px
+}
+
+.g_main, .g_mainManage .g_web {
+	background: #fff
+}
+
+.webHeaderTable {
+	height: 100px;
+	background: #fff;
+	width: 100%
+}
+
+.webHeader {
+	height: 100%;
+	width: 960px;
+	position: relative;
+	margin: 0 auto
+}
+
+.absTopTable {
+	height: 35px;
+	background: url(../../image/template/4002/topline.gif?v=201501261926) repeat;
+	width: 100%
+}
+
+.webBannerTable {
+	width: 100%
+}
+
+.webBanner {
+	width: 100% !important;
+	background: #333
+}
+
+.banner {
+	width: 100%;
+	height: 380px;
+	background: url(../../image/template/banners/40001.jpg?v=201501261926) 50% 0
+		no-repeat
+}
+
+.webContainerTable {
+	padding-top: 20px
+}
+
+.webFooterTable {
+	background: #eaeaea;
+	border-top: #b4b4b4 solid 1px;
+	padding-bottom: 15px
+}
+
+.webFooter {
+	position: relative
+}
+
+.corpTitle {
+	top: 75px;
+	color: #282828;
+	font-family: "微软雅黑", "宋体"
+}
+
+.logo {
+	left: 10px;
+	top: 35px
+}
+
+.localer {
+	color: #000
+}
+
+.localer a {
+	color: #000
+}
+
+.date {
+	left: 0;
+	top: 5px
+}
+
+.nav {
+	width: 650px;
+	height: 50px;
+	top: auto;
+	bottom: 20px;
+	left: 300px
+}
+
+.nav .navMainContent {
+	width: 650px
+}
+
+.nav .itemPrev {
+	top: 8px
+}
+
+.nav .itemNext {
+	top: 8px
+}
+
+.nav .itemSep {
+	display: table-cell;
+	width: 20px;
+	height: 50px;
+	background: url(../../image/template/4002/g_ls.gif?v=201501261926) center
+		no-repeat
+}
+
+.nav .item {
+	height: 50px;
+	line-height: 27px
+}
+
+.nav .item .itemCenter a {
+	color: #666;
+	font-size: 15px;
+	font-weight: bold
+}
+
+.nav .itemHover .itemLeft {
+	background: url(../../image/template/4002/cyan.gif?v=201501261926) repeat-x
+		bottom
+}
+
+.nav .itemHover .itemCenter {
+	background: url(../../image/template/4002/cyan.gif?v=201501261926) repeat-x
+		bottom
+}
+
+.nav .itemHover .itemCenter a {
+	color: #2b8397
+}
+
+.nav .itemSelected .itemLeft {
+	background: url(../../image/template/4002/cyan.gif?v=201501261926) repeat-x
+		bottom/
+}
+
+.nav .itemSelected .itemCenter {
+	background: url(../../image/template/4002/cyan.gif?v=201501261926) repeat-x
+		bottom
+}
+
+.nav .itemSelected .itemCenter a {
+	color: #2b8397
+}
+
+.navSubMenu .content {
+	margin-top: -3px;
+	background: #3e92a5
+}
+
+.navSubMenu .item {
+	line-height: 30px
+}
+
+.navSubMenu .item a {
+	color: #FFF
+}
+
+.navSubMenu .itemHover {
+	background: #2b8397
+}
+
+.navSubMenu .itemHover a {
+	color: #fff
+}
+
+.subMenu .content {
+	background: ##2b8397;
+	margin-top: 0
+}
+
+.footer {
+	color: #333;
+	padding-top: 26px
+}
+
+.footer a {
+	color: #333
+}
+
+.footer a:hover {
+	color: #2b8397
+}
+
+.footerItemSpacing .footerVerticalLine {
+	background-color: #333
+}
+
+.forms .formBannerTitle .titleCenter {
+	color: #2b8397;
+	font-size: 14px;
+	font-family: "微软雅黑", "宋体"
+}
+
+.forms .formMiddle .g_borderHover {
+	border-color: #1cdbc8
+}
+
+.forms .formMiddle .g_borderSelected {
+	border-color: #1cdbc8
+}
+
+.forms .formMiddle .g_separator {
+	border-color: #ddd
+}
+
+.forms .formMiddle .g_selected {
+	background-color: #58aabc;
+	color: #fff
+}
+
+.forms .formMiddle .g_selected a {
+	color: #FFF
+}
+
+.forms .formMiddle .g_title {
+	background-color: #2b8397;
+	color: #fff
+}
+
+.forms .formMiddle .g_title a {
+	color: #fff
+}
+
+.forms .formMiddle .g_block {
+	background-color: #2b8397;
+	color: #fff
+}
+
+.forms .formMiddle .g_block a {
+	color: #fff
+}
+
+.forms .formMiddle .g_hover {
+	background-color: #58aabc;
+	color: #fff
+}
+
+.forms .formMiddle .g_hover a {
+	color: #fff
+}
+
+.forms .formMiddle .g_panel {
+	background: #f3f5f7;
+	color: #333
+}
+
+.forms .formMiddle .g_panel a {
+	color: #333
+}
+
+.forms .formMiddle .g_panelArrow {
+	color: #f3f5f7
+}
+
+.forms .g_close {
+	background: url(../../image/imgClose.gif?v=201508311727) 0 -419px no-repeat
+}
+
+.forms .g_close:hover {
+	background: url(../../image/imgClose.gif?v=201508311727) -37px -419px
+		no-repeat;
+	width: 17px
+}
+
+.forms .formMiddle .g_imgPrev {
+	background: url(../../image/imgPrevNext.gif?v=201508311727) -36px -950px
+}
+
+.forms .formMiddle .g_imgNext {
+	background: url(../../image/imgPrevNext.gif?v=201508311727) 0 -950px
+}
+
+.forms .formMiddle .g_mallBuy {
+	background: url(../../image/buyB3.png?v=201310281734) no-repeat 0 -809px
+}
+
+.forms .formMiddle .g_mallBuy span {
+	background: url(../../image/buyB3.png?v=201310281734) 0 -838px repeat-x
+}
+
+.forms .formMiddle .g_mallBuyBig {
+	background: url(../../image/buyB2.png?v=201504271715) no-repeat 0 -1345px
+}
+
+.forms .formMiddle .g_mallBuyBig span {
+	background: url(../../image/buyB2.png?v=201504271715) 0 -1393px repeat-x
+}
+
+.forms .formMiddle .g_stress {
+	color: #c30
+}
+
+.forms .formMiddle .g_stress a {
+	color: #c30
+}
+
+.forms .formMiddle .fk-mallBuy {
+	background-color: #13a2a0
+}
+
+.forms .formMiddle .fk-mallBuy-big {
+	background-color: #13a2a0
+}
+
+.forms .formMiddle .fk-mall-addCart {
+	background-color: #deffff;
+	border-color: #13a2a0
+}
+
+.forms .formMiddle .fk-mall-addCart span {
+	color: #13a2a0
+}
+
+.sideForms .formBanner {
+	background: url(../../image/template/4002/title_ls.gif?v=201501261926) #fff
+		left bottom no-repeat;
+	height: 36px;
+	line-height: 36px;
+	color: #282828
+}
+
+.sideForms .formBanner .left {
+	display: table-cell;
+	*display: block;
+	width: 6px
+}
+
+.sideForms .formBanner .right {
+	display: table-cell;
+	*display: block;
+	width: 7px
+}
+
+.sideForms .formBannerMore a {
+	color: #999;
+	font-size: 12px;
+	font-family: "宋体", "微软雅黑"
+}
+
+.sideForms .formMiddle {
+	background: #fff
+}
+
+.sideForms .formMiddleContent {
+	margin-left: 15px
+}
+
+.mainForms .form {
+	font-family: "微软雅黑", "宋体"
+}
+
+.mainForms .formBanner {
+	background: url(../../image/template/4002/mainForms-c.jpg?v=201509081855)
+		bottom repeat-x;
+	height: 30px;
+	line-height: 30px;
+	color: #282828
+}
+
+.mainForms .formBanner .left {
+	display: table-cell;
+	*display: block
+}
+
+.mainForms .formBanner .right {
+	display: table-cell;
+	*display: block;
+	width: 7px
+}
+
+.mainForms .formBannerTitle {
+	height: 30px;
+	line-height: 30px;
+	font-size: 14px;
+	background: url(../../image/template/4002/sekuai.jpg?v=201509081855) bottom
+		repeat-x
+}
+
+.mainForms .formBannerTitle .titleLeft {
+	width: 25px
+}
+
+.mainForms .formBannerTitle .titleCenter {
+	color: #282828
+}
+
+.mainForms .formBannerMore a {
+	color: #999;
+	font-size: 12px;
+	font-family: "宋体", "微软雅黑"
+}
+
+.mainForms .formMiddle {
+	background: #fff
+}
+
+.mainForms .formMiddleContent {
+	color: #666
+}
+
+.absForms .form {
+	border: 1px solid #ddd
+}
+
+.floatForms .form {
+	border: 1px solid #ddd
+}
+
+.floatForms .formBanner {
+	background: url(../../image/template/4002/cent_ls.gif?v=201501261926) #fff
+		left bottom no-repeat;
+	height: 36px;
+	line-height: 36px;
+	color: #282828
+}
+
+.floatForms .formMiddle {
+	background: #fff
+}
+
+.leftForms .formIndex1 .formBanner {
+	background: #fff
+}
+
+.leftForms .formIndex1 .formBannerTitle {
+	color: #0282828
+}
+
+.leftForms .formIndex1 .formMiddle {
+	background: url(../../image/template/4002/left_t1.gif?v=201501261926) top
+		left no-repeat #fff;
+	padding-top: 30px
+}
+
+.g_sB_rt {
+	background: url(../../image/site/float/floata_blue4.gif) no-repeat 0 0
+}
+
+.g_sB_rc {
+	background: url(../../image/site/float/floata_blue4.gif) repeat-y -60px 0;
+	color: #fff
+}
+
+.g_sB_rb {
+	background: url(../../image/site/float/floata_blue4.gif) no-repeat -120px 0
+}
+
+.g_sB_lt {
+	background: url(../../image/site/float/floata_blue4.gif) no-repeat -180px 0
+}
+
+.g_sB_lc {
+	background: url(../../image/site/float/floata_blue4.gif) repeat-y -240px 0;
+	color: #fff
+}
+
+.g_sB_lb {
+	background: url(../../image/site/float/floata_blue4.gif) no-repeat -300px 0
+}
+
+.siteBackToTop_small_box {
+	background-position: 0 -1032px
+}
+
+.visitorCounterBg {
+	background: url(../../image/site/visitorCounter/blue4.gif) no-repeat
+}
+
+.g_control_next {
+	background: url(../../image/site/prev_nextarrow/Blue2_next.png) no-repeat;
+	_background: url(../../image/site/prev_nextarrow/Blue2_next.gif) no-repeat
+}
+
+.g_control_prev {
+	background: url(../../image/site/prev_nextarrow/Blue2_prev.png) no-repeat;
+	_background: url(../../image/site/prev_nextarrow/Blue2_prev.gif) no-repeat
+}
+
+.formTabButton .formTabMiddleHover {
+	color: #2b8397;
+	font-weight: bold
+}
+
+.formTabContent {
+	background: #FFF
+}
+
+.productFilter .productFilterFold {
+	padding-left: 15px;
+	background: url(../../image/fold.png?v=201304081856) 0 -1116px no-repeat
+}
+
+.productFilter .productFilterUnfold {
+	padding-left: 15px;
+	background: url(../../image/fold.png?v=201304081856) 0 -1076px no-repeat
+}
+
+.productFilterVert .productFilterValue {
+	height: 30px;
+	line-height: 30px;
+	border-bottom: 1px dashed #aaa
+}
+
+.productFilterVert .productFilterValue a {
+	background: url(../../image/template/4002/bq_sj.gif?v=201501261926) no-repeat
+		left;
+	line-height: 30px;
+	height: 30px;
+	text-decoration: none;
+	color: #555;
+	padding-left: 15px
+}
+
+.productFilterVert .productFilterValueCenter {
+	white-space: normal;
+	*word-break: break-all
+}
+
+.g_foldContainer .g_fold {
+	background-image: url(../../image/fold/tpl/11_0.png?v=201501271710)
+}
+
+.g_foldContainer .g_unfold {
+	background-image: url(../../image/fold/tpl/11_1.png?v=201501271710)
+}
+
+.g_vertFold .g_foldContainerValueCenter {
+	*word-break: break-all
+}

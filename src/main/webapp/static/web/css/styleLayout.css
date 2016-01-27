@@ -1,1 +1,96 @@
-body{background-color:#f7f7f7}.contentLeft{float:left;width:100px;height:187px;padding-top:18px;background:#e0e6eb;text-align:center;position:relative;font-family:"Microsoft YaHei","Î¢ÈíÑÅºÚ",sans-serif}.contentLeft ul{float:right}.contentTopBg{position:absolute;top:0;left:0;width:100%;height:20px;background:#f7f7f7 url(../image/panesMenuBg.png?v=201501101710) no-repeat 0 2px}.contentBottomBg{position:absolute;bottom:0;left:0;width:100%;height:20px;background:#f7f7f7 url(../image/panesMenuBg.png?v=201501101710) no-repeat left bottom}.menu{width:92px;height:30px;line-height:30px;cursor:pointer;color:#333}.menuHovor{background-color:#eceff1}.menuCheck{background-color:#f7f7f7}.contentRight{float:left;width:900px;font-family:"Microsoft YaHei","Î¢ÈíÑÅºÚ",sans-serif}.panelMenuTitle{position:relative;float:left;height:20px;line-height:20px;background:#84abcc;color:#fff;padding:0 5px;margin:5px 3px 0 0}.panelMenuTitleIco{position:absolute;width:0;height:0;line-height:0;font-size:0;top:6px;right:-6px;border-width:3px;border-style:solid;border-color:transparent transparent transparent #84abcc}.help{float:left;margin-left:5px;color:#555;text-decoration:none}.help:hover{color:#1b7ad1;font-weight:bold}
+body {
+	background-color: #f7f7f7
+}
+
+.contentLeft {
+	float: left;
+	width: 100px;
+	height: 187px;
+	padding-top: 18px;
+	background: #e0e6eb;
+	text-align: center;
+	position: relative;
+	font-family: "Microsoft YaHei", "Î¢ÈíÑÅºÚ", sans-serif
+}
+
+.contentLeft ul {
+	float: right
+}
+
+.contentTopBg {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 20px;
+	background: #f7f7f7 url(../image/panesMenuBg.png?v=201501101710)
+		no-repeat 0 2px
+}
+
+.contentBottomBg {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 20px;
+	background: #f7f7f7 url(../image/panesMenuBg.png?v=201501101710)
+		no-repeat left bottom
+}
+
+.menu {
+	width: 92px;
+	height: 30px;
+	line-height: 30px;
+	cursor: pointer;
+	color: #333
+}
+
+.menuHovor {
+	background-color: #eceff1
+}
+
+.menuCheck {
+	background-color: #f7f7f7
+}
+
+.contentRight {
+	float: left;
+	width: 900px;
+	font-family: "Microsoft YaHei", "Î¢ÈíÑÅºÚ", sans-serif
+}
+
+.panelMenuTitle {
+	position: relative;
+	float: left;
+	height: 20px;
+	line-height: 20px;
+	background: #84abcc;
+	color: #fff;
+	padding: 0 5px;
+	margin: 5px 3px 0 0
+}
+
+.panelMenuTitleIco {
+	position: absolute;
+	width: 0;
+	height: 0;
+	line-height: 0;
+	font-size: 0;
+	top: 6px;
+	right: -6px;
+	border-width: 3px;
+	border-style: solid;
+	border-color: transparent transparent transparent #84abcc
+}
+
+.help {
+	float: left;
+	margin-left: 5px;
+	color: #555;
+	text-decoration: none
+}
+
+.help:hover {
+	color: #1b7ad1;
+	font-weight: bold
+}

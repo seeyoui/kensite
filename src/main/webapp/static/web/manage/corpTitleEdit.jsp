@@ -38,8 +38,8 @@ var $primaryTitle = Fai.top.$("#primaryTitle"),
 	$logoImg = Fai.top.$("#logoImg"),
 	$corpTitle = Fai.top.$("#corpTitle");
 
+var popupID = <%=popupID%>;
 $(function(){
-	var popupID = <%=popupID%>;
 	Fai.addPopupWindowBtn(popupID, {id:'ok', text:'确 定', extClass:'saveButton', click:save});
 	Fai.addPopupWindowBtn(popupID, {id:'default', text:'恢复默认', click:resetDefault});
 	

@@ -1,1 +1,306 @@
-@charset "utf-8";body{background:#f7f7f7}ul,li{list-style:none;margin:0;padding:0}.choicebox{clear:both;height:23px;line-height:23px;padding:2px 0}.common_titile{float:left;width:90px;height:23px;text-align:right;line-height:23px}.radioPanel{float:left}.radioPanel{cursor:pointer}.proMsg{float:left;height:23px;line-height:23px}.closeEff{float:left;margin:4px;border:1px solid #f7f7f7;position:relative;cursor:pointer}.closeEff .effectsImg{width:130px;height:50px;background:url(../image/template/bannerEffects/close.jpg?v=201310170034) center no-repeat;padding:2px;border:1px solid #ddd}.closeEff .effectsImgHover{border-color:#8f8f8f}.clear{clear:both}.siteProFunc{height:23px!important;line-height:23px!important;background:url("../image/sitepro.png") no-repeat scroll 0 4px transparent}.siteMidFunc{height:23px!important;line-height:23px!important;background:url("../image/sitemid.png?v=201411102015") no-repeat scroll 0 4px transparent}.effectsListBody{height:100%;width:auto;overflow:auto;margin:0 auto}.effectsDiv{float:left;margin:4px;border:1px solid #f7f7f7;position:relative;cursor:pointer}.effectsDiv .effectsImg{width:130px;height:50px;padding:2px;border:1px solid #ddd}.effectsDiv .effectsImgHover{border-color:#8f8f8f}.effectsTitle{display:none;position:absolute;left:3px;bottom:3px;width:130px;height:20px;line-height:20px;text-align:center;color:#3a3a3f;background-color:#fff;opacity:.75;filter:alpha(opacity=75);z-index:1}.effectsCheck{border-color:#3599ff}.effectsCheck .effectsImg{border-color:#3599ff}.setTitle{width:50px;height:24px;line-height:24px;float:left;text-align:right}.setline{height:24px;line-height:24px;margin:2px 0;display:none}.mouseShape{cursor:text}.setCtrl{height:24px;line-height:24px;float:left}.choiceCus{width:150px;float:left;margin:0 0 0 20px}.choiceCus span{text-align:center}.menu{padding:10px 0 0 10px;height:26px;line-height:24px}.panelMenuTitle{position:relative;float:left;background:#84abcc;color:#fff;padding:0 5px;margin:3px 3px 0 0;height:20px;line-height:20px}.panelMenuTitleIco{position:absolute;width:0;height:0;line-height:0;font-size:0;top:7px;right:-6px;border-width:3px;border-style:solid;border-color:transparent transparent transparent #84abcc}.typeChange{display:block;float:left;margin:0 2px;padding:0 3px;border:1px solid #f7f7f7;text-decoration:none;color:#555}.typeChange:hover{border-color:#3298fe;background:#e8f3fe;color:#555}.typeCheck{color:#385e7e;font-weight:bold}.positionCheck{float:left;margin-left:5px;width:65px;margin-top:2px}.effectsCheckButton{display:none;position:absolute;width:15px;height:15px;left:1px;bottom:1px;background:url(../image/bg01.png?v=201512071738) -1406px -323px no-repeat;z-index:2;background-color:#ffc}#advancedFilter{float:left;width:auto;height:24px;overflow:hidden}.advFilRight{float:left;width:15px;height:15px;margin-left:8px;background:url(../image/bg02.png?v=201511091906) -172px -427px no-repeat;margin-top:6px;cursor:pointer}.advFilRight-hover{background:url(../image/bg02.png?v=201511091906) -188px -427px no-repeat}.advFilLeft{float:left;width:15px;height:15px;margin-left:8px;background:url(../image/bg02.png?v=201511091906) -172px -450px no-repeat;margin-top:6px;cursor:pointer}.advFilLeft-hover{background:url(../image/bg02.png?v=201511091906) -188px -450px no-repeat}.searchInput{display:inline-block;float:left;width:50px;height:18px;line-height:18px;margin:3px 0 0 5px;padding:0;outline:0;border:1px solid #d2dcec}.clearSearch{display:inline-block;float:left;width:16px;height:14px;zoom:1;margin-top:2px}.unfind{background:0;cursor:default}.find{background:url(../image/bg01.png?v=201512071738) no-repeat -1436px 5px;cursor:pointer}
+@charset "utf-8"; 
+
+body {
+	background: #f7f7f7
+}
+
+ul, li {
+	list-style: none;
+	margin: 0;
+	padding: 0
+}
+
+.choicebox {
+	clear: both;
+	height: 23px;
+	line-height: 23px;
+	padding: 2px 0
+}
+
+.common_titile {
+	float: left;
+	width: 90px;
+	height: 23px;
+	text-align: right;
+	line-height: 23px
+}
+
+.radioPanel {
+	float: left
+}
+
+.radioPanel {
+	cursor: pointer
+}
+
+.proMsg {
+	float: left;
+	height: 23px;
+	line-height: 23px
+}
+
+.closeEff {
+	float: left;
+	margin: 4px;
+	border: 1px solid #f7f7f7;
+	position: relative;
+	cursor: pointer
+}
+
+.closeEff .effectsImg {
+	width: 130px;
+	height: 50px;
+	background:
+		url(../image/template/bannerEffects/close.jpg?v=201310170034) center
+		no-repeat;
+	padding: 2px;
+	border: 1px solid #ddd
+}
+
+.closeEff .effectsImgHover {
+	border-color: #8f8f8f
+}
+
+.clear {
+	clear: both
+}
+
+.siteProFunc {
+	height: 23px !important;
+	line-height: 23px !important;
+	background: url("../image/sitepro.png") no-repeat scroll 0 4px
+		transparent
+}
+
+.siteMidFunc {
+	height: 23px !important;
+	line-height: 23px !important;
+	background: url("../image/sitemid.png?v=201411102015") no-repeat scroll
+		0 4px transparent
+}
+
+.effectsListBody {
+	height: 100%;
+	width: auto;
+	overflow: auto;
+	margin: 0 auto
+}
+
+.effectsDiv {
+	float: left;
+	margin: 4px;
+	border: 1px solid #f7f7f7;
+	position: relative;
+	cursor: pointer
+}
+
+.effectsDiv .effectsImg {
+	width: 130px;
+	height: 50px;
+	padding: 2px;
+	border: 1px solid #ddd
+}
+
+.effectsDiv .effectsImgHover {
+	border-color: #8f8f8f
+}
+
+.effectsTitle {
+	display: none;
+	position: absolute;
+	left: 3px;
+	bottom: 3px;
+	width: 130px;
+	height: 20px;
+	line-height: 20px;
+	text-align: center;
+	color: #3a3a3f;
+	background-color: #fff;
+	opacity: .75;
+	filter: alpha(opacity = 75);
+	z-index: 1
+}
+
+.effectsCheck {
+	border-color: #3599ff
+}
+
+.effectsCheck .effectsImg {
+	border-color: #3599ff
+}
+
+.setTitle {
+	width: 50px;
+	height: 24px;
+	line-height: 24px;
+	float: left;
+	text-align: right
+}
+
+.setline {
+	height: 24px;
+	line-height: 24px;
+	margin: 2px 0;
+	display: none
+}
+
+.mouseShape {
+	cursor: text
+}
+
+.setCtrl {
+	height: 24px;
+	line-height: 24px;
+	float: left
+}
+
+.choiceCus {
+	width: 150px;
+	float: left;
+	margin: 0 0 0 20px
+}
+
+.choiceCus span {
+	text-align: center
+}
+
+.menu {
+	padding: 10px 0 0 10px;
+	height: 26px;
+	line-height: 24px
+}
+
+.panelMenuTitle {
+	position: relative;
+	float: left;
+	background: #84abcc;
+	color: #fff;
+	padding: 0 5px;
+	margin: 3px 3px 0 0;
+	height: 20px;
+	line-height: 20px
+}
+
+.panelMenuTitleIco {
+	position: absolute;
+	width: 0;
+	height: 0;
+	line-height: 0;
+	font-size: 0;
+	top: 7px;
+	right: -6px;
+	border-width: 3px;
+	border-style: solid;
+	border-color: transparent transparent transparent #84abcc
+}
+
+.typeChange {
+	display: block;
+	float: left;
+	margin: 0 2px;
+	padding: 0 3px;
+	border: 1px solid #f7f7f7;
+	text-decoration: none;
+	color: #555
+}
+
+.typeChange:hover {
+	border-color: #3298fe;
+	background: #e8f3fe;
+	color: #555
+}
+
+.typeCheck {
+	color: #385e7e;
+	font-weight: bold
+}
+
+.positionCheck {
+	float: left;
+	margin-left: 5px;
+	width: 65px;
+	margin-top: 2px
+}
+
+.effectsCheckButton {
+	display: none;
+	position: absolute;
+	width: 15px;
+	height: 15px;
+	left: 1px;
+	bottom: 1px;
+	background: url(../image/bg01.png?v=201512071738) -1406px -323px
+		no-repeat;
+	z-index: 2;
+	background-color: #ffc
+}
+
+#advancedFilter {
+	float: left;
+	width: auto;
+	height: 24px;
+	overflow: hidden
+}
+
+.advFilRight {
+	float: left;
+	width: 15px;
+	height: 15px;
+	margin-left: 8px;
+	background: url(../image/bg02.png?v=201511091906) -172px -427px
+		no-repeat;
+	margin-top: 6px;
+	cursor: pointer
+}
+
+.advFilRight-hover {
+	background: url(../image/bg02.png?v=201511091906) -188px -427px
+		no-repeat
+}
+
+.advFilLeft {
+	float: left;
+	width: 15px;
+	height: 15px;
+	margin-left: 8px;
+	background: url(../image/bg02.png?v=201511091906) -172px -450px
+		no-repeat;
+	margin-top: 6px;
+	cursor: pointer
+}
+
+.advFilLeft-hover {
+	background: url(../image/bg02.png?v=201511091906) -188px -450px
+		no-repeat
+}
+
+.searchInput {
+	display: inline-block;
+	float: left;
+	width: 50px;
+	height: 18px;
+	line-height: 18px;
+	margin: 3px 0 0 5px;
+	padding: 0;
+	outline: 0;
+	border: 1px solid #d2dcec
+}
+
+.clearSearch {
+	display: inline-block;
+	float: left;
+	width: 16px;
+	height: 14px;
+	zoom: 1;
+	margin-top: 2px
+}
+
+.unfind {
+	background: 0;
+	cursor: default
+}
+
+.find {
+	background: url(../image/bg01.png?v=201512071738) no-repeat -1436px 5px;
+	cursor: pointer
+}

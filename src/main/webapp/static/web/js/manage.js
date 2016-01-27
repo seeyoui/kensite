@@ -9157,7 +9157,7 @@ Site.initTopBar = function(e) {
         $("#topBarMySiteCheckResult .text").html("正在查询域名...");
         $.ajax({
             type: "post",
-            url: "../ajax/siteDomain_h.jsp?cmd=checkRegistered&domainList=" + Fai.encodeUrl($.toJSON(h)),
+            url: "../static/web/ajax/siteDomain_h.jsp?cmd=checkRegistered&domainList=" + Fai.encodeUrl($.toJSON(h)),
             error: function() {
                 $("#topBarMySiteDomain").removeAttr("disabled");
                 $("#topBarMySiteDomainSuffix").removeAttr("disabled");
@@ -9433,7 +9433,7 @@ Site.initTopBar = function(e) {
         }
         $.ajax({
             type: "post",
-            url: "./ajax/site_h.jsp?cmd=set",
+            url: "./static/web/ajax/site_h.jsp?cmd=set",
             data: g.join(""),
             error: function() {
                 Fai.ing("服务繁忙，请稍候重试", false)
@@ -16124,7 +16124,7 @@ Site.deletePhotoDetail = function(a, d, b, f) {
         Fai.ing("正在删除……", false);
         $.ajax({
             type: "post",
-            url: "../ajax/photoGroup_h.jsp?cmd=set&id=" + d,
+            url: "../static/web/ajax/photoGroup_h.jsp?cmd=set&id=" + d,
             data: e.join(""),
             error: function() {
                 Fai.ing("服务繁忙，请稍后重试。", true)
@@ -16158,7 +16158,7 @@ Site.changeRichPic = function(c) {
             var n = q.data[0].fileId;
             var m = q.data[0].fileWidth;
             var o = q.data[0].fileHeight;
-            var l = "../ajax/module_h.jsp?cmd=setBack&id=" + c + "&colId=" + Fai.top._colId + "&extId=" + Fai.top._extId;
+            var l = "../static/web/ajax/module_h.jsp?cmd=setBack&id=" + c + "&colId=" + Fai.top._colId + "&extId=" + Fai.top._extId;
             var p = "";
             if (b == 2) {
                 p = "{'i':'" + n + "','w':" + m + ",'h':" + o + ",'l':" + b + ",'d':'" + e + "','u':'" + j + "','c':" + a + "}"
@@ -19633,7 +19633,7 @@ Site.renderUEditor = function(c, b) {
     };
     $.extend(d, a.outerFunction);
     var e = new baidu.editor.ui.Editor({
-        upLoadFlashUrl: "/ajax/upfile_h.jsp?type=50",
+        upLoadFlashUrl: "/static/web/ajax/upfile_h.jsp?type=50",
         ueditorChangeEvent: a.setPageChange,
         htmlModuleRichTip: a.faiscoRichTip,
         initialContent: a.initContent,
@@ -21328,7 +21328,7 @@ Site.publishScheme = function(b, a) {
         Fai.ing("正在发布……", false);
         $.ajax({
             type: "post",
-            url: "/ajax/site_h.jsp",
+            url: "/static/web/ajax/site_h.jsp",
             data: "cmd=publish&id=" + b,
             error: function() {
                 Fai.ing("系统繁忙，请稍候重试", true)
@@ -21399,7 +21399,7 @@ Site.closeImagePage = function() {
     if (confirm("您确定要关闭欢迎页?")) {
         $.ajax({
             type: "post",
-            url: "/ajax/site_h.jsp?cmd=set",
+            url: "/static/web/ajax/site_h.jsp?cmd=set",
             data: "schemeFlag8=false",
             success: function(a) {
                 Fai.successHandle(a, "成功关闭欢迎页。", "", "/index.jsp", 1, 1)

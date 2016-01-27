@@ -138,6 +138,15 @@ ${"<if test=\""+column.columnNameLower+" !=null and "+column.columnNameLower+" !
 	
 	<!-- 数据新增 -->
 	<insert id="save" parameterType="${basepackage}.${innerpackage}.${table.classNameFirstLower}.domain.${className}">
+		<#list table.columns as column>
+			<#if (column.columnName=="id") >
+				<#if column.sqlTypeName=="number" >
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			SELECT SEQ_COMMON_BO_ID.NEXTVAL FROM DUAL
+		</selectKey>
+				</#if>
+			</#if>
+		</#list>
 		INSERT INTO ${table.sqlName} (
 			<#list table.columns as column>
 			${getInsertColStr(column)}

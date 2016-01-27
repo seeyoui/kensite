@@ -1,0 +1,587 @@
+@charset "utf-8"; 
+
+.firstLevel {
+	height: auto;
+	padding: 0;
+	width: 100%;
+	margin: 0;
+	list-style: none;
+	list-style-type: none;
+	clear: both
+}
+
+.firstLevel li {
+	border: 0;
+	padding: 0;
+	height: auto;
+	min-height: 22px;
+	max-height: none;
+	_height: 22px;
+	line-height: 22px;
+	margin: 0;
+	_margin: 0
+}
+
+.firstLevel li .mark {
+	float: left;
+	width: 15px;
+	height: 22px;
+	clear: left
+}
+
+.firstLevel li .itemName {
+	width: 200px;
+	float: left;
+	cursor: move
+}
+
+.firstLevel li .itemType {
+	width: 120px;
+	float: left;
+	cursor: move
+}
+
+.firstLevel li .itemOpen {
+	width: 60px;
+	float: left
+}
+
+.firstLevel li .itemManage {
+	width: 160px;
+	float: left;
+	cursor: move
+}
+
+.firstLevel .arrow {
+	background: url(../../image/bg01.png?v=201512071738) -1545px -65px no-repeat;
+	cursor: pointer
+}
+
+.firstLevel .arrowLeft {
+	background: url(../../image/bg01.png?v=201512071738) -1650px -102px no-repeat;
+	cursor: pointer
+}
+
+.firstLevel .div {
+	float: left;
+	margin: 0;
+	min-height: 22px;
+	max-height: none;
+	height: auto;
+	_height: 22px;
+	line-height: 22px
+}
+
+.secondLevel {
+	height: auto;
+	padding: 0;
+	width: 100%;
+	margin: 0;
+	list-style: none;
+	list-style-type: none
+}
+
+.secondLevel li {
+	border: 0;
+	margin: 0;
+	margin-left: 20px;
+	padding: 0;
+	height: auto;
+	min-height: 22px;
+	max-height: none;
+	_height: 100%;
+	line-height: 22px
+}
+
+.secondLevel li .mark {
+	float: left;
+	width: 20px;
+	height: 22px;
+	clear: left;
+	background: url(../../image/bg01.png?v=201512071738) -1610px -247px repeat-y
+}
+
+.secondLevel li .itemName {
+	width: 175px;
+	float: left;
+	cursor: move
+}
+
+.secondLevel li .itemType {
+	width: 120px;
+	float: left;
+	cursor: move
+}
+
+.secondLevel li .itemOpen {
+	width: 60px;
+	float: left
+}
+
+.secondLevel li .itemManage {
+	width: 160px;
+	float: left;
+	cursor: move
+}
+
+.thirdLevel {
+	height: auto;
+	padding: 0;
+	width: 100%;
+	margin: 0;
+	list-style: none;
+	list-style-type: none
+}
+
+.thirdLevel li {
+	border: 0;
+	margin: 0;
+	margin-left: 20px;
+	padding: 0;
+	height: auto;
+	min-height: 22px;
+	max-height: none;
+	_height: 100%;
+	line-height: 22px
+}
+
+.thirdLevel li .mark {
+	float: left;
+	width: 20px;
+	height: 22px;
+	clear: left;
+	background: url(../../image/bg01.png?v=201512071738) -1610px -247px repeat-y
+}
+
+.thirdLevel li .itemName {
+	width: 155px;
+	float: left;
+	cursor: move
+}
+
+.thirdLevel li .itemType {
+	width: 120px;
+	float: left;
+	cursor: move
+}
+
+.thirdLevel li .itemOpen {
+	width: 60px;
+	float: left
+}
+
+.thirdLevel li .itemManage {
+	width: 160px;
+	float: left;
+	cursor: move
+}
+
+.dropzone {
+	clear: both;
+	HEIGHT: 4px;
+	font-size: 0;
+	overflow: hidden
+}
+
+.dl {
+	width: 600px;
+	padding: 0;
+	margin: 0;
+	height: auto;
+	min-height: 22px;
+	max-height: none;
+	_height: 22px
+}
+
+.itemOpenIco {
+	width: 40px;
+	float: left;
+	cursor: pointer;
+	float: left;
+	height: 23px;
+	margin: 0 10px
+}
+
+.checked_on {
+	background: url("../../image/bg02.png?v=201511091906") no-repeat scroll
+		-310px -346px transparent
+}
+
+.checked_off {
+	background: url("../../image/bg02.png?v=201511091906") no-repeat scroll
+		-310px -368px transparent
+}
+
+.popupSetUrl {
+	width: 250px;
+	height: 22px;
+	line-height: 24px
+}
+
+.lTitle {
+	width: 80px;
+	float: left;
+	text-align: right
+}
+
+.rValue {
+	width: 170px;
+	float: left;
+	text-align: left
+}
+
+.popupSetLine {
+	clear: both;
+	height: 24px;
+	line-height: 24px;
+	color: black
+}
+
+.hackHeight {
+	height: 150px;
+	overflow-y: auto;
+	overflow-x: hidden
+}
+
+.popupSetLine .tCtrl {
+	float: left;
+	width: 60px;
+	height: 24px;
+	line-height: 24px;
+	text-align: right
+}
+
+.popupSetLine .oCtrl {
+	float: left;
+	line-height: 24px;
+	width: 320px
+}
+
+.popupSetLine .oCtrl .nullmp {
+	margin: 0;
+	padding: 0
+}
+
+.popupSetLine .oCtrl .clearCtrl1 {
+	display: block;
+	height: 24px;
+	line-height: 24px;
+	width: 150px
+}
+
+.popupSetLine .oCtrl .clearCtrl1 span {
+	cursor: default
+}
+
+.popupSetLine .oCtrl .clearCtrl2 .chkPanel {
+	float: left;
+	width: 95px
+}
+
+.popupSetLine .oCtrl .clearCtrl2 .chkPanel span {
+	cursor: default
+}
+
+.showBtn {
+	margin: 0 auto
+}
+
+.allOrMember {
+	float: left;
+	width: 150px
+}
+
+.buddyGroupPanel {
+	width: 95px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis
+}
+
+.list {
+	position: relative;
+	float: left;
+	text-align: left;
+	width: 100%;
+	height: auto;
+	padding: 0;
+	margin: 5px;
+	border-top: 1px solid #b5c8eb;
+	border-bottom: 1px solid #b5c8eb
+}
+
+.listBanner {
+	margin: 0;
+	padding: 0;
+	float: left;
+	text-align: left;
+	width: 100%;
+	height: auto !important;
+	min-height: 22px;
+	max-height: none;
+	_height: 22px;
+	list-style: none;
+	list-style-type: none
+}
+
+.listBanner ul {
+	height: auto;
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	height: auto !important;
+	min-height: 22px;
+	max-height: none;
+	_height: 22px;
+	background: #eef3fe;
+	border-bottom: 1px solid #b5c8eb;
+	list-style: none;
+	list-style-type: none
+}
+
+.listBanner ul li {
+	padding: 0;
+	margin: 0;
+	float: left;
+	height: auto !important;
+	min-height: 22px;
+	max-height: none;
+	_height: 22px;
+	line-height: 22px;
+	border: 0;
+	height: auto
+}
+
+.listBanner ul li span {
+	padding: 0
+}
+
+.col-up {
+	background: url(../../image/bg02.png?v=201511091906) -251px -421px no-repeat;
+	width: 20px;
+	height: 27px;
+	display: inline-block;
+	cursor: pointer;
+	text-decoration: none
+}
+
+.col-up:hover {
+	background: url(../../image/bg02.png?v=201511091906) -251px -442px no-repeat
+}
+
+.col-down {
+	background: url(../../image/bg02.png?v=201511091906) -270px -421px no-repeat;
+	width: 20px;
+	height: 27px;
+	display: inline-block;
+	cursor: pointer;
+	text-decoration: none
+}
+
+.col-down:hover {
+	background: url(../../image/bg02.png?v=201511091906) -270px -442px no-repeat
+}
+
+.col-left {
+	background: url(../../image/bg02.png?v=201511091906) -289px -421px no-repeat;
+	width: 20px;
+	height: 27px;
+	display: inline-block;
+	cursor: pointer;
+	text-decoration: none
+}
+
+.col-left:hover {
+	background: url(../../image/bg02.png?v=201511091906) -289px -442px no-repeat
+}
+
+.col-right {
+	background: url(../../image/bg02.png?v=201511091906) -308px -421px no-repeat;
+	width: 20px;
+	height: 27px;
+	display: inline-block;
+	cursor: pointer;
+	text-decoration: none
+}
+
+.col-right:hover {
+	background: url(../../image/bg02.png?v=201511091906) -308px -442px no-repeat
+}
+
+.linkButton {
+	text-decoration: none
+}
+
+.addColIcon {
+	float: left;
+	width: 20px;
+	height: 20px;
+	margin-left: 3px;
+	margin-top: 4px;
+	background-image: url(../../image/site/jh2.gif?v=201404211717);
+	background-repeat: no-repeat;
+	background-size: 10px;
+	background-position: 3px 4px;
+	cursor: pointer
+}
+
+.addColIcon-Hover {
+	background-image: url(../../image/site/jh1.gif?v=201404211717)
+}
+
+.firstLevel li .itemName {
+	width: 160px;
+	float: left;
+	cursor: move
+}
+
+.secondLevel li .itemName {
+	width: 135px;
+	float: left;
+	cursor: move
+}
+
+.thirdLevel li .itemName {
+	width: 115px;
+	float: left;
+	cursor: move
+}
+
+.dl {
+	width: 600px;
+	padding: 0;
+	margin: 0;
+	height: 27px;
+	min-height: 22px;
+	line-height: 27px;
+	max-height: none;
+	_height: 22px
+}
+
+.dl {
+	float: left;
+	background-color: whiteSmoke;
+	margin-left: 10px;
+	border: 1px solid #b5c8eb;
+	border-radius: 2px
+}
+
+.secondLevel li .dl {
+	width: 580px
+}
+
+.thirdLevel li .dl {
+	width: 560px
+}
+
+.firstLevel li .mark {
+	float: left;
+	height: 27px;
+	clear: left;
+	line-height: 26px
+}
+
+.firstLevel .arrow {
+	background: url(http://0.ss.aaadns.com../../image/bg01.png?v=201512071738)
+		-1545px -62px no-repeat;
+	cursor: pointer
+}
+
+.totalCount {
+	margin-left: 20px
+}
+
+.sibling-dropzone {
+	clear: both;
+	height: 10px;
+	font-size: 0;
+	overflow: hidden;
+	border-radius: 2px
+}
+
+.child-pre-div {
+	border-radius: 2px
+}
+
+.tail-dropzone {
+	clear: both;
+	height: 20px;
+	font-size: 0;
+	overflow: hidden;
+	border-radius: 2px
+}
+
+.itemOpenIco {
+	width: 20px
+}
+
+.setline {
+	height: 26px;
+	line-height: 26px
+}
+
+.setTitle {
+	height: 26px;
+	line-height: 26px;
+	float: left;
+	width: 100px;
+	text-align: right
+}
+
+.setCtrl {
+	height: 26px;
+	line-height: 26px;
+	float: left
+}
+
+.setRadio span {
+	cursor: pointer
+}
+
+.hard-width-150 {
+	width: 120px
+}
+
+.color-red {
+	color: red
+}
+
+.supportTip {
+	height: 22px;
+	line-height: 22px;
+	border: 1px solid #f4e190;
+	background: #fff6d0;
+	float: left;
+	text-align: center;
+	width: 290px
+}
+
+.bizIcon {
+	display: inline-block;
+	color: #36c;
+	background-color: #fff6d0;
+	height: 20px;
+	padding-left: 18px;
+	line-height: 20px;
+	background: url(../../image/sitebiz2.png?v=201411102015) no-repeat 0 2px;
+	cursor: pointer
+}
+
+.bizIcon:hover {
+	color: #36c
+}
+
+.advIcon {
+	display: inline-block;
+	color: #36c;
+	background-color: #fff6d0;
+	height: 20px;
+	padding-left: 18px;
+	line-height: 20px;
+	background: url(../../image/siteadv.png?v=201411102015) no-repeat 0 2px;
+	cursor: pointer
+}
+
+.advIcon:hover {
+	color: #36c
+}

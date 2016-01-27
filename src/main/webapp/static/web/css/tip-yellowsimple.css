@@ -1,1 +1,91 @@
-.tip-yellowsimple{z-index:9101;text-align:left;border:1px solid #fec24a;padding:6px 8px;width:auto;color:#555;background-color:#fffcc9}.tip-yellowsimple .tip-inner{font:12px/16px arial,helvetica,sans-serif}.tip-yellowsimple .tip-inner .tip-content{padding-left:6px;padding-right:6px;color:#ff7800}.tip-yellowsimple .tip-arrow-top{margin-top:-6px;margin-left:-5px;top:0;left:50%;width:9px;height:6px;background:url(../image/comm/poshytip/tip-yellowsimple_arrows.gif?v=201311121807) no-repeat}.tip-yellowsimple .tip-arrow-right{margin-top:-4px;margin-left:0;top:50%;left:100%;width:6px;height:9px;background:url(../image/comm/poshytip/tip-yellowsimple_arrows.gif?v=201311121807) no-repeat -9px 0}.tip-yellowsimple .tip-arrow-bottom{margin-top:0;margin-left:-5px;top:100%;left:50%;width:9px;height:6px;background:url(../image/comm/poshytip/tip-yellowsimple_arrows.gif?v=201311121807) no-repeat -18px 0}.tip-yellowsimple .tip-arrow-left{margin-top:-4px;margin-left:-6px;top:50%;left:0;width:6px;height:9px;background:url(../image/comm/poshytip/tip-yellowsimple_arrows.gif?v=201311121807) no-repeat -27px 0}.tip-btnClose{background:url(../image/comm/poshytip/close02.gif?v=201401131741) no-repeat 0 0;height:9px;line-height:9px;width:9px;cursor:pointer;position:absolute;top:3px;right:3px}a.tip-btnClose:hover{background:url(../image/comm/poshytip/close02.gif?v=201401131741) no-repeat -9px 0}.tip-closeFrame{clear:both;height:8px;line-height:8px;font-size:8px}
+.tip-yellowsimple {
+	z-index: 9101;
+	text-align: left;
+	border: 1px solid #fec24a;
+	padding: 6px 8px;
+	width: auto;
+	color: #555;
+	background-color: #fffcc9
+}
+
+.tip-yellowsimple .tip-inner {
+	font: 12px/16px arial, helvetica, sans-serif
+}
+
+.tip-yellowsimple .tip-inner .tip-content {
+	padding-left: 6px;
+	padding-right: 6px;
+	color: #ff7800
+}
+
+.tip-yellowsimple .tip-arrow-top {
+	margin-top: -6px;
+	margin-left: -5px;
+	top: 0;
+	left: 50%;
+	width: 9px;
+	height: 6px;
+	background:
+		url(../image/comm/poshytip/tip-yellowsimple_arrows.gif?v=201311121807)
+		no-repeat
+}
+
+.tip-yellowsimple .tip-arrow-right {
+	margin-top: -4px;
+	margin-left: 0;
+	top: 50%;
+	left: 100%;
+	width: 6px;
+	height: 9px;
+	background:
+		url(../image/comm/poshytip/tip-yellowsimple_arrows.gif?v=201311121807)
+		no-repeat -9px 0
+}
+
+.tip-yellowsimple .tip-arrow-bottom {
+	margin-top: 0;
+	margin-left: -5px;
+	top: 100%;
+	left: 50%;
+	width: 9px;
+	height: 6px;
+	background:
+		url(../image/comm/poshytip/tip-yellowsimple_arrows.gif?v=201311121807)
+		no-repeat -18px 0
+}
+
+.tip-yellowsimple .tip-arrow-left {
+	margin-top: -4px;
+	margin-left: -6px;
+	top: 50%;
+	left: 0;
+	width: 6px;
+	height: 9px;
+	background:
+		url(../image/comm/poshytip/tip-yellowsimple_arrows.gif?v=201311121807)
+		no-repeat -27px 0
+}
+
+.tip-btnClose {
+	background: url(../image/comm/poshytip/close02.gif?v=201401131741)
+		no-repeat 0 0;
+	height: 9px;
+	line-height: 9px;
+	width: 9px;
+	cursor: pointer;
+	position: absolute;
+	top: 3px;
+	right: 3px
+}
+
+a.tip-btnClose:hover {
+	background: url(../image/comm/poshytip/close02.gif?v=201401131741)
+		no-repeat -9px 0
+}
+
+.tip-closeFrame {
+	clear: both;
+	height: 8px;
+	line-height: 8px;
+	font-size: 8px
+}

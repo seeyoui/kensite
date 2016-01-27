@@ -25,13 +25,13 @@
 	</script>
 	<link type="text/css" rel="stylesheet" href="${ctx_web}/css/site/floatBtnEdit.min.css?v=201509071734"/>
 <script type="text/javascript">
-var addMode = false,
+var addMode = true,
 	g_id = <%=id%>,
 	flBtnStyleData,
 	cntFlBtn, 
 	cssLinkType = {},
-
 	moduleFloatBtnBox = Fai.top.$(".formStyle81").find(".J_floatBtnBox");
+	var popupID = <%=popupID%>;
 	
 if(moduleFloatBtnBox .length > 0){
 	moduleFloatBtnBox.each(function(index){
@@ -46,8 +46,6 @@ if(moduleFloatBtnBox .length > 0){
 }
 
 $(function(){
-	//popupID
-	var popupID = <%=popupID%>;
 	Fai.addPopupWindowBtn(popupID, {id:'save', extClass:'saveButton', text:'确定', click:save});
 	Fai.addPopupWindowBtn(popupID, {id:'close', extClass:'cancelButton', text:'取消', click:'close'});
 	$('#tabs').tabs({ selected: 0 });
@@ -180,9 +178,9 @@ function save(){
 	
 	Fai.ing("正在保存……", false);
 	Fai.closePopupWindow(  );
-	/* $.ajax({
+	$.ajax({
 	   	type: "post",
-		url: '.../ajax/module_h.jsp?cmd=setBack&id=479&style=81&colId=2&extId=0',
+		url: "../ajax/module_h.jsp?cmd=setBack&id="+popupID+"&style=81&colId=2&extId=0",
 		data: params.join(""),
 		error: function(){Fai.ing("服务繁忙，请稍候重试",false);},
 		success: function(data){
@@ -199,7 +197,7 @@ function save(){
 			}
 			Site.getModuleAttr(g_id).data.changed = false;
 		}
-	}); */
+	});
 }
 function initFlBtnData(){
 	initBaseSet();

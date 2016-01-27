@@ -337,8 +337,8 @@ Fai.renderUEditor = function(b) {
     };
     $.extend(a, b);
     var c = new baidu.editor.ui.Editor({
-        upLoadFlashUrl: "/ajax/upfile_h.jsp?type=50",
-        upLoadImageUrl: "/ajax/upimg_h.jsp",
+        upLoadFlashUrl: "/static/web/ajax/upfile_h.jsp?type=50",
+        upLoadImageUrl: "/static/web/ajax/upimg_h.jsp",
         ueditorChangeEvent: a.setPageChange,
         htmlModuleRichTip: a.faiscoRichTip,
         initialContent: a.initContent,

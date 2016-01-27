@@ -1,0 +1,2330 @@
+body {
+	font-size: 12px
+}
+
+#tablewrapper_id label {
+	float: none
+}
+
+#tablewrapper_id table td {
+	padding: 0
+}
+
+.imageExtendsClass {
+	height: 20px;
+	padding-left: 10px;
+	line-height: 20px;
+	width: 60px;
+	padding-right: 20px;
+	position: relative;
+	display: -moz-inline-box !important;
+	display: inline-block !important;
+	border: 1px solid #fff;
+	vertical-align: top;
+	cursor: pointer
+}
+
+.imageExtendsClass:hover {
+	background-color: #fff5d4;
+	border: 1px solid #dcac6c
+}
+
+.edui-box {
+	border: 0;
+	padding: 0;
+	margin: 0;
+	overflow: hidden
+}
+
+a.edui-box {
+	display: block;
+	text-decoration: none;
+	color: black
+}
+
+a.edui-box:hover {
+	text-decoration: none
+}
+
+a.edui-box:active {
+	text-decoration: none
+}
+
+table.edui-box {
+	border-collapse: collapse
+}
+
+ul.edui-box {
+	list-style-type: none
+}
+
+div.edui-box {
+	position: relative;
+	display: -moz-inline-box !important;
+	display: inline-block !important;
+	vertical-align: top
+}
+
+.edui-clearfix {
+	zoom: 1
+}
+
+.edui-clearfix:after {
+	content: '\20';
+	display: block;
+	clear: both
+}
+
+* html div.edui-box {
+	display: inline !important
+}
+
+*:first-child+html div.edui-box {
+	display: inline !important
+}
+
+.edui-for-swfupload .edui-icon {
+	background-position: -294px -0px
+}
+
+.edui-button-body, .edui-splitbutton-body, .edui-menubutton-body,
+	.edui-combox-body {
+	position: relative
+}
+
+.edui-popup {
+	position: absolute;
+	-webkit-user-select: none
+}
+
+.edui-popup .edui-shadow {
+	position: absolute;
+	z-index: -1
+}
+
+.edui-popup .edui-bordereraser {
+	position: absolute;
+	overflow: hidden
+}
+
+.edui-tablepicker .edui-canvas {
+	position: relative
+}
+
+.edui-tablepicker .edui-canvas .edui-overlay {
+	position: absolute
+}
+
+.edui-dialog-modalmask, .edui-dialog-dragmask {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%
+}
+
+.edui-toolbar {
+	position: relative
+}
+
+.bodyDisable_1 {
+	width: 100%;
+	height: 100%;
+	_height: 500px;
+	position: absolute;
+	background: #fff;
+	top: 0;
+	left: 0;
+	z-index: 4;
+	filter: alpha(opacity = 60);
+	opacity: .6
+}
+
+.bodyProgressWrap_1 {
+	width: 100%;
+	height: 100%;
+	_height: 500px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 5
+}
+
+.progressCenter_1 {
+	width: 100%;
+	height: 50%
+}
+
+.progressIngBody_1 {
+	width: 330px;
+	height: 85px;
+	margin: 0 auto;
+	margin-top: -40px;
+	background: #fff;
+	border: 1px solid #6c92ad
+}
+
+.progressIngBody_1 .progressIngTitle {
+	width: 300px;
+	height: 20px;
+	font-weight: 600;
+	font-size: 14px;
+	margin: 10px 10px 0 10px;
+	text-indent: 22px;
+	background: url(../../../image/fileUploadV2/attachmentIco.gif) no-repeat;
+	overflow: hidden;
+	word-break: keep-all;
+	white-space: nowrap;
+	text-overflow: ellipsis
+}
+
+.progressIngBody_1 .progressIngMission {
+	height: 20px;
+	margin-top: 5px
+}
+
+.progressIngBody_1 .mission {
+	float: left;
+	width: 270px;
+	margin: 2px 8px 0 8px;
+	padding: 1px;
+	height: 6px;
+	_font-size: 1px !important;
+	border: 1px solid #ccc
+}
+
+.progressIngBody_1 .progress {
+	float: left;
+	height: 100%;
+	width: 60%;
+	background: url(../../../image/fileUploadV2/uploading.gif) repeat-x #54cd4a;
+	_font-size: 1px
+}
+
+.progressIngBody_1 .progressError {
+	background-position: 0 -9px;
+	color: #f00
+}
+
+.progressIngBody_1 .progressNum {
+	float: left;
+	width: 30px
+}
+
+.progressIngBody_1 .progressInfo {
+	margin: 2px 46px 0 10px
+}
+
+.progressIngBody_1 .progressFileSize {
+	float: left;
+	color: #7d7d7d
+}
+
+.progressIngBody_1 .progressCancel {
+	float: right
+}
+
+.edui-label {
+	cursor: default
+}
+
+span.edui-clickable {
+	color: blue;
+	cursor: pointer;
+	text-decoration: underline
+}
+
+span.edui-unclickable {
+	color: gray;
+	cursor: default
+}
+
+.edui-popup {
+	z-index: 3000
+}
+
+.edui-popup .edui-shadow {
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: black;
+	box-shadow: 3px 3px 5px #818181;
+	-webkit-box-shadow: 3px 3px 5px #818181;
+	-moz-box-shadow: 3px 3px 5px #818181;
+	-ms-filter: 'progid:DXImageTransform.Microsoft.Blur(PixelRadius=' 3
+		', MakeShadow=' true ', ShadowOpacity=' 0.5 ')';
+	filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius='3',
+		MakeShadow='true', ShadowOpacity='0.5')
+}
+
+.edui-popup-content {
+	border: 1px solid gray;
+	background-color: white;
+	padding: 5px
+}
+
+.edui-for-qqservice .edui-popup-body .edui-popup-content {
+	_height: 255px;
+	_overflow-y: hidden
+}
+
+.edui-popup .edui-bordereraser {
+	background-color: white;
+	height: 3px
+}
+
+.edui-menu .edui-bordereraser {
+	background-color: #f1f1f1;
+	height: 3px
+}
+
+.edui-anchor-topleft .edui-bordereraser {
+	left: 1px;
+	top: -2px
+}
+
+.edui-anchor-topright .edui-bordereraser {
+	right: 1px;
+	top: -2px
+}
+
+.edui-anchor-bottomleft .edui-bordereraser {
+	left: 0;
+	bottom: -6px;
+	height: 7px;
+	border-left: 1px solid gray;
+	border-right: 1px solid gray
+}
+
+.edui-anchor-bottomright .edui-bordereraser {
+	right: 0;
+	bottom: -6px;
+	height: 7px;
+	border-left: 1px solid gray;
+	border-right: 1px solid gray
+}
+
+.edui-menu {
+	z-index: 3000
+}
+
+.edui-menu .edui-popup-content {
+	background-color: white;
+	padding: 3px
+}
+
+.edui-menu-body {
+	_width: 150px;
+	min-width: 150px;
+	background: url("../../../image/comm/ueditor/images/menu/sparator_v.png")
+		repeat-y 25px
+}
+
+.edui-menuitem {
+	height: 20px;
+	cursor: default;
+	vertical-align: top
+}
+
+.edui-menuitem .edui-icon {
+	width: 20px !important;
+	height: 20px !important;
+	background: url(../../../image/comm/ueditor/images/icons.png?v=201506291735) 0
+		-40px;
+	background: url(../../../image/comm/ueditor/images/icons.gif?v=201506291735) 0
+		-40px\9
+}
+
+.edui-menuitem .edui-label {
+	font-size: 12px;
+	line-height: 20px;
+	height: 20px;
+	padding-left: 10px;
+	padding-right: 20px
+}
+
+.edui-state-checked .edui-menuitem-body {
+	background: url("../../../image/comm/ueditor/images/icons-all.gif") no-repeat
+		6px -205px
+}
+
+.edui-state-disabled .edui-menuitem-label {
+	color: gray
+}
+
+.edui-state-disabled .edui-icon {
+	opacity: .3;
+	-ms-filter: 'alpha(opacity=30)';
+	filter: alpha(opacity = 30)
+}
+
+.edui-state-disabled .edui-label {
+	color: gray
+}
+
+.edui-hassubmenu .edui-arrow {
+	height: 20px;
+	width: 20px;
+	float: right;
+	background: url("../../../image/comm/ueditor/images/icons-all.gif") no-repeat
+		10px -233px
+}
+
+.edui-menu-body .edui-menuitem {
+	padding: 1px
+}
+
+.body .edui-menuitem {
+	padding: 1px
+}
+
+.edui-menuseparator {
+	margin: 2px 0;
+	height: 1px;
+	overflow: hidden
+}
+
+.edui-menuseparator-inner {
+	border-bottom: 1px solid #e2e3e3;
+	margin-left: 29px;
+	margin-right: 1px
+}
+
+.edui-menu-body .edui-state-hover {
+	padding: 0 !important;
+	background-color: #fff5d4;
+	border: 1px solid #dcac6c
+}
+
+.body .edui-state-hover {
+	padding: 0 !important;
+	background-color: #fff5d4;
+	border: 1px solid #dcac6c
+}
+
+.edui-dialog {
+	z-index: 2000;
+	position: absolute
+}
+
+.edui-dialog-wrap {
+	border: 1px solid #c6c6c6
+}
+
+.edui-dialog-body {
+	position: relative;
+	background-color: white;
+	_zoom: 1
+}
+
+.edui-dialog-shadow {
+	position: absolute;
+	z-index: -1;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: black;
+	box-shadow: 3px 3px 5px #818181;
+	-webkit-box-shadow: 3px 3px 5px #818181;
+	-moz-box-shadow: 3px 3px 5px #818181;
+	-ms-filter: 'progid:DXImageTransform.Microsoft.Blur(PixelRadius=' 3
+		', MakeShadow=' true ', ShadowOpacity=' 0.5 ')';
+	filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius='3',
+		MakeShadow='true', ShadowOpacity='0.5')
+}
+
+.edui-dialog-foot {
+	background-color: white
+}
+
+.edui-dialog-titlebar {
+	height: 26px;
+	border-bottom: 1px solid #c6c6c6;
+	background: url(../../../image/comm/ueditor/images/dialog-title-bg.png) repeat-x
+		bottom;
+	position: relative;
+	cursor: move
+}
+
+.edui-dialog-caption {
+	font-weight: bold;
+	font-size: 12px;
+	line-height: 26px;
+	padding-left: 5px
+}
+
+.edui-dialog-draghandle {
+	height: 26px
+}
+
+.edui-dialog-closebutton {
+	position: absolute !important;
+	right: 5px;
+	top: 3px
+}
+
+.edui-dialog-closebutton .edui-button-body {
+	height: 20px;
+	width: 20px;
+	cursor: pointer;
+	background: url("../../../image/comm/ueditor/images/icons-all.gif") no-repeat 0
+		-59px
+}
+
+.edui-dialog-closebutton .edui-state-hover .edui-button-body {
+	background: url("../../../image/comm/ueditor/images/icons-all.gif") no-repeat 0
+		-89px
+}
+
+.edui-dialog-foot {
+	height: 40px
+}
+
+.edui-dialog-buttons {
+	position: absolute;
+	right: 0
+}
+
+.edui-dialog-buttons .edui-button {
+	margin-right: 10px
+}
+
+.edui-dialog-buttons .edui-button .edui-button-body {
+	background: url("../../../image/comm/ueditor/images/icons-all.gif") no-repeat;
+	height: 24px;
+	width: 96px;
+	font-size: 12px;
+	line-height: 24px;
+	text-align: center;
+	cursor: default
+}
+
+.edui-dialog-buttons .edui-button .edui-state-hover .edui-button-body {
+	background: url("../../../image/comm/ueditor/images/icons-all.gif") no-repeat 0
+		-30px
+}
+
+.edui-dialog iframe {
+	border: 0;
+	padding: 0;
+	margin: 0;
+	vertical-align: top
+}
+
+.edui-dialog-modalmask {
+	opacity: .3;
+	filter: alpha(opacity = 30);
+	background-color: #ccc;
+	position: absolute
+}
+
+.edui-dialog-dragmask {
+	position: absolute;
+	background-color: transparent;
+	cursor: move
+}
+
+.edui-dialog-content {
+	position: relative
+}
+
+.dialogcontmask {
+	cursor: move;
+	visibility: hidden;
+	display: block;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	filter: alpha(opacity = 0)
+}
+
+.edui-colorpicker-topbar {
+	height: 27px;
+	width: 200px
+}
+
+.edui-colorpicker-preview {
+	height: 20px;
+	border: 1px inset black;
+	margin-left: 1px;
+	width: 128px;
+	float: left
+}
+
+.edui-colorpicker-nocolor {
+	float: right;
+	margin-right: 1px;
+	font-size: 12px;
+	line-height: 14px;
+	height: 18px;
+	width: 14px;
+	padding: 3px 5px;
+	cursor: pointer;
+	background: url("../../../image/comm/ueditor/images/clean.png") no-repeat
+}
+
+.edui-colorpicker-preview_textModifyColor {
+	height: 20px;
+	margin-left: 1px;
+	width: 128px;
+	float: left
+}
+
+.edui-colorpicker-openUpColorText {
+	float: left;
+	margin-right: 1px;
+	font-size: 12px;
+	line-height: 14px;
+	height: 18px;
+	width: 14px;
+	padding: 3px 5px;
+	cursor: pointer;
+	background: url("../../../image/comm/ueditor/images/gou.png") no-repeat
+}
+
+.edui-colorpicker-tablefirstrow {
+	height: 30px
+}
+
+.edui-colorpicker-colorcell {
+	width: 14px;
+	height: 14px;
+	display: block;
+	margin: 0;
+	cursor: pointer
+}
+
+.edui-colorpicker-colorcell:hover {
+	width: 14px;
+	height: 14px;
+	margin: 0
+}
+
+.edui-tablepicker .edui-infoarea {
+	height: 14px;
+	line-height: 14px;
+	font-size: 12px;
+	width: 220px;
+	margin-bottom: 3px;
+	clear: both
+}
+
+.edui-tablepicker .edui-infoarea .edui-label {
+	float: left
+}
+
+.edui-dialog-buttons .edui-label {
+	line-height: 24px
+}
+
+.edui-tablepicker .edui-infoarea .edui-clickable {
+	float: right
+}
+
+.edui-tablepicker .edui-pickarea {
+	width: 140px
+}
+
+.edui-tablepicker .edui-pickarea .body {
+	background: url("../../../image/comm/ueditor/images/menu/sparator_v.png")
+		repeat-y 25px
+}
+
+.edui-autotypesetpicker .edui-autotypesetpicker-body {
+	font-size: 12px;
+	width: 300px;
+	margin-bottom: 3px;
+	clear: both
+}
+
+.edui-autotypesetpicker-body td {
+	font-size: 12px
+}
+
+.edui-toolbar {
+	cursor: default;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	padding: 1px
+}
+
+.edui-toolbar .edui-separator {
+	width: 2px;
+	height: 20px;
+	margin: 2px 4px 2px 3px;
+	background: url(../../../image/comm/ueditor/images/icons.png?v=201506291735)
+		-180px 0;
+	background: url(../../../image/comm/ueditor/images/icons.gif?v=201506291735)
+		-180px 0\9
+}
+
+.edui-newlineseparator {
+	display: block !important;
+	width: 0;
+	height: 0
+}
+
+.edui-toolbar .edui-button .edui-icon, .edui-toolbar .edui-menubutton .edui-icon,
+	.edui-toolbar .edui-splitbutton .edui-icon {
+	height: 20px;
+	width: 20px;
+	background-image:
+		url(../../../image/comm/ueditor/images/icons.png?v=201506291735);
+	background-image:
+		url(../../../image/comm/ueditor/images/icons.gif?v=201506291735) \9
+}
+
+.edui-toolbar .edui-for-hoverimage .edui-box .edui-icon {
+	width: 25px
+}
+
+.edui-for-shrinkopenup .edui-icon {
+	height: 20px !important;
+	width: 20px !important;
+	background-image:
+		url(../../../image/comm/ueditor/images/icons.png?v=201506291735);
+	background-image:
+		url(../../../image/comm/ueditor/images/icons.gif?v=201506291735) \9
+}
+
+.edui-for-fontfamily_background {
+	height: 20px !important;
+	width: 20px !important;
+	background-image:
+		url(../../../image/comm/ueditor/images/icons.png?v=201506291735);
+	background-image:
+		url(../../../image/comm/ueditor/images/icons.gif?v=201506291735) \9;
+	background-position: -893px 1px
+}
+
+.edui-for-fontfamily .edui-popup-content {
+	overflow-y: auto;
+	min-height: auto;
+	max-height: 230px; *+
+	width: 120px;
+	overflow-x: hidden;
+	_height: 230px
+}
+
+.edui-for-fontsize_background {
+	height: 20px !important;
+	width: 20px !important;
+	background-image:
+		url(../../../image/comm/ueditor/images/icons.png?v=201506291735);
+	background-image:
+		url(../../../image/comm/ueditor/images/icons.gif?v=201506291735) \9;
+	background-position: -913px 0
+}
+
+.edui-toolbar .edui-button .edui-button-wrap {
+	padding: 1px;
+	position: relative
+}
+
+.edui-toolbar .edui-button .edui-state-hover .edui-button-wrap {
+	background-color: #fff5d4;
+	padding: 0;
+	border: 1px solid #dcac6c
+}
+
+.edui-toolbar .edui-button .edui-state-checked .edui-button-wrap {
+	background-color: #ffe69f;
+	padding: 0;
+	border: 1px solid #dcac6c
+}
+
+.edui-toolbar .edui-button .edui-state-active .edui-button-wrap {
+	background-color: #fff;
+	padding: 0;
+	border: 1px solid gray
+}
+
+.edui-toolbar .edui-splitbutton-body .edui-arrow, .edui-toolbar .edui-menubutton-body .edui-arrow
+	{
+	background: url(../../../image/comm/ueditor/images/icons.png?v=201506291735)
+		-741px 0;
+	_background: url(../../../image/comm/ueditor/images/icons.gif?v=201506291735)
+		-741px 0;
+	height: 20px;
+	width: 9px
+}
+
+.edui-toolbar .edui-splitbutton .edui-splitbutton-body, .edui-toolbar .edui-menubutton .edui-menubutton-body
+	{
+	padding: 1px
+}
+
+.edui-toolbar .edui-splitborder {
+	width: 1px;
+	height: 20px
+}
+
+.edui-toolbar .edui-state-hover .edui-splitborder {
+	width: 1px;
+	border-left: 0 solid #dcac6c
+}
+
+.edui-toolbar .edui-state-active .edui-splitborder {
+	width: 0;
+	border-left: 1px solid gray
+}
+
+.edui-toolbar .edui-state-opened .edui-splitborder {
+	width: 1px;
+	border: 0
+}
+
+.edui-toolbar .edui-splitbutton .edui-state-hover .edui-splitbutton-body,
+	.edui-toolbar .edui-menubutton .edui-state-hover .edui-menubutton-body
+	{
+	background-color: #fff5d4;
+	border: 1px solid #dcac6c;
+	padding: 0
+}
+
+.edui-toolbar .edui-splitbutton .edui-state-checked .edui-splitbutton-body,
+	.edui-toolbar .edui-menubutton .edui-state-checked .edui-menubutton-body
+	{
+	background-color: #ffe69f;
+	border: 1px solid #dcac6c;
+	padding: 0
+}
+
+.edui-toolbar .edui-splitbutton .edui-state-active .edui-splitbutton-body,
+	.edui-toolbar .edui-menubutton .edui-state-active .edui-menubutton-body
+	{
+	background-color: #fff;
+	border: 1px solid gray;
+	padding: 0
+}
+
+.edui-state-disabled .edui-arrow {
+	opacity: .3;
+	-ms-filter: 'alpha(opacity=30)';
+	_filter: alpha(opacity = 30)
+}
+
+.edui-toolbar .edui-splitbutton .edui-state-opened .edui-splitbutton-body,
+	.edui-toolbar .edui-menubutton .edui-state-opened .edui-menubutton-body
+	{
+	background-color: white;
+	border: 1px solid gray;
+	padding: 0
+}
+
+.edui-for-insertorderedlist .edui-bordereraser, .edui-for-lineheight .edui-bordereraser,
+	.edui-for-rowspacingtop .edui-bordereraser, .edui-for-rowspacingbottom .edui-bordereraser,
+	.edui-for-insertunorderedlist .edui-bordereraser {
+	background-color: white
+}
+
+.edui-for-insertorderedlist .edui-popup-body .edui-icon,
+	.edui-for-lineheight .edui-popup-body .edui-icon,
+	.edui-for-rowspacingtop .edui-popup-body .edui-icon,
+	.edui-for-rowspacingbottom .edui-popup-body .edui-icon,
+	.edui-for-justifyjustify .edui-popup-body .edui-icon,
+	.edui-for-insertunorderedlist .edui-popup-body .edui-icon {
+	background-position: 0 -40px
+}
+
+.edui-toolbar .edui-colorbutton .edui-colorlump {
+	position: absolute;
+	overflow: hidden;
+	bottom: 1px;
+	left: 2px;
+	width: 18px;
+	height: 4px
+}
+
+.edui-toolbar .edui-combox-body .edui-button-body {
+	width: 20px;
+	font-size: 12px;
+	height: 20px;
+	line-height: 20px;
+	padding-left: 0;
+	white-space: nowrap
+}
+
+.edui-toolbar .edui-combox-body .edui-arrow {
+	background: url(../../../image/comm/ueditor/images/icons.png?v=201506291735)
+		-741px 0;
+	_background: url(../../../image/comm/ueditor/images/icons.gif?v=201506291735)
+		-741px 0;
+	height: 20px;
+	width: 9px
+}
+
+.edui-toolbar .edui-combox .edui-combox-body {
+	border: 1px solid #f3f5f6
+}
+
+.edui-toolbar .edui-combox-body .edui-splitborder {
+	display: none
+}
+
+.edui-toolbar .edui-combox-body .edui-arrow {
+	border-left: 1px solid #CCC
+}
+
+.edui-toolbar .edui-state-hover .edui-combox-body {
+	background-color: #fff5d4;
+	border: 1px solid #dcac6c
+}
+
+.edui-toolbar .edui-state-hover .edui-combox-body .edui-arrow {
+	border-left: 1px solid #dcac6c
+}
+
+.edui-toolbar .edui-state-checked .edui-combox-body {
+	background-color: #ffe69f;
+	border: 1px solid #dcac6c
+}
+
+.edui-toolbar .edui-state-checked .edui-combox-body .edui-arrow {
+	border-left: 1px solid #dcac6c
+}
+
+.edui-toolbar .edui-state-disabled .edui-combox-body {
+	background-color: #f0f0ee;
+	opacity: .3;
+	-ms-filter: 'alpha(opacity=30)';
+	filter: alpha(opacity = 30)
+}
+
+.edui-toolbar .edui-state-opened .edui-combox-body {
+	background-color: white;
+	border: 1px solid gray
+}
+
+.edui-list .edui-bordereraser {
+	display: block
+}
+
+.edui-listitem {
+	padding: 1px;
+	white-space: nowrap
+}
+
+.edui-list .edui-state-hover {
+	position: relative;
+	background-color: #fff5d4;
+	border: 1px solid #dcac6c;
+	padding: 0
+}
+
+.edui-for-fontfamily .edui-listitem-label {
+	min-width: 120px;
+	_width: 120px;
+	font-size: 12px;
+	height: 22px;
+	line-height: 22px;
+	padding-left: 5px
+}
+
+.edui-for-underline .edui-listitem-label {
+	min-width: 120px;
+	_width: 120px;
+	padding: 3px 5px;
+	font-size: 12px
+}
+
+.edui-for-fontsize .edui-listitem-label {
+	min-width: 120px;
+	_width: 120px;
+	padding: 3px 5px
+}
+
+.edui-for-paragraph .edui-listitem-label {
+	min-width: 200px;
+	_width: 200px;
+	padding: 2px 5px
+}
+
+.edui-for-rowspacingtop .edui-listitem-label, .edui-for-rowspacingbottom .edui-listitem-label
+	{
+	min-width: 53px;
+	_width: 53px;
+	padding: 2px 5px
+}
+
+.edui-for-lineheight .edui-listitem-label {
+	min-width: 53px;
+	_width: 53px;
+	padding: 2px 5px
+}
+
+.edui-for-customstyle .edui-listitem-label {
+	min-width: 200px;
+	_width: 200px;
+	width: 200px !important;
+	padding: 2px 5px
+}
+
+.edui-for-undo .edui-icon {
+	background-position: -160px 0
+}
+
+.edui-for-redo .edui-icon {
+	background-position: -100px 0
+}
+
+.edui-for-bold .edui-icon {
+	background-position: 0 0
+}
+
+.edui-for-italic .edui-icon {
+	background-position: -60px 0
+}
+
+.edui-for-underline .edui-icon {
+	background-position: -140px 0
+}
+
+.edui-for-strikethrough .edui-icon {
+	background-position: -120px 0
+}
+
+.edui-for-subscript .edui-icon {
+	background-position: -600px 0
+}
+
+.edui-for-superscript .edui-icon {
+	background-position: -620px 0
+}
+
+.edui-for-blockquote .edui-icon {
+	background-position: -220px 0
+}
+
+.edui-for-qqservice .edui-icon {
+	background-position: -868px 0
+}
+
+.edui-for-forecolor .edui-icon {
+	background-position: -867px -21px
+}
+
+.edui-for-backcolor .edui-icon {
+	background-position: -892px -20px
+}
+
+.edui-for-inserttable .edui-icon {
+	background-position: -580px -20px
+}
+
+.edui-for-autotypeset .edui-icon {
+	background-position: -640px -40px
+}
+
+.edui-for-phone .edui-icon {
+	background-position: -932px 0
+}
+
+.edui-for-justifyleft .edui-icon {
+	background-position: -460px 0
+}
+
+.edui-for-justifycenter .edui-icon {
+	background-position: -420px 0
+}
+
+.edui-for-justifyright .edui-icon {
+	background-position: -480px 0
+}
+
+.edui-for-justifyjustify .edui-icon {
+	background-position: -440px 0
+}
+
+.edui-for-insertorderedlist .edui-icon {
+	background-position: -80px 0
+}
+
+.edui-for-insertunorderedlist .edui-icon {
+	background-position: -20px 0
+}
+
+.edui-for-lineheight .edui-icon {
+	background-position: -725px -40px
+}
+
+.edui-for-rowspacingbottom .edui-icon {
+	background-position: -745px -40px
+}
+
+.edui-for-rowspacingtop .edui-icon {
+	background-position: -765px -40px
+}
+
+.edui-for-horizontal .edui-icon {
+	background-position: -360px 0
+}
+
+.edui-for-zhspace .edui-icon {
+	background-position: -380px 0
+}
+
+.edui-for-link .edui-icon {
+	background-position: -500px 0
+}
+
+.edui-for-code .edui-icon {
+	background-position: -440px -40px
+}
+
+.edui-for-insertimage .edui-icon {
+	background-position: -830px -22px
+}
+
+.edui-for-hoverimage .edui-icon {
+	background-position: -1004px -1px
+}
+
+.edui-for-insertmp4 .edui-icon {
+	background-position: -970px 0
+}
+
+.edui-for-insertframe .edui-icon {
+	background-position: -240px -40px
+}
+
+.edui-for-emoticon .edui-icon {
+	background-position: -60px -20px
+}
+
+.edui-for-spechars .edui-icon {
+	background-position: -240px 0
+}
+
+.edui-for-help .edui-icon {
+	background-position: -340px 0
+}
+
+.edui-for-print .edui-icon {
+	background-position: -440px -20px
+}
+
+.edui-for-preview .edui-icon {
+	background-position: -420px -20px
+}
+
+.edui-for-selectall .edui-icon {
+	background-position: -400px -20px
+}
+
+.edui-for-searchreplace .edui-icon {
+	background-position: -520px -20px
+}
+
+.edui-for-map .edui-icon {
+	background-position: -40px -40px
+}
+
+.edui-for-gmap .edui-icon {
+	background-position: -260px -40px
+}
+
+.edui-for-insertvideo .edui-icon {
+	background-position: -320px -20px
+}
+
+.edui-for-time .edui-icon {
+	background-position: -160px -20px
+}
+
+.edui-for-date .edui-icon {
+	background-position: -140px -20px
+}
+
+.edui-for-cut .edui-icon {
+	background-position: -680px 0
+}
+
+.edui-for-copy .edui-icon {
+	background-position: -700px 0
+}
+
+.edui-for-paste .edui-icon {
+	background-position: -560px 0
+}
+
+.edui-for-formatmatch .edui-icon {
+	background-position: -40px 0
+}
+
+.edui-for-pasteplain .edui-icon {
+	background-position: -360px -20px
+}
+
+.edui-for-directionalityltr .edui-icon {
+	background-position: -20px -20px
+}
+
+.edui-for-directionalityrtl .edui-icon {
+	background-position: -40px -20px
+}
+
+.edui-for-source .edui-icon {
+	background-position: -260px -0px
+}
+
+.edui-for-removeformat .edui-icon {
+	background-position: -580px 0
+}
+
+.edui-for-unlink .edui-icon {
+	background-position: -640px 0
+}
+
+.edui-for-touppercase .edui-icon {
+	background-position: -786px 0
+}
+
+.edui-for-tolowercase .edui-icon {
+	background-position: -806px 0
+}
+
+.edui-for-insertrow .edui-icon {
+	background-position: -740px -20px
+}
+
+.edui-for-insertcol .edui-icon {
+	background-position: -700px -20px
+}
+
+.edui-for-mergeright .edui-icon {
+	background-position: -60px -40px
+}
+
+.edui-for-mergedown .edui-icon {
+	background-position: -80px -40px
+}
+
+.edui-for-splittorows .edui-icon {
+	background-position: -100px -40px
+}
+
+.edui-for-splittocols .edui-icon {
+	background-position: -120px -40px
+}
+
+.edui-for-insertparagraphbeforetable .edui-icon {
+	background-position: -140px -40px
+}
+
+.edui-for-deleterow .edui-icon {
+	background-position: -660px -20px
+}
+
+.edui-for-deletecol .edui-icon {
+	background-position: -640px -20px
+}
+
+.edui-for-splittocells .edui-icon {
+	background-position: -800px -20px
+}
+
+.edui-for-mergecells .edui-icon {
+	background-position: -760px -20px
+}
+
+.edui-for-deletetable .edui-icon {
+	background-position: -620px -20px
+}
+
+.edui-for-cleardoc .edui-icon {
+	background-position: -520px 0
+}
+
+.edui-for-fullscreen .edui-icon {
+	background-position: -100px -20px
+}
+
+.edui-for-shrinkopenup .edui-icon {
+	background-position: -830px -42px
+}
+
+.edui-for-shrink .edui-icon {
+	background-position: -850px -42px
+}
+
+.edui-for-anchor .edui-icon {
+	background-position: -200px 0
+}
+
+.edui-for-pagebreak .edui-icon {
+	background-position: -460px -40px
+}
+
+.edui-for-imagenone .edui-icon {
+	background-position: -480px -40px
+}
+
+.edui-for-imageleft .edui-icon {
+	background-position: -500px -40px
+}
+
+.edui-for-wordimage .edui-icon {
+	background-position: -660px -40px
+}
+
+.edui-for-imageright .edui-icon {
+	background-position: -520px -40px
+}
+
+.edui-for-imagecenter .edui-icon {
+	background-position: -540px -40px
+}
+
+.edui-for-indent .edui-icon {
+	background-position: -400px 0
+}
+
+.edui-for-outdent .edui-icon {
+	background-position: -540px 0
+}
+
+.edui-for-webapp .edui-icon {
+	background-position: -601px -40px
+}
+
+.edui-for-flash .edui-icon {
+	background-position: -850px -22px
+}
+
+.edui-for-table .edui-icon {
+	background-position: -580px -20px
+}
+
+.edui-for-edittable .edui-icon {
+	background-position: -420px -40px
+}
+
+.edui-for-template .edui-icon {
+	background-position: -339px -40px
+}
+
+.edui-for-delete .edui-icon {
+	background-position: -360px -40px
+}
+
+.edui-for-highlightcode .edui-icon {
+	background-position: -440px -40px
+}
+
+.edui-for-deletehighlightcode .edui-icon {
+	background-position: -360px -40px
+}
+
+.edui-for-attachment .edui-icon {
+	background-position: -620px -40px
+}
+
+.edui-for-edittd .edui-icon {
+	background-position: -700px -40px
+}
+
+.edui-for-snapscreen .edui-icon {
+	background-position: -581px -40px
+}
+
+.edui-for-scrawl .edui-icon {
+	background-position: -801px -41px
+}
+
+.edui-for-background .edui-icon {
+	background-position: -678px -40px
+}
+
+.edui-for-link .edui-dialog-content {
+	width: 420px;
+	height: 200px;
+	overflow: hidden
+}
+
+.edui-for-background .edui-dialog-content {
+	width: 440px;
+	height: 280px;
+	overflow: hidden
+}
+
+.edui-for-template .edui-dialog-content {
+	width: 630px;
+	height: 390px;
+	overflow: hidden
+}
+
+.edui-for-emoticon .edui-dialog-content {
+	width: 515px;
+	*width: 506px;
+	height: 360px
+}
+
+.edui-for-scrawl .edui-dialog-content {
+	width: 515px;
+	*width: 506px;
+	height: 360px
+}
+
+.edui-for-spechars .edui-dialog-content {
+	width: 620px;
+	height: 500px;
+	*height: 570px
+}
+
+.edui-for-insertimage .edui-dialog-content {
+	width: 640px;
+	height: 390px;
+	overflow: hidden
+}
+
+.edui-for-webapp .edui-dialog-content {
+	width: 560px;
+	_width: 565px;
+	height: 450px;
+	overflow: hidden
+}
+
+.edui-for-insertframe .edui-dialog-content {
+	width: 350px;
+	height: 200px;
+	overflow: hidden
+}
+
+.edui-for-wordimage .edui-dialog-content {
+	width: 620px;
+	height: 380px;
+	overflow: hidden
+}
+
+.edui-for-attachment .edui-dialog-content {
+	width: 480px;
+	height: 360px;
+	overflow: hidden
+}
+
+.edui-for-highlightcode .edui-dialog-content {
+	width: 550px;
+	height: 360px;
+	overflow: hidden
+}
+
+.edui-for-map .edui-dialog-content {
+	width: 550px;
+	height: 400px
+}
+
+.edui-for-gmap .edui-dialog-content {
+	width: 550px;
+	height: 400px
+}
+
+.edui-for-insertvideo .edui-dialog-content {
+	width: 590px;
+	height: 390px
+}
+
+.edui-for-anchor .edui-dialog-content {
+	width: 320px;
+	height: 60px;
+	overflow: hidden
+}
+
+.edui-for-searchreplace .edui-dialog-content {
+	width: 400px;
+	height: 180px
+}
+
+.edui-for-help .edui-dialog-content {
+	width: 400px;
+	height: 420px
+}
+
+.edui-for-inserttable .edui-dialog-content {
+	width: 510px;
+	height: 275px
+}
+
+.edui-for-edittd .edui-dialog-content {
+	width: 220px;
+	height: 125px
+}
+
+.edui-for-snapscreen .edui-dialog-content {
+	width: 400px;
+	height: 220px
+}
+
+.edui-editor-toolbarmsg-upload {
+	font-size: 14px;
+	color: blue;
+	width: 100px;
+	height: 16px;
+	line-height: 16px;
+	cursor: pointer;
+	position: absolute;
+	top: 5px;
+	left: 350px
+}
+
+.edui-for-paragraph .edui-listitem-label {
+	font-family: Tahoma, Verdana, Arial, Helvetica
+}
+
+.edui-for-paragraph .edui-listitem-label .edui-for-p {
+	font-size: 22px;
+	line-height: 27px
+}
+
+.edui-for-paragraph .edui-listitem-label .edui-for-h1 {
+	font-weight: bolder;
+	font-size: 32px;
+	line-height: 36px
+}
+
+.edui-for-paragraph .edui-listitem-label .edui-for-h2 {
+	font-weight: bolder;
+	font-size: 27px;
+	line-height: 29px
+}
+
+.edui-for-paragraph .edui-listitem-label .edui-for-h3 {
+	font-weight: bolder;
+	font-size: 19px;
+	line-height: 23px
+}
+
+.edui-for-paragraph .edui-listitem-label .edui-for-h4 {
+	font-weight: bolder;
+	font-size: 16px;
+	line-height: 19px
+}
+
+.edui-for-paragraph .edui-listitem-label .edui-for-h5 {
+	font-weight: bolder;
+	font-size: 13px;
+	line-height: 16px
+}
+
+.edui-for-paragraph .edui-listitem-label .edui-for-h6 {
+	font-weight: bolder;
+	font-size: 12px;
+	line-height: 14px
+}
+
+.edui-editor {
+	border: 1px solid #ccc;
+	background-color: white;
+	position: relative;
+	overflow: visible
+}
+
+.edui-editor-toolbarbox {
+	position: relative;
+	zoom: 1
+}
+
+.edui-editor-toolbarboxouter {
+	border-bottom: 1px solid #ccc;
+	line-height: 20px;
+	background: #eff4f8
+}
+
+.edui-editor-iframeholder {
+	position: relative
+}
+
+.edui-editor-iframeholder textarea {
+	font-family: consolas, "Courier New", "lucida console", monospace;
+	font-size: 12px;
+	line-height: 18px
+}
+
+.edui-editor-bottomContainer {
+	overflow: hidden
+}
+
+.edui-editor-bottomContainer table {
+	width: 100%;
+	height: 0;
+	overflow: hidden;
+	border-spacing: 0;
+	border-collapse: collapse
+}
+
+.edui-editor-bottomContainer td {
+	white-space: nowrap;
+	border-top: 1px solid #ccc;
+	line-height: 20px;
+	font-size: 12px;
+	font-family: 寰蒋闆呴粦, 'microsoft yahei', 瀹嬩綋, 鏂板畫浣�, sans-serif
+}
+
+.edui-editor-wordcount {
+	text-align: right;
+	margin-right: 5px;
+	color: #aaa
+}
+
+.edui-editor-breadcrumb {
+	margin: 2px 0 0 3px
+}
+
+.edui-editor-breadcrumb span {
+	cursor: pointer;
+	text-decoration: underline;
+	color: blue
+}
+
+.edui-editor-toolbarboxinner .edui-for-shrinkopenup {
+	float: right
+}
+
+.shrinkopenup {
+	overflow: hidden;
+	height: 22px
+}
+
+.edui-toolbar .edui-for-shrink {
+	float: right
+}
+
+.edui-bubble .edui-popup-content {
+	border: 1px solid #dcac6c;
+	background-color: #fff6d9;
+	padding: 5px;
+	font-size: 10pt;
+	font-family: "瀹嬩綋"
+}
+
+.edui-tool4 .edui-popup-content {
+	padding: 0;
+	border: 0
+}
+
+.edui-bubble .edui-shadow {
+	box-shadow: 1px 1px 3px #818181;
+	-webkit-box-shadow: 2px 2px 3px #818181;
+	-moz-box-shadow: 2px 2px 3px #818181;
+	-ms-filter: 'progid:DXImageTransform.Microsoft.Blur(PixelRadius=' 2
+		', MakeShadow=' true ', ShadowOpacity=' 0.5 ')';
+	filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius='2',
+		MakeShadow='true', ShadowOpacity='0.5')
+}
+
+.edui-editor-toolbarmsg {
+	background-color: #fff6d9;
+	border-bottom: 1px solid #ccc;
+	position: absolute;
+	bottom: -25px;
+	left: 0;
+	z-index: 1009;
+	width: 99.9%
+}
+
+.edui-editor-toolbarmsg-label {
+	font-size: 12px;
+	line-height: 16px;
+	padding: 4px
+}
+
+.edui-editor-toolbarmsg-close {
+	float: right;
+	width: 20px;
+	height: 16px;
+	line-height: 16px;
+	cursor: pointer;
+	color: red
+}
+
+.edui-for-emotion .edui-icon {
+	background-position: -60px -20px
+}
+
+.edui-for-emotion .edui-popup-content {
+	position: relative;
+	z-index: 555
+}
+
+.edui-for-emotion .edui-popup-content iframe {
+	width: 514px;
+	height: 380px;
+	overflow: hidden
+}
+
+.edui-for-emotion .edui-splitborder {
+	display: none
+}
+
+.edui-for-emotion .edui-splitbutton-body .edui-arrow {
+	width: 0
+}
+
+.xheDialog {
+	font-size: 12px;
+	font-family: monospace
+}
+
+.xheDialog div {
+	padding: 2px 0
+}
+
+.xheDialog input {
+	margin: 0;
+	border-width: 1px;
+	border-style: solid;
+	font-size: 12px;
+	border-color: #afb8c0
+}
+
+.wrapper {
+	margin-left: 2px;
+	font-size: 12px
+}
+
+.base {
+	width: 472px;
+	height: 70px;
+	margin-left: 10px;
+	margin-top: 10px;
+	border: 1px solid #ddd
+}
+
+.base table {
+	margin-left: 10px
+}
+
+.base table tr {
+	height: 25px
+}
+
+.extend {
+	width: 300px;
+	height: 180px;
+	margin: 10px;
+	_margin-left: 5px;
+	float: left;
+	border: 1px solid #ddd
+}
+
+.extend table {
+	height: 155px
+}
+
+#preview {
+	width: 160px;
+	height: 175px;
+	float: left;
+	border: 1px solid #ccc;
+	margin: 16px 0;
+	background-color: #eee
+}
+
+#preview table {
+	margin: 3px 5px;
+	background-color: #fff
+}
+
+#preview table td {
+	width: 30px;
+	height: 20px
+}
+
+#message {
+	float: left;
+	width: 180px;
+	margin-left: 10px;
+	font-size: 10px;
+	color: red;
+	line-height: 15px
+}
+
+#messageContent {
+	color: green;
+	margin-top: 5px
+}
+
+#bgColor {
+	width: 85px
+}
+
+.extend select {
+	width: 90px
+}
+
+#borderType {
+	width: 92px;
+	_width: 112px
+}
+
+.xheModalShadow {
+	position: fixed;
+	z-index: 1000009;
+	top: 50%;
+	left: 50%;
+	background: #000;
+	opacity: .2;
+	-ms-filter: 'alpha(opacity=20)';
+	filter: alpha(opacity = 20);
+	*position: absolute;
+	*margin-top: expression(0 - parseInt(this.offsetHeight/ 2)+(TBWindowMargin=
+		 document.documentElement&& document.documentElement.scrollTop|| document.body.scrollTop)
+		+5+'px')
+}
+
+.xheModalOverlay {
+	position: fixed;
+	z-index: 1000008;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background-color: #000;
+	opacity: .2;
+	-ms-filter: 'alpha(opacity=20)';
+	filter: alpha(opacity = 20);
+	*position: absolute;
+	*height: expression(Math.max ( document.documentElement.clientHeight,
+		document.documentElement.scrollHeight)+'px');
+	*width: expression(Math.max ( document.documentElement.clientWidth,
+		document.documentElement.scrollWidth)+'px')
+}
+
+.xheModal {
+	position: fixed;
+	z-index: 1000010;
+	text-align: left;
+	top: 50%;
+	left: 50%;
+	background: #FFF;
+	border: 1px solid #BBB;
+	font-size: 12px;
+	*position: absolute;
+	*margin-top: expression(0 - parseInt(this.offsetHeight/ 2)+(TBWindowMargin=
+		 document.documentElement&& document.documentElement.scrollTop|| document.body.scrollTop)+'px')
+}
+
+.xheModalTitle {
+	padding: 5px;
+	background: #f0f0ee;
+	border-bottom: 1px solid #BBB
+}
+
+.xheModalClose {
+	float: right;
+	width: 16px;
+	height: 16px;
+	background: url(../../../image/comm/ueditor/images/menu/close.gif);
+	cursor: pointer
+}
+
+#pasteImageTipsDiv {
+	line-height: 20px;
+	font-family: Verdana, Arial, sans-serif;
+	font-size: 12px;
+	z-index: 200;
+	width: auto;
+	box-shadow: 2px 2px 5px #dad4ab;
+	border-radius: 3px;
+	border: 1px solid #f4e190;
+	padding-right: 5px;
+	padding-left: 10px;
+	height: 20px;
+	background: #fff6d0;
+	position: absolute
+}
+
+.closeTipsDiv {
+	width: 20px;
+	height: 18px;
+	border-radius: 3px;
+	margin-left: 10px;
+	text-align: center;
+	float: right;
+	position: relative;
+	cursor: pointer
+}
+
+.bodyDisable {
+	width: 100%;
+	height: 100%;
+	_height: 500px;
+	position: absolute;
+	background: #fff;
+	top: 0;
+	left: 0;
+	z-index: 1114;
+	filter: alpha(opacity = 60);
+	opacity: .6
+}
+
+.bodyProgressWrap {
+	width: 100%;
+	height: 100%;
+	_height: 500px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1115
+}
+
+.progressCenter {
+	width: 100%;
+	height: 50%
+}
+
+.progressIngBody {
+	width: 300px;
+	height: 85px;
+	margin: 0 auto;
+	background: #fff;
+	border: 1px solid #6c92ad
+}
+
+.progressIngBody .progressIngTitle {
+	width: 300px;
+	text-align: center;
+	height: 20px;
+	font-weight: 600;
+	font-size: 14px;
+	margin: 10px auto;
+	text-indent: 22px;
+	overflow: hidden;
+	word-break: keep-all;
+	white-space: nowrap;
+	text-overflow: ellipsis
+}
+
+.progressIngBody .progressIngMission {
+	height: 20px;
+	margin-top: -5px;
+	float: left
+}
+
+.progressIngBody .mission {
+	float: left;
+	width: 225px;
+	margin: 10px 8px 0 18px;
+	padding: 1px;
+	height: 19px;
+	_font-size: 0; ! important;
+	border: 1px solid #ccc
+}
+
+.progressIngBody .progress {
+	float: left;
+	height: 100%;
+	width: 100%;
+	background: url(../../../image/comm/ueditor/images/menu/loading_3.gif)
+}
+
+.progressIngBody .progressError {
+	background-position: 0 -9px;
+	color: #f00
+}
+
+.progressIngBody .progressNum {
+	float: left;
+	width: 30px
+}
+
+.progressIngBody .progressInfo {
+	margin: -7px 16px 0 10px;
+	float: right
+}
+
+.progressIngBody .progressFileSize {
+	float: left;
+	color: #7d7d7d
+}
+
+.progressIngBody .progressCancel {
+	float: right;
+	cursor: pointer
+}
+
+.tool4edit-container {
+	height: 20px;
+	*height: 0
+}
+
+.tool4edit-body {
+	list-style: none;
+	_margin: 0;
+	height: 18px;
+	*height: 20px;
+	border: 1px solid #abc;
+	background: white;
+	width: 54px
+}
+
+.tool4edit-hoverImage-body {
+	list-style: none;
+	_margin: 0;
+	height: 18px;
+	*height: 20px;
+	border: 1px solid #abc;
+	background: white;
+	width: 80px
+}
+
+.tool4-imagefloat-panel {
+	position: absolute;
+	top: 18px;
+	*top: 16px;
+	left: -1px;
+	padding: 3px;
+	_padding: 0;
+	border: 1px solid #abc;
+	z-index: 9
+}
+
+.tool4-hoverImage-panel {
+	position: absolute;
+	top: 18px;
+	*top: 16px;
+	left: -1px;
+	padding: 3px;
+	_padding: 0;
+	border: 1px solid #abc;
+	z-index: 9
+}
+
+.tool4edit-panel {
+	position: absolute;
+	top: 18px;
+	*top: 16px;
+	left: -1px;
+	padding: 3px;
+	_padding: 0;
+	width: 280px;
+	*width: 277px;
+	border: 1px solid #abc;
+	z-index: 9
+}
+
+.tool4edit-edit-button {
+	display: block;
+	height: 18px;
+	*height: 16px;
+	width: 18px;
+	*background: url(../../../image/comm/ueditor/images/icons.gif?v=201506291735)
+		no-repeat -160px -22px;
+	background: url(../../../image/comm/ueditor/images/icons.png?v=201506291735)
+		no-repeat -160px -22px;
+	cursor: pointer
+}
+
+.tool4edit-hoverImage-button {
+	display: block;
+	height: 18px;
+	*height: 16px;
+	width: 25px;
+	*background: url(../../../image/comm/ueditor/images/icons.gif?v=201506291735)
+		no-repeat -178px -22px;
+	background: url(../../../image/comm/ueditor/images/icons.png?v=201506291735)
+		no-repeat -1003px -24px;
+	cursor: pointer
+}
+
+.tool4edit-delete-button {
+	display: block;
+	height: 18px;
+	*height: 16px;
+	width: 18px;
+	*background: url(../../../image/comm/ueditor/images/icons.gif?v=201506291735)
+		no-repeat -178px -22px;
+	background: url(../../../image/comm/ueditor/images/icons.png?v=201506291735)
+		no-repeat -178px -22px;
+	cursor: pointer
+}
+
+.tool4edit-imagefloat-button {
+	display: block;
+	height: 18px;
+	*height: 16px;
+	width: 18px;
+	*background: url(../../../image/comm/ueditor/images/icons.gif?v=201506291735)
+		no-repeat -200px -22px;
+	background: url(../../../image/comm/ueditor/images/icons.png?v=201506291735)
+		no-repeat -200px -22px;
+	cursor: pointer
+}
+
+.tool4-imagefloat-panel .tool4imagefloat {
+	display: block;
+	float: left;
+	margin-right: 5px;
+	height: 18px;
+	*height: 16px;
+	width: 18px;
+	*background: url(../../../image/comm/ueditor/images/icons.gif?v=201506291735)
+		no-repeat;
+	background: url(../../../image/comm/ueditor/images/icons.png?v=201506291735)
+		no-repeat;
+	cursor: pointer
+}
+
+.tool4-imagefloat-panel .imagedefault {
+	background-position: -200px -22px
+}
+
+.tool4-imagefloat-panel .imageleft {
+	background-position: -219px -22px
+}
+
+.tool4-imagefloat-panel .imagecenter {
+	background-position: -257px -22px
+}
+
+.tool4-imagefloat-panel .imageright {
+	background-position: -238px -22px
+}
+
+.tool4-imagefloat-panel .imageroundleft {
+	background-position: -276px -22px
+}
+
+.tool4-imagefloat-panel .imageroundright {
+	background-position: -295px -22px
+}
+
+.tool4-imagefloat-panel .imageItem {
+	margin: 3px 5px;
+	width: 80px;
+	text-align: left;
+	cursor: pointer;
+	height: 18px
+}
+
+.tool4-imagefloat-panel .imageItem .spanname {
+	line-height: 18px
+}
+
+.tool4-imagefloat-panel .imageItemHover {
+	outline: 1px solid #dcac6c;
+	background-color: #fff5d4
+}
+
+.tool4-imagefloat-panel .imageItemSelect {
+	outline: 1px solid #dcac6c;
+	background-color: #fff5d4
+}
+
+.tool4edit-panel input.tool4edit-width {
+	width: 35px
+}
+
+.tool4edit-panel input.tool4edit-height {
+	width: 35px
+}
+
+.tool4edit-panel input.tool4edit-submit {
+	width: auto;
+	margin-left: 7px
+}
+
+.tool4edit {
+	float: left
+}
+
+.xheDialogType {
+	font-size: 12px
+}
+
+.xheDialogType .header {
+	background: #d0d0d0;
+	border: 1px solid #a8acb1;
+	border-radius: 6px;
+	padding: 6px 6px 0 4;
+	height: 23px;
+	_padding-bottom: 0;
+	_height: 20px
+}
+
+.xheDialogType .header .qqheader {
+	border: 0 solid black;
+	cursor: pointer;
+	float: left;
+	width: 40px;
+	border-left: 1px #7c7874 solid;
+	border-right: 1px #7c7874 solid;
+	border-top: 1px #7c7874 solid;
+	line-height: 16px;
+	text-align: center;
+	height: 18px;
+	background: #fff;
+	margin-left: 3px;
+	margin-top: 5px; *+
+	margin-top: 2px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px
+}
+
+.xheDialogType .header .msnheader {
+	border: 0 solid black;
+	float: left;
+	cursor: pointer;
+	width: 40px;
+	line-height: 16px;
+	border-left: 1px #7c7874 solid;
+	border-right: 1px #7c7874 solid;
+	border-top: 1px #7c7874 solid;
+	text-align: center;
+	height: 18px;
+	background: #e6e6e6;
+	margin-left: 3px;
+	margin-top: 5px; *+
+	margin-top: 2px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px
+}
+
+.xheDialogType .header .skypeheader {
+	border: 0 solid black;
+	float: left;
+	cursor: pointer;
+	width: 40px;
+	line-height: 16px;
+	border-left: 1px #7c7874 solid;
+	border-right: 1px #7c7874 solid;
+	border-top: 1px #7c7874 solid;
+	text-align: center;
+	height: 18px;
+	background: #e6e6e6;
+	margin-left: 3px;
+	margin-top: 5px; *+
+	margin-top: 2px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px
+}
+
+.xheDialogType .header .aliwangwangheader {
+	border: 0 solid black;
+	float: left;
+	cursor: pointer;
+	width: 60px;
+	line-height: 16px;
+	border-left: 1px #7c7874 solid;
+	border-right: 1px #7c7874 solid;
+	border-top: 1px #7c7874 solid;
+	text-align: center;
+	height: 18px;
+	background: #e6e6e6;
+	margin-left: 3px;
+	margin-top: 5px; *+
+	margin-top: 2px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px
+}
+
+.xheDialogType .header .taobaowangwangheader {
+	border: 0 solid black;
+	float: left;
+	cursor: pointer;
+	width: 60px;
+	line-height: 16px;
+	border-left: 1px #7c7874 solid;
+	border-right: 1px #7c7874 solid;
+	border-top: 1px #7c7874 solid;
+	text-align: center;
+	height: 18px;
+	background: #e6e6e6;
+	margin-left: 3px;
+	margin-top: 5px; *+
+	margin-top: 2px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px
+}
+
+#xheDialogQQ {
+	font-size: 12px;
+	margin: 6px 4px;
+	width: 280px;
+	text-align: left
+}
+
+.edui-qqface {
+	background-position: -41px 0;
+	width: 390px
+}
+
+.edui-popup-content .edui-qqface table {
+	height: auto;
+	width: 210px
+}
+
+.edui-popup-content .edui-qqface td {
+	border: 0
+}
+
+.edui-popup-content .edui-qqface td img {
+	cursor: pointer;
+	border: 1px #fff solid
+}
+
+.edui-popup-content .edui-qqface img:hover {
+	border: 1px #06c solid
+}
+
+.fontsizeInput {
+	width: 20px;
+	height: 14px;
+	line-height: 14px;
+	padding-left: 2px;
+	position: absolute;
+	top: 2px;
+	left: 0
+}
+
+.fontsizeLabel {
+	width: 16px;
+	height: 14px;
+	font-size: 12px;
+	line-height: 14px;
+	position: absolute;
+	top: 3px;
+	left: 28px
+}
+
+.fontsizeSlider {
+	width: 156px;
+	height: 24px;
+	position: relative
+}
+
+.fontsizeSliderBarContainer {
+	width: 113px;
+	height: 18px;
+	position: absolute;
+	top: 3px;
+	left: 46px
+}
+
+.fontsizeSliderBar {
+	width: 108px;
+	height: 3px;
+	font-size: 0;
+	overflow: hidden;
+	position: absolute;
+	top: 8px;
+	left: 2px;
+	background: #9db9cf
+}
+
+.fontsizeSliderBtn {
+	width: 16px;
+	height: 14px;
+	cursor: w-resize;
+	position: absolute;
+	top: 3px;
+	left: 0;
+	text-align: right;
+	font-size: 11px;
+	color: #3a5b7c;
+	background: url(../../../image/comm/fai/faiui01.png?v=201503161711) -103px
+		-485px no-repeat
+}

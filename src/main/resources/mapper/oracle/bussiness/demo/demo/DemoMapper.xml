@@ -97,12 +97,10 @@
 	
 	<!-- 数据新增 -->
 	<insert id="save" parameterType="com.seeyoui.kensite.bussiness.demo.demo.domain.Demo">
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			SELECT SEQ_COMMON_BO_ID.NEXTVAL FROM DUAL
+		</selectKey>
 		INSERT INTO BO_DEMO (
-			
-			
-			
-			
-			
 			REMARKS,
 			DEL_FLAG,
 			TREE_ID,
@@ -111,11 +109,6 @@
 			ID
 		)
 		VALUES (
-			
-			
-			
-			
-			
 			#{remarks,jdbcType=VARCHAR},
 			#{delFlag,jdbcType=VARCHAR},
 			#{treeId,jdbcType=VARCHAR},

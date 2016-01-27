@@ -1,1 +1,237 @@
-@charset "utf-8";.popupTabBody input{text-overflow:ellipsis}.setline,.setTitle,.setCtrl{height:24px}.setline{line-height:24px;clear:both}.setTitle{width:70px;text-align:right}.setTitle,.setCtrl{float:left}.setCtrl-input-42{width:42px}.setCtrl-input-90{width:90px}.setCtrl-input-100{width:100px}.basicSetting .setline{margin-bottom:14px}.advancedSetting .setline{line-height:26px}.advancedSetting label{cursor:pointer}.flBtnStyle{margin-top:18px}.flBtnStyle .buttonStyleSelect{width:385px;height:200px;float:left;overflow-y:auto;overflow-x:hidden;border:1px solid #ebeaef;text-align:left}.flBtnStyle .styleList{width:336px;height:60px;margin:0 auto}.flBtnStyle .styleList3{padding-left:4px}.flBtnStyle .styleList4{padding-left:2px}.flBtnStyle .styleList .styleItem{width:103px;height:44px;float:left;cursor:pointer;margin:4px}.StyleListTitle{margin:10px 0 0 25px;font-size:12px;color:#666}.flBtnStyle .styleList .styleItem_hover{border:1px solid #b4b4b4;margin:3px;-moz-border-radius:5px;border-radius:5px;behavior:url(res/js/pie/PIE.min.htc?v=201509071511)}.flBtnStyle .styleList .styleItem_choice{border:2px solid #b4b4b4;margin:2px;-moz-border-radius:5px;border-radius:5px;behavior:url(res/js/pie/PIE.min.htc?v=201509071511)}.flBtnStyle .styleList .styleItem{background-image:url(../../image/floatBtn/buttonStyle/buttonStyle.png?v=201507201745);background-repeat:no-repeat}.flBtnStyle .styleList .item101{background-position:3px 5px}.flBtnStyle .styleList .item102{background-position:3px -35px}.flBtnStyle .styleList .item103{background-position:3px -75px}.flBtnStyle .styleList .item104{background-position:3px -115px}.flBtnStyle .styleList .item105{background-position:3px -155px}.flBtnStyle .styleList .item106{background-position:3px -195px}.flBtnStyle .styleList .item201{background-position:3px -235px}.flBtnStyle .styleList .item202{background-position:3px -275px}.flBtnStyle .styleList .item203{background-position:3px -315px}.flBtnStyle .styleList .item204{background-position:3px -355px}.flBtnStyle .styleList .item205{background-position:3px -395px}.flBtnStyle .styleList .item206{background-position:3px -435px}.flBtnStyle .styleList .item301{background-position:3px -476px}.flBtnStyle .styleList .item302{background-position:3px -522px}.flBtnStyle .styleList .item303{background-position:3px -568px}.flBtnStyle .styleList .item304{background-position:3px -617px}.flBtnStyle .styleList .item305{background-position:3px -663px}.flBtnStyle .styleList .item306{background-position:3px -710px}.flBtnStyle .styleList .item401{background-position:3px -757px}.flBtnStyle .styleList .item402{background-position:3px -798px}.flBtnStyle .styleList .item403{background-position:3px -840px}.flBtnStyle .styleList .item404{background-position:3px -881px}.flBtnStyle .styleList .item405{background-position:3px -922px}.flBtnStyle .styleList .item406{background-position:3px -964px}.colorPicker{width:21px;height:21px;border:1px solid #999;cursor:pointer}.advancedSetting .cusBox{display:none;padding-left:45px}.advancedSetting .title2{width:65px;float:left;text-align:right}.advancedSetting .flBtnBgShowCus{padding-top:5px}.advancedSetting .flBtnBorderSize{width:48px}.advancedSetting .flBtnImgMsg,.basicSetting .flBtnLink{margin-left:8px}
+@charset "utf-8"; 
+
+.popupTabBody input {
+	text-overflow: ellipsis
+}
+
+.setline, .setTitle, .setCtrl {
+	height: 24px
+}
+
+.setline {
+	line-height: 24px;
+	clear: both
+}
+
+.setTitle {
+	width: 70px;
+	text-align: right
+}
+
+.setTitle, .setCtrl {
+	float: left
+}
+
+.setCtrl-input-42 {
+	width: 42px
+}
+
+.setCtrl-input-90 {
+	width: 90px
+}
+
+.setCtrl-input-100 {
+	width: 100px
+}
+
+.basicSetting .setline {
+	margin-bottom: 14px
+}
+
+.advancedSetting .setline {
+	line-height: 26px
+}
+
+.advancedSetting label {
+	cursor: pointer
+}
+
+.flBtnStyle {
+	margin-top: 18px
+}
+
+.flBtnStyle .buttonStyleSelect {
+	width: 385px;
+	height: 200px;
+	float: left;
+	overflow-y: auto;
+	overflow-x: hidden;
+	border: 1px solid #ebeaef;
+	text-align: left
+}
+
+.flBtnStyle .styleList {
+	width: 336px;
+	height: 60px;
+	margin: 0 auto
+}
+
+.flBtnStyle .styleList3 {
+	padding-left: 4px
+}
+
+.flBtnStyle .styleList4 {
+	padding-left: 2px
+}
+
+.flBtnStyle .styleList .styleItem {
+	width: 103px;
+	height: 44px;
+	float: left;
+	cursor: pointer;
+	margin: 4px
+}
+
+.StyleListTitle {
+	margin: 10px 0 0 25px;
+	font-size: 12px;
+	color: #666
+}
+
+.flBtnStyle .styleList .styleItem_hover {
+	border: 1px solid #b4b4b4;
+	margin: 3px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	behavior: url(res/js/pie/PIE.min.htc?v=201509071511)
+}
+
+.flBtnStyle .styleList .styleItem_choice {
+	border: 2px solid #b4b4b4;
+	margin: 2px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	behavior: url(res/js/pie/PIE.min.htc?v=201509071511)
+}
+
+.flBtnStyle .styleList .styleItem {
+	background-image:
+		url(../../image/floatBtn/buttonStyle/buttonStyle.png?v=201507201745);
+	background-repeat: no-repeat
+}
+
+.flBtnStyle .styleList .item101 {
+	background-position: 3px 5px
+}
+
+.flBtnStyle .styleList .item102 {
+	background-position: 3px -35px
+}
+
+.flBtnStyle .styleList .item103 {
+	background-position: 3px -75px
+}
+
+.flBtnStyle .styleList .item104 {
+	background-position: 3px -115px
+}
+
+.flBtnStyle .styleList .item105 {
+	background-position: 3px -155px
+}
+
+.flBtnStyle .styleList .item106 {
+	background-position: 3px -195px
+}
+
+.flBtnStyle .styleList .item201 {
+	background-position: 3px -235px
+}
+
+.flBtnStyle .styleList .item202 {
+	background-position: 3px -275px
+}
+
+.flBtnStyle .styleList .item203 {
+	background-position: 3px -315px
+}
+
+.flBtnStyle .styleList .item204 {
+	background-position: 3px -355px
+}
+
+.flBtnStyle .styleList .item205 {
+	background-position: 3px -395px
+}
+
+.flBtnStyle .styleList .item206 {
+	background-position: 3px -435px
+}
+
+.flBtnStyle .styleList .item301 {
+	background-position: 3px -476px
+}
+
+.flBtnStyle .styleList .item302 {
+	background-position: 3px -522px
+}
+
+.flBtnStyle .styleList .item303 {
+	background-position: 3px -568px
+}
+
+.flBtnStyle .styleList .item304 {
+	background-position: 3px -617px
+}
+
+.flBtnStyle .styleList .item305 {
+	background-position: 3px -663px
+}
+
+.flBtnStyle .styleList .item306 {
+	background-position: 3px -710px
+}
+
+.flBtnStyle .styleList .item401 {
+	background-position: 3px -757px
+}
+
+.flBtnStyle .styleList .item402 {
+	background-position: 3px -798px
+}
+
+.flBtnStyle .styleList .item403 {
+	background-position: 3px -840px
+}
+
+.flBtnStyle .styleList .item404 {
+	background-position: 3px -881px
+}
+
+.flBtnStyle .styleList .item405 {
+	background-position: 3px -922px
+}
+
+.flBtnStyle .styleList .item406 {
+	background-position: 3px -964px
+}
+
+.colorPicker {
+	width: 21px;
+	height: 21px;
+	border: 1px solid #999;
+	cursor: pointer
+}
+
+.advancedSetting .cusBox {
+	display: none;
+	padding-left: 45px
+}
+
+.advancedSetting .title2 {
+	width: 65px;
+	float: left;
+	text-align: right
+}
+
+.advancedSetting .flBtnBgShowCus {
+	padding-top: 5px
+}
+
+.advancedSetting .flBtnBorderSize {
+	width: 48px
+}
+
+.advancedSetting .flBtnImgMsg, .basicSetting .flBtnLink {
+	margin-left: 8px
+}

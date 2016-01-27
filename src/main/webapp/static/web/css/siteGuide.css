@@ -1,1 +1,448 @@
-@charset "utf-8";.guideQuickIco{width:50px;height:42px;position:absolute;top:35%;left:58px;background:url(../image/guide/siteGuideIco.gif?v=201409151747) no-repeat 0 0;z-index:9030;cursor:pointer}.guideTitle{width:100%;height:45px;background-color:#4188c6;margin:0;padding:0;color:#fff}.guideTitle span{float:left;line-height:45px;font-weight:normal}.guideTitle .guideTitleText{font-size:16px;margin:auto 42px}.guideTitle .guideProgress{width:235px;height:46px;float:left;line-height:45px}.guideProgress span{line-height:12px;width:26px;float:right;margin-right:10px}.guideProgress .progress{float:left;font-weight:normal}.guideProgress .progressBar{width:190px;height:11px;margin-top:16px;border:1px solid #fff;float:right;border-radius:5px;background-color:#fff;overflow:hidden}.guideProgress #progressBar{width:95px;height:12px;float:left;background:url(../image/guide/03.gif?v=20140701153506);border-radius:2px}.sgCloseBtn{margin:9px}#siteGuide{width:100%;height:100%;table-layout:fixed}#siteGuide .siteGuideNav{width:185px;height:100%;left:0;top:0}.siteGuideNav .guidenav{width:100%;height:100%;border-right:1px solid #d7d7d7;background-color:#eee}.guidenav .navList{margin:0;list-style-type:none;padding:0}.navList .itemContent{width:110px;height:15px;margin:23px 0 23px 26px}.itemContent .isOk{display:none;background:url(../image/guide/02.gif?v=20140702114015) no-repeat;width:14px;height:10px;float:left;margin-top:3px}.itemContent .itemtText{color:#555;font-size:14px;line-height:14px;_line-height:17px;float:right}.itemContent .selected{color:#0090f4}.itemContent .done{background:url(../image/guide/01.gif?v=20140702114010) no-repeat}.guidenav li{height:55px;border-bottom:1px solid #d7d7d7;border-top:1px solid #FFF;cursor:pointer}.guidenav .navBtnList{border-top:1px solid #fff}.guidenav .navBtns{position:absolute;bottom:30px}.guidenav .navBtn{width:153px;height:43px;background-color:#f4f4f4;margin:0 15px;border:1px solid #d7d7d7;color:#555;cursor:pointer}.navBtn .navBtnText{width:85px;font-size:14px;line-height:42px;margin:0 auto}.navBtn:hover{color:#fff;background-color:#ff7200;border-color:#fb5300}#siteGuide .siteGuideContent{width:auto;height:83%;*+height:100%;_height:75%;position:relative;overflow:auto;overflow-x:hidden}.siteGuideContent .guideContent{width:auto;height:92%;margin:25px auto 0 45px}.content .contentTitle{font-size:16px;color:#2587c8}.contentTitle .acctUrl{text-decoration:underline;color:#ff7200}#guideReg{width:90%;height:auto;float:left;font-size:14px;line-height:24px;color:#8e8e8e}#guideGoal{width:90%;height:auto;float:left;font-size:14px;line-height:24px;color:#494949}#guideGoal a{color:#2587c8}#guideStyle{width:90%;height:auto;float:left;font-size:14px;line-height:24px;color:#8e8e8e;position:relative}#guideStyle span{color:#494949}#guideDesign{width:100%;height:auto;float:left;font-size:14px;line-height:24px;color:#8e8e8e}#guideDesign span{color:#494949}#guideOther{width:90%;height:auto;float:left;font-size:14px;line-height:24px;color:#494949}#popularize{width:90%;height:auto;float:left;font-size:14px;line-height:24px;color:#8e8e8e}#popularize a{text-decoration:underline;color:#ff7200}.guideContentBtn{width:100%;height:auto;position:absolute;bottom:30px;_bottom:0}.guideContentBtn .ContentBtn{margin:0 auto;width:359px;height:45px}.ContentBtn .pBtn{width:129px;height:42px;float:left;background-color:#f4f4f4;border:1px solid #d7d7d7;margin-left:30px;line-height:42px;text-align:center;font-size:16px;color:#888;cursor:pointer}.ContentBtn .nBtn{width:129px;height:42px;float:left;background-color:#f4f4f4;border:1px solid #d7d7d7;margin-left:30px;line-height:42px;text-align:center;font-size:16px;color:#888;cursor:pointer}.ContentBtn .cBtn{width:129px;height:42px;float:left;background-color:#f4f4f4;border:1px solid #d7d7d7;margin-left:30px;line-height:42px;text-align:center;font-size:16px;color:#888;cursor:pointer}.ContentBtn .enterBtn{background-color:#39aaf8;color:#fff;border-color:#1899ec}.ContentBtn .oneBtn{margin-left:110px;_margin-left:50px}.guideImg1{width:314px;height:248px;background:url(../image/guide/siteGuide01.jpg?v=201409151747) no-repeat;margin:29px auto 0 auto}.guideImg2{width:387px;height:134px;background:url(../image/guide/siteGuide02.jpg?v=201409151747) no-repeat;margin-left:56px}.guideImg3{width:380px;height:187px;background:url(../image/guide/siteGuide03.jpg?v=201409151747) no-repeat;margin-left:56px}.guideImg4{width:383px;height:259px;background:url(../image/guide/siteGuide04.jpg?v=201409151747) no-repeat;margin:15px 0 0 70px}.guideImg5{width:429px;height:224px;background:url(../image/guide/siteGuide05.jpg?v=201409151747) no-repeat;margin-left:50px}.guideImg6{width:453px;height:261px;background:url(../image/guide/siteGuide06.jpg?v=201409151747) no-repeat;margin:20px 0 0 50px}.guideImg7{width:455px;height:383px;background:url(../image/guide/siteGuide07.jpg?v=201409151747) no-repeat;margin-left:35px}.guideImg8{width:74px;height:22px;background:url(../image/guide/10.gif?v=20140704160453);display:inline-block;display:inline-block!important;*display:inline;zoom:1}.newTip{width:200px;height:76px;position:absolute;top:48px;right:3px;_right:48px;*+right:40px}.tipText{width:86px;height:24px;float:left;border:2px solid #ff7200}.tipImg{background:url(../image/guide/ball.png?v=20140704214205);_background:url(../image/guide/ball.gif?v=20140704214205);height:100%;width:104px;margin-top:12px;margin-left:70px;*margin-left:40px}.tipClose{width:25px;height:25px;float:right;margin-top:13px;cursor:pointer}.guideN{width:23%;height:93%;position:absolute;left:0;*position:relative;*heigth:550px;*float:left}.sgMove{position:absolute;height:45px;width:100%;cursor:move;background:url(../image/guide/opacityImg.gif?v=201407141810) repeat-x}
+@charset "utf-8"; 
+
+.guideQuickIco {
+	width: 50px;
+	height: 42px;
+	position: absolute;
+	top: 35%;
+	left: 58px;
+	background: url(../image/guide/siteGuideIco.gif?v=201409151747)
+		no-repeat 0 0;
+	z-index: 9030;
+	cursor: pointer
+}
+
+.guideTitle {
+	width: 100%;
+	height: 45px;
+	background-color: #4188c6;
+	margin: 0;
+	padding: 0;
+	color: #fff
+}
+
+.guideTitle span {
+	float: left;
+	line-height: 45px;
+	font-weight: normal
+}
+
+.guideTitle .guideTitleText {
+	font-size: 16px;
+	margin: auto 42px
+}
+
+.guideTitle .guideProgress {
+	width: 235px;
+	height: 46px;
+	float: left;
+	line-height: 45px
+}
+
+.guideProgress span {
+	line-height: 12px;
+	width: 26px;
+	float: right;
+	margin-right: 10px
+}
+
+.guideProgress .progress {
+	float: left;
+	font-weight: normal
+}
+
+.guideProgress .progressBar {
+	width: 190px;
+	height: 11px;
+	margin-top: 16px;
+	border: 1px solid #fff;
+	float: right;
+	border-radius: 5px;
+	background-color: #fff;
+	overflow: hidden
+}
+
+.guideProgress #progressBar {
+	width: 95px;
+	height: 12px;
+	float: left;
+	background: url(../image/guide/03.gif?v=20140701153506);
+	border-radius: 2px
+}
+
+.sgCloseBtn {
+	margin: 9px
+}
+
+#siteGuide {
+	width: 100%;
+	height: 100%;
+	table-layout: fixed
+}
+
+#siteGuide .siteGuideNav {
+	width: 185px;
+	height: 100%;
+	left: 0;
+	top: 0
+}
+
+.siteGuideNav .guidenav {
+	width: 100%;
+	height: 100%;
+	border-right: 1px solid #d7d7d7;
+	background-color: #eee
+}
+
+.guidenav .navList {
+	margin: 0;
+	list-style-type: none;
+	padding: 0
+}
+
+.navList .itemContent {
+	width: 110px;
+	height: 15px;
+	margin: 23px 0 23px 26px
+}
+
+.itemContent .isOk {
+	display: none;
+	background: url(../image/guide/02.gif?v=20140702114015) no-repeat;
+	width: 14px;
+	height: 10px;
+	float: left;
+	margin-top: 3px
+}
+
+.itemContent .itemtText {
+	color: #555;
+	font-size: 14px;
+	line-height: 14px;
+	_line-height: 17px;
+	float: right
+}
+
+.itemContent .selected {
+	color: #0090f4
+}
+
+.itemContent .done {
+	background: url(../image/guide/01.gif?v=20140702114010) no-repeat
+}
+
+.guidenav li {
+	height: 55px;
+	border-bottom: 1px solid #d7d7d7;
+	border-top: 1px solid #FFF;
+	cursor: pointer
+}
+
+.guidenav .navBtnList {
+	border-top: 1px solid #fff
+}
+
+.guidenav .navBtns {
+	position: absolute;
+	bottom: 30px
+}
+
+.guidenav .navBtn {
+	width: 153px;
+	height: 43px;
+	background-color: #f4f4f4;
+	margin: 0 15px;
+	border: 1px solid #d7d7d7;
+	color: #555;
+	cursor: pointer
+}
+
+.navBtn .navBtnText {
+	width: 85px;
+	font-size: 14px;
+	line-height: 42px;
+	margin: 0 auto
+}
+
+.navBtn:hover {
+	color: #fff;
+	background-color: #ff7200;
+	border-color: #fb5300
+}
+
+#siteGuide .siteGuideContent {
+	width: auto;
+	height: 83%; *+
+	height: 100%;
+	_height: 75%;
+	position: relative;
+	overflow: auto;
+	overflow-x: hidden
+}
+
+.siteGuideContent .guideContent {
+	width: auto;
+	height: 92%;
+	margin: 25px auto 0 45px
+}
+
+.content .contentTitle {
+	font-size: 16px;
+	color: #2587c8
+}
+
+.contentTitle .acctUrl {
+	text-decoration: underline;
+	color: #ff7200
+}
+
+#guideReg {
+	width: 90%;
+	height: auto;
+	float: left;
+	font-size: 14px;
+	line-height: 24px;
+	color: #8e8e8e
+}
+
+#guideGoal {
+	width: 90%;
+	height: auto;
+	float: left;
+	font-size: 14px;
+	line-height: 24px;
+	color: #494949
+}
+
+#guideGoal a {
+	color: #2587c8
+}
+
+#guideStyle {
+	width: 90%;
+	height: auto;
+	float: left;
+	font-size: 14px;
+	line-height: 24px;
+	color: #8e8e8e;
+	position: relative
+}
+
+#guideStyle span {
+	color: #494949
+}
+
+#guideDesign {
+	width: 100%;
+	height: auto;
+	float: left;
+	font-size: 14px;
+	line-height: 24px;
+	color: #8e8e8e
+}
+
+#guideDesign span {
+	color: #494949
+}
+
+#guideOther {
+	width: 90%;
+	height: auto;
+	float: left;
+	font-size: 14px;
+	line-height: 24px;
+	color: #494949
+}
+
+#popularize {
+	width: 90%;
+	height: auto;
+	float: left;
+	font-size: 14px;
+	line-height: 24px;
+	color: #8e8e8e
+}
+
+#popularize a {
+	text-decoration: underline;
+	color: #ff7200
+}
+
+.guideContentBtn {
+	width: 100%;
+	height: auto;
+	position: absolute;
+	bottom: 30px;
+	_bottom: 0
+}
+
+.guideContentBtn .ContentBtn {
+	margin: 0 auto;
+	width: 359px;
+	height: 45px
+}
+
+.ContentBtn .pBtn {
+	width: 129px;
+	height: 42px;
+	float: left;
+	background-color: #f4f4f4;
+	border: 1px solid #d7d7d7;
+	margin-left: 30px;
+	line-height: 42px;
+	text-align: center;
+	font-size: 16px;
+	color: #888;
+	cursor: pointer
+}
+
+.ContentBtn .nBtn {
+	width: 129px;
+	height: 42px;
+	float: left;
+	background-color: #f4f4f4;
+	border: 1px solid #d7d7d7;
+	margin-left: 30px;
+	line-height: 42px;
+	text-align: center;
+	font-size: 16px;
+	color: #888;
+	cursor: pointer
+}
+
+.ContentBtn .cBtn {
+	width: 129px;
+	height: 42px;
+	float: left;
+	background-color: #f4f4f4;
+	border: 1px solid #d7d7d7;
+	margin-left: 30px;
+	line-height: 42px;
+	text-align: center;
+	font-size: 16px;
+	color: #888;
+	cursor: pointer
+}
+
+.ContentBtn .enterBtn {
+	background-color: #39aaf8;
+	color: #fff;
+	border-color: #1899ec
+}
+
+.ContentBtn .oneBtn {
+	margin-left: 110px;
+	_margin-left: 50px
+}
+
+.guideImg1 {
+	width: 314px;
+	height: 248px;
+	background: url(../image/guide/siteGuide01.jpg?v=201409151747) no-repeat;
+	margin: 29px auto 0 auto
+}
+
+.guideImg2 {
+	width: 387px;
+	height: 134px;
+	background: url(../image/guide/siteGuide02.jpg?v=201409151747) no-repeat;
+	margin-left: 56px
+}
+
+.guideImg3 {
+	width: 380px;
+	height: 187px;
+	background: url(../image/guide/siteGuide03.jpg?v=201409151747) no-repeat;
+	margin-left: 56px
+}
+
+.guideImg4 {
+	width: 383px;
+	height: 259px;
+	background: url(../image/guide/siteGuide04.jpg?v=201409151747) no-repeat;
+	margin: 15px 0 0 70px
+}
+
+.guideImg5 {
+	width: 429px;
+	height: 224px;
+	background: url(../image/guide/siteGuide05.jpg?v=201409151747) no-repeat;
+	margin-left: 50px
+}
+
+.guideImg6 {
+	width: 453px;
+	height: 261px;
+	background: url(../image/guide/siteGuide06.jpg?v=201409151747) no-repeat;
+	margin: 20px 0 0 50px
+}
+
+.guideImg7 {
+	width: 455px;
+	height: 383px;
+	background: url(../image/guide/siteGuide07.jpg?v=201409151747) no-repeat;
+	margin-left: 35px
+}
+
+.guideImg8 {
+	width: 74px;
+	height: 22px;
+	background: url(../image/guide/10.gif?v=20140704160453);
+	display: inline-block;
+	display: inline-block !important;
+	*display: inline;
+	zoom: 1
+}
+
+.newTip {
+	width: 200px;
+	height: 76px;
+	position: absolute;
+	top: 48px;
+	right: 3px;
+	_right: 48px; *+
+	right: 40px
+}
+
+.tipText {
+	width: 86px;
+	height: 24px;
+	float: left;
+	border: 2px solid #ff7200
+}
+
+.tipImg {
+	background: url(../image/guide/ball.png?v=20140704214205);
+	_background: url(../image/guide/ball.gif?v=20140704214205);
+	height: 100%;
+	width: 104px;
+	margin-top: 12px;
+	margin-left: 70px;
+	*margin-left: 40px
+}
+
+.tipClose {
+	width: 25px;
+	height: 25px;
+	float: right;
+	margin-top: 13px;
+	cursor: pointer
+}
+
+.guideN {
+	width: 23%;
+	height: 93%;
+	position: absolute;
+	left: 0;
+	*position: relative;
+	*heigth: 550px;
+	*float: left
+}
+
+.sgMove {
+	position: absolute;
+	height: 45px;
+	width: 100%;
+	cursor: move;
+	background: url(../image/guide/opacityImg.gif?v=201407141810) repeat-x
+}

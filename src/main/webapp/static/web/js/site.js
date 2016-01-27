@@ -977,17 +977,17 @@ var b="";
 	b=c.slice(a,c.length-1)
 }
 $.ajax( {
-	type:"GET",url:"/ajax/log_h.jsp?cmd=log&msg="+Fai.encodeUrl(c),data:b
+	type:"GET",url:"/static/web/ajax/log_h.jsp?cmd=log&msg="+Fai.encodeUrl(c),data:b
 }
 )};
 	Site.logDog=function(b,a) {
 	$.ajax( {
-	type:"GET",url:"/ajax/log_h.jsp?cmd=dog&dogId="+Fai.encodeUrl(b)+"&dogSrc="+Fai.encodeUrl(a)
+	type:"GET",url:"/static/web/ajax/log_h.jsp?cmd=dog&dogId="+Fai.encodeUrl(b)+"&dogSrc="+Fai.encodeUrl(a)
 }
 )};
 	Site.logProf=function(b,a) {
 	$.ajax( {
-	type:"GET",url:"/ajax/log_h.jsp?cmd=prof&profId="+Fai.encodeUrl(b)+"&profVal="+Fai.encodeUrl(a)
+	type:"GET",url:"/static/web/ajax/log_h.jsp?cmd=prof&profId="+Fai.encodeUrl(b)+"&profVal="+Fai.encodeUrl(a)
 }
 )};
 	Site.popupBox=function(p) {
@@ -6087,7 +6087,7 @@ else {
 	Site.memberImgFileUpload=function(a,c,e) {
 	var d=e.split(",");
 	var b= {
-	file_post_name:"Filedata",upload_url:"/ajax/memberHeadImgUp_h.jsp",button_placeholder_id:c,file_size_limit:a+"MB",file_queue_limit:1,button_cursor:SWFUpload.CURSOR.HAND,button_width:"80",button_height:"30",requeue_on_error:false,post_params: {
+	file_post_name:"Filedata",upload_url:"/static/web/ajax/memberHeadImgUp_h.jsp",button_placeholder_id:c,file_size_limit:a+"MB",file_queue_limit:1,button_cursor:SWFUpload.CURSOR.HAND,button_width:"80",button_height:"30",requeue_on_error:false,post_params: {
 	ctrl:"Filedata",app:21
 }
 ,file_types:d.join(";
@@ -6855,7 +6855,7 @@ var c=d.find(".memberProfileBtn");
 	e.html(LS.memberProfileSubmitting);
 	if("id" in newImg&&oldImgId!=newImg.id) {
 	$.ajax( {
-	type:"post",url:"../ajax/member_h.jsp?cmd=cimg",data:"oldImgId="+oldImgId+"&mid="+o+"&newImg="+Fai.encodeUrl($.toJSON(newImg)),async:false,error:function() {
+	type:"post",url:"../static/web/ajax/member_h.jsp?cmd=cimg",data:"oldImgId="+oldImgId+"&mid="+o+"&newImg="+Fai.encodeUrl($.toJSON(newImg)),async:false,error:function() {
 	Fai.ing("服务繁忙，请稍后重试")
 }
 ,success:function(q) {
@@ -10902,7 +10902,7 @@ else {
 	Site.siteMenCommImgFileUpload=function(b,e,g,a,d) {
 	var f=g.split(",");
 	var c= {
-	file_post_name:"Filedata",upload_url:"/ajax/commUpsiteimg_h.jsp",button_placeholder_id:e,file_size_limit:b+"MB",button_image_type:3,file_queue_limit:a,button_width:"50px",button_height:"50px",button_cursor:SWFUpload.CURSOR.HAND,button_image_url:_resRoot+"/image/site/msgUpImg/upload.png",requeue_on_error:false,post_params: {
+	file_post_name:"Filedata",upload_url:"/static/web/ajax/commUpsiteimg_h.jsp",button_placeholder_id:e,file_size_limit:b+"MB",button_image_type:3,file_queue_limit:a,button_width:"50px",button_height:"50px",button_cursor:SWFUpload.CURSOR.HAND,button_image_url:_resRoot+"/image/site/msgUpImg/upload.png",requeue_on_error:false,post_params: {
 	ctrl:"Filedata",app:21,type:0,fileUploadLimit:5,isSiteForm:true
 }
 ,file_types:f.join(";
@@ -13867,7 +13867,7 @@ var o=g.length<m?g.length:m;
 	Site.siteCommImgFileUpload=function(b,d,f,a) {
 	var e=f.split(",");
 	var c= {
-	file_post_name:"Filedata",upload_url:"/ajax/commUpsiteimg_h.jsp",button_placeholder_id:d,file_size_limit:b+"MB",button_image_type:3,file_queue_limit:a,button_width:"50px",button_height:"50px",button_cursor:SWFUpload.CURSOR.HAND,button_image_url:_resRoot+"/image/site/msgUpImg/upload.png",requeue_on_error:false,post_params: {
+	file_post_name:"Filedata",upload_url:"/static/web/ajax/commUpsiteimg_h.jsp",button_placeholder_id:d,file_size_limit:b+"MB",button_image_type:3,file_queue_limit:a,button_width:"50px",button_height:"50px",button_cursor:SWFUpload.CURSOR.HAND,button_image_url:_resRoot+"/image/site/msgUpImg/upload.png",requeue_on_error:false,post_params: {
 	ctrl:"Filedata",app:21,type:0,fileUploadLimit:5,isSiteForm:true
 }
 ,file_types:e.join(";
@@ -15412,7 +15412,7 @@ else {
 	i=161
 }
 }}var h= {
-	file_post_name:"Filedata",upload_url:"/ajax/upsiteimg_h.jsp",button_placeholder_id:"siteForm"+b+"fileUpload"+g,file_size_limit:c+"MB",button_image_type:e?5:3,file_queue_limit:1,requeue_on_error:false,button_height:e?"34":"22",button_width:e?(i-2):"71",button_text:e?"<span class='fk_btText'>"+d+"</span>":"",button_text_style:e?".fk_btText {
+	file_post_name:"Filedata",upload_url:"/static/web/ajax/upsiteimg_h.jsp",button_placeholder_id:"siteForm"+b+"fileUpload"+g,file_size_limit:c+"MB",button_image_type:e?5:3,file_queue_limit:1,requeue_on_error:false,button_height:e?"34":"22",button_width:e?(i-2):"71",button_text:e?"<span class='fk_btText'>"+d+"</span>":"",button_text_style:e?".fk_btText {
 	text-align:center;
 	font-family:微软雅黑;
 	color:#666666;

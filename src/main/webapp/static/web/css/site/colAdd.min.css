@@ -1,0 +1,39 @@
+@charset "utf-8"; 
+
+.blockStyle {
+	clear: both;
+	width: 100%
+}
+
+.part {
+	clear: both;
+	height: 23px;
+	line-height: 23px;
+	margin-bottom: 3px
+}
+
+.partLabel {
+	float: left;
+	width: 120px;
+	text-align: right
+}
+
+.tipsStyle {
+	float: left;
+	padding-left: 32px;
+	padding-right: 32px;
+	*padding-left: 19px;
+	*padding-right: 38px
+}
+
+.mouseShape {
+	cursor: text
+}
+
+.tipsHelpColor {
+	color: red
+}
+
+.marginBottom {
+	margin-bottom: 3px
+}
