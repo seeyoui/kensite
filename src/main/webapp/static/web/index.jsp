@@ -2847,7 +2847,12 @@
 
 			Site.pageOnload();
 		};
-
+		/*
+		$LAB.script("${ctx_web}/js/module_moduleEditTool.min.js?v=201601261113").wait(function(){
+			Site.functionInterfaceTrigger({"name":"addModuleContextMenu"});
+			Site.functionInterfaceTrigger({"name":"moduleEditTool.init"});
+		});
+		*/
 		$LAB.script("${ctx_web}/js/productSlide.min.js?v=201512071738");
 
 		$LAB.script("${ctx_web}/js/photoSlide.min.js?v=201601041813");

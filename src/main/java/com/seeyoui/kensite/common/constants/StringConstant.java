@@ -68,6 +68,11 @@ public final class StringConstant {
 	public static final String READ_SATUS_READ="READ";//已读
 	public static final String READ_SATUS_UNREAD="UNREAD";//未读
 	
+	//WEB门户
+	public static final String WEB_ADD = "add";
+	public static final String WEB_SET_BACK = "setBack";
+	public static final String WEB_SEQ_SQL = "select seq_web_module_id.nextval id from dual";
+	
 	public static final HashMap<String, String> NULLABLE = new LinkedHashMap<String, String>();
 	
 	public static final HashMap<String, String> DELETE_FLAG = new LinkedHashMap<String, String>();

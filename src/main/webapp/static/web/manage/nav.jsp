@@ -319,7 +319,6 @@ function save(){
 	var mdList = new Array();	
 	$.each(sortable, function(i, n){
 		var tmpid = parseInt($(this).attr("id"));
-		
 		var newThisData = allPerResult["perData"+ tmpid ];
 		orderList.push( tmpid );
 		var other = {};

@@ -22,7 +22,7 @@
 	<entry key="outRoot">C:\Users\cuichen\git\</entry>
 
 	<!-- 需要移除的表名前缀,使用逗号进行分隔多个前缀,示例值: t_,v_ -->
-	<entry key="tableRemovePrefixes">cms_,t_,sys_,mod_</entry>
+	<entry key="tableRemovePrefixes">bo_,cms_,t_,sys_,mod_</entry>
 	
 	<entry key="jdbc.username">ks</entry>
 	<entry key="jdbc.password">kensite</entry>

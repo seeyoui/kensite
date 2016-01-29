@@ -1,0 +1,304 @@
+
+.fk-moduleToolbar {
+    background: #56a1e3 none repeat scroll 0 0;
+    font-family: "Microsoft YaHei";
+    font-size: 12px;
+    overflow: hidden;
+    position: absolute;
+    z-index: 9099;
+}
+.fk-moduleToolbar-right {
+    border-radius: 0 4px 4px 0;
+}
+.fk-moduleToolbar-left {
+    border-radius: 4px 0 0 4px;
+}
+.fk-moduleToolbar .f-toolItem {
+    border-bottom: 1px solid #6cade7;
+    position: relative;
+}
+.fk-moduleToolbar .f-toolItem:last-child {
+    border-bottom: 0 none;
+}
+.fk-moduleToolbar .f-icon {
+    background-image: url("../../image/site/moduleToolbar.png?v=201601121610");
+    background-repeat: no-repeat;
+    display: block;
+    height: 20px;
+    left: 3px;
+    margin-top: -10px;
+    position: absolute;
+    top: 50%;
+    width: 20px;
+}
+.fk-moduleToolbar .f-title {
+    color: #fff;
+    display: block;
+    font-family: "Microsoft YaHei";
+    font-size: 12px;
+    padding: 11px 10px 11px 26px;
+    position: relative;
+}
+.fk-moduleToolbar .f-title:hover {
+    background: #4295de none repeat scroll 0 0;
+    cursor: pointer;
+}
+.fk-moduleToolbar .f-icon {
+    background-position: 3px 3px;
+}
+.fk-moduleToolbar .f-onlyIcon {
+    display: none;
+}
+.fk-moduleToolbar .f-toolItembannerAndBorder .f-icon {
+    background-position: 2px -27px;
+}
+.fk-moduleToolbar .f-toolItemclose .f-icon {
+    background-position: 5px -57px;
+}
+.fk-moduleToolbar .f-toolItemclearTB .f-icon {
+    background-position: 2px -91px;
+}
+.fk-moduleToolbar .f-toolItemresetTB .f-icon {
+    background-position: 2px -117px;
+}
+.fk-moduleToolbar .f-toolItemadd .f-icon {
+    background-position: 3px -286px;
+}
+.fk-moduleToolbar .f-toolItemedit .f-icon {
+    background-position: 3px -254px;
+}
+.fk-moduleToolbar-multiModule {
+    background: #7e807f none repeat scroll 0 0;
+}
+.fk-moduleToolbar-multiModule .f-toolItem {
+    border-bottom: 1px solid #8f9090;
+}
+.fk-moduleToolbar-multiModule .f-title:hover {
+    background: #737373 none repeat scroll 0 0;
+}
+.fk-moduleToolbar-multiModule .f-toolItemtabStyle .f-icon {
+    background-position: 2px -27px;
+}
+.fk-moduleToolbar-multiModule .f-toolItemmulColStyle .f-icon {
+    background-position: 2px -27px;
+}
+.fk-moduleToolbar-multiModule .f-toolItembannerAndBorder .f-icon {
+    background-position: 3px -143px;
+}
+.fk-moduleToolbar-fullmeasure {
+    background: #7e807f none repeat scroll 0 0;
+    overflow: hidden;
+}
+.fk-moduleToolbar-fullmeasure .f-toolItem {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: -moz-use-text-color #8f9090 -moz-use-text-color -moz-use-text-color;
+    border-image: none;
+    border-style: none solid none none;
+    border-width: 0 1px 0 0;
+    float: left;
+    height: 31px;
+    line-height: 31px;
+}
+.fk-moduleToolbar-fullmeasure .f-toolItem:last-child {
+    border-right: 0 none;
+}
+.fk-moduleToolbar-fullmeasure .f-title {
+    display: block;
+    height: 100%;
+    padding: 0 6px;
+}
+.fk-moduleToolbar-fullmeasure .f-title:hover {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 center;
+}
+.fk-moduleToolbar-fullmeasure .f-toolItemmoduleLayerIconHide {
+    background: rgba(0, 0, 0, 0) url("../../image/bg02.png?v=201511091906") no-repeat scroll -940px -210px;
+    padding: 0;
+    width: 26px;
+}
+.fk-moduleToolbar-fullmeasure .f-toolItemmoduleLayerIconTop {
+    background: rgba(0, 0, 0, 0) url("../../image/bg02.png?v=201511091906") no-repeat scroll -212px -323px;
+    padding: 0;
+    width: 26px;
+}
+.fk-moduleToolbar-fullmeasure .f-toolItemmoduleLayerIconBottom {
+    background: rgba(0, 0, 0, 0) url("../../image/bg02.png?v=201511091906") no-repeat scroll -85px -65px;
+    padding: 0;
+    width: 26px;
+}
+.fk-moduleToolbar-top .f-toolItem, .fk-moduleToolbar-bottom .f-toolItem {
+    border-bottom: 0 none;
+    border-right: 1px solid #6cade7;
+    float: left;
+}
+.fk-moduleToolbar-top .f-toolItem:last-child, .fk-moduleToolbar-bottom .f-toolItem:last-child {
+    border-right: 0 none;
+}
+.fk-moduleToolbar-top .f-title, .fk-moduleToolbar-bottom .f-title {
+    padding: 11px 11px 12px 15px;
+}
+.fk-moduleToolbar-top .f-title .f-text, .fk-moduleToolbar-bottom .f-title .f-text {
+    display: none;
+}
+.fk-moduleToolbar-top .f-onlyIcon, .fk-moduleToolbar-bottom .f-onlyIcon {
+    display: block;
+}
+#context-menu-layer {
+    z-index: 9030 !important;
+}
+.fk-moduleContextMenu {
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #f1f1f1;
+    border-radius: 3px;
+    box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.27);
+    font-family: "Microsoft YaHei";
+    font-size: 12px;
+    list-style-type: none;
+    margin: 0;
+    min-width: 120px;
+    opacity: 0.95;
+    padding: 4px 0;
+    position: absolute;
+    z-index: 9031 !important;
+}
+.fk-moduleContextMenu .context-menu-item {
+    -moz-user-select: none;
+    color: #000;
+    padding: 3px 20px;
+    position: relative;
+    text-align: center;
+}
+.fk-moduleContextMenu .f-tip {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 center;
+    height: 12px;
+    left: 10px;
+    margin-top: -5px;
+    position: absolute;
+    top: 50%;
+    width: 12px;
+}
+.fk-moduleContextMenu .context-menu-separator {
+    border-bottom: 1px solid #f1f1f1;
+    margin: 4px 0;
+    padding: 0;
+}
+.fk-moduleContextMenu .context-menu-hover {
+    background-color: #2980b9;
+    color: #fff;
+    cursor: pointer;
+}
+.fk-moduleContextMenu .f-icon-tickGlobal .f-tip, .fk-moduleContextMenu .f-icon-tickIndependent .f-tip {
+    background: rgba(0, 0, 0, 0) url("../../image/site/moduleToolbar.png?v=201601121610") no-repeat scroll 0 -234px;
+}
+.fk-multiDragBtn-low {
+    background: rgba(0, 0, 0, 0) url("../../image/bg02.png?v=201511091906") no-repeat scroll -1223px -84px;
+    cursor: move;
+    display: none;
+    height: 54px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 54px;
+    z-index: 99;
+}
+.fk-multiDragBtn {
+    background: #7e807f url("../../image/site/moduleToolbar.png?v=201601121610") no-repeat scroll 11px -193px;
+    border-radius: 0 0 0 34px;
+    cursor: move;
+    height: 34px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 34px;
+    z-index: 99;
+}
+.fk-multiDragBtn-left {
+    background: #7e807f url("../../image/site/moduleToolbar.png?v=201601121610") no-repeat scroll 6px -193px;
+    border-radius: 0 0 34px;
+    left: 0;
+    right: auto;
+    top: 0;
+}
+.fk-multiDragBtn-left-low {
+    background: rgba(0, 0, 0, 0) url("../../image/bg02.png?v=201511091906") no-repeat scroll -1225px -166px;
+    border-radius: 0;
+    height: 54px;
+    width: 54px;
+}
+.fk-fullmeasureDragBtn {
+    background: rgba(0, 0, 0, 0) url("../../image/bg02.png?v=201511091906") no-repeat scroll -1223px -84px;
+    cursor: move;
+    display: none;
+    height: 54px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 54px;
+}
+.fk-resizable-cancelTip {
+    background: #56a1e3 url("../../image/site/moduleToolbar.png?v=201601121610") no-repeat scroll 8px -168px;
+    border-radius: 3px 0 0;
+    bottom: 1px;
+    display: none;
+    height: 20px;
+    position: absolute;
+    right: 0;
+    width: 24px;
+    z-index: 1009;
+}
+.fk-resizable-cancelLeftTip {
+    border-radius: 0 3px 0 0;
+    left: 0;
+}
+.fk-resizable-cancelTip2 {
+    background: #7e807f url("../../image/site/moduleToolbar.png?v=201601111801") no-repeat scroll 8px -168px;
+}
+.formBanner {
+    cursor: move;
+}
+.fk-moduleEditToolGuide {
+    bottom: 0;
+    font-family: "Microsoft YaHei";
+    font-size: 12px;
+    height: 100%;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 100%;
+    z-index: 9099;
+}
+.fk-moduleEditToolGuide .f-contentBg {
+    background-color: #000;
+    bottom: 0;
+    height: 100%;
+    left: 0;
+    margin: 0;
+    opacity: 0.7;
+    padding: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
+}
+.fk-moduleEditToolGuide .f-content {
+    background: rgba(0, 0, 0, 0) url("../../image/site/moduleEditToolPrompt.png?v=201601181715") no-repeat scroll 0 0;
+    height: 233px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 412px;
+}
+.fk-moduleEditToolGuide .f-konwIt {
+    background: #fff none repeat scroll 0 0;
+    height: 46px;
+    left: 189px;
+    opacity: 0;
+    position: absolute;
+    top: 154px;
+    width: 123px;
+}
