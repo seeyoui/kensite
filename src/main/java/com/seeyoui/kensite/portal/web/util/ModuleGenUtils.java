@@ -16,6 +16,7 @@ public class ModuleGenUtils {
 	 */
 	public static String genModuleStr(String fileName, String id, String style, String name, String content, String script, String toolTitle, String toolScript, String css) {
 		File file = new File(System.getProperty("user.dir") + TEMPLATE_URL + fileName + ".htm");
+		System.out.println(file.exists());
 		// BufferedReader:从字符输入流中读取文本，缓冲各个字符，从而实现字符、数组和行的高效读取。
 		BufferedReader bufReader = null;
 		try {
@@ -34,7 +35,7 @@ public class ModuleGenUtils {
 				temp = temp.replaceAll("MODULE_TOOL_TITLE", toolTitle);
 				temp = temp.replaceAll("MODULE_TOOL_SCRIPT", toolScript);
 				temp = temp.replaceAll("MODULE_CSS", css);
-				result.append(temp);
+				result.append(temp + "\n");
 			}
 			return result.toString();
 		} catch (Exception e) {

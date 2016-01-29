@@ -1,0 +1,232 @@
+<div class='formWrap formWrapMODULE_ID'>
+	<table class='formTop formTopMODULE_ID' cellpadding='0' cellspacing='0'>
+		<tr>
+			<td class='left'></td>
+			<td class='center'></td>
+			<td class='right'></td>
+		</tr>
+	</table>
+	<table class='formBanner formBannerMODULE_ID' cellpadding='0'
+		cellspacing='0'>
+		<tr>
+			<td class='left leftMODULE_ID'></td>
+			<td class='center centerMODULE_ID' valign='top'>
+				<table cellpadding='0' cellspacing='0'
+					class='formBannerTitle formBannerTitleMODULE_ID'>
+					<tr>
+						<td class='titleLeft titleLeftMODULE_ID' valign='top'></td>
+						<td class='titleCenter titleCenterMODULE_ID' valign='top'>
+							<div class='titleText titleTextMODULE_ID'>
+								<span> MODULE_NAME </span>
+							</div>
+						</td>
+						<td class='titleRight titleRightMODULE_ID' valign='top'></td>
+					</tr>
+				</table>
+				<div class='formBannerOther formBannerOtherMODULE_ID'>
+					<div class='formBannerBtn formBannerBtnMODULE_ID'>
+						<span style='_display: inline-block; _position: relative;'>
+							<a hidefocus='true' href='javascript:;'
+							onclick='Site.closeAd("moduleMODULE_ID");return false;'
+							class='g_close'> <span style='_display: none;'> &nbsp;
+							</span>
+						</a>
+						</span>
+					</div>
+					&nbsp;
+				</div>
+			</td>
+			<td class='right rightMODULE_ID'></td>
+		</tr>
+	</table>
+	<table class='formMiddle formMiddleMODULE_ID' style='' cellpadding='0'
+		cellspacing='0'>
+		<tr>
+			<td class='formMiddleLeft formMiddleLeftMODULE_ID'></td>
+			<td class='formMiddleCenter formMiddleCenterMODULE_ID' valign='top'>
+				<div class='formMiddleContent formMiddleContentMODULE_ID  '>
+					MODULE_CONTENT</div>
+			</td>
+			<td class='formMiddleRight formMiddleRightMODULE_ID'></td>
+		</tr>
+	</table>
+	<table class='formBottom formBottomMODULE_ID' cellpadding='0'
+		cellspacing='0'>
+		<tr>
+			<td class='left leftMODULE_ID'></td>
+			<td class='center centerMODULE_ID'></td>
+			<td class='right rightMODULE_ID'></td>
+		</tr>
+	</table>
+	<div class='clearfloat clearfloatMODULE_ID'></div>
+</div>
+<script type='text/javascript' language='javascript'>
+	MODULE_SCRIPT
+	Site.initModuleLayer(
+			MODULE_ID,
+			[
+				{
+					"text" : "编辑模块",
+					"title" : "MODULE_TOOL_TITLE",
+					"evalScript" : "MODULE_TOOL_SCRIPT"
+				},
+				{
+					"display" : "icon",
+					"iconClass" : "bannerAndBorder",
+					"text" : "设置样式",
+					"title" : "设置模块标题栏、边框等样式",
+					"evalScript" : "Site.functionInterface({'name':'faiSettingPanel.init', 'prompt':true}, {'id':MODULE_ID, 'styleId':66, 'entrance':0});Site.removeAllEditLayer();return false;"
+				},
+				{
+					"text" : "高级",
+					"title" : "",
+					"className" : "setItem",
+					"menu" : [
+						{
+							"display" : "icon",
+							"iconClass1" : "dockModule",
+							"text1" : "停靠模块",
+							"title1" : "把模块停靠回固定区域",
+							"statusScript" : "Site.getDockStatus2('moduleMODULE_ID');",
+							"evalScript" : "Site.dock2('moduleMODULE_ID');"
+						},
+						{
+							"display" : "icon",
+							"iconClass1" : "absModule",
+							"text1" : "浮动模块",
+							"title1" : "浮动模块，可随意摆放位置",
+							"statusScript" : "Site.getAbsStatus2('moduleMODULE_ID');",
+							"evalScript" : "Site.floatOut2('moduleMODULE_ID');"
+						},
+						{
+							"display" : "icon",
+							"iconClass1" : "lock",
+							"text1" : "锁定模块",
+							"title1" : "锁定模块在当前位置，不跟随滚动条变化位置",
+							"statusScript" : "Site.getLockStatus2('moduleMODULE_ID');",
+							"evalScript" : "Site.lock2('moduleMODULE_ID');"
+						},
+						{
+							"display" : "icon",
+							"iconClass1" : "sidem",
+							"text1" : "侧停模块",
+							"title1" : "侧边停靠收起模块，支持鼠标移入自动展开",
+							"statusScript" : "Site.getSideStatus2('moduleMODULE_ID');",
+							"evalScript" : "Site.sideModule2('moduleMODULE_ID');"
+						},
+						{
+							"display" : "icon",
+							"iconClass1" : "flutterm",
+							"text1" : "飘动模块",
+							"title1" : "飘动模块,按照轨迹飘动",
+							"statusScript" : "Site.getFlutterStatus('moduleMODULE_ID');",
+							"evalScript" : "Site.flutter('moduleMODULE_ID');"
+						},
+						{
+							"hrLine" : true
+						},
+						{
+							"display" : "icon",
+							"text" : "取消全站模块",
+							"title" : "取消该模块在所有栏目中展示。",
+							"iconClass" : "global",
+							"evalScript" : "Site.setGlobalModule(MODULE_ID, false);",
+							"statusScript" : "Site.getLayoutItemStatus('moduleMODULE_ID');"
+						},
+						{
+							"display" : "icon",
+							"text" : "本页独立布局",
+							"title" : "该模块在本页面独立布局。",
+							"iconClass" : "independent",
+							"evalScript" : "Site.independentModule(MODULE_ID, true);"
+						} ]
+				} ],
+			[
+				{
+					"display" : "icon",
+					"text" : "隐藏模块",
+					"title" : "隐藏模块",
+					"iconClass" : "close",
+					"evalScript" : "Site.hideModule(MODULE_ID, false);"
+				},
+				{
+					"display" : "icon",
+					"text" : "隐藏标题栏与背景样式",
+					"title" : "隐藏标题栏与背景样式",
+					"iconClass" : "clearTB",
+					"statusScript" : "Site.getOneKeySetModuleTBStatus('moduleMODULE_ID');",
+					"evalScript" : "Site.oneKeySetModuleTB(MODULE_ID, true);",
+					"setTB" : "1"
+				},
+				{
+					"display" : "icon",
+					"iconClass1" : "add",
+					"text1" : "添加模块",
+					"title1" : "添加模块",
+					"statusScript" : "Site.getOpenAddModuleStatus('moduleMODULE_ID');",
+					"evalScript" : "Site.openAddModule(MODULE_ID)"
+				},
+				{
+					"display" : "icon",
+					"iconClass1" : "mzindex",
+					"text1" : "浮到最前",
+					"title1" : "把模块浮到最前区域",
+					"statusScript" : "Site.getAbsZIndexStatus('moduleMODULE_ID');",
+					"evalScript" : "Site.absZIndexModule('moduleMODULE_ID');"
+				} ],
+			[
+				{
+					"display" : "icon",
+					"iconClass1" : "mtop",
+					"fixClass" : "littleBtn",
+					"text1" : "上移模块",
+					"title1" : "上移模块",
+					"statusScript" : "Site.getModulePosTop('moduleMODULE_ID');",
+					"evalScript" : "Site.moveModulePosTop('moduleMODULE_ID');"
+				},
+				{
+					"display" : "icon",
+					"iconClass1" : "mbottom",
+					"fixClass" : "littleBtn",
+					"text1" : "下移模块",
+					"title1" : "下移模块",
+					"statusScript" : "Site.getModulePosBottom('moduleMODULE_ID');",
+					"evalScript" : "Site.moveModulePosBottom('moduleMODULE_ID');"
+				},
+				{
+					"display" : "icon",
+					"iconClass1" : "mleft",
+					"fixClass" : "littleBtn",
+					"text1" : "左移模块",
+					"title1" : "左移模块",
+					"statusScript" : "Site.getModulePosLeft('moduleMODULE_ID');",
+					"evalScript" : "Site.moveModulePosLeft('moduleMODULE_ID');"
+				},
+				{
+					"display" : "icon",
+					"iconClass1" : "mright",
+					"fixClass" : "littleBtn",
+					"text1" : "右移模块",
+					"title1" : "右移模块",
+					"statusScript" : "Site.getModulePosRight('moduleMODULE_ID');",
+					"evalScript" : "Site.moveModulePosRight('moduleMODULE_ID');"
+				},
+				{
+					"display" : "icon",
+					"iconClass1" : "mtop",
+					"fixClass" : "littleBtn",
+					"text1" : "跳到中间",
+					"title1" : "把模块跳到中间区域",
+					"statusScript" : "Site.getAbsMiddleStatus('moduleMODULE_ID');",
+					"evalScript" : "Site.absMiddleModule('moduleMODULE_ID');"
+				},
+				{
+					"display" : "icon",
+					"iconClass1" : "mbottom",
+					"fixClass" : "littleBtn",
+					"text1" : "跳到底部",
+					"title1" : "把模块跳到底部区域",
+					"statusScript" : "Site.getAbsBottomStatus('moduleMODULE_ID');",
+					"evalScript" : "Site.absBottomModule('moduleMODULE_ID');"
+				} ]);
+</script>
