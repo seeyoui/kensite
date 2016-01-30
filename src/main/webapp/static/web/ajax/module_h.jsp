@@ -109,15 +109,7 @@
 			result.put("success", true);
 			result.put("msg", "添加成功");
 			result.put("id", id);
-			ModuleData moduleData = new ModuleData();
-			moduleData.setId(id);
-			moduleData.setName(name);
-			moduleData.setValid(true);
-			moduleData.setGlobal("true".equals(global));
-			moduleData.setSpecial(false);
-			moduleData.setCus(true);
-			moduleData.setStyle(Integer.parseInt(style));
-			result.put("moduleData", moduleData);
+			result.put("style", 0);
 			String content = "<div id='module"+id+"Date' class='date g_specialClass'>&nbsp;</div>";
 			String script = "Site.initModuleDate.init("+id+", "+prop0+");";
 			String toolTitle = "编辑日期模块";

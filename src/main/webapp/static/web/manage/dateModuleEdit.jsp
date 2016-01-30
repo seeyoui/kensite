@@ -87,7 +87,7 @@ function save(){
 	params.push( '&prop0=' + style );
 	$.ajax({
 		type: 'post',
-		<%if(StringUtils.isBlank(id)){out.print("url: '../ajax/module_h.jsp?cmd=add&global=true&style=66&colId=2&extId=0',");}else{out.print("url: '../ajax/module_h.jsp?cmd=setBack&id="+id+"&colId=2&extId=0',");}%>
+		<%if(StringUtils.isBlank(id)){out.print("url: '../ajax/module_h.jsp?cmd=add&global=true&style=66&colId=2&extId=0',");}else{out.print("url: '../ajax/module_h.jsp?cmd=setBack&id="+id+"&style=66&colId=2&extId=0',");}%>
 		data: params.join(''),
 		error: function(){
 			Fai.enablePopupWindowBtn(popupID, 'save', true);

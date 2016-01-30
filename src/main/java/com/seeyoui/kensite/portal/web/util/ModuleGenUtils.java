@@ -15,14 +15,10 @@ public class ModuleGenUtils {
 	 * @param filePath
 	 */
 	public static String genModuleStr(String fileName, String id, String style, String name, String content, String script, String toolTitle, String toolScript, String css) {
-		File file = new File(System.getProperty("user.dir") + TEMPLATE_URL + fileName + ".htm");
-		System.out.println(file.exists());
-		// BufferedReader:从字符输入流中读取文本，缓冲各个字符，从而实现字符、数组和行的高效读取。
 		BufferedReader bufReader = null;
 		try {
 			FileInputStream fis = new FileInputStream(System.getProperty("user.dir") + TEMPLATE_URL + fileName + ".htm");
-			InputStreamReader isr = new InputStreamReader(fis, "utf-8");  //GBK替换成你文件内容使用的编码
-			// FileReader:用来读取字符文件的便捷类。
+			InputStreamReader isr = new InputStreamReader(fis, "utf-8");
 			bufReader = new BufferedReader(isr);
 			String temp = "";
 			StringBuffer result = new StringBuffer();
