@@ -26,7 +26,7 @@
 	</script>
 	<link type="text/css" rel="stylesheet" href="${ctx_web}/css/site/floatBtnEdit.min.css?v=201509071734"/>
 <script type="text/javascript">
-var addMode = true,
+	var addMode = <%=StringUtils.isBlank(id)%>,
 	g_id = <%=id%>,
 	flBtnStyleData,
 	cntFlBtn, 
@@ -178,13 +178,13 @@ function save(){
 	params.push( '&pattern=' + Fai.encodeUrl($.toJSON(pattern)));
 	
 	Fai.ing("正在保存……", false);
-	Fai.closePopupWindow(  );
 	$.ajax({
 	   	type: "post",
-		url: "../ajax/module_h.jsp?cmd=setBack&id="+popupID+"&style=81&colId=2&extId=0",
+	   	<%if(StringUtils.isBlank(id)){out.print("url: '../ajax/module_h.jsp?cmd=add&style=81&colId=2&extId=0',");}else{out.print("url: '../ajax/module_h.jsp?cmd=setBack&id="+id+"&style=81&colId=2&extId=0',");}%>
 		data: params.join(""),
 		error: function(){Fai.ing("服务繁忙，请稍候重试",false);},
 		success: function(data){
+			console.info(data);
 			Fai.enablePopupWindowBtn(popupID, 'save', true);
 			var res = $.parseJSON(data);
 			reSetPageChange();
@@ -1181,7 +1181,7 @@ function reSetPageChange(){
 						<option value="4">拉伸平铺</option>
 						<option value="5">缩放平铺（等比例）</option>
 						<option value="21">纵向平铺（左边对齐）</option>
-						<option value="2">纵向平铺（中间对齐）</option>s
+						<option value="2">纵向平铺（中间对齐）</option>
 						<option value="22">纵向平铺（右边对齐）</option>
 						<option value="11">横向平铺（顶部对齐）</option>
 						<option value="1">横向平铺（中部对齐）</option>
@@ -1272,7 +1272,7 @@ function reSetPageChange(){
 				<div class="setline">
 					<div class="title2">大小：</div>
 					<div class="setCtrl">
-						<select class="setCtrl flBtnBorderSize" id="flBtnBorderSize" onChange="onFlBtnBorderWidthChange()"> ;
+						<select class="setCtrl flBtnBorderSize" id="flBtnBorderSize" onChange="onFlBtnBorderWidthChange()">
 								<option value="0">0</option>
 								<option value="1">1</option>
 								<option value="2">2</option>

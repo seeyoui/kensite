@@ -1,0 +1,265 @@
+@charset "utf-8"; 
+
+html, body {
+	overflow: hidden
+}
+
+.setline {
+	clear: both;
+	height: 26px;
+	line-height: 23px
+}
+
+.setline-padd {
+	float: left
+}
+
+.setTitle {
+	width: 70px;
+	text-align: right;
+	margin-right: 10px;
+	float: left
+}
+
+.setCtrl {
+	float: left
+}
+
+.hard-height-285 {
+	height: 330px;
+	_height: 320px
+}
+
+.radioPanel {
+	float: left
+}
+
+.radioPanel span {
+	cursor: pointer
+}
+
+.showMulModuleColTable {
+	height: 260px;
+	overflow-x: hidden;
+	overflow-y: auto;
+	position: relative
+}
+
+.showMulModuleColTable .faiTableWrap {
+	width: 550px
+}
+
+.showMulModuleColTable .column {
+	width: 108px;
+	position: relative
+}
+
+.showMulModuleColTable th.sep {
+	background-image: none !important;
+	border-right: 1px solid #b5c8eb
+}
+
+.showMulModuleColTable .moduleNameTd {
+	vertical-align: top;
+	height: 130px;
+	overflow: auto
+}
+
+.showMulModuleColTable .notUse {
+	background: url(../../image/site/mulModuleCol/stop_bg.gif?v=201208151411)
+		repeat-y 50% 0;
+	cursor: not-allowed
+}
+
+.showMulModuleColTable .padding {
+	padding: 0 !important;
+	position: relative
+}
+
+.showMulModuleColTable .tdBorder {
+	border-right: 1px solid #b5c8eb
+}
+
+.showMulModuleColTable .moduleNameWrap {
+	width: 104px;
+	height: 24px;
+	line-height: 24px;
+	cursor: move;
+	border: 1px solid #ccc;
+	margin: 1px 1px 2px 2px;
+	background: #FFF
+}
+
+.showMulModuleColTable .moduleName {
+	width: 85px;
+	text-indent: 2px
+}
+
+.showMulModuleColTable .moduleNameList {
+	height: 140px;
+	padding-bottom: 2px
+}
+
+.showMulModuleColTable .unableNameList {
+	height: 100%
+}
+
+.showMulModuleColTable .sortableHighlight {
+	width: 104px;
+	height: 24px !important;
+	line-height: 24px;
+	margin: 1px 1px 2px 2px !important;
+	border: 1px solid #fed22f;
+	background: #fff0a5
+}
+
+.rmHoverBtn {
+	margin-top: 4px;
+	cursor: pointer
+}
+
+.choiceTableContent {
+	width: 284px;
+	height: 160px;
+	margin-bottom: 8px;
+	overflow-x: hidden;
+	overflow-y: auto
+}
+
+.showChoiceModuleTable .faiTableWrap {
+	width: 99%;
+	height: 100%
+}
+
+.showChoiceModuleTable .column1 {
+	width: 100%
+}
+
+.showChoiceModuleTable .column2 {
+	width: 50px
+}
+
+.showChoiceModuleTable .showBtn {
+	margin: 0 auto
+}
+
+.showChoiceModuleTable .sys_module {
+	display: inline-block;
+	height: 24px;
+	width: 24px;
+	line-height: 24px;
+	vertical-align: middle;
+	background: url(../../image/bg01.png?v=201512071738) -915px -239px no-repeat;
+	cursor: default
+}
+
+.colWidthWrap {
+	margin-bottom: 5px
+}
+
+.colWidthInput {
+	width: 100px
+}
+
+.columnTopBtn {
+	position: absolute;
+	top: 2px;
+	right: 2px
+}
+
+.btn_16x16 {
+	cursor: pointer
+}
+
+.spacingInput {
+	width: 50px;
+	height: 20px;
+	_height: 18px
+}
+
+.choiceContainer {
+	padding: 5px 0 0 10px;
+	color: #000
+}
+
+.choiceContainer .choiceTitle {
+	height: 24px;
+	line-height: 24px;
+	color: #000
+}
+
+.choiceContainer .choice-box {
+	overflow: hidden;
+	padding: 10px 0 0 0
+}
+
+.choice-box .choiceButton {
+	float: left;
+	position: relative;
+	padding: 0 10px 0 0;
+	width: 124px
+}
+
+.choice-box .choiceButton .choice-icon {
+	display: block;
+	width: 120px;
+	height: 90px;
+	border: 2px solid #bbb;
+	border-top: 2px solid #fff;
+	border-left: 2px solid #fff
+}
+
+.choice-box .choiceButton .choice-icon:hover {
+	border: 2px solid #3599ff
+}
+
+.choice-box .choiceButton .choice-title {
+	display: block;
+	width: 100%;
+	height: 24px;
+	line-height: 24px;
+	text-align: center;
+	text-decoration: none;
+	outline: 0;
+	color: #000
+}
+
+.choice-box .choiceButton .choice-title:hover {
+	color: #000
+}
+
+.choice-box .choiceButton .choice-tip {
+	display: block;
+	width: 31px;
+	height: 31px;
+	position: absolute;
+	top: 63px;
+	right: 10px;
+	background:
+		url(../../image/site/mulModuleCol/mulModuleColChoice.png?v=201408251738)
+		no-repeat 0 -464px
+}
+
+.choice-box .choiceButton a.mulCol-two {
+	background:
+		url(../../image/site/mulModuleCol/mulModuleColChoice.png?v=201408251738)
+		no-repeat 0 2px
+}
+
+.choice-box .choiceButton a.mulCol-three {
+	background:
+		url(../../image/site/mulModuleCol/mulModuleColChoice.png?v=201408251738)
+		no-repeat 2px -230px
+}
+
+.choice-box .choiceButton a.mulCol-four {
+	background:
+		url(../../image/site/mulModuleCol/mulModuleColChoice.png?v=201408251738)
+		no-repeat 2px -346px
+}
+
+.choice-box .choiceButton a.mulCol-five {
+	background:
+		url(../../image/site/mulModuleCol/mulModuleColChoice.png?v=201408251738)
+		no-repeat 2px -114px
+}

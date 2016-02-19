@@ -1,0 +1,155 @@
+<div id='moduleMODULE_ID' _indexClass=''
+	class='form formMODULE_ID formStyle80 extformClass ' title='' style=''
+	_side='0' _inTab='0' _inMulMCol='0' _inFullmeasure='0' _autoHeight='1'
+	_global='false' _independent='false'>
+	<div class='formWrap fullmeasureFormWrap formWrapMODULE_ID'>
+		<div
+			class='fullmeasureOuterContentBg fullmeasureOuterContentBgMODULE_ID fullmeasureStyle1'>
+		</div>
+		<div class='fullmeasureOuterContent fullmeasureOuterContentMODULE_ID'>
+			<div class='fullmeasureContent fullmeasureContentMODULE_ID'
+				id='fullmeasureContentMODULE_ID'>
+				<div class='fullmeasureContentBg fullmeasureContentBgMODULE_ID'></div>
+			</div>
+		</div>
+		<div class='clearfloat clearfloatMODULE_ID'></div>
+	</div>
+</div>
+<script type='text/javascript' language='javascript'>
+	Site.setFullMeasureBgHightInIe6(MODULE_ID);
+	Site.functionInterface({
+		'name' : 'addModuleContextMenu',
+		'callMethod' : true
+	}, {
+		"id" : MODULE_ID,
+		"moduleStateList" : [],
+		"moduleDirectionList" : [],
+		"moduleOtherList" : []
+	});
+	Site.functionInterface(
+	{
+		'name' : 'moduleEditTool.init',
+		'callMethod' : true
+	},
+	{
+		"id" : MODULE_ID,
+		"toolList" : [
+		{
+			"text" : "编辑模块",
+			"title" : "编辑模块",
+			"evalScript" : "Site.popupWindow({title:'编辑通栏模块', frameSrcUrl:'manage/styleFullmeasure.jsp?id=MODULE_ID&colId=2&extId=0&ram='+Math.random(), width:'480', height:'300', saveBeforePopup:false});"
+		},
+		{
+			"toolDisplay" : "toolIcon",
+			"toolClass" : "moduleLayerIconHide",
+			"text" : "隐藏模块",
+			"title" : "隐藏模块",
+			"evalScript" : "Site.hideModule(MODULE_ID, false);"
+		},
+		{
+			"toolDisplay" : "toolIcon",
+			"toolClass" : "moduleLayerIconTop",
+			"text" : "上移模块",
+			"title" : "上移模块",
+			"statusScript" : "Site.getModulePosTop('moduleMODULE_ID');",
+			"evalScript" : "Site.moveModulePosTop('moduleMODULE_ID');"
+		},
+		{
+			"toolDisplay" : "toolIcon",
+			"toolClass" : "moduleLayerIconTop",
+			"text" : "上移模块",
+			"title" : "上移模块",
+			"statusScript" : "Site.getFmModulePosTop('moduleMODULE_ID');",
+			"evalScript" : "Site.moveFmModulePosTop('moduleMODULE_ID');"
+		},
+		{
+			"toolDisplay" : "toolIcon",
+			"toolClass" : "moduleLayerIconBottom",
+			"text" : "下移模块",
+			"title" : "下移模块",
+			"statusScript" : "Site.getModulePosBottom('moduleMODULE_ID');",
+			"evalScript" : "Site.moveModulePosBottom('moduleMODULE_ID');"
+		},
+		{
+			"toolDisplay" : "toolIcon",
+			"toolClass" : "moduleLayerIconBottom",
+			"text" : "下移模块",
+			"title" : "下移模块",
+			"statusScript" : "Site.getFmModulePosBottom('moduleMODULE_ID');",
+			"evalScript" : "Site.moveFmModulePosBottom('moduleMODULE_ID');"
+		} ]
+	});
+	Site.initModuleLayer(
+		MODULE_ID,
+		[{
+			"text" : "编辑模块",
+			"title" : "MODULE_TOOL_TITLE",
+			"evalScript" : "MODULE_TOOL_SCRIPT"
+		}],
+		[{
+			"display" : "icon",
+			"iconClass1" : "mtop",
+			"fixClass" : "littleBtn",
+			"text1" : "上移模块",
+			"title1" : "上移模块",
+			"statusScript" : "Site.getModulePosTop('moduleMODULE_ID');",
+			"evalScript" : "Site.moveModulePosTop('moduleMODULE_ID');"
+		},
+		{
+			"display" : "icon",
+			"iconClass1" : "mbottom",
+			"fixClass" : "littleBtn",
+			"text1" : "下移模块",
+			"title1" : "下移模块",
+			"statusScript" : "Site.getModulePosBottom('moduleMODULE_ID');",
+			"evalScript" : "Site.moveModulePosBottom('moduleMODULE_ID');"
+		}]);
+	Site.addModuleStyle('MODULE_CSS');
+	/*
+#moduleMODULE_ID .fullmeasureOuterContentBgMODULE_ID{background:#cbdeff;}
+#moduleMODULE_ID .fullmeasureOuterContentBgMODULE_ID{opacity:0.79;filter:alpha(opacity=79);}
+#moduleMODULE_ID .fullmeasureContentBgMODULE_ID{background:#c0b6ff;}
+#moduleMODULE_ID .fullmeasureContentBgMODULE_ID{opacity:0.69;filter:alpha(opacity=69);}
+#moduleMODULE_ID .fullmeasureContent{width:1000px;}
+#moduleMODULE_ID .fullmeasureContent{padding:1px 4px 2px 3px;}
+#moduleMODULE_ID {border-top:1px solid #ff3e07;border-bottom:none;}
+	*/
+	moduleAttr['moduleMODULE_ID'] = {
+		"pattern" : {
+			"mulModuleColPattern" : {
+				"mcs" : -1
+			},
+			"systemFullmeasure" : 1,
+			"fullmeasurePattern" : {
+				"mb" : {
+					"y" : 2,
+					"c" : "#cbdeff",
+					"o" : 21
+				},
+				"cb" : {
+					"y" : 2,
+					"c" : "#c0b6ff",
+					"o" : 31
+				},
+				"cw" : 1000,
+				"i" : {
+					"y" : 2,
+					"l" : 3,
+					"r" : 4,
+					"t" : 1,
+					"b" : 2
+				},
+				"b" : {
+					"y" : 2,
+					"c" : "#ff3e07"
+				}
+			},
+			"searchBoxPattern" : {
+				"iw" : -1
+			},
+			"contentLineIcon" : {
+				"y" : 0
+			}
+		}
+	};
+</script>

@@ -313,16 +313,19 @@ public class FormUtils {
 			result.append(column);
 			result.append("\" "+tableColumn.getHtmlInner());
 			result.append("\" data-options=\"tipPosition:'bottom',");
-			if(StringConstant.NO.equals(tableColumn.getIsEdit())) {
-				result.append("readonly:true,");
-			}
-			if(StringConstant.DISABLE.equals(tableColumn.getIsEdit())) {
-				result.append("disabled:true,");
-			}
 			if(StringConstant.NO.equals(tableColumn.getIsNull())) {
 				result.append("required:true,");
 			}
 			result.append("\"");
+			if(StringUtils.isNoneBlank(tableColumn.getDefaultValue())) {
+				result.append(" value=\""+tableColumn.getDefaultValue()+"\"");
+			}
+			if(StringConstant.NO.equals(tableColumn.getIsEdit())) {
+				result.append(" readonly=true");
+			}
+			if(StringConstant.DISABLE.equals(tableColumn.getIsEdit())) {
+				result.append(" disabled = true");
+			}
 			if(!StringConstant.NO.equals(tableColumn.getIsEdit())) {
 				if(StringUtils.isNoneBlank(tableColumn.getSettings())) {
 					result.append(" onClick=\"WdatePicker({");
