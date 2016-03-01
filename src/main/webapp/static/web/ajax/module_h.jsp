@@ -161,6 +161,34 @@
 			JSONObject jsonObj = JSONObject.fromObject(result);
 			out.print(jsonObj.toString());
 		}
+		
+		if("80".equals(style)) {//通栏模块
+			String pattern = request.getParameter("pattern");
+			int id = Integer.parseInt(DBUtils.getString(StringConstant.WEB_SEQ_SQL, "ID"));
+			Map<String, Object> result = new HashMap<String, Object>();
+			result.put("success", true);
+			result.put("msg", "添加成功");
+			result.put("id", id);
+			ModuleData moduleData = new ModuleData();
+			moduleData.setId(id);
+			moduleData.setName(name);
+			moduleData.setValid(true);
+			moduleData.setGlobal("true".equals(global));
+			moduleData.setSpecial(false);
+			moduleData.setCus(true);
+			moduleData.setStyle(Integer.parseInt(style));
+			result.put("moduleData", moduleData);
+			String content = "";
+			String script = "";
+			String toolTitle = "编辑通栏模块";
+			String toolScript = "Site.popupWindow({title:'"+toolTitle+"', frameSrcUrl:'manage/styleFullmeasure.jsp?id="+id+"&colId=2&extId=0&ram='+Math.random(), width:'480', height:'300', saveBeforePopup:false});";
+			String css = "";
+			css = css.replaceAll("MODULE_ID", String.valueOf(id));
+			String div = ModuleGenUtils.genModuleStr("styleFullmeasure", String.valueOf(id), style, name, content, script, toolTitle, toolScript, css);
+			result.put("div", div);
+			JSONObject jsonObj = JSONObject.fromObject(result);
+			out.print(jsonObj.toString());
+		}
 	}
 %>
 
