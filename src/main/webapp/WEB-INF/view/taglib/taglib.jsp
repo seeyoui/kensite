@@ -14,5 +14,6 @@
 <c:set var="ctx_skins" value="${pageContext.request.contextPath}/static/skins"/>
 <c:set var="ctx_login" value="${pageContext.request.contextPath}/static/login"/>
 <c:set var="ctx_assets" value="${pageContext.request.contextPath}/assets"/>
+<c:set var="ctx_weixin" value="${pageContext.request.contextPath}/static/weixin"/>
 <!-- Form Skins Url -->
 <c:set var="ctx_assets_skins" value="${pageContext.request.contextPath}/assets/chubby-stacks/chubby-stacks-css"/>
