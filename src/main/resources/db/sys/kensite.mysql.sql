@@ -1,849 +1,1822 @@
-drop table if exists OA_LEAVE;
-drop table if exists SYS_DEPARTMENT;
-drop table if exists SYS_MENU;
-drop table if exists SYS_MODULE;
-drop table if exists SYS_MODULE_PERMISSION;
-drop table if exists SYS_PERMISSION;
-drop table if exists SYS_ROLE;
-drop table if exists SYS_ROLE_MENU;
-drop table if exists SYS_ROLE_MODULE;
-drop table if exists SYS_USER;
-drop table if exists SYS_USER_ROLE;
-create table OA_LEAVE
-(
-  id         CHAR(32) not null COMMENT '主键',
-  createdate DATETIME COMMENT '创建日期',
-  createuser VARCHAR(50) COMMENT '创建用户',
-  updatedate DATETIME COMMENT '修改日期',
-  updateuser VARCHAR(50) COMMENT '修改用户',
-  bindid     CHAR(60) COMMENT '流程绑定主键',
-  reason     TEXT COMMENT '请假原因',
-  starttime  DATETIME COMMENT '请假开始时间',
-  endtime    DATETIME COMMENT '请假结束时间',
-  leavetype  VARCHAR(50) COMMENT '请假类型'
+DROP TABLE IF EXISTS BO_DEMO;
+CREATE TABLE BO_DEMO (
+ID CHAR(32) not null  COMMENT '主键',
+CREATE_DATE DATETIME COMMENT '创建日期',
+CREATE_USER VARCHAR(50) COMMENT '创建用户',
+UPDATE_DATE DATETIME COMMENT '修改日期',
+UPDATE_USER VARCHAR(50) COMMENT '修改用户',
+REMARKS VARCHAR(255) COMMENT '备注信息',
+DEL_FLAG CHAR(1) COMMENT '删除标记',
+TREE_ID VARCHAR(100) COMMENT '下拉树',
+EXPRESSION VARCHAR(100) COMMENT '表达式'
+) COMMENT = '演示';
+ALTER TABLE BO_DEMO ADD CONSTRAINT BO_DEMO_ID PRIMARY KEY (ID);
+
+DROP TABLE IF EXISTS CMS_ARTICLE;
+CREATE TABLE CMS_ARTICLE (
+ID CHAR(32) not null  COMMENT '编号',
+CATEGORY_ID CHAR(32) not null  COMMENT '栏目编号',
+TITLE VARCHAR(255) not null  COMMENT '标题',
+SUB_TITLE VARCHAR(255) COMMENT '副标题',
+LINK VARCHAR(255) COMMENT '文章链接',
+COLOR VARCHAR(50) COMMENT '标题颜色',
+ARTICLE_FILE VARCHAR(255) COMMENT '文章附件',
+KEYWORDS VARCHAR(255) COMMENT '关键字',
+DESCRIPTION VARCHAR(255) COMMENT '描述、摘要',
+WEIGHT INTEGER(10) COMMENT '权重，越大越靠前',
+WEIGHT_DATE DATETIME COMMENT '权重期限',
+HITS INTEGER(10) COMMENT '点击数',
+CUSTOM_CONTENT_VIEW VARCHAR(255) COMMENT '自定义内容视图',
+VIEW_CONFIG TEXT COMMENT '视图配置',
+CONTENT TEXT COMMENT '文章内容',
+COPYFROM VARCHAR(255) COMMENT '文章来源',
+CREATE_USER VARCHAR(64) COMMENT '创建者',
+CREATE_DATE DATETIME COMMENT '创建时间',
+UPDATE_USER VARCHAR(64) COMMENT '更新者',
+UPDATE_DATE DATETIME COMMENT '更新时间',
+REMARKS VARCHAR(255) COMMENT '备注信息',
+DEL_FLAG CHAR(1) COMMENT '删除标记'
+) COMMENT = '文章';
+ALTER TABLE CMS_ARTICLE ADD CONSTRAINT CMS_ARTICLE_ID PRIMARY KEY (ID);
+
+DROP TABLE IF EXISTS CMS_CATEGORY;
+CREATE TABLE CMS_CATEGORY (
+ID CHAR(32) not null  COMMENT '编号',
+PARENT_ID CHAR(32) COMMENT '父级编号',
+SITE_ID CHAR(32) COMMENT '站点编号',
+MODULE VARCHAR(20) COMMENT '栏目模块',
+NAME VARCHAR(100) not null  COMMENT '栏目名称',
+IMAGE VARCHAR(255) COMMENT '栏目图片',
+HREF VARCHAR(255) COMMENT '链接',
+TARGET VARCHAR(20) COMMENT '目标',
+DESCRIPTION VARCHAR(255) COMMENT '描述',
+KEYWORDS VARCHAR(255) COMMENT '关键字',
+SORT INTEGER(10) COMMENT '排序（升序）',
+IN_MENU CHAR(1) COMMENT '是否在导航中显示',
+IN_LIST CHAR(1) COMMENT '是否在分类页中显示列表',
+ALLOW_COMMENT CHAR(1) COMMENT '是否允许评论',
+IS_AUDIT CHAR(1) COMMENT '是否需要审核',
+CUSTOM_LIST_VIEW VARCHAR(255) COMMENT '自定义列表视图',
+CUSTOM_CONTENT_VIEW VARCHAR(255) COMMENT '自定义内容视图',
+VIEW_CONFIG TEXT COMMENT '视图配置',
+CREATE_USER VARCHAR(64) COMMENT '创建者',
+CREATE_DATE DATETIME COMMENT '创建时间',
+UPDATE_USER VARCHAR(64) COMMENT '更新者',
+UPDATE_DATE DATETIME COMMENT '更新时间',
+REMARKS VARCHAR(255) COMMENT '备注信息',
+DEL_FLAG CHAR(1) COMMENT '删除标记'
+) COMMENT = '栏目';
+ALTER TABLE CMS_CATEGORY ADD CONSTRAINT CMS_CATEGORY_ID PRIMARY KEY (ID);
+
+DROP TABLE IF EXISTS CMS_COMMENT;
+CREATE TABLE CMS_COMMENT (
+ID CHAR(32) not null  COMMENT '编号',
+CATEGORY_ID CHAR(32) COMMENT '栏目编号',
+CONTENT_ID CHAR(32) COMMENT '内容编号',
+SCORE INTEGER(10) COMMENT '评论等级',
+CONTENT VARCHAR(255) COMMENT '评论内容',
+NAME VARCHAR(100) COMMENT '评论姓名',
+IP VARCHAR(100) COMMENT '评论IP',
+AUDIT_USER_ID CHAR(32) COMMENT '审核人',
+AUDIT_DATE DATETIME COMMENT '审核时间',
+CREATE_USER VARCHAR(64) COMMENT '创建者',
+CREATE_DATE DATETIME COMMENT '创建时间',
+UPDATE_USER VARCHAR(64) COMMENT '更新者',
+UPDATE_DATE DATETIME COMMENT '更新时间',
+REMARKS VARCHAR(255) COMMENT '备注信息',
+DEL_FLAG CHAR(1) COMMENT '删除标记'
+) COMMENT = '评论';
+ALTER TABLE CMS_COMMENT ADD CONSTRAINT CMS_COMMENT_ID PRIMARY KEY (ID);
+
+DROP TABLE IF EXISTS CMS_GUESTBOOK;
+CREATE TABLE CMS_GUESTBOOK (
+ID CHAR(32) not null  COMMENT '编号',
+TYPE CHAR(1) COMMENT '留言分类',
+CONTENT VARCHAR(255) COMMENT '留言内容',
+NAME VARCHAR(100) COMMENT '姓名',
+EMAIL VARCHAR(100) COMMENT '邮箱',
+PHONE VARCHAR(100) COMMENT '电话',
+WORKUNIT VARCHAR(100) COMMENT '单位',
+IP VARCHAR(100) COMMENT 'IP',
+RE_USER_ID CHAR(32) COMMENT '回复人',
+RE_DATE DATETIME COMMENT '回复时间',
+RE_CONTENT VARCHAR(100) COMMENT '回复内容',
+CREATE_USER VARCHAR(64) COMMENT '创建者',
+CREATE_DATE DATETIME COMMENT '创建时间',
+UPDATE_USER VARCHAR(64) COMMENT '更新者',
+UPDATE_DATE DATETIME COMMENT '更新时间',
+REMARKS VARCHAR(255) COMMENT '备注信息',
+DEL_FLAG CHAR(1) COMMENT '删除标记'
+) COMMENT = '留言板';
+ALTER TABLE CMS_GUESTBOOK ADD CONSTRAINT CMS_GUESTBOOK_ID PRIMARY KEY (ID);
+
+DROP TABLE IF EXISTS CMS_SITE;
+CREATE TABLE CMS_SITE (
+ID CHAR(32) not null  COMMENT '编号',
+NAME VARCHAR(100) COMMENT '站点名称',
+TITLE VARCHAR(100) COMMENT '站点标题',
+LOGO VARCHAR(255) COMMENT '站点Logo',
+DOMAIN VARCHAR(255) COMMENT '站点域名',
+DESCRIPTION VARCHAR(255) COMMENT '描述',
+KEYWORDS VARCHAR(255) COMMENT '关键字',
+THEME VARCHAR(255) COMMENT '主题',
+COPYRIGHT TEXT COMMENT '版权信息',
+CUSTOM_VIEW VARCHAR(255) COMMENT '自定义站点首页视图',
+CREATE_USER VARCHAR(64) COMMENT '创建者',
+CREATE_DATE DATETIME COMMENT '创建时间',
+UPDATE_USER VARCHAR(64) COMMENT '更新者',
+UPDATE_DATE DATETIME COMMENT '更新时间',
+REMARKS VARCHAR(255) COMMENT '备注信息',
+DEL_FLAG CHAR(1) COMMENT '删除标记'
+) COMMENT = '站点表';
+ALTER TABLE CMS_SITE ADD CONSTRAINT SYS_C0011460 PRIMARY KEY (ID);
+
+DROP TABLE IF EXISTS MOD_TABLE;
+CREATE TABLE MOD_TABLE (
+ID CHAR(32) not null  COMMENT '主键',
+CREATE_DATE DATETIME COMMENT '创建日期',
+CREATE_USER VARCHAR(50) COMMENT '创建用户',
+UPDATE_DATE DATETIME COMMENT '修改日期',
+UPDATE_USER VARCHAR(50) COMMENT '修改用户',
+NAME VARCHAR(200) COMMENT '名称',
+COMMENTS VARCHAR(500) COMMENT '描述',
+PARENT_TABLE VARCHAR(200) COMMENT '关联父表',
+PARENT_TABLE_FK VARCHAR(100) COMMENT '关联父表外键',
+REMARKS VARCHAR(255) COMMENT '备注信息',
+DEL_FLAG CHAR(1) COMMENT '删除标记（0：正常；1：删除）'
+) COMMENT = '业务表';
+ALTER TABLE MOD_TABLE ADD CONSTRAINT MOD_TABLE_ID PRIMARY KEY (ID);
+
+DROP TABLE IF EXISTS MOD_TABLE_COLUMN;
+CREATE TABLE MOD_TABLE_COLUMN (
+ID CHAR(32) not null  COMMENT '主键',
+CREATE_DATE DATETIME COMMENT '创建日期',
+CREATE_USER VARCHAR(50) COMMENT '创建用户',
+UPDATE_DATE DATETIME COMMENT '修改日期',
+UPDATE_USER VARCHAR(200) COMMENT '修改用户',
+TABLE_NAME VARCHAR(200) COMMENT '业务表',
+NAME VARCHAR(200) COMMENT '列名',
+COMMENTS VARCHAR(200) COMMENT '注释',
+JDBC_TYPE VARCHAR(200) COMMENT '数据库类型及长度',
+JDBC_LENGTH VARCHAR(200) COMMENT '是否主键',
+IS_NULL CHAR(1) COMMENT '是否可为空',
+IS_EDIT CHAR(1) COMMENT '是否编辑字段',
+CATEGORY VARCHAR(200) COMMENT '字段生成方案',
+DEFAULT_VALUE VARCHAR(4000) COMMENT '默认值',
+VALID_TYPE VARCHAR(200) COMMENT '校验类型',
+SETTINGS VARCHAR(4000) COMMENT '扩展设置',
+REMARKS VARCHAR(255) COMMENT '备注信息',
+DEL_FLAG CHAR(1) COMMENT '删除标记（0：正常；1：删除）',
+HTML_INNER VARCHAR(4000) COMMENT '代码扩展',
+IS_LIST CHAR(1) COMMENT '是否列表字段',
+IS_QUERY CHAR(1) COMMENT '是否查询字段',
+LIST_WIDTH DOUBLE(10,2) COMMENT '列表显示宽度',
+QUERY_WIDTH DOUBLE(10,2) COMMENT '查询框宽度'
+) COMMENT = '业务表字段';
+ALTER TABLE MOD_TABLE_COLUMN ADD CONSTRAINT MOD_TABLE_COLUMN_ID PRIMARY KEY (ID);
+
+DROP TABLE IF EXISTS OA_LEAVE;
+CREATE TABLE OA_LEAVE (
+ID CHAR(32) not null  COMMENT '主键',
+CREATEDATE DATETIME COMMENT '创建日期',
+CREATEUSER VARCHAR(50) COMMENT '创建用户',
+UPDATEDATE DATETIME COMMENT '修改日期',
+UPDATEUSER VARCHAR(50) COMMENT '修改用户',
+BINDID VARCHAR(60) COMMENT '流程绑定主键',
+REASON VARCHAR(500) COMMENT '请假原因',
+STARTTIME DATETIME COMMENT '请假开始时间',
+ENDTIME DATETIME COMMENT '请假结束时间',
+LEAVETYPE VARCHAR(50) COMMENT '请假类型'
 ) COMMENT = '请假申请';
-alter table OA_LEAVE
-  add constraint OA_LEAVE_ID primary key (ID);
+ALTER TABLE OA_LEAVE ADD CONSTRAINT OA_LEAVE_ID PRIMARY KEY (ID);
 
-create table SYS_DEPARTMENT
-(
-  id       CHAR(32) not null COMMENT '主键',
-  parentid CHAR(32) COMMENT '外键',
-  sequence integer(10) COMMENT '排序',
-  name     VARCHAR(50) COMMENT '部门名称',
-  code     CHAR(100) COMMENT '部门编号'
+DROP TABLE IF EXISTS SYS_DEPARTMENT;
+CREATE TABLE SYS_DEPARTMENT (
+ID CHAR(32) not null  COMMENT '主键',
+PARENT_ID CHAR(32) COMMENT '外键',
+SEQUENCE INTEGER(10) COMMENT '排序',
+NAME VARCHAR(50) COMMENT '部门名称',
+CODE VARCHAR(100) COMMENT '部门编号'
 ) COMMENT = '部门';
-alter table SYS_DEPARTMENT
-  add constraint SYS_DEPARTMENT_ID primary key (ID);
+ALTER TABLE SYS_DEPARTMENT ADD CONSTRAINT SYS_DEPARTMENT_ID PRIMARY KEY (ID);
 
-create table SYS_MENU
-(
-  id       CHAR(32) not null COMMENT '主键',
-  parentid CHAR(32) COMMENT '外键',
-  name     VARCHAR(50) COMMENT '名称',
-  url      VARCHAR(100) COMMENT 'URL',
-  sequence integer COMMENT '排序',
-  icon     VARCHAR(50) COMMENT '图标',
-  target   VARCHAR(50) COMMENT '打开方式'
+DROP TABLE IF EXISTS SYS_DICT;
+CREATE TABLE SYS_DICT (
+ID CHAR(32) not null  COMMENT '主键',
+VALUE VARCHAR(50) COMMENT '数据值',
+LABEL VARCHAR(50) COMMENT '标签名',
+CATEGORY VARCHAR(50) COMMENT '分类',
+DESCRIPTION VARCHAR(50) COMMENT '描述',
+SEQUENCE INTEGER(10) COMMENT '排序',
+PARENT_ID CHAR(32) COMMENT '父主键'
+) COMMENT = '系统字典';
+ALTER TABLE SYS_DICT ADD CONSTRAINT SYS_DICT_ID PRIMARY KEY (ID);
+
+DROP TABLE IF EXISTS SYS_LOG;
+CREATE TABLE SYS_LOG (
+ID CHAR(32) not null  COMMENT '主键',
+TYPE CHAR(1) COMMENT '日志类型',
+TITLE VARCHAR(500) COMMENT '日志标题',
+CREATE_USER VARCHAR(64) COMMENT '创建者',
+CREATE_DATE DATETIME COMMENT '创建时间',
+REMOTE_ADDR VARCHAR(255) COMMENT '操作用户的IP地址',
+USER_AGENT VARCHAR(255) COMMENT '操作用户代理信息',
+REQUEST_URI VARCHAR(255) COMMENT '操作的URI',
+METHOD VARCHAR(5) COMMENT '操作的方式',
+PARAMS TEXT COMMENT '操作提交的数据',
+EXCEPTION TEXT COMMENT '异常信息',
+SPEND_TIME INTEGER(10) COMMENT '耗费时间'
+) COMMENT = '日志表';
+ALTER TABLE SYS_LOG ADD CONSTRAINT SYS_C0011468 PRIMARY KEY (ID);
+
+DROP TABLE IF EXISTS SYS_MENU;
+CREATE TABLE SYS_MENU (
+ID CHAR(32) not null  COMMENT '主键',
+PARENT_ID CHAR(32) COMMENT '外键',
+NAME VARCHAR(50) COMMENT '名称',
+URL VARCHAR(500) COMMENT 'URL',
+SEQUENCE INTEGER(10) COMMENT '排序',
+ICON VARCHAR(50) COMMENT '图标',
+TARGET VARCHAR(50) COMMENT '打开方式'
 ) COMMENT = '导航菜单';
-alter table SYS_MENU
-  add constraint SYS_MENU_ID primary key (ID);
+ALTER TABLE SYS_MENU ADD CONSTRAINT SYS_MENU_ID PRIMARY KEY (ID);
 
-create table SYS_MODULE
-(
-  id    CHAR(32) not null COMMENT '主键',
-  name  VARCHAR(50) COMMENT '模块名称',
-  shiro VARCHAR(50) COMMENT '权限'
+DROP TABLE IF EXISTS SYS_MODULE;
+CREATE TABLE SYS_MODULE (
+ID CHAR(32) not null  COMMENT '主键',
+NAME VARCHAR(50) COMMENT '模块名称',
+SHIRO VARCHAR(50) COMMENT '权限'
 ) COMMENT = '系统模块';
-alter table SYS_MODULE
-  add constraint SYS_MODULE_ID primary key (ID);
+ALTER TABLE SYS_MODULE ADD CONSTRAINT SYS_MODULE_ID PRIMARY KEY (ID);
 
-create table SYS_MODULE_PERMISSION
-(
-  moduleid     CHAR(32) not null COMMENT '模块主键',
-  permissionid VARCHAR(50) not null COMMENT '权限主键'
+DROP TABLE IF EXISTS SYS_MODULE_PERMISSION;
+CREATE TABLE SYS_MODULE_PERMISSION (
+MODULE_ID CHAR(32) not null  COMMENT '模块主键',
+PERMISSION_ID VARCHAR(50) not null  COMMENT '权限主键'
 ) COMMENT = '模块权限';
-alter table SYS_MODULE_PERMISSION
-  add constraint SYS_MODULE_PERMISSION_ID primary key (MODULEID, PERMISSIONID);
+ALTER TABLE SYS_MODULE_PERMISSION ADD CONSTRAINT SYS_MODULE_PERMISSION_ID PRIMARY KEY (MODULE_ID,PERMISSION_ID);
 
-create table SYS_PERMISSION
-(
-  id       VARCHAR(50) not null COMMENT '主键',
-  sequence integer(10) COMMENT '排序',
-  name     VARCHAR(50) COMMENT '权限名'
+DROP TABLE IF EXISTS SYS_PERMISSION;
+CREATE TABLE SYS_PERMISSION (
+ID VARCHAR(50) not null  COMMENT '主键',
+SEQUENCE INTEGER(10) COMMENT '排序',
+NAME VARCHAR(50) COMMENT '权限名'
 ) COMMENT = '权限';
-alter table SYS_PERMISSION
-  add constraint SYS_PERMISSION_ID primary key (ID);
+ALTER TABLE SYS_PERMISSION ADD CONSTRAINT SYS_PERMISSION_ID PRIMARY KEY (ID);
 
-create table SYS_ROLE
-(
-  id    CHAR(32) not null COMMENT '主键',
-  name  VARCHAR(50) COMMENT '角色名',
-  shiro VARCHAR(50) COMMENT '权限'
+DROP TABLE IF EXISTS SYS_ROLE;
+CREATE TABLE SYS_ROLE (
+ID CHAR(32) not null  COMMENT '主键',
+NAME VARCHAR(50) COMMENT '角色名',
+SHIRO VARCHAR(50) COMMENT '权限'
 ) COMMENT = '角色';
-alter table SYS_ROLE
-  add constraint SYS_ROLE_ID primary key (ID);
+ALTER TABLE SYS_ROLE ADD CONSTRAINT SYS_ROLE_ID PRIMARY KEY (ID);
 
-create table SYS_ROLE_MENU
-(
-  roleid CHAR(32) not null COMMENT '角色主键',
-  menuid CHAR(32) not null COMMENT '菜单主键'
+DROP TABLE IF EXISTS SYS_ROLE_MENU;
+CREATE TABLE SYS_ROLE_MENU (
+ROLE_ID CHAR(32) not null  COMMENT '角色主键',
+MENU_ID CHAR(32) not null  COMMENT '菜单主键'
 ) COMMENT = '角色菜单';
-alter table SYS_ROLE_MENU
-  add constraint SYS_ROLE_MENU_ID primary key (ROLEID, MENUID);
+ALTER TABLE SYS_ROLE_MENU ADD CONSTRAINT SYS_ROLE_MENU_ID PRIMARY KEY (ROLE_ID,MENU_ID);
 
-create table SYS_ROLE_MODULE
-(
-  roleid   CHAR(32) not null COMMENT '角色主键',
-  moduleid CHAR(32) not null COMMENT '模块主键'
+DROP TABLE IF EXISTS SYS_ROLE_MODULE;
+CREATE TABLE SYS_ROLE_MODULE (
+ROLE_ID CHAR(32) not null  COMMENT '角色主键',
+MODULE_ID CHAR(32) not null  COMMENT '模块主键'
 ) COMMENT = '角色模块';
-alter table SYS_ROLE_MODULE
-  add constraint SYS_ROLE_MODULE_ID primary key (ROLEID, MODULEID);
+ALTER TABLE SYS_ROLE_MODULE ADD CONSTRAINT SYS_ROLE_MODULE_ID PRIMARY KEY (ROLE_ID,MODULE_ID);
 
-create table SYS_USER
-(
-  id           CHAR(32) not null COMMENT '主键',
-  username     VARCHAR(50) COMMENT '账号',
-  password     VARCHAR(50) COMMENT '密码',
-  name         VARCHAR(50) COMMENT '用户名',
-  departmentid CHAR(32) COMMENT '部门',
-  state        CHAR(1) COMMENT '状态',
-  email        VARCHAR(50) COMMENT '邮箱',
-  phone        VARCHAR(50) COMMENT '电话'
+DROP TABLE IF EXISTS SYS_SKINS;
+CREATE TABLE SYS_SKINS (
+ID CHAR(32) not null  COMMENT '主键',
+NAME VARCHAR(50) COMMENT '说明',
+URL VARCHAR(100) COMMENT '路径',
+STATE VARCHAR(1) COMMENT '状态',
+MAIN VARCHAR(100) COMMENT '页面'
+) COMMENT = '系统皮肤';
+ALTER TABLE SYS_SKINS ADD CONSTRAINT SYS_SKINS_ID PRIMARY KEY (ID);
+
+DROP TABLE IF EXISTS SYS_UPLOADFILE;
+CREATE TABLE SYS_UPLOADFILE (
+ID CHAR(32) COMMENT '主键',
+VIEWNAME VARCHAR(100) COMMENT '文件原名',
+REALNAME VARCHAR(100) COMMENT '文件存储名',
+URL VARCHAR(500) COMMENT 'WEB访问路径',
+REALURL VARCHAR(500) COMMENT '服务器真实路径',
+SUFFIX VARCHAR(10) COMMENT '后缀名',
+FILESIZE VARCHAR(50) COMMENT '文件大小',
+CREATEDATE DATETIME COMMENT '上传时间'
+) COMMENT = '系统附件表';
+
+
+DROP TABLE IF EXISTS SYS_USER;
+CREATE TABLE SYS_USER (
+ID CHAR(32) not null  COMMENT '主键',
+USER_NAME VARCHAR(50) COMMENT '账号',
+PASSWORD VARCHAR(50) COMMENT '密码',
+NAME VARCHAR(50) COMMENT '用户名',
+DEPARTMENT_ID CHAR(32) COMMENT '部门',
+STATE CHAR(1) COMMENT '状态',
+EMAIL VARCHAR(50) COMMENT '邮箱',
+PHONE VARCHAR(50) COMMENT '电话'
 ) COMMENT = '用户信息';
-alter table SYS_USER
-  add constraint SYS_USER_ID primary key (ID);
+ALTER TABLE SYS_USER ADD CONSTRAINT SYS_USER_ID PRIMARY KEY (ID);
 
-create table SYS_USER_ROLE
-(
-  userid CHAR(32) not null COMMENT '用户主键',
-  roleid CHAR(32) not null COMMENT '角色主键'
+DROP TABLE IF EXISTS SYS_USER_ROLE;
+CREATE TABLE SYS_USER_ROLE (
+USER_ID CHAR(32) not null  COMMENT '用户主键',
+ROLE_ID CHAR(32) not null  COMMENT '角色主键'
 ) COMMENT = '用户角色';
-alter table SYS_USER_ROLE
-  add constraint SYS_USER_ROLE_ID primary key (USERID, ROLEID);
+ALTER TABLE SYS_USER_ROLE ADD CONSTRAINT SYS_USER_ROLE_ID PRIMARY KEY (USER_ID,ROLE_ID);
 
-insert into SYS_DEPARTMENT (id, parentid, sequence, name, code)
-values ('00000000000000000000000000000000', 'ffffffffffffffffffffffffffffffff', 1, '部门管理', '001');
-insert into SYS_DEPARTMENT (id, parentid, sequence, name, code)
-values ('b41c66947b7f4577968d4249c3c52a85', '00000000000000000000000000000000', 0, '系统管理', '003');
-insert into SYS_DEPARTMENT (id, parentid, sequence, name, code)
-values ('dad8faf2f3eb4d279ef04decb91ca4c0', 'b41c66947b7f4577968d4249c3c52a85', 0, '超级系统管理员', '001');
-commit;
-insert into SYS_MENU (id, parentid, name, url, sequence, icon, target)
-values ('b3d67c1d94d7408f878d9c0726d9f09c', 'c617ec2d6eee475ea05fbe779ab3b7c8', '权限管理', '/sysPermission/showPageList.do', 7, '/', null);
-insert into SYS_MENU (id, parentid, name, url, sequence, icon, target)
-values ('9e189622e7944d899cbbbf6677892e9e', '863a29b9f37c45579f1666254d1b557c', '运行中流程管理', '/actProcess/showRunningPageList.do', 10, '/', '_blank');
-insert into SYS_MENU (id, parentid, name, url, sequence, icon, target)
-values ('18e69a5a441a4f8da3d0e4e13f01de9b', '863a29b9f37c45579f1666254d1b557c', '流程模型', '/actModel/showPageList.do', 0, '/', '_blank');
-insert into SYS_MENU (id, parentid, name, url, sequence, icon, target)
-values ('e293c0ce48354d1896934700e1f0282c', 'c617ec2d6eee475ea05fbe779ab3b7c8', '模块管理', '/sysModule/showPageList.do', 3, '/', '_blank');
-insert into SYS_MENU (id, parentid, name, url, sequence, icon, target)
-values ('dba5fbee0097464f92e3abac9d0372c1', '863a29b9f37c45579f1666254d1b557c', '流程管理', '/actProcess/showPageList.do', 5, '/', '_blank');
-insert into SYS_MENU (id, parentid, name, url, sequence, icon, target)
-values ('00000000000000000000000000000000', 'ffffffffffffffffffffffffffffffff', '导航菜单', '/', 1, '/', null);
-insert into SYS_MENU (id, parentid, name, url, sequence, icon, target)
-values ('08e27f9288d04c7a8839dc65f6cbd1fa', 'c617ec2d6eee475ea05fbe779ab3b7c8', '用户管理', '/sysUser/showPageList.do', 10, '/', null);
-insert into SYS_MENU (id, parentid, name, url, sequence, icon, target)
-values ('0a0bf010a2e54ee5a82d0d2fe3708d2f', 'c617ec2d6eee475ea05fbe779ab3b7c8', '部门管理', '/sysDepartment/showPageList.do', 8, '/', null);
-insert into SYS_MENU (id, parentid, name, url, sequence, icon, target)
-values ('8bf056fec564462e9f6dd02d89630b9d', 'c617ec2d6eee475ea05fbe779ab3b7c8', '菜单管理', '/sysMenu/showPageList.do', 1, '/', null);
-insert into SYS_MENU (id, parentid, name, url, sequence, icon, target)
-values ('935acd7355634b278549b0ebbba01876', 'c617ec2d6eee475ea05fbe779ab3b7c8', '角色管理', '/sysRole/showPageList.do', 5, '/', null);
-insert into SYS_MENU (id, parentid, name, url, sequence, icon, target)
-values ('c617ec2d6eee475ea05fbe779ab3b7c8', '00000000000000000000000000000000', '系统管理', '/', 99, '/', null);
-insert into SYS_MENU (id, parentid, name, url, sequence, icon, target)
-values ('863a29b9f37c45579f1666254d1b557c', '00000000000000000000000000000000', '流程建模', '/', 88, '/', '_blank');
-insert into SYS_MENU (id, parentid, name, url, sequence, icon, target)
-values ('61102bf49a004196ba0fb418ed1929e3', '00000000000000000000000000000000', 'OA办公', '/', 77, '/', '_blank');
-insert into SYS_MENU (id, parentid, name, url, sequence, icon, target)
-values ('5d2d5ddfd20f4783938fe636eedb5b37', '61102bf49a004196ba0fb418ed1929e3', '请假流程', '/oa/leave/list.do', 0, '/', '_blank');
-insert into SYS_MENU (id, parentid, name, url, sequence, icon, target)
-values ('035c58f70576403e9c31767469b15258', '61102bf49a004196ba0fb418ed1929e3', '请假待办流程', '/oa/leave/list/task.do', 5, '/', '_blank');
-commit;
-insert into SYS_MODULE (id, name, shiro)
-values ('7466722e008349cfb7ed1d034b856bad', 'sysRoleMenu', 'sysRoleMenu');
-insert into SYS_MODULE (id, name, shiro)
-values ('0cc19fd4409a4d8b832a02584b15e45f', 'sysRoleModule', 'sysRoleModule');
-insert into SYS_MODULE (id, name, shiro)
-values ('3570d90302404b769704bd810ea3696a', 'sysUserRole', 'sysUserRole');
-insert into SYS_MODULE (id, name, shiro)
-values ('ddc3b32e4fae473e82a69a28c41a6b48', 'sysModulePermission', 'sysModulePermission');
-insert into SYS_MODULE (id, name, shiro)
-values ('7d741c551b984b7bb776e742090d076f', 'sysRole', 'sysRole');
-insert into SYS_MODULE (id, name, shiro)
-values ('2b5d24bdb8b6413e9a1b2fb2e12437a6', 'sysPermission', 'sysPermission');
-insert into SYS_MODULE (id, name, shiro)
-values ('8996fada7b6542779535357d7eee8197', 'sysUser', 'sysUser');
-insert into SYS_MODULE (id, name, shiro)
-values ('bce58ffd35774b91a6ffc6c690d22d34', 'sysMenu', 'sysMenu');
-insert into SYS_MODULE (id, name, shiro)
-values ('465292ff14d64226ada2b34cf4826a2e', 'actModel', 'actModel');
-insert into SYS_MODULE (id, name, shiro)
-values ('8b92453ba86642478dca3aa7ee9106c2', 'sysDepartment', 'sysDepartment');
-insert into SYS_MODULE (id, name, shiro)
-values ('6267cc893dcf47c2b41279e52bc5fa73', 'sysModule', 'sysModule');
-insert into SYS_MODULE (id, name, shiro)
-values ('e0ca626efde34ad788365f020094e22d', 'actProcess', 'actProcess');
-insert into SYS_MODULE (id, name, shiro)
-values ('1eb16f4188dd451d9287116214bf215a', 'actTask', 'actTask');
-insert into SYS_MODULE (id, name, shiro)
-values ('60663fd923564eb3b4c9b7e9a37aadf6', 'oa:leave', 'oa:leave');
-commit;
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('0cc19fd4409a4d8b832a02584b15e45f', 'build');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('0cc19fd4409a4d8b832a02584b15e45f', 'create');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('0cc19fd4409a4d8b832a02584b15e45f', 'delete');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('0cc19fd4409a4d8b832a02584b15e45f', 'deploy');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('0cc19fd4409a4d8b832a02584b15e45f', 'download');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('0cc19fd4409a4d8b832a02584b15e45f', 'drop');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('0cc19fd4409a4d8b832a02584b15e45f', 'export');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('0cc19fd4409a4d8b832a02584b15e45f', 'import');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('0cc19fd4409a4d8b832a02584b15e45f', 'insert');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('0cc19fd4409a4d8b832a02584b15e45f', 'print');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('0cc19fd4409a4d8b832a02584b15e45f', 'select');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('0cc19fd4409a4d8b832a02584b15e45f', 'update');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('0cc19fd4409a4d8b832a02584b15e45f', 'upload');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('0cc19fd4409a4d8b832a02584b15e45f', 'view');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('1eb16f4188dd451d9287116214bf215a', 'build');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('1eb16f4188dd451d9287116214bf215a', 'create');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('1eb16f4188dd451d9287116214bf215a', 'delete');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('1eb16f4188dd451d9287116214bf215a', 'deploy');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('1eb16f4188dd451d9287116214bf215a', 'download');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('1eb16f4188dd451d9287116214bf215a', 'drop');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('1eb16f4188dd451d9287116214bf215a', 'export');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('1eb16f4188dd451d9287116214bf215a', 'import');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('1eb16f4188dd451d9287116214bf215a', 'insert');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('1eb16f4188dd451d9287116214bf215a', 'print');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('1eb16f4188dd451d9287116214bf215a', 'select');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('1eb16f4188dd451d9287116214bf215a', 'update');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('1eb16f4188dd451d9287116214bf215a', 'upload');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('1eb16f4188dd451d9287116214bf215a', 'view');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('2b5d24bdb8b6413e9a1b2fb2e12437a6', 'build');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('2b5d24bdb8b6413e9a1b2fb2e12437a6', 'create');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('2b5d24bdb8b6413e9a1b2fb2e12437a6', 'delete');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('2b5d24bdb8b6413e9a1b2fb2e12437a6', 'deploy');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('2b5d24bdb8b6413e9a1b2fb2e12437a6', 'download');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('2b5d24bdb8b6413e9a1b2fb2e12437a6', 'drop');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('2b5d24bdb8b6413e9a1b2fb2e12437a6', 'export');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('2b5d24bdb8b6413e9a1b2fb2e12437a6', 'import');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('2b5d24bdb8b6413e9a1b2fb2e12437a6', 'insert');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('2b5d24bdb8b6413e9a1b2fb2e12437a6', 'print');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('2b5d24bdb8b6413e9a1b2fb2e12437a6', 'select');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('2b5d24bdb8b6413e9a1b2fb2e12437a6', 'update');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('2b5d24bdb8b6413e9a1b2fb2e12437a6', 'upload');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('2b5d24bdb8b6413e9a1b2fb2e12437a6', 'view');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('3570d90302404b769704bd810ea3696a', 'build');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('3570d90302404b769704bd810ea3696a', 'create');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('3570d90302404b769704bd810ea3696a', 'delete');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('3570d90302404b769704bd810ea3696a', 'deploy');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('3570d90302404b769704bd810ea3696a', 'download');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('3570d90302404b769704bd810ea3696a', 'drop');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('3570d90302404b769704bd810ea3696a', 'export');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('3570d90302404b769704bd810ea3696a', 'import');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('3570d90302404b769704bd810ea3696a', 'insert');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('3570d90302404b769704bd810ea3696a', 'print');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('3570d90302404b769704bd810ea3696a', 'select');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('3570d90302404b769704bd810ea3696a', 'update');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('3570d90302404b769704bd810ea3696a', 'upload');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('3570d90302404b769704bd810ea3696a', 'view');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('465292ff14d64226ada2b34cf4826a2e', 'build');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('465292ff14d64226ada2b34cf4826a2e', 'create');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('465292ff14d64226ada2b34cf4826a2e', 'delete');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('465292ff14d64226ada2b34cf4826a2e', 'deploy');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('465292ff14d64226ada2b34cf4826a2e', 'download');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('465292ff14d64226ada2b34cf4826a2e', 'drop');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('465292ff14d64226ada2b34cf4826a2e', 'export');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('465292ff14d64226ada2b34cf4826a2e', 'import');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('465292ff14d64226ada2b34cf4826a2e', 'insert');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('465292ff14d64226ada2b34cf4826a2e', 'print');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('465292ff14d64226ada2b34cf4826a2e', 'select');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('465292ff14d64226ada2b34cf4826a2e', 'update');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('465292ff14d64226ada2b34cf4826a2e', 'upload');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('465292ff14d64226ada2b34cf4826a2e', 'view');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('60663fd923564eb3b4c9b7e9a37aadf6', 'build');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('60663fd923564eb3b4c9b7e9a37aadf6', 'create');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('60663fd923564eb3b4c9b7e9a37aadf6', 'delete');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('60663fd923564eb3b4c9b7e9a37aadf6', 'deploy');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('60663fd923564eb3b4c9b7e9a37aadf6', 'download');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('60663fd923564eb3b4c9b7e9a37aadf6', 'drop');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('60663fd923564eb3b4c9b7e9a37aadf6', 'export');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('60663fd923564eb3b4c9b7e9a37aadf6', 'import');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('60663fd923564eb3b4c9b7e9a37aadf6', 'insert');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('60663fd923564eb3b4c9b7e9a37aadf6', 'print');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('60663fd923564eb3b4c9b7e9a37aadf6', 'select');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('60663fd923564eb3b4c9b7e9a37aadf6', 'update');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('60663fd923564eb3b4c9b7e9a37aadf6', 'upload');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('60663fd923564eb3b4c9b7e9a37aadf6', 'view');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('6267cc893dcf47c2b41279e52bc5fa73', 'build');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('6267cc893dcf47c2b41279e52bc5fa73', 'create');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('6267cc893dcf47c2b41279e52bc5fa73', 'delete');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('6267cc893dcf47c2b41279e52bc5fa73', 'deploy');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('6267cc893dcf47c2b41279e52bc5fa73', 'download');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('6267cc893dcf47c2b41279e52bc5fa73', 'drop');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('6267cc893dcf47c2b41279e52bc5fa73', 'export');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('6267cc893dcf47c2b41279e52bc5fa73', 'import');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('6267cc893dcf47c2b41279e52bc5fa73', 'insert');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('6267cc893dcf47c2b41279e52bc5fa73', 'print');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('6267cc893dcf47c2b41279e52bc5fa73', 'select');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('6267cc893dcf47c2b41279e52bc5fa73', 'update');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('6267cc893dcf47c2b41279e52bc5fa73', 'upload');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('6267cc893dcf47c2b41279e52bc5fa73', 'view');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('7466722e008349cfb7ed1d034b856bad', 'build');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('7466722e008349cfb7ed1d034b856bad', 'create');
-commit;
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('7466722e008349cfb7ed1d034b856bad', 'delete');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('7466722e008349cfb7ed1d034b856bad', 'deploy');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('7466722e008349cfb7ed1d034b856bad', 'download');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('7466722e008349cfb7ed1d034b856bad', 'drop');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('7466722e008349cfb7ed1d034b856bad', 'export');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('7466722e008349cfb7ed1d034b856bad', 'import');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('7466722e008349cfb7ed1d034b856bad', 'insert');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('7466722e008349cfb7ed1d034b856bad', 'print');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('7466722e008349cfb7ed1d034b856bad', 'select');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('7466722e008349cfb7ed1d034b856bad', 'update');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('7466722e008349cfb7ed1d034b856bad', 'upload');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('7466722e008349cfb7ed1d034b856bad', 'view');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('7d741c551b984b7bb776e742090d076f', 'build');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('7d741c551b984b7bb776e742090d076f', 'create');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('7d741c551b984b7bb776e742090d076f', 'delete');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('7d741c551b984b7bb776e742090d076f', 'deploy');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('7d741c551b984b7bb776e742090d076f', 'download');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('7d741c551b984b7bb776e742090d076f', 'drop');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('7d741c551b984b7bb776e742090d076f', 'export');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('7d741c551b984b7bb776e742090d076f', 'import');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('7d741c551b984b7bb776e742090d076f', 'insert');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('7d741c551b984b7bb776e742090d076f', 'print');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('7d741c551b984b7bb776e742090d076f', 'select');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('7d741c551b984b7bb776e742090d076f', 'update');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('7d741c551b984b7bb776e742090d076f', 'upload');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('7d741c551b984b7bb776e742090d076f', 'view');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('8996fada7b6542779535357d7eee8197', 'build');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('8996fada7b6542779535357d7eee8197', 'create');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('8996fada7b6542779535357d7eee8197', 'delete');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('8996fada7b6542779535357d7eee8197', 'deploy');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('8996fada7b6542779535357d7eee8197', 'download');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('8996fada7b6542779535357d7eee8197', 'drop');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('8996fada7b6542779535357d7eee8197', 'export');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('8996fada7b6542779535357d7eee8197', 'import');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('8996fada7b6542779535357d7eee8197', 'insert');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('8996fada7b6542779535357d7eee8197', 'print');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('8996fada7b6542779535357d7eee8197', 'select');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('8996fada7b6542779535357d7eee8197', 'update');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('8996fada7b6542779535357d7eee8197', 'upload');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('8996fada7b6542779535357d7eee8197', 'view');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('8b92453ba86642478dca3aa7ee9106c2', 'build');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('8b92453ba86642478dca3aa7ee9106c2', 'create');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('8b92453ba86642478dca3aa7ee9106c2', 'delete');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('8b92453ba86642478dca3aa7ee9106c2', 'deploy');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('8b92453ba86642478dca3aa7ee9106c2', 'download');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('8b92453ba86642478dca3aa7ee9106c2', 'drop');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('8b92453ba86642478dca3aa7ee9106c2', 'export');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('8b92453ba86642478dca3aa7ee9106c2', 'import');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('8b92453ba86642478dca3aa7ee9106c2', 'insert');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('8b92453ba86642478dca3aa7ee9106c2', 'print');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('8b92453ba86642478dca3aa7ee9106c2', 'select');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('8b92453ba86642478dca3aa7ee9106c2', 'update');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('8b92453ba86642478dca3aa7ee9106c2', 'upload');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('8b92453ba86642478dca3aa7ee9106c2', 'view');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('bce58ffd35774b91a6ffc6c690d22d34', 'build');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('bce58ffd35774b91a6ffc6c690d22d34', 'create');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('bce58ffd35774b91a6ffc6c690d22d34', 'delete');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('bce58ffd35774b91a6ffc6c690d22d34', 'deploy');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('bce58ffd35774b91a6ffc6c690d22d34', 'download');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('bce58ffd35774b91a6ffc6c690d22d34', 'drop');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('bce58ffd35774b91a6ffc6c690d22d34', 'export');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('bce58ffd35774b91a6ffc6c690d22d34', 'import');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('bce58ffd35774b91a6ffc6c690d22d34', 'insert');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('bce58ffd35774b91a6ffc6c690d22d34', 'print');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('bce58ffd35774b91a6ffc6c690d22d34', 'select');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('bce58ffd35774b91a6ffc6c690d22d34', 'update');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('bce58ffd35774b91a6ffc6c690d22d34', 'upload');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('bce58ffd35774b91a6ffc6c690d22d34', 'view');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('ddc3b32e4fae473e82a69a28c41a6b48', 'build');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('ddc3b32e4fae473e82a69a28c41a6b48', 'create');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('ddc3b32e4fae473e82a69a28c41a6b48', 'delete');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('ddc3b32e4fae473e82a69a28c41a6b48', 'deploy');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('ddc3b32e4fae473e82a69a28c41a6b48', 'download');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('ddc3b32e4fae473e82a69a28c41a6b48', 'drop');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('ddc3b32e4fae473e82a69a28c41a6b48', 'export');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('ddc3b32e4fae473e82a69a28c41a6b48', 'import');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('ddc3b32e4fae473e82a69a28c41a6b48', 'insert');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('ddc3b32e4fae473e82a69a28c41a6b48', 'print');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('ddc3b32e4fae473e82a69a28c41a6b48', 'select');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('ddc3b32e4fae473e82a69a28c41a6b48', 'update');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('ddc3b32e4fae473e82a69a28c41a6b48', 'upload');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('ddc3b32e4fae473e82a69a28c41a6b48', 'view');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('e0ca626efde34ad788365f020094e22d', 'build');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('e0ca626efde34ad788365f020094e22d', 'create');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('e0ca626efde34ad788365f020094e22d', 'delete');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('e0ca626efde34ad788365f020094e22d', 'deploy');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('e0ca626efde34ad788365f020094e22d', 'download');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('e0ca626efde34ad788365f020094e22d', 'drop');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('e0ca626efde34ad788365f020094e22d', 'export');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('e0ca626efde34ad788365f020094e22d', 'import');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('e0ca626efde34ad788365f020094e22d', 'insert');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('e0ca626efde34ad788365f020094e22d', 'print');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('e0ca626efde34ad788365f020094e22d', 'select');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('e0ca626efde34ad788365f020094e22d', 'update');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('e0ca626efde34ad788365f020094e22d', 'upload');
-insert into SYS_MODULE_PERMISSION (moduleid, permissionid)
-values ('e0ca626efde34ad788365f020094e22d', 'view');
-commit;
-insert into SYS_PERMISSION (id, sequence, name)
-values ('view', 1, '展示');
-insert into SYS_PERMISSION (id, sequence, name)
-values ('select', 2, '查询');
-insert into SYS_PERMISSION (id, sequence, name)
-values ('insert', 3, '插入');
-insert into SYS_PERMISSION (id, sequence, name)
-values ('update', 4, '修改');
-insert into SYS_PERMISSION (id, sequence, name)
-values ('delete', 5, '删除');
-insert into SYS_PERMISSION (id, sequence, name)
-values ('import', 6, '导入');
-insert into SYS_PERMISSION (id, sequence, name)
-values ('export', 7, '导出');
-insert into SYS_PERMISSION (id, sequence, name)
-values ('print', 10, '打印');
-insert into SYS_PERMISSION (id, sequence, name)
-values ('create', 11, '创建');
-insert into SYS_PERMISSION (id, sequence, name)
-values ('drop', 12, '销毁');
-insert into SYS_PERMISSION (id, sequence, name)
-values ('build', 13, '同步');
-insert into SYS_PERMISSION (id, sequence, name)
-values ('download', 9, '下载');
-insert into SYS_PERMISSION (id, sequence, name)
-values ('upload', 8, '上传');
-insert into SYS_PERMISSION (id, sequence, name)
-values ('deploy', 14, '部署');
-commit;
-insert into SYS_ROLE (id, name, shiro)
-values ('233e1814d0484ae6ad600a84ae8b2a1b', '员工', 'employee');
-insert into SYS_ROLE (id, name, shiro)
-values ('d3f34652eb03447b9cc8bb7375df675d', '系统管理员', 'sys');
-insert into SYS_ROLE (id, name, shiro)
-values ('e015765dbaf1429fa34bbff7eb4e9b79', '经理', 'deptmanager');
-insert into SYS_ROLE (id, name, shiro)
-values ('4bb7b95168a04cb6885d31dc583cde40', '人事', 'hrmanager');
-commit;
-insert into SYS_ROLE_MENU (roleid, menuid)
-values ('233e1814d0484ae6ad600a84ae8b2a1b', '00000000000000000000000000000000');
-insert into SYS_ROLE_MENU (roleid, menuid)
-values ('233e1814d0484ae6ad600a84ae8b2a1b', '035c58f70576403e9c31767469b15258');
-insert into SYS_ROLE_MENU (roleid, menuid)
-values ('233e1814d0484ae6ad600a84ae8b2a1b', '08e27f9288d04c7a8839dc65f6cbd1fa');
-insert into SYS_ROLE_MENU (roleid, menuid)
-values ('233e1814d0484ae6ad600a84ae8b2a1b', '0a0bf010a2e54ee5a82d0d2fe3708d2f');
-insert into SYS_ROLE_MENU (roleid, menuid)
-values ('233e1814d0484ae6ad600a84ae8b2a1b', '18e69a5a441a4f8da3d0e4e13f01de9b');
-insert into SYS_ROLE_MENU (roleid, menuid)
-values ('233e1814d0484ae6ad600a84ae8b2a1b', '5d2d5ddfd20f4783938fe636eedb5b37');
-insert into SYS_ROLE_MENU (roleid, menuid)
-values ('233e1814d0484ae6ad600a84ae8b2a1b', '61102bf49a004196ba0fb418ed1929e3');
-insert into SYS_ROLE_MENU (roleid, menuid)
-values ('233e1814d0484ae6ad600a84ae8b2a1b', '614408a7ec044cd5b1f7b5990460e605');
-insert into SYS_ROLE_MENU (roleid, menuid)
-values ('233e1814d0484ae6ad600a84ae8b2a1b', '863a29b9f37c45579f1666254d1b557c');
-insert into SYS_ROLE_MENU (roleid, menuid)
-values ('233e1814d0484ae6ad600a84ae8b2a1b', '8bf056fec564462e9f6dd02d89630b9d');
-insert into SYS_ROLE_MENU (roleid, menuid)
-values ('233e1814d0484ae6ad600a84ae8b2a1b', '935acd7355634b278549b0ebbba01876');
-insert into SYS_ROLE_MENU (roleid, menuid)
-values ('233e1814d0484ae6ad600a84ae8b2a1b', '9e189622e7944d899cbbbf6677892e9e');
-insert into SYS_ROLE_MENU (roleid, menuid)
-values ('233e1814d0484ae6ad600a84ae8b2a1b', 'b3d67c1d94d7408f878d9c0726d9f09c');
-insert into SYS_ROLE_MENU (roleid, menuid)
-values ('233e1814d0484ae6ad600a84ae8b2a1b', 'c617ec2d6eee475ea05fbe779ab3b7c8');
-insert into SYS_ROLE_MENU (roleid, menuid)
-values ('233e1814d0484ae6ad600a84ae8b2a1b', 'dba5fbee0097464f92e3abac9d0372c1');
-insert into SYS_ROLE_MENU (roleid, menuid)
-values ('233e1814d0484ae6ad600a84ae8b2a1b', 'e293c0ce48354d1896934700e1f0282c');
-insert into SYS_ROLE_MENU (roleid, menuid)
-values ('4bb7b95168a04cb6885d31dc583cde40', '00000000000000000000000000000000');
-insert into SYS_ROLE_MENU (roleid, menuid)
-values ('4bb7b95168a04cb6885d31dc583cde40', '035c58f70576403e9c31767469b15258');
-insert into SYS_ROLE_MENU (roleid, menuid)
-values ('4bb7b95168a04cb6885d31dc583cde40', '08e27f9288d04c7a8839dc65f6cbd1fa');
-insert into SYS_ROLE_MENU (roleid, menuid)
-values ('4bb7b95168a04cb6885d31dc583cde40', '0a0bf010a2e54ee5a82d0d2fe3708d2f');
-insert into SYS_ROLE_MENU (roleid, menuid)
-values ('4bb7b95168a04cb6885d31dc583cde40', '18e69a5a441a4f8da3d0e4e13f01de9b');
-insert into SYS_ROLE_MENU (roleid, menuid)
-values ('4bb7b95168a04cb6885d31dc583cde40', '5d2d5ddfd20f4783938fe636eedb5b37');
-insert into SYS_ROLE_MENU (roleid, menuid)
-values ('4bb7b95168a04cb6885d31dc583cde40', '61102bf49a004196ba0fb418ed1929e3');
-insert into SYS_ROLE_MENU (roleid, menuid)
-values ('4bb7b95168a04cb6885d31dc583cde40', '614408a7ec044cd5b1f7b5990460e605');
-insert into SYS_ROLE_MENU (roleid, menuid)
-values ('4bb7b95168a04cb6885d31dc583cde40', '863a29b9f37c45579f1666254d1b557c');
-insert into SYS_ROLE_MENU (roleid, menuid)
-values ('4bb7b95168a04cb6885d31dc583cde40', '8bf056fec564462e9f6dd02d89630b9d');
-insert into SYS_ROLE_MENU (roleid, menuid)
-values ('4bb7b95168a04cb6885d31dc583cde40', '935acd7355634b278549b0ebbba01876');
-insert into SYS_ROLE_MENU (roleid, menuid)
-values ('4bb7b95168a04cb6885d31dc583cde40', '9e189622e7944d899cbbbf6677892e9e');
-insert into SYS_ROLE_MENU (roleid, menuid)
-values ('4bb7b95168a04cb6885d31dc583cde40', 'b3d67c1d94d7408f878d9c0726d9f09c');
-insert into SYS_ROLE_MENU (roleid, menuid)
-values ('4bb7b95168a04cb6885d31dc583cde40', 'c617ec2d6eee475ea05fbe779ab3b7c8');
-insert into SYS_ROLE_MENU (roleid, menuid)
-values ('4bb7b95168a04cb6885d31dc583cde40', 'dba5fbee0097464f92e3abac9d0372c1');
-insert into SYS_ROLE_MENU (roleid, menuid)
-values ('4bb7b95168a04cb6885d31dc583cde40', 'e293c0ce48354d1896934700e1f0282c');
-insert into SYS_ROLE_MENU (roleid, menuid)
-values ('d3f34652eb03447b9cc8bb7375df675d', '00000000000000000000000000000000');
-insert into SYS_ROLE_MENU (roleid, menuid)
-values ('d3f34652eb03447b9cc8bb7375df675d', '035c58f70576403e9c31767469b15258');
-insert into SYS_ROLE_MENU (roleid, menuid)
-values ('d3f34652eb03447b9cc8bb7375df675d', '08e27f9288d04c7a8839dc65f6cbd1fa');
-insert into SYS_ROLE_MENU (roleid, menuid)
-values ('d3f34652eb03447b9cc8bb7375df675d', '0a0bf010a2e54ee5a82d0d2fe3708d2f');
-insert into SYS_ROLE_MENU (roleid, menuid)
-values ('d3f34652eb03447b9cc8bb7375df675d', '18e69a5a441a4f8da3d0e4e13f01de9b');
-insert into SYS_ROLE_MENU (roleid, menuid)
-values ('d3f34652eb03447b9cc8bb7375df675d', '5d2d5ddfd20f4783938fe636eedb5b37');
-insert into SYS_ROLE_MENU (roleid, menuid)
-values ('d3f34652eb03447b9cc8bb7375df675d', '61102bf49a004196ba0fb418ed1929e3');
-insert into SYS_ROLE_MENU (roleid, menuid)
-values ('d3f34652eb03447b9cc8bb7375df675d', '614408a7ec044cd5b1f7b5990460e605');
-insert into SYS_ROLE_MENU (roleid, menuid)
-values ('d3f34652eb03447b9cc8bb7375df675d', '863a29b9f37c45579f1666254d1b557c');
-insert into SYS_ROLE_MENU (roleid, menuid)
-values ('d3f34652eb03447b9cc8bb7375df675d', '8bf056fec564462e9f6dd02d89630b9d');
-insert into SYS_ROLE_MENU (roleid, menuid)
-values ('d3f34652eb03447b9cc8bb7375df675d', '935acd7355634b278549b0ebbba01876');
-insert into SYS_ROLE_MENU (roleid, menuid)
-values ('d3f34652eb03447b9cc8bb7375df675d', '9e189622e7944d899cbbbf6677892e9e');
-insert into SYS_ROLE_MENU (roleid, menuid)
-values ('d3f34652eb03447b9cc8bb7375df675d', 'b3d67c1d94d7408f878d9c0726d9f09c');
-insert into SYS_ROLE_MENU (roleid, menuid)
-values ('d3f34652eb03447b9cc8bb7375df675d', 'c617ec2d6eee475ea05fbe779ab3b7c8');
-insert into SYS_ROLE_MENU (roleid, menuid)
-values ('d3f34652eb03447b9cc8bb7375df675d', 'dba5fbee0097464f92e3abac9d0372c1');
-insert into SYS_ROLE_MENU (roleid, menuid)
-values ('d3f34652eb03447b9cc8bb7375df675d', 'e293c0ce48354d1896934700e1f0282c');
-insert into SYS_ROLE_MENU (roleid, menuid)
-values ('e015765dbaf1429fa34bbff7eb4e9b79', '035c58f70576403e9c31767469b15258');
-insert into SYS_ROLE_MENU (roleid, menuid)
-values ('e015765dbaf1429fa34bbff7eb4e9b79', '5d2d5ddfd20f4783938fe636eedb5b37');
-insert into SYS_ROLE_MENU (roleid, menuid)
-values ('e015765dbaf1429fa34bbff7eb4e9b79', '61102bf49a004196ba0fb418ed1929e3');
-commit;
-insert into SYS_ROLE_MODULE (roleid, moduleid)
-values ('233e1814d0484ae6ad600a84ae8b2a1b', '0cc19fd4409a4d8b832a02584b15e45f');
-insert into SYS_ROLE_MODULE (roleid, moduleid)
-values ('233e1814d0484ae6ad600a84ae8b2a1b', '1eb16f4188dd451d9287116214bf215a');
-insert into SYS_ROLE_MODULE (roleid, moduleid)
-values ('233e1814d0484ae6ad600a84ae8b2a1b', '2b5d24bdb8b6413e9a1b2fb2e12437a6');
-insert into SYS_ROLE_MODULE (roleid, moduleid)
-values ('233e1814d0484ae6ad600a84ae8b2a1b', '3570d90302404b769704bd810ea3696a');
-insert into SYS_ROLE_MODULE (roleid, moduleid)
-values ('233e1814d0484ae6ad600a84ae8b2a1b', '465292ff14d64226ada2b34cf4826a2e');
-insert into SYS_ROLE_MODULE (roleid, moduleid)
-values ('233e1814d0484ae6ad600a84ae8b2a1b', '60663fd923564eb3b4c9b7e9a37aadf6');
-insert into SYS_ROLE_MODULE (roleid, moduleid)
-values ('233e1814d0484ae6ad600a84ae8b2a1b', '6267cc893dcf47c2b41279e52bc5fa73');
-insert into SYS_ROLE_MODULE (roleid, moduleid)
-values ('233e1814d0484ae6ad600a84ae8b2a1b', '7466722e008349cfb7ed1d034b856bad');
-insert into SYS_ROLE_MODULE (roleid, moduleid)
-values ('233e1814d0484ae6ad600a84ae8b2a1b', '7d741c551b984b7bb776e742090d076f');
-insert into SYS_ROLE_MODULE (roleid, moduleid)
-values ('233e1814d0484ae6ad600a84ae8b2a1b', '8996fada7b6542779535357d7eee8197');
-insert into SYS_ROLE_MODULE (roleid, moduleid)
-values ('233e1814d0484ae6ad600a84ae8b2a1b', '8b92453ba86642478dca3aa7ee9106c2');
-insert into SYS_ROLE_MODULE (roleid, moduleid)
-values ('233e1814d0484ae6ad600a84ae8b2a1b', 'bce58ffd35774b91a6ffc6c690d22d34');
-insert into SYS_ROLE_MODULE (roleid, moduleid)
-values ('233e1814d0484ae6ad600a84ae8b2a1b', 'ddc3b32e4fae473e82a69a28c41a6b48');
-insert into SYS_ROLE_MODULE (roleid, moduleid)
-values ('233e1814d0484ae6ad600a84ae8b2a1b', 'e0ca626efde34ad788365f020094e22d');
-insert into SYS_ROLE_MODULE (roleid, moduleid)
-values ('4bb7b95168a04cb6885d31dc583cde40', '0cc19fd4409a4d8b832a02584b15e45f');
-insert into SYS_ROLE_MODULE (roleid, moduleid)
-values ('4bb7b95168a04cb6885d31dc583cde40', '1eb16f4188dd451d9287116214bf215a');
-insert into SYS_ROLE_MODULE (roleid, moduleid)
-values ('4bb7b95168a04cb6885d31dc583cde40', '2b5d24bdb8b6413e9a1b2fb2e12437a6');
-insert into SYS_ROLE_MODULE (roleid, moduleid)
-values ('4bb7b95168a04cb6885d31dc583cde40', '3570d90302404b769704bd810ea3696a');
-insert into SYS_ROLE_MODULE (roleid, moduleid)
-values ('4bb7b95168a04cb6885d31dc583cde40', '465292ff14d64226ada2b34cf4826a2e');
-insert into SYS_ROLE_MODULE (roleid, moduleid)
-values ('4bb7b95168a04cb6885d31dc583cde40', '60663fd923564eb3b4c9b7e9a37aadf6');
-insert into SYS_ROLE_MODULE (roleid, moduleid)
-values ('4bb7b95168a04cb6885d31dc583cde40', '6267cc893dcf47c2b41279e52bc5fa73');
-insert into SYS_ROLE_MODULE (roleid, moduleid)
-values ('4bb7b95168a04cb6885d31dc583cde40', '7466722e008349cfb7ed1d034b856bad');
-insert into SYS_ROLE_MODULE (roleid, moduleid)
-values ('4bb7b95168a04cb6885d31dc583cde40', '7d741c551b984b7bb776e742090d076f');
-insert into SYS_ROLE_MODULE (roleid, moduleid)
-values ('4bb7b95168a04cb6885d31dc583cde40', '8996fada7b6542779535357d7eee8197');
-insert into SYS_ROLE_MODULE (roleid, moduleid)
-values ('4bb7b95168a04cb6885d31dc583cde40', '8b92453ba86642478dca3aa7ee9106c2');
-insert into SYS_ROLE_MODULE (roleid, moduleid)
-values ('4bb7b95168a04cb6885d31dc583cde40', 'bce58ffd35774b91a6ffc6c690d22d34');
-insert into SYS_ROLE_MODULE (roleid, moduleid)
-values ('4bb7b95168a04cb6885d31dc583cde40', 'ddc3b32e4fae473e82a69a28c41a6b48');
-insert into SYS_ROLE_MODULE (roleid, moduleid)
-values ('4bb7b95168a04cb6885d31dc583cde40', 'e0ca626efde34ad788365f020094e22d');
-insert into SYS_ROLE_MODULE (roleid, moduleid)
-values ('d3f34652eb03447b9cc8bb7375df675d', '0cc19fd4409a4d8b832a02584b15e45f');
-insert into SYS_ROLE_MODULE (roleid, moduleid)
-values ('d3f34652eb03447b9cc8bb7375df675d', '1eb16f4188dd451d9287116214bf215a');
-insert into SYS_ROLE_MODULE (roleid, moduleid)
-values ('d3f34652eb03447b9cc8bb7375df675d', '2b5d24bdb8b6413e9a1b2fb2e12437a6');
-insert into SYS_ROLE_MODULE (roleid, moduleid)
-values ('d3f34652eb03447b9cc8bb7375df675d', '3570d90302404b769704bd810ea3696a');
-insert into SYS_ROLE_MODULE (roleid, moduleid)
-values ('d3f34652eb03447b9cc8bb7375df675d', '465292ff14d64226ada2b34cf4826a2e');
-insert into SYS_ROLE_MODULE (roleid, moduleid)
-values ('d3f34652eb03447b9cc8bb7375df675d', '60663fd923564eb3b4c9b7e9a37aadf6');
-insert into SYS_ROLE_MODULE (roleid, moduleid)
-values ('d3f34652eb03447b9cc8bb7375df675d', '6267cc893dcf47c2b41279e52bc5fa73');
-insert into SYS_ROLE_MODULE (roleid, moduleid)
-values ('d3f34652eb03447b9cc8bb7375df675d', '7466722e008349cfb7ed1d034b856bad');
-insert into SYS_ROLE_MODULE (roleid, moduleid)
-values ('d3f34652eb03447b9cc8bb7375df675d', '7d741c551b984b7bb776e742090d076f');
-insert into SYS_ROLE_MODULE (roleid, moduleid)
-values ('d3f34652eb03447b9cc8bb7375df675d', '8996fada7b6542779535357d7eee8197');
-insert into SYS_ROLE_MODULE (roleid, moduleid)
-values ('d3f34652eb03447b9cc8bb7375df675d', '8b92453ba86642478dca3aa7ee9106c2');
-insert into SYS_ROLE_MODULE (roleid, moduleid)
-values ('d3f34652eb03447b9cc8bb7375df675d', 'bce58ffd35774b91a6ffc6c690d22d34');
-insert into SYS_ROLE_MODULE (roleid, moduleid)
-values ('d3f34652eb03447b9cc8bb7375df675d', 'ddc3b32e4fae473e82a69a28c41a6b48');
-insert into SYS_ROLE_MODULE (roleid, moduleid)
-values ('d3f34652eb03447b9cc8bb7375df675d', 'e0ca626efde34ad788365f020094e22d');
-insert into SYS_ROLE_MODULE (roleid, moduleid)
-values ('e015765dbaf1429fa34bbff7eb4e9b79', '0cc19fd4409a4d8b832a02584b15e45f');
-insert into SYS_ROLE_MODULE (roleid, moduleid)
-values ('e015765dbaf1429fa34bbff7eb4e9b79', '1eb16f4188dd451d9287116214bf215a');
-insert into SYS_ROLE_MODULE (roleid, moduleid)
-values ('e015765dbaf1429fa34bbff7eb4e9b79', '2b5d24bdb8b6413e9a1b2fb2e12437a6');
-insert into SYS_ROLE_MODULE (roleid, moduleid)
-values ('e015765dbaf1429fa34bbff7eb4e9b79', '3570d90302404b769704bd810ea3696a');
-insert into SYS_ROLE_MODULE (roleid, moduleid)
-values ('e015765dbaf1429fa34bbff7eb4e9b79', '465292ff14d64226ada2b34cf4826a2e');
-insert into SYS_ROLE_MODULE (roleid, moduleid)
-values ('e015765dbaf1429fa34bbff7eb4e9b79', '60663fd923564eb3b4c9b7e9a37aadf6');
-insert into SYS_ROLE_MODULE (roleid, moduleid)
-values ('e015765dbaf1429fa34bbff7eb4e9b79', '6267cc893dcf47c2b41279e52bc5fa73');
-insert into SYS_ROLE_MODULE (roleid, moduleid)
-values ('e015765dbaf1429fa34bbff7eb4e9b79', '7466722e008349cfb7ed1d034b856bad');
-insert into SYS_ROLE_MODULE (roleid, moduleid)
-values ('e015765dbaf1429fa34bbff7eb4e9b79', '7d741c551b984b7bb776e742090d076f');
-insert into SYS_ROLE_MODULE (roleid, moduleid)
-values ('e015765dbaf1429fa34bbff7eb4e9b79', '8996fada7b6542779535357d7eee8197');
-insert into SYS_ROLE_MODULE (roleid, moduleid)
-values ('e015765dbaf1429fa34bbff7eb4e9b79', '8b92453ba86642478dca3aa7ee9106c2');
-insert into SYS_ROLE_MODULE (roleid, moduleid)
-values ('e015765dbaf1429fa34bbff7eb4e9b79', 'bce58ffd35774b91a6ffc6c690d22d34');
-insert into SYS_ROLE_MODULE (roleid, moduleid)
-values ('e015765dbaf1429fa34bbff7eb4e9b79', 'ddc3b32e4fae473e82a69a28c41a6b48');
-insert into SYS_ROLE_MODULE (roleid, moduleid)
-values ('e015765dbaf1429fa34bbff7eb4e9b79', 'e0ca626efde34ad788365f020094e22d');
-commit;
-insert into SYS_USER (id, username, password, name, departmentid, state, email, phone)
-values ('3a657ea8ddc745a698d51aeea2183f4d', 'system', 'c4ca86dead4518ac4fd6e30172db3d9e', '管理员', 'dad8faf2f3eb4d279ef04decb91ca4c0', '1', null, null);
-insert into SYS_USER (id, username, password, name, departmentid, state, email, phone)
-values ('1e995b4cf4c449afa6c31033b6786cef', 'dept', '41dab460432fd36459e9dd9cf33bb81b', '部门经理', 'b41c66947b7f4577968d4249c3c52a85', '1', null, null);
-commit;
-insert into SYS_USER_ROLE (userid, roleid)
-values ('1e995b4cf4c449afa6c31033b6786cef', 'e015765dbaf1429fa34bbff7eb4e9b79');
-insert into SYS_USER_ROLE (userid, roleid)
-values ('3a657ea8ddc745a698d51aeea2183f4d', 'd3f34652eb03447b9cc8bb7375df675d');
-commit;
+INSERT INTO CMS_COMMENT (ID,CATEGORY_ID,CONTENT_ID,SCORE,CONTENT,NAME,IP,AUDIT_USER_ID,AUDIT_DATE,CREATE_USER,CREATE_DATE,UPDATE_USER,UPDATE_DATE,REMARKS,DEL_FLAG) 
+VALUES ('355222f869db4f4fb8a22e6888aabe48','355222f869db4f4fb8a22e6888aabe48','355222f869db4f4fb8a22e6888aabe48',5,'很不错','匿名','127.0.0.1','3a657ea8ddc745a698d51aeea2183f4d',to_timestamp('2015-10-13 00:00:00.0','yyyy-mm-dd hh24:mi:ss:ff')+0,null,null,'system',to_timestamp('2015-10-13 09:32:12.0','yyyy-mm-dd hh24:mi:ss:ff')+0,null,'1');
+
+INSERT INTO CMS_COMMENT (ID,CATEGORY_ID,CONTENT_ID,SCORE,CONTENT,NAME,IP,AUDIT_USER_ID,AUDIT_DATE,CREATE_USER,CREATE_DATE,UPDATE_USER,UPDATE_DATE,REMARKS,DEL_FLAG) 
+VALUES ('0af80866e7c143fa860f1e25b2d46e26',null,null,3,'评论内容','评论者','127.0.0.1',null,to_timestamp('2015-10-13 00:00:00.0','yyyy-mm-dd hh24:mi:ss:ff')+0,null,to_timestamp('2015-10-13 10:02:47.0','yyyy-mm-dd hh24:mi:ss:ff')+0,null,to_timestamp('2015-10-13 10:03:09.0','yyyy-mm-dd hh24:mi:ss:ff')+0,null,'1');
+
+INSERT INTO CMS_GUESTBOOK (ID,TYPE,CONTENT,NAME,EMAIL,PHONE,WORKUNIT,IP,RE_USER_ID,RE_DATE,RE_CONTENT,CREATE_USER,CREATE_DATE,UPDATE_USER,UPDATE_DATE,REMARKS,DEL_FLAG) 
+VALUES ('3a657ea8ddc745a698d51aeea2183f4d','1','咨询','张三','qq@qq.com','15156845635','无业','127.0.0.1','3a657ea8ddc745a698d51aeea2183f4d',to_timestamp('2015-10-13 00:00:00.0','yyyy-mm-dd hh24:mi:ss:ff')+0,'你想资讯什么',null,null,'system',to_timestamp('2015-10-13 09:00:52.0','yyyy-mm-dd hh24:mi:ss:ff')+0,null,'0');
+
+INSERT INTO CMS_GUESTBOOK (ID,TYPE,CONTENT,NAME,EMAIL,PHONE,WORKUNIT,IP,RE_USER_ID,RE_DATE,RE_CONTENT,CREATE_USER,CREATE_DATE,UPDATE_USER,UPDATE_DATE,REMARKS,DEL_FLAG) 
+VALUES ('f95b913873c547e19131e93d04046734','2','内容','匿名',null,null,null,'127.0.0.1',null,null,null,null,to_timestamp('2015-10-13 09:54:56.0','yyyy-mm-dd hh24:mi:ss:ff')+0,null,null,null,null);
+
+INSERT INTO CMS_GUESTBOOK (ID,TYPE,CONTENT,NAME,EMAIL,PHONE,WORKUNIT,IP,RE_USER_ID,RE_DATE,RE_CONTENT,CREATE_USER,CREATE_DATE,UPDATE_USER,UPDATE_DATE,REMARKS,DEL_FLAG) 
+VALUES ('acc4f545a2eb49aebd11643ac7c86e66','2','内容','匿名',null,null,null,'127.0.0.1',null,null,null,null,to_timestamp('2015-10-13 09:58:28.0','yyyy-mm-dd hh24:mi:ss:ff')+0,null,null,null,null);
+
+INSERT INTO CMS_GUESTBOOK (ID,TYPE,CONTENT,NAME,EMAIL,PHONE,WORKUNIT,IP,RE_USER_ID,RE_DATE,RE_CONTENT,CREATE_USER,CREATE_DATE,UPDATE_USER,UPDATE_DATE,REMARKS,DEL_FLAG) 
+VALUES ('833093914a1a49cd8222dbf0046009e8','2','内容','匿名',null,null,null,'127.0.0.1',null,null,null,null,to_timestamp('2015-10-13 09:58:49.0','yyyy-mm-dd hh24:mi:ss:ff')+0,null,null,null,null);
+
+INSERT INTO CMS_SITE (ID,NAME,TITLE,LOGO,DOMAIN,DESCRIPTION,KEYWORDS,THEME,COPYRIGHT,CUSTOM_VIEW,CREATE_USER,CREATE_DATE,UPDATE_USER,UPDATE_DATE,REMARKS,DEL_FLAG) 
+VALUES ('f9427f770859414793a43bcfcc36553b','11','22','upload/image/89ea3b6bb9934a3bad7dd8d2c16fa70a.png','44','55','66','77',88,'99','system',to_timestamp('2015-06-23 09:32:16.0','yyyy-mm-dd hh24:mi:ss:ff')+0,'system',to_timestamp('2015-10-13 11:48:01.0','yyyy-mm-dd hh24:mi:ss:ff')+0,'00','0');
+
+INSERT INTO CMS_SITE (ID,NAME,TITLE,LOGO,DOMAIN,DESCRIPTION,KEYWORDS,THEME,COPYRIGHT,CUSTOM_VIEW,CREATE_USER,CREATE_DATE,UPDATE_USER,UPDATE_DATE,REMARKS,DEL_FLAG) 
+VALUES ('3142b15af04c4479888127a7d15b6c04','22','33','upload/image/4536276e0d02429ea91fdc2295e993e0.png','44','55','66','7',88,'9','system',to_timestamp('2015-10-13 11:51:21.0','yyyy-mm-dd hh24:mi:ss:ff')+0,null,null,null,null);
+
+INSERT INTO CMS_SITE (ID,NAME,TITLE,LOGO,DOMAIN,DESCRIPTION,KEYWORDS,THEME,COPYRIGHT,CUSTOM_VIEW,CREATE_USER,CREATE_DATE,UPDATE_USER,UPDATE_DATE,REMARKS,DEL_FLAG) 
+VALUES ('f30a531758724f99b16a799aa476c39b','33','55','upload/image/f177a088942341b29e164397e69ab901.png','44','77','88','99',66,'33','system',to_timestamp('2015-10-13 11:56:07.0','yyyy-mm-dd hh24:mi:ss:ff')+0,null,null,null,null);
+
+INSERT INTO MOD_TABLE (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,NAME,COMMENTS,PARENT_TABLE,PARENT_TABLE_FK,REMARKS,DEL_FLAG) 
+VALUES ('c8ab465058644015a494fa32302fef9c',to_timestamp('2015-12-28 14:20:59.0','yyyy-mm-dd hh24:mi:ss:ff')+0,'system',to_timestamp('2015-12-28 14:20:59.0','yyyy-mm-dd hh24:mi:ss:ff')+0,null,'BO_DEMO','演示',null,null,null,null);
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH) 
+VALUES ('f7c32c721a6a45d79c6d8667a8df189c',to_timestamp('2016-01-21 11:12:00.0','yyyy-mm-dd hh24:mi:ss:ff')+0,'system',to_timestamp('2016-01-21 14:29:15.0','yyyy-mm-dd hh24:mi:ss:ff')+0,'system','BO_DEMO','EXPRESSION','表达式','VARCHAR2','100','Y','Y','textarea','@userId在@dateTime登录',null,'multiline:true,prompt:'@userId==@userName==@name==@departmentId==@departmentName==@year'',null,null,'style="height:100px"','Y','Y',null,null);
+
+INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH) 
+VALUES ('910a75da82c341119044dd45e09330bf',to_timestamp('2015-12-28 15:34:04.0','yyyy-mm-dd hh24:mi:ss:ff')+0,'system',to_timestamp('2016-01-21 12:59:51.0','yyyy-mm-dd hh24:mi:ss:ff')+0,'system','BO_DEMO','TREE_ID','下拉树','VARCHAR2','100','Y','Y','combobox',null,null,'SQL>select * from sys_user where id='@userId'|id|name',null,null,null,'Y','Y',null,null);
+
+INSERT INTO OA_LEAVE (ID,CREATEDATE,CREATEUSER,UPDATEDATE,UPDATEUSER,BINDID,REASON,STARTTIME,ENDTIME,LEAVETYPE) 
+VALUES ('bd68cfc58e214ff6a17d3e35ecb750f1',to_timestamp('2015-10-05 14:43:46.0','yyyy-mm-dd hh24:mi:ss:ff')+0,'employee',to_timestamp('2015-10-05 16:06:30.0','yyyy-mm-dd hh24:mi:ss:ff')+0,'employee','d88dbc95353a4682b968687642c99760','我要请假啊',to_timestamp('2015-10-05 14:44:00.0','yyyy-mm-dd hh24:mi:ss:ff')+0,to_timestamp('2015-10-15 14:44:01.0','yyyy-mm-dd hh24:mi:ss:ff')+0,'事假');
+
+INSERT INTO OA_LEAVE (ID,CREATEDATE,CREATEUSER,UPDATEDATE,UPDATEUSER,BINDID,REASON,STARTTIME,ENDTIME,LEAVETYPE) 
+VALUES ('fb0fad4f97944d01925b3fd75838d1e3',to_timestamp('2015-09-22 10:55:36.0','yyyy-mm-dd hh24:mi:ss:ff')+0,'employee',to_timestamp('2015-09-22 11:02:17.0','yyyy-mm-dd hh24:mi:ss:ff')+0,'employee','4e21f0dd2b364ef7aabd450988af9cc6','我要请假~',to_timestamp('2015-09-22 10:56:48.0','yyyy-mm-dd hh24:mi:ss:ff')+0,to_timestamp('2015-09-26 10:56:50.0','yyyy-mm-dd hh24:mi:ss:ff')+0,'事假');
+
+INSERT INTO SYS_DEPARTMENT (ID,PARENT_ID,SEQUENCE,NAME,CODE) 
+VALUES ('dad8faf2f3eb4d279ef04decb91ca4c0','00000000000000000000000000000000',0,'超级系统管理员','001');
+
+INSERT INTO SYS_DEPARTMENT (ID,PARENT_ID,SEQUENCE,NAME,CODE) 
+VALUES ('00000000000000000000000000000000','ffffffffffffffffffffffffffffffff',0,'系统部门','dept');
+
+INSERT INTO SYS_DEPARTMENT (ID,PARENT_ID,SEQUENCE,NAME,CODE) 
+VALUES ('e51ba1c688204117bd08b8ce2393e756','00000000000000000000000000000000',1,'研发部','YFB001');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('006dd9700c6343a996fffdb837d4df02','sort','排序方式','root','排序方式字典',2,'00000000000000000000000000000000');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('3ef666c12386464b8bb72919bfedf095','asc','升序','sort','排序方式升序',1,'006dd9700c6343a996fffdb837d4df02');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('abec26fffaa142bf8fddbba148cb4fb1','desc','降序','sort','排序方式降序',5,'006dd9700c6343a996fffdb837d4df02');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('425c2bb98782417aa0e398c3a120504e','=','等于','query','排序方式等于',1,'b23f0094a5c54035aac65c3a6e8bbc13');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('e947732a62164859bc573208bc1c1ea3','like','LIKE','query','排序方式LIKE',25,'b23f0094a5c54035aac65c3a6e8bbc13');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('a71be6d72bc9496c97444dd174681255','valid','校验类型','root','表单数据校验类型',4,'00000000000000000000000000000000');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('93a5e915621c415ba833415d16550043','editable','是否可编辑','root','是否可编辑',7,'00000000000000000000000000000000');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('46d0f15b58d74d0fae3a14d0449c6a33','Y','是','editable','是',5,'93a5e915621c415ba833415d16550043');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('285e75fb2c214e14965b8f6a0647d2a1','N','否','editable','否',10,'93a5e915621c415ba833415d16550043');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('b58d8337fde44cc6931f9a317c1ec461','D','禁用','editable','禁用',15,'93a5e915621c415ba833415d16550043');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('bfc0b1a8cfe143b0a244679851d08a99','H','隐藏','editable','隐藏',20,'93a5e915621c415ba833415d16550043');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('be8704e7e9c44e4e8eb526a9bfd51f45','combotree','下拉树','columnCategory','下拉树',38,'8bffb44c5100487f93c01c9619448680');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('86910beecfa144139c0cb37a44bfe832','D','禁用','yes_no_hidden','disable',13,'05da54f04ce0408e89c839402f83b3f8');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('05da54f04ce0408e89c839402f83b3f8','yes_no_hidden','表单字段编辑权限','root','表单是否编辑或隐藏',2,'00000000000000000000000000000000');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('bad1cc7d03c4456ab08347f98297aace','N','否','yes_no_hidden','否',10,'05da54f04ce0408e89c839402f83b3f8');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('27b2f554dc474ddc81840b53dab6e4e0','Y','是','yes_no_hidden','是',5,'05da54f04ce0408e89c839402f83b3f8');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('069c81108d6c4fa4a8ea3f60cd6da37f','H','隐藏','yes_no_hidden','隐藏',15,'05da54f04ce0408e89c839402f83b3f8');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('44710a4cec6443888a65ba7137991f0c','loginName','帐号','valid','帐号，登录名',1,'a71be6d72bc9496c97444dd174681255');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('25f2253e48c142b9bff112b0500c9bca','url','URL','valid','URL格式校验',3,'a71be6d72bc9496c97444dd174681255');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('440b144690734530bda8aeff6249647a','email','邮箱','valid','邮箱格式校验',5,'a71be6d72bc9496c97444dd174681255');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('40e677c9691f42acad06797e3168856f','CHS','汉字','valid','汉字',8,'a71be6d72bc9496c97444dd174681255');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('d2062ed8cf4448e8927b920b8c54e4d5','english','英语','valid','英语',11,'a71be6d72bc9496c97444dd174681255');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('f3511a51bfa347dd9c75518f3870e8c2','ChEn','中英文','valid','中英文',14,'a71be6d72bc9496c97444dd174681255');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('ae05d12ae8434f15817a9d70f5e77c41','money','金额','valid','钱',16,'a71be6d72bc9496c97444dd174681255');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('85fa7c92066048f6b312ed5657a3ab91','ip','IPV4','valid','IPV4',17,'a71be6d72bc9496c97444dd174681255');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('ba743fd63cf1437794bd82310ae6000a','ZIP','邮政编码','valid','邮政编码',20,'a71be6d72bc9496c97444dd174681255');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('96a8c120cb1c4673b7013baeebe3cc19','QQ','QQ','valid','QQ',23,'a71be6d72bc9496c97444dd174681255');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('a0ab84edbe73465a97eb8dd70dfff6b0','mobile','手机号','valid','手机号',26,'a71be6d72bc9496c97444dd174681255');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('105a550d0fa54d7fa3abcc8cbf5371a3','tel','电话','valid','电话',29,'a71be6d72bc9496c97444dd174681255');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('dbb54a0a6d844b0ab2bff2f368e065a8','mobileAndTel','手机电话','valid','手机电话',32,'a71be6d72bc9496c97444dd174681255');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('47f827e12b1e48938387c9f32744418c','idCode','身份证号','valid','身份证号',35,'a71be6d72bc9496c97444dd174681255');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('b3a442f4b2b848a2a72a3ae6de3b7306','englishOrNum','英文或数字','valid','英文数字',38,'a71be6d72bc9496c97444dd174681255');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('5b613d3461e54e639397ca36ca96348a','integer','正整数','valid','正整数',40,'a71be6d72bc9496c97444dd174681255');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('d7e56b07528e4d0a940479bf415ebe17','integ','0和正整数','valid','正整数最小为0',41,'a71be6d72bc9496c97444dd174681255');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('6ee7ceda158a402985d674361675fc32','xiaoshu','两位小数','valid','两位小数',44,'a71be6d72bc9496c97444dd174681255');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('1631194214b64ae991366cdb01cab0af','M','男','sex','性别',1,'f5814ca746a145bc844669a70d984a9c');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('4088a75a965f4a11acce875fe864623b','F','女','sex','性别',2,'f5814ca746a145bc844669a70d984a9c');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('1125e32a6aa442e881d899574ed29c9f','Y','是','yes_no','是',0,'0469a2108e854bbc83d5afa7b3367676');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('9a8e72198a7a48b0a0c1b95395b19ef3','N','否','yes_no','否',1,'0469a2108e854bbc83d5afa7b3367676');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('b23f0094a5c54035aac65c3a6e8bbc13','query','查询方式','root','数据库字段查询方式',3,'00000000000000000000000000000000');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('238c813e6157415bad169b28ec939346','&lt;','小于','query','排序方式小于',5,'b23f0094a5c54035aac65c3a6e8bbc13');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('c306c0753a51406ea7ae2777899fc71c','&gt;','大于','query','排序方式大于',10,'b23f0094a5c54035aac65c3a6e8bbc13');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('a5b17303fda549909992510c027eccb7','&gt;=','大于等于','query','排序方式大于等于',20,'b23f0094a5c54035aac65c3a6e8bbc13');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('0469a2108e854bbc83d5afa7b3367676','yes_no','是否','root','是否字典',1,'00000000000000000000000000000000');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('8f34b07686d543f98af15332b1b2484e','combobox','列表','columnCategory','下拉框',15,'8bffb44c5100487f93c01c9619448680');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('276695a7bf264d409f95290992a13044','radiobox','单选','columnCategory','单选按钮组',20,'8bffb44c5100487f93c01c9619448680');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('4f69dcc49059453ea7d3f24df8dce31a','checkbox','复选','columnCategory','复选框',25,'8bffb44c5100487f93c01c9619448680');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('b9b948f3b6834e0583b2de6e74700e62','datebox','日期','columnCategory','日期',30,'8bffb44c5100487f93c01c9619448680');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('36962a4c19ea402782a21e427ee8d2f5','htmldesign','HTML','columnCategory','UEditor',40,'8bffb44c5100487f93c01c9619448680');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('f5814ca746a145bc844669a70d984a9c','sex','性别','root','性别字典',0,'00000000000000000000000000000000');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('8bffb44c5100487f93c01c9619448680','columnCategory','字段生成规则','root','字段自动生成',5,'00000000000000000000000000000000');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('1fc867dcf4e4404ca8127a85f6d215b2','textbox','单行','columnCategory','单行输入框',5,'8bffb44c5100487f93c01c9619448680');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('8473a29b4c7c480cbd4faaf6f8d3726b','numberbox','数值','columnCategory','数字',10,'8bffb44c5100487f93c01c9619448680');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('40140cf333554cfbbb1edc3486392c8e','textarea','多行','columnCategory','多行文本框',35,'8bffb44c5100487f93c01c9619448680');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('838ebfaff94a42c5abd718e811f4da5f','jdbcType','数据库字段类型','root','数据库字段类型',6,'00000000000000000000000000000000');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('707e7b2585cd468484094fdf94d9e3be','CHAR','CHAR','jdbcType','CHAR',1,'838ebfaff94a42c5abd718e811f4da5f');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('286369a2800540d38d0a39c72b5d209a','VARCHAR2','VARCHAR2','jdbcType','VARCHAR2',5,'838ebfaff94a42c5abd718e811f4da5f');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('5e24d786442940c7b164fae2d8264821','NUMBER','NUMBER','jdbcType','NUMBER',10,'838ebfaff94a42c5abd718e811f4da5f');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('13956f4e6bca40a2a45670e9593904ba','DATE','DATE','jdbcType','DATE',15,'838ebfaff94a42c5abd718e811f4da5f');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('d9a81aa07d14446d8a2b3aee1db88f80','CLOB','CLOB','jdbcType','CLOB',20,'838ebfaff94a42c5abd718e811f4da5f');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('0b36e6e0de4d40bea6bb078a38bbed22','&lt;=','小于等于','query','排序方式小于等于',15,'b23f0094a5c54035aac65c3a6e8bbc13');
+
+INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
+VALUES ('5da5691ce03240b0a2fcaba6b70227fb','not like','NOT LIKE','query','排序方式NOTLIKE',30,'b23f0094a5c54035aac65c3a6e8bbc13');
+
+INSERT INTO SYS_LOG (ID,TYPE,TITLE,CREATE_USER,CREATE_DATE,REMOTE_ADDR,USER_AGENT,REQUEST_URI,METHOD,PARAMS,EXCEPTION,SPEND_TIME) 
+VALUES ('2c09c058d79142bab11eb34fdffcecee','s','[system]管理员','system',to_timestamp('2015-07-16 16:59:37.0','yyyy-mm-dd hh24:mi:ss:ff')+0,'0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0','/kensite/sysDepartment/getTreeJson.do','POST',null,null,null);
+
+INSERT INTO SYS_MENU (ID,PARENT_ID,NAME,URL,SEQUENCE,ICON,TARGET) 
+VALUES ('e0f3aac77b984733bcf0d8d35363bfa1','7978e1b6d95044e1a4ba5840c0d8a004','浮动按钮','/static/web/blank.jsp',0,null,'_blank');
+
+INSERT INTO SYS_MENU (ID,PARENT_ID,NAME,URL,SEQUENCE,ICON,TARGET) 
+VALUES ('b3d67c1d94d7408f878d9c0726d9f09c','c617ec2d6eee475ea05fbe779ab3b7c8','权限管理','/sysPermission/showPageList.do',7,'/',null);
+
+INSERT INTO SYS_MENU (ID,PARENT_ID,NAME,URL,SEQUENCE,ICON,TARGET) 
+VALUES ('9e189622e7944d899cbbbf6677892e9e','863a29b9f37c45579f1666254d1b557c','运行中流程管理','/actProcess/showRunningPageList.do',10,'/','_blank');
+
+INSERT INTO SYS_MENU (ID,PARENT_ID,NAME,URL,SEQUENCE,ICON,TARGET) 
+VALUES ('18e69a5a441a4f8da3d0e4e13f01de9b','863a29b9f37c45579f1666254d1b557c','流程模型','/actModel/showPageList.do',0,'/','_blank');
+
+INSERT INTO SYS_MENU (ID,PARENT_ID,NAME,URL,SEQUENCE,ICON,TARGET) 
+VALUES ('e293c0ce48354d1896934700e1f0282c','c617ec2d6eee475ea05fbe779ab3b7c8','模块管理','/sysModule/showPageList.do',3,'/','_blank');
+
+INSERT INTO SYS_MENU (ID,PARENT_ID,NAME,URL,SEQUENCE,ICON,TARGET) 
+VALUES ('dba5fbee0097464f92e3abac9d0372c1','863a29b9f37c45579f1666254d1b557c','流程管理','/actProcess/showPageList.do',5,'/','_blank');
+
+INSERT INTO SYS_MENU (ID,PARENT_ID,NAME,URL,SEQUENCE,ICON,TARGET) 
+VALUES ('00000000000000000000000000000000','ffffffffffffffffffffffffffffffff','导航菜单','/',1,'/',null);
+
+INSERT INTO SYS_MENU (ID,PARENT_ID,NAME,URL,SEQUENCE,ICON,TARGET) 
+VALUES ('08e27f9288d04c7a8839dc65f6cbd1fa','c617ec2d6eee475ea05fbe779ab3b7c8','用户管理','/sysUser/showPageList.do',10,'/',null);
+
+INSERT INTO SYS_MENU (ID,PARENT_ID,NAME,URL,SEQUENCE,ICON,TARGET) 
+VALUES ('0a0bf010a2e54ee5a82d0d2fe3708d2f','c617ec2d6eee475ea05fbe779ab3b7c8','部门管理','/sysDepartment/list',8,'/','_blank');
+
+INSERT INTO SYS_MENU (ID,PARENT_ID,NAME,URL,SEQUENCE,ICON,TARGET) 
+VALUES ('8bf056fec564462e9f6dd02d89630b9d','c617ec2d6eee475ea05fbe779ab3b7c8','菜单管理','/sysMenu/list',1,'/',null);
+
+INSERT INTO SYS_MENU (ID,PARENT_ID,NAME,URL,SEQUENCE,ICON,TARGET) 
+VALUES ('935acd7355634b278549b0ebbba01876','c617ec2d6eee475ea05fbe779ab3b7c8','角色管理','/sysRole/showPageList.do',5,'/',null);
+
+INSERT INTO SYS_MENU (ID,PARENT_ID,NAME,URL,SEQUENCE,ICON,TARGET) 
+VALUES ('c617ec2d6eee475ea05fbe779ab3b7c8','00000000000000000000000000000000','系统管理','/',99,'/portal/img/menu/icon_08.png','_blank');
+
+INSERT INTO SYS_MENU (ID,PARENT_ID,NAME,URL,SEQUENCE,ICON,TARGET) 
+VALUES ('d63fb68c3af44a5a9bc93afc3edba378','00000000000000000000000000000000','内容发布','/',66,'/portal/img/menu/icon_01.png','_blank');
+
+INSERT INTO SYS_MENU (ID,PARENT_ID,NAME,URL,SEQUENCE,ICON,TARGET) 
+VALUES ('863a29b9f37c45579f1666254d1b557c','b48d762c01c54dce95c31fb42204d126','流程建模','/',88,'/portal/img/menu/icon_06.png','_blank');
+
+INSERT INTO SYS_MENU (ID,PARENT_ID,NAME,URL,SEQUENCE,ICON,TARGET) 
+VALUES ('61102bf49a004196ba0fb418ed1929e3','00000000000000000000000000000000','OA办公','/',77,'/portal/img/menu/icon_03.png','_blank');
+
+INSERT INTO SYS_MENU (ID,PARENT_ID,NAME,URL,SEQUENCE,ICON,TARGET) 
+VALUES ('5d2d5ddfd20f4783938fe636eedb5b37','61102bf49a004196ba0fb418ed1929e3','请假流程历史','/oa/leave/list.do',0,'/','_blank');
+
+INSERT INTO SYS_MENU (ID,PARENT_ID,NAME,URL,SEQUENCE,ICON,TARGET) 
+VALUES ('035c58f70576403e9c31767469b15258','61102bf49a004196ba0fb418ed1929e3','请假待办流程','/oa/leave/list/task.do',5,'/','_blank');
+
+INSERT INTO SYS_MENU (ID,PARENT_ID,NAME,URL,SEQUENCE,ICON,TARGET) 
+VALUES ('8916113ef8e847db9c975e8be3c5f83c','d63fb68c3af44a5a9bc93afc3edba378','站点管理','/cms/site/showPageList.do',10,'/portal/img/menu/icon_00.png','_blank');
+
+INSERT INTO SYS_MENU (ID,PARENT_ID,NAME,URL,SEQUENCE,ICON,TARGET) 
+VALUES ('f1a961b4aa274f3b86208b988ac88492','62e818ed15e647bdad4bee8f199ba21f','业务表管理','/sys/table/showPageList.do',0,null,'_blank');
+
+INSERT INTO SYS_MENU (ID,PARENT_ID,NAME,URL,SEQUENCE,ICON,TARGET) 
+VALUES ('95fee483e011455a822f9a9e6a483fce','c617ec2d6eee475ea05fbe779ab3b7c8','系统字典','/sys/dict/list',99,'linecons-params','_blank');
+
+INSERT INTO SYS_MENU (ID,PARENT_ID,NAME,URL,SEQUENCE,ICON,TARGET) 
+VALUES ('f9253401654549a7ab86d53edf2c0d5b','c617ec2d6eee475ea05fbe779ab3b7c8','系统皮肤','/sys/skins/list',88,'linecons-t-shirt','_blank');
+
+INSERT INTO SYS_MENU (ID,PARENT_ID,NAME,URL,SEQUENCE,ICON,TARGET) 
+VALUES ('bf7b7fb56f574cda8355fe5aa6e7735c','c617ec2d6eee475ea05fbe779ab3b7c8','数据库字典','/sys/db/list',90,null,'_blank');
+
+INSERT INTO SYS_MENU (ID,PARENT_ID,NAME,URL,SEQUENCE,ICON,TARGET) 
+VALUES ('ff3871e4726c4396bd7a55510daca5c6','62e818ed15e647bdad4bee8f199ba21f','业务表字段管理','/sys/tableColumn/showPageList.do',10,null,'_blank');
+
+INSERT INTO SYS_MENU (ID,PARENT_ID,NAME,URL,SEQUENCE,ICON,TARGET) 
+VALUES ('62e818ed15e647bdad4bee8f199ba21f','b48d762c01c54dce95c31fb42204d126','业务表建模','/sys/mod/db/list',11,null,'_blank');
+
+INSERT INTO SYS_MENU (ID,PARENT_ID,NAME,URL,SEQUENCE,ICON,TARGET) 
+VALUES ('fdfbc2b37c78488ca063931068077fc0','d63fb68c3af44a5a9bc93afc3edba378','评价管理','/cms/comment/showPageList.do',80,null,'_blank');
+
+INSERT INTO SYS_MENU (ID,PARENT_ID,NAME,URL,SEQUENCE,ICON,TARGET) 
+VALUES ('53f6471f7d904cadb3ed5fdda4e9ff33','d63fb68c3af44a5a9bc93afc3edba378','留言管理','/cms/guestbook/showPageList.do',90,null,'_blank');
+
+INSERT INTO SYS_MENU (ID,PARENT_ID,NAME,URL,SEQUENCE,ICON,TARGET) 
+VALUES ('2db887eb47aa458d9d04d54489b0684f','c617ec2d6eee475ea05fbe779ab3b7c8','DruidMonitor','/druid/index.html',999,null,'_blank');
+
+INSERT INTO SYS_MENU (ID,PARENT_ID,NAME,URL,SEQUENCE,ICON,TARGET) 
+VALUES ('b48d762c01c54dce95c31fb42204d126','00000000000000000000000000000000','系统建模','/',88,'/portal/img/menu/icon_06.png','_blank');
+
+INSERT INTO SYS_MENU (ID,PARENT_ID,NAME,URL,SEQUENCE,ICON,TARGET) 
+VALUES ('7978e1b6d95044e1a4ba5840c0d8a004','b48d762c01c54dce95c31fb42204d126','WEB门户建模','/',22,null,'_blank');
+
+INSERT INTO SYS_MODULE (ID,NAME,SHIRO) 
+VALUES ('d94881a8dc854298bfac029147b38e26','系统皮肤','skins');
+
+INSERT INTO SYS_MODULE (ID,NAME,SHIRO) 
+VALUES ('7466722e008349cfb7ed1d034b856bad','系统角色菜单','sysRoleMenu');
+
+INSERT INTO SYS_MODULE (ID,NAME,SHIRO) 
+VALUES ('0cc19fd4409a4d8b832a02584b15e45f','系统角色模块','sysRoleModule');
+
+INSERT INTO SYS_MODULE (ID,NAME,SHIRO) 
+VALUES ('3570d90302404b769704bd810ea3696a','系统用户角色','sysUserRole');
+
+INSERT INTO SYS_MODULE (ID,NAME,SHIRO) 
+VALUES ('ddc3b32e4fae473e82a69a28c41a6b48','系统模块权限','sysModulePermission');
+
+INSERT INTO SYS_MODULE (ID,NAME,SHIRO) 
+VALUES ('7d741c551b984b7bb776e742090d076f','系统角色','sysRole');
+
+INSERT INTO SYS_MODULE (ID,NAME,SHIRO) 
+VALUES ('2b5d24bdb8b6413e9a1b2fb2e12437a6','系统权限','sysPermission');
+
+INSERT INTO SYS_MODULE (ID,NAME,SHIRO) 
+VALUES ('8996fada7b6542779535357d7eee8197','系统用户','sysUser');
+
+INSERT INTO SYS_MODULE (ID,NAME,SHIRO) 
+VALUES ('bce58ffd35774b91a6ffc6c690d22d34','系统菜单','sysMenu');
+
+INSERT INTO SYS_MODULE (ID,NAME,SHIRO) 
+VALUES ('465292ff14d64226ada2b34cf4826a2e','ACT模型','actModel');
+
+INSERT INTO SYS_MODULE (ID,NAME,SHIRO) 
+VALUES ('8b92453ba86642478dca3aa7ee9106c2','系统部门','sysDepartment');
+
+INSERT INTO SYS_MODULE (ID,NAME,SHIRO) 
+VALUES ('6267cc893dcf47c2b41279e52bc5fa73','系统模块','sysModule');
+
+INSERT INTO SYS_MODULE (ID,NAME,SHIRO) 
+VALUES ('e0ca626efde34ad788365f020094e22d','ACT流程','actProcess');
+
+INSERT INTO SYS_MODULE (ID,NAME,SHIRO) 
+VALUES ('1eb16f4188dd451d9287116214bf215a','ACT任务','actTask');
+
+INSERT INTO SYS_MODULE (ID,NAME,SHIRO) 
+VALUES ('60663fd923564eb3b4c9b7e9a37aadf6','OA办公-请假流程','oa:leave');
+
+INSERT INTO SYS_MODULE (ID,NAME,SHIRO) 
+VALUES ('b788cdfa69674a51935b4039fcb654ab','内容发布-站点','cms:site');
+
+INSERT INTO SYS_MODULE (ID,NAME,SHIRO) 
+VALUES ('a59afc9f487f4a6fa5dcae9e195bf499','系统字典','dict');
+
+INSERT INTO SYS_MODULE (ID,NAME,SHIRO) 
+VALUES ('96d679fb9d754bb5acbd1286a1b2968c','内容发布-评论','cms:comment');
+
+INSERT INTO SYS_MODULE (ID,NAME,SHIRO) 
+VALUES ('95bab193057a4823be5cff384eb489f9','内容发布-留言','cms:guestbook');
+
+INSERT INTO SYS_MODULE (ID,NAME,SHIRO) 
+VALUES ('80f11f6553a74d34bb750255ba3308e7','业务表字段建模','sys:tableColumn');
+
+INSERT INTO SYS_MODULE (ID,NAME,SHIRO) 
+VALUES ('6d82509cc687416f8c1ad01f49efb54b','业务表建模','sys:table');
+
+INSERT INTO SYS_MODULE (ID,NAME,SHIRO) 
+VALUES ('7fe102f7b2424128bd7828d9e1d2d790','数据字典-表','sys:userTables');
+
+INSERT INTO SYS_MODULE (ID,NAME,SHIRO) 
+VALUES ('349ed3e79dbe406b9034ef73bb8056d3','数据字典-列','sys:userTabColumns');
+
+INSERT INTO SYS_MODULE (ID,NAME,SHIRO) 
+VALUES ('df79cb9026824eff8f5f2eb367b45ed1','DEMO','demo:testW');
+
+INSERT INTO SYS_MODULE (ID,NAME,SHIRO) 
+VALUES ('3019e17df75c4ec28ac613472fb6b79f','系统数据库建模','sys:db');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('0cc19fd4409a4d8b832a02584b15e45f','build');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('0cc19fd4409a4d8b832a02584b15e45f','create');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('0cc19fd4409a4d8b832a02584b15e45f','delete');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('0cc19fd4409a4d8b832a02584b15e45f','deploy');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('0cc19fd4409a4d8b832a02584b15e45f','download');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('0cc19fd4409a4d8b832a02584b15e45f','drop');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('0cc19fd4409a4d8b832a02584b15e45f','export');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('0cc19fd4409a4d8b832a02584b15e45f','import');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('0cc19fd4409a4d8b832a02584b15e45f','insert');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('0cc19fd4409a4d8b832a02584b15e45f','print');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('0cc19fd4409a4d8b832a02584b15e45f','select');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('0cc19fd4409a4d8b832a02584b15e45f','update');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('0cc19fd4409a4d8b832a02584b15e45f','upload');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('0cc19fd4409a4d8b832a02584b15e45f','view');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('1eb16f4188dd451d9287116214bf215a','build');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('1eb16f4188dd451d9287116214bf215a','create');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('1eb16f4188dd451d9287116214bf215a','delete');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('1eb16f4188dd451d9287116214bf215a','deploy');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('1eb16f4188dd451d9287116214bf215a','download');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('1eb16f4188dd451d9287116214bf215a','drop');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('1eb16f4188dd451d9287116214bf215a','export');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('1eb16f4188dd451d9287116214bf215a','import');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('1eb16f4188dd451d9287116214bf215a','insert');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('1eb16f4188dd451d9287116214bf215a','print');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('1eb16f4188dd451d9287116214bf215a','select');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('1eb16f4188dd451d9287116214bf215a','update');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('1eb16f4188dd451d9287116214bf215a','upload');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('1eb16f4188dd451d9287116214bf215a','view');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('2b5d24bdb8b6413e9a1b2fb2e12437a6','build');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('2b5d24bdb8b6413e9a1b2fb2e12437a6','create');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('2b5d24bdb8b6413e9a1b2fb2e12437a6','delete');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('2b5d24bdb8b6413e9a1b2fb2e12437a6','deploy');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('2b5d24bdb8b6413e9a1b2fb2e12437a6','download');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('2b5d24bdb8b6413e9a1b2fb2e12437a6','drop');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('2b5d24bdb8b6413e9a1b2fb2e12437a6','export');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('2b5d24bdb8b6413e9a1b2fb2e12437a6','import');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('2b5d24bdb8b6413e9a1b2fb2e12437a6','insert');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('2b5d24bdb8b6413e9a1b2fb2e12437a6','print');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('2b5d24bdb8b6413e9a1b2fb2e12437a6','select');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('2b5d24bdb8b6413e9a1b2fb2e12437a6','update');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('2b5d24bdb8b6413e9a1b2fb2e12437a6','upload');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('2b5d24bdb8b6413e9a1b2fb2e12437a6','view');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('3019e17df75c4ec28ac613472fb6b79f','view');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('349ed3e79dbe406b9034ef73bb8056d3','export');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('349ed3e79dbe406b9034ef73bb8056d3','select');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('349ed3e79dbe406b9034ef73bb8056d3','view');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('3570d90302404b769704bd810ea3696a','build');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('3570d90302404b769704bd810ea3696a','create');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('3570d90302404b769704bd810ea3696a','delete');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('3570d90302404b769704bd810ea3696a','deploy');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('3570d90302404b769704bd810ea3696a','download');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('3570d90302404b769704bd810ea3696a','drop');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('3570d90302404b769704bd810ea3696a','export');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('3570d90302404b769704bd810ea3696a','import');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('3570d90302404b769704bd810ea3696a','insert');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('3570d90302404b769704bd810ea3696a','print');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('3570d90302404b769704bd810ea3696a','select');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('3570d90302404b769704bd810ea3696a','update');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('3570d90302404b769704bd810ea3696a','upload');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('3570d90302404b769704bd810ea3696a','view');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('465292ff14d64226ada2b34cf4826a2e','build');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('465292ff14d64226ada2b34cf4826a2e','create');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('465292ff14d64226ada2b34cf4826a2e','delete');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('465292ff14d64226ada2b34cf4826a2e','deploy');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('465292ff14d64226ada2b34cf4826a2e','download');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('465292ff14d64226ada2b34cf4826a2e','drop');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('465292ff14d64226ada2b34cf4826a2e','export');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('465292ff14d64226ada2b34cf4826a2e','import');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('465292ff14d64226ada2b34cf4826a2e','insert');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('465292ff14d64226ada2b34cf4826a2e','print');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('465292ff14d64226ada2b34cf4826a2e','select');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('465292ff14d64226ada2b34cf4826a2e','update');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('465292ff14d64226ada2b34cf4826a2e','upload');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('465292ff14d64226ada2b34cf4826a2e','view');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('60663fd923564eb3b4c9b7e9a37aadf6','build');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('60663fd923564eb3b4c9b7e9a37aadf6','create');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('60663fd923564eb3b4c9b7e9a37aadf6','delete');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('60663fd923564eb3b4c9b7e9a37aadf6','deploy');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('60663fd923564eb3b4c9b7e9a37aadf6','download');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('60663fd923564eb3b4c9b7e9a37aadf6','drop');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('60663fd923564eb3b4c9b7e9a37aadf6','export');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('60663fd923564eb3b4c9b7e9a37aadf6','import');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('60663fd923564eb3b4c9b7e9a37aadf6','insert');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('60663fd923564eb3b4c9b7e9a37aadf6','print');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('60663fd923564eb3b4c9b7e9a37aadf6','select');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('8b92453ba86642478dca3aa7ee9106c2','download');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('8b92453ba86642478dca3aa7ee9106c2','drop');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('8b92453ba86642478dca3aa7ee9106c2','export');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('8b92453ba86642478dca3aa7ee9106c2','import');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('8b92453ba86642478dca3aa7ee9106c2','insert');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('8b92453ba86642478dca3aa7ee9106c2','print');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('8b92453ba86642478dca3aa7ee9106c2','select');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('8b92453ba86642478dca3aa7ee9106c2','update');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('8b92453ba86642478dca3aa7ee9106c2','upload');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('8b92453ba86642478dca3aa7ee9106c2','view');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('95bab193057a4823be5cff384eb489f9','delete');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('95bab193057a4823be5cff384eb489f9','insert');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('95bab193057a4823be5cff384eb489f9','select');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('95bab193057a4823be5cff384eb489f9','update');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('95bab193057a4823be5cff384eb489f9','view');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('96d679fb9d754bb5acbd1286a1b2968c','delete');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('96d679fb9d754bb5acbd1286a1b2968c','insert');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('96d679fb9d754bb5acbd1286a1b2968c','select');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('96d679fb9d754bb5acbd1286a1b2968c','update');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('96d679fb9d754bb5acbd1286a1b2968c','view');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('a59afc9f487f4a6fa5dcae9e195bf499','delete');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('a59afc9f487f4a6fa5dcae9e195bf499','export');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('a59afc9f487f4a6fa5dcae9e195bf499','import');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('a59afc9f487f4a6fa5dcae9e195bf499','insert');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('a59afc9f487f4a6fa5dcae9e195bf499','select');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('a59afc9f487f4a6fa5dcae9e195bf499','update');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('a59afc9f487f4a6fa5dcae9e195bf499','view');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('b788cdfa69674a51935b4039fcb654ab','build');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('b788cdfa69674a51935b4039fcb654ab','create');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('b788cdfa69674a51935b4039fcb654ab','delete');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('b788cdfa69674a51935b4039fcb654ab','deploy');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('b788cdfa69674a51935b4039fcb654ab','download');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('b788cdfa69674a51935b4039fcb654ab','drop');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('b788cdfa69674a51935b4039fcb654ab','export');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('b788cdfa69674a51935b4039fcb654ab','import');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('b788cdfa69674a51935b4039fcb654ab','insert');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('b788cdfa69674a51935b4039fcb654ab','print');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('b788cdfa69674a51935b4039fcb654ab','select');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('b788cdfa69674a51935b4039fcb654ab','update');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('b788cdfa69674a51935b4039fcb654ab','upload');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('b788cdfa69674a51935b4039fcb654ab','view');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('bce58ffd35774b91a6ffc6c690d22d34','build');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('bce58ffd35774b91a6ffc6c690d22d34','create');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('bce58ffd35774b91a6ffc6c690d22d34','delete');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('bce58ffd35774b91a6ffc6c690d22d34','deploy');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('bce58ffd35774b91a6ffc6c690d22d34','download');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('bce58ffd35774b91a6ffc6c690d22d34','drop');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('bce58ffd35774b91a6ffc6c690d22d34','export');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('bce58ffd35774b91a6ffc6c690d22d34','import');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('bce58ffd35774b91a6ffc6c690d22d34','insert');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('bce58ffd35774b91a6ffc6c690d22d34','print');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('bce58ffd35774b91a6ffc6c690d22d34','select');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('bce58ffd35774b91a6ffc6c690d22d34','update');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('bce58ffd35774b91a6ffc6c690d22d34','upload');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('bce58ffd35774b91a6ffc6c690d22d34','view');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('d94881a8dc854298bfac029147b38e26','delete');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('d94881a8dc854298bfac029147b38e26','export');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('d94881a8dc854298bfac029147b38e26','import');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('d94881a8dc854298bfac029147b38e26','insert');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('d94881a8dc854298bfac029147b38e26','select');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('d94881a8dc854298bfac029147b38e26','update');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('d94881a8dc854298bfac029147b38e26','view');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('ddc3b32e4fae473e82a69a28c41a6b48','build');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('ddc3b32e4fae473e82a69a28c41a6b48','create');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('ddc3b32e4fae473e82a69a28c41a6b48','delete');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('ddc3b32e4fae473e82a69a28c41a6b48','deploy');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('ddc3b32e4fae473e82a69a28c41a6b48','download');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('ddc3b32e4fae473e82a69a28c41a6b48','drop');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('ddc3b32e4fae473e82a69a28c41a6b48','export');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('ddc3b32e4fae473e82a69a28c41a6b48','import');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('ddc3b32e4fae473e82a69a28c41a6b48','insert');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('ddc3b32e4fae473e82a69a28c41a6b48','print');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('ddc3b32e4fae473e82a69a28c41a6b48','select');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('ddc3b32e4fae473e82a69a28c41a6b48','update');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('ddc3b32e4fae473e82a69a28c41a6b48','upload');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('ddc3b32e4fae473e82a69a28c41a6b48','view');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('df79cb9026824eff8f5f2eb367b45ed1','delete');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('df79cb9026824eff8f5f2eb367b45ed1','export');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('df79cb9026824eff8f5f2eb367b45ed1','insert');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('df79cb9026824eff8f5f2eb367b45ed1','select');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('df79cb9026824eff8f5f2eb367b45ed1','update');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('df79cb9026824eff8f5f2eb367b45ed1','view');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('e0ca626efde34ad788365f020094e22d','build');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('e0ca626efde34ad788365f020094e22d','create');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('e0ca626efde34ad788365f020094e22d','delete');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('e0ca626efde34ad788365f020094e22d','deploy');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('e0ca626efde34ad788365f020094e22d','download');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('e0ca626efde34ad788365f020094e22d','drop');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('e0ca626efde34ad788365f020094e22d','export');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('e0ca626efde34ad788365f020094e22d','import');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('e0ca626efde34ad788365f020094e22d','insert');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('e0ca626efde34ad788365f020094e22d','print');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('e0ca626efde34ad788365f020094e22d','select');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('e0ca626efde34ad788365f020094e22d','send');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('e0ca626efde34ad788365f020094e22d','update');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('e0ca626efde34ad788365f020094e22d','upload');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('e0ca626efde34ad788365f020094e22d','view');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('60663fd923564eb3b4c9b7e9a37aadf6','update');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('60663fd923564eb3b4c9b7e9a37aadf6','upload');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('60663fd923564eb3b4c9b7e9a37aadf6','view');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('6267cc893dcf47c2b41279e52bc5fa73','build');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('6267cc893dcf47c2b41279e52bc5fa73','create');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('6267cc893dcf47c2b41279e52bc5fa73','delete');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('6267cc893dcf47c2b41279e52bc5fa73','deploy');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('6267cc893dcf47c2b41279e52bc5fa73','download');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('6267cc893dcf47c2b41279e52bc5fa73','drop');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('6267cc893dcf47c2b41279e52bc5fa73','export');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('6267cc893dcf47c2b41279e52bc5fa73','import');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('6267cc893dcf47c2b41279e52bc5fa73','insert');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('6267cc893dcf47c2b41279e52bc5fa73','print');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('6267cc893dcf47c2b41279e52bc5fa73','select');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('6267cc893dcf47c2b41279e52bc5fa73','update');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('6267cc893dcf47c2b41279e52bc5fa73','upload');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('6267cc893dcf47c2b41279e52bc5fa73','view');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('6d82509cc687416f8c1ad01f49efb54b','delete');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('6d82509cc687416f8c1ad01f49efb54b','insert');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('6d82509cc687416f8c1ad01f49efb54b','select');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('6d82509cc687416f8c1ad01f49efb54b','update');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('6d82509cc687416f8c1ad01f49efb54b','view');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('7466722e008349cfb7ed1d034b856bad','build');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('7466722e008349cfb7ed1d034b856bad','create');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('7466722e008349cfb7ed1d034b856bad','delete');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('7466722e008349cfb7ed1d034b856bad','deploy');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('7466722e008349cfb7ed1d034b856bad','download');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('7466722e008349cfb7ed1d034b856bad','drop');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('7466722e008349cfb7ed1d034b856bad','export');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('7466722e008349cfb7ed1d034b856bad','import');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('7466722e008349cfb7ed1d034b856bad','insert');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('7466722e008349cfb7ed1d034b856bad','print');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('7466722e008349cfb7ed1d034b856bad','select');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('7466722e008349cfb7ed1d034b856bad','update');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('7466722e008349cfb7ed1d034b856bad','upload');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('7466722e008349cfb7ed1d034b856bad','view');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('7d741c551b984b7bb776e742090d076f','build');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('7d741c551b984b7bb776e742090d076f','create');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('7d741c551b984b7bb776e742090d076f','delete');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('7d741c551b984b7bb776e742090d076f','deploy');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('7d741c551b984b7bb776e742090d076f','download');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('7d741c551b984b7bb776e742090d076f','drop');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('7d741c551b984b7bb776e742090d076f','export');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('7d741c551b984b7bb776e742090d076f','import');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('7d741c551b984b7bb776e742090d076f','insert');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('7d741c551b984b7bb776e742090d076f','print');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('7d741c551b984b7bb776e742090d076f','select');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('7d741c551b984b7bb776e742090d076f','update');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('7d741c551b984b7bb776e742090d076f','upload');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('7d741c551b984b7bb776e742090d076f','view');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('7fe102f7b2424128bd7828d9e1d2d790','export');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('7fe102f7b2424128bd7828d9e1d2d790','select');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('7fe102f7b2424128bd7828d9e1d2d790','view');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('80f11f6553a74d34bb750255ba3308e7','delete');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('80f11f6553a74d34bb750255ba3308e7','export');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('80f11f6553a74d34bb750255ba3308e7','insert');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('80f11f6553a74d34bb750255ba3308e7','select');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('80f11f6553a74d34bb750255ba3308e7','update');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('80f11f6553a74d34bb750255ba3308e7','view');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('8996fada7b6542779535357d7eee8197','build');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('8996fada7b6542779535357d7eee8197','create');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('8996fada7b6542779535357d7eee8197','delete');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('8996fada7b6542779535357d7eee8197','deploy');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('8996fada7b6542779535357d7eee8197','download');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('8996fada7b6542779535357d7eee8197','drop');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('8996fada7b6542779535357d7eee8197','export');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('8996fada7b6542779535357d7eee8197','import');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('8996fada7b6542779535357d7eee8197','insert');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('8996fada7b6542779535357d7eee8197','print');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('8996fada7b6542779535357d7eee8197','select');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('8996fada7b6542779535357d7eee8197','update');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('8996fada7b6542779535357d7eee8197','upload');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('8996fada7b6542779535357d7eee8197','view');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('8b92453ba86642478dca3aa7ee9106c2','build');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('8b92453ba86642478dca3aa7ee9106c2','create');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('8b92453ba86642478dca3aa7ee9106c2','delete');
+
+INSERT INTO SYS_MODULE_PERMISSION (MODULE_ID,PERMISSION_ID) 
+VALUES ('8b92453ba86642478dca3aa7ee9106c2','deploy');
+
+INSERT INTO SYS_PERMISSION (ID,SEQUENCE,NAME) 
+VALUES ('send',15,'发送');
+
+INSERT INTO SYS_PERMISSION (ID,SEQUENCE,NAME) 
+VALUES ('view',1,'展示');
+
+INSERT INTO SYS_PERMISSION (ID,SEQUENCE,NAME) 
+VALUES ('select',2,'查询');
+
+INSERT INTO SYS_PERMISSION (ID,SEQUENCE,NAME) 
+VALUES ('insert',3,'插入');
+
+INSERT INTO SYS_PERMISSION (ID,SEQUENCE,NAME) 
+VALUES ('update',4,'修改');
+
+INSERT INTO SYS_PERMISSION (ID,SEQUENCE,NAME) 
+VALUES ('delete',5,'删除');
+
+INSERT INTO SYS_PERMISSION (ID,SEQUENCE,NAME) 
+VALUES ('import',6,'导入');
+
+INSERT INTO SYS_PERMISSION (ID,SEQUENCE,NAME) 
+VALUES ('export',7,'导出');
+
+INSERT INTO SYS_PERMISSION (ID,SEQUENCE,NAME) 
+VALUES ('print',10,'打印');
+
+INSERT INTO SYS_PERMISSION (ID,SEQUENCE,NAME) 
+VALUES ('create',11,'创建');
+
+INSERT INTO SYS_PERMISSION (ID,SEQUENCE,NAME) 
+VALUES ('drop',12,'销毁');
+
+INSERT INTO SYS_PERMISSION (ID,SEQUENCE,NAME) 
+VALUES ('build',13,'同步');
+
+INSERT INTO SYS_PERMISSION (ID,SEQUENCE,NAME) 
+VALUES ('download',9,'下载');
+
+INSERT INTO SYS_PERMISSION (ID,SEQUENCE,NAME) 
+VALUES ('upload',8,'上传');
+
+INSERT INTO SYS_PERMISSION (ID,SEQUENCE,NAME) 
+VALUES ('deploy',14,'部署');
+
+INSERT INTO SYS_ROLE (ID,NAME,SHIRO) 
+VALUES ('233e1814d0484ae6ad600a84ae8b2a1b','员工','employee');
+
+INSERT INTO SYS_ROLE (ID,NAME,SHIRO) 
+VALUES ('d3f34652eb03447b9cc8bb7375df675d','系统管理员','sys');
+
+INSERT INTO SYS_ROLE (ID,NAME,SHIRO) 
+VALUES ('e015765dbaf1429fa34bbff7eb4e9b79','经理','deptmanager');
+
+INSERT INTO SYS_ROLE (ID,NAME,SHIRO) 
+VALUES ('4bb7b95168a04cb6885d31dc583cde40','人事','hrmanager');
+
+INSERT INTO SYS_ROLE_MENU (ROLE_ID,MENU_ID) 
+VALUES ('233e1814d0484ae6ad600a84ae8b2a1b','035c58f70576403e9c31767469b15258');
+
+INSERT INTO SYS_ROLE_MENU (ROLE_ID,MENU_ID) 
+VALUES ('233e1814d0484ae6ad600a84ae8b2a1b','5d2d5ddfd20f4783938fe636eedb5b37');
+
+INSERT INTO SYS_ROLE_MENU (ROLE_ID,MENU_ID) 
+VALUES ('233e1814d0484ae6ad600a84ae8b2a1b','61102bf49a004196ba0fb418ed1929e3');
+
+INSERT INTO SYS_ROLE_MENU (ROLE_ID,MENU_ID) 
+VALUES ('233e1814d0484ae6ad600a84ae8b2a1b','8916113ef8e847db9c975e8be3c5f83c');
+
+INSERT INTO SYS_ROLE_MENU (ROLE_ID,MENU_ID) 
+VALUES ('233e1814d0484ae6ad600a84ae8b2a1b','d63fb68c3af44a5a9bc93afc3edba378');
+
+INSERT INTO SYS_ROLE_MENU (ROLE_ID,MENU_ID) 
+VALUES ('4bb7b95168a04cb6885d31dc583cde40','035c58f70576403e9c31767469b15258');
+
+INSERT INTO SYS_ROLE_MENU (ROLE_ID,MENU_ID) 
+VALUES ('4bb7b95168a04cb6885d31dc583cde40','5d2d5ddfd20f4783938fe636eedb5b37');
+
+INSERT INTO SYS_ROLE_MENU (ROLE_ID,MENU_ID) 
+VALUES ('4bb7b95168a04cb6885d31dc583cde40','61102bf49a004196ba0fb418ed1929e3');
+
+INSERT INTO SYS_ROLE_MENU (ROLE_ID,MENU_ID) 
+VALUES ('d3f34652eb03447b9cc8bb7375df675d','035c58f70576403e9c31767469b15258');
+
+INSERT INTO SYS_ROLE_MENU (ROLE_ID,MENU_ID) 
+VALUES ('d3f34652eb03447b9cc8bb7375df675d','08e27f9288d04c7a8839dc65f6cbd1fa');
+
+INSERT INTO SYS_ROLE_MENU (ROLE_ID,MENU_ID) 
+VALUES ('d3f34652eb03447b9cc8bb7375df675d','0a0bf010a2e54ee5a82d0d2fe3708d2f');
+
+INSERT INTO SYS_ROLE_MENU (ROLE_ID,MENU_ID) 
+VALUES ('d3f34652eb03447b9cc8bb7375df675d','18e69a5a441a4f8da3d0e4e13f01de9b');
+
+INSERT INTO SYS_ROLE_MENU (ROLE_ID,MENU_ID) 
+VALUES ('d3f34652eb03447b9cc8bb7375df675d','2db887eb47aa458d9d04d54489b0684f');
+
+INSERT INTO SYS_ROLE_MENU (ROLE_ID,MENU_ID) 
+VALUES ('d3f34652eb03447b9cc8bb7375df675d','53f6471f7d904cadb3ed5fdda4e9ff33');
+
+INSERT INTO SYS_ROLE_MENU (ROLE_ID,MENU_ID) 
+VALUES ('d3f34652eb03447b9cc8bb7375df675d','5d2d5ddfd20f4783938fe636eedb5b37');
+
+INSERT INTO SYS_ROLE_MENU (ROLE_ID,MENU_ID) 
+VALUES ('d3f34652eb03447b9cc8bb7375df675d','61102bf49a004196ba0fb418ed1929e3');
+
+INSERT INTO SYS_ROLE_MENU (ROLE_ID,MENU_ID) 
+VALUES ('d3f34652eb03447b9cc8bb7375df675d','62e818ed15e647bdad4bee8f199ba21f');
+
+INSERT INTO SYS_ROLE_MENU (ROLE_ID,MENU_ID) 
+VALUES ('d3f34652eb03447b9cc8bb7375df675d','7978e1b6d95044e1a4ba5840c0d8a004');
+
+INSERT INTO SYS_ROLE_MENU (ROLE_ID,MENU_ID) 
+VALUES ('d3f34652eb03447b9cc8bb7375df675d','863a29b9f37c45579f1666254d1b557c');
+
+INSERT INTO SYS_ROLE_MENU (ROLE_ID,MENU_ID) 
+VALUES ('d3f34652eb03447b9cc8bb7375df675d','8916113ef8e847db9c975e8be3c5f83c');
+
+INSERT INTO SYS_ROLE_MENU (ROLE_ID,MENU_ID) 
+VALUES ('d3f34652eb03447b9cc8bb7375df675d','8bf056fec564462e9f6dd02d89630b9d');
+
+INSERT INTO SYS_ROLE_MENU (ROLE_ID,MENU_ID) 
+VALUES ('d3f34652eb03447b9cc8bb7375df675d','935acd7355634b278549b0ebbba01876');
+
+INSERT INTO SYS_ROLE_MENU (ROLE_ID,MENU_ID) 
+VALUES ('d3f34652eb03447b9cc8bb7375df675d','95fee483e011455a822f9a9e6a483fce');
+
+INSERT INTO SYS_ROLE_MENU (ROLE_ID,MENU_ID) 
+VALUES ('d3f34652eb03447b9cc8bb7375df675d','9e189622e7944d899cbbbf6677892e9e');
+
+INSERT INTO SYS_ROLE_MENU (ROLE_ID,MENU_ID) 
+VALUES ('d3f34652eb03447b9cc8bb7375df675d','b3d67c1d94d7408f878d9c0726d9f09c');
+
+INSERT INTO SYS_ROLE_MENU (ROLE_ID,MENU_ID) 
+VALUES ('d3f34652eb03447b9cc8bb7375df675d','b48d762c01c54dce95c31fb42204d126');
+
+INSERT INTO SYS_ROLE_MENU (ROLE_ID,MENU_ID) 
+VALUES ('d3f34652eb03447b9cc8bb7375df675d','bf7b7fb56f574cda8355fe5aa6e7735c');
+
+INSERT INTO SYS_ROLE_MENU (ROLE_ID,MENU_ID) 
+VALUES ('d3f34652eb03447b9cc8bb7375df675d','c617ec2d6eee475ea05fbe779ab3b7c8');
+
+INSERT INTO SYS_ROLE_MENU (ROLE_ID,MENU_ID) 
+VALUES ('d3f34652eb03447b9cc8bb7375df675d','d63fb68c3af44a5a9bc93afc3edba378');
+
+INSERT INTO SYS_ROLE_MENU (ROLE_ID,MENU_ID) 
+VALUES ('d3f34652eb03447b9cc8bb7375df675d','dba5fbee0097464f92e3abac9d0372c1');
+
+INSERT INTO SYS_ROLE_MENU (ROLE_ID,MENU_ID) 
+VALUES ('d3f34652eb03447b9cc8bb7375df675d','e0f3aac77b984733bcf0d8d35363bfa1');
+
+INSERT INTO SYS_ROLE_MENU (ROLE_ID,MENU_ID) 
+VALUES ('d3f34652eb03447b9cc8bb7375df675d','e293c0ce48354d1896934700e1f0282c');
+
+INSERT INTO SYS_ROLE_MENU (ROLE_ID,MENU_ID) 
+VALUES ('d3f34652eb03447b9cc8bb7375df675d','f9253401654549a7ab86d53edf2c0d5b');
+
+INSERT INTO SYS_ROLE_MENU (ROLE_ID,MENU_ID) 
+VALUES ('d3f34652eb03447b9cc8bb7375df675d','fdfbc2b37c78488ca063931068077fc0');
+
+INSERT INTO SYS_ROLE_MENU (ROLE_ID,MENU_ID) 
+VALUES ('e015765dbaf1429fa34bbff7eb4e9b79','035c58f70576403e9c31767469b15258');
+
+INSERT INTO SYS_ROLE_MENU (ROLE_ID,MENU_ID) 
+VALUES ('e015765dbaf1429fa34bbff7eb4e9b79','5d2d5ddfd20f4783938fe636eedb5b37');
+
+INSERT INTO SYS_ROLE_MENU (ROLE_ID,MENU_ID) 
+VALUES ('e015765dbaf1429fa34bbff7eb4e9b79','61102bf49a004196ba0fb418ed1929e3');
+
+INSERT INTO SYS_ROLE_MODULE (ROLE_ID,MODULE_ID) 
+VALUES ('233e1814d0484ae6ad600a84ae8b2a1b','0cc19fd4409a4d8b832a02584b15e45f');
+
+INSERT INTO SYS_ROLE_MODULE (ROLE_ID,MODULE_ID) 
+VALUES ('233e1814d0484ae6ad600a84ae8b2a1b','1eb16f4188dd451d9287116214bf215a');
+
+INSERT INTO SYS_ROLE_MODULE (ROLE_ID,MODULE_ID) 
+VALUES ('233e1814d0484ae6ad600a84ae8b2a1b','2b5d24bdb8b6413e9a1b2fb2e12437a6');
+
+INSERT INTO SYS_ROLE_MODULE (ROLE_ID,MODULE_ID) 
+VALUES ('233e1814d0484ae6ad600a84ae8b2a1b','3570d90302404b769704bd810ea3696a');
+
+INSERT INTO SYS_ROLE_MODULE (ROLE_ID,MODULE_ID) 
+VALUES ('233e1814d0484ae6ad600a84ae8b2a1b','465292ff14d64226ada2b34cf4826a2e');
+
+INSERT INTO SYS_ROLE_MODULE (ROLE_ID,MODULE_ID) 
+VALUES ('233e1814d0484ae6ad600a84ae8b2a1b','60663fd923564eb3b4c9b7e9a37aadf6');
+
+INSERT INTO SYS_ROLE_MODULE (ROLE_ID,MODULE_ID) 
+VALUES ('4bb7b95168a04cb6885d31dc583cde40','60663fd923564eb3b4c9b7e9a37aadf6');
+
+INSERT INTO SYS_ROLE_MODULE (ROLE_ID,MODULE_ID) 
+VALUES ('d3f34652eb03447b9cc8bb7375df675d','0cc19fd4409a4d8b832a02584b15e45f');
+
+INSERT INTO SYS_ROLE_MODULE (ROLE_ID,MODULE_ID) 
+VALUES ('d3f34652eb03447b9cc8bb7375df675d','1eb16f4188dd451d9287116214bf215a');
+
+INSERT INTO SYS_ROLE_MODULE (ROLE_ID,MODULE_ID) 
+VALUES ('d3f34652eb03447b9cc8bb7375df675d','2b5d24bdb8b6413e9a1b2fb2e12437a6');
+
+INSERT INTO SYS_ROLE_MODULE (ROLE_ID,MODULE_ID) 
+VALUES ('d3f34652eb03447b9cc8bb7375df675d','349ed3e79dbe406b9034ef73bb8056d3');
+
+INSERT INTO SYS_ROLE_MODULE (ROLE_ID,MODULE_ID) 
+VALUES ('d3f34652eb03447b9cc8bb7375df675d','3570d90302404b769704bd810ea3696a');
+
+INSERT INTO SYS_ROLE_MODULE (ROLE_ID,MODULE_ID) 
+VALUES ('d3f34652eb03447b9cc8bb7375df675d','465292ff14d64226ada2b34cf4826a2e');
+
+INSERT INTO SYS_ROLE_MODULE (ROLE_ID,MODULE_ID) 
+VALUES ('d3f34652eb03447b9cc8bb7375df675d','60663fd923564eb3b4c9b7e9a37aadf6');
+
+INSERT INTO SYS_ROLE_MODULE (ROLE_ID,MODULE_ID) 
+VALUES ('d3f34652eb03447b9cc8bb7375df675d','6267cc893dcf47c2b41279e52bc5fa73');
+
+INSERT INTO SYS_ROLE_MODULE (ROLE_ID,MODULE_ID) 
+VALUES ('d3f34652eb03447b9cc8bb7375df675d','6d82509cc687416f8c1ad01f49efb54b');
+
+INSERT INTO SYS_ROLE_MODULE (ROLE_ID,MODULE_ID) 
+VALUES ('d3f34652eb03447b9cc8bb7375df675d','7466722e008349cfb7ed1d034b856bad');
+
+INSERT INTO SYS_ROLE_MODULE (ROLE_ID,MODULE_ID) 
+VALUES ('d3f34652eb03447b9cc8bb7375df675d','7d741c551b984b7bb776e742090d076f');
+
+INSERT INTO SYS_ROLE_MODULE (ROLE_ID,MODULE_ID) 
+VALUES ('d3f34652eb03447b9cc8bb7375df675d','7fe102f7b2424128bd7828d9e1d2d790');
+
+INSERT INTO SYS_ROLE_MODULE (ROLE_ID,MODULE_ID) 
+VALUES ('d3f34652eb03447b9cc8bb7375df675d','80f11f6553a74d34bb750255ba3308e7');
+
+INSERT INTO SYS_ROLE_MODULE (ROLE_ID,MODULE_ID) 
+VALUES ('d3f34652eb03447b9cc8bb7375df675d','8996fada7b6542779535357d7eee8197');
+
+INSERT INTO SYS_ROLE_MODULE (ROLE_ID,MODULE_ID) 
+VALUES ('d3f34652eb03447b9cc8bb7375df675d','8b92453ba86642478dca3aa7ee9106c2');
+
+INSERT INTO SYS_ROLE_MODULE (ROLE_ID,MODULE_ID) 
+VALUES ('d3f34652eb03447b9cc8bb7375df675d','95bab193057a4823be5cff384eb489f9');
+
+INSERT INTO SYS_ROLE_MODULE (ROLE_ID,MODULE_ID) 
+VALUES ('d3f34652eb03447b9cc8bb7375df675d','96d679fb9d754bb5acbd1286a1b2968c');
+
+INSERT INTO SYS_ROLE_MODULE (ROLE_ID,MODULE_ID) 
+VALUES ('d3f34652eb03447b9cc8bb7375df675d','a59afc9f487f4a6fa5dcae9e195bf499');
+
+INSERT INTO SYS_ROLE_MODULE (ROLE_ID,MODULE_ID) 
+VALUES ('d3f34652eb03447b9cc8bb7375df675d','b788cdfa69674a51935b4039fcb654ab');
+
+INSERT INTO SYS_ROLE_MODULE (ROLE_ID,MODULE_ID) 
+VALUES ('d3f34652eb03447b9cc8bb7375df675d','bce58ffd35774b91a6ffc6c690d22d34');
+
+INSERT INTO SYS_ROLE_MODULE (ROLE_ID,MODULE_ID) 
+VALUES ('d3f34652eb03447b9cc8bb7375df675d','d94881a8dc854298bfac029147b38e26');
+
+INSERT INTO SYS_ROLE_MODULE (ROLE_ID,MODULE_ID) 
+VALUES ('d3f34652eb03447b9cc8bb7375df675d','ddc3b32e4fae473e82a69a28c41a6b48');
+
+INSERT INTO SYS_ROLE_MODULE (ROLE_ID,MODULE_ID) 
+VALUES ('d3f34652eb03447b9cc8bb7375df675d','df79cb9026824eff8f5f2eb367b45ed1');
+
+INSERT INTO SYS_ROLE_MODULE (ROLE_ID,MODULE_ID) 
+VALUES ('d3f34652eb03447b9cc8bb7375df675d','e0ca626efde34ad788365f020094e22d');
+
+INSERT INTO SYS_ROLE_MODULE (ROLE_ID,MODULE_ID) 
+VALUES ('e015765dbaf1429fa34bbff7eb4e9b79','60663fd923564eb3b4c9b7e9a37aadf6');
+
+INSERT INTO SYS_SKINS (ID,NAME,URL,STATE,MAIN) 
+VALUES ('780e5d65c08e42da98f491e84fce8de0','蓝色主题','/portal','1','main');
+
+INSERT INTO SYS_SKINS (ID,NAME,URL,STATE,MAIN) 
+VALUES ('3df2a557ac47442889212395848b9213','EASYUI皮肤','/poor','0','main');
+
+INSERT INTO SYS_UPLOADFILE (ID,VIEWNAME,REALNAME,URL,REALURL,SUFFIX,FILESIZE,CREATEDATE) 
+VALUES ('062e05aeae8946e686694f506750ff54','6ee5247ad182424e85e438b927d26ecd.png','062e05aeae8946e686694f506750ff54.png','upload/image/','C:/Users/cuichen/git/kensite/src/main/webapp/upload/image/','.png','15109',to_timestamp('2015-10-13 11:50:04.0','yyyy-mm-dd hh24:mi:ss:ff')+0);
+
+INSERT INTO SYS_UPLOADFILE (ID,VIEWNAME,REALNAME,URL,REALURL,SUFFIX,FILESIZE,CREATEDATE) 
+VALUES ('4536276e0d02429ea91fdc2295e993e0','6ee5247ad182424e85e438b927d26ecd.png','4536276e0d02429ea91fdc2295e993e0.png','upload/image/','C:/Users/cuichen/git/kensite/src/main/webapp/upload/image/','.png','15109',to_timestamp('2015-10-13 11:51:08.0','yyyy-mm-dd hh24:mi:ss:ff')+0);
+
+INSERT INTO SYS_UPLOADFILE (ID,VIEWNAME,REALNAME,URL,REALURL,SUFFIX,FILESIZE,CREATEDATE) 
+VALUES ('89ea3b6bb9934a3bad7dd8d2c16fa70a','6ee5247ad182424e85e438b927d26ecd.png','89ea3b6bb9934a3bad7dd8d2c16fa70a.png','upload/image/','C:/Users/cuichen/git/kensite/src/main/webapp/upload/image/','.png','15109',to_timestamp('2015-10-13 11:45:50.0','yyyy-mm-dd hh24:mi:ss:ff')+0);
+
+INSERT INTO SYS_UPLOADFILE (ID,VIEWNAME,REALNAME,URL,REALURL,SUFFIX,FILESIZE,CREATEDATE) 
+VALUES ('f177a088942341b29e164397e69ab901','6ee5247ad182424e85e438b927d26ecd.png','f177a088942341b29e164397e69ab901.png','upload/image/','C:/Users/cuichen/git/kensite/src/main/webapp/upload/image/','.png','15109',to_timestamp('2015-10-13 11:55:52.0','yyyy-mm-dd hh24:mi:ss:ff')+0);
+
+INSERT INTO SYS_USER (ID,USER_NAME,PASSWORD,NAME,DEPARTMENT_ID,STATE,EMAIL,PHONE) 
+VALUES ('3a657ea8ddc745a698d51aeea2183f4d','system','c4ca86dead4518ac4fd6e30172db3d9e','管理员','dad8faf2f3eb4d279ef04decb91ca4c0','1',null,null);
+
+INSERT INTO SYS_USER (ID,USER_NAME,PASSWORD,NAME,DEPARTMENT_ID,STATE,EMAIL,PHONE) 
+VALUES ('1e995b4cf4c449afa6c31033b6786cef','dept','41dab460432fd36459e9dd9cf33bb81b','部门经理','e51ba1c688204117bd08b8ce2393e756','1',null,null);
+
+INSERT INTO SYS_USER (ID,USER_NAME,PASSWORD,NAME,DEPARTMENT_ID,STATE,EMAIL,PHONE) 
+VALUES ('355222f869db4f4fb8a22e6888aabe48','ken','6efce4fa00c7f982559d05b90207e8b9','肯','dad8faf2f3eb4d279ef04decb91ca4c0','1',null,null);
+
+INSERT INTO SYS_USER (ID,USER_NAME,PASSWORD,NAME,DEPARTMENT_ID,STATE,EMAIL,PHONE) 
+VALUES ('11522a6173804d5ea075ca052c76e20c','promise','367603a556093d611ec3789dd9144ee0','一诺','b41c66947b7f4577968d4249c3c52a85','1',null,null);
+
+INSERT INTO SYS_USER (ID,USER_NAME,PASSWORD,NAME,DEPARTMENT_ID,STATE,EMAIL,PHONE) 
+VALUES ('206d10a5596042d8be72069dc01f3326','employee','26acdbda33c45a2567f1d40aea9ee2c0','员工','e51ba1c688204117bd08b8ce2393e756','1',null,null);
+
+INSERT INTO SYS_USER_ROLE (USER_ID,ROLE_ID) 
+VALUES ('11522a6173804d5ea075ca052c76e20c','4bb7b95168a04cb6885d31dc583cde40');
+
+INSERT INTO SYS_USER_ROLE (USER_ID,ROLE_ID) 
+VALUES ('1e995b4cf4c449afa6c31033b6786cef','e015765dbaf1429fa34bbff7eb4e9b79');
+
+INSERT INTO SYS_USER_ROLE (USER_ID,ROLE_ID) 
+VALUES ('206d10a5596042d8be72069dc01f3326','233e1814d0484ae6ad600a84ae8b2a1b');
+
+INSERT INTO SYS_USER_ROLE (USER_ID,ROLE_ID) 
+VALUES ('355222f869db4f4fb8a22e6888aabe48','233e1814d0484ae6ad600a84ae8b2a1b');
+
+INSERT INTO SYS_USER_ROLE (USER_ID,ROLE_ID) 
+VALUES ('3a657ea8ddc745a698d51aeea2183f4d','d3f34652eb03447b9cc8bb7375df675d');
+
