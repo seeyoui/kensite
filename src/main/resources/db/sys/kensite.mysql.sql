@@ -330,46 +330,46 @@ ROLE_ID CHAR(32) not null  COMMENT '角色主键'
 ALTER TABLE SYS_USER_ROLE ADD CONSTRAINT SYS_USER_ROLE_ID PRIMARY KEY (USER_ID,ROLE_ID);
 
 INSERT INTO CMS_COMMENT (ID,CATEGORY_ID,CONTENT_ID,SCORE,CONTENT,NAME,IP,AUDIT_USER_ID,AUDIT_DATE,CREATE_USER,CREATE_DATE,UPDATE_USER,UPDATE_DATE,REMARKS,DEL_FLAG) 
-VALUES ('355222f869db4f4fb8a22e6888aabe48','355222f869db4f4fb8a22e6888aabe48','355222f869db4f4fb8a22e6888aabe48',5,'很不错','匿名','127.0.0.1','3a657ea8ddc745a698d51aeea2183f4d',to_timestamp('2015-10-13 00:00:00.0','yyyy-mm-dd hh24:mi:ss:ff')+0,null,null,'system',to_timestamp('2015-10-13 09:32:12.0','yyyy-mm-dd hh24:mi:ss:ff')+0,null,'1');
+VALUES ('355222f869db4f4fb8a22e6888aabe48','355222f869db4f4fb8a22e6888aabe48','355222f869db4f4fb8a22e6888aabe48',5,'很不错','匿名','127.0.0.1','3a657ea8ddc745a698d51aeea2183f4d',str_to_date('2015-10-13 00:00:00', '%Y-%m-%d %H:%i:%s'),null,null,'system',str_to_date('2015-10-13 09:32:12', '%Y-%m-%d %H:%i:%s'),null,'1');
 
 INSERT INTO CMS_COMMENT (ID,CATEGORY_ID,CONTENT_ID,SCORE,CONTENT,NAME,IP,AUDIT_USER_ID,AUDIT_DATE,CREATE_USER,CREATE_DATE,UPDATE_USER,UPDATE_DATE,REMARKS,DEL_FLAG) 
-VALUES ('0af80866e7c143fa860f1e25b2d46e26',null,null,3,'评论内容','评论者','127.0.0.1',null,to_timestamp('2015-10-13 00:00:00.0','yyyy-mm-dd hh24:mi:ss:ff')+0,null,to_timestamp('2015-10-13 10:02:47.0','yyyy-mm-dd hh24:mi:ss:ff')+0,null,to_timestamp('2015-10-13 10:03:09.0','yyyy-mm-dd hh24:mi:ss:ff')+0,null,'1');
+VALUES ('0af80866e7c143fa860f1e25b2d46e26',null,null,3,'评论内容','评论者','127.0.0.1',null,str_to_date('2015-10-13 00:00:00', '%Y-%m-%d %H:%i:%s'),null,str_to_date('2015-10-13 10:02:47', '%Y-%m-%d %H:%i:%s'),null,str_to_date('2015-10-13 10:03:09', '%Y-%m-%d %H:%i:%s'),null,'1');
 
 INSERT INTO CMS_GUESTBOOK (ID,TYPE,CONTENT,NAME,EMAIL,PHONE,WORKUNIT,IP,RE_USER_ID,RE_DATE,RE_CONTENT,CREATE_USER,CREATE_DATE,UPDATE_USER,UPDATE_DATE,REMARKS,DEL_FLAG) 
-VALUES ('3a657ea8ddc745a698d51aeea2183f4d','1','咨询','张三','qq@qq.com','15156845635','无业','127.0.0.1','3a657ea8ddc745a698d51aeea2183f4d',to_timestamp('2015-10-13 00:00:00.0','yyyy-mm-dd hh24:mi:ss:ff')+0,'你想资讯什么',null,null,'system',to_timestamp('2015-10-13 09:00:52.0','yyyy-mm-dd hh24:mi:ss:ff')+0,null,'0');
+VALUES ('3a657ea8ddc745a698d51aeea2183f4d','1','咨询','张三','qq@qq.com','15156845635','无业','127.0.0.1','3a657ea8ddc745a698d51aeea2183f4d',str_to_date('2015-10-13 00:00:00', '%Y-%m-%d %H:%i:%s'),'你想资讯什么',null,null,'system',str_to_date('2015-10-13 09:00:52', '%Y-%m-%d %H:%i:%s'),null,'0');
 
 INSERT INTO CMS_GUESTBOOK (ID,TYPE,CONTENT,NAME,EMAIL,PHONE,WORKUNIT,IP,RE_USER_ID,RE_DATE,RE_CONTENT,CREATE_USER,CREATE_DATE,UPDATE_USER,UPDATE_DATE,REMARKS,DEL_FLAG) 
-VALUES ('f95b913873c547e19131e93d04046734','2','内容','匿名',null,null,null,'127.0.0.1',null,null,null,null,to_timestamp('2015-10-13 09:54:56.0','yyyy-mm-dd hh24:mi:ss:ff')+0,null,null,null,null);
+VALUES ('f95b913873c547e19131e93d04046734','2','内容','匿名',null,null,null,'127.0.0.1',null,null,null,null,str_to_date('2015-10-13 09:54:56', '%Y-%m-%d %H:%i:%s'),null,null,null,null);
 
 INSERT INTO CMS_GUESTBOOK (ID,TYPE,CONTENT,NAME,EMAIL,PHONE,WORKUNIT,IP,RE_USER_ID,RE_DATE,RE_CONTENT,CREATE_USER,CREATE_DATE,UPDATE_USER,UPDATE_DATE,REMARKS,DEL_FLAG) 
-VALUES ('acc4f545a2eb49aebd11643ac7c86e66','2','内容','匿名',null,null,null,'127.0.0.1',null,null,null,null,to_timestamp('2015-10-13 09:58:28.0','yyyy-mm-dd hh24:mi:ss:ff')+0,null,null,null,null);
+VALUES ('acc4f545a2eb49aebd11643ac7c86e66','2','内容','匿名',null,null,null,'127.0.0.1',null,null,null,null,str_to_date('2015-10-13 09:58:28', '%Y-%m-%d %H:%i:%s'),null,null,null,null);
 
 INSERT INTO CMS_GUESTBOOK (ID,TYPE,CONTENT,NAME,EMAIL,PHONE,WORKUNIT,IP,RE_USER_ID,RE_DATE,RE_CONTENT,CREATE_USER,CREATE_DATE,UPDATE_USER,UPDATE_DATE,REMARKS,DEL_FLAG) 
-VALUES ('833093914a1a49cd8222dbf0046009e8','2','内容','匿名',null,null,null,'127.0.0.1',null,null,null,null,to_timestamp('2015-10-13 09:58:49.0','yyyy-mm-dd hh24:mi:ss:ff')+0,null,null,null,null);
+VALUES ('833093914a1a49cd8222dbf0046009e8','2','内容','匿名',null,null,null,'127.0.0.1',null,null,null,null,str_to_date('2015-10-13 09:58:49', '%Y-%m-%d %H:%i:%s'),null,null,null,null);
 
 INSERT INTO CMS_SITE (ID,NAME,TITLE,LOGO,DOMAIN,DESCRIPTION,KEYWORDS,THEME,COPYRIGHT,CUSTOM_VIEW,CREATE_USER,CREATE_DATE,UPDATE_USER,UPDATE_DATE,REMARKS,DEL_FLAG) 
-VALUES ('f9427f770859414793a43bcfcc36553b','11','22','upload/image/89ea3b6bb9934a3bad7dd8d2c16fa70a.png','44','55','66','77',88,'99','system',to_timestamp('2015-06-23 09:32:16.0','yyyy-mm-dd hh24:mi:ss:ff')+0,'system',to_timestamp('2015-10-13 11:48:01.0','yyyy-mm-dd hh24:mi:ss:ff')+0,'00','0');
+VALUES ('f9427f770859414793a43bcfcc36553b','11','22','upload/image/89ea3b6bb9934a3bad7dd8d2c16fa70a.png','44','55','66','77',88,'99','system',str_to_date('2015-06-23 09:32:16', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2015-10-13 11:48:01', '%Y-%m-%d %H:%i:%s'),'00','0');
 
 INSERT INTO CMS_SITE (ID,NAME,TITLE,LOGO,DOMAIN,DESCRIPTION,KEYWORDS,THEME,COPYRIGHT,CUSTOM_VIEW,CREATE_USER,CREATE_DATE,UPDATE_USER,UPDATE_DATE,REMARKS,DEL_FLAG) 
-VALUES ('3142b15af04c4479888127a7d15b6c04','22','33','upload/image/4536276e0d02429ea91fdc2295e993e0.png','44','55','66','7',88,'9','system',to_timestamp('2015-10-13 11:51:21.0','yyyy-mm-dd hh24:mi:ss:ff')+0,null,null,null,null);
+VALUES ('3142b15af04c4479888127a7d15b6c04','22','33','upload/image/4536276e0d02429ea91fdc2295e993e0.png','44','55','66','7',88,'9','system',str_to_date('2015-10-13 11:51:21', '%Y-%m-%d %H:%i:%s'),null,null,null,null);
 
 INSERT INTO CMS_SITE (ID,NAME,TITLE,LOGO,DOMAIN,DESCRIPTION,KEYWORDS,THEME,COPYRIGHT,CUSTOM_VIEW,CREATE_USER,CREATE_DATE,UPDATE_USER,UPDATE_DATE,REMARKS,DEL_FLAG) 
-VALUES ('f30a531758724f99b16a799aa476c39b','33','55','upload/image/f177a088942341b29e164397e69ab901.png','44','77','88','99',66,'33','system',to_timestamp('2015-10-13 11:56:07.0','yyyy-mm-dd hh24:mi:ss:ff')+0,null,null,null,null);
+VALUES ('f30a531758724f99b16a799aa476c39b','33','55','upload/image/f177a088942341b29e164397e69ab901.png','44','77','88','99',66,'33','system',str_to_date('2015-10-13 11:56:07', '%Y-%m-%d %H:%i:%s'),null,null,null,null);
 
 INSERT INTO MOD_TABLE (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,NAME,COMMENTS,PARENT_TABLE,PARENT_TABLE_FK,REMARKS,DEL_FLAG) 
-VALUES ('c8ab465058644015a494fa32302fef9c',to_timestamp('2015-12-28 14:20:59.0','yyyy-mm-dd hh24:mi:ss:ff')+0,'system',to_timestamp('2015-12-28 14:20:59.0','yyyy-mm-dd hh24:mi:ss:ff')+0,null,'BO_DEMO','演示',null,null,null,null);
+VALUES ('c8ab465058644015a494fa32302fef9c',str_to_date('2015-12-28 14:20:59', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2015-12-28 14:20:59', '%Y-%m-%d %H:%i:%s'),null,'BO_DEMO','演示',null,null,null,null);
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH) 
-VALUES ('f7c32c721a6a45d79c6d8667a8df189c',to_timestamp('2016-01-21 11:12:00.0','yyyy-mm-dd hh24:mi:ss:ff')+0,'system',to_timestamp('2016-01-21 14:29:15.0','yyyy-mm-dd hh24:mi:ss:ff')+0,'system','BO_DEMO','EXPRESSION','表达式','VARCHAR2','100','Y','Y','textarea','@userId在@dateTime登录',null,'multiline:true,prompt:'@userId==@userName==@name==@departmentId==@departmentName==@year'',null,null,'style="height:100px"','Y','Y',null,null);
+VALUES ('f7c32c721a6a45d79c6d8667a8df189c',str_to_date('2016-01-21 11:12:00', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-01-21 14:29:15', '%Y-%m-%d %H:%i:%s'),'system','BO_DEMO','EXPRESSION','表达式','VARCHAR2','100','Y','Y','textarea','@userId在@dateTime登录',null,'multiline:true,prompt:\'@userId==@userName==@name==@departmentId==@departmentName==@year\'',null,null,'style="height:100px"','Y','Y',null,null);
 
 INSERT INTO MOD_TABLE_COLUMN (ID,CREATE_DATE,CREATE_USER,UPDATE_DATE,UPDATE_USER,TABLE_NAME,NAME,COMMENTS,JDBC_TYPE,JDBC_LENGTH,IS_NULL,IS_EDIT,CATEGORY,DEFAULT_VALUE,VALID_TYPE,SETTINGS,REMARKS,DEL_FLAG,HTML_INNER,IS_LIST,IS_QUERY,LIST_WIDTH,QUERY_WIDTH) 
-VALUES ('910a75da82c341119044dd45e09330bf',to_timestamp('2015-12-28 15:34:04.0','yyyy-mm-dd hh24:mi:ss:ff')+0,'system',to_timestamp('2016-01-21 12:59:51.0','yyyy-mm-dd hh24:mi:ss:ff')+0,'system','BO_DEMO','TREE_ID','下拉树','VARCHAR2','100','Y','Y','combobox',null,null,'SQL>select * from sys_user where id='@userId'|id|name',null,null,null,'Y','Y',null,null);
+VALUES ('910a75da82c341119044dd45e09330bf',str_to_date('2015-12-28 15:34:04', '%Y-%m-%d %H:%i:%s'),'system',str_to_date('2016-01-21 12:59:51', '%Y-%m-%d %H:%i:%s'),'system','BO_DEMO','TREE_ID','下拉树','VARCHAR2','100','Y','Y','combobox',null,null,'SQL>select * from sys_user where id=\'@userId\'|id|name',null,null,null,'Y','Y',null,null);
 
 INSERT INTO OA_LEAVE (ID,CREATEDATE,CREATEUSER,UPDATEDATE,UPDATEUSER,BINDID,REASON,STARTTIME,ENDTIME,LEAVETYPE) 
-VALUES ('bd68cfc58e214ff6a17d3e35ecb750f1',to_timestamp('2015-10-05 14:43:46.0','yyyy-mm-dd hh24:mi:ss:ff')+0,'employee',to_timestamp('2015-10-05 16:06:30.0','yyyy-mm-dd hh24:mi:ss:ff')+0,'employee','d88dbc95353a4682b968687642c99760','我要请假啊',to_timestamp('2015-10-05 14:44:00.0','yyyy-mm-dd hh24:mi:ss:ff')+0,to_timestamp('2015-10-15 14:44:01.0','yyyy-mm-dd hh24:mi:ss:ff')+0,'事假');
+VALUES ('bd68cfc58e214ff6a17d3e35ecb750f1',str_to_date('2015-10-05 14:43:46', '%Y-%m-%d %H:%i:%s'),'employee',str_to_date('2015-10-05 16:06:30', '%Y-%m-%d %H:%i:%s'),'employee','d88dbc95353a4682b968687642c99760','我要请假啊',str_to_date('2015-10-05 14:44:00', '%Y-%m-%d %H:%i:%s'),str_to_date('2015-10-15 14:44:01', '%Y-%m-%d %H:%i:%s'),'事假');
 
 INSERT INTO OA_LEAVE (ID,CREATEDATE,CREATEUSER,UPDATEDATE,UPDATEUSER,BINDID,REASON,STARTTIME,ENDTIME,LEAVETYPE) 
-VALUES ('fb0fad4f97944d01925b3fd75838d1e3',to_timestamp('2015-09-22 10:55:36.0','yyyy-mm-dd hh24:mi:ss:ff')+0,'employee',to_timestamp('2015-09-22 11:02:17.0','yyyy-mm-dd hh24:mi:ss:ff')+0,'employee','4e21f0dd2b364ef7aabd450988af9cc6','我要请假~',to_timestamp('2015-09-22 10:56:48.0','yyyy-mm-dd hh24:mi:ss:ff')+0,to_timestamp('2015-09-26 10:56:50.0','yyyy-mm-dd hh24:mi:ss:ff')+0,'事假');
+VALUES ('fb0fad4f97944d01925b3fd75838d1e3',str_to_date('2015-09-22 10:55:36', '%Y-%m-%d %H:%i:%s'),'employee',str_to_date('2015-09-22 11:02:17', '%Y-%m-%d %H:%i:%s'),'employee','4e21f0dd2b364ef7aabd450988af9cc6','我要请假~',str_to_date('2015-09-22 10:56:48', '%Y-%m-%d %H:%i:%s'),str_to_date('2015-09-26 10:56:50', '%Y-%m-%d %H:%i:%s'),'事假');
 
 INSERT INTO SYS_DEPARTMENT (ID,PARENT_ID,SEQUENCE,NAME,CODE) 
 VALUES ('dad8faf2f3eb4d279ef04decb91ca4c0','00000000000000000000000000000000',0,'超级系统管理员','001');
@@ -501,13 +501,13 @@ INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID)
 VALUES ('b23f0094a5c54035aac65c3a6e8bbc13','query','查询方式','root','数据库字段查询方式',3,'00000000000000000000000000000000');
 
 INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
-VALUES ('238c813e6157415bad169b28ec939346','&lt;','小于','query','排序方式小于',5,'b23f0094a5c54035aac65c3a6e8bbc13');
+VALUES ('238c813e6157415bad169b28ec939346','<','小于','query','排序方式小于',5,'b23f0094a5c54035aac65c3a6e8bbc13');
 
 INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
-VALUES ('c306c0753a51406ea7ae2777899fc71c','&gt;','大于','query','排序方式大于',10,'b23f0094a5c54035aac65c3a6e8bbc13');
+VALUES ('c306c0753a51406ea7ae2777899fc71c','>','大于','query','排序方式大于',10,'b23f0094a5c54035aac65c3a6e8bbc13');
 
 INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
-VALUES ('a5b17303fda549909992510c027eccb7','&gt;=','大于等于','query','排序方式大于等于',20,'b23f0094a5c54035aac65c3a6e8bbc13');
+VALUES ('a5b17303fda549909992510c027eccb7','>=','大于等于','query','排序方式大于等于',20,'b23f0094a5c54035aac65c3a6e8bbc13');
 
 INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
 VALUES ('0469a2108e854bbc83d5afa7b3367676','yes_no','是否','root','是否字典',1,'00000000000000000000000000000000');
@@ -561,13 +561,10 @@ INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID)
 VALUES ('d9a81aa07d14446d8a2b3aee1db88f80','CLOB','CLOB','jdbcType','CLOB',20,'838ebfaff94a42c5abd718e811f4da5f');
 
 INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
-VALUES ('0b36e6e0de4d40bea6bb078a38bbed22','&lt;=','小于等于','query','排序方式小于等于',15,'b23f0094a5c54035aac65c3a6e8bbc13');
+VALUES ('0b36e6e0de4d40bea6bb078a38bbed22','<=','小于等于','query','排序方式小于等于',15,'b23f0094a5c54035aac65c3a6e8bbc13');
 
 INSERT INTO SYS_DICT (ID,VALUE,LABEL,CATEGORY,DESCRIPTION,SEQUENCE,PARENT_ID) 
 VALUES ('5da5691ce03240b0a2fcaba6b70227fb','not like','NOT LIKE','query','排序方式NOTLIKE',30,'b23f0094a5c54035aac65c3a6e8bbc13');
-
-INSERT INTO SYS_LOG (ID,TYPE,TITLE,CREATE_USER,CREATE_DATE,REMOTE_ADDR,USER_AGENT,REQUEST_URI,METHOD,PARAMS,EXCEPTION,SPEND_TIME) 
-VALUES ('2c09c058d79142bab11eb34fdffcecee','s','[system]管理员','system',to_timestamp('2015-07-16 16:59:37.0','yyyy-mm-dd hh24:mi:ss:ff')+0,'0:0:0:0:0:0:0:1','Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0','/kensite/sysDepartment/getTreeJson.do','POST',null,null,null);
 
 INSERT INTO SYS_MENU (ID,PARENT_ID,NAME,URL,SEQUENCE,ICON,TARGET) 
 VALUES ('e0f3aac77b984733bcf0d8d35363bfa1','7978e1b6d95044e1a4ba5840c0d8a004','浮动按钮','/static/web/blank.jsp',0,null,'_blank');
@@ -1779,16 +1776,16 @@ INSERT INTO SYS_SKINS (ID,NAME,URL,STATE,MAIN)
 VALUES ('3df2a557ac47442889212395848b9213','EASYUI皮肤','/poor','0','main');
 
 INSERT INTO SYS_UPLOADFILE (ID,VIEWNAME,REALNAME,URL,REALURL,SUFFIX,FILESIZE,CREATEDATE) 
-VALUES ('062e05aeae8946e686694f506750ff54','6ee5247ad182424e85e438b927d26ecd.png','062e05aeae8946e686694f506750ff54.png','upload/image/','C:/Users/cuichen/git/kensite/src/main/webapp/upload/image/','.png','15109',to_timestamp('2015-10-13 11:50:04.0','yyyy-mm-dd hh24:mi:ss:ff')+0);
+VALUES ('062e05aeae8946e686694f506750ff54','6ee5247ad182424e85e438b927d26ecd.png','062e05aeae8946e686694f506750ff54.png','upload/image/','C:/Users/cuichen/git/kensite/src/main/webapp/upload/image/','.png','15109',str_to_date('2015-10-13 11:50:04', '%Y-%m-%d %H:%i:%s'));
 
 INSERT INTO SYS_UPLOADFILE (ID,VIEWNAME,REALNAME,URL,REALURL,SUFFIX,FILESIZE,CREATEDATE) 
-VALUES ('4536276e0d02429ea91fdc2295e993e0','6ee5247ad182424e85e438b927d26ecd.png','4536276e0d02429ea91fdc2295e993e0.png','upload/image/','C:/Users/cuichen/git/kensite/src/main/webapp/upload/image/','.png','15109',to_timestamp('2015-10-13 11:51:08.0','yyyy-mm-dd hh24:mi:ss:ff')+0);
+VALUES ('4536276e0d02429ea91fdc2295e993e0','6ee5247ad182424e85e438b927d26ecd.png','4536276e0d02429ea91fdc2295e993e0.png','upload/image/','C:/Users/cuichen/git/kensite/src/main/webapp/upload/image/','.png','15109',str_to_date('2015-10-13 11:51:08', '%Y-%m-%d %H:%i:%s'));
 
 INSERT INTO SYS_UPLOADFILE (ID,VIEWNAME,REALNAME,URL,REALURL,SUFFIX,FILESIZE,CREATEDATE) 
-VALUES ('89ea3b6bb9934a3bad7dd8d2c16fa70a','6ee5247ad182424e85e438b927d26ecd.png','89ea3b6bb9934a3bad7dd8d2c16fa70a.png','upload/image/','C:/Users/cuichen/git/kensite/src/main/webapp/upload/image/','.png','15109',to_timestamp('2015-10-13 11:45:50.0','yyyy-mm-dd hh24:mi:ss:ff')+0);
+VALUES ('89ea3b6bb9934a3bad7dd8d2c16fa70a','6ee5247ad182424e85e438b927d26ecd.png','89ea3b6bb9934a3bad7dd8d2c16fa70a.png','upload/image/','C:/Users/cuichen/git/kensite/src/main/webapp/upload/image/','.png','15109',str_to_date('2015-10-13 11:45:50', '%Y-%m-%d %H:%i:%s'));
 
 INSERT INTO SYS_UPLOADFILE (ID,VIEWNAME,REALNAME,URL,REALURL,SUFFIX,FILESIZE,CREATEDATE) 
-VALUES ('f177a088942341b29e164397e69ab901','6ee5247ad182424e85e438b927d26ecd.png','f177a088942341b29e164397e69ab901.png','upload/image/','C:/Users/cuichen/git/kensite/src/main/webapp/upload/image/','.png','15109',to_timestamp('2015-10-13 11:55:52.0','yyyy-mm-dd hh24:mi:ss:ff')+0);
+VALUES ('f177a088942341b29e164397e69ab901','6ee5247ad182424e85e438b927d26ecd.png','f177a088942341b29e164397e69ab901.png','upload/image/','C:/Users/cuichen/git/kensite/src/main/webapp/upload/image/','.png','15109',str_to_date('2015-10-13 11:55:52', '%Y-%m-%d %H:%i:%s'));
 
 INSERT INTO SYS_USER (ID,USER_NAME,PASSWORD,NAME,DEPARTMENT_ID,STATE,EMAIL,PHONE) 
 VALUES ('3a657ea8ddc745a698d51aeea2183f4d','system','c4ca86dead4518ac4fd6e30172db3d9e','管理员','dad8faf2f3eb4d279ef04decb91ca4c0','1',null,null);

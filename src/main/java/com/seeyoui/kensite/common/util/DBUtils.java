@@ -12,6 +12,8 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
+import org.springframework.web.util.HtmlUtils;
+
 public class DBUtils {
 	private static DataSource dataSource;
 
@@ -129,7 +131,7 @@ public class DBUtils {
 	        for (int i = 1; i <= columnCount; i++) {
 	            String columnName =metaData.getColumnLabel(i);
 	            String value = rst.getString(columnName);
-	            map.put(columnName.toUpperCase(), value);
+	            map.put(columnName.toUpperCase(), HtmlUtils.htmlUnescape(value));
 	        }
 	        list.add(map);
 	    }
