@@ -28,4 +28,16 @@ public class Global {
 		return prop.getProperty(key);
 	}
 
+	public static String getConfig(String file, String key) {
+		Properties prop = new Properties();
+		ClassLoader loader = Global.class.getClassLoader();
+		InputStream ips = loader
+				.getResourceAsStream(file+".properties");
+		try {
+			prop.load(ips);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return prop.getProperty(key);
+	}
 }

@@ -8,7 +8,11 @@ public class DepartmentCodeExpression extends ExpressionBase implements Expressi
 
 	@Override
 	public String expresstionPares() {
-		return UserUtils.getUser().getSysDepartment().getCode();
+		if(UserUtils.getUser() != null && UserUtils.getUser().getSysDepartment() != null) {
+			return UserUtils.getUser().getSysDepartment().getCode();
+		} else {
+			return "";
+		}
 	}
 	
 }

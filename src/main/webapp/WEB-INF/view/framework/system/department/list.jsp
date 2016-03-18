@@ -9,40 +9,12 @@
 	<%@ include file="/WEB-INF/view/taglib/header.jsp" %>
 	<%@ include file="/WEB-INF/view/taglib/easyui.jsp" %>
 	<%@ include file="/WEB-INF/view/taglib/layer.jsp" %>
-	<%@ include file="/WEB-INF/view/taglib/zTree.jsp" %>
-	<script type="text/javascript">
-		var setting = {
-			async: {
-				enable: true,
-				url: "${ctx}/sysDepartment/list/all"
-			},
-			data: {
-				key: {
-					name: "name"
-				},
-				simpleData: {
-					enable: true,
-					idKey: 'id',
-					pIdKey: 'parentId',
-					rootPId: 'ffffffffffffffffffffffffffffffff'
-				}
-			},
-			callback: {
-				onClick: onClick
-			}
-		};
-		function onClick(event, treeId, treeNode, clickFlag) {
-			$('#sel_parentId').val(treeNode.id);
-			selectData();
-		}
-	</script>
   </head>
   <body>
   
   	<div style="position:absolute;top:0px;left:0px;right:0px;bottom:0px;">
   		<div style="position:absolute;top:0px;bottom:0px;width:200px;">
-  			<ul id=departmentTree class="ztree"></ul>
-        	<%-- <ul id="departmentTree" class="easyui-tree" url="${ctx}/sysDepartment/getTreeJson"></ul> --%>
+        	<ul id="departmentTree" class="easyui-tree" url="${ctx}/sysDepartment/list/all" data-options="idFiled:'id',textField:'name',parentField:'parentId'"></ul>
         </div>
 		<div style="position:absolute;top:0px;left:200px;right:0px;bottom:0px;">
 		    <table id="dataList" title="" class="easyui-datagrid" style="width:100%;height:100%"
@@ -77,11 +49,23 @@
     </div>
     <script type="text/javascript">
 	    $(document).ready(function(){
-			$.fn.zTree.init($("#departmentTree"), setting);
+	    	$("#departmentTree").tree({
+	    		onClick: function(node){
+	    			$('#sel_parentId').val(node.id);
+	    			selectData();
+	    		}
+	    	});
 	    	$('#dataList').datagrid({
 	    		url:'${ctx}/sysDepartment/list/data',
 	    		queryParams: {
 	    			parentId:$('#sel_parentId').val()
+	    		},
+	    		onDblClickRow: function(index, row){
+	    			var node = $('#departmentTree').tree('find', row.id);
+	    			$('#departmentTree').tree('select', node.target);
+	    			$('#departmentTree').tree('scrollTo', node.target);
+	    			$('#sel_parentId').val(row.id);
+	    			selectData();
 	    		}
 	    	});
 	    });

@@ -24,7 +24,7 @@
             </div>
             <div class="fitem">
                 <label>上级部门</label>
-                <input id="parentId" name="parentId" class="easyui-combotree" data-options="required:true,tipPosition:'top'" style="width:160px;" url="${ctx}/sysDepartment/getTreeJson"/>
+                <input id="parentId" name="parentId" class="easyui-combotree" data-options="required:true,tipPosition:'top',idFiled:'id',textField:'name',parentField:'parentId'" style="width:160px;" url="${ctx}/sysDepartment/list/all"/>
             </div>
             <div class="fitem">
                 <label>排序</label>

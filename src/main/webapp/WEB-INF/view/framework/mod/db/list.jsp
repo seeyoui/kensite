@@ -212,7 +212,7 @@
     		layer.open({
 				title: '字段配置',
 			    type: 2,
-			    area: ['420px', '355px'],
+			    area: ['420px', '385px'],
 			    fix: false, //不固定
 			    maxmin: false,
 			    content: '${ctx_static}/form/mod/config.jsp'

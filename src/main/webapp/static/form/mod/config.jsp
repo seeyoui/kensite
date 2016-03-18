@@ -17,7 +17,7 @@
 	</style>
   </head>
 <body>
-	<div id="configTab" class="easyui-tabs" data-options="plain: true, narrow: false, pill: true, tabPosition: 'left', headerWidth: 120, tools:'#tab-tools'" style="width:100%;height:310px">
+	<div id="configTab" class="easyui-tabs" data-options="plain: true, narrow: false, pill: true, tabPosition: 'left', headerWidth: 120, tools:'#tab-tools'" style="width:100%;height:340px">
 		<div id="textbox" title="单行" data-options="iconCls:'icon-uicomponent-text'" style="padding:10px">
 			<form class="configForm">
 				<div class="fitem">
@@ -194,13 +194,35 @@
 				<label>固定高度</label><input id="config" class="easyui-numberbox" data-options="min:0,value:100" style="width:200px;"/>
 			</div>
 		</div>
+		<div id="selectButton" title="选择按钮" data-options="iconCls:'icon-uicomponent-gunter'" style="padding:10px">
+			<div class="fitem">
+				<label>SQL语句</label><input id="sqlStr" class="easyui-textbox" data-options="" style="width:220px;"/>
+			</div>
+			<div style="position:absolute;top:40px;left: 130px;width:273px;height:160px">
+				<table id="dg_return" class="easyui-datagrid" title="映射关系" style="width:100%;height:100%"
+		            data-options="fitColumns: true,singleSelect: true,toolbar: '#tb_return',onClickCell: onClickCellReturn">
+			        <thead>
+			            <tr>
+			                <th data-options="field:'field',width:250,editor:'textbox'">源字段</th>
+			                <th data-options="field:'title',width:250,editor:'textbox'">字段名</th>
+			                <th data-options="field:'width',width:250,editor:'numberbox'">列宽</th>
+			                <th data-options="field:'fieldTo',width:250,editor:'textbox'">目标字段</th>
+			            </tr>
+			        </thead>
+			    </table>
+			</div>
+		    <div id="tb_return" style="height:auto">
+		        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-4131',plain:true" onclick="appendReturn()"></a>
+		        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-4333',plain:true" onclick="removeReturn()"></a>
+		    </div>
+		</div>
 	</div>
 	<div id="tab-tools">
 		<a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-4336'" onclick="save()">确定</a>
 		<a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-5571'" onclick="run()">试用</a>
 	</div>
-	<div style="position:absolute;left:130px;right:0px;bottom:0px;height:150px;">
-		<div class="easyui-panel" title="展示区" style="width:100%;height:140px;padding:10px;">
+	<div style="position:absolute;left:130px;right:0px;bottom:0px;height:130px;">
+		<div class="easyui-panel" title="展示区" style="width:100%;height:120px;padding:10px;">
 			<div id="showComponent"></div>
 		</div>
 	</div>
@@ -237,6 +259,9 @@
 					}
 					if(title == "HTML") {
 						componentType = "htmldesign";
+					}
+					if(title == "选择按钮") {
+						componentType = "selectButton";
 					}
 				}
 			});
@@ -371,6 +396,15 @@
 					$('#'+componentType+'Tab').tabs('select', 0);
 				}
 			}
+
+			if(componentType=="selectButton") {
+				$('#configTab').tabs('select', 9);
+				if(componentConfig.indexOf("SQL>") != -1) {
+					var sqlArr = componentConfig.split("|");
+					$('#'+componentType+' #sqlStr').textbox('setValue', sqlArr[0].replace("SQL>", ""));
+		            $('#dg_return').datagrid('loadData', JSON.parse(sqlArr[1]));
+				}
+			}
 		}
 		
 		function save() {
@@ -440,6 +474,13 @@
 					componentConfig = "URL>"+$('#'+componentType+' #url #urlStr').val()+"|"+$('#'+componentType+' #url #idStr').val()+"|"+$('#'+componentType+' #url #textStr').val()+"|"+$('#'+componentType+' #url #pidStr').val();
 				}
 			}
+			if(componentType=="selectButton") {
+		    	endEditingReturn();
+				var sqlStr = componentConfig = $('#'+componentType+' #sqlStr').val();
+		    	var sqlMapper = JSON.stringify($('#dg_return').datagrid('getData'));
+		    	componentConfig = "SQL>"+sqlStr+"|"+sqlMapper;
+			}
+			console.info(componentConfig);
 			var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
 			parent.$('#category').combobox('setValue', componentType);
 			parent.$('#settings').textbox('setValue', componentConfig);
@@ -566,6 +607,46 @@
 		function getComponentBySql(type, sql, value, label) {
 			
 		}
+		var editIndex2 = undefined;
+		function endEditingReturn(){
+        	if (editIndex2 == undefined){return true}
+            if ($('#dg_return').datagrid('validateRow', editIndex2)){
+                $('#dg_return').datagrid('endEdit', editIndex2);
+                editIndex2 = undefined;
+                return true;
+            } else {
+                return false;
+            }
+        }
+        function onClickCellReturn(index, field){
+            if (editIndex2 != index){
+                if (endEditingReturn()){
+                    $('#dg_return').datagrid('selectRow', index)
+                            .datagrid('beginEdit', index);
+                    var ed = $('#dg_return').datagrid('getEditor', {index:index,field:field});
+                    if (ed){
+                        ($(ed.target).data('textbox') ? $(ed.target).textbox('textbox') : $(ed.target)).focus();
+                    }
+                    editIndex2 = index;
+                } else {
+                    $('#dg_return').datagrid('selectRow', editIndex2);
+                }
+            }
+        }
+        function appendReturn(){
+            if (endEditingReturn()){
+                $('#dg_return').datagrid('appendRow',{});
+                editIndex2 = $('#dg_return').datagrid('getRows').length-1;
+                $('#dg_return').datagrid('selectRow', editIndex2)
+                        .datagrid('beginEdit', editIndex2);
+            }
+        }
+        function removeReturn(){
+            if (editIndex2 == undefined){return}
+            $('#dg_return').datagrid('cancelEdit', editIndex2)
+                    .datagrid('deleteRow', editIndex2);
+            editIndex2 = undefined;
+        }
 	</script>
 </body>
 </html>

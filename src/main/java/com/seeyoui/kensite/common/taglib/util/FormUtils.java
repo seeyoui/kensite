@@ -1,5 +1,6 @@
 package com.seeyoui.kensite.common.taglib.util;
 
+import java.net.URLEncoder;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -353,6 +354,42 @@ public class FormUtils {
 				result.append("ue.ready(function() {ue.setHeight("+tableColumn.getSettings()+");});");
 			}
 			result.append("</script>");
+		}
+		if(TableColumnConstants.SELECTBUTTON.equals(tableColumn.getCategory())) {
+			result.append("<input class=\"easyui-textbox\" id=\"");
+			result.append(column);
+			result.append("\" name=\"");
+			result.append(column);
+			result.append("\" data-options=\"tipPosition:'bottom',");
+			if(StringConstant.NO.equals(tableColumn.getIsEdit())) {
+				result.append("readonly:true,");
+			}
+			if(StringConstant.DISABLE.equals(tableColumn.getIsEdit())) {
+				result.append("disabled:true,");
+			}
+			if(StringConstant.NO.equals(tableColumn.getIsNull())) {
+				result.append("required:true,");
+			}
+			if(StringUtils.isNoneBlank(tableColumn.getValidType())) {
+				result.append("validType:'"+tableColumn.getValidType()+"',");
+			}
+			if(StringUtils.isNoneBlank(tableColumn.getDefaultValue())) {
+				result.append("value:'"+tableColumn.getDefaultValue()+"',");
+			}
+			if(StringUtils.isNoneBlank(tableColumn.getSettings())) {
+				String settings = tableColumn.getSettings();
+				if(settings.indexOf("SQL>") != -1) {
+					String[] settingsArr = settings.split("\\|");
+					String sql = settingsArr[0].replace("SQL>", "");
+					String mapper = settingsArr[1];
+					result.append("iconWidth: 22,icons: [{iconCls:'icon-search',handler: function(e){");
+					result.append("var sqlStr = '"+URLEncoder.encode(sql, "UTF-8")+"';");
+					result.append("var mapperStr = '"+URLEncoder.encode(mapper, "UTF-8")+"';");
+					result.append("var url = '/"+Global.getConfig("productName")+"/static/form/mod/sqlMapper.jsp?sqlStr='+sqlStr+'&mapperStr='+mapperStr;layerOpen(url);}}]");
+				}
+			}
+			result.append("\" "+tableColumn.getHtmlInner());
+			result.append("/>");
 		}
 		result.append("<span id=\"msg-"+column+"\" class=\"err-msg\"></span>");
 		if(needCache) {

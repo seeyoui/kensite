@@ -20,4 +20,5 @@ public class TableColumnConstants {
 	public static final String TEXTAREA = "textarea";
 	public static final String COMBOTREE = "combotree";
 	public static final String COMBOGRID = "combogrid";
+	public static final String SELECTBUTTON = "selectButton";
 }

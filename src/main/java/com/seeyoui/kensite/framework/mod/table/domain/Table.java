@@ -22,7 +22,7 @@ public class Table extends DataEntity<Table> {
 	private String parentTableFk;//关联父表外键
 
 	public void setName(String name) {
-		this.name = name;
+		this.name = name.toUpperCase();
 	}
     
 	public String getName() {
@@ -34,7 +34,7 @@ public class Table extends DataEntity<Table> {
 	}
 
 	public void setOldName(String oldName) {
-		this.oldName = oldName;
+		this.oldName = oldName.toUpperCase();
 	}
 
 	public void setComments(String comments) {
@@ -45,14 +45,14 @@ public class Table extends DataEntity<Table> {
 		return this.comments;
 	}
 	public void setParentTable(String parentTable) {
-		this.parentTable = parentTable;
+		this.parentTable = parentTable.toUpperCase();
 	}
     
 	public String getParentTable() {
 		return this.parentTable;
 	}
 	public void setParentTableFk(String parentTableFk) {
-		this.parentTableFk = parentTableFk;
+		this.parentTableFk = parentTableFk.toUpperCase();
 	}
     
 	public String getParentTableFk() {

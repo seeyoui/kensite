@@ -74,15 +74,15 @@ public class SysUserController extends BaseController {
 //	@RequiresRoles("sys")
 	@RequestMapping(value = "/getListData", method=RequestMethod.POST)
 	@ResponseBody
-	public String getListData(HttpSession session,
+	public Object getListData(HttpSession session,
 		HttpServletResponse response, HttpServletRequest request,
 		ModelMap modelMap, SysUser sysUser) throws Exception{
 		List<SysUser> sysUserList = sysUserService.findSysUserList(sysUser);
 		EasyUIDataGrid eudg = sysUserService.findSysUserListTotal(sysUser);
 		eudg.setRows(sysUserList);
-		JSONObject jsonObj = JSONObject.fromObject(eudg);
-		RequestResponseUtil.putResponseStr(session, response, request, jsonObj);
-		return null;
+//		JSONObject jsonObj = JSONObject.fromObject(eudg);
+//		RequestResponseUtil.putResponseStr(session, response, request, jsonObj);
+		return eudg;
 	}
 	
 	/**
