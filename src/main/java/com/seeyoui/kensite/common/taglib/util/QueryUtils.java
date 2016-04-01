@@ -47,7 +47,7 @@ public class QueryUtils {
 		String column = tableColumn.getName();
 		column = StringUtils.toCamelCase(column);
 		result.append("<span>"+tableColumn.getComments()+"</span>");
-		if(TableColumnConstants.TEXTBOX.equals(tableColumn.getCategory()) || TableColumnConstants.TEXTAREA.equals(tableColumn.getCategory()) || TableColumnConstants.HTMLDESIGN.equals(tableColumn.getCategory())) {
+		if(TableColumnConstants.TEXTBOX.equals(tableColumn.getCategory()) || TableColumnConstants.TEXTAREA.equals(tableColumn.getCategory()) || TableColumnConstants.HTMLDESIGN.equals(tableColumn.getCategory()) || TableColumnConstants.SELECTBUTTON.equals(tableColumn.getCategory())) {
 			result.append("<input class=\"easyui-textbox\" id=\"sel_");
 			result.append(column);
 			result.append("\" name=\"sel_");

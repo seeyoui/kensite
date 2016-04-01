@@ -385,7 +385,7 @@ public class FormUtils {
 					result.append("iconWidth: 22,icons: [{iconCls:'icon-search',handler: function(e){");
 					result.append("var sqlStr = '"+URLEncoder.encode(sql, "UTF-8")+"';");
 					result.append("var mapperStr = '"+URLEncoder.encode(mapper, "UTF-8")+"';");
-					result.append("var url = '/"+Global.getConfig("productName")+"/static/form/mod/sqlMapper.jsp?sqlStr='+sqlStr+'&mapperStr='+mapperStr;layerOpen(url);}}]");
+					result.append("var url = '/"+Global.getConfig("productName")+"/static/form/mod/sqlMapper.jsp?sqlStr='+sqlStr+'&mapperStr='+mapperStr;layerOpenSqlMapper(url);}}]");
 				}
 			}
 			result.append("\" "+tableColumn.getHtmlInner());
