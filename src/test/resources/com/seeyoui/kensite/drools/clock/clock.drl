@@ -1,0 +1,32 @@
+package com.seeyoui.kensite.drools.clock
+
+rule "run"
+	salience 1
+	when
+		c: Clock(!(hour == 1 && second == 1))
+	then
+		System.out.println(c);
+		Thread.sleep(1000);
+		c.setSecond(c.getSecond() + 1);
+		update(c);
+end
+
+rule "second"
+	salience 2
+	when
+		c: Clock(second == 60);
+	then
+		c.setMinute(c.getMinute() + 1);
+		c.setSecond(0);
+		update(c);
+end
+
+rule "minute"
+	salience 3
+	when
+		c: Clock(minute == 60)
+	then
+		c.setHour(c.getHour() + 1);
+		c.setMinute(0);
+		update(c);
+end

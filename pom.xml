@@ -41,6 +41,7 @@
 		<poi.version>3.9</poi.version>
 		<freemarker.version>2.3.20</freemarker.version>
 		<lucene.version>5.3.1</lucene.version><!-- 4.0.0 -->
+		<drools.version>6.3.0.Final</drools.version>
 		
 		<!-- jdbc driver setting -->
 		<mysql.driver.version>5.1.30</mysql.driver.version>
@@ -663,22 +664,22 @@
 		<dependency>
 			<groupId>org.drools</groupId>
 			<artifactId>drools-core</artifactId>
-			<version>6.3.0.Final</version>
+			<version>${drools.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.drools</groupId>
 			<artifactId>drools-compiler</artifactId>
-			<version>6.3.0.Final</version>
+			<version>${drools.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.kie</groupId>
 			<artifactId>kie-api</artifactId>
-			<version>6.3.0.Final</version>
+			<version>${drools.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.kie</groupId>
 			<artifactId>kie-internal</artifactId>
-			<version>6.3.0.Final</version>
+			<version>${drools.version}</version>
 		</dependency>
 		
 		<!-- TEST begin -->
@@ -733,8 +734,7 @@
 	<build>
 		<outputDirectory>${project.basedir}/src/main/webapp/WEB-INF/classes/</outputDirectory>
 		<plugins>
-			<!-- Compiler 插件, 设定JDK版本
-			 -->
+			<!-- Compiler 插件, 设定JDK版本-->
 			<plugin> 
 				<groupId>org.apache.maven.plugins</groupId> 
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -744,6 +744,13 @@
 					<target>${jdk.version}</target> 
 					<encoding>UTF8</encoding>
 				</configuration> 
+			</plugin>
+			<!-- 规则引擎插件 -->
+			<plugin>
+				<groupId>org.kie</groupId>
+				<artifactId>kie-maven-plugin</artifactId>
+				<version>${drools.version}</version>
+				<extensions>true</extensions>
 			</plugin>
 			<!-- JSP 预编译插件  jspweb.xml
 			<plugin>

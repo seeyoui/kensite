@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kmodule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://jboss.org/kie/6.0.0/kmodule">
+
+	<kbase name="HouseOfDoomKB" packages="com.seeyoui.kensite.drools.backwardchaining">
+		<ksession name="HouseOfDoomKS" />
+	</kbase>
+
+	<kbase name="clock" packages="com.seeyoui.kensite.drools.clock">
+		<ksession name="session-clock" />
+	</kbase>
+</kmodule>

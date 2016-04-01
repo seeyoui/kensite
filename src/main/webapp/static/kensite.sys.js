@@ -44,6 +44,37 @@ function curDateTime(formater) {
     return curDateTime;
 }
 
+var iframeMapperWin = null, iframeMapperBody=null;
+function layerOpenSqlMapper(url) {
+	//var parentIndex = parent.layer.getFrameIndex(window.name);
+	//parent.layer.full(parentIndex);
+	//area: ['600px', '370px'],
+	setTimeout(function(){
+		layer.open({
+		    type: 2,
+		    title: '请选择',
+		    fix: false, //不固定
+		    maxmin: false,
+		    content: url,
+		    btn: ['保存', '取消'],
+	        success: function(layero, index){
+	            iframeMapperBody = layer.getChildFrame('body', index);
+	            iframeMapperWin = window[layero.find('iframe')[0]['name']];
+	        },
+		    yes: function(index, layero) {
+		    	if(iframeMapperWin != null) {
+		    		iframeMapperWin.submitInfo();
+		    		//parent.layer.restore(parentIndex);
+		    	}
+		    },
+		    cancel: function(index){
+		    	layer.close(index);
+		    	//parent.layer.restore(parentIndex);
+		    }
+		});
+	},100);
+}
+
 function getRootPath(){
     //获取当前网址，如： http://localhost:8083/uimcardprj/share/meun.jsp
     var curWwwPath=window.document.location.href;
