@@ -55,7 +55,7 @@ public class TableController extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequiresPermissions("sys:table:select")
+	////@RequiresPermissions("sys:table:select")
 	@RequestMapping(value = "/list/data", method=RequestMethod.POST)
 	@ResponseBody
 	public Object listData(HttpSession session,
@@ -76,7 +76,7 @@ public class TableController extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequiresPermissions("sys:table:select")
+	////@RequiresPermissions("sys:table:select")
 	@RequestMapping(value = "/list/all", method=RequestMethod.POST)
 	@ResponseBody
 	public Object listAll(HttpSession session,
@@ -93,7 +93,7 @@ public class TableController extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequiresPermissions("sys:table:insert")
+	////@RequiresPermissions("sys:table:insert")
 	@RequestMapping(value = "/save", method=RequestMethod.POST)
 	@ResponseBody
 	public String save(HttpSession session,
@@ -125,7 +125,7 @@ public class TableController extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequiresPermissions("sys:table:update")
+	//@RequiresPermissions("sys:table:update")
 	@RequestMapping(value = "/update", method=RequestMethod.POST)
 	@ResponseBody
 	public String update(HttpSession session,
@@ -147,7 +147,7 @@ public class TableController extends BaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequiresPermissions("sys:table:delete")
+	//@RequiresPermissions("sys:table:delete")
 	@RequestMapping(value = "/delete", method=RequestMethod.POST)
 	@ResponseBody
 	public String delete(HttpSession session,
