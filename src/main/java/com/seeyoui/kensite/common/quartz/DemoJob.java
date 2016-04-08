@@ -2,6 +2,7 @@ package com.seeyoui.kensite.common.quartz;
 
 import org.apache.log4j.Logger;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 import org.springframework.stereotype.Component;
 
 import com.seeyoui.kensite.common.util.DateUtils;
@@ -58,10 +59,9 @@ public class DemoJob {
 		0 0 12 1/5 * ?            每月的第一个中午开始每隔5天触发一次 
 		0 11 11 11 11 ?           每年的11月11号 11点11分触发(光棍节)
 	 */
-//	@Scheduled(fixedDelay=1000)
+//	@Scheduled(fixedDelay=5000)
     public void execute() {
     	System.out.println(DateUtils.getDate("yyyy-MM-dd HH:mm:ss"));
-    	System.out.println(Global.getConfig("param", "web.login"));
     }
 
 }

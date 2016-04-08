@@ -42,6 +42,7 @@
 		<freemarker.version>2.3.20</freemarker.version>
 		<lucene.version>5.3.1</lucene.version><!-- 4.0.0 -->
 		<drools.version>6.3.0.Final</drools.version>
+		<quartz.version>2.2.1</quartz.version>
 		
 		<!-- jdbc driver setting -->
 		<mysql.driver.version>5.1.30</mysql.driver.version>
@@ -652,13 +653,15 @@
 		<dependency>
 			<groupId>org.quartz-scheduler</groupId>
 			<artifactId>quartz</artifactId>
-			<version>2.2.2</version>
+			<version>${quartz.version}</version>
 		</dependency>
+		<!-- 
 		<dependency>
 		    <groupId>org.quartz-scheduler</groupId>
 		    <artifactId>quartz-jobs</artifactId>
-		    <version>2.2.2</version>
+		    <version>${quartz.version}</version>
 		</dependency>
+		 -->
 		
 		<!-- 规则引擎 -->
 		<dependency>
