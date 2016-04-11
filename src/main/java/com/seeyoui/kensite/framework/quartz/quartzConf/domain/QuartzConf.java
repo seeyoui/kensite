@@ -4,6 +4,8 @@
  */
 package com.seeyoui.kensite.framework.quartz.quartzConf.domain;
 
+import javax.validation.constraints.NotNull;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.seeyoui.kensite.common.base.domain.DataEntity;
@@ -20,14 +22,18 @@ import com.seeyoui.kensite.common.util.excel.annotation.ExcelField;
 public class QuartzConf extends DataEntity<QuartzConf> {
 	private static final long serialVersionUID = 1L;
 
+	@NotNull
 	@ExcelField(title="任务名", type=1, align=2, sort=7, mod="JOB_QUARTZ_CONF|JOB_NAME")
 	private String jobName;//任务名
+	@NotNull
 	@ExcelField(title="任务别名", type=1, align=2, sort=8, mod="JOB_QUARTZ_CONF|ALIAS_NAME")
 	private String aliasName;//任务别名
+	@NotNull
 	@ExcelField(title="任务分组", type=1, align=2, sort=9, mod="JOB_QUARTZ_CONF|JOB_GROUP")
 	private String jobGroup;//任务分组
 	@ExcelField(title="任务触发器", type=1, align=2, sort=10, mod="JOB_QUARTZ_CONF|JOB_TRIGGER")
 	private String jobTrigger;//任务触发器
+//	@NotNull
 	@ExcelField(title="cron表达式", type=1, align=2, sort=11, mod="JOB_QUARTZ_CONF|CRON_EXPRESSION")
 	private String cronExpression;//cron表达式
 	@ExcelField(title="是否异步", type=1, align=2, sort=12, mod="JOB_QUARTZ_CONF|IS_SYNC")
@@ -36,6 +42,7 @@ public class QuartzConf extends DataEntity<QuartzConf> {
 	private String description;//任务描述
 	@ExcelField(title="任务状态", type=1, align=2, sort=14, mod="JOB_QUARTZ_CONF|STATUS")
 	private String status;//任务状态
+	@NotNull
 	@ExcelField(title="任务主体", type=1, align=2, sort=15, mod="JOB_QUARTZ_CONF|JOB_CLASS")
 	private String jobClass;//任务主体
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")

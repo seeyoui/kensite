@@ -105,7 +105,6 @@ public class QuartzConfService extends BaseService {
 	 */
 	public void save(QuartzConf quartzConf) throws CRUDException, Exception{
 		quartzConf.preInsert();
-		quartzConf.setCronExpression("0/5 * * * * ?");
 		quartzConf.setJobTrigger("trigger"+quartzConf.getJobName());
 		quartzConf.setStatus(QuartzConstants.NORMAL);
 		ScheduleUtils.createScheduleJob(scheduler, quartzConf);
@@ -119,7 +118,6 @@ public class QuartzConfService extends BaseService {
 	 */
 	public void update(QuartzConf quartzConf) throws CRUDException{
 		quartzConf.preUpdate();
-		quartzConf.setCronExpression("0/1 * * * * ?");
 		quartzConf.setJobTrigger("trigger"+quartzConf.getJobName());
 		ScheduleUtils.updateScheduleJob(scheduler, quartzConf);
 		quartzConfMapper.update(quartzConf);			

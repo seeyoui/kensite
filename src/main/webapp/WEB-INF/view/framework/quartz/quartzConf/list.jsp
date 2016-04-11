@@ -97,7 +97,7 @@
 	            var row = $('#dataList').datagrid('getSelected');
 	            //var row = $('#dataList').datagrid('getSelections');
 	            if (row){
-            		layer.msg("只能选择一条记录修改！", {offset: 'rb',icon: 5,shift: 8,time: layerMsgTime});
+            		$.quartzConf.layerOpen(url);
 	            } else {
 					layer.msg("请先选择要修改的记录！", {offset: 'rb',icon: 5,shift: 8,time: layerMsgTime});
 				}
@@ -110,7 +110,7 @@
 	        	layer.open({
 	        	    type: 2,
 	        	    title: '定时任务计划配置基本信息',
-	        	    area: ['310px', '350px'],
+	        	    area: ['550px', '350px'],
 	        	    fix: false, //不固定
 	        	    maxmin: false,
 	        	    content: url,

@@ -78,11 +78,11 @@
 	            var row = $('#dataList').datagrid('getSelected');
 	            //var row = $('#dataList').datagrid('getSelections');
 	            if (row){
-	            	if(row.length != 1) {
-	            		layer.msg("只能选择一条记录修改！", {offset: 'rb',icon: 5,shift: 8,time: layerMsgTime});
-	            	} else {
-		            	$.${table.classNameFirstLower}.layerOpen(url);
-	            	}
+	            	//if(row.length != 1) {
+	            		//layer.msg("只能选择一条记录修改！", {offset: 'rb',icon: 5,shift: 8,time: layerMsgTime});
+	            	//} else {
+		            $.${table.classNameFirstLower}.layerOpen(url);
+	            	//}
 	            } else {
 					layer.msg("请先选择要修改的记录！", {offset: 'rb',icon: 5,shift: 8,time: layerMsgTime});
 				}

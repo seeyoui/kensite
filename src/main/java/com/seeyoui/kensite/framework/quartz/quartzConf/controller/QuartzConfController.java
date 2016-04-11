@@ -15,6 +15,8 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.quartz.CronExpression;
+import org.quartz.Job;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -134,9 +136,26 @@ public class QuartzConfController extends BaseController {
 			RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
 			return null;
 		}
+		Class jobClass = null;
+		try {
+			jobClass = Class.forName(quartzConf.getJobClass());
+		} catch (ClassNotFoundException e) {
+			Map<Object, Object> map = new HashMap<Object, Object>();
+			map.put("jobClass", "类未找到");
+			modelMap.put("message", map);
+			RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
+			return null;
+		}
+		if(!CronExpression.isValidExpression(quartzConf.getCronExpression())) {
+			Map<Object, Object> map = new HashMap<Object, Object>();
+			map.put("cronExpression", "cron表达式不合法");
+			modelMap.put("message", map);
+			RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
+			return null;
+		}
 		QuartzConf quartzConfValid = new QuartzConf();
 		quartzConfValid.setJobName(quartzConf.getJobName());
-		int total = quartzConfService.findTotal(quartzConf);
+		int total = quartzConfService.findTotal(quartzConfValid);
 		if(total != 0) {
 			Map<Object, Object> map = new HashMap<Object, Object>();
 			map.put("jobName", "已存在");
@@ -163,6 +182,23 @@ public class QuartzConfController extends BaseController {
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, QuartzConf quartzConf) throws Exception {
 		if (!beanValidator(modelMap, quartzConf)){
+			RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
+			return null;
+		}
+		Class jobClass = null;
+		try {
+			jobClass = Class.forName(quartzConf.getJobClass());
+		} catch (ClassNotFoundException e) {
+			Map<Object, Object> map = new HashMap<Object, Object>();
+			map.put("jobClass", "类未找到");
+			modelMap.put("message", map);
+			RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
+			return null;
+		}
+		if(!CronExpression.isValidExpression(quartzConf.getCronExpression())) {
+			Map<Object, Object> map = new HashMap<Object, Object>();
+			map.put("cronExpression", "cron表达式不合法");
+			modelMap.put("message", map);
 			RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
 			return null;
 		}
