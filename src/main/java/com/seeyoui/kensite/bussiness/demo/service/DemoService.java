@@ -1,7 +1,7 @@
 /*
  * Powered By cuichen
- * Since 2014 - 2015
- */package com.seeyoui.kensite.bussiness.demo.demo.service;
+ * Since 2014 - 2016
+ */package com.seeyoui.kensite.bussiness.demo.service;
  
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,8 +15,8 @@ import com.seeyoui.kensite.common.base.service.BaseService;
 import com.seeyoui.kensite.common.exception.CRUDException;
 import com.seeyoui.kensite.common.util.*;
 import com.seeyoui.kensite.common.constants.StringConstant;
-import com.seeyoui.kensite.bussiness.demo.demo.domain.Demo;
-import com.seeyoui.kensite.bussiness.demo.demo.persistence.DemoMapper;
+import com.seeyoui.kensite.bussiness.demo.domain.Demo;
+import com.seeyoui.kensite.bussiness.demo.persistence.DemoMapper;
 import com.seeyoui.kensite.framework.act.idgenerator.GeneratorUUID;
 
 /**
@@ -24,7 +24,7 @@ import com.seeyoui.kensite.framework.act.idgenerator.GeneratorUUID;
  * @author cuichen
  * @version 1.0
  * @since 1.0
- * @date 2015-12-28
+ * @date 2016-04-20
  */
 @Service
 public class DemoService extends BaseService {
@@ -109,6 +109,16 @@ public class DemoService extends BaseService {
 	 */
 	public void delete(List<String> listId) throws CRUDException {
 		demoMapper.delete(listId);
+	}
+	
+	/**
+	 * 全文检索查询所有数据集合
+	 * @param listId
+	 * @return
+	 * @throws CRUDException
+	 */
+	public List<Demo> findLucene(List<String> listId) throws CRUDException {
+		return demoMapper.findLucene(listId);
 	}
 	
 }

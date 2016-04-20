@@ -112,7 +112,7 @@ public class UserUtils {
 	 */
 	public static SysUser getUser(){
 		SysUser sysUser = (SysUser)getSession().getAttribute("currentUser");
-		if (sysUser != null){
+		if (sysUser == null){
 			String currentUserName = (String)getSession().getAttribute("currentUserName");
 			if(currentUserName == null) {
 				return new SysUser();
@@ -121,6 +121,8 @@ public class UserUtils {
 			if (sysUser != null){
 				return sysUser;
 			}
+		} else {
+			return sysUser;
 		}
 		// 如果没有登录，则返回实例化空的User对象。
 		return new SysUser();

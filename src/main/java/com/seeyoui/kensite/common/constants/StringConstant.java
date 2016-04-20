@@ -24,6 +24,9 @@ public final class StringConstant {
 	//附件存放路径
 	public static final String UPLOAD_FILE_URL = "upload\\";
 	
+	//附件存放路径
+	public static final String LUCENE_INDEX_URL = "\\lucene\\";
+	
 	//初始化密码
 	public static final String INIT_PASSWORD = "123456";
 	

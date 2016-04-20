@@ -21,16 +21,28 @@
 					    <th data-options="field:'id',hidden:true">ID</th>
 				    	<ks:listTag table="BO_DEMO" column="REMARKS"/>
 				    	<ks:listTag table="BO_DEMO" column="TREE_ID"/>
+				    	<ks:listTag table="BO_DEMO" column="USER_NAME"/>
+				    	<ks:listTag table="BO_DEMO" column="EXPRESSION"/>
 		            </tr>
 		        </thead>
 		    </table>
 		    <div id="toolbar">
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="$.demo.newInfo()">新建</a>
+		    	<shiro:hasPermission name="demo:demo:insert">
+		        </shiro:hasPermission>
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="$.demo.editInfo()">修改</a>
+		        <shiro:hasPermission name="demo:demo:update">
+		        </shiro:hasPermission>
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="$.demo.destroyInfo()">删除</a>
+		        <shiro:hasPermission name="demo:demo:delete">
+		        </shiro:hasPermission>
+		        <shiro:hasPermission name="demo:demo:export">
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-page_excel" plain="true" onclick="$.demo.exportExcel()">导出</a>
+		        </shiro:hasPermission>
 		    	<ks:queryTag table="BO_DEMO" column="REMARKS"/>
 		    	<ks:queryTag table="BO_DEMO" column="TREE_ID"/>
+		    	<ks:queryTag table="BO_DEMO" column="EXPRESSION"/>
+		    	<ks:queryTag table="BO_DEMO" column="USER_NAME"/>
 			    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="$.demo.selectData()">查询</a>
 		    </div>
 	    </div>
@@ -45,6 +57,8 @@
 	        	$('#dataList').datagrid('load',{
 			    	<ks:queryJsTag table="BO_DEMO" column="REMARKS"/>
 			    	<ks:queryJsTag table="BO_DEMO" column="TREE_ID"/>
+			    	<ks:queryJsTag table="BO_DEMO" column="EXPRESSION"/>
+			    	<ks:queryJsTag table="BO_DEMO" column="USER_NAME"/>
 	        	});
 	        },
         	reloadData : function () {
@@ -58,11 +72,11 @@
 	            var row = $('#dataList').datagrid('getSelected');
 	            //var row = $('#dataList').datagrid('getSelections');
 	            if (row){
-	            	if(row.length != 1) {
-	            		layer.msg("只能选择一条记录修改！", {offset: 'rb',icon: 5,shift: 8,time: layerMsgTime});
-	            	} else {
-		            	$.demo.layerOpen(url);
-	            	}
+	            	//if(row.length != 1) {
+	            		//layer.msg("只能选择一条记录修改！", {offset: 'rb',icon: 5,shift: 8,time: layerMsgTime});
+	            	//} else {
+		            $.demo.layerOpen(url);
+	            	//}
 	            } else {
 					layer.msg("请先选择要修改的记录！", {offset: 'rb',icon: 5,shift: 8,time: layerMsgTime});
 				}

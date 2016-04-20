@@ -2,10 +2,16 @@ package com.seeyoui.kensite.framework.system.controller;
 
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import net.sf.json.JSONObject;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -21,13 +27,17 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import com.seeyoui.kensite.common.util.CookieUtils;
 import com.seeyoui.kensite.common.util.MD5;
+import com.seeyoui.kensite.common.util.SessionUtil;
 import com.seeyoui.kensite.common.util.StringUtils;
 import com.seeyoui.kensite.framework.plugin.skins.domain.Skins;
 import com.seeyoui.kensite.framework.plugin.skins.service.SkinsService;
+import com.seeyoui.kensite.framework.system.domain.SysUser;
 import com.seeyoui.kensite.framework.system.util.SkinsUtils;
 import com.seeyoui.kensite.framework.system.util.UserUtils;
 
@@ -152,6 +162,33 @@ public class LoginController {
 	@RequestMapping(value = "/mainContent/{url}")
 	public String mainContent(@PathVariable("url") String url, HttpSession session, ModelMap modelMap) {
 		return "skins/"+url;
+	}
+	
+	/**
+	 * 单点登录
+	 * @param modelMap
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/sso/weaver")
+	@ResponseBody
+	public ModelAndView ssoWeaver(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap, String userInfo, String url, String license) {
+		String mac = "00-26-C6-3B-B6-9A";
+		System.out.println(request.getRemoteAddr());
+		List<String> result = new ArrayList<String>();
+		result.add(mac);
+		result.add(request.getRemoteAddr());
+		System.out.println(MD5.md5(result.toString()));
+		if(StringUtils.isBlank(license) || !license.equals(MD5.md5(result.toString()))) {
+			return new ModelAndView("redirect:/WEB-INF/view/error/error404.jsp", modelMap);
+		}
+		JSONObject jsonObj = JSONObject.fromObject(userInfo);
+		SysUser sysUser = (SysUser) JSONObject.toBean(jsonObj, SysUser.class);
+		SessionUtil.setSession("currentUserName", "system");
+		SessionUtil.setSession("currentUser", sysUser);
+		return new ModelAndView("redirect:"+url, modelMap);
 	}
 }
 

@@ -1,8 +1,8 @@
 /*
  * Powered By cuichen
- * Since 2014 - 2015
+ * Since 2014 - 2016
  */
-package com.seeyoui.kensite.bussiness.demo.demo.controller;
+package com.seeyoui.kensite.bussiness.demo.controller;
 
 import java.sql.*;
 import java.util.*;
@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+import org.apache.lucene.index.Term;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,14 +32,16 @@ import com.seeyoui.kensite.common.base.domain.EasyUIDataGrid;
 import com.seeyoui.kensite.common.base.controller.BaseController;
 import com.seeyoui.kensite.common.util.RequestResponseUtil;
 import com.seeyoui.kensite.common.util.excel.ExportExcel;
-import com.seeyoui.kensite.bussiness.demo.demo.domain.Demo;
-import com.seeyoui.kensite.bussiness.demo.demo.service.DemoService;
+import com.seeyoui.kensite.framework.luence.domain.LuceneDocument;
+import com.seeyoui.kensite.framework.luence.util.LuceneUtils;
+import com.seeyoui.kensite.bussiness.demo.domain.Demo;
+import com.seeyoui.kensite.bussiness.demo.service.DemoService;
 /**
  * 演示
  * @author cuichen
  * @version 1.0
  * @since 1.0
- * @date 2015-12-28
+ * @date 2016-04-20
  */
 @Controller
 @RequestMapping(value = "demo/demo")
@@ -59,7 +62,7 @@ public class DemoController extends BaseController {
 	public ModelAndView view(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, @PathVariable String page) throws Exception {
-		return new ModelAndView("bussiness/demo/demo/"+page, modelMap);
+		return new ModelAndView("bussiness/demo/"+page, modelMap);
 	}
 	
 	/**
@@ -135,6 +138,11 @@ public class DemoController extends BaseController {
 			return null;
 		}
 		demoService.save(demo);
+		String luceneUrl = session.getServletContext().getRealPath("/")+StringConstant.LUCENE_INDEX_URL+"demo";
+		LuceneDocument document = new LuceneDocument();
+		document.setId(demo.getId());
+		document.setContent(demo.getUserName()+","+demo.getExpression());
+		LuceneUtils.insert(luceneUrl, document);
 		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}
@@ -157,6 +165,12 @@ public class DemoController extends BaseController {
 			return null;
 		}
 		demoService.update(demo);
+		String luceneUrl = session.getServletContext().getRealPath("/")+StringConstant.LUCENE_INDEX_URL+"demo";
+		LuceneDocument document = new LuceneDocument();
+		document.setId(demo.getId());
+		document.setContent(demo.getUserName()+","+demo.getExpression());
+		Term term = new Term("id", demo.getId());
+		LuceneUtils.update(luceneUrl, term, document);
 		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}
@@ -176,6 +190,11 @@ public class DemoController extends BaseController {
 			ModelMap modelMap, String id) throws Exception {
 		List<String> listId = Arrays.asList(id.split(","));
 		demoService.delete(listId);
+		String luceneUrl = session.getServletContext().getRealPath("/")+StringConstant.LUCENE_INDEX_URL+"demo";
+		for(String key : listId) {
+			Term term = new Term("id", key);
+			LuceneUtils.delete(luceneUrl, term);
+		}
 		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}
@@ -195,6 +214,98 @@ public class DemoController extends BaseController {
 		String fileName = DateUtils.getDate("yyyyMMddHHmmss")+".xlsx";
 		List<Demo> demoList = demoService.findAll(demo);
 		new ExportExcel(null, Demo.class).setDataList(demoList).write(response, fileName).dispose();
+		return null;
+	}
+	
+	/**
+	 * 全文检索分页
+	 * @param session
+	 * @param response
+	 * @param request
+	 * @param modelMap
+	 * @param searchStr
+	 * @param page
+	 * @param rows
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/lucene/data")
+	@ResponseBody
+	public Object luceneData(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap, String searchStr, int page, int rows) throws Exception {
+		String luceneUrl = session.getServletContext().getRealPath("/")+StringConstant.LUCENE_INDEX_URL+"demo";
+		List<String> listId = LuceneUtils.search(luceneUrl, searchStr, page, rows);
+		List<Demo> demoList = demoService.findLucene(listId);
+		return demoList;
+	}
+
+	/**
+	 * 全文检索
+	 * @param session
+	 * @param response
+	 * @param request
+	 * @param modelMap
+	 * @param searchStr
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/lucene/all")
+	@ResponseBody
+	public Object luceneAll(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap, String searchStr) throws Exception {
+		String luceneUrl = session.getServletContext().getRealPath("/")+StringConstant.LUCENE_INDEX_URL+"demo";
+		List<String> listId = LuceneUtils.search(luceneUrl, searchStr, 1, Integer.MAX_VALUE);
+		List<Demo> demoList = demoService.findLucene(listId);
+		return demoList;
+	}
+	
+	/**
+	 * 全文检索清空索引
+	 * @param session
+	 * @param response
+	 * @param request
+	 * @param modelMap
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/lucene/clean")
+	@ResponseBody
+	public Object luceneClean(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap) throws Exception {
+		String luceneUrl = session.getServletContext().getRealPath("/")+StringConstant.LUCENE_INDEX_URL+"demo";
+		LuceneUtils.clean(luceneUrl);
+		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
+		return null;
+	}
+	
+	/**
+	 * 
+	 * @param session
+	 * @param response
+	 * @param request
+	 * @param modelMap
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/lucene/create")
+	@ResponseBody
+	public Object luceneCreate(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap) throws Exception {
+		String luceneUrl = session.getServletContext().getRealPath("/")+StringConstant.LUCENE_INDEX_URL+"demo";
+		List<LuceneDocument> documentList = new ArrayList<LuceneDocument>();
+		List<Demo> demoList = demoService.findAll(new Demo());
+		for(Demo demo : demoList) {
+			LuceneDocument document = new LuceneDocument();
+			document.setId(demo.getId());
+			document.setContent(demo.getUserName()+","+demo.getExpression());
+			documentList.add(document);
+		}
+		LuceneUtils.create(luceneUrl, documentList);
+		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}
 }

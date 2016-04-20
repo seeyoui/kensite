@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.seeyoui.kensite.bussiness.demo.demo.persistence.DemoMapper" >
+<mapper namespace="com.seeyoui.kensite.bussiness.demo.persistence.DemoMapper" >
 	<!-- 查询单表的字段 -->
 	<sql id="tableColumns">
 		T.ID AS "id",
@@ -10,7 +10,9 @@
 		T.UPDATE_USER AS "updateUser",
 		T.REMARKS AS "remarks",
 		T.DEL_FLAG AS "delFlag",
-		T.TREE_ID AS "treeId"
+		T.TREE_ID AS "treeId",
+		T.EXPRESSION AS "expression",
+		T.USER_NAME AS "userName"
 	</sql>
 	<!-- 查询过滤条件 -->
 	<sql id="whereStr">
@@ -40,18 +42,24 @@
 			<if test="treeId != null and treeId != ''">
 				AND T.TREE_ID LIKE '%'||#{treeId}||'%'
 			</if>
+			<if test="expression != null and expression != ''">
+				AND T.EXPRESSION LIKE '%'||#{expression}||'%'
+			</if>
+			<if test="userName != null and userName != ''">
+				AND T.USER_NAME LIKE '%'||#{userName}||'%'
+			</if>
 		</where>
 	</sql>
 	<sql id="orderBy">
 		ORDER BY 
 		<if test="sort != null and sort != ''">
-			#{sort} #{order},
+			${sort} ${order},
 		</if>
 		T.CREATE_DATE DESC 
 	</sql>
 	
 	<!-- 根据ID查询单条数据 -->
-	<select id="findOne" resultType="com.seeyoui.kensite.bussiness.demo.demo.domain.Demo">
+	<select id="findOne" resultType="com.seeyoui.kensite.bussiness.demo.domain.Demo">
 		SELECT
 		<include refid="tableColumns" />
 		FROM BO_DEMO T
@@ -59,7 +67,7 @@
 	</select>
 	
 	<!-- 查询数据集合 -->
-	<select id="findList" resultType="com.seeyoui.kensite.bussiness.demo.demo.domain.Demo">
+	<select id="findList" resultType="com.seeyoui.kensite.bussiness.demo.domain.Demo">
 		select * from(select T.*,rownum rn from(
 			SELECT
 			<include refid="tableColumns"/>
@@ -70,12 +78,24 @@
 	</select>
 	
 	<!-- 查询所有数据集合 -->
-	<select id="findAll" resultType="com.seeyoui.kensite.bussiness.demo.demo.domain.Demo">
+	<select id="findAll" resultType="com.seeyoui.kensite.bussiness.demo.domain.Demo">
 		SELECT
 		<include refid="tableColumns"/>
 		FROM BO_DEMO T
 		<include refid="whereStr"/>
 		<include refid="orderBy"/>
+	</select>
+	
+	<!-- 查询所有数据集合 -->
+	<select id="findLucene" resultType="com.seeyoui.kensite.bussiness.demo.domain.Demo">
+		SELECT
+		<include refid="tableColumns"/>
+		FROM BO_DEMO T
+		WHERE ID IN 
+		<foreach item="listId" collection="list"
+			open="(" separator="," close=")">
+			#{listId}
+		</foreach>
 	</select>
 	
 	<!-- 查询数据总数 -->
@@ -96,22 +116,33 @@
 	</select>
 	
 	<!-- 数据新增 -->
-	<insert id="save" parameterType="com.seeyoui.kensite.bussiness.demo.demo.domain.Demo">
-		<selectKey keyProperty="id" resultType="int" order="BEFORE">
-			SELECT SEQ_COMMON_BO_ID.NEXTVAL FROM DUAL
-		</selectKey>
+	<insert id="save" parameterType="com.seeyoui.kensite.bussiness.demo.domain.Demo">
 		INSERT INTO BO_DEMO (
+			
+			
+			
+			
+			
 			REMARKS,
 			DEL_FLAG,
 			TREE_ID,
+			EXPRESSION,
+			USER_NAME,
 			CREATE_USER,
 			CREATE_DATE,
 			ID
 		)
 		VALUES (
+			
+			
+			
+			
+			
 			#{remarks,jdbcType=VARCHAR},
 			#{delFlag,jdbcType=VARCHAR},
 			#{treeId,jdbcType=VARCHAR},
+			#{expression,jdbcType=VARCHAR},
+			#{userName,jdbcType=VARCHAR},
 			#{createUser.userName},
 			sysdate,
 			#{id}
@@ -119,7 +150,7 @@
 	</insert>
 	
 	<!-- 数据修改 -->
-	<update id="update" parameterType="com.seeyoui.kensite.bussiness.demo.demo.domain.Demo">
+	<update id="update" parameterType="com.seeyoui.kensite.bussiness.demo.domain.Demo">
 		UPDATE BO_DEMO
 		<set>
 			
@@ -135,6 +166,12 @@
 			</if>
 			<if test="treeId !=null and treeId !=''">
 			TREE_ID=#{treeId},
+			</if>
+			<if test="expression !=null and expression !=''">
+			EXPRESSION=#{expression},
+			</if>
+			<if test="userName !=null and userName !=''">
+			USER_NAME=#{userName},
 			</if>
 			UPDATE_USER = #{updateUser.userName},
 			UPDATE_DATE = sysdate,

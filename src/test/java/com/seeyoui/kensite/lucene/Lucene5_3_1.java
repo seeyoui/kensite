@@ -1,4 +1,4 @@
-package com.seeyoui.kensite.luence;
+package com.seeyoui.kensite.lucene;
 
 import java.io.IOException;
 
@@ -18,7 +18,7 @@ import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.RAMDirectory;
 
-public class Luence5_3_1 {
+public class Lucene5_3_1 {
 	public static void main(String[] args) throws IOException {
 	    Analyzer analyzer = new StandardAnalyzer();
 
