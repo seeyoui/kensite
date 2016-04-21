@@ -7,7 +7,10 @@ package ${basepackage}.${innerpackage}.${table.classNameFirstLower}.persistence;
 
 import ${basepackage}.common.base.domain.EasyUIDataGrid;
 import ${basepackage}.${innerpackage}.${table.classNameFirstLower}.domain.${className};
+
 import java.util.*;
+
+import com.seeyoui.kensite.common.exception.CRUDException;
 
 <#include "/java_imports.include">
 
@@ -65,4 +68,13 @@ public interface ${className}Mapper {
 	 * @param listId
 	 */
 	public void delete(List<String> listId);
+	<#if (lucene=="Y") >
+	/**
+	 * 全文检索查询所有数据集合
+	 * @param listId
+	 * @return
+	 * @throws CRUDException
+	 */
+	public List<${className}> findLucene(List<String> listId);
+	</#if>
 }

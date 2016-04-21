@@ -186,4 +186,17 @@ ${"<if test=\""+column.columnNameLower+" !=null and "+column.columnNameLower+" !
 			${"#{"}listId${"}"}
 		</foreach>
 	</delete>
+	<#if (lucene=="Y") >
+	<!-- 查询所有数据集合 -->
+	<select id="findLucene" resultType="${basepackage}.${innerpackage}.${table.classNameFirstLower}.domain.${className}">
+		SELECT
+		<include refid="tableColumns"/>
+		FROM ${table.sqlName} T
+		WHERE ${"id"} IN 
+		<foreach item="listId" collection="list"
+			open="(" separator="," close=")">
+			${"#{"}listId${"}"}
+		</foreach>
+	</select>
+	</#if>
 </mapper>

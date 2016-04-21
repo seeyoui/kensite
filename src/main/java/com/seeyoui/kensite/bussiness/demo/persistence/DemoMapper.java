@@ -6,14 +6,17 @@ package com.seeyoui.kensite.bussiness.demo.persistence;
 
 import com.seeyoui.kensite.common.base.domain.EasyUIDataGrid;
 import com.seeyoui.kensite.bussiness.demo.domain.Demo;
+
 import java.util.*;
+
+import com.seeyoui.kensite.common.exception.CRUDException;
 
 /**
  * 演示
  * @author cuichen
  * @version 1.0
  * @since 1.0
- * @date 2016-04-20
+ * @date 2016-04-21
  */
 public interface DemoMapper {
 
@@ -69,11 +72,11 @@ public interface DemoMapper {
 	 * @param listId
 	 */
 	public void delete(List<String> listId);
-	
 	/**
 	 * 全文检索查询所有数据集合
 	 * @param listId
 	 * @return
+	 * @throws CRUDException
 	 */
 	public List<Demo> findLucene(List<String> listId);
 }

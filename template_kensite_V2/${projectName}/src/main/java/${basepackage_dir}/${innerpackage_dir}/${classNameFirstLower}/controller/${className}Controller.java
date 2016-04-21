@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+import org.apache.lucene.index.Term;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,12 +28,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.seeyoui.kensite.common.constants.StringConstant;
+import com.seeyoui.kensite.common.util.RequestResponseUtil;
+import com.seeyoui.kensite.framework.luence.domain.LuceneDocument;
+import com.seeyoui.kensite.framework.luence.util.LuceneUtils;
+
 import ${basepackage}.common.util.DateUtils;
 import ${basepackage}.common.constants.StringConstant;
 import ${basepackage}.common.base.domain.EasyUIDataGrid;
 import ${basepackage}.common.base.controller.BaseController;
 import ${basepackage}.common.util.RequestResponseUtil;
 import ${basepackage}.common.util.excel.ExportExcel;
+
+import com.seeyoui.kensite.framework.luence.domain.LuceneDocument;
+import com.seeyoui.kensite.framework.luence.util.LuceneUtils;
+
 import ${basepackage}.${innerpackage}.${table.classNameFirstLower}.domain.${className};
 import ${basepackage}.${innerpackage}.${table.classNameFirstLower}.service.${className}Service;
 <#include "/java_imports.include">
@@ -132,6 +142,19 @@ public class ${className}Controller extends BaseController {
 			return null;
 		}
 		${table.classNameFirstLower}Service.save(${table.classNameFirstLower});
+		<#if (lucene=="Y") >
+		String luceneUrl = session.getServletContext().getRealPath("/")+StringConstant.LUCENE_INDEX_URL+"${table.classNameFirstLower}";
+		LuceneDocument document = new LuceneDocument();
+		document.setId(${table.classNameFirstLower}.getId());
+		document.setContent(""
+		<#list table.columns as column>
+		<#if (column.columnName?lower_case!="id"&&column.columnName?lower_case!="createuser"&&column.columnName?lower_case!="createdate"&&column.columnName?lower_case!="updateuser"&&column.columnName?lower_case!="updatedate"&&column.columnName?lower_case!="remarks"&&column.columnName?lower_case!="delflag") >
+			+","+${table.classNameFirstLower}.get${column.columnName}()
+		</#if>
+		</#list>
+		);
+		LuceneUtils.insert(luceneUrl, document);
+		</#if>
 		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}
@@ -154,6 +177,20 @@ public class ${className}Controller extends BaseController {
 			return null;
 		}
 		${table.classNameFirstLower}Service.update(${table.classNameFirstLower});
+		<#if (lucene=="Y") >
+		String luceneUrl = session.getServletContext().getRealPath("/")+StringConstant.LUCENE_INDEX_URL+"${table.classNameFirstLower}";
+		LuceneDocument document = new LuceneDocument();
+		document.setId(${table.classNameFirstLower}.getId());
+		document.setContent(""
+		<#list table.columns as column>
+		<#if (column.columnName?lower_case!="id"&&column.columnName?lower_case!="createuser"&&column.columnName?lower_case!="createdate"&&column.columnName?lower_case!="updateuser"&&column.columnName?lower_case!="updatedate"&&column.columnName?lower_case!="remarks"&&column.columnName?lower_case!="delflag") >
+			+","+${table.classNameFirstLower}.get${column.columnName}()
+		</#if>
+		</#list>
+		);
+		Term term = new Term("id", ${table.classNameFirstLower}.getId());
+		LuceneUtils.update(luceneUrl, term, document);
+		</#if>
 		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}
@@ -173,6 +210,13 @@ public class ${className}Controller extends BaseController {
 			ModelMap modelMap, String id) throws Exception {
 		List<String> listId = Arrays.asList(id.split(","));
 		${table.classNameFirstLower}Service.delete(listId);
+		<#if (lucene=="Y") >
+		String luceneUrl = session.getServletContext().getRealPath("/")+StringConstant.LUCENE_INDEX_URL+"${table.classNameFirstLower}";
+		for(String key : listId) {
+			Term term = new Term("id", key);
+			LuceneUtils.delete(luceneUrl, term);
+		}
+		</#if>
 		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
 	}
@@ -194,4 +238,103 @@ public class ${className}Controller extends BaseController {
 		new ExportExcel(null, ${className}.class).setDataList(${table.classNameFirstLower}List).write(response, fileName).dispose();
 		return null;
 	}
+	<#if (lucene=="Y") >
+	/**
+	 * 全文检索分页
+	 * @param session
+	 * @param response
+	 * @param request
+	 * @param modelMap
+	 * @param searchStr
+	 * @param page
+	 * @param rows
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/lucene/data")
+	@ResponseBody
+	public Object luceneData(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap, String searchStr, int page, int rows) throws Exception {
+		String luceneUrl = session.getServletContext().getRealPath("/")+StringConstant.LUCENE_INDEX_URL+"${table.classNameFirstLower}";
+		List<String> listId = LuceneUtils.search(luceneUrl, searchStr, page, rows);
+		List<${className}> ${table.classNameFirstLower}List = ${table.classNameFirstLower}Service.findLucene(listId);
+		return ${table.classNameFirstLower}List;
+	}
+
+	/**
+	 * 全文检索
+	 * @param session
+	 * @param response
+	 * @param request
+	 * @param modelMap
+	 * @param searchStr
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/lucene/all")
+	@ResponseBody
+	public Object luceneAll(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap, String searchStr) throws Exception {
+		String luceneUrl = session.getServletContext().getRealPath("/")+StringConstant.LUCENE_INDEX_URL+"${table.classNameFirstLower}";
+		List<String> listId = LuceneUtils.search(luceneUrl, searchStr, 1, Integer.MAX_VALUE);
+		List<${className}> ${table.classNameFirstLower}List = ${table.classNameFirstLower}Service.findLucene(listId);
+		return ${table.classNameFirstLower}List;
+	}
+	
+	/**
+	 * 全文检索清空索引
+	 * @param session
+	 * @param response
+	 * @param request
+	 * @param modelMap
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/lucene/clean")
+	@ResponseBody
+	public Object luceneClean(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap) throws Exception {
+		String luceneUrl = session.getServletContext().getRealPath("/")+StringConstant.LUCENE_INDEX_URL+"${table.classNameFirstLower}";
+		LuceneUtils.clean(luceneUrl);
+		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
+		return null;
+	}
+	
+	/**
+	 * 
+	 * @param session
+	 * @param response
+	 * @param request
+	 * @param modelMap
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/lucene/create")
+	@ResponseBody
+	public Object luceneCreate(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap) throws Exception {
+		String luceneUrl = session.getServletContext().getRealPath("/")+StringConstant.LUCENE_INDEX_URL+"${table.classNameFirstLower}";
+		List<LuceneDocument> documentList = new ArrayList<LuceneDocument>();
+		List<${className}> ${table.classNameFirstLower}List = ${table.classNameFirstLower}Service.findAll(new ${className}());
+		for(${className} ${table.classNameFirstLower} : ${table.classNameFirstLower}List) {
+			LuceneDocument document = new LuceneDocument();
+			document.setId(${table.classNameFirstLower}.getId());
+			document.setContent(""
+			<#list table.columns as column>
+			<#if (column.columnName?lower_case!="id"&&column.columnName?lower_case!="createuser"&&column.columnName?lower_case!="createdate"&&column.columnName?lower_case!="updateuser"&&column.columnName?lower_case!="updatedate"&&column.columnName?lower_case!="remarks"&&column.columnName?lower_case!="delflag") >
+				+","+${table.classNameFirstLower}.get${column.columnName}()
+			</#if>
+			</#list>
+			);
+			documentList.add(document);
+		}
+		LuceneUtils.create(luceneUrl, documentList);
+		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
+		return null;
+	}
+	</#if>
 }

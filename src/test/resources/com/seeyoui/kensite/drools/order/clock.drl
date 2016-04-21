@@ -1,0 +1,11 @@
+package com.seeyoui.kensite.drools.order
+
+global Integer num;
+
+rule "run"
+	salience 1
+	when
+		eval(true)
+	then
+		System.out.println(num);
+end

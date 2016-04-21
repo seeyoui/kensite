@@ -6,23 +6,32 @@
 		1.会为所有的property生成property_dir属性,如pkg=com.company => pkg_dir=com/company
 		2.可以引用环境变量: ${env.JAVA_HOME} or System.properties: ${user.home},property之间也可以相互引用
 	</comment>
-	<entry key="basepackage">com.seeyoui.kensite</entry>
-	<!-- 当前模块所属包路径 -->
-	<entry key="innerpackage">bussiness.demo</entry>
+	<!-- ==========只需要配置一次========== -->
 	<!-- 当前功能名，对应工作空间的文件夹名，注意大小写 -->
 	<entry key="projectName">kensite</entry>
+	<!-- 项目基础包路径 -->
+	<entry key="basepackage">com.seeyoui.kensite</entry>
+	
+	<!-- JSP文件所在路径 web/${namespace}/${className}/list.jsp -->
+	<entry key="namespace">WEB-INF/view</entry>
+	<!-- 项目本地硬盘绝对路径 -->
+	<entry key="outRoot">C:\Users\cuichen\git\</entry>
+	<!-- ==========只需要配置一次========== -->
+	
+	
+	<!-- ==========根据业务自行修改========== -->
+	<!-- 当前模块所属包路径 -->
+	<entry key="innerpackage">bussiness</entry>
 	<!-- 当前模块名，@RequestMapping(value = "guestbook")==@RequestMapping(value = "cms/guestbook") -->
 	<entry key="moduleC">demo/</entry>
 	<!-- 当前模块名，@RequiresPermissions("guestbook:view")==@RequiresPermissions("cms:guestbook:view") -->
 	<entry key="moduleP">demo:</entry>
-	
-	<!-- jsp namespace: web/${namespace}/${className}/list.jsp -->
-	<entry key="namespace">WEB-INF/view</entry>
-	
-	<entry key="outRoot">C:\Users\cuichen\git\</entry>
+	<!-- 是否生成全文检索模块，需要：Y，不需要：N，打开将会对增删改查操作有一定效率影响，请按照需求设置 -->
+	<entry key="lucene">Y</entry>
+	<!-- ==========根据业务自行修改========== -->
 
 	<!-- 需要移除的表名前缀,使用逗号进行分隔多个前缀,示例值: t_,v_ -->
-	<entry key="tableRemovePrefixes">bo_,cms_,t_,sys_,mod_</entry>
+	<entry key="tableRemovePrefixes">job_,bo_,cms_,sys_,mod_,t_</entry>
 	
 	<entry key="jdbc.username">ks</entry>
 	<entry key="jdbc.password">kensite</entry>
@@ -50,7 +59,7 @@
 
 	<!-- Oracle 	jdbc:oracle:oci:@tnsname_devdb
 	-->
-	<entry key="jdbc.url">jdbc:oracle:thin:@123.56.224.66:1521:orcl</entry>
+	<entry key="jdbc.url">jdbc:oracle:thin:@42.96.206.93:1521:orcl</entry>
 	<entry key="jdbc.driver">oracle.jdbc.driver.OracleDriver</entry>
 	
 	<!-- SQLServer2000 

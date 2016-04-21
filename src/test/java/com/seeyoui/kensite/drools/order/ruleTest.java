@@ -21,7 +21,7 @@ public class ruleTest {
 		KnowledgeBuilder kbuilder = KnowledgeBuilderFactory
 				.newKnowledgeBuilder();
 
-		kbuilder.add(ResourceFactory.newClassPathResource("discountrule.drl",
+		kbuilder.add(ResourceFactory.newClassPathResource("clock.drl",
 				getClass()), ResourceType.DRL);
 
 		if (kbuilder.hasErrors()) {
@@ -34,12 +34,16 @@ public class ruleTest {
 
 		StatelessKnowledgeSession ksession = kbase
 				.newStatelessKnowledgeSession();
-
+		ksession.setGlobal("num", 200);
 		Order order = new Order();
 		order.setSumprice(159);
-		ksession.execute(Arrays.asList(new Object[] { order }));
+
+		Order order1 = new Order();
+		order1.setSumprice(50);
+		ksession.execute(Arrays.asList(new Object[] { order, order1 }));
 
 		System.out.println("DISCOUNT IS: " + order.getDiscountPercent());
+		System.out.println("DISCOUNT1 IS: " + order1.getDiscountPercent());
 
 		return order.getDiscountPercent();
 

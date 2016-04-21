@@ -18,6 +18,8 @@ import ${basepackage}.common.util.*;
 import ${basepackage}.common.constants.StringConstant;
 import ${basepackage}.${innerpackage}.${table.classNameFirstLower}.domain.${className};
 import ${basepackage}.${innerpackage}.${table.classNameFirstLower}.persistence.${className}Mapper;
+
+import com.seeyoui.kensite.common.exception.CRUDException;
 import com.seeyoui.kensite.framework.act.idgenerator.GeneratorUUID;
 
 <#include "/java_imports.include">
@@ -106,5 +108,15 @@ public class ${className}Service extends BaseService {
 	public void delete(List<String> listId) throws CRUDException {
 		${classNameLower}Mapper.delete(listId);
 	}
-	
+	<#if (lucene=="Y") >
+	/**
+	 * 全文检索查询所有数据集合
+	 * @param listId
+	 * @return
+	 * @throws CRUDException
+	 */
+	public List<${className}> findLucene(List<String> listId) throws CRUDException {
+		return ${classNameLower}Mapper.findLucene(listId);
+	}
+	</#if>
 }

@@ -26,14 +26,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.seeyoui.kensite.common.constants.StringConstant;
+import com.seeyoui.kensite.common.util.RequestResponseUtil;
+import com.seeyoui.kensite.framework.luence.domain.LuceneDocument;
+import com.seeyoui.kensite.framework.luence.util.LuceneUtils;
+
 import com.seeyoui.kensite.common.util.DateUtils;
 import com.seeyoui.kensite.common.constants.StringConstant;
 import com.seeyoui.kensite.common.base.domain.EasyUIDataGrid;
 import com.seeyoui.kensite.common.base.controller.BaseController;
 import com.seeyoui.kensite.common.util.RequestResponseUtil;
 import com.seeyoui.kensite.common.util.excel.ExportExcel;
+
 import com.seeyoui.kensite.framework.luence.domain.LuceneDocument;
 import com.seeyoui.kensite.framework.luence.util.LuceneUtils;
+
 import com.seeyoui.kensite.bussiness.demo.domain.Demo;
 import com.seeyoui.kensite.bussiness.demo.service.DemoService;
 /**
@@ -41,7 +48,7 @@ import com.seeyoui.kensite.bussiness.demo.service.DemoService;
  * @author cuichen
  * @version 1.0
  * @since 1.0
- * @date 2016-04-20
+ * @date 2016-04-21
  */
 @Controller
 @RequestMapping(value = "demo/demo")
@@ -141,7 +148,11 @@ public class DemoController extends BaseController {
 		String luceneUrl = session.getServletContext().getRealPath("/")+StringConstant.LUCENE_INDEX_URL+"demo";
 		LuceneDocument document = new LuceneDocument();
 		document.setId(demo.getId());
-		document.setContent(demo.getUserName()+","+demo.getExpression());
+		document.setContent(""
+			+","+demo.getTreeId()
+			+","+demo.getExpression()
+			+","+demo.getUserName()
+		);
 		LuceneUtils.insert(luceneUrl, document);
 		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;
@@ -168,7 +179,11 @@ public class DemoController extends BaseController {
 		String luceneUrl = session.getServletContext().getRealPath("/")+StringConstant.LUCENE_INDEX_URL+"demo";
 		LuceneDocument document = new LuceneDocument();
 		document.setId(demo.getId());
-		document.setContent(demo.getUserName()+","+demo.getExpression());
+		document.setContent(""
+			+","+demo.getTreeId()
+			+","+demo.getExpression()
+			+","+demo.getUserName()
+		);
 		Term term = new Term("id", demo.getId());
 		LuceneUtils.update(luceneUrl, term, document);
 		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
@@ -216,7 +231,6 @@ public class DemoController extends BaseController {
 		new ExportExcel(null, Demo.class).setDataList(demoList).write(response, fileName).dispose();
 		return null;
 	}
-	
 	/**
 	 * 全文检索分页
 	 * @param session
@@ -301,7 +315,11 @@ public class DemoController extends BaseController {
 		for(Demo demo : demoList) {
 			LuceneDocument document = new LuceneDocument();
 			document.setId(demo.getId());
-			document.setContent(demo.getUserName()+","+demo.getExpression());
+			document.setContent(""
+				+","+demo.getTreeId()
+				+","+demo.getExpression()
+				+","+demo.getUserName()
+			);
 			documentList.add(document);
 		}
 		LuceneUtils.create(luceneUrl, documentList);

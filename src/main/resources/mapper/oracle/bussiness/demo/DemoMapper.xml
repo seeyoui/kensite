@@ -86,18 +86,6 @@
 		<include refid="orderBy"/>
 	</select>
 	
-	<!-- 查询所有数据集合 -->
-	<select id="findLucene" resultType="com.seeyoui.kensite.bussiness.demo.domain.Demo">
-		SELECT
-		<include refid="tableColumns"/>
-		FROM BO_DEMO T
-		WHERE ID IN 
-		<foreach item="listId" collection="list"
-			open="(" separator="," close=")">
-			#{listId}
-		</foreach>
-	</select>
-	
 	<!-- 查询数据总数 -->
 	<select id="findTotal" resultType="Integer">
 		SELECT
@@ -188,4 +176,15 @@
 			#{listId}
 		</foreach>
 	</delete>
+	<!-- 查询所有数据集合 -->
+	<select id="findLucene" resultType="com.seeyoui.kensite.bussiness.demo.domain.Demo">
+		SELECT
+		<include refid="tableColumns"/>
+		FROM BO_DEMO T
+		WHERE id IN 
+		<foreach item="listId" collection="list"
+			open="(" separator="," close=")">
+			#{listId}
+		</foreach>
+	</select>
 </mapper>

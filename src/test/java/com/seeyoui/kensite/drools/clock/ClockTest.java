@@ -10,7 +10,6 @@ public class ClockTest {
         KieServices ks = KieServices.Factory.get();  
         KieContainer kContainer = ks.getKieClasspathContainer();  
         KieSession kSession = kContainer.newKieSession("session-clock");  
-          
         kSession.insert(new Clock());  
         kSession.fireAllRules();  
         kSession.dispose();  

@@ -17,6 +17,8 @@ import com.seeyoui.kensite.common.util.*;
 import com.seeyoui.kensite.common.constants.StringConstant;
 import com.seeyoui.kensite.bussiness.demo.domain.Demo;
 import com.seeyoui.kensite.bussiness.demo.persistence.DemoMapper;
+
+import com.seeyoui.kensite.common.exception.CRUDException;
 import com.seeyoui.kensite.framework.act.idgenerator.GeneratorUUID;
 
 /**
@@ -24,7 +26,7 @@ import com.seeyoui.kensite.framework.act.idgenerator.GeneratorUUID;
  * @author cuichen
  * @version 1.0
  * @since 1.0
- * @date 2016-04-20
+ * @date 2016-04-21
  */
 @Service
 public class DemoService extends BaseService {
@@ -110,7 +112,6 @@ public class DemoService extends BaseService {
 	public void delete(List<String> listId) throws CRUDException {
 		demoMapper.delete(listId);
 	}
-	
 	/**
 	 * 全文检索查询所有数据集合
 	 * @param listId
@@ -120,5 +121,4 @@ public class DemoService extends BaseService {
 	public List<Demo> findLucene(List<String> listId) throws CRUDException {
 		return demoMapper.findLucene(listId);
 	}
-	
 }
