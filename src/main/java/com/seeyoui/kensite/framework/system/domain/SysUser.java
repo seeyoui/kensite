@@ -26,6 +26,7 @@ public class SysUser extends Pager implements Serializable {
 	private String phone;
 	private String departmentId;
 	private String state;
+	private String headIcon;
 	@JsonIgnore
 	private SysDepartment sysDepartment;
 	private List<SysRole> roleList;
@@ -108,5 +109,13 @@ public class SysUser extends Pager implements Serializable {
 
 	public void setRoleList(List<SysRole> roleList) {
 		this.roleList = roleList;
+	}
+
+	public String getHeadIcon() {
+		return headIcon;
+	}
+
+	public void setHeadIcon(String headIcon) {
+		this.headIcon = headIcon;
 	}
 }

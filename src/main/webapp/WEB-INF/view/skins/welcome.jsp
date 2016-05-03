@@ -7,5 +7,6 @@
 	<%@ include file="/WEB-INF/view/taglib/layer.jsp" %>
 </head>
 <body>
+hello
 </body>
 </html>

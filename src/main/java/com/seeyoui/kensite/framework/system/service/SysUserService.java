@@ -129,6 +129,7 @@ public class SysUserService extends BaseService {
 	 * @throws CRUDException
 	 */
 	public void updateSysUser(SysUser sysUser) throws CRUDException{
+		UserUtils.clearCache(sysUser);
 		sysUserMapper.updateSysUser(sysUser);			
 	}
 	
@@ -138,6 +139,7 @@ public class SysUserService extends BaseService {
 	 * @throws CRUDException
 	 */
 	public void updatePassword(SysUser sysUser) throws CRUDException{
+		UserUtils.clearCache(sysUser);
 		sysUserMapper.updatePassword(sysUser);			
 	}
 	

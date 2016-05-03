@@ -1,5 +1,6 @@
 package com.seeyoui.kensite.common.constants;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
@@ -22,10 +23,13 @@ public final class StringConstant {
 	public static final String TABLE_PREFIX = "BO_";
 	
 	//附件存放路径
-	public static final String UPLOAD_FILE_URL = "upload\\";
+	public static final String UPLOAD_FILE_URL = "upload"+"/";
 	
 	//附件存放路径
-	public static final String LUCENE_INDEX_URL = "\\lucene\\";
+	public static final String LUCENE_INDEX_URL = "/"+"lucene"+"/";
+	
+	//用户头像存放路径
+	public static final String HEAD_ICON_URL = "headIcon"+"/";
 	
 	//初始化密码
 	public static final String INIT_PASSWORD = "123456";

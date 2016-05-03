@@ -110,7 +110,7 @@
             url = '${ctx}/sysMenu/form';
         	layer.open({
         	    type: 2,
-        	    title: '部门基本信息',
+        	    title: '菜单基本信息',
         	    area: ['310px', '385px'],
         	    fix: false, //不固定
         	    maxmin: false,

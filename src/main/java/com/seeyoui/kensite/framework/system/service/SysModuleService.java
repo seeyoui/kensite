@@ -15,6 +15,7 @@ import com.seeyoui.kensite.framework.act.idgenerator.GeneratorUUID;
 import com.seeyoui.kensite.framework.system.domain.SysModule;
 import com.seeyoui.kensite.framework.system.persistence.SysModuleMapper;
 import com.seeyoui.kensite.framework.system.persistence.SysModulePermissionMapper;
+import com.seeyoui.kensite.framework.system.persistence.SysRoleModuleMapper;
 
 /**
  * @author cuichen
@@ -28,6 +29,8 @@ public class SysModuleService extends BaseService {
 	private SysModuleMapper sysModuleMapper;
 	@Autowired
 	private SysModulePermissionMapper sysModulePermissionMapper;
+	@Autowired
+	private SysRoleModuleMapper sysRoleModuleMapper;
 
 	/**
 	 * 根据ID查询单条数据
@@ -86,6 +89,7 @@ public class SysModuleService extends BaseService {
 	public void deleteSysModule(List<String> listId) throws CRUDException {
 		for(int i=0; i<listId.size(); i++) {
 			sysModulePermissionMapper.deleteSysModulePermission(listId.get(i));
+			sysRoleModuleMapper.deleteSysRoleModule(listId.get(i));
 		}
 		sysModuleMapper.deleteSysModule(listId);
 	}

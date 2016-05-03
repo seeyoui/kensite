@@ -50,6 +50,6 @@
 	
 	<!-- 数据删除 -->
 	<delete id="deleteSysRoleModule">
-		DELETE FROM SYS_ROLE_MODULE WHERE role_id=#{roleId}
+		DELETE FROM SYS_ROLE_MODULE WHERE role_id=#{roleId} OR module_id=#{roleId}
 	</delete>
 </mapper>

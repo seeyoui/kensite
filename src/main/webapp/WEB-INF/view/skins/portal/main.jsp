@@ -335,7 +335,7 @@ a:hover {text-decoration:one;}
 		right_button_init();//按钮初始化效果
 		//user_menu_a_init();//用户菜单初始化效果
 		
-		initTab('首页', '/login/mainContent/welcome.do');//初始化主页
+		initTab('首页', '/login/skinsPage/welcome.do');//初始化主页
 		//初始化左侧菜单
 		$("#top_menu_button ul li:first").attr("class","top_menu_button_click_bg");
 		$("#top_menu_button ul li:first").click();

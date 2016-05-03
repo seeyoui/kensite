@@ -6,6 +6,7 @@
 <%@ taglib prefix="ks" uri="/WEB-INF/taglib/componentTag.tld" %>
 <%@ taglib prefix="ksfn" uri="/WEB-INF/tlds/fns.tld" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
+<c:set var="ctx_bootstrap" value="${pageContext.request.contextPath}/bootstrap"/>
 <c:set var="ctx_script" value="${pageContext.request.contextPath}/script"/>
 <c:set var="ctx_activiti" value="${pageContext.request.contextPath}/act"/>
 <c:set var="ctx_static" value="${pageContext.request.contextPath}/static"/>

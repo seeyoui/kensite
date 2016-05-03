@@ -1,6 +1,9 @@
 package com.seeyoui.kensite.drools.order
 
+import com.seeyoui.kensite.drools.order.Order;
+
 global Integer num;
+global Order o;
 
 rule "run"
 	salience 1
@@ -8,4 +11,21 @@ rule "run"
 		eval(true)
 	then
 		System.out.println(num);
+		System.out.println(o.getName());
+end
+
+rule "First Rule"
+	salience 2
+	when
+		order:Order(sumprice>num);
+	then
+		order.setDiscountPercent(100);
+end
+
+rule "Second Rule"
+	salience 3
+	when
+		order:Order(sumprice<=num);
+	then
+		order.setDiscountPercent(0);
 end

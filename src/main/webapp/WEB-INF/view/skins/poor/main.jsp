@@ -203,7 +203,7 @@
 	}
 	
 	$(function() {
-		addTab('首页', '${ctx}/login/mainContent/welcome.do');
+		addTab('首页', '${ctx}/login/skinsPage/welcome.do');
 		tabCloseEven();
 		$('.cs-navi-tab').click(function() {
 			var $this = $(this);

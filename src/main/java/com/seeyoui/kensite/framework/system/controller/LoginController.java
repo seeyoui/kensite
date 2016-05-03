@@ -159,9 +159,20 @@ public class LoginController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/mainContent/{url}")
+	@RequestMapping(value = "/skinsPage/{url}")
 	public String mainContent(@PathVariable("url") String url, HttpSession session, ModelMap modelMap) {
 		return "skins/"+url;
+	}
+	
+	/**
+	 * 登陆首页主区域页面
+	 * @param modelMap
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/skinsPage/common/{url}")
+	public String commonPage(@PathVariable("url") String url, HttpSession session, ModelMap modelMap) {
+		return "skins/common/"+url;
 	}
 	
 	/**

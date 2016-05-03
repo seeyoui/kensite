@@ -96,8 +96,10 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 			}
 			// 添加用户权限
 			List<SysPermission> sysPermissionList = UserUtils.getPermissionList();
-			for (SysPermission sysPermission : sysPermissionList){
-				info.addStringPermission(sysPermission.getId());
+			if(sysPermissionList != null) {
+				for (SysPermission sysPermission : sysPermissionList){
+					info.addStringPermission(sysPermission.getId());
+				}
 			}
 			// 记录登录日志
 			logger.info(currentUsername+"系统登录");

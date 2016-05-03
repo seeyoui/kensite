@@ -50,6 +50,6 @@
 	
 	<!-- 数据删除 -->
 	<delete id="deleteSysModulePermission">
-		DELETE FROM SYS_MODULE_PERMISSION WHERE module_id=#{moduleId}
+		DELETE FROM SYS_MODULE_PERMISSION WHERE module_id=#{moduleId} OR permission_id=#{moduleId}
 	</delete>
 </mapper>

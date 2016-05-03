@@ -48,6 +48,7 @@
 	<!-- 我们可以访问http://IP:8080/xxx/js/my.css和http://IP:8080/xxx/resources/js/my.css对比出来 -->
 	<mvc:resources mapping="/act/**" location="/act/"/>
 	<mvc:resources mapping="/assets/**" location="/assets/"/>
+	<mvc:resources mapping="/bootstrap/**" location="/bootstrap/"/>
 	<mvc:resources mapping="/script/**" location="/script/"/>
 	<mvc:resources mapping="/static/**" location="/static/"/>
 	<mvc:resources mapping="/upload/**" location="/upload/"/>

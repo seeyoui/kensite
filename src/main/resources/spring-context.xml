@@ -108,6 +108,7 @@
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
 			<mvc:exclude-mapping path="/assets/**"/>
+			<mvc:exclude-mapping path="/bootstrap/**"/>
 			<mvc:exclude-mapping path="/script/**"/>
 			<mvc:exclude-mapping path="/static/**"/>
 			<mvc:exclude-mapping path="/upload/**"/>
@@ -120,6 +121,7 @@
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
 			<mvc:exclude-mapping path="/assets/**"/>
+			<mvc:exclude-mapping path="/bootstrap/**"/>
 			<mvc:exclude-mapping path="/script/**"/>
 			<mvc:exclude-mapping path="/static/**"/>
 			<mvc:exclude-mapping path="/upload/**"/>

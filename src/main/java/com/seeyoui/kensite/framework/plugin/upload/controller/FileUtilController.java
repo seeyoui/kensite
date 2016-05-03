@@ -5,7 +5,9 @@
 package com.seeyoui.kensite.framework.plugin.upload.controller;  
  
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,7 +16,9 @@ import javax.servlet.http.HttpSession;
 import net.sf.json.JSONObject;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.authz.annotation.RequiresUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,8 +43,6 @@ import com.seeyoui.kensite.framework.plugin.upload.service.UploadfileService;
 @RequestMapping(value = "sys/uploadfile")
 public class FileUtilController extends BaseController {
 	
-	@Autowired
-	private UploadfileService uploadfileService;
 	@Autowired
 	private FileUtilService fileUtilService;
 	
@@ -76,4 +78,14 @@ public class FileUtilController extends BaseController {
 		return null;
 	}
 	
+	@RequestMapping(value = "imageCropper/headIcon", method = RequestMethod.POST, 
+			consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE, 
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	@RequiresUser
+	public Object imageCropperHeadIcon(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap) {
+		return fileUtilService.headIcon(request);
+	}
 }

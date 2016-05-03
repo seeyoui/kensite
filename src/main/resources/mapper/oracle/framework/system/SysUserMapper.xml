@@ -11,6 +11,7 @@
 	    t.state as "state",
 	    t.email as "email",
 	    t.phone as "phone",
+	    t.head_icon as "headIcon",
 	    d.id as "sysDepartment.id",
 	    d.name as "sysDepartment.name",
 	    d.code as "sysDepartment.code"
@@ -121,6 +122,7 @@
 	    	state,
 	    	email,
 	    	phone,
+	    	head_icon,
 		    id
 		)
 		VALUES (
@@ -132,6 +134,7 @@
 			#{state},
 			#{email},
 			#{phone},
+			#{headIcon},
 		    #{id}
 		)
 	</insert>
@@ -151,6 +154,9 @@
 			</if>
 	    	<if test="phone !=null and phone !=''">
 			phone=#{phone},
+			</if>
+	    	<if test="headIcon !=null and headIcon !=''">
+			head_icon=#{headIcon},
 			</if>
 		    id = #{id}
 		</set>

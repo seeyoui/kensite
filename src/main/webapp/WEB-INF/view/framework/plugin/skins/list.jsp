@@ -41,6 +41,7 @@
 
 				说明<input id="sel_name" name="sel_name" class="easyui-textbox" data-options=""/>
 			    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="selectData()">查询</a>
+			    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="viewPage()">预览</a>
 		    </div>
 		    <div id="dataWin" class="easyui-window" title="系统皮肤信息维护" data-options="modal:true,closed:true,iconCls:'icon-save',resizable:false" style="width:400px;height:200px;padding:10px;">
 		        <div class="ftitle">系统皮肤信息维护</div>
@@ -190,6 +191,13 @@
 					});
             	}, function(){
             	});
+            }
+        }
+        
+        function viewPage() {
+        	var row = $('#dataList').datagrid('getSelected');
+            if (row){
+            	window.open('${ctx}'+row.url+'/'+row.main);
             }
         }
     </script>

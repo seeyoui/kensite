@@ -37,11 +37,7 @@
                 <label>图标</label>
                 <input id="icon" name="icon" class="easyui-textbox" data-options=""/>
             </div>
-            <div id="icon_li" class="fitem" style="background:#D2E9FF">
-            	<c:forEach var="menuIcon" items="${menuIconList}" varStatus="status">
-            		<img id="${menuIcon}" src="${ctx_skins}${menuIcon}" style="width:25px;height:25px;"/>
-				</c:forEach>
-            </div>
+			<%@ include file="/WEB-INF/view/skins/bootstrap/icon.jsp" %>
             <input id="id" name="id" type="hidden"/>
 		</form>
     </div>
@@ -59,10 +55,6 @@
 	            $('#dataForm').form('load', row);
 	    		url = '${ctx}/sysMenu/update';
 	        }
-	    	$("#icon_li img").click(function(){
-	    		var obj = $(this);
-	    		$("#icon").textbox('setValue', obj.attr("id"));
-	    	});
 	    });
 	
 	    function submitInfo(){

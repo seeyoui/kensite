@@ -63,25 +63,12 @@ public class SysMenuController extends BaseController {
 	public ModelAndView view(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, @PathVariable String page) throws Exception {
-		String ctxPath = request.getSession().getServletContext().getRealPath("/"); 
-		List<String> menuIconList = new ArrayList<String>();
 		Skins skin = SkinsUtils.getCurSysSkins();
 		String skinsUrl = "";
     	if(skin!=null && !"".equals(skin.getUrl())) {
     		skinsUrl = skin.getUrl();
     	}
-		String url = ctxPath + "/static/skins/"+skinsUrl+"/img/menu/";
-		url = FileUtils.path(url);
-		File file = new File(url);
-		if(file.exists() && file.isDirectory()) {
-			File[] fs = file.listFiles();
-			for(int i=0; i<fs.length; i++){
-				if(fs[i].isFile()) {
-					menuIconList.add(skinsUrl+"/img/menu/"+fs[i].getName());
-				}
-			}
-		}
-		modelMap.put("menuIconList", menuIconList);
+		modelMap.put("skinsUrl", skinsUrl);
 		return new ModelAndView("framework/system/menu/"+page, modelMap);
 	}
 	
