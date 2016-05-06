@@ -9,6 +9,13 @@
 <%@ include file="/WEB-INF/view/taglib/header.jsp"%>
 <%@ include file="/WEB-INF/view/taglib/layer.jsp" %>
 <%@ include file="/WEB-INF/view/taglib/bootstrap.jsp"%>
+<%@ include file="/WEB-INF/view/taglib/moment.jsp"%>
+<style type="text/css">
+.content img {
+	width:32px;
+	height:32px;
+}
+</style>
 </head>
 <body class="fixed-sidebar full-height-layout gray-bg"
 	style="overflow: hidden">
@@ -345,65 +352,40 @@
 		</div>
 		<!--右侧边栏结束-->
 		<!--mini聊天窗口开始-->
-		<!-- <div class="small-chat-box fadeInRight animated">
+		<div class="small-chat-box fadeInRight animated">
 			<div class="heading" draggable="true">
-				<small class="chat-date pull-right"> 2015.9.1 </small> 与 Beau-zihan 聊天中
+				<small class="chat-date pull-right">
+					2016.05.05
+				</small>唠嗑
 			</div>
-			<div class="content">
-				<div class="left">
-					<div class="author-name">
-						Beau-zihan <small class="chat-date"> 10:02 </small>
-					</div>
-					<div class="chat-message active">你好</div>
-				</div>
-				<div class="right">
-					<div class="author-name">
-						游客 <small class="chat-date"> 11:24 </small>
-					</div>
-					<div class="chat-message">你好，请问H+有帮助文档吗？</div>
-				</div>
-				<div class="left">
-					<div class="author-name">
-						Beau-zihan <small class="chat-date"> 08:45 </small>
-					</div>
-					<div class="chat-message active">有，购买的H+源码包中有帮助文档，位于docs文件夹下
-					</div>
-				</div>
-				<div class="right">
-					<div class="author-name">
-						游客 <small class="chat-date"> 11:24 </small>
-					</div>
-					<div class="chat-message">那除了帮助文档还提供什么样的服务？</div>
-				</div>
-				<div class="left">
-					<div class="author-name">
-						Beau-zihan <small class="chat-date"> 08:45 </small>
-					</div>
-					<div class="chat-message active">
-						1.所有源码(未压缩、带注释版本)； <br> 2.说明文档； <br> 3.终身免费升级服务； <br>
-						4.必要的技术支持； <br> 5.付费二次开发服务； <br> 6.授权许可； <br> …… <br>
-					</div>
-				</div>
+			<div id="console" class="content">
+				
 			</div>
 			<div class="form-chat">
 				<div class="input-group input-group-sm">
-					<input type="text" class="form-control"> <span
-						class="input-group-btn">
-						<button class="btn btn-primary" type="button">发送</button>
+					<input id="message" type="text" class="form-control"/>
+					<span class="input-group-btn">
+						<button class="btn btn-primary" type="button" onclick="echo();">发送</button>
 					</span>
 				</div>
 			</div>
 
 		</div>
-		<div id="small-chat">
-			<span class="badge badge-warning pull-right">5</span> <a
-				class="open-small-chat"> <i class="fa fa-comments"></i>
-			</a>
-		</div> -->
+		<div id="small-chat" class="animated">
+			<span class="badge badge-warning pull-right"></span>
+			<a class="open-small-chat"><i class="fa fa-comments"></i></a>
+		</div>
 	</div>
 </body>
 <script type="text/javascript">
-
+$(document).ready(function() {
+	connect();
+	$(document).keydown(function(e) {
+		if (e.keyCode === 13) {
+			echo();
+		}
+	});
+});
 //退出当前登录
 function logout() {
 	layer.confirm('你确定要退出系统么？',function(index){
@@ -444,5 +426,100 @@ function layerOpen(url, title, area) {
    	    }
    	});
 }
+</script>
+
+<script src="http://cdn.sockjs.org/sockjs-0.3.min.js"></script>
+
+<script type="text/javascript">
+	var ws = null;
+	var url = null;
+	var transports = [];
+
+	function connect() {
+		if(ws) {
+			return;
+		}
+		if (!url) {
+			url = '${ctx}/websck';
+		}
+		if ('WebSocket' in window) {
+			ws= new WebSocket("ws://"+window.location.host+"${ctx}/websck");
+		} else {
+			ws = new SockJS("http://"+window.location.host+"${ctx}/sockjs/websck");
+		}
+		ws.onopen = function () {
+			console.info('open');
+		};
+		ws.onmessage = function (event) {
+			log(event.data);
+		};
+		ws.onclose = function (event) {
+			log('Info: connection closed.');
+			log(event);
+		};
+	}
+
+	function disconnect() {
+		if (ws != null) {
+			ws.close();
+			ws = null;
+		}
+	}
+
+	function echo() {
+		if (ws != null) {
+			var message = $('#message').val();
+			if(message == null || message == '') {
+				return;
+			}
+			var sendMsg = '{"userName":"${currentUser.userName}",'+
+				'"name":"${currentUser.name}",'+
+				'"headIcon":"${currentUser.headIcon}",'+
+				'"sendType":"msg",'+
+				'"sendTo":"all",'+
+				'"message":"'+message+'"}';
+			ws.send(sendMsg);
+			$('#message').val('');
+		} else {
+		}
+	}
+	
+	function log(message) {
+		//$("#small-chat").removeAttr("class").attr("class","");
+		//$("#small-chat").addClass("animated");
+		//$("#small-chat").addClass("pulse");
+		message = JSON.parse(message);
+		var p = '';
+		if(message.userName=='${currentUserName}') {
+			p = '<div class="right">'+
+				'<div class="author-name">'+
+				message.name+' <small class="chat-date"> '+moment().calendar()+' </small>'+
+				'<img class="message-avatar" src="${ctx}/upload/headIcon/'+message.headIcon+'" alt="">'+
+				'</div>'+
+				'<div class="chat-message">'+message.message+'</div>'+
+				'</div>';
+		} else {
+			p = '<div class="left">'+
+				'<div class="author-name">'+
+				'<img class="message-avatar" src="${ctx}/upload/headIcon/'+message.headIcon+'" alt="">'+
+				message.name+' <small class="chat-date"> '+moment().calendar()+' </small>'+
+				'</div>'+
+				'<div class="chat-message active">'+message.message+'</div>'+
+				'</div>';
+			if($('.small-chat-box').attr('class').indexOf('active') == -1) {
+				var messageCount = $('#small-chat span').html();
+				if(messageCount == null || messageCount == '') {
+					messageCount = 0;
+				}
+				$('#small-chat span').html(parseInt(messageCount)+1);
+			}
+		}
+		$('#console').append(p);
+		var console = document.getElementById('console');
+		while (console.childNodes.length > 25) {
+			console.removeChild(console.firstChild);
+		}
+		console.scrollTop = console.scrollHeight;
+	}
 </script>
 </html>

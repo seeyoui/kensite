@@ -330,7 +330,7 @@ public class FormUtils {
 			if(!StringConstant.NO.equals(tableColumn.getIsEdit())) {
 				if(StringUtils.isNoneBlank(tableColumn.getSettings())) {
 					result.append(" onClick=\"WdatePicker({");
-					result.append(tableColumn.getSettings());
+					result.append(tableColumn.getSettings().replaceAll(",maxDate:''", "").replaceAll(",minDate:''", ""));
 					result.append("})\"");
 				} else {
 					result.append(" onClick=\"WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})\"");

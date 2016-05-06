@@ -46,6 +46,7 @@ import org.apache.lucene.store.RAMDirectory;
  */
 
 public class IndexDao {
+	private static ArrayList<String> filelist = new ArrayList<String>();
 	// 源文件
 	String filePath1 = "D:\\lucene5.3\\luceneSourceFile\\Ext Tree属性方法.txt";
 	String filePath2 = "D:\\lucene5.3\\luceneSourceFile\\oracle创建表空间.txt";
@@ -54,6 +55,7 @@ public class IndexDao {
 	String indexPath = "D:\\lucene5.3\\luceneIndex";
 	// 分词器
 	Analyzer analyzer = new SmartChineseAnalyzer();// 词库分词
+
 	// Analyzer analyzer = new SmartChineseAnalyzer();// 词库分词
 
 	/**
@@ -69,15 +71,20 @@ public class IndexDao {
 		IndexWriterConfig config = new IndexWriterConfig(analyzer);
 		IndexWriter ramIndexWiter = new IndexWriter(ramDir, config);
 
-		// 2. 添加 Document
-		Document doc1 = file2Document(filePath1);
-		Document doc2 = file2Document(filePath2);
-		Document doc3 = file2Document(filePath3);
+		/*
+		 * // 2. 添加 Document Document doc1 = file2Document(filePath1); Document
+		 * doc2 = file2Document(filePath2); Document doc3 =
+		 * file2Document(filePath3);
+		 * 
+		 * // 内存索引添加Document ramIndexWiter.addDocument(doc1);
+		 * ramIndexWiter.addDocument(doc2); ramIndexWiter.addDocument(doc3);
+		 */
 
-		// 内存索引添加Document
-		ramIndexWiter.addDocument(doc1);
-		ramIndexWiter.addDocument(doc2);
-		ramIndexWiter.addDocument(doc3);
+		for(String file : filelist) {
+			System.out.println(file);
+			Document doc = file2Document(file);
+			ramIndexWiter.addDocument(doc);
+		}
 		ramIndexWiter.close();
 
 		// 2.退出时将内存索引保存到磁盘索引中
@@ -157,7 +164,7 @@ public class IndexDao {
 			// Filter filter = new TermFilter(new Term("title", "A"));
 			// 2、搜索解析器
 			QueryParser parser = new QueryParser("content", analyzer);
-			Query query = parser.parse("orcl");
+			Query query = parser.parse("泛");
 			// lucene 4.x 此方法已经过时，不建议使用filter,而使用BooleanQuery来代替
 			// TopDocs topDocs = searcher.search(query, filter,
 			// Integer.MAX_VALUE, sort);
@@ -174,7 +181,7 @@ public class IndexDao {
 			Fragmenter fragmenter = new SimpleFragmenter(50);
 			highlighter.setTextFragmenter(fragmenter);
 			// 3取出当前页的数据
-			int end = Math.min(10, topDocs.totalHits);
+			int end = Math.min(500, topDocs.totalHits);
 			// 循环读出前10条
 			for (int i = 0; i < end; i++) {
 				ScoreDoc scoreDoc = topDocs.scoreDocs[i];
@@ -193,11 +200,18 @@ public class IndexDao {
 				recordList.add(doc);
 			}
 			for (Document document : recordList) {
-				System.out.println("------------------------------");
-				System.out.println("name     = " + document.get("name"));
-				System.out.println("content  = " + document.get("content"));
-				System.out.println("size     = " + document.get("size"));
-				System.out.println("path     = " + document.get("path"));
+//				System.out.println("------------------------------");
+//				System.out.println("name     = " + document.get("name"));
+//				System.out.println("content  = " + document.get("content"));
+//				System.out.println("size     = " + document.get("size"));
+//				System.out.println("path     = " + document.get("path"));
+				if(document.get("content").indexOf("软")==-1 && document.get("content").indexOf("博")==-1
+						 && document.get("content").indexOf("信")==-1 && document.get("content").indexOf("搜")==-1
+						 && document.get("content").indexOf("title")==-1) {
+					System.out.println("------------------------------");
+					System.out.println("content  = " + document.get("content"));
+					System.out.println("path     = " + document.get("path"));
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -240,10 +254,29 @@ public class IndexDao {
 			throw new RuntimeException(e);
 		}
 	}
+	
+	public static void getFiles(String filePath) {
+		File root = new File(filePath);
+		File[] files = root.listFiles();
+		for (File file : files) {
+			if (file.isDirectory()) {
+				getFiles(file.getAbsolutePath());
+//				System.out.println("显示" + filePath + "下所有子目录及其文件"
+//						+ file.getAbsolutePath());
+			} else {
+				if(file.getAbsolutePath().endsWith("jsp") || file.getAbsolutePath().endsWith("html") || file.getAbsolutePath().endsWith("htm")) {
+					filelist.add(file.getAbsolutePath());
+				}
+//				System.out.println("显示" + filePath + "下所有子目录"
+//						+ file.getAbsolutePath());
+			}
+		}
+	}
 
 	public static void main(String[] args) {
 		IndexDao indexDao = new IndexDao();
 		try {
+//			getFiles("D:/Weaver2015_base/ecology");
 //			indexDao.createIndex();
 			indexDao.search();
 		} catch (Exception e) {

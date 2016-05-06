@@ -34,6 +34,9 @@ public final class StringConstant {
 	//初始化密码
 	public static final String INIT_PASSWORD = "123456";
 	
+	//webSocket
+	public static final String WEBSOCKET_USERNAME = "currentUserName";
+	
 	//字符串表示布尔值
 	public static final String TRUE = "T";
 	public static final String FALSE = "F";
