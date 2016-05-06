@@ -541,7 +541,7 @@ a:hover {text-decoration:one;}
    			url :'${ctx}/sysUser/validatePassWord.do?userName=${currentUser.userName}'+"&passWord="+lPass,
    			dataType : "json",
    			success : function(result) {
-   				if(result.success == "<%=StringConstant.TRUE%>"){
+   				if(result.success){
    				//3判断两次密码是否一致
    					if(newPass != repaPass){
    						layer.alert('两次新密码输入不一致!', 0, !1);

@@ -6,7 +6,7 @@
 	<%@ include file="/WEB-INF/view/taglib/header.jsp" %>
 	<%@ include file="/WEB-INF/view/taglib/layer.jsp" %>
 	<script type="text/javascript">
-		//window.location.href="${ctx}/sys/chat/chatRoom";
+		window.location.href="${ctx }/login/skinsPage/common/portal_v1";
 	</script>
 </head>
 <body>

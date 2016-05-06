@@ -24,7 +24,7 @@
 							<div class="col-md-9 ">
 								<div class="chat-discussion">
 									<div class="chat-message">
-										<img class="message-avatar" src="img/a1.jpg" alt="">
+										<img class="message-avatar" src="${ctx_skins}/bootstrap/img/a1.jpg" alt="">
 										<div class="message">
 											<a class="message-author" href="#"> 颜文字君</a> <span
 												class="message-date"> 2015-02-02 18:39:23 </span> <span
@@ -32,7 +32,7 @@
 										</div>
 									</div>
 									<div class="chat-message">
-										<img class="message-avatar" src="img/a4.jpg" alt="">
+										<img class="message-avatar" src="${ctx_skins}/bootstrap/img/a4.jpg" alt="">
 										<div class="message">
 											<a class="message-author" href="#"> 林依晨Ariel </a> <span
 												class="message-date"> 2015-02-02 11:12:36 </span> <span
@@ -45,14 +45,14 @@
 								<div class="chat-users">
 									<div class="users-list">
 										<div class="chat-user">
-											<img class="chat-avatar" src="img/a4.jpg" alt="">
+											<img class="chat-avatar" src="${ctx_skins}/bootstrap/img/a4.jpg" alt="">
 											<div class="chat-user-name">
 												伤城Simple
 											</div>
 										</div>
 										<div class="chat-user">
 											<span class="pull-right label label-primary">在线</span>
-											<img class="chat-avatar" src="img/a1.jpg" alt="">
+											<img class="chat-avatar" src="${ctx_skins}/bootstrap/img/a1.jpg" alt="">
 											<div class="chat-user-name">
 												<a href="#">从未出现过的风景__</a>
 											</div>

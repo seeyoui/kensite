@@ -137,7 +137,7 @@ public class SysUserController extends BaseController {
 	@RequiresUser
 	@RequestMapping(value = "/updatePassword", method=RequestMethod.POST)
 	@ResponseBody
-	public String updatePassword(HttpSession session,
+	public Object updatePassword(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, SysUser sysUser) throws Exception{
 		if (!beanValidator(modelMap, sysUser)){
@@ -237,7 +237,7 @@ public class SysUserController extends BaseController {
 	 */
 	@RequestMapping(value = "/validatePassWord")
 	@ResponseBody
-	public String validatePassWord(HttpSession session,
+	public Object validatePassWord(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, String userName, String passWord) throws Exception {
 		SysUser sysUserResult = sysUserService.findSysUserByUserName(userName);
@@ -245,10 +245,9 @@ public class SysUserController extends BaseController {
 			&& (sysUserResult.getId() != null && !sysUserResult.getId().equals(""))){
 			String newPassWord = MD5.md5(userName+passWord);
 			if(newPassWord.equals(sysUserResult.getPassword())) {
-				RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
+				return true;
 			}
 		}
-		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
-		return null;
+		return false;
 	}
 }

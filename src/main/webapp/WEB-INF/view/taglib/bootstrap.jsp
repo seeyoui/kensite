@@ -12,10 +12,7 @@
 	<link href="${ctx_bootstrap}/css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
 	<link href="${ctx_bootstrap}/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
 	<link href="${ctx_bootstrap}/css/animate.min.css" rel="stylesheet">
-	<link href="${ctx_bootstrap}/css/style.min.css?v=4.0.0" rel="stylesheet">
 	<script src="${ctx_bootstrap}/js/bootstrap.min.js?v=3.3.5"></script>
 	<script src="${ctx_bootstrap}/js/metisMenu/jquery.metisMenu.js"></script>
 	<script src="${ctx_bootstrap}/js/slimscroll/jquery.slimscroll.min.js"></script>
-	<script src="${ctx_bootstrap}/js/hplus.min.js?v=4.0.0"></script>
-	<script src="${ctx_bootstrap}/js/contabs.min.js"></script>
 	<script src="${ctx_bootstrap}/js/pace/pace.min.js"></script>
