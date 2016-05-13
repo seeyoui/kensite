@@ -962,7 +962,7 @@
 				</configuration>
 			</plugin>
 			
-			<!-- jetty插件 -->
+			<!-- jetty插件
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
@@ -980,6 +980,32 @@
 						<systemProperty>
 							<name>org.mortbay.util.URI.charset</name>
 							<value>${project.build.sourceEncoding}</value>
+						</systemProperty>
+					</systemProperties>
+				</configuration>
+			</plugin> -->
+			<!--  -->
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>8.1.8.v20121106</version>
+				<configuration>
+					<webApp>
+						<contextPath>/${project.artifactId}</contextPath>
+					</webApp>
+					<connectors>
+						<connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
+							<port>${webserver.port}</port>
+						</connector>
+					</connectors>
+					<systemProperties>
+						<systemProperty>
+							<name>org.eclipse.jetty.util.URI.charset</name>
+							<value>${project.build.sourceEncoding}</value>
+						</systemProperty>
+						<systemProperty>
+							<name>org.eclipse.jetty.server.Request.maxFormContentSize</name>
+							<value>-1</value>
 						</systemProperty>
 					</systemProperties>
 				</configuration>

@@ -28,9 +28,25 @@
     	.bind('keyup', function(){
     		$(this).ColorPickerSetColor(this.value);
     	});
+    	
+    	$('#colorSelector').ColorPicker({
+    		color: '#0000ff',
+    		onShow: function (colpkr) {
+    			$(colpkr).fadeIn(500);
+    			return false;
+    		},
+    		onHide: function (colpkr) {
+    			$(colpkr).fadeOut(500);
+    			return false;
+    		},
+    		onChange: function (hsb, hex, rgb) {
+    			$('#colorSelector div').css('backgroundColor', '#' + hex);
+    		}
+    	});
     });
 </script>
 
 <input type="text" maxlength="6" size="6" id="colorpickerField" value="00ff00" />
+<div id="colorSelector" style="height: 36px;position: relative;width: 36px;"><div style="background-color: #0000ff;height: 36px; position: relative;width: 36px;"></div></div>
 </body>
 </html>
