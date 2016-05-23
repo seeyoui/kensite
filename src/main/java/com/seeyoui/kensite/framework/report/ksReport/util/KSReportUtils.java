@@ -51,8 +51,8 @@ public class KSReportUtils {
 		for(int i=0; i<COL_SIZE; i++) {
 			int rowSize = maxRowSize[i];
 			for(int j=0; j<COL_SIZE; j++) {
-				if(cellArray[i][j] != null && cellArray[i][j].getDirection()==1 && cellArray[i][j].getCellValueSize() > rowSize) {
-					maxRowSize[i] = cellArray[i][j].getCellValueSize()-1;
+				if(cellArrayTurn[i][j] != null && cellArrayTurn[i][j].getDirection()==1 && cellArrayTurn[i][j].getCellValueSize() > rowSize) {
+					maxRowSize[i] = cellArrayTurn[i][j].getCellValueSize()-1;
 				}
 			}
 		}
@@ -71,8 +71,8 @@ public class KSReportUtils {
 				if(ksReportCell == null) {
 					continue;
 				}
-				int rowAdd = getSumSize(maxColSize, j);
-				int colAdd = getSumSize(maxRowSize, i);
+				int rowAdd = getSumSize(maxColSize, i);
+				int colAdd = getSumSize(maxRowSize, j);
 				int row = ksReportCell.getRow();
 				int col = ksReportCell.getCol();
 				ksReportCell.setRow(row + rowAdd);

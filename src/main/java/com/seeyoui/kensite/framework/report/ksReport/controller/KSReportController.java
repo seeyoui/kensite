@@ -302,7 +302,7 @@ public class KSReportController extends BaseController {
 		
 		KSReportCell ksReportCell1 = new KSReportCell();
 		ksReportCell1.setRow(3);
-		ksReportCell1.setCol(3);
+		ksReportCell1.setCol(2);
 		ksReportCell1.setWidth(33);
 		ksReportCell1.setHeight(50);
 		ksReportCell1.setDirection(1);
