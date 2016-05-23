@@ -26,6 +26,7 @@ import com.seeyoui.kensite.framework.report.ksReport.domain.KSReportBorder;
 import com.seeyoui.kensite.framework.report.ksReport.domain.KSReportCell;
 import com.seeyoui.kensite.framework.report.ksReport.domain.KSReportStyle;
 import com.seeyoui.kensite.framework.report.ksReport.service.KSReportService;
+import com.seeyoui.kensite.framework.report.ksReport.util.KSReportUtils;
 /**
  * KS报表
  * @author cuichen
@@ -355,6 +356,76 @@ public class KSReportController extends BaseController {
 		cellList.add(ksReportCell2);
 		
 		modelMap.put("ksReport", ksReportService.report3(cellList));
+		return new ModelAndView("framework/report/ksReport/show", modelMap);
+	}
+	
+	/**
+	 * 展示报表页面
+	 * @param modelMap
+	 * @param module
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/report4")
+	public ModelAndView report4(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap) throws Exception {
+		List<KSReportCell> cellList = new ArrayList<KSReportCell>();
+		KSReportCell ksReportCell = new KSReportCell();
+		ksReportCell.setRow(1);
+		ksReportCell.setCol(1);
+		ksReportCell.setWidth(33);
+		ksReportCell.setHeight(33);
+		ksReportCell.setDirection(2);
+		ksReportCell.setValue("select dept.name from sys_department dept left join sys_user us on dept.id=us.department_id where dept.id!='00000000000000000000000000000000' order by dept.name");
+		KSReportStyle ksReportStyle = new KSReportStyle();
+		ksReportStyle.setBackColor("#00ff51");
+		ksReportStyle.setBackgroundImage("/kensite/static/exceldesign/img/field/sqlReport.png");
+		ksReportStyle.setBackgroundImageLayout(3);
+		ksReportStyle.setFont("italic bold 22pt YouYuan");
+		ksReportStyle.setForeColor("#f700f7");
+		ksReportStyle.sethAlign(1);
+		ksReportStyle.setvAlign(1);
+		ksReportStyle.setWordWrap(true);
+		
+		KSReportBorder border = new KSReportBorder();
+		border.setColor("#000000");
+		border.setStyle(1);
+		ksReportStyle.setBorderTop(border);
+		ksReportStyle.setBorderBottom(border);
+		ksReportStyle.setBorderLeft(border);
+		ksReportStyle.setBorderRight(border);
+		ksReportCell.setStyle(ksReportStyle);
+		cellList.add(ksReportCell);
+		
+		KSReportCell ksReportCell1 = new KSReportCell();
+		ksReportCell1.setRow(1);
+		ksReportCell1.setCol(2);
+		ksReportCell1.setWidth(33);
+		ksReportCell1.setHeight(50);
+		ksReportCell1.setDirection(2);
+		ksReportCell1.setValue("select us.name from sys_department dept left join sys_user us on dept.id=us.department_id where dept.id!='00000000000000000000000000000000' order by dept.name");
+		KSReportStyle ksReportStyle1 = new KSReportStyle();
+		ksReportStyle1.setBackColor("#00ff51");
+		ksReportStyle1.setBackgroundImage("/kensite/static/exceldesign/img/field/sqlReport.png");
+		ksReportStyle1.setBackgroundImageLayout(3);
+		ksReportStyle1.setFont("italic bold 22pt YouYuan");
+		ksReportStyle1.setForeColor("#f700f7");
+		ksReportStyle1.sethAlign(1);
+		ksReportStyle1.setvAlign(1);
+		ksReportStyle1.setWordWrap(true);
+		
+		KSReportBorder border1 = new KSReportBorder();
+		border1.setColor("#000000");
+		border1.setStyle(2);
+		ksReportStyle1.setBorderTop(border1);
+		ksReportStyle1.setBorderBottom(border1);
+		ksReportStyle1.setBorderLeft(border1);
+		ksReportStyle1.setBorderRight(border1);
+		ksReportCell1.setStyle(ksReportStyle1);
+		cellList.add(ksReportCell1);
+		
+		modelMap.put("ksReport", KSReportUtils.fillData(cellList));
 		return new ModelAndView("framework/report/ksReport/show", modelMap);
 	}
 	

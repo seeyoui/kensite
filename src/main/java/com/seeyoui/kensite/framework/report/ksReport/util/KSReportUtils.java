@@ -1,14 +1,108 @@
 package com.seeyoui.kensite.framework.report.ksReport.util;
 
 import java.util.List;
+import java.util.Map;
 
+import com.seeyoui.kensite.common.util.DBUtils;
+import com.seeyoui.kensite.common.util.StringUtils;
+import com.seeyoui.kensite.framework.report.ksReport.domain.KSReportBorder;
 import com.seeyoui.kensite.framework.report.ksReport.domain.KSReportCell;
+import com.seeyoui.kensite.framework.report.ksReport.domain.KSReportStyle;
 
 public class KSReportUtils {
 	//报表数组行数
 	private static final int ROW_SIZE = 99;
 	//报表数组列数
 	private static final int COL_SIZE = 99;
+	
+	public static StringBuffer fillData(List<KSReportCell> cellList) throws Exception {
+		StringBuffer ksReport = new StringBuffer();
+		for(KSReportCell ksReportCell : cellList) {
+			String sql = ksReportCell.getValue();
+			List<Map<Object, Object>> result = DBUtils.executeQuery(sql);
+			ksReportCell.setCellValue(result);
+		}
+		cellReLayout(cellList);
+		for(KSReportCell ksReportCell : cellList) {
+			int startRow = ksReportCell.getRow();
+			int startCol = ksReportCell.getCol();
+			double width = ksReportCell.getWidth();
+			double height = ksReportCell.getHeight();
+			
+			KSReportStyle ksReportStyle = ksReportCell.getStyle();
+			ksReport.append("var style = new $.wijmo.wijspread.Style();");
+			if(ksReportStyle != null) {
+				String backColor = ksReportStyle.getBackColor();
+				if(StringUtils.isNoneBlank(backColor)) {
+					ksReport.append("style.backColor = '"+backColor+"';");
+				}
+				int hAlign = ksReportStyle.gethAlign();
+				ksReport.append("style.hAlign = "+hAlign+";");
+				int vAlign = ksReportStyle.getvAlign();
+				ksReport.append("style.vAlign = "+vAlign+";");
+				String font = ksReportStyle.getFont();
+				if(StringUtils.isNoneBlank(font)) {
+					ksReport.append("style.font = '"+font+"';");
+				}
+				String foreColor = ksReportStyle.getForeColor();
+				if(StringUtils.isNoneBlank(foreColor)) {
+					ksReport.append("style.foreColor = '"+foreColor+"';");
+				}
+				String backgroundImage = ksReportStyle.getBackgroundImage();
+				int backgroundImageLayout = ksReportStyle.getBackgroundImageLayout();
+				if(StringUtils.isNoneBlank(backgroundImage)) {
+					ksReport.append("style.backgroundImage = '"+backgroundImage+"';");
+					ksReport.append("style.backgroundImageLayout = "+backgroundImageLayout+";");
+				}
+				boolean wordWrap = ksReportStyle.isWordWrap();
+				ksReport.append("style.wordWrap = "+wordWrap+";");
+				KSReportBorder borderTop = ksReportStyle.getBorderTop();
+				if(borderTop != null) {
+					String bordercolor = borderTop.getColor();
+					int borderstyle = borderTop.getStyle();
+					ksReport.append("style.borderTop = new $.wijmo.wijspread.LineBorder('"+bordercolor+"', "+borderstyle+");");
+				}
+				KSReportBorder borderBottom = ksReportStyle.getBorderBottom();
+				if(borderBottom != null) {
+					String bordercolor = borderBottom.getColor();
+					int borderstyle = borderBottom.getStyle();
+					ksReport.append("style.borderBottom = new $.wijmo.wijspread.LineBorder('"+bordercolor+"', "+borderstyle+");");
+				}
+				KSReportBorder borderLeft = ksReportStyle.getBorderLeft();
+				if(borderLeft != null) {
+					String bordercolor = borderLeft.getColor();
+					int borderstyle = borderLeft.getStyle();
+					ksReport.append("style.borderLeft = new $.wijmo.wijspread.LineBorder('"+bordercolor+"', "+borderstyle+");");
+				}
+				KSReportBorder borderRight = ksReportStyle.getBorderRight();
+				if(borderRight != null) {
+					String bordercolor = borderRight.getColor();
+					int borderstyle = borderRight.getStyle();
+					ksReport.append("style.borderRight = new $.wijmo.wijspread.LineBorder('"+bordercolor+"', "+borderstyle+");");
+				}
+			}
+			if(ksReportCell.getDirection() == 1) {
+				ksReport.append("sheet.setRowHeight("+startRow+", "+height+"); \n");
+			} else if(ksReportCell.getDirection() == 2) {
+				ksReport.append("sheet.setColumnWidth("+startCol+", "+width+");");
+			}
+			int dataIndex = 0;
+			List<Map<Object, Object>> result = ksReportCell.getCellValue();
+			for(Map<Object, Object> map : result) {
+				if(ksReportCell.getDirection() == 1) {
+					ksReport.append("sheet.setValue("+startRow+", "+(startCol+dataIndex)+", \""+map.get("NAME").toString()+"\"); \n");
+					ksReport.append("sheet.setColumnWidth("+(startCol+dataIndex)+", "+width+");");
+					ksReport.append("sheet.setStyle("+startRow+", "+(startCol+dataIndex)+", style, $.wijmo.wijspread.SheetArea.viewport);");
+				} else if (ksReportCell.getDirection() == 2) {
+					ksReport.append("sheet.setValue("+(startRow+dataIndex)+", "+startCol+", \""+map.get("NAME").toString()+"\"); \n");
+					ksReport.append("sheet.setRowHeight("+(startRow+dataIndex)+", "+height+"); \n");
+					ksReport.append("sheet.setStyle("+(startRow+dataIndex)+", "+startCol+", style, $.wijmo.wijspread.SheetArea.viewport);");
+				}
+				dataIndex++;
+			}
+		}
+		return ksReport;
+	}
 	
 	/**
 	 * cell重新布局，以便往excel里面铺数据

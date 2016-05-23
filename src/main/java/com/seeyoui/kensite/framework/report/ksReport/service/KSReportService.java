@@ -170,67 +170,7 @@ public class KSReportService extends BaseService {
 	 * @throws Exception
 	 */
 	public String report3(List<KSReportCell> cellList) throws CRUDException, Exception {
-		StringBuffer ksReport = new StringBuffer();
-		for(KSReportCell ksReportCell : cellList) {
-			String sql = ksReportCell.getValue();
-			List<Map<Object, Object>> result = DBUtils.executeQuery(sql);
-			ksReportCell.setCellValue(result);
-		}
-		KSReportUtils.cellReLayout(cellList);
-		for(KSReportCell ksReportCell : cellList) {
-			int startRow = ksReportCell.getRow();
-			int startCol = ksReportCell.getCol();
-			double width = ksReportCell.getWidth();
-			double height = ksReportCell.getHeight();
-			
-			KSReportStyle ksReportStyle = ksReportCell.getStyle();
-			if(ksReportStyle != null) {
-				ksReport.append("var style = new $.wijmo.wijspread.Style();");
-				String backColor = ksReportStyle.getBackColor();
-				if(StringUtils.isNoneBlank(backColor)) {
-					ksReport.append("style.backColor = '"+backColor+"';");
-				}
-				int hAlign = ksReportStyle.gethAlign();
-				ksReport.append("style.hAlign = "+hAlign+";");
-				int vAlign = ksReportStyle.getvAlign();
-				ksReport.append("style.vAlign = "+vAlign+";");
-				String font = ksReportStyle.getFont();
-				if(StringUtils.isNoneBlank(font)) {
-					ksReport.append("style.font = '"+font+"';");
-				}
-				String foreColor = ksReportStyle.getForeColor();
-				if(StringUtils.isNoneBlank(foreColor)) {
-					ksReport.append("style.foreColor = '"+foreColor+"';");
-				}
-				String backgroundImage = ksReportStyle.getBackgroundImage();
-				int backgroundImageLayout = ksReportStyle.getBackgroundImageLayout();
-				if(StringUtils.isNoneBlank(backgroundImage)) {
-					ksReport.append("style.backgroundImage = '"+backgroundImage+"';");
-					ksReport.append("style.backgroundImageLayout = "+backgroundImageLayout+";");
-				}
-				boolean wordWrap = ksReportStyle.isWordWrap();
-				ksReport.append("style.wordWrap = "+wordWrap+";");
-			}
-			if(ksReportCell.getDirection() == 1) {
-				ksReport.append("sheet.setRowHeight("+startRow+", "+height+"); \n");
-			} else if(ksReportCell.getDirection() == 2) {
-				ksReport.append("sheet.setColumnWidth("+startCol+", "+width+");");
-			}
-			int dataIndex = 0;
-			List<Map<Object, Object>> result = ksReportCell.getCellValue();
-			for(Map<Object, Object> map : result) {
-				if(ksReportCell.getDirection() == 1) {
-					ksReport.append("sheet.setValue("+startRow+", "+(startCol+dataIndex)+", \""+map.get("NAME").toString()+"\"); \n");
-					ksReport.append("sheet.setColumnWidth("+(startCol+dataIndex)+", "+width+");");
-					ksReport.append("sheet.setStyle("+startRow+", "+(startCol+dataIndex)+", style, $.wijmo.wijspread.SheetArea.viewport);");
-				} else if (ksReportCell.getDirection() == 2) {
-					ksReport.append("sheet.setValue("+(startRow+dataIndex)+", "+startCol+", \""+map.get("NAME").toString()+"\"); \n");
-					ksReport.append("sheet.setRowHeight("+(startRow+dataIndex)+", "+height+"); \n");
-					ksReport.append("sheet.setStyle("+(startRow+dataIndex)+", "+startCol+", style, $.wijmo.wijspread.SheetArea.viewport);");
-				}
-				dataIndex++;
-			}
-		}
+		StringBuffer ksReport = KSReportUtils.fillData(cellList);
 		return ksReport.toString();
 	}
 }
