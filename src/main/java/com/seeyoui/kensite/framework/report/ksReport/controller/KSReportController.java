@@ -413,6 +413,7 @@ public class KSReportController extends BaseController {
 		ksReportStyle1.setForeColor("#f700f7");
 		ksReportStyle1.sethAlign(1);
 		ksReportStyle1.setvAlign(1);
+
 		ksReportStyle1.setWordWrap(true);
 		
 		KSReportBorder border1 = new KSReportBorder();

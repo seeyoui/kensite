@@ -115,8 +115,8 @@
 					<a id="rightAlign" title="右对齐" href="javascript:alignBx({'a_halign':'2'}, $('#rightAlign').linkbutton('options').selected)" class="easyui-linkbutton" data-options="iconCls:'icon-menuBtn-rightAlign',iconAlign:'top',toggle:true,selected:false,group:'valign'"></a>
 				</td>
 				<td class="splitTHead">
-					<a id="mergeCell" title="合并单元格" href="javascript:mergeCell()" class="easyui-linkbutton" data-options="iconCls:'icon-menuBtn-MergenBx',iconAlign:'top',toggle:true,selected:false"></a>
-					<a id="unMergeCell" title="拆分单元格" href="javascript:unMergeCell()" class="easyui-linkbutton" data-options="iconCls:'icon-menuBtn-splitBx',iconAlign:'top',toggle:true,selected:false"></a>
+					<a id="mergeCell" title="合并单元格" href="javascript:mergeCell()" class="easyui-linkbutton" data-options="iconCls:'icon-menuBtn-MergenBx',iconAlign:'top'"></a>
+					<a id="unMergeCell" title="拆分单元格" href="javascript:unMergeCell()" class="easyui-linkbutton" data-options="iconCls:'icon-menuBtn-splitBx',iconAlign:'top'"></a>
 				</td>
 				<td class="splitTHead">
 					<input id="borderstyle" class="easyui-combobox" style="width:60px;height:26px" data-options="
@@ -163,7 +163,8 @@
 		</tbody>
 		</table>
 	</div>
-	<div id="KSreport" style="position:absolute; top:72px; bottom:0px; left:0px; right:0px; border: 1px solid gray"></div>
+	<div id="formulaBar" contenteditable="true" spellcheck="false" style="position:absolute; top:72px; height:20px; left:0px; right:0px; border: 1px solid #808080;"></div>
+	<div id="KSreport" style="position:absolute; top:92px; bottom:0px; left:0px; right:0px; border: 1px solid gray"></div>
 </body>
 <script type="text/javascript">
 	$(document).ready( $(function () {
@@ -190,6 +191,8 @@
 	
 	function initSpread() {
 		var spread = $("#KSreport").wijspread("spread");
+        var fbx = new $.wijmo.wijspread.FormulaTextBox(document.getElementById('formulaBar'));
+        fbx.spread(spread);
 		var sheet = spread.getActiveSheet();
 		sheet.setName("KS Report");
 		sheet.setRowCount(30, $.wijmo.wijspread.SheetArea.viewport);

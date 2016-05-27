@@ -10,10 +10,8 @@
 <meta name="mobile-agent"
 	content="format=html5;url=http://m.seeyoui.icoc.in/" />
 <%@ include file="/WEB-INF/view/taglib/webPortal.jsp"%>
-<style id='stylemodule' type='text/css'>
-</style>
-<style id='styleHeaderTop' type='text/css'>
-</style>
+<style id='stylemodule' type='text/css'></style>
+<style id='styleHeaderTop' type='text/css'></style>
 <style id='stylefooter' type='text/css'>
 #footer .footerInfo {
 	float: left;
@@ -238,8 +236,7 @@
 	background: #63b4d2;
 }
 </style>
-<style id='styleWebSite' type='text/css'>
-</style>
+<style id='styleWebSite' type='text/css'></style>
 <style id='stylenav' type='text/css'>
 #nav .itemSelected {
 	background: none !important;
@@ -284,8 +281,7 @@
 }
 </style>
 <script type="text/javascript" language="javascript">
-	//document.domain = 'faisco.cn';
-	var _portalHost = 'www.faisco.cn';
+	var _portalHost = 'www.seeyoui.com';
 </script>
 <script type="text/javascript" language="javascript">
 	window.setTimeout(function() {
@@ -302,12 +298,7 @@
 	<iframe id="guideLowBrowser"
 		style="display: none; position: absolute; z-index: 10000; width: 100%; height: 100%;">
 	</iframe>
-	<script type="text/javascript"
-		src="${ctx_web}/js/comm/testBrowser.min.js?v=201510121802"></script>
-	<script type="text/javascript">
-		domainLink = "http://www.seeyoui.icoc.in" + window.location.pathname
-				+ window.location.search;
-	</script>
+	<script type="text/javascript" src="${ctx_web}/js/comm/testBrowser.min.js?v=201510121802"></script>
 	<!-- top工具条 -->
 	<div id="topBarArea" class="g_topBarArea g_editPanel" style=''>
 		<div id="arrow" class="g_arrow g_arrow_up"></div>
@@ -316,138 +307,14 @@
 				<a href="javascript:;" id="webDesign" class="tbutton"
 					onclick="Site.styleSetting('open', 'webTemplateTab');Site.logDog(100038, 2);">
 					<div class="styleSettingButton">
-						<span class="siteIco styleSettingDesign"> </span> <span
-							class="styleSettingTitle"> 网站设计 </span>
+						<span class="siteIco styleSettingDesign"></span>
+						<span class="styleSettingTitle"> 网站设计 </span>
 					</div>
 				</a>
 			</div>
-			<div class="navbar_right" style="display: none;">
-				<div id="topBarStaff" class="siteTitle" _mouseIn="0">
-					<div class="siteVersion siteGroupFre"></div>
-					<div class="titleName"></div>
-				</div>
-				<div class="line"></div>
-				<div class="topBarBulletin" _mouseIn="0"></div>
-				<div class="line" style="margin-left: 2px;"></div>
-				<div id="choiceService" _mouseIn="0" class="choiceServiceInfo">
-					<div class="choiceServiceText">服务支持</div>
-					<div class="titleName"></div>
-				</div>
-				<div class="line" style="margin-right: 2px;"></div>
-				<div id="mySite" _mouseIn="0" class="mySite">
-					<div class="mySiteText">我的网址</div>
-					<div class="titleName"></div>
-				</div>
-			</div>
 			<div style="clear: both;"></div>
-			<div id="mailTip" class="mailTip" style="display: none;"
-				mailHref="mail.faisco.cn/mail/index.jsp"></div>
-			<div class="serviceList"></div>
-			<div class="topBarStaffContent">
-				<div class="top">
-					<div class="versionIcon siteGroupFre"></div>
-					</a>
-					<div class="right">
-						<div class="title">网站免费版</div>
-						<div class="text">免费版用户每个月至少登录一次，逾期未登录则关闭网站。</div>
-						<div style="clear: both;"></div>
-					</div>
-					<div style="clear: both;"></div>
-				</div>
-				<div class="bottom">
-					<div class="topBarHelloTip">boss</div>
-					<div class="topBarHelloTip">,下午好!</div>
-					<a hidefocus="true" class="staffManage"
-						href="http://www.faisco.cn/portal.jsp#appId=corpStaff"
-						target="_blank" style="margin-right: 5px;"> [管理员工] </a> <a
-						href="javascript:Site.logDog(100038, 6);Site.logout('http://www.seeyoui.icoc.in');"
-						hidefocus="true" class="exit"> [退出] </a>
-				</div>
-			</div>
-			<div id="topBarMySiteContent" class="topBarMySiteContent2">
-				<div class="mainUrlDiv">
-					<a hidefocus="true" id="topBarMySiteMainUrl" class="mainUrl"
-						href="" title="" onclick="Site.logDog(100038, 7);" target="_blank">
-					</a>
-				</div>
-				<div class="textLine" style="border-bottom: 1px solid #dadada;">
-					<a hidefocus="true" id="topBarMySiteCopyBtn" class="toolbtn btn"
-						href="javascript:;" data-clipboard-target="topBarMySiteMainUrl">
-						[复制] </a> <a hidefocus="true" class="toolbtn btn" href="javascript:;"
-						onClick="Fai.addBookmark(top.document.title, 'http://www.seeyoui.icoc.in/?_sc=5');Site.logDog(100038, 9);">
-						[收藏] </a> <span> 分享： </span> <a hidefocus="true"
-						class="sina_weibo shareBtn" title="分享到新浪微博" href="javascript:;"
-						onclick="window.open('http://service.weibo.com/share/share.php?title=智慧星河&url='+encodeURIComponent(domainLink)+'&source=bookmark')">
-					</a> <a hidefocus="true" class="qq_weibo shareBtn" title="分享到腾讯微博"
-						href="javascript:;"
-						onclick="window.open('http://v.t.qq.com/share/share.php?title=智慧星河&url='+encodeURIComponent(domainLink)+'&site=http%3A%2F%2Fwww.seeyoui.icoc.in%2F%3F_sc%3D1')">
-					</a> <a hidefocus="true" class="qq_zone shareBtn" title="分享到QQ空间"
-						href="javascript:;"
-						onclick="window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+encodeURIComponent(domainLink)+'&title=智慧星河&pics=&summary=')">
-					</a> <a hidefocus="true" class="Weixin shareBtn" title="分享到微信"
-						href="javascript:;"
-						onclick="Site.wxShareAlter('cn/qrCode.jsp?cmd=mobiQR&_s=190');return false;">
-					</a>
-				</div>
-				<div id="topBarMySiteCheckDomain" class="topBarMySiteCheckDomain">
-					<div class="checkDomainDiv">
-						<span style='float: left; font-family: "微软雅黑"; font-size: 14px;'>
-							www.&nbsp; </span> <input type="text" id="topBarMySiteDomain"
-							value="seeyoui" /> <select id="topBarMySiteDomainSuffix">
-							<option value=".com" selected>.com</option>
-							<option value=".net">.net</option>
-							<option value=".org">.org</option>
-						</select> <a hidefocus="true" href="javascript:;"
-							id="topBarMySiteDomainCheck"> 查&nbsp;询 </a>
-						<div id="topBarMySiteDomainBuy"
-							onclick="Site.logDog(100038, 25);return false;">索&nbsp;要</div>
-					</div>
-					<div id="topBarMySiteCheckResult">
-						<span id="topBarMySiteCheckResultIco"
-							style="display: inline-block; width: 30px; height: 30px;">
-							&nbsp; </span> <span class="text"> </span>
-					</div>
-				</div>
-			</div>
-			<div class="topBarBulletinContent">
-				<div class="menuDiv">
-					<div id="menuMessage" class="menu menu-check">我的消息</div>
-					<div class="line"></div>
-					<div id="menuUpdate" class="menu">
-						功能更新
-						<div class="redPoint"></div>
-					</div>
-				</div>
-				<div id="message" class="listDiv">
-					<a class="adImg" href="http://jz.faisco.com/pro/20160101.html?_s=5"
-						target="_blank" onclick='Site.logDog(100038, 28);'> <img
-						width="243" height="73"
-						src="" />
-					</a>
-					<div class='list '>
-						<a hidefocus='true' href="http://www.faisco.cn/corp/index.jsp"
-							target='_blank' onclick='Site.logDog(100038, 112);'> <span
-							class='icon0'> &nbsp; </span> 马上完善注册资料，第一时间掌握重要通知
-						</a>
-					</div>
-				</div>
-				<div id="update" class="listDiv" style="display: none;">
-					<div class='list'>
-						<a hidefocus='true' href="http://jz.faisco.com/news/3274"
-							target='_blank' onclick='Site.logDog(100038, 102);'> <span
-							class='iconPoint'> &nbsp; </span> 01月13日更新：企业邮箱全面升级
-						</a>
-					</div>
-				</div>
-			</div>
 		</div>
 		<div id="scrollbar" class="onloading">正在加载网站管理功能...</div>
-		<script type="text/javascript">
-			var topBarMainUrl = document.getElementById("topBarMySiteMainUrl");
-			topBarMainUrl.title = domainLink;
-			topBarMainUrl.href = domainLink;
-			topBarMainUrl.innerHTML = domainLink;
-		</script>
 	</div>
 	<div id="styleDesign" class="g_styleDesign g_editPanel">
 		<div class="tabsWrap">
