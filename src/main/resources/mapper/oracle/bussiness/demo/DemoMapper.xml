@@ -12,7 +12,14 @@
 		T.DEL_FLAG AS "delFlag",
 		T.TREE_ID AS "treeId",
 		T.EXPRESSION AS "expression",
-		T.USER_NAME AS "userName"
+		T.USER_NAME AS "userName",
+		T.USER_SEX AS "userSex",
+		T.USER_AGE AS "userAge",
+		T.USER_BIRTHDAY AS "userBirthday",
+		T.USER_ICON AS "userIcon",
+		T.USER_SUMMARY AS "userSummary",
+		T.DEPARTMENT_ID AS "departmentId",
+		T.MANAGER_ID AS "managerId"
 	</sql>
 	<!-- 查询过滤条件 -->
 	<sql id="whereStr">
@@ -47,6 +54,27 @@
 			</if>
 			<if test="userName != null and userName != ''">
 				AND T.USER_NAME LIKE '%'||#{userName}||'%'
+			</if>
+			<if test="userSex != null and userSex != ''">
+				AND T.USER_SEX LIKE '%'||#{userSex}||'%'
+			</if>
+			<if test="userAge != null and userAge != ''">
+				AND T.USER_AGE = #{userAge}
+			</if>
+			<if test="userBirthday != null and userBirthday != ''">
+				AND T.USER_BIRTHDAY = #{userBirthday}
+			</if>
+			<if test="userIcon != null and userIcon != ''">
+				AND T.USER_ICON LIKE '%'||#{userIcon}||'%'
+			</if>
+			<if test="userSummary != null and userSummary != ''">
+				
+			</if>
+			<if test="departmentId != null and departmentId != ''">
+				AND T.DEPARTMENT_ID LIKE '%'||#{departmentId}||'%'
+			</if>
+			<if test="managerId != null and managerId != ''">
+				AND T.MANAGER_ID LIKE '%'||#{managerId}||'%'
 			</if>
 		</where>
 	</sql>
@@ -116,6 +144,13 @@
 			TREE_ID,
 			EXPRESSION,
 			USER_NAME,
+			USER_SEX,
+			USER_AGE,
+			USER_BIRTHDAY,
+			USER_ICON,
+			USER_SUMMARY,
+			DEPARTMENT_ID,
+			MANAGER_ID,
 			CREATE_USER,
 			CREATE_DATE,
 			ID
@@ -131,6 +166,13 @@
 			#{treeId,jdbcType=VARCHAR},
 			#{expression,jdbcType=VARCHAR},
 			#{userName,jdbcType=VARCHAR},
+			#{userSex,jdbcType=VARCHAR},
+			#{userAge,jdbcType=NUMERIC},
+			#{userBirthday,jdbcType=TIMESTAMP},
+			#{userIcon,jdbcType=VARCHAR},
+			#{userSummary,jdbcType=CLOB},
+			#{departmentId,jdbcType=VARCHAR},
+			#{managerId,jdbcType=VARCHAR},
 			#{createUser.userName},
 			sysdate,
 			#{id}
@@ -161,6 +203,27 @@
 			<if test="userName !=null and userName !=''">
 			USER_NAME=#{userName},
 			</if>
+			<if test="userSex !=null and userSex !=''">
+			USER_SEX=#{userSex},
+			</if>
+			<if test="userAge !=null and userAge !=''">
+			USER_AGE=#{userAge},
+			</if>
+			<if test="userBirthday !=null and userBirthday !=''">
+			USER_BIRTHDAY=#{userBirthday},
+			</if>
+			<if test="userIcon !=null and userIcon !=''">
+			USER_ICON=#{userIcon},
+			</if>
+			<if test="userSummary !=null and userSummary !=''">
+			USER_SUMMARY=#{userSummary},
+			</if>
+			<if test="departmentId !=null and departmentId !=''">
+			DEPARTMENT_ID=#{departmentId},
+			</if>
+			<if test="managerId !=null and managerId !=''">
+			MANAGER_ID=#{managerId},
+			</if>
 			UPDATE_USER = #{updateUser.userName},
 			UPDATE_DATE = sysdate,
 			ID = #{id}
@@ -176,15 +239,4 @@
 			#{listId}
 		</foreach>
 	</delete>
-	<!-- 查询所有数据集合 -->
-	<select id="findLucene" resultType="com.seeyoui.kensite.bussiness.demo.domain.Demo">
-		SELECT
-		<include refid="tableColumns"/>
-		FROM BO_DEMO T
-		WHERE id IN 
-		<foreach item="listId" collection="list"
-			open="(" separator="," close=")">
-			#{listId}
-		</foreach>
-	</select>
 </mapper>

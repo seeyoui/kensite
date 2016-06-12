@@ -13,7 +13,7 @@
  	<div style="position:absolute;top:0px;left:0px;right:0px;bottom:0px;">
 		<div style="position:absolute;top:0px;left:0px;right:0px;bottom:0px;">
 		    <table id="dataList" title="演示列表" class="easyui-datagrid" style="width:100%;height:100%"
-		    		url="${ctx}/demo/demo/list/data"
+		    		url="${ctx}/bussiness/demo/list/data"
 		            toolbar="#toolbar" pagination="true"
 		            rownumbers="true" fitColumns="true" singleSelect="true">
 		        <thead>
@@ -21,28 +21,42 @@
 					    <th data-options="field:'id',hidden:true">ID</th>
 				    	<ks:listTag table="BO_DEMO" column="REMARKS"/>
 				    	<ks:listTag table="BO_DEMO" column="TREE_ID"/>
-				    	<ks:listTag table="BO_DEMO" column="USER_NAME"/>
 				    	<ks:listTag table="BO_DEMO" column="EXPRESSION"/>
+				    	<ks:listTag table="BO_DEMO" column="USER_NAME"/>
+				    	<ks:listTag table="BO_DEMO" column="USER_SEX"/>
+				    	<ks:listTag table="BO_DEMO" column="USER_AGE"/>
+				    	<ks:listTag table="BO_DEMO" column="USER_BIRTHDAY"/>
+				    	<ks:listTag table="BO_DEMO" column="USER_ICON"/>
+				    	<ks:listTag table="BO_DEMO" column="USER_SUMMARY"/>
+				    	<ks:listTag table="BO_DEMO" column="DEPARTMENT_ID"/>
+				    	<ks:listTag table="BO_DEMO" column="MANAGER_ID"/>
 		            </tr>
 		        </thead>
 		    </table>
 		    <div id="toolbar">
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="$.demo.newInfo()">新建</a>
-		    	<shiro:hasPermission name="demo:demo:insert">
+		    	<shiro:hasPermission name="bussiness:demo:insert">
 		        </shiro:hasPermission>
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="$.demo.editInfo()">修改</a>
-		        <shiro:hasPermission name="demo:demo:update">
+		        <shiro:hasPermission name="bussiness:demo:update">
 		        </shiro:hasPermission>
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="$.demo.destroyInfo()">删除</a>
-		        <shiro:hasPermission name="demo:demo:delete">
+		        <shiro:hasPermission name="bussiness:demo:delete">
 		        </shiro:hasPermission>
-		        <shiro:hasPermission name="demo:demo:export">
+		        <shiro:hasPermission name="bussiness:demo:export">
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-page_excel" plain="true" onclick="$.demo.exportExcel()">导出</a>
 		        </shiro:hasPermission>
 		    	<ks:queryTag table="BO_DEMO" column="REMARKS"/>
 		    	<ks:queryTag table="BO_DEMO" column="TREE_ID"/>
 		    	<ks:queryTag table="BO_DEMO" column="EXPRESSION"/>
 		    	<ks:queryTag table="BO_DEMO" column="USER_NAME"/>
+		    	<ks:queryTag table="BO_DEMO" column="USER_SEX"/>
+		    	<ks:queryTag table="BO_DEMO" column="USER_AGE"/>
+		    	<ks:queryTag table="BO_DEMO" column="USER_BIRTHDAY"/>
+		    	<ks:queryTag table="BO_DEMO" column="USER_ICON"/>
+		    	<ks:queryTag table="BO_DEMO" column="USER_SUMMARY"/>
+		    	<ks:queryTag table="BO_DEMO" column="DEPARTMENT_ID"/>
+		    	<ks:queryTag table="BO_DEMO" column="MANAGER_ID"/>
 			    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="$.demo.selectData()">查询</a>
 		    </div>
 	    </div>
@@ -59,6 +73,13 @@
 			    	<ks:queryJsTag table="BO_DEMO" column="TREE_ID"/>
 			    	<ks:queryJsTag table="BO_DEMO" column="EXPRESSION"/>
 			    	<ks:queryJsTag table="BO_DEMO" column="USER_NAME"/>
+			    	<ks:queryJsTag table="BO_DEMO" column="USER_SEX"/>
+			    	<ks:queryJsTag table="BO_DEMO" column="USER_AGE"/>
+			    	<ks:queryJsTag table="BO_DEMO" column="USER_BIRTHDAY"/>
+			    	<ks:queryJsTag table="BO_DEMO" column="USER_ICON"/>
+			    	<ks:queryJsTag table="BO_DEMO" column="USER_SUMMARY"/>
+			    	<ks:queryJsTag table="BO_DEMO" column="DEPARTMENT_ID"/>
+			    	<ks:queryJsTag table="BO_DEMO" column="MANAGER_ID"/>
 	        	});
 	        },
         	reloadData : function () {
@@ -82,14 +103,14 @@
 				}
 	        },
 	        exportExcel : function () {
-	        	window.open("${ctx}/demo/demo/export");
+	        	window.open("${ctx}/bussiness/demo/export");
 	        },
 	        layerOpen : function (url) {
-	            url = '${ctx}/demo/demo/form';
+	            url = '${ctx}/bussiness/demo/form';
 	        	layer.open({
 	        	    type: 2,
 	        	    title: '演示基本信息',
-	        	    area: ['310px', '350px'],
+	        	    area: ['545px', '460px'],
 	        	    fix: false, //不固定
 	        	    maxmin: false,
 	        	    content: url,
@@ -117,7 +138,7 @@
 	            	}, function(){
 	            		$.ajax({
 							type: "post",
-							url: '${ctx}/demo/demo/delete',
+							url: '${ctx}/bussiness/demo/delete',
 							data: {id:row.id},
 							dataType: 'json',
 							timeout: layerLoadMaxTime,

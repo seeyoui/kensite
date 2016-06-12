@@ -10,9 +10,6 @@
 <%@ include file="/WEB-INF/view/taglib/layer.jsp" %>
 <%@ include file="/WEB-INF/view/taglib/bootstrap.jsp"%>
 <%@ include file="/WEB-INF/view/taglib/moment.jsp"%>
-<link href="${ctx_skins}/bootstrap/css/style.min.css?v=4.0.0" rel="stylesheet">
-<script src="${ctx_skins}/bootstrap/js/hplus.min.js?v=4.0.0"></script>
-<script src="${ctx_skins}/bootstrap/js/contabs.min.js"></script>
 <style type="text/css">
 .content img {
 	width:32px;

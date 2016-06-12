@@ -85,7 +85,7 @@
 	}
 	</script>
 </head>
-<body class="gray-bg">
+<body class="gray-bg" style="overflow-x: hidden;">
 	<div class="wrapper wrapper-content animated fadeInRight">
 		<div class="row">
 			<div class="col-sm-12">

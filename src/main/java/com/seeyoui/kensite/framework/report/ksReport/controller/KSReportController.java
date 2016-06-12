@@ -56,6 +56,22 @@ public class KSReportController extends BaseController {
 	}
 	
 	/**
+	 * 获取报表Table数据集合
+	 * @param session
+	 * @param response
+	 * @param request
+	 * @param modelMap
+	 * @param sql
+	 * @return
+	 * @throws Exception
+	 */
+	public Object getReportTableData(HttpSession session,
+			HttpServletResponse response, HttpServletRequest request,
+			ModelMap modelMap, String sql) throws Exception {
+		return DBUtils.executeQuery(sql);
+	}
+	
+	/**
 	 * 展示报表页面
 	 * @param modelMap
 	 * @param module

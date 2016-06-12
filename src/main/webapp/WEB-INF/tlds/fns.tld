@@ -184,6 +184,13 @@
   
   <!-- DateUtils -->
   <function>
+    <description>日期格式化</description>
+    <name>formatDate</name>
+    <function-class>com.seeyoui.kensite.common.util.DateUtils</function-class>
+    <function-signature>java.lang.String formatDate(java.util.Date)</function-signature>
+    <example>${ksfn:formatDate(date)}</example>  
+  </function>
+  <function>
     <description>获取当前日期</description>
     <name>getDate</name>
     <function-class>com.seeyoui.kensite.common.util.DateUtils</function-class>

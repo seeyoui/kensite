@@ -1,5 +1,5 @@
-<link href="${ctx_skins}/bootstrap/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
-<link href="${ctx_skins}/bootstrap/css/icon.css" rel="stylesheet">
+<link href="${ctx_bootstrap}/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+<link href="${ctx_bootstrap}/css/icon.css" rel="stylesheet">
 <div id="icon_li" class="main">
 	<ul class="icon_lists clear">
 		<li><i id="fa fa-glass" class="fa fa-glass icon iconfont"></i></li>

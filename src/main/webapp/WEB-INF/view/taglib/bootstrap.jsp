@@ -16,3 +16,6 @@
 	<script src="${ctx_bootstrap}/js/metisMenu/jquery.metisMenu.js"></script>
 	<script src="${ctx_bootstrap}/js/slimscroll/jquery.slimscroll.min.js"></script>
 	<script src="${ctx_bootstrap}/js/pace/pace.min.js"></script>
+	<link href="${ctx_skins}/bootstrap/css/style.min.css?v=4.0.0" rel="stylesheet">
+	<script src="${ctx_skins}/bootstrap/js/hplus.min.js?v=4.0.0"></script>
+	<script src="${ctx_skins}/bootstrap/js/contabs.min.js"></script>

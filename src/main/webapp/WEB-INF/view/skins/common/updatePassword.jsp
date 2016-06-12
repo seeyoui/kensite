@@ -11,8 +11,6 @@
 <%@ include file="/WEB-INF/view/taglib/layer.jsp"%>
 <%@ include file="/WEB-INF/view/taglib/bootstrap.jsp"%>
 <%@ include file="/WEB-INF/view/taglib/validate.jsp"%>
-<link href="${ctx_skins}/bootstrap/css/style.min.css?v=4.0.0"
-	rel="stylesheet">
 <style type="text/css">
 </style>
 <script type="text/javascript">
