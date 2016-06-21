@@ -26,7 +26,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.seeyoui.kensite.common.base.controller.BaseController;
 import com.seeyoui.kensite.common.constants.StringConstant;
+import com.seeyoui.kensite.common.util.DBUtils;
 import com.seeyoui.kensite.common.util.RequestResponseUtil;
+import com.seeyoui.kensite.common.util.StringUtils;
 import com.seeyoui.kensite.common.constants.StringConstant;
 import com.seeyoui.kensite.common.base.domain.EasyUIDataGrid;
 import com.seeyoui.kensite.common.base.controller.BaseController;
@@ -107,6 +109,18 @@ public class TableColumnController extends BaseController {
 			if(tableColumn.getName().equals(columnName)) {
 				Map<String, String> result = new HashMap<String, String>();
 				result.put("name", tableColumn.getName()+"是系统字段");
+				modelMap.put("message", result);
+				RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
+				return null;
+			}
+		}
+		if(StringUtils.isNoneBlank(tableColumn.getIsNull()) && StringConstant.NO.equals(tableColumn.getIsNull())) {
+			String tableName = tableColumn.getTableName();
+			String sql = "select count(1) cou from "+tableName;
+			String cou = DBUtils.getString(sql, "COU");
+			if(!"0".equals(cou)) {
+				Map<String, String> result = new HashMap<String, String>();
+				result.put("isNull", "要添加必需的 (NOT NULL) 列, 则表必须为空");
 				modelMap.put("message", result);
 				RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
 				return null;
