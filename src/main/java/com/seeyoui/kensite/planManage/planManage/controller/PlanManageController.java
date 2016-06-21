@@ -55,14 +55,14 @@ public class PlanManageController extends BaseController {
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap) throws Exception {
 		String sql = "select * from v_task_details where finish_date is null and trunc(start_date)<=trunc(sysdate) and trunc(end_date)>=trunc(sysdate)";
-		List<Map<Object, Object>> currentTaskList = DBUtils.executeQuery(sql);
+		List<Map<Object, Object>> currentTaskList = DBUtils.executeQuery(sql, false);
 		modelMap.put("currentTaskList", currentTaskList);
 		sql = "select * from v_task_details where finish_date is null and trunc(start_date)=trunc(sysdate)";
-		List<Map<Object, Object>> todayStartTaskList = DBUtils.executeQuery(sql);
+		List<Map<Object, Object>> todayStartTaskList = DBUtils.executeQuery(sql, false);
 		sql = "select * from v_task_details where finish_date is null and trunc(end_date)=trunc(sysdate)";
-		List<Map<Object, Object>> todayEndTaskList = DBUtils.executeQuery(sql);
+		List<Map<Object, Object>> todayEndTaskList = DBUtils.executeQuery(sql, false);
 		sql = "select * from v_task_details where finish_date is null and trunc(end_date)<trunc(sysdate)";
-		List<Map<Object, Object>> delayTaskList = DBUtils.executeQuery(sql);
+		List<Map<Object, Object>> delayTaskList = DBUtils.executeQuery(sql, false);
 		modelMap.put("currentTaskList", currentTaskList);
 		modelMap.put("todayStartTaskList", todayStartTaskList);
 		modelMap.put("todayEndTaskList", todayEndTaskList);
@@ -109,7 +109,7 @@ public class PlanManageController extends BaseController {
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, String projectId) throws Exception {
 		String sql = "select u.id,u.name from plan_project p left join plan_team t on p.team_id=t.id left join plan_team_leaguer tl on t.id=tl.team_id left join sys_user u on tl.user_id=u.id where p.id='"+projectId+"'";
-		return JSONArray.fromObject(DBUtils.executeQuery(sql)).toString().toLowerCase();
+		return JSONArray.fromObject(DBUtils.executeQuery(sql, false)).toString().toLowerCase();
 	}
 	
 	/**
@@ -130,16 +130,16 @@ public class PlanManageController extends BaseController {
 		if(StringUtils.isNoneBlank(userId)) {
 			sql += " and user_id='"+userId+"'";
 		}
-		List<Map<Object, Object>> taskList = DBUtils.executeQuery(sql);
+		List<Map<Object, Object>> taskList = DBUtils.executeQuery(sql, false);
 		sql = "select id,name from plan_project";
-		List<Map<Object, Object>> projectList = DBUtils.executeQuery(sql);
+		List<Map<Object, Object>> projectList = DBUtils.executeQuery(sql, false);
 		sql = "select distinct id,name from V_USER_TEAM_PROJECT where 1=1";
 		if(StringUtils.isNoneBlank(projectId)) {
 			sql += " and project_id='"+projectId+"'";
 		} else {
 			sql += " and id in (select leader from plan_project)";
 		}
-		List<Map<Object, Object>> userList = DBUtils.executeQuery(sql);
+		List<Map<Object, Object>> userList = DBUtils.executeQuery(sql, false);
 		modelMap.put("taskList", taskList);
 		modelMap.put("projectList", projectList);
 		modelMap.put("userList", userList);
@@ -202,7 +202,7 @@ public class PlanManageController extends BaseController {
 			modelMap.put("endDate", "");
 		}
 		sql += " order by project_id,user_id,sequence";
-		List<Map<Object, Object>> taskList = DBUtils.executeQuery(sql);
+		List<Map<Object, Object>> taskList = DBUtils.executeQuery(sql, false);
 		modelMap.put("taskList", taskList);
 		return new ModelAndView("planManage/planManage/taskReport", modelMap);
 	}
@@ -263,7 +263,7 @@ public class PlanManageController extends BaseController {
 //			modelMap.put("endDate", "");
 //		}
 //		sql += " order by project_id,user_id,sequence";
-//		List<Map<Object, Object>> taskList = DBUtils.executeQuery(sql);
+//		List<Map<Object, Object>> taskList = DBUtils.executeQuery(sql, false);
 //		modelMap.put("taskList", taskList);
 		return new ModelAndView("planManage/planManage/taskWeekReport", modelMap);
 	}

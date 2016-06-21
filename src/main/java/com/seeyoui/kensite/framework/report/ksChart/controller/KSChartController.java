@@ -38,9 +38,9 @@ public class KSChartController extends BaseController {
 		sqlx= HtmlUtils.htmlUnescape(sqlx);
 		sqly= HtmlUtils.htmlUnescape(sqly);
 		sqlz= HtmlUtils.htmlUnescape(sqlz);
-		List<Map<Object, Object>> xList = DBUtils.executeQuery(sqlx);
-		List<Map<Object, Object>> yList = DBUtils.executeQuery(sqly);
-		List<Map<Object, Object>> zList = DBUtils.executeQuery(sqlz);
+		List<Map<Object, Object>> xList = DBUtils.executeQuery(sqlx, false);
+		List<Map<Object, Object>> yList = DBUtils.executeQuery(sqly, false);
+		List<Map<Object, Object>> zList = DBUtils.executeQuery(sqlz, false);
 		Map<String, Object> option = new HashMap<String, Object>();
 		Map<String, Object> xAxis = new HashMap<String, Object>();
 		List<String> data = new ArrayList<String>();
@@ -95,9 +95,9 @@ public class KSChartController extends BaseController {
 		sqlx= HtmlUtils.htmlUnescape(sqlx);
 		sqly= HtmlUtils.htmlUnescape(sqly);
 		sqlz= HtmlUtils.htmlUnescape(sqlz);
-		List<Map<Object, Object>> xList = DBUtils.executeQuery(sqlx);
-		List<Map<Object, Object>> yList = DBUtils.executeQuery(sqly);
-		List<Map<Object, Object>> zList = DBUtils.executeQuery(sqlz);
+		List<Map<Object, Object>> xList = DBUtils.executeQuery(sqlx, false);
+		List<Map<Object, Object>> yList = DBUtils.executeQuery(sqly, false);
+		List<Map<Object, Object>> zList = DBUtils.executeQuery(sqlz, false);
 		Map<String, Object> option = new HashMap<String, Object>();
 		Map<String, Object> xAxis = new HashMap<String, Object>();
 		List<String> data = new ArrayList<String>();
@@ -154,8 +154,8 @@ public class KSChartController extends BaseController {
 			ModelMap modelMap, String sqlx, String sqly) throws Exception {
 		sqlx= HtmlUtils.htmlUnescape(sqlx);
 		sqly= HtmlUtils.htmlUnescape(sqly);
-		List<Map<Object, Object>> xList = DBUtils.executeQuery(sqlx);
-		List<Map<Object, Object>> yList = DBUtils.executeQuery(sqly);
+		List<Map<Object, Object>> xList = DBUtils.executeQuery(sqlx, false);
+		List<Map<Object, Object>> yList = DBUtils.executeQuery(sqly, false);
 		Map<String, Object> option = new HashMap<String, Object>();
 		Map<String, Object> legend = new HashMap<String, Object>();
 		List<String> data = new ArrayList<String>();

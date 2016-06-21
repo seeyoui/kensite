@@ -78,7 +78,7 @@ public class KSReportService extends BaseService {
 			ksReport.append("sheet.setColumnWidth("+startCol+", "+width+");");
 		}
 		int dataIndex = 0;
-		List<Map<Object, Object>> result = DBUtils.executeQuery(sql);
+		List<Map<Object, Object>> result = DBUtils.executeQuery(sql, false);
 		for(Map<Object, Object> map : result) {
 			if(ksReportCell.getDirection() == 1) {
 				ksReport.append("sheet.setValue("+startRow+", "+(startCol+dataIndex)+", \""+map.get("NAME").toString()+"\"); \n");
@@ -145,7 +145,7 @@ public class KSReportService extends BaseService {
 				ksReport.append("sheet.setColumnWidth("+startCol+", "+width+");");
 			}
 			int dataIndex = 0;
-			List<Map<Object, Object>> result = DBUtils.executeQuery(sql);
+			List<Map<Object, Object>> result = DBUtils.executeQuery(sql, false);
 			for(Map<Object, Object> map : result) {
 				if(ksReportCell.getDirection() == 1) {
 					ksReport.append("sheet.setValue("+startRow+", "+(startCol+dataIndex)+", \""+map.get("NAME").toString()+"\"); \n");

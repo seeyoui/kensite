@@ -83,7 +83,7 @@ public class ListUtils {
 					String sql = settingsArr[0].replace("SQL>", "");
 					String value = settingsArr[1];
 					String label = settingsArr[2];
-					List<Map<Object, Object>> list = DBUtils.executeQuery(sql);
+					List<Map<Object, Object>> list = DBUtils.executeQuery(sql, false);
 					for(Map<Object, Object> map : list) {
 						sb.append("{value: '"+map.get(value.toUpperCase())+"',label: '"+map.get(label.toUpperCase())+"'},");
 					}
@@ -135,7 +135,7 @@ public class ListUtils {
 					String sql = settingsArr[0].replace("SQL>", "");
 					String value = settingsArr[1];
 					String label = settingsArr[2];
-					List<Map<Object, Object>> list = DBUtils.executeQuery(sql);
+					List<Map<Object, Object>> list = DBUtils.executeQuery(sql, false);
 					for(Map<Object, Object> map : list) {
 						sb.append("{value: '"+map.get(value.toUpperCase())+"',label: '"+map.get(label.toUpperCase())+"'},");
 					}

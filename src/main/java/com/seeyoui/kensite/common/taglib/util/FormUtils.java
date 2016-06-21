@@ -152,7 +152,7 @@ public class FormUtils {
 					String label = settingsArr[2];
 					result.append("valueField: '"+StringUtils.toCamelCase(value)+"',textField: '"+StringUtils.toCamelCase(label)+"',");
 					result.append("data: [");
-					List<Map<Object, Object>> list = DBUtils.executeQuery(sql);
+					List<Map<Object, Object>> list = DBUtils.executeQuery(sql, false);
 					for(Map<Object, Object> map : list) {
 						dataCount++;
 						Iterator entries = map.entrySet().iterator();
@@ -250,7 +250,7 @@ public class FormUtils {
 					String parent = settingsArr[3];
 					result.append("idField: '"+StringUtils.toCamelCase(id)+"',textField: '"+StringUtils.toCamelCase(text)+"',parentField: '"+StringUtils.toCamelCase(parent)+"',");
 					result.append("data: [");
-					List<Map<Object, Object>> list = DBUtils.executeQuery(sql);
+					List<Map<Object, Object>> list = DBUtils.executeQuery(sql, false);
 					for(Map<Object, Object> map : list) {
 						dataCount++;
 						Iterator entries = map.entrySet().iterator();

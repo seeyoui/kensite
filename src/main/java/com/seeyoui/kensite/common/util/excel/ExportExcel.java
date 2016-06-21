@@ -401,7 +401,7 @@ public class ExportExcel {
 						String sql = settingsArr[0];
 						String value = settingsArr[1];
 						String label = settingsArr[2];
-						List<Map<Object, Object>> listMap = DBUtils.executeQuery(sql);
+						List<Map<Object, Object>> listMap = DBUtils.executeQuery(sql, false);
 						for(Map<Object, Object> map : listMap) {
 							if(val.equals(map.get(value.toUpperCase()).toString())) {
 								val = map.get(label.toUpperCase()).toString();
@@ -424,7 +424,7 @@ public class ExportExcel {
 									String sql = arr[0].replace("SQL>", "");
 									String value = arr[1];
 									String label = arr[2];
-									List<Map<Object, Object>> listMap = DBUtils.executeQuery(sql);
+									List<Map<Object, Object>> listMap = DBUtils.executeQuery(sql, false);
 									for(Map<Object, Object> map : listMap) {
 										if(val.equals(map.get(value.toUpperCase()).toString())) {
 											val = map.get(label.toUpperCase()).toString();

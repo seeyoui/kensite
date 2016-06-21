@@ -68,7 +68,7 @@ public class KSReportController extends BaseController {
 	public Object getReportTableData(HttpSession session,
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, String sql) throws Exception {
-		return DBUtils.executeQuery(sql);
+		return DBUtils.executeQuery(sql, false);
 	}
 	
 	/**
@@ -150,7 +150,7 @@ public class KSReportController extends BaseController {
 			ksReport.append("sheet.setColumnWidth("+startCol+", "+width+");");
 		}
 		int dataIndex = 0;
-		List<Map<Object, Object>> result = DBUtils.executeQuery(sql);
+		List<Map<Object, Object>> result = DBUtils.executeQuery(sql, false);
 		for(Map<Object, Object> map : result) {
 			if(ksReportCell.getDirection() == 1) {
 				ksReport.append("sheet.setValue("+startRow+", "+(startCol+dataIndex)+", \""+map.get("NAME").toString()+"\"); \n");

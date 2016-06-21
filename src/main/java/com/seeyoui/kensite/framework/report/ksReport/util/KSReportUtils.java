@@ -19,7 +19,7 @@ public class KSReportUtils {
 		StringBuffer ksReport = new StringBuffer();
 		for(KSReportCell ksReportCell : cellList) {
 			String sql = ksReportCell.getValue();
-			List<Map<Object, Object>> result = DBUtils.executeQuery(sql);
+			List<Map<Object, Object>> result = DBUtils.executeQuery(sql, false);
 			ksReportCell.setCellValue(result);
 		}
 		cellReLayout(cellList);
