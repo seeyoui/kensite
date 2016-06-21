@@ -106,13 +106,13 @@
 				});
 				
 				//设置html编辑器渲染完成后事件，主要是给组件赋值，赋相应数据列值
-		        ue.ready(function() {
+		        userSummary.ready(function() {
 			        if(row != null) {
-			            ue.setContent(row.userSummary);
+			        	userSummary.setContent(row.userSummary);
 			        }
 		        });
 				//设置html编辑器事件监听，全屏与退出全屏事件，控制外层弹出框对应全屏与退出全屏
-				ue.addListener("fullScreenChanged",function(type,mode){
+				userSummary.addListener("fullScreenChanged",function(type,mode){
 	                if(mode) {
 	                	parent.layer.full(index);
 	                } else {

@@ -78,8 +78,8 @@
         </property>  
     </bean>  
 	
-	<!-- 创建SqlSessionFactory，同时指定数据源 -->
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	<!-- 创建SqlSessionFactory，同时指定数据源==org.mybatis.spring.SqlSessionFactoryBean== -->
+	<bean id="sqlSessionFactory" class="com.seeyoui.kensite.framework.system.mybatis.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="typeAliasesPackage" value="com.seeyoui.kensite" />
 		<property name="mapperLocations" value="classpath:mapper/${jdbc.type}/**/*.xml" />

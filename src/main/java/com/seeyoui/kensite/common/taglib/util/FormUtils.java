@@ -349,9 +349,9 @@ public class FormUtils {
 			}
 			result.append("</script>");
 			result.append("<script type=\"text/javascript\">");
-			result.append("var ue = UE.getEditor('"+column+"', {autoHeight: false});");
+			result.append("var "+column+" = UE.getEditor('"+column+"', {autoHeight: false});");
 			if(StringUtils.isNoneBlank(tableColumn.getSettings())) {
-				result.append("ue.ready(function() {ue.setHeight("+tableColumn.getSettings()+");});");
+				result.append(""+column+".ready(function() {"+column+".setHeight("+tableColumn.getSettings()+");});");
 			}
 			result.append("</script>");
 		}

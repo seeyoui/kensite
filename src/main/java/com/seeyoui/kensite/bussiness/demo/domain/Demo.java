@@ -4,6 +4,8 @@
  */
 package com.seeyoui.kensite.bussiness.demo.domain;
 
+import org.springframework.web.util.HtmlUtils;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.seeyoui.kensite.common.base.domain.DataEntity;
@@ -96,7 +98,8 @@ public class Demo extends DataEntity<Demo> {
 	}
 
 	public String getUserSummary() {
-		return this.userSummary;
+//		return this.userSummary;
+		return HtmlUtils.htmlUnescape(this.userSummary);
 	}
 	public void setDepartmentId(String departmentId) {
 		this.departmentId = departmentId;
