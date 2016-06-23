@@ -235,6 +235,15 @@ public class DictController extends BaseController {
 			HttpServletResponse response, HttpServletRequest request,
 			ModelMap modelMap, String id) throws Exception {
 		List<String> listId = Arrays.asList(id.split(","));
+		for(String pid : listId) {
+			Dict dict = new Dict();
+			dict.setParentId(pid);
+			int cou = dictService.findTotal(dict);
+			if(cou != 0) {
+				RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.FALSE);
+				return null;
+			}
+		}
 		dictService.delete(listId);
 		RequestResponseUtil.putResponseStr(session, response, request, modelMap, StringConstant.TRUE);
 		return null;

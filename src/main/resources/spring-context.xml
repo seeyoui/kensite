@@ -113,6 +113,7 @@
 			<mvc:exclude-mapping path="/static/**"/>
 			<mvc:exclude-mapping path="/upload/**"/>
 			<mvc:exclude-mapping path="/login/**"/>
+			<mvc:exclude-mapping path="/act/**"/>
 			<mvc:exclude-mapping path="/cms/**"/>
 			<mvc:exclude-mapping path="/sys/**"/>
 			<mvc:exclude-mapping path="/"/>
